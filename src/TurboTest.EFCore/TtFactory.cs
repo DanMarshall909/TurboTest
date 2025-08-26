@@ -35,7 +35,6 @@ public class TtFactory<TContext> : IAsyncDisposable where TContext : DbContext
             optionsBuilder.EnableSensitiveDataLogging();
         }
 
-        optionsBuilder.AddInterceptors(new TtCleanupInterceptor(database));
         configure?.Invoke(optionsBuilder);
 
         var context = Activator.CreateInstance(
@@ -48,7 +47,10 @@ public class TtFactory<TContext> : IAsyncDisposable where TContext : DbContext
             await context.Database.EnsureCreatedAsync();
         }
 
-        return context;
+        // Wrap context with callback-based cleanup handling
+        var wrappedContext = new TtContext<TContext>(context, database);
+
+        return wrappedContext;
     }
 
     public async ValueTask DisposeAsync()

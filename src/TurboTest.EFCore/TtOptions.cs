@@ -31,10 +31,10 @@ public class TtOptions
     public bool AutoMigrate { get; set; } = true;
 
     /// <summary>
-    /// Enable sensitive data logging in EF Core. Defaults to false.
+    /// Enable sensitive data logging in EF Core. Defaults to true for better test error messages.
     /// Can be configured via "TurboTest:EnableSensitiveDataLogging" in appsettings.json
     /// </summary>
-    public bool EnableSensitiveDataLogging { get; set; } = false;
+    public bool EnableSensitiveDataLogging { get; set; } = true;
 
     /// <summary>
     /// Custom Docker image to use. If null, uses default image for the provider.

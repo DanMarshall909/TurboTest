@@ -58,9 +58,7 @@ internal sealed class TtContainer : IAsyncDisposable
             // Fast reset using template - terminate connections first
             await connection.ExecuteNonQueryAsync($"SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '{_databaseName}' AND pid <> pg_backend_pid()");
             
-            // Small delay to ensure connections are closed
-            await Task.Delay(100);
-            
+            // Drop and recreate immediately - connection coordination handled by TtDatabase
             await connection.ExecuteNonQueryAsync($"DROP DATABASE IF EXISTS \"{_databaseName}\"");
             await connection.ExecuteNonQueryAsync($"CREATE DATABASE \"{_databaseName}\" TEMPLATE \"{_templateDbName}\"");
         }

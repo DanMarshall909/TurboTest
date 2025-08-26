@@ -89,7 +89,7 @@ internal sealed class TtPool : IAsyncDisposable
         if (_availableContainers.TryDequeue(out var container))
         {
             _activeContainers.TryAdd(container.Id, container);
-            await container.ResetAsync();
+            // No reset needed - database should already be clean from previous release
             return new TtDatabase(this, container);
         }
 
@@ -108,15 +108,20 @@ internal sealed class TtPool : IAsyncDisposable
         {
             if (_availableContainers.Count < _options.PoolSize)
             {
+                // Reset the database before returning to pool
+                // EF Core context disposal happens via callback before we get here
+                await container.ResetAsync();
                 _availableContainers.Enqueue(container);
             }
             else
             {
+                // Pool is full, dispose the container
                 await container.DisposeAsync();
             }
         }
-        catch
+        catch (Exception ex)
         {
+            _logger?.LogError("Failed to release container {ContainerId}: {Error}", container.Id, ex.Message);
             await container.DisposeAsync();
         }
     }

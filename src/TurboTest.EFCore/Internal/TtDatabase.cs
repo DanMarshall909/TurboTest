@@ -7,6 +7,7 @@ internal sealed class TtDatabase : IAsyncDisposable
 {
     private readonly TtPool _pool;
     private readonly TtContainer _container;
+    private readonly List<Func<Task>> _disposeCallbacks = new();
     private bool _disposed;
 
     public string ConnectionString => _container.ConnectionString;
@@ -17,10 +18,42 @@ internal sealed class TtDatabase : IAsyncDisposable
         _container = container;
     }
 
+    /// <summary>
+    /// Register a callback to be executed before the database is returned to the pool
+    /// </summary>
+    internal void OnDispose(Func<Task> callback)
+    {
+        lock (_disposeCallbacks)
+        {
+            _disposeCallbacks.Add(callback);
+        }
+    }
+
     public async ValueTask DisposeAsync()
     {
         if (_disposed) return;
         _disposed = true;
+
+        // Execute all dispose callbacks first (EF Core context disposal)
+        List<Func<Task>> callbacks;
+        lock (_disposeCallbacks)
+        {
+            callbacks = _disposeCallbacks.ToList();
+        }
+
+        foreach (var callback in callbacks)
+        {
+            try
+            {
+                await callback();
+            }
+            catch
+            {
+                // Continue with other callbacks even if one fails
+            }
+        }
+
+        // Now return to pool (which will reset the database)
         await _pool.ReleaseAsync(_container);
     }
 }

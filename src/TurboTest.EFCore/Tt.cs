@@ -62,9 +62,6 @@ public static class Tt
             optionsBuilder.EnableSensitiveDataLogging();
         }
 
-        // Track the database for cleanup
-        optionsBuilder.AddInterceptors(new TtCleanupInterceptor(database));
-
         // Apply any custom configuration
         configure?.Invoke(optionsBuilder);
 
@@ -80,7 +77,11 @@ public static class Tt
             await context.Database.EnsureCreatedAsync();
         }
 
-        return context;
+        // Wrap context with callback-based cleanup handling
+        var wrappedContext = new TtContext<TContext>(context, database);
+        
+        // Return the wrapped context (implicit conversion)
+        return wrappedContext;
     }
 
     /// <summary>

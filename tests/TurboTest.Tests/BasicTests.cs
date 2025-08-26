@@ -39,8 +39,11 @@ public class BasicTests
 
         // Act & Assert - Real database enforces FK constraint
         var act = () => context.SaveChangesAsync();
-        await act.Should().ThrowAsync<DbUpdateException>()
-            .WithMessage("*violates foreign key constraint*");
+        var exception = await act.Should().ThrowAsync<DbUpdateException>();
+        
+        // Check that it's a proper database constraint error (EF Core wraps the original exception)
+        exception.Which.InnerException.Should().NotBeNull();
+        exception.Which.InnerException!.Message.Should().Contain("violates foreign key constraint");
     }
 
     [Fact]
@@ -55,8 +58,11 @@ public class BasicTests
 
         // Act & Assert - Real database enforces unique constraint
         var act = () => context.SaveChangesAsync();
-        await act.Should().ThrowAsync<DbUpdateException>()
-            .WithMessage("*duplicate key value violates unique constraint*");
+        var exception = await act.Should().ThrowAsync<DbUpdateException>();
+        
+        // Check that it's a proper database constraint error (EF Core wraps the original exception)
+        exception.Which.InnerException.Should().NotBeNull();
+        exception.Which.InnerException!.Message.Should().Contain("duplicate key value violates unique constraint");
     }
 
     [Fact]

@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using Docker.DotNet;
 using Docker.DotNet.Models;
+using Microsoft.Extensions.Logging;
 
 namespace TurboTest.EFCore.Internal;
 
@@ -9,20 +10,32 @@ namespace TurboTest.EFCore.Internal;
 /// </summary>
 internal sealed class TtPool : IAsyncDisposable
 {
+    private readonly TtOptions _options;
+    private readonly ILogger _logger;
     private readonly ConcurrentQueue<TtContainer> _availableContainers = new();
     private readonly ConcurrentDictionary<string, TtContainer> _activeContainers = new();
     private readonly DockerClient _dockerClient;
     private readonly SemaphoreSlim _initSemaphore = new(1, 1);
     private bool _initialized;
     private bool _disposed;
-    private int _poolSize = 3;
+    private Timer? _scalingTimer;
+    private readonly object _scalingLock = new();
 
-    public TtPool()
+    public TtPool(TtOptions? options = null)
     {
-        var dockerUri = Environment.OSVersion.Platform == PlatformID.Win32NT
+        _options = options ?? new TtOptions();
+        _logger = _options.Logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
+
+        // Apply auto-allocation if enabled
+        if (_options.AutoAllocateResources)
+        {
+            ApplyAutoResourceAllocation();
+        }
+
+        var dockerUri = _options.DockerHost ?? (IsWindows()
             ? "npipe://./pipe/docker_engine"
-            : "unix:///var/run/docker.sock";
-            
+            : "unix:///var/run/docker.sock");
+
         _dockerClient = new DockerClientConfiguration(new Uri(dockerUri)).CreateClient();
     }
 
@@ -39,8 +52,11 @@ internal sealed class TtPool : IAsyncDisposable
             await EnsureImageAsync("postgres:16-alpine");
 
             // Create initial pool
+            _logger.LogInformation("Initializing TurboTest pool with {PoolSize} containers, {MemoryLimitMb}MB each",
+                _options.PoolSize, _options.MemoryLimitMb);
+
             var tasks = new List<Task<TtContainer>>();
-            for (int i = 0; i < _poolSize; i++)
+            for (int i = 0; i < _options.PoolSize; i++)
             {
                 tasks.Add(CreateContainerAsync($"pool_{i}"));
             }
@@ -49,6 +65,15 @@ internal sealed class TtPool : IAsyncDisposable
             foreach (var container in containers)
             {
                 _availableContainers.Enqueue(container);
+            }
+
+            _logger.LogInformation("TurboTest pool initialized successfully with {ContainerCount} containers",
+                containers.Length);
+
+            // Start dynamic scaling if enabled
+            if (_options.EnableDynamicScaling)
+            {
+                StartDynamicScaling();
             }
 
             _initialized = true;
@@ -68,7 +93,7 @@ internal sealed class TtPool : IAsyncDisposable
             return new TtDatabase(this, container);
         }
 
-        // Create overflow container
+        // Create overflow container if pool is empty
         container = await CreateContainerAsync($"overflow_{Guid.NewGuid():N}");
         _activeContainers.TryAdd(container.Id, container);
         return new TtDatabase(this, container);
@@ -81,9 +106,7 @@ internal sealed class TtPool : IAsyncDisposable
 
         try
         {
-            await container.ResetAsync();
-
-            if (_availableContainers.Count < _poolSize)
+            if (_availableContainers.Count < _options.PoolSize)
             {
                 _availableContainers.Enqueue(container);
             }
@@ -101,18 +124,21 @@ internal sealed class TtPool : IAsyncDisposable
     private async Task<TtContainer> CreateContainerAsync(string name)
     {
         var port = GetAvailablePort();
-        var password = "test_" + Guid.NewGuid().ToString("N")[..8];
-        
+        var password = _options.Password ?? "test_" + Guid.NewGuid().ToString("N")[..8];
+        var username = _options.Username ?? "postgres";
+        var databaseName = $"{_options.DatabaseName}_{Guid.NewGuid():N}"; // Make database name unique
+        var image = _options.DockerImage ?? "postgres:16-alpine";
+
         var createResponse = await _dockerClient.Containers.CreateContainerAsync(
             new CreateContainerParameters
             {
-                Image = "postgres:16-alpine",
-                Name = $"tt_{name}_{DateTime.UtcNow:yyyyMMddHHmmss}",
+                Image = image,
+                Name = $"{_options.ContainerPrefix}_{name}_{DateTime.UtcNow:yyyyMMddHHmmss}",
                 Env = new[]
                 {
-                    "POSTGRES_DB=testdb",
+                    $"POSTGRES_DB={databaseName}",
                     $"POSTGRES_PASSWORD={password}",
-                    "POSTGRES_USER=postgres"
+                    $"POSTGRES_USER={username}"
                 },
                 ExposedPorts = new Dictionary<string, EmptyStruct>
                 {
@@ -124,19 +150,21 @@ internal sealed class TtPool : IAsyncDisposable
                     {
                         ["5432/tcp"] = new[] { new PortBinding { HostPort = port.ToString() } }
                     },
-                    Memory = 256 * 1024 * 1024, // 256MB
+                    Memory = (long)_options.MemoryLimitMb * 1024 * 1024,
                     AutoRemove = false,
                     RestartPolicy = new RestartPolicy { Name = RestartPolicyKind.No }
                 }
             });
 
         await _dockerClient.Containers.StartContainerAsync(createResponse.ID, new ContainerStartParameters());
-        
-        var connectionString = $"Host=localhost;Port={port};Database=testdb;Username=postgres;Password={password};Include Error Detail=true";
-        
+
+        var connectionString = _options.ConnectionStringTemplate != null
+            ? string.Format(_options.ConnectionStringTemplate, "localhost", port, databaseName, username, password)
+            : $"Host=localhost;Port={port};Database={databaseName};Username={username};Password={password};Include Error Detail=true";
+
         // Wait for database to be ready
         await WaitForDatabaseReadyAsync(connectionString);
-        
+
         return new TtContainer(createResponse.ID, connectionString, _dockerClient);
     }
 
@@ -144,7 +172,7 @@ internal sealed class TtPool : IAsyncDisposable
     {
         using var connection = new Npgsql.NpgsqlConnection(connectionString);
         var maxAttempts = 60; // 30 seconds max
-        
+
         for (int i = 0; i < maxAttempts; i++)
         {
             try
@@ -158,7 +186,7 @@ internal sealed class TtPool : IAsyncDisposable
                 await Task.Delay(500);
             }
         }
-        
+
         throw new TimeoutException("Database failed to start within 30 seconds");
     }
 
@@ -186,15 +214,272 @@ internal sealed class TtPool : IAsyncDisposable
     public async ValueTask DisposeAsync()
     {
         if (_disposed) return;
-        
+
         var allContainers = _availableContainers.ToArray()
             .Concat(_activeContainers.Values)
             .ToArray();
-            
+
         await Task.WhenAll(allContainers.Select(c => c.DisposeAsync().AsTask()));
-        
+
+        _scalingTimer?.Dispose();
         _dockerClient?.Dispose();
         _initSemaphore?.Dispose();
         _disposed = true;
     }
+
+    private void ApplyAutoResourceAllocation()
+    {
+        var systemInfo = GetSystemInfo();
+
+        _logger.LogDebug("Auto-allocation enabled. System info: {CpuCores} CPU cores, {TotalMemoryMb}MB total memory",
+            systemInfo.CpuCores, systemInfo.TotalMemoryMb);
+
+        // Calculate available memory after reserving requested amount
+        var availableMemoryMb = Math.Max(0, systemInfo.TotalMemoryMb - _options.ReserveMemoryMb);
+
+        // Calculate available CPU cores after reserving requested amount  
+        var availableCores = Math.Max(1, systemInfo.CpuCores - _options.ReserveCpuCores);
+
+        _logger.LogDebug("After reserves: {AvailableMemoryMb}MB memory ({ReservedMb}MB reserved), {AvailableCores} CPU cores ({ReservedCores} reserved)",
+            availableMemoryMb, _options.ReserveMemoryMb, availableCores, _options.ReserveCpuCores);
+
+        // Calculate optimal container count based on available resources
+        // Each container should get reasonable memory allocation (minimum 128MB, optimal ~512MB)
+        var containersByMemory = availableMemoryMb / 512; // Prefer 512MB per container
+        var containersByCpu = availableCores; // One container per available core
+
+        _logger.LogDebug("Container calculations: {ContainersByMemory} by memory (512MB each), {ContainersByCpu} by CPU",
+            containersByMemory, containersByCpu);
+
+        // Use the more conservative limit
+        var optimalContainers = Math.Min(containersByMemory, containersByCpu);
+
+        // Apply bounds
+        optimalContainers = Math.Max(1, Math.Min(optimalContainers, _options.MaxAutoContainers));
+
+        // Calculate memory per container
+        var memoryPerContainer = optimalContainers > 0 ? availableMemoryMb / optimalContainers : 256;
+        memoryPerContainer = Math.Max(128, Math.Min(memoryPerContainer, 2048)); // Between 128MB-2GB
+
+        _logger.LogInformation("Auto-allocated resources: {ContainerCount} containers, {MemoryPerContainer}MB each (was: {OriginalPoolSize} containers, {OriginalMemory}MB each)",
+            optimalContainers, memoryPerContainer, _options.PoolSize, _options.MemoryLimitMb);
+
+        // Update options
+        _options.PoolSize = optimalContainers;
+        _options.MemoryLimitMb = memoryPerContainer;
+    }
+
+    private SystemInfo GetSystemInfo() =>
+        TryGetValue(() => new SystemInfo(Environment.ProcessorCount, GetTotalMemoryMb()), new SystemInfo(4, 8192));
+
+    private int GetTotalMemoryMb() => TryGetValue(() => IsWindows() ? GetWindowsMemoryMb() : GetLinuxMemoryMb(), 8192);
+
+    private int GetWindowsMemoryMb()
+    {
+        using var process = new System.Diagnostics.Process
+        {
+            StartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "wmic",
+                Arguments = "computersystem get TotalPhysicalMemory /value",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true
+            }
+        };
+
+        process.Start();
+        var output = process.StandardOutput.ReadToEnd();
+        process.WaitForExit();
+
+        var match = System.Text.RegularExpressions.Regex.Match(output, @"TotalPhysicalMemory=(\d+)");
+        if (match.Success && long.TryParse(match.Groups[1].Value, out var bytes))
+        {
+            return (int)(bytes / 1024 / 1024); // Convert to MB
+        }
+
+        return 8192; // Fallback
+    }
+
+    private int GetLinuxMemoryMb()
+    {
+        var meminfo = File.ReadAllText("/proc/meminfo");
+        var match = System.Text.RegularExpressions.Regex.Match(meminfo, @"MemTotal:\s*(\d+)\s*kB");
+
+        if (match.Success && int.TryParse(match.Groups[1].Value, out var kb))
+        {
+            return kb / 1024; // Convert to MB
+        }
+
+        return 8192; // Fallback
+    }
+
+    private void StartDynamicScaling()
+    {
+        _logger.LogInformation("Starting dynamic resource monitoring with {IntervalSeconds}s intervals",
+            _options.ScalingCheckIntervalSeconds);
+
+        _scalingTimer = new Timer(CheckAndScale, null,
+            TimeSpan.FromSeconds(_options.ScalingCheckIntervalSeconds),
+            TimeSpan.FromSeconds(_options.ScalingCheckIntervalSeconds));
+    }
+
+    private void CheckAndScale(object? state)
+    {
+        if (_disposed) return;
+
+        try
+        {
+            lock (_scalingLock)
+            {
+                if (_disposed) return;
+
+                var currentUsage = GetCurrentResourceUsage();
+                var currentContainerCount = _availableContainers.Count + _activeContainers.Count;
+
+                _logger.LogDebug("Resource check: CPU {CpuUsage}%, Memory {MemoryUsage}%, Containers {ContainerCount}",
+                    currentUsage.CpuUsagePercent, currentUsage.MemoryUsagePercent, currentContainerCount);
+
+                // Check if we need to scale down (high resource usage)
+                if ((currentUsage.CpuUsagePercent > _options.CpuScaleDownThreshold ||
+                     currentUsage.MemoryUsagePercent > _options.MemoryScaleDownThreshold) &&
+                    currentContainerCount > 1) // Keep at least 1 container
+                {
+                    ScaleDown();
+                }
+                // Check if we can scale up (low resource usage and have capacity)
+                else if (currentUsage.CpuUsagePercent < _options.CpuScaleUpThreshold &&
+                         currentUsage.MemoryUsagePercent < _options.MemoryScaleUpThreshold &&
+                         currentContainerCount < _options.MaxAutoContainers)
+                {
+                    _ = Task.Run(ScaleUpAsync); // Run async to avoid blocking timer
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Error during dynamic scaling check");
+        }
+    }
+
+    private void ScaleDown()
+    {
+        if (_availableContainers.TryDequeue(out var container))
+        {
+            _logger.LogInformation("Scaling down: Removing 1 container due to high resource usage");
+            _ = Task.Run(() => container.DisposeAsync());
+        }
+    }
+
+    private async Task ScaleUpAsync()
+    {
+        try
+        {
+            _logger.LogInformation("Scaling up: Adding 1 container due to low resource usage");
+            var newContainer = await CreateContainerAsync($"scaled_{DateTime.UtcNow:HHmmss}");
+            _availableContainers.Enqueue(newContainer);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to scale up container");
+        }
+    }
+
+    private ResourceUsage GetCurrentResourceUsage() =>
+        TryGetValue(() => new ResourceUsage(GetCpuUsagePercent(), GetMemoryUsagePercent()), new ResourceUsage(50, 50));
+
+    private int GetCpuUsagePercent() => TryGetValue(() => IsWindows() ? GetWindowsCpuUsage() : GetLinuxCpuUsage(), 50);
+
+    private int GetWindowsCpuUsage()
+    {
+        using var process = new System.Diagnostics.Process
+        {
+            StartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "wmic",
+                Arguments = "cpu get loadpercentage /value",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true
+            }
+        };
+
+        process.Start();
+        var output = process.StandardOutput.ReadToEnd();
+        process.WaitForExit();
+
+        var match = System.Text.RegularExpressions.Regex.Match(output, @"LoadPercentage=(\d+)");
+        return match.Success && int.TryParse(match.Groups[1].Value, out var usage) ? usage : 50;
+    }
+
+    private int GetLinuxCpuUsage()
+    {
+        // Simple CPU usage calculation from /proc/loadavg
+        var loadavg = File.ReadAllText("/proc/loadavg").Split(' ')[0];
+        if (double.TryParse(loadavg, out var load))
+        {
+            var cpuCores = Environment.ProcessorCount;
+            var usage = (int)Math.Min(100, (load / cpuCores) * 100);
+            return usage;
+        }
+        return 50;
+    }
+
+    private int GetMemoryUsagePercent() => TryGetValue(() => IsWindows() ? GetWindowsMemoryUsage() : GetLinuxMemoryUsage(), 50);
+
+    private int GetWindowsMemoryUsage()
+    {
+        using var process = new System.Diagnostics.Process
+        {
+            StartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "wmic",
+                Arguments = "OS get TotalVisibleMemorySize,FreePhysicalMemory /value",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true
+            }
+        };
+
+        process.Start();
+        var output = process.StandardOutput.ReadToEnd();
+        process.WaitForExit();
+
+        var totalMatch = System.Text.RegularExpressions.Regex.Match(output, @"TotalVisibleMemorySize=(\d+)");
+        var freeMatch = System.Text.RegularExpressions.Regex.Match(output, @"FreePhysicalMemory=(\d+)");
+
+        if (totalMatch.Success && freeMatch.Success &&
+            long.TryParse(totalMatch.Groups[1].Value, out var total) &&
+            long.TryParse(freeMatch.Groups[1].Value, out var free))
+        {
+            return (int)((total - free) * 100 / total);
+        }
+        return 50;
+    }
+
+    private int GetLinuxMemoryUsage()
+    {
+        var meminfo = File.ReadAllText("/proc/meminfo");
+        var totalMatch = System.Text.RegularExpressions.Regex.Match(meminfo, @"MemTotal:\s*(\d+)\s*kB");
+        var availableMatch = System.Text.RegularExpressions.Regex.Match(meminfo, @"MemAvailable:\s*(\d+)\s*kB");
+
+        if (totalMatch.Success && availableMatch.Success &&
+            long.TryParse(totalMatch.Groups[1].Value, out var total) &&
+            long.TryParse(availableMatch.Groups[1].Value, out var available))
+        {
+            return (int)((total - available) * 100 / total);
+        }
+        return 50;
+    }
+
+    private static bool IsWindows() => Environment.OSVersion.Platform == PlatformID.Win32NT;
+
+    private static T TryGetValue<T>(Func<T> getter, T fallback)
+    {
+        try { return getter(); }
+        catch { return fallback; }
+    }
+
+    private record SystemInfo(int CpuCores, int TotalMemoryMb);
+    private record ResourceUsage(int CpuUsagePercent, int MemoryUsagePercent);
 }

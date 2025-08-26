@@ -1,16 +1,40 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using TurboTest.EFCore.Internal;
 
 namespace TurboTest.EFCore;
 
 /// <summary>
 /// Main entry point for TurboTest. Provides simple, EF-friendly API for containerized database testing.
+/// Supports familiar .NET configuration patterns.
 /// </summary>
 public static class Tt
 {
-    private static readonly TtPool _globalPool = new();
+    private static TtPool? _globalPool;
     private static readonly SemaphoreSlim _initLock = new(1, 1);
     private static bool _initialized;
+    private static TtOptions _globalOptions = new();
+
+    /// <summary>
+    /// Configures TurboTest globally from IConfiguration (appsettings.json).
+    /// Should be called once at application startup.
+    /// </summary>
+    /// <param name="configuration">Configuration instance</param>
+    public static void Configure(IConfiguration configuration)
+    {
+        var section = configuration.GetSection(TtOptions.SectionName);
+        section.Bind(_globalOptions);
+    }
+
+    /// <summary>
+    /// Configures TurboTest globally with custom options.
+    /// Should be called once at application startup.
+    /// </summary>
+    /// <param name="configure">Configuration action</param>
+    public static void Configure(Action<TtOptions> configure)
+    {
+        configure(_globalOptions);
+    }
 
     /// <summary>
     /// Creates a new DbContext instance backed by a real containerized database.
@@ -20,33 +44,42 @@ public static class Tt
     /// <param name="configure">Optional configuration for the DbContext</param>
     /// <returns>A configured DbContext instance</returns>
     public static async Task<TContext> CreateContextAsync<TContext>(
-        Action<DbContextOptionsBuilder>? configure = null) 
+        Action<DbContextOptionsBuilder>? configure = null)
         where TContext : DbContext
     {
         await EnsureInitializedAsync();
-        
+
         // Get a database from the pool
-        var database = await _globalPool.GetDatabaseAsync();
-        
+        var database = await _globalPool!.GetDatabaseAsync();
+
         // Build options
         var optionsBuilder = new DbContextOptionsBuilder<TContext>();
         optionsBuilder.UseNpgsql(database.ConnectionString);
-        
+
+        // Apply global options
+        if (_globalOptions.EnableSensitiveDataLogging)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
+
         // Track the database for cleanup
         optionsBuilder.AddInterceptors(new TtCleanupInterceptor(database));
-        
+
         // Apply any custom configuration
         configure?.Invoke(optionsBuilder);
-        
+
         // Create context instance
         var context = Activator.CreateInstance(
-            typeof(TContext), 
+            typeof(TContext),
             optionsBuilder.Options) as TContext
             ?? throw new InvalidOperationException($"Could not create instance of {typeof(TContext).Name}");
-        
+
         // Auto-migrate if needed
-        await context.Database.EnsureCreatedAsync();
-        
+        if (_globalOptions.AutoMigrate)
+        {
+            await context.Database.EnsureCreatedAsync();
+        }
+
         return context;
     }
 
@@ -55,15 +88,15 @@ public static class Tt
     /// Useful for test fixtures that need multiple contexts.
     /// </summary>
     public static async Task<TtFactory<TContext>> CreateFactoryAsync<TContext>(
-        Action<TtOptions>? configure = null) 
+        Action<TtOptions>? configure = null)
         where TContext : DbContext
     {
         await EnsureInitializedAsync();
-        
+
         var options = new TtOptions();
         configure?.Invoke(options);
-        
-        return new TtFactory<TContext>(_globalPool, options);
+
+        return new TtFactory<TContext>(_globalPool!, options);
     }
 
     /// <summary>
@@ -71,18 +104,22 @@ public static class Tt
     /// </summary>
     public static async Task DisposeAsync()
     {
-        await _globalPool.DisposeAsync();
+        if (_globalPool != null)
+        {
+            await _globalPool.DisposeAsync();
+        }
     }
 
     private static async Task EnsureInitializedAsync()
     {
         if (_initialized) return;
-        
+
         await _initLock.WaitAsync();
         try
         {
             if (_initialized) return;
-            
+
+            _globalPool = new TtPool(_globalOptions);
             await _globalPool.InitializeAsync();
             _initialized = true;
         }

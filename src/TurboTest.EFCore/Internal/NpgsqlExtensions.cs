@@ -12,7 +12,7 @@ internal static class NpgsqlExtensions
         using var command = new NpgsqlCommand(sql, connection);
         return await command.ExecuteNonQueryAsync();
     }
-    
+
     public static async Task<object?> ExecuteScalarAsync(this NpgsqlConnection connection, string sql)
     {
         using var command = new NpgsqlCommand(sql, connection);

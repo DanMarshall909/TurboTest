@@ -26,28 +26,28 @@ public class TtFactory<TContext> : IAsyncDisposable where TContext : DbContext
     {
         var database = await _pool.GetDatabaseAsync();
         _activeDatabases.Add(database);
-        
+
         var optionsBuilder = new DbContextOptionsBuilder<TContext>();
         optionsBuilder.UseNpgsql(database.ConnectionString);
-        
+
         if (_options.EnableSensitiveDataLogging)
         {
             optionsBuilder.EnableSensitiveDataLogging();
         }
-        
+
         optionsBuilder.AddInterceptors(new TtCleanupInterceptor(database));
         configure?.Invoke(optionsBuilder);
-        
+
         var context = Activator.CreateInstance(
-            typeof(TContext), 
+            typeof(TContext),
             optionsBuilder.Options) as TContext
             ?? throw new InvalidOperationException($"Could not create instance of {typeof(TContext).Name}");
-        
+
         if (_options.AutoMigrate)
         {
             await context.Database.EnsureCreatedAsync();
         }
-        
+
         return context;
     }
 

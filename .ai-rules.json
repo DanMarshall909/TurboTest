@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "resources": {
+    "memory": {
+      "reserveMiBPerActiveWorktree": 4096,
+      "basis": "estimated",
+      "estimateReason": "Allows for a .NET build and test run with the default pool of three PostgreSQL containers at 256 MiB each; replace with a measured successful-run peak."
+    }
+  }
+}

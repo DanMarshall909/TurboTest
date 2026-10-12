@@ -68,9 +68,9 @@ public class BlogTests
 
 ## Requirements
 
-- .NET 8.0 or later
+- .NET 10.0 or later
 - Docker Desktop or Docker Engine
-- Entity Framework Core 8.0+
+- Entity Framework Core 10.0+
 
 ## License
 

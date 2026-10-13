@@ -1,0 +1,9 @@
+LOG Information: Initializing TurboTest pool with 1 containers, 256MB each
+LOG Information: TurboTest pool initialized successfully with 1 containers
+DIRECT lease=1 acquire_ms=13699 port=42157 initial_rows=0
+DIRECT after context disposal: containers=1 (PoolSize=1)
+DIRECT lease=2 acquire_ms=4811 port=38933 initial_rows=0
+DIRECT after context disposal: containers=2 (PoolSize=1)
+DIRECT lease=3 acquire_ms=4827 port=38459 initial_rows=0
+DIRECT after context disposal: containers=3 (PoolSize=1)
+AFTER shutdown own_containers=0

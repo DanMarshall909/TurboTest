@@ -1,0 +1,14 @@
+{
+  "command": [
+    "dotnet",
+    "run",
+    "--project",
+    "Adaptive.csproj",
+    "--configuration",
+    "Release",
+    "--",
+    "--policy-only"
+  ],
+  "cwd": "/tmp/turbotest-adaptive-ideas-20261013",
+  "exit": 134
+}

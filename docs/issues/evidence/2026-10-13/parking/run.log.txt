@@ -1,0 +1,29 @@
+POLICY CHECKS PASSED: 15
+WORKLOAD CHECKS PASSED: 240 deterministic inputs; 60% small, 30% medium, 10% large
+COMMON container/template startup: 5626.24 ms
+PHASE park-first/low-before: 30 complete, checkout_p95=18.57, ready_p95=44.28, throughput=13.59/s, capacity=2
+PHASE park-first/peak: 240 complete, checkout_p95=198.29, ready_p95=71.53, throughput=63.90/s, capacity=8
+PHASE park-first/low-after: 30 complete, checkout_p95=3.54, ready_p95=39.74, throughput=32.46/s, capacity=8
+IDLE park-first: capacity=2, parked=6, reserved=8, retiring=0
+PHASE park-first/peak-again: 240 complete, checkout_p95=138.24, ready_p95=79.20, throughput=66.74/s, capacity=8
+POLICY park-first: startup=470.54, overall=22008.72, peak_reserved=8, creates=8, retires=0, parks=6, rewarms=6, session_peak=10
+PHASE drop-first/low-before: 30 complete, checkout_p95=11.34, ready_p95=42.89, throughput=20.53/s, capacity=2
+PHASE drop-first/peak: 240 complete, checkout_p95=159.71, ready_p95=70.51, throughput=64.72/s, capacity=8
+PHASE drop-first/low-after: 30 complete, checkout_p95=3.22, ready_p95=45.50, throughput=36.42/s, capacity=8
+IDLE drop-first: capacity=7, parked=0, reserved=7, retiring=0
+PHASE drop-first/peak-again: 240 complete, checkout_p95=87.83, ready_p95=80.39, throughput=77.64/s, capacity=8
+POLICY drop-first: startup=190.03, overall=17550.53, peak_reserved=8, creates=9, retires=1, parks=0, rewarms=0, session_peak=10
+PHASE drop-repeat/low-before: 30 complete, checkout_p95=13.28, ready_p95=34.72, throughput=29.87/s, capacity=2
+PHASE drop-repeat/peak: 240 complete, checkout_p95=201.60, ready_p95=81.53, throughput=68.12/s, capacity=8
+PHASE drop-repeat/low-after: 30 complete, checkout_p95=3.62, ready_p95=42.19, throughput=30.52/s, capacity=8
+IDLE drop-repeat: capacity=6, parked=0, reserved=7, retiring=1
+PHASE drop-repeat/peak-again: 240 complete, checkout_p95=136.36, ready_p95=96.70, throughput=66.74/s, capacity=8
+POLICY drop-repeat: startup=206.70, overall=18029.64, peak_reserved=8, creates=10, retires=2, parks=0, rewarms=0, session_peak=10
+PHASE park-repeat/low-before: 30 complete, checkout_p95=12.02, ready_p95=30.57, throughput=43.12/s, capacity=2
+PHASE park-repeat/peak: 240 complete, checkout_p95=174.62, ready_p95=91.75, throughput=66.48/s, capacity=8
+PHASE park-repeat/low-after: 30 complete, checkout_p95=3.39, ready_p95=49.75, throughput=30.92/s, capacity=8
+IDLE park-repeat: capacity=2, parked=6, reserved=8, retiring=0
+PHASE park-repeat/peak-again: 240 complete, checkout_p95=104.69, ready_p95=63.93, throughput=92.15/s, capacity=8
+POLICY park-repeat: startup=197.71, overall=20033.63, peak_reserved=8, creates=8, retires=0, parks=6, rewarms=6, session_peak=10
+ADAPTIVE EXPERIMENT COMPLETE: 2160 workloads, correctness checks=63791
+CLEANUP task-owned PostgreSQL container removed

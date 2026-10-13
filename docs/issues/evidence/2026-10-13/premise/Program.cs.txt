@@ -1,0 +1,123 @@
+using System.Diagnostics;
+using Docker.DotNet;
+using Docker.DotNet.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Npgsql;
+using TurboTest.EFCore;
+using TurboTest.EFCore.Extensions;
+
+var mode = args.Single();
+var prefix = "tt_premise_" + mode.Replace('-', '_');
+using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+
+async Task<int> CountContainers()
+{
+    var all = await docker.Containers.ListContainersAsync(new ContainersListParameters { All = true });
+    return all.Count(c => c.Names.Any(n => n.StartsWith("/" + prefix + "_", StringComparison.Ordinal)));
+}
+
+if (mode == "di")
+{
+    var services = new ServiceCollection();
+    services.AddTurboTestDbContext<ProbeContext>();
+    await using var provider = services.BuildServiceProvider();
+    try
+    {
+        using var scope = provider.CreateScope();
+        _ = scope.ServiceProvider.GetRequiredService<ProbeContext>();
+        Console.WriteLine("DI context resolution succeeded");
+    }
+    catch (NotSupportedException ex)
+    {
+        Console.WriteLine("DI context resolution failed: " + ex.Message);
+    }
+    return;
+}
+
+Tt.Configure(o =>
+{
+    o.PoolSize = 1;
+    o.AutoAllocateResources = false;
+    o.EnableDynamicScaling = false;
+    o.ContainerPrefix = prefix;
+    o.DockerHost = "unix:///var/run/docker.sock";
+    o.Logger = new ProbeLogger();
+    if (mode == "no-pooling")
+        o.ConnectionStringTemplate = "Host={0};Port={1};Database={2};Username={3};Password={4};Pooling=false;Include Error Detail=true";
+});
+
+try
+{
+    if (mode == "direct")
+    {
+        for (var i = 1; i <= 3; i++)
+        {
+            var timer = Stopwatch.StartNew();
+            int port;
+            await using (var context = await Tt.CreateContextAsync<ProbeContext>())
+            {
+                port = new NpgsqlConnectionStringBuilder(context.Database.GetConnectionString()).Port;
+                var rows = await context.Entries.CountAsync();
+                context.Entries.Add(new ProbeEntry { Value = "lease" + i });
+                await context.SaveChangesAsync();
+                Console.WriteLine($"DIRECT lease={i} acquire_ms={timer.ElapsedMilliseconds} port={port} initial_rows={rows}");
+            }
+            Console.WriteLine($"DIRECT after context disposal: containers={await CountContainers()} (PoolSize=1)");
+        }
+    }
+    else
+    {
+        for (var i = 1; i <= 2; i++)
+        {
+            var timer = Stopwatch.StartNew();
+            var factory = await Tt.CreateFactoryAsync<ProbeContext>();
+            string connectionString;
+            await using (var context = await factory.CreateContextAsync())
+            {
+                connectionString = context.Database.GetConnectionString()!;
+                var port = new NpgsqlConnectionStringBuilder(connectionString).Port;
+                var rows = await context.Entries.CountAsync();
+                context.Entries.Add(new ProbeEntry { Value = "seed or test data" });
+                await context.SaveChangesAsync();
+                Console.WriteLine($"FACTORY mode={mode} lease={i} acquire_ms={timer.ElapsedMilliseconds} port={port} initial_rows={rows}");
+            }
+            timer.Restart();
+            await factory.DisposeAsync();
+            Console.WriteLine($"FACTORY release_ms={timer.ElapsedMilliseconds} remaining_containers={await CountContainers()}");
+            if (mode == "no-pooling")
+            {
+                await using var connection = new NpgsqlConnection(connectionString);
+                await connection.OpenAsync();
+                await using var command = new NpgsqlCommand("SELECT count(*) FROM pg_tables WHERE schemaname='public'", connection);
+                Console.WriteLine("SCHEMA after reset: public_tables=" + await command.ExecuteScalarAsync());
+            }
+        }
+    }
+}
+finally
+{
+    NpgsqlConnection.ClearAllPools();
+    await Tt.DisposeAsync();
+    Console.WriteLine("AFTER shutdown own_containers=" + await CountContainers());
+}
+
+public sealed class ProbeEntry
+{
+    public int Id { get; set; }
+    public string Value { get; set; } = "";
+}
+
+public sealed class ProbeContext(DbContextOptions<ProbeContext> options) : DbContext(options)
+{
+    public DbSet<ProbeEntry> Entries => Set<ProbeEntry>();
+}
+
+public sealed class ProbeLogger : ILogger
+{
+    public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+    public bool IsEnabled(LogLevel logLevel) => true;
+    public void Log<TState>(LogLevel level, EventId eventId, TState state, Exception? error, Func<TState, Exception?, string> formatter)
+        => Console.WriteLine($"LOG {level}: {formatter(state, error)}");
+}

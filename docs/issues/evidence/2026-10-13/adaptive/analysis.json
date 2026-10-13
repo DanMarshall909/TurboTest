@@ -1,0 +1,22 @@
+{
+  "validWorkloads": 3660,
+  "parkingMs": {
+    "count": 12,
+    "min": 7.407500000000255,
+    "median": 8.533550000000105,
+    "max": 10.31590000000051
+  },
+  "rewarmMs": {
+    "count": 12,
+    "min": 33.07729999999901,
+    "median": 36.3743000000004,
+    "max": 38.78949999999895
+  },
+  "dropMs": {
+    "count": 3,
+    "min": 316.0598000000009,
+    "median": 4447.5836,
+    "max": 4950.6212
+  },
+  "artifactChecks": "exit status, source identity, deterministic row mix, lifecycle errors, resource caps and actual parking/rewarming counts passed"
+}

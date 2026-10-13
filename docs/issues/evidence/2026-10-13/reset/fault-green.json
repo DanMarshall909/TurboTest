@@ -1,0 +1,16 @@
+{
+  "command": [
+    "dotnet",
+    "run",
+    "--project",
+    "Ideas.csproj",
+    "--configuration",
+    "Release",
+    "--",
+    "--fault-only"
+  ],
+  "cwd": "/tmp/turbotest-reset-ideas-20261013",
+  "sourceSha256": "9c8f6b708a72f6c99529d07ad2af46fd68dca3d87b4afe68f8048fffe56f20c4",
+  "exit": 0,
+  "seconds": 13.835
+}

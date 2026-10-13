@@ -1,0 +1,16 @@
+{
+  "command": [
+    "dotnet",
+    "run",
+    "--project",
+    "Ideas.csproj",
+    "--configuration",
+    "Release"
+  ],
+  "cwd": "/tmp/turbotest-reset-ideas-20261013",
+  "revision": "d510320f6a11e98b509f6f5f9cc8cc02a1c23cfe",
+  "sourceSha256": "eb8beb6b299b790e76c86504c58a1e6abc49ced3450ca8e60255df97490f6fb7",
+  "exit": 0,
+  "seconds": 45.769,
+  "DOTNET_PROCESSOR_COUNT": 4
+}

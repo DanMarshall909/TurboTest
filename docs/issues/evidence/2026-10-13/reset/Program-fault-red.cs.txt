@@ -1,0 +1,382 @@
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Channels;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using TurboTest.EFCore;
+using TurboTest.Tests;
+
+await new Experiment().RunAsync(args.Contains("--fault-only"));
+
+sealed class Experiment
+{
+    const string SeedSql = """
+        INSERT INTO "Users" ("Id","Email","Name") VALUES (100,'baseline@example.test','baseline-user');
+        INSERT INTO "Blogs" ("Id","Url") VALUES (200,'https://baseline.example.test');
+        INSERT INTO "Posts" ("Id","Title","Content","BlogId") VALUES (300,'baseline-post','baseline-content',200);
+        SELECT setval(pg_get_serial_sequence('"Users"','Id'),100,true);
+        SELECT setval(pg_get_serial_sequence('"Blogs"','Id'),200,true);
+        SELECT setval(pg_get_serial_sequence('"Posts"','Id'),300,true);
+        """;
+    const string DeleteSql = "DELETE FROM \"Posts\"; DELETE FROM \"Blogs\"; DELETE FROM \"Users\";";
+    const string TruncateSql = "TRUNCATE TABLE \"Posts\", \"Blogs\", \"Users\" RESTART IDENTITY;";
+    readonly List<Slot> slots = [];
+    readonly ConcurrentBag<Sample> samples = [];
+    readonly List<object> probes = [];
+    string adminString = "", template = "", baselineSchema = "";
+    int assertions;
+
+    public async Task RunAsync(bool faultOnly)
+    {
+        var suite = Stopwatch.StartNew();
+        Tt.Configure(o => { o.PoolSize = 1; o.AutoAllocateResources = false; o.EnableDynamicScaling = false;
+            o.ContainerPrefix = "tt_reset_ideas_20261013"; o.DockerHost = "unix:///var/run/docker.sock"; });
+        try
+        {
+            await InitializeAsync();
+            var startupMs = suite.Elapsed.TotalMilliseconds;
+            Console.WriteLine($"STARTUP four prepared databases in one container: {startupMs:F2} ms");
+            if(faultOnly)
+            {
+                await QuarantineAsync();
+                File.WriteAllText("fault-results.json",JsonSerializer.Serialize(new{assertions,probes},new JsonSerializerOptions{WriteIndented=true}));
+                Console.WriteLine($"ALL FAULT CHECKS PASSED: {assertions}");
+                return;
+            }
+            await CalibrateAsync();
+            var random = new Random(731);
+            foreach (var scale in new[] { 1, 10, 100 })
+            {
+                for (var iteration = 0; iteration < 33; iteration++)
+                {
+                    var order = random.Next(2) == 0 ? new[] { "delete", "truncate" } : new[] { "truncate", "delete" };
+                    foreach (var strategy in order)
+                    {
+                        var slot = slots[0];
+                        await VerifyAsync(slot);
+                        var cycle = Stopwatch.StartNew();
+                        await FillAsync(slot, scale, $"sequential-{scale}-{iteration}-{strategy}");
+                        var reset = Stopwatch.StartNew();
+                        var timing = await ResetAsync(slot, strategy);
+                        await VerifyAsync(slot);
+                        var readyMs = reset.Elapsed.TotalMilliseconds;
+                        if (iteration >= 3)
+                            samples.Add(new Sample($"sequential-{strategy}-{130 * scale}-rows", 0, timing.CoreMs, timing.SeedMs, readyMs, cycle.Elapsed.TotalMilliseconds));
+                        await VerifyGeneratedIdsAsync(slot);
+                        await ResetAsync(slot, "delete");
+                    }
+                }
+                Console.WriteLine($"SEQUENTIAL {130 * scale} inserted test rows + one mutated baseline row; reset restores three baseline rows: both strategies complete");
+            }
+            await ExclusivityAsync();
+            foreach (var scenario in new[] { (Slots:4,Scale:1,Background:true), (Slots:2,Scale:1,Background:true),
+                (Slots:4,Scale:10,Background:true), (Slots:2,Scale:10,Background:true), (Slots:2,Scale:1,Background:false) })
+                await ParallelAsync(scenario.Slots, scenario.Scale, scenario.Background);
+            await SchemaFallbackAsync();
+            await QuarantineAsync();
+            var summaries = samples.GroupBy(s => s.Case).Select(g => new
+            {
+                name=g.Key,n=g.Count(),checkout=Stats(g.Select(s=>s.CheckoutMs)),resetCore=Stats(g.Select(s=>s.CoreMs)),
+                seedRestore=Stats(g.Select(s=>s.SeedMs)),releaseToVerifiedReady=Stats(g.Select(s=>s.ReadyMs)),
+                fullTestCycleIncludingWritesAndDeferredCleanup=Stats(g.Select(s=>s.CycleMs))
+            }).OrderBy(s=>s.name).ToArray();
+            foreach (var s in summaries)
+                Console.WriteLine($"RESULT {s.name} n={s.n} checkout_p95={s.checkout.P95:F2} ready_p50={s.releaseToVerifiedReady.P50:F2} ready_p95={s.releaseToVerifiedReady.P95:F2} ready_max={s.releaseToVerifiedReady.Max:F2} full_cycle_p95={s.fullTestCycleIncludingWritesAndDeferredCleanup.P95:F2}");
+            File.WriteAllText("results.json",JsonSerializer.Serialize(new { revision="d510320f6a11e98b509f6f5f9cc8cc02a1c23cfe",startupMs,
+                totalSuiteMs=suite.Elapsed.TotalMilliseconds,assertions,scope="Prototype; PostgreSQL16; real EF model; known seed; one container/four databases; warm cleanup+verified readiness target50ms; cycle includes test writes; no general schema support claim",summaries,samples=samples.ToArray(),probes },new JsonSerializerOptions{WriteIndented=true}));
+            Console.WriteLine($"ALL EXPERIMENT CHECKS PASSED: {assertions}; suite_ms={suite.Elapsed.TotalMilliseconds:F2}");
+        }
+        finally
+        {
+            foreach (var slot in slots) await slot.Source.DisposeAsync();
+            NpgsqlConnection.ClearAllPools();
+            await Tt.DisposeAsync();
+            Console.WriteLine("CLEANUP completed for the task-owned container and databases");
+        }
+    }
+
+    async Task InitializeAsync()
+    {
+        string bootstrap;
+        await using(var context=await Tt.CreateContextAsync<TestDbContext>()) bootstrap=context.Database.GetConnectionString()!;
+        var admin=new NpgsqlConnectionStringBuilder(bootstrap){Database="postgres",Pooling=false};
+        adminString=admin.ConnectionString;
+        var stem="ttideas_"+Guid.NewGuid().ToString("N")[..8];
+        template=stem+"_template";
+        for(var i=0;i<4;i++)
+        {
+            var name=stem+"_"+i;
+            await AdminAsync($"CREATE DATABASE \"{name}\"");
+            var builder=new NpgsqlConnectionStringBuilder(bootstrap){Database=name,Pooling=true};
+            var slot=new Slot(i,name,builder.ConnectionString);
+            slots.Add(slot);
+            await using(var context=slot.Context()) await context.Database.EnsureCreatedAsync();
+            await ExecuteAsync(slot,SeedSql);
+        }
+        baselineSchema=await SchemaAsync(slots[0]);
+        slots[0].Source.Clear();
+        await AdminAsync($"CREATE DATABASE \"{template}\" TEMPLATE \"{slots[0].Name}\"");
+        await AdminAsync($"ALTER DATABASE \"{template}\" ALLOW_CONNECTIONS false");
+        for(var i=0;i<5;i++) foreach(var slot in slots) await VerifyAsync(slot);
+    }
+
+    async Task FillAsync(Slot slot,int scale,string token)
+    {
+        const string sql="""
+            UPDATE "Users" SET "Name"=@token WHERE "Id"=100;
+            DELETE FROM "Blogs" WHERE "Id"=200;
+            INSERT INTO "Users"("Id","Email","Name") SELECT 100+n,@token||'-'||n||'@example.test',@token FROM generate_series(1,@users) n;
+            INSERT INTO "Blogs"("Id","Url") SELECT 200+n,'https://example.test/'||@token||'/'||n FROM generate_series(1,@blogs) n;
+            INSERT INTO "Posts"("Id","Title","Content","BlogId") SELECT 300+n,@token,@token,200+((n-1)%@blogs)+1 FROM generate_series(1,@posts) n;
+            SELECT setval(pg_get_serial_sequence('"Users"','Id'),100+@users,true);
+            SELECT setval(pg_get_serial_sequence('"Blogs"','Id'),200+@blogs,true);
+            SELECT setval(pg_get_serial_sequence('"Posts"','Id'),300+@posts,true);
+            """;
+        await using(var connection=await slot.Source.OpenConnectionAsync())
+        await using(var transaction=await connection.BeginTransactionAsync())
+        {
+            await using var command=new NpgsqlCommand(sql,connection,transaction);
+            command.Parameters.AddWithValue("token",token); command.Parameters.AddWithValue("users",100*scale);
+            command.Parameters.AddWithValue("blogs",10*scale);command.Parameters.AddWithValue("posts",20*scale);
+            await command.ExecuteNonQueryAsync();await transaction.CommitAsync();
+        }
+        await using var context=slot.Context();
+        Require(await context.Users.CountAsync()==100*scale+1,$"filled user cardinality: {token}");
+        Require(await context.Blogs.CountAsync()==10*scale,$"filled blog cardinality: {token}");
+        Require(await context.Posts.CountAsync()==20*scale,$"filled post cardinality: {token}");
+        Require(await context.Users.CountAsync(u=>u.Name==token)==100*scale+1,$"exclusive marker: {token}");
+    }
+
+    async Task<ResetTiming> ResetAsync(Slot slot,string strategy,bool corruptSeed=false,bool fail=false)
+    {
+        var timer=Stopwatch.StartNew();
+        if(await SchemaAsync(slot)!=baselineSchema)
+        {
+            await CloneAsync(slot);
+            return new ResetTiming(timer.Elapsed.TotalMilliseconds,0,true);
+        }
+        await using var connection=await slot.Source.OpenConnectionAsync();
+        await using var transaction=await connection.BeginTransactionAsync();
+        await using(var command=new NpgsqlCommand(strategy=="truncate"?TruncateSql:DeleteSql,connection,transaction))
+            await command.ExecuteNonQueryAsync();
+        var coreMs=timer.Elapsed.TotalMilliseconds;
+        var seedTimer=Stopwatch.StartNew();
+        if(fail)
+        {
+            await using var fault=new NpgsqlCommand("SELECT setval(pg_get_serial_sequence('\"Users\"','Id'),500,true); SELECT 1/0",connection,transaction);
+            await fault.ExecuteNonQueryAsync();
+        }
+        await using(var command=new NpgsqlCommand(corruptSeed?SeedSql.Replace("baseline-user","corrupt-user"):SeedSql,connection,transaction))
+            await command.ExecuteNonQueryAsync();
+        await transaction.CommitAsync();
+        return new ResetTiming(coreMs,seedTimer.Elapsed.TotalMilliseconds,false);
+    }
+
+    async Task VerifyAsync(Slot slot)
+    {
+        await using var context=slot.Context();
+        Require(await context.Users.CountAsync()==1,"baseline user count");
+        Require(await context.Blogs.CountAsync()==1,"baseline blog count");
+        Require(await context.Posts.CountAsync()==1,"baseline post count");
+        var user=await context.Users.SingleAsync(); var blog=await context.Blogs.SingleAsync();var post=await context.Posts.SingleAsync();
+        Require(user.Id==100&&user.Email=="baseline@example.test"&&user.Name=="baseline-user","baseline user snapshot");
+        Require(blog.Id==200&&blog.Url=="https://baseline.example.test","baseline blog snapshot");
+        Require(post.Id==300&&post.BlogId==200&&post.Title=="baseline-post"&&post.Content=="baseline-content","baseline post snapshot and relationship");
+        foreach(var (table,expected) in new[]{("Users",100L),("Blogs",200L),("Posts",300L)})
+        {
+            await using var connection=await slot.Source.OpenConnectionAsync();
+            await using var command=new NpgsqlCommand($"SELECT last_value,is_called FROM \"{table}_Id_seq\"",connection);
+            await using var reader=await command.ExecuteReaderAsync();Require(await reader.ReadAsync(),"sequence exists");
+            Require(reader.GetInt64(0)==expected&&reader.GetBoolean(1),$"baseline {table} sequence");
+        }
+    }
+
+    async Task VerifyGeneratedIdsAsync(Slot slot)
+    {
+        await using var context=slot.Context();
+        var user=new User{Email="identity-check@example.test"};var blog=new Blog{Url="https://identity.example.test",Posts=[new Post{Title="identity-post"}]};
+        context.AddRange(user,blog);await context.SaveChangesAsync();
+        Require(user.Id==101&&blog.Id==201&&blog.Posts.Single().Id==301,"generated IDs in every table");
+    }
+
+    async Task CalibrateAsync()
+    {
+        await FillAsync(slots[0],1,"oracle-calibration");
+        await ResetAsync(slots[0],"delete",corruptSeed:true);
+        var detected=false;
+        try{await VerifyAsync(slots[0]);}
+        catch(InvalidDataException ex) when(ex.Message.Contains("baseline user snapshot",StringComparison.Ordinal)){detected=true;}
+        Require(detected,"independent snapshot rejects corrupted seed");
+        await ResetAsync(slots[0],"delete");await VerifyAsync(slots[0]);
+        probes.Add(new{name="corrupted-seed-oracle",detected});
+        Console.WriteLine("CALIBRATION snapshot rejected the deliberately corrupted seed");
+    }
+
+    async Task ExclusivityAsync()
+    {
+        var pool=new ReadyPool(slots,this);
+        var leases=new List<Slot>();
+        for(var i=0;i<4;i++) leases.Add(await pool.AcquireAsync());
+        Require(leases.Select(s=>s.Name).Distinct().Count()==4,"distinct simultaneously held database leases");
+        for(var i=0;i<4;i++) await FillAsync(leases[i],1,$"isolation-{i}");
+        var waiting=pool.AcquireAsync();
+        await Task.Delay(20);
+        Require(!waiting.IsCompleted,"saturated pool never lends an occupied database");
+        await pool.ReturnAsync(leases[0]);var recycled=await waiting;
+        Require(recycled.Name==leases[0].Name,"only reset slot is reacquired");await VerifyAsync(recycled);
+        await pool.ReturnAsync(recycled);
+        for(var i=1;i<4;i++) await pool.ReturnAsync(leases[i]);
+        Require(pool.ReadyCount==4,"all exclusive leases returned after verified reset");
+        probes.Add(new{name="exclusive-parallel-leases",slots=4,occupiedSlotNeverReturned=true,baselineRestored=true});
+        Console.WriteLine("EXCLUSIVITY four unique occupied databases; excess request waited; reused slot verified clean");
+    }
+
+    async Task ParallelAsync(int count,int scale,bool background)
+    {
+        foreach(var slot in slots)await ResetAsync(slot,"delete");
+        var pool=new ReadyPool(slots.Take(count),this);
+        var name=$"parallel-4-workers-{count}-slots-{130*scale}-rows-{(background?"background":"foreground")}";
+        var completions=new ConcurrentBag<Task>();var gate=new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var wall=Stopwatch.StartNew();
+        var workers=Enumerable.Range(0,4).Select(async worker=>
+        {
+            await gate.Task;
+            for(var iteration=0;iteration<25;iteration++)
+            {
+                var cycle=Stopwatch.StartNew();var acquire=Stopwatch.StartNew();
+                var slot=await pool.AcquireAsync();await VerifyAsync(slot);
+                var checkout=acquire.Elapsed.TotalMilliseconds;
+                await FillAsync(slot,scale,$"worker-{worker}-{iteration}");
+                await Task.Delay(5);
+                var release=Stopwatch.StartNew();var receipt=pool.ReturnAsync(slot);
+                async Task Complete()
+                {
+                    var timing=await receipt;
+                    samples.Add(new Sample(name,checkout,timing.CoreMs,timing.SeedMs,release.Elapsed.TotalMilliseconds,cycle.Elapsed.TotalMilliseconds));
+                }
+                var completion=Complete();completions.Add(completion);if(!background)await completion;
+            }
+        }).ToArray();
+        gate.SetResult();await Task.WhenAll(workers);
+        var drain=Stopwatch.StartNew();await Task.WhenAll(completions);var drainMs=drain.Elapsed.TotalMilliseconds;
+        Require(pool.ReadyCount==count&&pool.QuarantinedCount==0,"parallel backlog drained without lost/reused dirty slots");
+        foreach(var slot in slots.Take(count))await VerifyAsync(slot);
+        probes.Add(new{name,operations=100,wallMs=wall.Elapsed.TotalMilliseconds,throughputPerSecond=100/wall.Elapsed.TotalSeconds,drainMs,pool.MaxPending,pool.MaxLeased,pool.ReadyCount});
+        Console.WriteLine($"PARALLEL {name}: 100 complete, throughput={100/wall.Elapsed.TotalSeconds:F2}/s, drain_ms={drainMs:F2}, max_cleanup_pending={pool.MaxPending}");
+    }
+
+    async Task SchemaFallbackAsync()
+    {
+        var slot=slots[0];
+        await ExecuteAsync(slot,"ALTER TABLE \"Users\" ADD COLUMN \"Unexpected\" text; CREATE TABLE \"ExtraTestTable\"(id integer); INSERT INTO \"ExtraTestTable\" VALUES(7)");
+        var timer=Stopwatch.StartNew();var timing=await ResetAsync(slot,"delete");await VerifyAsync(slot);
+        Require(timing.Cloned&&await SchemaAsync(slot)==baselineSchema,"schema mutation routes to prepared-template clone");
+        await VerifyGeneratedIdsAsync(slot);await ResetAsync(slot,"delete");
+        probes.Add(new{name="schema-change-clone-fallback",cloneUsed=timing.Cloned,restoreAndVerifyMs=timer.Elapsed.TotalMilliseconds});
+        Console.WriteLine($"SCHEMA fallback restored baseline schema/seed/IDs: {timer.Elapsed.TotalMilliseconds:F2} ms (slow path)");
+    }
+
+    async Task QuarantineAsync()
+    {
+        var pool=new ReadyPool(slots.Take(2),this);var bad=await pool.AcquireAsync();
+        await FillAsync(bad,1,"fault-probe");var failure=false;
+        try{await pool.ReturnAsync(bad,fail:true);}
+        catch(PostgresException ex)when(ex.SqlState=="22012"){failure=true;}
+        Require(failure&&pool.QuarantinedCount==1&&pool.ReadyCount==1,"reset failure surfaced and slot quarantined");
+        var good=await pool.AcquireAsync();Require(good!=bad,"failed slot never reacquired");await pool.ReturnAsync(good);
+        await CloneAsync(bad);
+        await ExecuteAsync(bad,"UPDATE \"Users\" SET \"Name\"='corrupt-replacement' WHERE \"Id\"=100");
+        var rejectedReplacement=false;
+        try{await pool.RecoverAsync(bad);}
+        catch(InvalidDataException ex)when(ex.Message.Contains("baseline user snapshot",StringComparison.Ordinal)){rejectedReplacement=true;}
+        Require(rejectedReplacement&&bad.State==3&&pool.ReadyCount==1,"replacement validation failure remains quarantined");
+        await CloneAsync(bad);await VerifyAsync(bad);await pool.RecoverAsync(bad);
+        Require(pool.ReadyCount==2&&pool.QuarantinedCount==0,"capacity restored with replacement clone");
+        var committedBad=await pool.AcquireAsync();await FillAsync(committedBad,1,"postcommit-fault");
+        var rejectedPostcommit=false;
+        try{await pool.ReturnAsync(committedBad,corruptSeed:true);}
+        catch(InvalidDataException ex)when(ex.Message.Contains("baseline user snapshot",StringComparison.Ordinal)){rejectedPostcommit=true;}
+        Require(rejectedPostcommit&&committedBad.State==3&&pool.ReadyCount==1,"postcommit validation failure remains quarantined");
+        await CloneAsync(committedBad);await pool.RecoverAsync(committedBad);
+        Require(pool.ReadyCount==2&&pool.QuarantinedCount==0,"postcommit failure recovery restores capacity");
+        probes.Add(new{name="partial-cleanup-failure-quarantine",sqlState="22012",badSlotNeverReused=true,rejectedReplacement,rejectedPostcommit,capacityRecovered=true});
+        Console.WriteLine("FAULT partial cleanup, invalid replacement, and postcommit validation failures quarantined; recreation restored capacity");
+    }
+
+    async Task<string> SchemaAsync(Slot slot)
+    {
+        const string sql="""
+            SELECT signature FROM (
+              SELECT 'column:'||table_name||':'||column_name||':'||data_type||':'||is_nullable||':'||coalesce(column_default,'') AS signature
+                FROM information_schema.columns WHERE table_schema='public'
+              UNION ALL SELECT 'constraint:'||c.relname||':'||pg_get_constraintdef(k.oid) FROM pg_constraint k JOIN pg_class c ON c.oid=k.conrelid JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public'
+              UNION ALL SELECT 'index:'||pg_get_indexdef(i.indexrelid) FROM pg_index i JOIN pg_class c ON c.oid=i.indrelid JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public'
+              UNION ALL SELECT 'trigger:'||pg_get_triggerdef(t.oid) FROM pg_trigger t JOIN pg_class c ON c.oid=t.tgrelid JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND NOT t.tgisinternal
+            ) s ORDER BY signature
+            """;
+        await using var connection=await slot.Source.OpenConnectionAsync();await using var command=new NpgsqlCommand(sql,connection);
+        await using var reader=await command.ExecuteReaderAsync();var text=new StringBuilder();while(await reader.ReadAsync())text.AppendLine(reader.GetString(0));
+        return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(text.ToString())));
+    }
+    async Task CloneAsync(Slot slot)
+    {
+        await slot.Source.DisposeAsync();
+        await AdminAsync($"DROP DATABASE \"{slot.Name}\" WITH (FORCE)");
+        await AdminAsync($"CREATE DATABASE \"{slot.Name}\" TEMPLATE \"{template}\"");
+        slot.Source=NpgsqlDataSource.Create(slot.ConnectionString);await using var warm=await slot.Source.OpenConnectionAsync();
+        await using var command=new NpgsqlCommand("SELECT 1",warm);Require(Convert.ToInt32(await command.ExecuteScalarAsync())==1,"replacement database warmed");
+    }
+    async Task AdminAsync(string sql)
+    {await using var connection=new NpgsqlConnection(adminString);await connection.OpenAsync();await using var command=new NpgsqlCommand(sql,connection);await command.ExecuteNonQueryAsync();}
+    static async Task ExecuteAsync(Slot slot,string sql)
+    {await using var connection=await slot.Source.OpenConnectionAsync();await using var command=new NpgsqlCommand(sql,connection);await command.ExecuteNonQueryAsync();}
+    void Require(bool value,string diagnostic){if(!value)throw new InvalidDataException(diagnostic);Interlocked.Increment(ref assertions);}
+    static Summary Stats(IEnumerable<double> values){var s=values.Order().ToArray();return new((s[(s.Length-1)/2]+s[s.Length/2])/2,s[(int)Math.Ceiling(s.Length*.95)-1],s[^1]);}
+
+    sealed class ReadyPool
+    {
+        readonly Channel<Slot> ready;readonly Experiment owner;readonly Slot[] all;int pending,leased,maxPending,maxLeased;
+        public int ReadyCount=>ready.Reader.Count;
+        public int QuarantinedCount=>all.Count(s=>Volatile.Read(ref s.State)==3);
+        public int MaxPending=>maxPending;public int MaxLeased=>maxLeased;
+        public ReadyPool(IEnumerable<Slot> slots,Experiment owner)
+        {
+            this.owner=owner;all=slots.ToArray();ready=Channel.CreateBounded<Slot>(all.Length);
+            foreach(var slot in all){owner.Require(slot.State==0,"new pool contains only ready slots");ready.Writer.TryWrite(slot);}
+        }
+        public async Task<Slot> AcquireAsync()
+        {
+            using var timeout=new CancellationTokenSource(TimeSpan.FromSeconds(10));var slot=await ready.Reader.ReadAsync(timeout.Token);
+            owner.Require(Interlocked.CompareExchange(ref slot.State,1,0)==0,"exclusive ready-to-leased transition");
+            UpdateMax(ref maxLeased,Interlocked.Increment(ref leased));return slot;
+        }
+        public async Task<ResetTiming> ReturnAsync(Slot slot,bool fail=false,bool corruptSeed=false)
+        {
+            owner.Require(Interlocked.CompareExchange(ref slot.State,2,1)==1,"only the owner may return a lease");Interlocked.Decrement(ref leased);
+            UpdateMax(ref maxPending,Interlocked.Increment(ref pending));
+            try
+            {
+                var timing=await owner.ResetAsync(slot,"delete",corruptSeed:corruptSeed,fail:fail);await owner.VerifyAsync(slot);
+                Interlocked.Exchange(ref slot.State,0);await ready.Writer.WriteAsync(slot);return timing;
+            }
+            catch{Interlocked.Exchange(ref slot.State,3);throw;}
+            finally{Interlocked.Decrement(ref pending);}
+        }
+        public async Task RecoverAsync(Slot slot)
+        {owner.Require(Interlocked.CompareExchange(ref slot.State,0,3)==3,"only quarantined slot can recover");await owner.VerifyAsync(slot);await ready.Writer.WriteAsync(slot);}
+        static void UpdateMax(ref int location,int value){int prior;while(value>(prior=Volatile.Read(ref location))&&Interlocked.CompareExchange(ref location,value,prior)!=prior){}}
+    }
+}
+
+sealed class Slot(int id,string name,string connectionString)
+{
+    public int Id{get;}=id;public string Name{get;}=name;public string ConnectionString{get;}=connectionString;
+    public NpgsqlDataSource Source{get;set;}=NpgsqlDataSource.Create(connectionString);public int State;
+    public TestDbContext Context()=>new(new DbContextOptionsBuilder<TestDbContext>().UseNpgsql(Source).Options);
+}
+record ResetTiming(double CoreMs,double SeedMs,bool Cloned);
+record Sample(string Case,double CheckoutMs,double CoreMs,double SeedMs,double ReadyMs,double CycleMs);
+record Summary(double P50,double P95,double Max);

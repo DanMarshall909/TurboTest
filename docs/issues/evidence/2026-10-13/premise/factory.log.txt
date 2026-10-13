@@ -1,0 +1,13 @@
+LOG Information: Initializing TurboTest pool with 1 containers, 256MB each
+LOG Information: TurboTest pool initialized successfully with 1 containers
+FACTORY mode=factory lease=1 acquire_ms=5825 port=45253 initial_rows=0
+LOG Error: Failed to release container 0e075e7dabdfe7efeb72d88f90f170f068f7f0803e509d97f7d9cb09cd353efc: 55006: database "testdb_755495fa316643859c150796f29064c0" is being accessed by other users
+
+DETAIL: There is 1 other session using the database.
+FACTORY release_ms=5427 remaining_containers=0
+FACTORY mode=factory lease=2 acquire_ms=6834 port=44293 initial_rows=0
+LOG Error: Failed to release container 1ecd47e10c84836930f2f537d26a65afbb92664c1041a36d7fe3c5bbf28bc2dd: 55006: database "testdb_74b3c78dca9b455babb0749c421d0bd6" is being accessed by other users
+
+DETAIL: There is 1 other session using the database.
+FACTORY release_ms=5415 remaining_containers=0
+AFTER shutdown own_containers=0

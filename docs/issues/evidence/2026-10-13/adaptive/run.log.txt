@@ -1,0 +1,25 @@
+POLICY CHECKS PASSED: 13
+WORKLOAD CHECKS PASSED: 240 deterministic inputs; 60% small, 30% medium, 10% large
+COMMON container/template startup: 9628.91 ms
+PHASE fixed-4/low-before: 30 complete, checkout_p95=3.83, ready_p95=38.88, throughput=29.89/s, capacity=4
+PHASE fixed-4/peak: 240 complete, checkout_p95=266.35, ready_p95=48.69, throughput=59.78/s, capacity=4
+PHASE fixed-4/low-after: 30 complete, checkout_p95=3.63, ready_p95=54.90, throughput=15.93/s, capacity=4
+POLICY fixed-4: startup=677.44, overall=13741.07, peak_reserved=4, creates=4, retires=0, idle_capacity=4, session_peak=6
+PHASE adaptive-2-to-8/low-before: 30 complete, checkout_p95=17.81, ready_p95=43.63, throughput=39.44/s, capacity=2
+PHASE adaptive-2-to-8/peak: 240 complete, checkout_p95=223.96, ready_p95=75.36, throughput=63.97/s, capacity=8
+PHASE adaptive-2-to-8/low-after: 30 complete, checkout_p95=3.19, ready_p95=43.13, throughput=20.53/s, capacity=8
+POLICY adaptive-2-to-8: startup=165.16, overall=12000.95, peak_reserved=8, creates=8, retires=1, idle_capacity=7, session_peak=10
+PHASE fixed-8/low-before: 30 complete, checkout_p95=3.44, ready_p95=37.41, throughput=42.01/s, capacity=8
+PHASE fixed-8/peak: 240 complete, checkout_p95=81.38, ready_p95=79.10, throughput=66.50/s, capacity=8
+PHASE fixed-8/low-after: 30 complete, checkout_p95=3.82, ready_p95=45.36, throughput=37.40/s, capacity=8
+POLICY fixed-8: startup=749.60, overall=14026.90, peak_reserved=8, creates=8, retires=0, idle_capacity=8, session_peak=10
+PHASE fixed-2/low-before: 30 complete, checkout_p95=15.72, ready_p95=46.05, throughput=21.68/s, capacity=2
+PHASE fixed-2/peak: 240 complete, checkout_p95=629.86, ready_p95=47.21, throughput=31.64/s, capacity=2
+PHASE fixed-2/low-after: 30 complete, checkout_p95=12.82, ready_p95=34.22, throughput=37.14/s, capacity=2
+POLICY fixed-2: startup=202.59, overall=14023.30, peak_reserved=2, creates=2, retires=0, idle_capacity=2, session_peak=4
+PHASE adaptive-repeat/low-before: 30 complete, checkout_p95=15.63, ready_p95=39.60, throughput=28.45/s, capacity=2
+PHASE adaptive-repeat/peak: 240 complete, checkout_p95=142.28, ready_p95=81.33, throughput=78.05/s, capacity=8
+PHASE adaptive-repeat/low-after: 30 complete, checkout_p95=3.62, ready_p95=39.91, throughput=29.03/s, capacity=8
+POLICY adaptive-repeat: startup=172.47, overall=12027.30, peak_reserved=8, creates=8, retires=1, idle_capacity=7, session_peak=10
+ADAPTIVE EXPERIMENT COMPLETE: 1500 workloads, correctness checks=44226
+CLEANUP task-owned PostgreSQL container removed

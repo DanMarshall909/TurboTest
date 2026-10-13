@@ -1,0 +1,160 @@
+using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using TurboTest.EFCore;
+using TurboTest.Tests;
+
+sealed class DatabaseEnvironment : IAsyncDisposable
+{
+    const string SeedSql = """
+        INSERT INTO "Users" ("Id","Email","Name") VALUES (100,'baseline@example.test','baseline-user');
+        INSERT INTO "Blogs" ("Id","Url") VALUES (200,'https://baseline.example.test');
+        INSERT INTO "Posts" ("Id","Title","Content","BlogId") VALUES (300,'baseline-post','baseline-content',200);
+        SELECT setval(pg_get_serial_sequence('"Users"','Id'),100,true);
+        SELECT setval(pg_get_serial_sequence('"Blogs"','Id'),200,true);
+        SELECT setval(pg_get_serial_sequence('"Posts"','Id'),300,true);
+        """;
+    const string DeleteSql = "DELETE FROM \"Posts\"; DELETE FROM \"Blogs\"; DELETE FROM \"Users\";";
+    const string TruncateSql = "TRUNCATE TABLE \"Posts\", \"Blogs\", \"Users\" RESTART IDENTITY;";
+    readonly List<Slot> owned=[];
+    string adminString="",template="",baselineSchema="",bootstrap="",stem="";
+    int assertions;
+    public int Assertions=>assertions;
+    public async Task StartAsync()
+    {
+        Tt.Configure(o=>{o.PoolSize=1;o.AutoAllocateResources=false;o.EnableDynamicScaling=false;
+            o.ContainerPrefix="tt_adaptive_ideas_20261013";o.DockerHost="unix:///var/run/docker.sock";});
+        await using(var context=await Tt.CreateContextAsync<TestDbContext>())bootstrap=context.Database.GetConnectionString()!;
+        adminString=new NpgsqlConnectionStringBuilder(bootstrap){Database="postgres",Pooling=false}.ConnectionString;
+        stem="ttadaptive_"+Guid.NewGuid().ToString("N")[..8];template=stem+"_template";
+        var seed=NewSlot("baseline",0);
+        await AdminAsync($"CREATE DATABASE \"{seed.Name}\"");
+        await using(var context=seed.Context())await context.Database.EnsureCreatedAsync();
+        await ExecuteAsync(seed,SeedSql);baselineSchema=await SchemaAsync(seed);
+        seed.Source.Clear();await AdminAsync($"CREATE DATABASE \"{template}\" TEMPLATE \"{seed.Name}\"");
+        await AdminAsync($"ALTER DATABASE \"{template}\" ALLOW_CONNECTIONS false");
+        await DestroyAsync(seed);
+    }
+    public Slot NewSlot(string policy,int id)
+    {
+        var name=stem+"_"+policy.Replace('-','_')+"_"+id;
+        var connectionString=new NpgsqlConnectionStringBuilder(bootstrap){Database=name,Pooling=true,MaxPoolSize=2}.ConnectionString;
+        var slot=new Slot(id,name,connectionString);lock(owned)owned.Add(slot);return slot;
+    }
+    public async Task PrepareAsync(Slot slot)
+    {
+        await AdminAsync($"CREATE DATABASE \"{slot.Name}\" TEMPLATE \"{template}\"");
+        await VerifyAsync(slot);Check(await SchemaAsync(slot)==baselineSchema,"prepared database matches baseline schema");
+        await using var connection=await slot.Source.OpenConnectionAsync();
+        await using var command=new NpgsqlCommand("SELECT current_database()",connection);
+        Require((string?)await command.ExecuteScalarAsync()==slot.Name,"actual database identity matches its exclusive slot");
+    }
+    public async Task DestroyAsync(Slot slot)
+    {
+        await slot.Source.DisposeAsync();
+        await AdminAsync($"DROP DATABASE IF EXISTS \"{slot.Name}\" WITH (FORCE)");
+    }
+    public async Task<int> CountClientSessionsAsync()
+    {
+        await using var connection=new NpgsqlConnection(adminString);await connection.OpenAsync();
+        await using var command=new NpgsqlCommand("SELECT count(*) FROM pg_stat_activity WHERE backend_type='client backend'",connection);
+        return Convert.ToInt32(await command.ExecuteScalarAsync());
+    }
+    public async Task FillAsync(Slot slot,int scale,string token)
+    {
+        const string sql="""
+            UPDATE "Users" SET "Name"=@token WHERE "Id"=100;
+            DELETE FROM "Blogs" WHERE "Id"=200;
+            INSERT INTO "Users"("Id","Email","Name") SELECT 100+n,@token||'-'||n||'@example.test',@token FROM generate_series(1,@users) n;
+            INSERT INTO "Blogs"("Id","Url") SELECT 200+n,'https://example.test/'||@token||'/'||n FROM generate_series(1,@blogs) n;
+            INSERT INTO "Posts"("Id","Title","Content","BlogId") SELECT 300+n,@token,@token,200+((n-1)%@blogs)+1 FROM generate_series(1,@posts) n;
+            SELECT setval(pg_get_serial_sequence('"Users"','Id'),100+@users,true);
+            SELECT setval(pg_get_serial_sequence('"Blogs"','Id'),200+@blogs,true);
+            SELECT setval(pg_get_serial_sequence('"Posts"','Id'),300+@posts,true);
+            """;
+        await using(var connection=await slot.Source.OpenConnectionAsync())
+        await using(var transaction=await connection.BeginTransactionAsync())
+        {
+            await using var command=new NpgsqlCommand(sql,connection,transaction);
+            command.Parameters.AddWithValue("token",token); command.Parameters.AddWithValue("users",100*scale);
+            command.Parameters.AddWithValue("blogs",10*scale);command.Parameters.AddWithValue("posts",20*scale);
+            await command.ExecuteNonQueryAsync();await transaction.CommitAsync();
+        }
+        await using var context=slot.Context();
+        Check(await context.Users.CountAsync()==100*scale+1,$"filled user cardinality: {token}");
+        Check(await context.Blogs.CountAsync()==10*scale,$"filled blog cardinality: {token}");
+        Check(await context.Posts.CountAsync()==20*scale,$"filled post cardinality: {token}");
+        Check(await context.Users.CountAsync(u=>u.Name==token)==100*scale+1,$"exclusive marker: {token}");
+    }
+
+    public async Task ResetAsync(Slot slot)
+    {
+        Check(await SchemaAsync(slot)==baselineSchema,"ordinary workload leaves baseline schema unchanged");
+        await using var connection=await slot.Source.OpenConnectionAsync();
+        await using var transaction=await connection.BeginTransactionAsync();
+        await using var command=new NpgsqlCommand(DeleteSql+SeedSql,connection,transaction);
+        await command.ExecuteNonQueryAsync();await transaction.CommitAsync();
+    }
+    public async Task VerifyAsync(Slot slot)
+    {
+        await using var context=slot.Context();
+        Check(await context.Users.CountAsync()==1,"baseline user count");
+        Check(await context.Blogs.CountAsync()==1,"baseline blog count");
+        Check(await context.Posts.CountAsync()==1,"baseline post count");
+        var user=await context.Users.SingleAsync(); var blog=await context.Blogs.SingleAsync();var post=await context.Posts.SingleAsync();
+        Check(user.Id==100&&user.Email=="baseline@example.test"&&user.Name=="baseline-user","baseline user snapshot");
+        Check(blog.Id==200&&blog.Url=="https://baseline.example.test","baseline blog snapshot");
+        Check(post.Id==300&&post.BlogId==200&&post.Title=="baseline-post"&&post.Content=="baseline-content","baseline post snapshot and relationship");
+        foreach(var (table,expected) in new[]{("Users",100L),("Blogs",200L),("Posts",300L)})
+        {
+            await using var connection=await slot.Source.OpenConnectionAsync();
+            await using var command=new NpgsqlCommand($"SELECT last_value,is_called FROM \"{table}_Id_seq\"",connection);
+            await using var reader=await command.ExecuteReaderAsync();Check(await reader.ReadAsync(),"sequence exists");
+            Check(reader.GetInt64(0)==expected&&reader.GetBoolean(1),$"baseline {table} sequence");
+        }
+    }
+
+    async Task VerifyGeneratedIdsAsync(Slot slot)
+    {
+        await using var context=slot.Context();
+        var user=new User{Email="identity-check@example.test"};var blog=new Blog{Url="https://identity.example.test",Posts=[new Post{Title="identity-post"}]};
+        context.AddRange(user,blog);await context.SaveChangesAsync();
+        Check(user.Id==101&&blog.Id==201&&blog.Posts.Single().Id==301,"generated IDs in every table");
+    }
+
+    async Task<string> SchemaAsync(Slot slot)
+    {
+        const string sql="""
+            SELECT signature FROM (
+              SELECT 'column:'||table_name||':'||column_name||':'||data_type||':'||is_nullable||':'||coalesce(column_default,'') AS signature
+                FROM information_schema.columns WHERE table_schema='public'
+              UNION ALL SELECT 'constraint:'||c.relname||':'||pg_get_constraintdef(k.oid) FROM pg_constraint k JOIN pg_class c ON c.oid=k.conrelid JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public'
+              UNION ALL SELECT 'index:'||pg_get_indexdef(i.indexrelid) FROM pg_index i JOIN pg_class c ON c.oid=i.indrelid JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public'
+              UNION ALL SELECT 'trigger:'||pg_get_triggerdef(t.oid) FROM pg_trigger t JOIN pg_class c ON c.oid=t.tgrelid JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND NOT t.tgisinternal
+            ) s ORDER BY signature
+            """;
+        await using var connection=await slot.Source.OpenConnectionAsync();await using var command=new NpgsqlCommand(sql,connection);
+        await using var reader=await command.ExecuteReaderAsync();var text=new StringBuilder();while(await reader.ReadAsync())text.AppendLine(reader.GetString(0));
+        return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(text.ToString())));
+    }
+    async Task AdminAsync(string sql)
+    {await using var connection=new NpgsqlConnection(adminString);await connection.OpenAsync();await using var command=new NpgsqlCommand(sql,connection);await command.ExecuteNonQueryAsync();}
+    static async Task ExecuteAsync(Slot slot,string sql)
+    {await using var connection=await slot.Source.OpenConnectionAsync();await using var command=new NpgsqlCommand(sql,connection);await command.ExecuteNonQueryAsync();}
+    void Check(bool value,string diagnostic){Require(value,diagnostic);Interlocked.Increment(ref assertions);}
+    public static void Require(bool value,string diagnostic){if(!value)throw new InvalidDataException(diagnostic);}
+    public async ValueTask DisposeAsync()
+    {
+        foreach(var slot in owned)await slot.Source.DisposeAsync();
+        NpgsqlConnection.ClearAllPools();await Tt.DisposeAsync();
+        Console.WriteLine("CLEANUP task-owned PostgreSQL container removed");
+    }
+}
+sealed class Slot(int id,string name,string connectionString)
+{
+    public int Id{get;}=id;public string Name{get;}=name;public string ConnectionString{get;}=connectionString;
+    public NpgsqlDataSource Source{get;set;}=NpgsqlDataSource.Create(connectionString);public int State;public double IdleSinceMs;
+    public TestDbContext Context()=>new(new DbContextOptionsBuilder<TestDbContext>().UseNpgsql(Source).Options);
+}

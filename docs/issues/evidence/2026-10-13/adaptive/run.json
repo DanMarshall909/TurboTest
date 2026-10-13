@@ -1,0 +1,21 @@
+{
+  "command": [
+    "dotnet",
+    "run",
+    "--project",
+    "Adaptive.csproj",
+    "--configuration",
+    "Release"
+  ],
+  "cwd": "/tmp/turbotest-adaptive-ideas-20261013",
+  "revision": "d510320f6a11e98b509f6f5f9cc8cc02a1c23cfe",
+  "sourceSha256": {
+    "AdaptivePolicy.cs": "24725d0ae6828bd18fe0d18634f34a1c176c801ec36eea6623c097b015126b2b",
+    "Program.cs": "cfa1e7a56dcce34658fa4e63ce7b26423aebd4e5d31dde61fd3cb03f54ff1e20",
+    "DatabaseEnvironment.cs": "abbcee125adf6491f5238b2e199bbca2ac33403071b9201b617697947f3fa250",
+    "Workloads.cs": "8628a238301f7ef48765d0c21a34cc50b62745b1ec7c262b47688d81bc18cdb2"
+  },
+  "exit": 0,
+  "seconds": 77.609,
+  "DOTNET_PROCESSOR_COUNT": 4
+}

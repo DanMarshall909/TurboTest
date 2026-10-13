@@ -1,0 +1,487 @@
+{
+  "recorded": "2026-10-14",
+  "investigatedRevision": "d510320f6a11e98b509f6f5f9cc8cc02a1c23cfe",
+  "note": "Historical prototype sources are stored as text and are not build targets. Results are losslessly gzip-compressed. No bin/obj caches or rejected zero-row results are included. The rejected-workload notice and failing workload check are retained.",
+  "files": [
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/Adaptive.csproj",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/Adaptive.csproj.txt",
+      "sourceSha256": "224b625c4f36a63ae9c81487804ae9efc2af42cd3f1694ed25be42d104bfe959",
+      "archiveSha256": "224b625c4f36a63ae9c81487804ae9efc2af42cd3f1694ed25be42d104bfe959",
+      "sourceBytes": 521,
+      "archiveBytes": 521
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/global.json",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/global.json",
+      "sourceSha256": "20c93ca7812d0a9825eef71217156f95ab2f4fe5aadfeb22ebc1c24b630018d3",
+      "archiveSha256": "20c93ca7812d0a9825eef71217156f95ab2f4fe5aadfeb22ebc1c24b630018d3",
+      "sourceBytes": 111,
+      "archiveBytes": 111
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/Program.cs",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/Program.cs.txt",
+      "sourceSha256": "cfa1e7a56dcce34658fa4e63ce7b26423aebd4e5d31dde61fd3cb03f54ff1e20",
+      "archiveSha256": "cfa1e7a56dcce34658fa4e63ce7b26423aebd4e5d31dde61fd3cb03f54ff1e20",
+      "sourceBytes": 17147,
+      "archiveBytes": 17147
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/AdaptivePolicy.cs",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/AdaptivePolicy.cs.txt",
+      "sourceSha256": "24725d0ae6828bd18fe0d18634f34a1c176c801ec36eea6623c097b015126b2b",
+      "archiveSha256": "24725d0ae6828bd18fe0d18634f34a1c176c801ec36eea6623c097b015126b2b",
+      "sourceBytes": 3398,
+      "archiveBytes": 3398
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/DatabaseEnvironment.cs",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/DatabaseEnvironment.cs.txt",
+      "sourceSha256": "abbcee125adf6491f5238b2e199bbca2ac33403071b9201b617697947f3fa250",
+      "archiveSha256": "abbcee125adf6491f5238b2e199bbca2ac33403071b9201b617697947f3fa250",
+      "sourceBytes": 10704,
+      "archiveBytes": 10704
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/Workloads.cs",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/Workloads.cs.txt",
+      "sourceSha256": "8628a238301f7ef48765d0c21a34cc50b62745b1ec7c262b47688d81bc18cdb2",
+      "archiveSha256": "8628a238301f7ef48765d0c21a34cc50b62745b1ec7c262b47688d81bc18cdb2",
+      "sourceBytes": 723,
+      "archiveBytes": 723
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/results.json",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/results.json.gz",
+      "sourceSha256": "826c2be91a013e6dd43edf0a8208b847b30ef39ca7f61ba0c45f391278d3d48e",
+      "archiveSha256": "6b97a252282e7da48e3f34e5e63dd4bea10bbe462d563625d152bb85ffeebb92",
+      "sourceBytes": 634179,
+      "archiveBytes": 39318
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/run.json",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/run.json",
+      "sourceSha256": "35a3febd34825116a1319f7f4f7d9d9208fdb6346be02d1fa8950b69d1bf43cd",
+      "archiveSha256": "35a3febd34825116a1319f7f4f7d9d9208fdb6346be02d1fa8950b69d1bf43cd",
+      "sourceBytes": 688,
+      "archiveBytes": 688
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/run.log",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/run.log.txt",
+      "sourceSha256": "a4139b2b2f7bf3c346b12de7b51212fd03b2326f0ebe7fd120c5d30c0d0228f5",
+      "archiveSha256": "a4139b2b2f7bf3c346b12de7b51212fd03b2326f0ebe7fd120c5d30c0d0228f5",
+      "sourceBytes": 2518,
+      "archiveBytes": 2518
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/analysis.json",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/analysis.json",
+      "sourceSha256": "0210242bf77dbe1292266fbba71191c7e5ec4c03f39dc844e2f5bf9be4eba7b8",
+      "archiveSha256": "0210242bf77dbe1292266fbba71191c7e5ec4c03f39dc844e2f5bf9be4eba7b8",
+      "sourceBytes": 551,
+      "archiveBytes": 551
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/analyze.py",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/analyze.py.txt",
+      "sourceSha256": "567b0d830f5ae0801e41e061be068471ec7d3f62625caef51561e24f68fc40a4",
+      "archiveSha256": "567b0d830f5ae0801e41e061be068471ec7d3f62625caef51561e24f68fc40a4",
+      "sourceBytes": 4826,
+      "archiveBytes": 4826
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/capacity-timeline.png",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/capacity-timeline.png",
+      "sourceSha256": "b5ec93cc6f038469d70e2fc7d719d0d002fa0c43e07e75cb790d674f2e6a82a8",
+      "archiveSha256": "b5ec93cc6f038469d70e2fc7d719d0d002fa0c43e07e75cb790d674f2e6a82a8",
+      "sourceBytes": 104843,
+      "archiveBytes": 104843
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/capacity-timeline.svg",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/capacity-timeline.svg",
+      "sourceSha256": "1b162d4728b1eb4d375bde96f4fbf103299b6d9876efa36799bb49cfd4d56c30",
+      "archiveSha256": "1b162d4728b1eb4d375bde96f4fbf103299b6d9876efa36799bb49cfd4d56c30",
+      "sourceBytes": 79753,
+      "archiveBytes": 79753
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/final-checks.json",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/final-checks.json",
+      "sourceSha256": "7cf8acb31597ff9ce3ee4f735c23573b126cd1fa986fdc7f7f9a0d1d9ddff7a3",
+      "archiveSha256": "7cf8acb31597ff9ce3ee4f735c23573b126cd1fa986fdc7f7f9a0d1d9ddff7a3",
+      "sourceBytes": 312,
+      "archiveBytes": 312
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/policy-red.json",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/policy-red.json",
+      "sourceSha256": "b0f8b6dd077940753acb32a6b5a166ad1354a26dc6afbf74edca31d463d10ae3",
+      "archiveSha256": "b0f8b6dd077940753acb32a6b5a166ad1354a26dc6afbf74edca31d463d10ae3",
+      "sourceBytes": 328,
+      "archiveBytes": 328
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/policy-red.log",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/policy-red.log.txt",
+      "sourceSha256": "8869918f96f2642d79b11a443b7597fddf10eb61ea6d4b37a67dea9b79fda5f1",
+      "archiveSha256": "8869918f96f2642d79b11a443b7597fddf10eb61ea6d4b37a67dea9b79fda5f1",
+      "sourceBytes": 1073,
+      "archiveBytes": 1073
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/policy-green.json",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/policy-green.json",
+      "sourceSha256": "26df6952be6a6151a6b99ee2228329600978ffd8c227722a6aa1803ff2dd6203",
+      "archiveSha256": "26df6952be6a6151a6b99ee2228329600978ffd8c227722a6aa1803ff2dd6203",
+      "sourceBytes": 326,
+      "archiveBytes": 326
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/policy-green.log",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/policy-green.log.txt",
+      "sourceSha256": "91352e8fc508e110a64a7e849eb77274991cb8115d19a98d64627ddc664b4c42",
+      "archiveSha256": "91352e8fc508e110a64a7e849eb77274991cb8115d19a98d64627ddc664b4c42",
+      "sourceBytes": 25,
+      "archiveBytes": 25
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/AdaptivePolicy-red.cs.txt",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/AdaptivePolicy-red.cs.txt",
+      "sourceSha256": "b4c4bd42bb8ae0222aa7a98f2cfa2ed5fd0a2de5141ae74057ac3aba646af30f",
+      "archiveSha256": "b4c4bd42bb8ae0222aa7a98f2cfa2ed5fd0a2de5141ae74057ac3aba646af30f",
+      "sourceBytes": 2568,
+      "archiveBytes": 2568
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/workload-red.json",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/workload-red.json",
+      "sourceSha256": "c8350d2a5a59496e46cc7b3507695562615eabb5f7f5a19c2fb129e065a2693d",
+      "archiveSha256": "c8350d2a5a59496e46cc7b3507695562615eabb5f7f5a19c2fb129e065a2693d",
+      "sourceBytes": 222,
+      "archiveBytes": 222
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/workload-red.log",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/workload-red.log.txt",
+      "sourceSha256": "697be61247b6b2b30c64599e913fc0441885bf74d444e4162caf44240bdde655",
+      "archiveSha256": "697be61247b6b2b30c64599e913fc0441885bf74d444e4162caf44240bdde655",
+      "sourceBytes": 364,
+      "archiveBytes": 364
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/Workloads-red.cs.txt",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/Workloads-red.cs.txt",
+      "sourceSha256": "b6fce3a6c39af577e4bddcbcb9c7fa0028c988e51483b624064aa85bdccf0c9b",
+      "archiveSha256": "b6fce3a6c39af577e4bddcbcb9c7fa0028c988e51483b624064aa85bdccf0c9b",
+      "sourceBytes": 721,
+      "archiveBytes": 721
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-ideas-20261013/invalid-workload/REJECTED.md",
+      "archive": "docs/issues/evidence/2026-10-13/adaptive/REJECTED.md.txt",
+      "sourceSha256": "75a998d965ecb915179dbfd8b7296c2ad7792c0260bfafa47aedaecb003e20b2",
+      "archiveSha256": "75a998d965ecb915179dbfd8b7296c2ad7792c0260bfafa47aedaecb003e20b2",
+      "sourceBytes": 306,
+      "archiveBytes": 306
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/Adaptive.csproj",
+      "archive": "docs/issues/evidence/2026-10-13/parking/Adaptive.csproj.txt",
+      "sourceSha256": "224b625c4f36a63ae9c81487804ae9efc2af42cd3f1694ed25be42d104bfe959",
+      "archiveSha256": "224b625c4f36a63ae9c81487804ae9efc2af42cd3f1694ed25be42d104bfe959",
+      "sourceBytes": 521,
+      "archiveBytes": 521
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/global.json",
+      "archive": "docs/issues/evidence/2026-10-13/parking/global.json",
+      "sourceSha256": "20c93ca7812d0a9825eef71217156f95ab2f4fe5aadfeb22ebc1c24b630018d3",
+      "archiveSha256": "20c93ca7812d0a9825eef71217156f95ab2f4fe5aadfeb22ebc1c24b630018d3",
+      "sourceBytes": 111,
+      "archiveBytes": 111
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/Program.cs",
+      "archive": "docs/issues/evidence/2026-10-13/parking/Program.cs.txt",
+      "sourceSha256": "e1ca29334f279fa1791f3cbd785c8cdccad16b5fdb262d6c30d77dbdf9720799",
+      "archiveSha256": "e1ca29334f279fa1791f3cbd785c8cdccad16b5fdb262d6c30d77dbdf9720799",
+      "sourceBytes": 18252,
+      "archiveBytes": 18252
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/AdaptivePolicy.cs",
+      "archive": "docs/issues/evidence/2026-10-13/parking/AdaptivePolicy.cs.txt",
+      "sourceSha256": "eed31e41c225eebbdb01e865c4d428b5b0443a4b4748c3b67d73cb1fb77feac5",
+      "archiveSha256": "eed31e41c225eebbdb01e865c4d428b5b0443a4b4748c3b67d73cb1fb77feac5",
+      "sourceBytes": 3879,
+      "archiveBytes": 3879
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/DatabaseEnvironment.cs",
+      "archive": "docs/issues/evidence/2026-10-13/parking/DatabaseEnvironment.cs.txt",
+      "sourceSha256": "3fd08c9eb8b788d3dd629d6988861410b048d8dd40a1fab13ef2b253682e5e5f",
+      "archiveSha256": "3fd08c9eb8b788d3dd629d6988861410b048d8dd40a1fab13ef2b253682e5e5f",
+      "sourceBytes": 11463,
+      "archiveBytes": 11463
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/Workloads.cs",
+      "archive": "docs/issues/evidence/2026-10-13/parking/Workloads.cs.txt",
+      "sourceSha256": "8628a238301f7ef48765d0c21a34cc50b62745b1ec7c262b47688d81bc18cdb2",
+      "archiveSha256": "8628a238301f7ef48765d0c21a34cc50b62745b1ec7c262b47688d81bc18cdb2",
+      "sourceBytes": 723,
+      "archiveBytes": 723
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/results.json",
+      "archive": "docs/issues/evidence/2026-10-13/parking/results.json.gz",
+      "sourceSha256": "d542e8db34f3381de4d76b788dcca8532b90efd78b8421345a362d455a57479e",
+      "archiveSha256": "50eb753801268dca6446290361c4856aef4c034650d3c63456c5b0ac5d38719e",
+      "sourceBytes": 846846,
+      "archiveBytes": 52627
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/run.json",
+      "archive": "docs/issues/evidence/2026-10-13/parking/run.json",
+      "sourceSha256": "48d5f228b7056a3f1da2a3ed1726c06bb402fccaeef58d94a49d423a524d0dd3",
+      "archiveSha256": "48d5f228b7056a3f1da2a3ed1726c06bb402fccaeef58d94a49d423a524d0dd3",
+      "sourceBytes": 832,
+      "archiveBytes": 832
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/run.log",
+      "archive": "docs/issues/evidence/2026-10-13/parking/run.log.txt",
+      "sourceSha256": "07197c0add356c49c3de2e47429e263178361ee0a64fb276279844be11583633",
+      "archiveSha256": "07197c0add356c49c3de2e47429e263178361ee0a64fb276279844be11583633",
+      "sourceBytes": 2789,
+      "archiveBytes": 2789
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/run_experiment.py",
+      "archive": "docs/issues/evidence/2026-10-13/parking/run_experiment.py.txt",
+      "sourceSha256": "20af4255c6d0cf2633e3c136524b9bfda0267c96998959b897f8735524cfaada",
+      "archiveSha256": "20af4255c6d0cf2633e3c136524b9bfda0267c96998959b897f8735524cfaada",
+      "sourceBytes": 2056,
+      "archiveBytes": 2056
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/parking-policy-red.cs.txt",
+      "archive": "docs/issues/evidence/2026-10-13/parking/parking-policy-red.cs.txt",
+      "sourceSha256": "f5dacb8beff4c790592a55695f613766b9f24bd04065fa5241f36b706bae6cd4",
+      "archiveSha256": "f5dacb8beff4c790592a55695f613766b9f24bd04065fa5241f36b706bae6cd4",
+      "sourceBytes": 3860,
+      "archiveBytes": 3860
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/parking-policy-red.json",
+      "archive": "docs/issues/evidence/2026-10-13/parking/parking-policy-red.json",
+      "sourceSha256": "e1aff176bd8849d26ec3198e674019698fa3b34f22b911f42ca0f55a4fa05bd1",
+      "archiveSha256": "e1aff176bd8849d26ec3198e674019698fa3b34f22b911f42ca0f55a4fa05bd1",
+      "sourceBytes": 158,
+      "archiveBytes": 158
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/parking-policy-red.log",
+      "archive": "docs/issues/evidence/2026-10-13/parking/parking-policy-red.log.txt",
+      "sourceSha256": "d64770e935d7198b70bce9dd60a6c0e066617b66d2359b9ad87e247172126f9b",
+      "archiveSha256": "d64770e935d7198b70bce9dd60a6c0e066617b66d2359b9ad87e247172126f9b",
+      "sourceBytes": 551,
+      "archiveBytes": 551
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/parking-policy-green.json",
+      "archive": "docs/issues/evidence/2026-10-13/parking/parking-policy-green.json",
+      "sourceSha256": "045fcd38eec194878e75648bb3ba8961a45431f84b9ba7a5411cb90ef0bf2cf6",
+      "archiveSha256": "045fcd38eec194878e75648bb3ba8961a45431f84b9ba7a5411cb90ef0bf2cf6",
+      "sourceBytes": 59,
+      "archiveBytes": 59
+    },
+    {
+      "source": "/tmp/turbotest-adaptive-parking-20261013/parking-policy-green.log",
+      "archive": "docs/issues/evidence/2026-10-13/parking/parking-policy-green.log.txt",
+      "sourceSha256": "7dcfb2e3aa6677995f49a1a11391781aa62c8cefbebfdf112d414060044de931",
+      "archiveSha256": "7dcfb2e3aa6677995f49a1a11391781aa62c8cefbebfdf112d414060044de931",
+      "sourceBytes": 108,
+      "archiveBytes": 108
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/Ideas.csproj",
+      "archive": "docs/issues/evidence/2026-10-13/reset/Ideas.csproj.txt",
+      "sourceSha256": "224b625c4f36a63ae9c81487804ae9efc2af42cd3f1694ed25be42d104bfe959",
+      "archiveSha256": "224b625c4f36a63ae9c81487804ae9efc2af42cd3f1694ed25be42d104bfe959",
+      "sourceBytes": 521,
+      "archiveBytes": 521
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/global.json",
+      "archive": "docs/issues/evidence/2026-10-13/reset/global.json",
+      "sourceSha256": "20c93ca7812d0a9825eef71217156f95ab2f4fe5aadfeb22ebc1c24b630018d3",
+      "archiveSha256": "20c93ca7812d0a9825eef71217156f95ab2f4fe5aadfeb22ebc1c24b630018d3",
+      "sourceBytes": 111,
+      "archiveBytes": 111
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/Program-full-run.cs.txt",
+      "archive": "docs/issues/evidence/2026-10-13/reset/Program-full-run.cs.txt",
+      "sourceSha256": "eb8beb6b299b790e76c86504c58a1e6abc49ced3450ca8e60255df97490f6fb7",
+      "archiveSha256": "eb8beb6b299b790e76c86504c58a1e6abc49ced3450ca8e60255df97490f6fb7",
+      "sourceBytes": 23188,
+      "archiveBytes": 23188
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/Program-fault-red.cs.txt",
+      "archive": "docs/issues/evidence/2026-10-13/reset/Program-fault-red.cs.txt",
+      "sourceSha256": "a2dd17506495ec43eb0669b1fa6ac2ca2bf15a3a74bae0a4ba228c532f67f5ef",
+      "archiveSha256": "a2dd17506495ec43eb0669b1fa6ac2ca2bf15a3a74bae0a4ba228c532f67f5ef",
+      "sourceBytes": 24907,
+      "archiveBytes": 24907
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/Program.cs",
+      "archive": "docs/issues/evidence/2026-10-13/reset/Program.cs.txt",
+      "sourceSha256": "9c8f6b708a72f6c99529d07ad2af46fd68dca3d87b4afe68f8048fffe56f20c4",
+      "archiveSha256": "9c8f6b708a72f6c99529d07ad2af46fd68dca3d87b4afe68f8048fffe56f20c4",
+      "sourceBytes": 25064,
+      "archiveBytes": 25064
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/results.json",
+      "archive": "docs/issues/evidence/2026-10-13/reset/results.json.gz",
+      "sourceSha256": "dfc68426fe57ecc26900479641729118f7c8a4980adde69cc7a497a2be002ed9",
+      "archiveSha256": "909bbf0df106d3c8d906658d4f74501fe61430d1e7f69190b80e81dd0f2c346f",
+      "sourceBytes": 144534,
+      "archiveBytes": 17336
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/run.json",
+      "archive": "docs/issues/evidence/2026-10-13/reset/run.json",
+      "sourceSha256": "829fd6f71f518b659f35f5410407cdd94f487c347e1dae14ea59cbdbee3e89c8",
+      "archiveSha256": "829fd6f71f518b659f35f5410407cdd94f487c347e1dae14ea59cbdbee3e89c8",
+      "sourceBytes": 379,
+      "archiveBytes": 379
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/run.log",
+      "archive": "docs/issues/evidence/2026-10-13/reset/run.log.txt",
+      "sourceSha256": "0016bdf522cdb9f43451566f1021e1b7ce5f60700a53b2f3d44b7c4bad52257a",
+      "archiveSha256": "0016bdf522cdb9f43451566f1021e1b7ce5f60700a53b2f3d44b7c4bad52257a",
+      "sourceBytes": 2892,
+      "archiveBytes": 2892
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/normalized-statistics.json",
+      "archive": "docs/issues/evidence/2026-10-13/reset/normalized-statistics.json",
+      "sourceSha256": "2b9de4227e6f787fa0dffbc58a1e52b37efbc8b0d1b91ce06a0cd6d224073740",
+      "archiveSha256": "2b9de4227e6f787fa0dffbc58a1e52b37efbc8b0d1b91ce06a0cd6d224073740",
+      "sourceBytes": 4480,
+      "archiveBytes": 4480
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/fault-red.json",
+      "archive": "docs/issues/evidence/2026-10-13/reset/fault-red.json",
+      "sourceSha256": "fa000d4858f312ec7bc1cdecdd4c1a2c9d48cbc613e49dc98c467c7fbe754102",
+      "archiveSha256": "fa000d4858f312ec7bc1cdecdd4c1a2c9d48cbc613e49dc98c467c7fbe754102",
+      "sourceBytes": 322,
+      "archiveBytes": 322
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/fault-red.log",
+      "archive": "docs/issues/evidence/2026-10-13/reset/fault-red.log.txt",
+      "sourceSha256": "6b8eaa3dfb14f882e318b4c515468a19c0b521382aa314400bd9638115d014e5",
+      "archiveSha256": "6b8eaa3dfb14f882e318b4c515468a19c0b521382aa314400bd9638115d014e5",
+      "sourceBytes": 775,
+      "archiveBytes": 775
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/fault-green.json",
+      "archive": "docs/issues/evidence/2026-10-13/reset/fault-green.json",
+      "sourceSha256": "d9598f2ef8366aca09607e2c3c855afcb61768bc5eafc08446807837b318f09c",
+      "archiveSha256": "d9598f2ef8366aca09607e2c3c855afcb61768bc5eafc08446807837b318f09c",
+      "sourceBytes": 320,
+      "archiveBytes": 320
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/fault-green.log",
+      "archive": "docs/issues/evidence/2026-10-13/reset/fault-green.log.txt",
+      "sourceSha256": "cc0340322b97b5ee74aa259f40870902a7095607127f9ba127615ea5b67727e2",
+      "archiveSha256": "cc0340322b97b5ee74aa259f40870902a7095607127f9ba127615ea5b67727e2",
+      "sourceBytes": 272,
+      "archiveBytes": 272
+    },
+    {
+      "source": "/tmp/turbotest-reset-ideas-20261013/fault-results.json",
+      "archive": "docs/issues/evidence/2026-10-13/reset/fault-results.json.gz",
+      "sourceSha256": "079cb75d908511f2d798a7537bdd6d278d8ed49a05c63be2b5450f688966f397",
+      "archiveSha256": "aeaad8675ec56b7196e5f9bcdf19a83901311bc3180a60c58e5cc29355524bb2",
+      "sourceBytes": 268,
+      "archiveBytes": 181
+    },
+    {
+      "source": "/tmp/turbotest-premise-probe-20261013/Probe.csproj",
+      "archive": "docs/issues/evidence/2026-10-13/premise/Probe.csproj.txt",
+      "sourceSha256": "57a2e0bac8afe30139a673c9b16e08ccc040f6ce460762e38456599b17ea9b3f",
+      "archiveSha256": "57a2e0bac8afe30139a673c9b16e08ccc040f6ce460762e38456599b17ea9b3f",
+      "sourceBytes": 407,
+      "archiveBytes": 407
+    },
+    {
+      "source": "/tmp/turbotest-premise-probe-20261013/global.json",
+      "archive": "docs/issues/evidence/2026-10-13/premise/global.json",
+      "sourceSha256": "20c93ca7812d0a9825eef71217156f95ab2f4fe5aadfeb22ebc1c24b630018d3",
+      "archiveSha256": "20c93ca7812d0a9825eef71217156f95ab2f4fe5aadfeb22ebc1c24b630018d3",
+      "sourceBytes": 111,
+      "archiveBytes": 111
+    },
+    {
+      "source": "/tmp/turbotest-premise-probe-20261013/Program.cs",
+      "archive": "docs/issues/evidence/2026-10-13/premise/Program.cs.txt",
+      "sourceSha256": "186320667c8c40cfcf80e230355784f4cd77722780f4700d8dcaf00fe0f4d5ee",
+      "archiveSha256": "186320667c8c40cfcf80e230355784f4cd77722780f4700d8dcaf00fe0f4d5ee",
+      "sourceBytes": 4749,
+      "archiveBytes": 4749
+    },
+    {
+      "source": "/tmp/turbotest-premise-probe-20261013/results.json",
+      "archive": "docs/issues/evidence/2026-10-13/premise/results.json.gz",
+      "sourceSha256": "f4d7864aadadc71a74ca01c3e10b430d325560262d8ff7de28e9e99b7c365f06",
+      "archiveSha256": "391e9cc517a1350715829812252d8113b4e37d89f307ea421dd352455b4a4494",
+      "sourceBytes": 1585,
+      "archiveBytes": 327
+    },
+    {
+      "source": "/tmp/turbotest-premise-probe-20261013/direct.log",
+      "archive": "docs/issues/evidence/2026-10-13/premise/direct.log.txt",
+      "sourceSha256": "697503e0c685a97807d3616847ea5f3c613f3aca20b62915de45029e1263faf9",
+      "archiveSha256": "697503e0c685a97807d3616847ea5f3c613f3aca20b62915de45029e1263faf9",
+      "sourceBytes": 525,
+      "archiveBytes": 525
+    },
+    {
+      "source": "/tmp/turbotest-premise-probe-20261013/factory.log",
+      "archive": "docs/issues/evidence/2026-10-13/premise/factory.log.txt",
+      "sourceSha256": "df222f86fc533679eb291f48ef74ab99dbdecdfa58fa50fdda0c19b2a02c9e78",
+      "archiveSha256": "df222f86fc533679eb291f48ef74ab99dbdecdfa58fa50fdda0c19b2a02c9e78",
+      "sourceBytes": 918,
+      "archiveBytes": 918
+    },
+    {
+      "source": "/tmp/turbotest-premise-probe-20261013/di.log",
+      "archive": "docs/issues/evidence/2026-10-13/premise/di.log.txt",
+      "sourceSha256": "39b28c400a30478ee84f55da061a8f39c3cce873d5011419a36fea132af85d9e",
+      "archiveSha256": "39b28c400a30478ee84f55da061a8f39c3cce873d5011419a36fea132af85d9e",
+      "sourceBytes": 116,
+      "archiveBytes": 116
+    },
+    {
+      "source": "/tmp/turbotest-premise-probe-20261013/no-pooling.log",
+      "archive": "docs/issues/evidence/2026-10-13/premise/no-pooling.log.txt",
+      "sourceSha256": "70c88d711538a74368a4763db3db1d137602ffbb51dffb48e93085cc6532cbdf",
+      "archiveSha256": "70c88d711538a74368a4763db3db1d137602ffbb51dffb48e93085cc6532cbdf",
+      "sourceBytes": 492,
+      "archiveBytes": 492
+    }
+  ]
+}

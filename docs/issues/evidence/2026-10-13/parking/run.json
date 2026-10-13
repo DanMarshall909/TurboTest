@@ -1,0 +1,23 @@
+{
+  "command": [
+    "dotnet",
+    "run",
+    "-c",
+    "Release"
+  ],
+  "DOTNET_PROCESSOR_COUNT": "4",
+  "startedUtc": "2026-10-13T11:35:00.572539+00:00",
+  "sourceSha256": {
+    "AdaptivePolicy.cs": "eed31e41c225eebbdb01e865c4d428b5b0443a4b4748c3b67d73cb1fb77feac5",
+    "Program.cs": "e1ca29334f279fa1791f3cbd785c8cdccad16b5fdb262d6c30d77dbdf9720799",
+    "DatabaseEnvironment.cs": "3fd08c9eb8b788d3dd629d6988861410b048d8dd40a1fab13ef2b253682e5e5f",
+    "Workloads.cs": "8628a238301f7ef48765d0c21a34cc50b62745b1ec7c262b47688d81bc18cdb2"
+  },
+  "sdk": "10.0.301",
+  "containersBefore": "0a95e88a68d8 prismml-llamacpp-server-1 Created",
+  "freeDiskBytesBefore": 10673213440,
+  "exitCode": 0,
+  "elapsedSeconds": 85.33033232507296,
+  "sourcesUnchanged": true,
+  "containersAfter": "0a95e88a68d8 prismml-llamacpp-server-1 Created"
+}

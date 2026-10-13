@@ -1,0 +1,1 @@
+Rejected performance evidence: workload-generator expression precedence produced zero inserted test rows in all 1,500 samples. These timings are excluded from all conclusions. Baseline checks alone did not establish the intended workload. A separate deterministic workload guard is added before rerunning.

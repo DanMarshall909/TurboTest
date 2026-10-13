@@ -1,0 +1,63 @@
+enum Decision { None, Grow, Shrink }
+record Demand(int Reserved, int Capacity, int Ready, int Leased, int Resetting, int Queued, int Preparing, int Retiring, bool MemoryPressure, int Parked=0);
+
+sealed class AdaptivePolicy
+{
+    readonly int minimum, maximum;
+    double? pressureSince, idleSince;
+    double lastChange=-10000;
+    public AdaptivePolicy(int minimum=2,int maximum=8){this.minimum=minimum;this.maximum=maximum;}
+
+    public Decision Evaluate(Demand demand,double nowMs)
+    {
+        var pressure=demand.Queued>0&&demand.Ready==0;
+        pressureSince=pressure?pressureSince??nowMs:null;
+        var idle=demand.Queued==0&&demand.Ready>=2&&demand.Leased+demand.Resetting<=1&&demand.Capacity>minimum
+            &&demand.Preparing==0&&demand.Retiring==0;
+        idleSince=idle?idleSince??nowMs:null;
+        if(pressure&&pressureSince.HasValue&&nowMs-pressureSince.Value>=100&&nowMs-lastChange>=200
+            &&(demand.Reserved<maximum||demand.Parked>0)&&demand.Preparing==0&&demand.Retiring==0&&!demand.MemoryPressure)
+        {
+            lastChange=nowMs;pressureSince=nowMs;idleSince=null;return Decision.Grow;
+        }
+        if(idle&&idleSince.HasValue&&nowMs-idleSince.Value>=750&&nowMs-lastChange>=300)
+        {
+            lastChange=nowMs;idleSince=nowMs;pressureSince=null;return Decision.Shrink;
+        }
+        return Decision.None;
+    }
+}
+
+static class PolicyChecks
+{
+    public static int Run()
+    {
+        var count=0;
+        void Check(bool value,string message){if(!value)throw new InvalidDataException(message);count++;}
+        var busy=new Demand(2,2,0,2,0,6,0,0,false);
+        var policy=new AdaptivePolicy();
+        Check(policy.Evaluate(busy,0)==Decision.None,"growth waits for sustained queue pressure");
+        Check(policy.Evaluate(busy,150)==Decision.Grow,"sustained queue pressure grows capacity");
+        Check(policy.Evaluate(busy,200)==Decision.None,"cooldown prevents immediate repeated growth");
+        foreach(var constrained in new[]{busy with{Reserved=8,Capacity=8},busy with{Preparing=1},busy with{Retiring=1},busy with{MemoryPressure=true}})
+        {
+            policy=new AdaptivePolicy();policy.Evaluate(constrained,0);
+            Check(policy.Evaluate(constrained,200)==Decision.None,"growth respects resource and operation limits");
+        }
+        policy=new AdaptivePolicy();var idle=new Demand(8,8,7,1,0,0,0,0,false);
+        Check(policy.Evaluate(idle,0)==Decision.None,"shrink waits for sustained spare capacity");
+        Check(policy.Evaluate(idle,1000)==Decision.Shrink,"sustained spare capacity shrinks");
+        Check(policy.Evaluate(idle,1100)==Decision.None,"shrink cooldown prevents oscillation");
+        policy=new AdaptivePolicy();var occupied=idle with{Ready=0,Leased=8};policy.Evaluate(occupied,0);
+        Check(policy.Evaluate(occupied,1000)==Decision.None,"occupied slots are never selected for shrinking");
+        policy=new AdaptivePolicy();var floor=idle with{Reserved=2,Capacity=2,Ready=2,Leased=0};policy.Evaluate(floor,0);
+        Check(policy.Evaluate(floor,1000)==Decision.None,"minimum capacity is retained");
+        policy=new AdaptivePolicy();policy.Evaluate(busy,0);policy.Evaluate(idle,100);policy.Evaluate(busy,200);
+        Check(policy.Evaluate(busy,250)==Decision.None,"brief spikes do not accumulate across quiet intervals");
+        policy=new AdaptivePolicy();var parked=busy with{Reserved=8,Parked=6};policy.Evaluate(parked,0);
+        Check(policy.Evaluate(parked,200)==Decision.Grow,"retained parked databases can be rewarmed at the physical database cap");
+        policy=new AdaptivePolicy();var blocked=parked with{MemoryPressure=true};policy.Evaluate(blocked,0);
+        Check(policy.Evaluate(blocked,200)==Decision.None,"rewarming also respects memory headroom");
+        Console.WriteLine($"POLICY CHECKS PASSED: {count}");return count;
+    }
+}

@@ -1,0 +1,9 @@
+LOG Information: Initializing TurboTest pool with 1 containers, 256MB each
+LOG Information: TurboTest pool initialized successfully with 1 containers
+FACTORY mode=no-pooling lease=1 acquire_ms=5860 port=40313 initial_rows=0
+FACTORY release_ms=207 remaining_containers=1
+SCHEMA after reset: public_tables=0
+FACTORY mode=no-pooling lease=2 acquire_ms=74 port=40313 initial_rows=0
+FACTORY release_ms=890 remaining_containers=1
+SCHEMA after reset: public_tables=0
+AFTER shutdown own_containers=0

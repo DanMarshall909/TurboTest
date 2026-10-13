@@ -1,0 +1,26 @@
+STARTUP four prepared databases in one container: 9717.33 ms
+CALIBRATION snapshot rejected the deliberately corrupted seed
+SEQUENTIAL 130 test rows + three baseline rows: both strategies complete
+SEQUENTIAL 1300 test rows + three baseline rows: both strategies complete
+SEQUENTIAL 13000 test rows + three baseline rows: both strategies complete
+EXCLUSIVITY four unique occupied databases; excess request waited; reused slot verified clean
+PARALLEL parallel-4-workers-4-slots-130-rows-background: 100 complete, throughput=128.81/s, drain_ms=12.39, max_cleanup_pending=4
+PARALLEL parallel-4-workers-2-slots-130-rows-background: 100 complete, throughput=71.56/s, drain_ms=11.28, max_cleanup_pending=2
+PARALLEL parallel-4-workers-4-slots-1300-rows-background: 100 complete, throughput=81.82/s, drain_ms=14.53, max_cleanup_pending=4
+PARALLEL parallel-4-workers-2-slots-1300-rows-background: 100 complete, throughput=44.49/s, drain_ms=23.49, max_cleanup_pending=2
+PARALLEL parallel-4-workers-2-slots-130-rows-foreground: 100 complete, throughput=71.21/s, drain_ms=0.02, max_cleanup_pending=2
+SCHEMA fallback restored baseline schema/seed/IDs: 2838.03 ms (slow path)
+FAULT partial cleanup failure surfaced; dirty slot quarantined; template recreation restored capacity
+RESULT parallel-4-workers-2-slots-130-rows-background n=100 checkout_p95=50.96 ready_p50=13.21 ready_p95=18.09 ready_max=48.21 full_cycle_p95=78.45
+RESULT parallel-4-workers-2-slots-130-rows-foreground n=100 checkout_p95=33.73 ready_p50=13.63 ready_p95=16.32 ready_max=18.03 full_cycle_p95=61.22
+RESULT parallel-4-workers-2-slots-1300-rows-background n=100 checkout_p95=92.50 ready_p50=19.08 ready_p95=24.51 ready_max=56.45 full_cycle_p95=137.22
+RESULT parallel-4-workers-4-slots-130-rows-background n=100 checkout_p95=20.53 ready_p50=14.89 ready_p95=18.33 ready_max=21.51 full_cycle_p95=50.21
+RESULT parallel-4-workers-4-slots-1300-rows-background n=100 checkout_p95=27.72 ready_p50=17.92 ready_p95=25.47 ready_max=77.42 full_cycle_p95=115.37
+RESULT sequential-delete-130-rows n=30 checkout_p95=0.00 ready_p50=13.24 ready_p95=17.67 ready_max=18.34 full_cycle_p95=34.62
+RESULT sequential-delete-1300-rows n=30 checkout_p95=0.00 ready_p50=14.27 ready_p95=18.57 ready_max=19.54 full_cycle_p95=35.05
+RESULT sequential-delete-13000-rows n=30 checkout_p95=0.00 ready_p50=37.45 ready_p95=64.19 ready_max=78.00 full_cycle_p95=218.70
+RESULT sequential-truncate-130-rows n=30 checkout_p95=0.00 ready_p50=59.08 ready_p95=86.54 ready_max=88.64 full_cycle_p95=92.95
+RESULT sequential-truncate-1300-rows n=30 checkout_p95=0.00 ready_p50=58.03 ready_p95=63.12 ready_max=64.06 full_cycle_p95=83.89
+RESULT sequential-truncate-13000-rows n=30 checkout_p95=0.00 ready_p50=59.92 ready_p95=70.80 ready_max=74.05 full_cycle_p95=199.70
+ALL EXPERIMENT CHECKS PASSED: 21361; suite_ms=40647.83
+CLEANUP completed for the task-owned container and databases

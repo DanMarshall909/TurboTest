@@ -1,0 +1,255 @@
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Text.Json;
+using Docker.DotNet;
+using Docker.DotNet.Models;
+
+var policyChecks=PolicyChecks.Run();
+Workloads.Check();
+if(args.Contains("--policy-only"))return;
+await new AdaptiveExperiment().RunAsync(policyChecks);
+
+sealed class AdaptiveExperiment
+{
+    readonly List<object> results=[];
+    readonly List<LeaseSample> samples=[];
+    public async Task RunAsync(int policyChecks)
+    {
+        await using var environment=new DatabaseEnvironment();
+        var common=Stopwatch.StartNew();await environment.StartAsync();var commonStartup=common.Elapsed.TotalMilliseconds;
+        using var docker=new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        var containers=await docker.Containers.ListContainersAsync(new ContainersListParameters{All=true});
+        var container=containers.Single(c=>c.Names.Any(n=>n.StartsWith("/tt_adaptive_ideas_20261013_",StringComparison.Ordinal)));
+        Console.WriteLine($"COMMON container/template startup: {commonStartup:F2} ms");
+        foreach(var configuration in new[]{("fixed-4",4,false),("adaptive-2-to-8",2,true),("fixed-8",8,false),("fixed-2",2,false),("adaptive-repeat",2,true)})
+        {
+            var name=configuration.Item1;var overall=Stopwatch.StartNew();
+            await using var pool=new PrototypePool(environment,name,configuration.Item2,configuration.Item3);
+            await pool.InitializeAsync();var startup=overall.Elapsed.TotalMilliseconds;
+            using var monitorStop=new CancellationTokenSource();
+            var memory=new MemoryMonitor(container.ID,pool);var monitor=memory.RunAsync(monitorStop.Token);
+            var phases=new List<object>();var allReceipts=new ConcurrentBag<Task>();
+            foreach(var (phase,workers,perWorker) in new[]{("low-before",1,30),("peak",8,30),("low-after",1,30)})
+            {
+                var phaseStartMs=pool.TimeMs;var window=Stopwatch.StartNew();var phaseSamples=new ConcurrentBag<LeaseSample>();
+                var gate=new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var jobs=Enumerable.Range(0,workers).Select(async worker=>
+                {
+                    await gate.Task;
+                    for(var iteration=0;iteration<perWorker;iteration++)
+                    {
+                        var scale=Workloads.Scale(iteration,worker);
+                        var cycle=Stopwatch.StartNew();var request=Stopwatch.StartNew();
+                        var slot=await pool.AcquireAsync();await environment.VerifyAsync(slot);
+                        var checkout=request.Elapsed.TotalMilliseconds;
+                        await environment.FillAsync(slot,scale,$"{phase}-{worker:D2}-{iteration:D2}");
+                        await Task.Delay(5);
+                        var release=Stopwatch.StartNew();var receipt=pool.ReturnAsync(slot);
+                        async Task Finish()
+                        {
+                            await receipt;
+                            phaseSamples.Add(new LeaseSample(name,phase,130*scale,checkout,release.Elapsed.TotalMilliseconds,cycle.Elapsed.TotalMilliseconds));
+                        }
+                        allReceipts.Add(Finish());
+                    }
+                }).ToArray();
+                gate.SetResult();await Task.WhenAll(jobs);await Task.WhenAll(allReceipts);
+                var completed=phaseSamples.ToArray();samples.AddRange(completed);
+                var summary=new{phase,workers,operations=completed.Length,phaseStartMs,wallMs=window.Elapsed.TotalMilliseconds,
+                    throughputPerSecond=completed.Length/window.Elapsed.TotalSeconds,checkout=Stats(completed.Select(s=>s.CheckoutMs)),
+                    ready=Stats(completed.Select(s=>s.ReadyMs)),cycle=Stats(completed.Select(s=>s.CycleMs)),pool=pool.Snapshot()};
+                phases.Add(summary);
+                Console.WriteLine($"PHASE {name}/{phase}: {completed.Length} complete, checkout_p95={summary.checkout.P95:F2}, ready_p95={summary.ready.P95:F2}, throughput={summary.throughputPerSecond:F2}/s, capacity={summary.pool.Capacity}");
+            }
+            var idle=Stopwatch.StartNew();await Task.Delay(3000);var idleMs=idle.Elapsed.TotalMilliseconds;
+            await pool.DrainAsync();var beforeShutdown=pool.Snapshot();
+            var shutdown=Stopwatch.StartNew();await pool.StopAsync();var teardown=shutdown.Elapsed.TotalMilliseconds;
+            monitorStop.Cancel();try{await monitor;}catch(OperationCanceledException){}
+            var final=pool.Snapshot();
+            DatabaseEnvironment.Require(final.Reserved==0&&final.Preparing==0&&final.Retiring==0&&final.Resetting==0&&final.Queued==0,"pool fully drained and all reservations released");
+            var row=new{name,startupMs=startup,phases,idleMs,beforeShutdown,teardownMs=teardown,overallMs=overall.Elapsed.TotalMilliseconds,
+                stats=pool.Statistics(),memory.PeakMemoryPercent,memory.PeakCpuPercent,memory.Samples,memory.Errors,events=pool.Events.ToArray(),timeline=pool.Timeline.ToArray()};
+            results.Add(row);
+            Console.WriteLine($"POLICY {name}: startup={startup:F2}, overall={row.overallMs:F2}, peak_reserved={row.stats.MaxReserved}, creates={row.stats.Created}, retires={row.stats.Retired}, idle_capacity={beforeShutdown.Capacity}, session_peak={row.stats.MaxClientSessions}");
+            File.WriteAllText("results.json",JsonSerializer.Serialize(new{revision="d510320f6a11e98b509f6f5f9cc8cc02a1c23cfe",policyChecks,commonStartup,results,samples,
+                scope="Disposable capacity-controller experiment; one PG16 container, immutable three-row seed, max8 reserved DBs, perDB max2 connections, max1 prepare/drop, max2 resets; same jobs, mixed130/1300/13000rows, 1->8->1 workers, deferred cleanup and teardown included"},new JsonSerializerOptions{WriteIndented=true}));
+        }
+        Console.WriteLine($"ADAPTIVE EXPERIMENT COMPLETE: {samples.Count} workloads, correctness checks={environment.Assertions}");
+    }
+    static Quantiles Stats(IEnumerable<double> values){var s=values.Order().ToArray();return new((s[(s.Length-1)/2]+s[s.Length/2])/2,s[(int)Math.Ceiling(s.Length*.95)-1],s[^1]);}
+}
+
+sealed class PrototypePool : IAsyncDisposable
+{
+    readonly object sync=new();readonly DatabaseEnvironment environment;readonly string name;readonly int initial;readonly bool adaptive;
+    readonly Dictionary<int,Slot> slots=[];readonly Queue<Slot> ready=[];readonly List<Task> lifecycle=[];
+    readonly SemaphoreSlim resetLimit=new(2,2),databaseChangeLimit=new(1,1);
+    readonly AdaptivePolicy policy=new();readonly Stopwatch clock=Stopwatch.StartNew();readonly CancellationTokenSource stop=new();
+    TaskCompletionSource changed=NewSignal();Task? controller;int nextId,queued,maxQueued,maxReserved,maxPreparing,maxResetting,activeResets,maxActiveResets,created,retired,maxSessions;
+    double area,lastAreaTime;bool stopping, memoryPressure;int connectionSamples;readonly ConcurrentQueue<Exception> errors=[];
+    public ConcurrentQueue<ScaleEvent> Events{get;}=[];
+    public ConcurrentQueue<ControllerPoint> Timeline{get;}=[];
+    public double TimeMs=>clock.Elapsed.TotalMilliseconds;
+    public PrototypePool(DatabaseEnvironment environment,string name,int initial,bool adaptive){this.environment=environment;this.name=name;this.initial=initial;this.adaptive=adaptive;}
+    public async Task InitializeAsync()
+    {
+        for(var i=0;i<initial;i++)await PrepareAsync();
+        controller=ControlAsync();
+    }
+    public async Task<Slot> AcquireAsync()
+    {
+        using var timeout=new CancellationTokenSource(TimeSpan.FromSeconds(10));var registered=false;
+        try
+        {
+            while(true)
+            {
+                Task signal;
+                lock(sync)
+                {
+                    if(stopping)throw new InvalidOperationException("pool stopping");
+                    if(ready.TryDequeue(out var slot))
+                    {
+                        DatabaseEnvironment.Require(slot.State==0,"only verified ready databases can be leased");
+                        slot.State=1;if(registered){queued--;registered=false;}return slot;
+                    }
+                    if(!registered){queued++;registered=true;maxQueued=Math.Max(maxQueued,queued);}
+                    signal=changed.Task;
+                }
+                await signal.WaitAsync(timeout.Token);
+            }
+        }
+        finally{if(registered)lock(sync)queued--;}
+    }
+    public async Task ReturnAsync(Slot slot)
+    {
+        lock(sync){DatabaseEnvironment.Require(slot.State==1,"return has exclusive lease ownership");slot.State=2;maxResetting=Math.Max(maxResetting,slots.Values.Count(s=>s.State==2));}
+        await resetLimit.WaitAsync();
+        lock(sync){activeResets++;maxActiveResets=Math.Max(maxActiveResets,activeResets);DatabaseEnvironment.Require(activeResets<=2,"executing cleanup concurrency cap");}
+        try
+        {
+            await environment.ResetAsync(slot);await environment.VerifyAsync(slot);
+            lock(sync){slot.State=0;slot.IdleSinceMs=clock.Elapsed.TotalMilliseconds;ready.Enqueue(slot);Pulse();}
+        }
+        catch(Exception error){lock(sync)slot.State=3;errors.Enqueue(error);throw;}
+        finally{lock(sync)activeResets--;resetLimit.Release();}
+    }
+    public void SetMemoryPressure(bool value){lock(sync)memoryPressure=value;}
+    async Task ControlAsync()
+    {
+        var lastSessionSample=-1000d;
+        try
+        {
+            while(!stop.IsCancellationRequested)
+            {
+                await Task.Delay(50,stop.Token);
+                var snapshot=Snapshot();var now=clock.Elapsed.TotalMilliseconds;Timeline.Enqueue(new(now,snapshot));
+                var decision=adaptive?policy.Evaluate(snapshot,now):Decision.None;
+                if(decision==Decision.Grow)Track(PrepareAsync());
+                else if(decision==Decision.Shrink)Track(RetireIdleAsync());
+                if(clock.Elapsed.TotalMilliseconds-lastSessionSample>=500)
+                {
+                    lastSessionSample=clock.Elapsed.TotalMilliseconds;
+                    var sessions=await environment.CountClientSessionsAsync();
+                    lock(sync){maxSessions=Math.Max(maxSessions,sessions);connectionSamples++;}
+                    DatabaseEnvironment.Require(sessions<=24,"physical connection budget including administrator/bootstrap");
+                }
+            }
+        }
+        catch(OperationCanceledException)when(stop.IsCancellationRequested){}
+        catch(Exception error){errors.Enqueue(error);}
+    }
+    async Task PrepareAsync()
+    {
+        Slot slot;
+        lock(sync)
+        {
+            if(stopping||slots.Count>=8||slots.Values.Any(s=>s.State is 4 or 5))return;
+            UpdateArea();slot=environment.NewSlot(name,nextId++);slot.State=4;slots.Add(slot.Id,slot);
+            maxReserved=Math.Max(maxReserved,slots.Count);maxPreparing=Math.Max(maxPreparing,slots.Values.Count(s=>s.State==4));
+            DatabaseEnvironment.Require(slots.Count<=8&&maxPreparing<=1,"reserved/preparation caps enforced before database creation");
+            Events.Enqueue(new(clock.Elapsed.TotalMilliseconds,"prepare-start",slots.Count,queued,slot.Id));
+        }
+        await databaseChangeLimit.WaitAsync();
+        try
+        {
+            await environment.PrepareAsync(slot);
+            lock(sync){slot.State=0;slot.IdleSinceMs=clock.Elapsed.TotalMilliseconds;ready.Enqueue(slot);created++;Events.Enqueue(new(clock.Elapsed.TotalMilliseconds,"prepare-ready",slots.Count,queued,slot.Id));Pulse();}
+        }
+        catch(Exception error)
+        {
+            lock(sync)slot.State=3;errors.Enqueue(error);
+            try{await environment.DestroyAsync(slot);lock(sync){UpdateArea();slots.Remove(slot.Id);Pulse();}}catch(Exception cleanup){errors.Enqueue(cleanup);}
+            throw;
+        }
+        finally{databaseChangeLimit.Release();}
+    }
+    async Task RetireIdleAsync()
+    {
+        Slot? slot;
+        lock(sync)
+        {
+            if(stopping||slots.Values.Count(s=>s.State is 0 or 1 or 2)<=2||slots.Values.Any(s=>s.State is 4 or 5))return;
+            slot=ready.OrderBy(s=>s.IdleSinceMs).FirstOrDefault();if(slot is null)return;
+            DatabaseEnvironment.Require(slot.State==0,"only idle verified-ready databases retire");
+            var kept=ready.Where(s=>s!=slot).ToArray();ready.Clear();foreach(var item in kept)ready.Enqueue(item);
+            slot.State=5;Events.Enqueue(new(clock.Elapsed.TotalMilliseconds,"retire-start",slots.Count,queued,slot.Id));
+        }
+        await databaseChangeLimit.WaitAsync();
+        try
+        {
+            await environment.DestroyAsync(slot);
+            lock(sync){UpdateArea();slots.Remove(slot.Id);retired++;Events.Enqueue(new(clock.Elapsed.TotalMilliseconds,"retire-complete",slots.Count,queued,slot.Id));Pulse();}
+        }
+        catch(Exception error){lock(sync)slot.State=3;errors.Enqueue(error);throw;}
+        finally{databaseChangeLimit.Release();}
+    }
+    public Demand Snapshot(){lock(sync)return new(slots.Count,slots.Values.Count(s=>s.State is 0 or 1 or 2),ready.Count,slots.Values.Count(s=>s.State==1),slots.Values.Count(s=>s.State==2),queued,slots.Values.Count(s=>s.State==4),slots.Values.Count(s=>s.State==5),memoryPressure);}
+    public PoolStatistics Statistics(){lock(sync){UpdateArea();return new(maxReserved,maxQueued,maxPreparing,maxResetting,maxActiveResets,maxSessions,connectionSamples,created,retired,area/1000,errors.Count);}}
+    public async Task DrainAsync(){Task[] pending;lock(sync)pending=lifecycle.ToArray();await Task.WhenAll(pending);if(errors.TryPeek(out var error))throw new InvalidOperationException("pool lifecycle failure",error);}
+    public async Task StopAsync()
+    {
+        if(stopping)return;lock(sync){stopping=true;Pulse();}stop.Cancel();if(controller is not null)await controller;
+        await DrainAsync();Slot[] remaining;lock(sync)remaining=slots.Values.ToArray();
+        foreach(var slot in remaining)
+        {
+            DatabaseEnvironment.Require(slot.State==0,"shutdown after all test leases and resets drained");
+            await environment.VerifyAsync(slot);await environment.DestroyAsync(slot);
+            lock(sync){UpdateArea();slots.Remove(slot.Id);}
+        }
+        lock(sync)ready.Clear();
+    }
+    public async ValueTask DisposeAsync(){await StopAsync();stop.Dispose();resetLimit.Dispose();databaseChangeLimit.Dispose();}
+    void Track(Task task){lock(sync)lifecycle.Add(task);}
+    void Pulse(){var prior=changed;changed=NewSignal();prior.TrySetResult();}
+    static TaskCompletionSource NewSignal()=>new(TaskCreationOptions.RunContinuationsAsynchronously);
+    void UpdateArea(){var now=clock.Elapsed.TotalMilliseconds;area+=(now-lastAreaTime)*slots.Count;lastAreaTime=now;}
+}
+
+sealed class MemoryMonitor(string containerId,PrototypePool pool)
+{
+    public double PeakMemoryPercent{get;private set;}public double PeakCpuPercent{get;private set;}public int Samples{get;private set;}public int Errors{get;private set;}
+    public async Task RunAsync(CancellationToken token)
+    {
+        while(!token.IsCancellationRequested)
+        {
+            try
+            {
+                using var process=new Process{StartInfo=new ProcessStartInfo("docker"){RedirectStandardOutput=true,RedirectStandardError=true,UseShellExecute=false}};
+                foreach(var arg in new[]{"--context","default","stats","--no-stream","--format","{{json .}}",containerId})process.StartInfo.ArgumentList.Add(arg);
+                process.Start();var output=await process.StandardOutput.ReadToEndAsync();await process.WaitForExitAsync();
+                if(process.ExitCode!=0){Errors++;await Task.Delay(500,token);continue;}
+                using var json=JsonDocument.Parse(output.Trim());
+                var memory=double.Parse(json.RootElement.GetProperty("MemPerc").GetString()!.TrimEnd('%'),System.Globalization.CultureInfo.InvariantCulture);
+                var cpu=double.Parse(json.RootElement.GetProperty("CPUPerc").GetString()!.TrimEnd('%'),System.Globalization.CultureInfo.InvariantCulture);
+                PeakMemoryPercent=Math.Max(PeakMemoryPercent,memory);PeakCpuPercent=Math.Max(PeakCpuPercent,cpu);Samples++;pool.SetMemoryPressure(memory>=85);
+            }
+            catch(Exception error)when(error is not OperationCanceledException){Errors++;}
+            try{await Task.Delay(500,token);}catch(OperationCanceledException)when(token.IsCancellationRequested){return;}
+        }
+    }
+}
+record LeaseSample(string Policy,string Phase,int InsertedRows,double CheckoutMs,double ReadyMs,double CycleMs);
+record ScaleEvent(double TimeMs,string Kind,int Reserved,int Queued,int Slot);
+record ControllerPoint(double TimeMs,Demand State);
+record PoolStatistics(int MaxReserved,int MaxQueued,int MaxPreparing,int MaxResetting,int MaxActiveResets,int MaxClientSessions,int ConnectionSamples,int Created,int Retired,double DatabaseSlotSeconds,int LifecycleErrors);
+record Quantiles(double Median,double P95,double Max);

@@ -1,0 +1,38 @@
+from pathlib import Path
+import datetime
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import time
+
+root = Path(__file__).resolve().parent
+assert shutil.disk_usage(root).free > 3 * 1024**3, 'At least 3 GiB free disk required'
+before = subprocess.check_output(['docker', '--context', 'default', 'ps', '-a', '--format', '{{.ID}} {{.Names}} {{.Status}}'], text=True)
+assert 'tt_parking_ideas_20261013_' not in before, 'Existing task container needs investigation'
+sources = {name: hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ['AdaptivePolicy.cs', 'Program.cs', 'DatabaseEnvironment.cs', 'Workloads.cs']}
+metadata = {
+    'command': ['dotnet', 'run', '-c', 'Release'],
+    'DOTNET_PROCESSOR_COUNT': '4',
+    'startedUtc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+    'sourceSha256': sources,
+    'sdk': subprocess.check_output(['dotnet', '--version'], text=True).strip(),
+    'containersBefore': before.strip(),
+    'freeDiskBytesBefore': shutil.disk_usage(root).free,
+}
+started = time.monotonic()
+with (root/'run.log').open('w') as log:
+    process = subprocess.Popen(metadata['command'], cwd=root, env=dict(os.environ, DOTNET_PROCESSOR_COUNT='4'), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    for line in process.stdout:
+        log.write(line)
+        log.flush()
+        print(line, end='', flush=True)
+    metadata['exitCode'] = process.wait()
+metadata['elapsedSeconds'] = time.monotonic()-started
+metadata['sourcesUnchanged'] = sources == {name: hashlib.sha256((root/name).read_bytes()).hexdigest() for name in sources}
+metadata['containersAfter'] = subprocess.check_output(['docker', '--context', 'default', 'ps', '-a', '--format', '{{.ID}} {{.Names}} {{.Status}}'], text=True).strip()
+(root/'run.json').write_text(json.dumps(metadata, indent=2)+'\n')
+assert metadata['sourcesUnchanged'], 'Source changed during measured run'
+assert 'tt_parking_ideas_20261013_' not in metadata['containersAfter'], 'Task container remains after run'
+raise SystemExit(metadata['exitCode'])

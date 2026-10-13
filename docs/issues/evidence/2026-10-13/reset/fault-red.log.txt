@@ -1,0 +1,9 @@
+STARTUP four prepared databases in one container: 5574.62 ms
+CLEANUP completed for the task-owned container and databases
+Unhandled exception. System.IO.InvalidDataException: replacement validation failure remains quarantined
+   at Experiment.Require(Boolean value, String diagnostic) in /tmp/turbotest-reset-ideas-20261013/Program.cs:line 336
+   at Experiment.QuarantineAsync() in /tmp/turbotest-reset-ideas-20261013/Program.cs:line 295
+   at Experiment.RunAsync(Boolean faultOnly) in /tmp/turbotest-reset-ideas-20261013/Program.cs:line 44
+   at Experiment.RunAsync(Boolean faultOnly) in /tmp/turbotest-reset-ideas-20261013/Program.cs:line 97
+   at Program.<Main>$(String[] args) in /tmp/turbotest-reset-ideas-20261013/Program.cs:line 12
+   at Program.<Main>(String[] args)

@@ -1,0 +1,5 @@
+POLICY CHECKS PASSED: 13
+Unhandled exception. System.IO.InvalidDataException: workload mix: worker=0, iteration=0, expected scale=100, actual=0
+   at Workloads.Check() in /tmp/turbotest-adaptive-ideas-20261013/Workloads.cs:line 11
+   at Program.<Main>$(String[] args) in /tmp/turbotest-adaptive-ideas-20261013/Program.cs:line 8
+   at Program.<Main>(String[] args)

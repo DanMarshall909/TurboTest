@@ -1,0 +1,244 @@
+[
+  {
+    "scenario": "parallel-4-workers-2-slots-130-rows-background",
+    "n": 100,
+    "ready": {
+      "median": 13.2207,
+      "p95": 18.0904,
+      "max": 48.2098,
+      "over50": 0
+    },
+    "checkout": {
+      "median": 41.9752,
+      "p95": 50.9645,
+      "max": 78.3678,
+      "over50": 7
+    },
+    "cycle": {
+      "median": 67.24164999999999,
+      "p95": 78.4511,
+      "max": 103.4547,
+      "over50": 98
+    }
+  },
+  {
+    "scenario": "parallel-4-workers-2-slots-130-rows-foreground",
+    "n": 100,
+    "ready": {
+      "median": 13.6326,
+      "p95": 16.3183,
+      "max": 18.0291,
+      "over50": 0
+    },
+    "checkout": {
+      "median": 30.1812,
+      "p95": 33.7339,
+      "max": 35.7037,
+      "over50": 0
+    },
+    "cycle": {
+      "median": 55.708,
+      "p95": 61.2214,
+      "max": 63.2038,
+      "over50": 97
+    }
+  },
+  {
+    "scenario": "parallel-4-workers-2-slots-1300-rows-background",
+    "n": 100,
+    "ready": {
+      "median": 19.13275,
+      "p95": 24.5136,
+      "max": 56.4476,
+      "over50": 1
+    },
+    "checkout": {
+      "median": 64.81795,
+      "p95": 92.5014,
+      "max": 100.3752,
+      "over50": 95
+    },
+    "cycle": {
+      "median": 106.4428,
+      "p95": 137.2192,
+      "max": 146.4866,
+      "over50": 98
+    }
+  },
+  {
+    "scenario": "parallel-4-workers-4-slots-130-rows-background",
+    "n": 100,
+    "ready": {
+      "median": 14.90565,
+      "p95": 18.3261,
+      "max": 21.5138,
+      "over50": 0
+    },
+    "checkout": {
+      "median": 16.69715,
+      "p95": 20.5272,
+      "max": 23.4573,
+      "over50": 0
+    },
+    "cycle": {
+      "median": 44.9798,
+      "p95": 50.2103,
+      "max": 57.5305,
+      "over50": 6
+    }
+  },
+  {
+    "scenario": "parallel-4-workers-4-slots-1300-rows-background",
+    "n": 100,
+    "ready": {
+      "median": 17.920699999999997,
+      "p95": 25.4671,
+      "max": 77.4211,
+      "over50": 2
+    },
+    "checkout": {
+      "median": 19.771500000000003,
+      "p95": 27.7222,
+      "max": 79.2013,
+      "over50": 2
+    },
+    "cycle": {
+      "median": 60.98675,
+      "p95": 115.3684,
+      "max": 127.0672,
+      "over50": 95
+    }
+  },
+  {
+    "scenario": "sequential-delete-130-rows",
+    "n": 30,
+    "ready": {
+      "median": 13.2403,
+      "p95": 17.6701,
+      "max": 18.345,
+      "over50": 0
+    },
+    "checkout": {
+      "median": 0.0,
+      "p95": 0,
+      "max": 0,
+      "over50": 0
+    },
+    "cycle": {
+      "median": 19.96845,
+      "p95": 34.6158,
+      "max": 36.1686,
+      "over50": 0
+    }
+  },
+  {
+    "scenario": "sequential-delete-1300-rows",
+    "n": 30,
+    "ready": {
+      "median": 14.462800000000001,
+      "p95": 18.5728,
+      "max": 19.5353,
+      "over50": 0
+    },
+    "checkout": {
+      "median": 0.0,
+      "p95": 0,
+      "max": 0,
+      "over50": 0
+    },
+    "cycle": {
+      "median": 28.1744,
+      "p95": 35.0481,
+      "max": 35.4211,
+      "over50": 0
+    }
+  },
+  {
+    "scenario": "sequential-delete-13000-rows",
+    "n": 30,
+    "ready": {
+      "median": 37.49935,
+      "p95": 64.1949,
+      "max": 78.0033,
+      "over50": 3
+    },
+    "checkout": {
+      "median": 0.0,
+      "p95": 0,
+      "max": 0,
+      "over50": 0
+    },
+    "cycle": {
+      "median": 138.77155,
+      "p95": 218.7047,
+      "max": 219.2669,
+      "over50": 30
+    }
+  },
+  {
+    "scenario": "sequential-truncate-130-rows",
+    "n": 30,
+    "ready": {
+      "median": 59.2864,
+      "p95": 86.5411,
+      "max": 88.642,
+      "over50": 30
+    },
+    "checkout": {
+      "median": 0.0,
+      "p95": 0,
+      "max": 0,
+      "over50": 0
+    },
+    "cycle": {
+      "median": 65.83875,
+      "p95": 92.9478,
+      "max": 102.6693,
+      "over50": 30
+    }
+  },
+  {
+    "scenario": "sequential-truncate-1300-rows",
+    "n": 30,
+    "ready": {
+      "median": 58.0379,
+      "p95": 63.1193,
+      "max": 64.0577,
+      "over50": 29
+    },
+    "checkout": {
+      "median": 0.0,
+      "p95": 0,
+      "max": 0,
+      "over50": 0
+    },
+    "cycle": {
+      "median": 72.5412,
+      "p95": 83.885,
+      "max": 108.7314,
+      "over50": 30
+    }
+  },
+  {
+    "scenario": "sequential-truncate-13000-rows",
+    "n": 30,
+    "ready": {
+      "median": 60.044650000000004,
+      "p95": 70.7987,
+      "max": 74.0536,
+      "over50": 29
+    },
+    "checkout": {
+      "median": 0.0,
+      "p95": 0,
+      "max": 0,
+      "over50": 0
+    },
+    "cycle": {
+      "median": 160.85835,
+      "p95": 199.6973,
+      "max": 202.4153,
+      "over50": 30
+    }
+  }
+]

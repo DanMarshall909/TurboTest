@@ -79,3 +79,6 @@ MIT
 ## Contributing
 
 Issues and PRs welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+The current implementation backlog and investigation evidence are in the
+[repository ticket tracker](docs/issues/README.md).

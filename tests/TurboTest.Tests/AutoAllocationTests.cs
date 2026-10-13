@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using TurboTest.EFCore;
-using FluentAssertions;
 
 namespace TurboTest.Tests;
 
@@ -78,11 +77,11 @@ public class AutoAllocationTests
 
         // Act & Assert
         await using var context = await Tt.CreateContextAsync<TestDbContext>();
-        context.Should().NotBeNull("Auto-allocated context should be created successfully");
+        context.ShouldNotBeNull("Auto-allocated context should be created successfully");
 
         // Verify database connectivity
         var canConnect = await context.Database.CanConnectAsync();
-        canConnect.Should().BeTrue("Auto-allocated database should be accessible");
+        canConnect.ShouldBeTrue("Auto-allocated database should be accessible");
     }
 
     [Fact]

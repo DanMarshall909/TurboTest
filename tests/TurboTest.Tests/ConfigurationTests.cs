@@ -64,7 +64,7 @@ public class ConfigurationTests
 
         // Assert
         var factory = serviceProvider.GetService<ITtServiceFactory>();
-        factory.Should().NotBeNull("TurboTest services should be registered");
+        factory.ShouldNotBeNull("TurboTest services should be registered");
     }
 
     [Fact]
@@ -79,7 +79,7 @@ public class ConfigurationTests
 
         // Assert - Should not throw when getting the context
         var contextFactory = serviceProvider.GetRequiredService<ITtServiceFactory>();
-        contextFactory.Should().NotBeNull("DbContext services should be registered");
+        contextFactory.ShouldNotBeNull("DbContext services should be registered");
     }
 
     [Fact]
@@ -106,7 +106,7 @@ public class ConfigurationTests
         // Assert
         var serviceProvider = services.BuildServiceProvider();
         var factory = serviceProvider.GetService<ITtServiceFactory>();
-        factory.Should().NotBeNull();
+        factory.ShouldNotBeNull();
     }
 
     [Fact]

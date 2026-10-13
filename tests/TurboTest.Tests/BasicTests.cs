@@ -12,16 +12,16 @@ public class BasicTests
         await using var context = await Tt.CreateContextAsync<TestDbContext>();
 
         // Assert
-        context.Should().NotBeNull();
-        context.Database.Should().NotBeNull();
+        context.ShouldNotBeNull();
+        context.Database.ShouldNotBeNull();
 
         // Verify we can connect
         var canConnect = await context.Database.CanConnectAsync();
-        canConnect.Should().BeTrue();
+        canConnect.ShouldBeTrue();
 
         // Verify we can query
         var userCount = await context.Users.CountAsync();
-        userCount.Should().Be(0);
+        userCount.ShouldBe(0);
     }
 
     [Fact]
@@ -39,11 +39,11 @@ public class BasicTests
 
         // Act & Assert - Real database enforces FK constraint
         var act = () => context.SaveChangesAsync();
-        var exception = await act.Should().ThrowAsync<DbUpdateException>();
+        var exception = await Should.ThrowAsync<DbUpdateException>(act);
         
         // Check that it's a proper database constraint error (EF Core wraps the original exception)
-        exception.Which.InnerException.Should().NotBeNull();
-        exception.Which.InnerException!.Message.Should().Contain("violates foreign key constraint");
+        var innerException = exception.InnerException.ShouldNotBeNull();
+        innerException.Message.ShouldContain("violates foreign key constraint", Case.Sensitive);
     }
 
     [Fact]
@@ -58,11 +58,11 @@ public class BasicTests
 
         // Act & Assert - Real database enforces unique constraint
         var act = () => context.SaveChangesAsync();
-        var exception = await act.Should().ThrowAsync<DbUpdateException>();
+        var exception = await Should.ThrowAsync<DbUpdateException>(act);
         
         // Check that it's a proper database constraint error (EF Core wraps the original exception)
-        exception.Which.InnerException.Should().NotBeNull();
-        exception.Which.InnerException!.Message.Should().Contain("duplicate key value violates unique constraint");
+        var innerException = exception.InnerException.ShouldNotBeNull();
+        innerException.Message.ShouldContain("duplicate key value violates unique constraint", Case.Sensitive);
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class BasicTests
 
         // Second context should not see the data
         var count = await context2.Users.CountAsync();
-        count.Should().Be(0, "each test should get an isolated database");
+        count.ShouldBe(0, "each test should get an isolated database");
     }
 
     [Fact]
@@ -99,10 +99,10 @@ public class BasicTests
 
         // Database should be clean
         var count = await context2.Users.CountAsync();
-        count.Should().Be(0);
+        count.ShouldBe(0);
 
         // Reset should be fast
-        stopwatch.ElapsedMilliseconds.Should().BeLessThan(500,
+        stopwatch.ElapsedMilliseconds.ShouldBeLessThan(500,
             "database reset should be quick");
     }
 }

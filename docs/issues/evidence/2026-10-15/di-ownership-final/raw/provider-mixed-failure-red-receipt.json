@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiMultipleFailureTests",
+    "--logger",
+    "trx;LogFileName=provider-mixed-failure-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/provider-mixed-failure-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 18.450782783096656,
+  "log": "artifacts/tt-007/provider-mixed-failure-red.log",
+  "sourceBinding": "artifacts/tt-007/provider-mixed-failure-red/source-binding.json"
+}

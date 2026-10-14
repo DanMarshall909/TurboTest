@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Aggregate_lifecycle_diagnostics_preserve_each_failure_kind_without_private_payloads",
+    "--logger",
+    "trx;LogFileName=aggregate-diagnostic-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/aggregate-diagnostic-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 4.224650465883315,
+  "log": "artifacts/tt-007/aggregate-diagnostic-red.log",
+  "sourceBinding": "artifacts/tt-007/aggregate-diagnostic-red/source-binding.json"
+}

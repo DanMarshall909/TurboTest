@@ -1,0 +1,22 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:25.22]     TurboTest.Tests.DiOwnershipTests.Service_leases_and_factories_share_the_configured_provider_owner [FAIL]
+  Failed TurboTest.Tests.DiOwnershipTests.Service_leases_and_factories_share_the_configured_provider_owner [24 s]
+  Error Message:
+   Assert.StartsWith() Failure: String start does not match
+String:         "testdb_4f4d4ae9f622470f9bb3134f33f410af"
+Expected start: "di_owned_"
+  Stack Trace:
+     at TurboTest.Tests.DiOwnershipTests.Service_leases_and_factories_share_the_configured_provider_owner() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 36
+   at TurboTest.Tests.DiOwnershipTests.Service_leases_and_factories_share_the_configured_provider_owner() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 44
+   at TurboTest.Tests.DiOwnershipTests.Service_leases_and_factories_share_the_configured_provider_owner() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 53
+   at TurboTest.Tests.DiOwnershipTests.Service_leases_and_factories_share_the_configured_provider_owner() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 53
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-007/owner-red/owner-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 25 s - TurboTest.Tests.dll (net10.0)

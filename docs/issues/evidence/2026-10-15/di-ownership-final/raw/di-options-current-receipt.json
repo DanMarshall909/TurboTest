@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiOwnershipTests|FullyQualifiedName~LoggingConfigurationTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=di-options-current.trx",
+    "--results-directory",
+    "artifacts/tt-007/di-options-current"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 25.759490124881268,
+  "log": "artifacts/tt-007/di-options-current.log"
+}

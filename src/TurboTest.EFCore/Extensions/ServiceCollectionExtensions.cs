@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using TurboTest.EFCore.Internal;
 
 namespace TurboTest.EFCore.Extensions;
 
@@ -10,6 +12,14 @@ namespace TurboTest.EFCore.Extensions;
 /// </summary>
 public static class ServiceCollectionExtensions
 {
+    /// <summary>Initializes this scope's leased context before synchronous service resolution.</summary>
+    public static Task InitializeTurboTestAsync<TContext>(this IServiceProvider services,
+        CancellationToken cancellationToken = default) where TContext : DbContext
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return services.GetRequiredService<TtScopedLease<TContext>>().InitializeAsync().WaitAsync(cancellationToken);
+    }
+
     /// <summary>
     /// Adds TurboTest services to the DI container.
     /// Uses familiar ASP.NET Core patterns for configuration.
@@ -32,7 +42,7 @@ public static class ServiceCollectionExtensions
         }
 
         // Register the service factory
-        services.AddSingleton<ITtServiceFactory, TtServiceFactory>();
+        services.TryAddSingleton<ITtServiceFactory, TtServiceFactory>();
 
         return services;
     }
@@ -48,13 +58,14 @@ public static class ServiceCollectionExtensions
         Action<TtOptions> configure)
     {
         services.Configure(configure);
-        services.AddSingleton<ITtServiceFactory, TtServiceFactory>();
+        services.TryAddSingleton<ITtServiceFactory, TtServiceFactory>();
         return services;
     }
 
     /// <summary>
-    /// Registers a DbContext to use TurboTest for testing.
-    /// Similar to AddDbContext but uses containerized databases.
+    /// Registers a TtLease of the context type for testing.
+    /// Await InitializeTurboTestAsync in a CreateAsyncScope before resolving the lease.
+    /// Dispose the scope and provider asynchronously to await return and drain.
     /// </summary>
     /// <typeparam name="TContext">The DbContext type</typeparam>
     /// <param name="services">The service collection</param>
@@ -71,14 +82,9 @@ public static class ServiceCollectionExtensions
             services.AddTurboTest();
         }
 
-        services.AddDbContext<TContext>((serviceProvider, options) =>
-        {
-            var factory = serviceProvider.GetRequiredService<ITtServiceFactory>();
-            var connectionString = factory.GetConnectionString();
-
-            options.UseNpgsql(connectionString);
-            configure?.Invoke(options);
-        });
+        services.AddScoped(provider => new TtScopedLease<TContext>(
+            provider.GetRequiredService<ITtServiceFactory>(), configure));
+        services.AddScoped(provider => provider.GetRequiredService<TtScopedLease<TContext>>().Lease);
 
         return services;
     }

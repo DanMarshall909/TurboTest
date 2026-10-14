@@ -1,0 +1,14 @@
+{
+  "basis": "Completed full-gate-r4: 243 passed, no failures/skips; exact 90-input source binding. Line hits are execution evidence, not branch coverage or assertion effectiveness.",
+  "assertionEvidence": "Native identity/data/resource retention checks and fast held-job, exactly-once disposal, threshold, and safe constituent failure assertions; coverage alone does not prove these invariants.",
+  "limits": {
+    "TtLogger.BeginScope": "Required ILogger delegation has no current pool caller; it is unexecuted, with no test added solely for the coverage number.",
+    "ServiceCollectionExtensions default registration": "No-action default options and automatic AddTurboTest convenience branches are unexecuted in this gate. Configured action/IConfiguration paths and explicit initialization/leased scope paths are exercised. These retained public conveniences are not claimed branch-covered.",
+    "other owners": "TtPool/TtPreparedPool/TtFactory/Tt static files include pre-existing paths and input variants; no whole-core 100% branch or mutation claim.",
+    "TtContainer confirmed NotFound cleanup": "Existing missing-resource catch did not execute in the final measured gate. Created-before-source cleanup and source-attached cleanup both execute; no claim every Docker error variant is covered.",
+    "TtPool inherited variants": "Readiness exhaustion, system-resource discovery fallback and Windows system/host variants remain unexecuted. The new assigned-port, inspection, attachment and real competing-socket query paths execute.",
+    "TtPreparedPool inherited variants": "Invalid enum, workload mismatch and source-disposal exception branches remain unexecuted. Constructor enum validation and owned connection isolation protect applicable successful paths; no branch-completeness claim.",
+    "TtFactory inherited variants": "A catch closing brace and legacy raw-database drain lines are unexecuted; owned-lease disposal/acquisition drain executes. No legacy-loop completion claim from this metric.",
+    "ITtServiceFactory": "Interface has no executable lines; absence from coverage is not an execution gap."
+  }
+}

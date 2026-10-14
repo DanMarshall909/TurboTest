@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiStartupDrainTests|FullyQualifiedName~DiScopeLifetimeTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=provider-many-green-r2.trx",
+    "--results-directory",
+    "artifacts/tt-007/provider-many-green-r2"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 26.78861127817072,
+  "log": "artifacts/tt-007/provider-many-green-r2.log"
+}

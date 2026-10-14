@@ -21,7 +21,7 @@ public class ResetTimingTests
                 context.Users.Add(new User { Email = "timing-seed-secret@example.com" });
                 await context.SaveChangesAsync(cancellation);
             });
-        await using var fixture = await Tt.CreatePreparedFactoryAsync(new TtOptions { PoolSize = 2, Logger = logger }, baseline, default,
+        await using var fixture = await Tt.CreatePreparedFactoryAsync(new TtOptions { PoolSize = 2, Logger = logger, LogLevel = LogLevel.Debug }, baseline, default,
             afterSequenceRestore: async (_, _) =>
             {
                 if (Interlocked.Increment(ref callbacks) != 1) return;

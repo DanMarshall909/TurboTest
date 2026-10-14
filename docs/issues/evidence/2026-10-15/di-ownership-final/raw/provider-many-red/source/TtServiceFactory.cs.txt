@@ -1,0 +1,108 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace TurboTest.EFCore;
+
+/// <summary>Owns one configured fixture per context type for this service provider.</summary>
+internal sealed class TtServiceFactory : ITtServiceFactory, IAsyncDisposable
+{
+    private readonly TtOptions _options;
+    private readonly IServiceProvider _services;
+    private readonly SemaphoreSlim _ownerGate = new(1, 1);
+    private readonly object _gate = new();
+    private readonly Dictionary<Type, IAsyncDisposable> _owners = new();
+    private readonly List<TtCleanup> _startupCleanup = new();
+    private readonly CancellationTokenSource _shutdown = new();
+    private bool _closing;
+    private Task? _disposal;
+
+    public TtServiceFactory(IOptions<TtOptions> options, IServiceProvider services)
+    {
+        _options = options.Value.Snapshot();
+        _services = services;
+    }
+
+    public async Task<TtLease<TContext>> CreateLeaseAsync<TContext>(Action<DbContextOptionsBuilder>? configure = null)
+        where TContext : DbContext
+        => await (await CreateFactoryAsync<TContext>()).CreateLeaseAsync(configure);
+
+    public async Task<TtFactory<TContext>> CreateFactoryAsync<TContext>() where TContext : DbContext
+    {
+        await _ownerGate.WaitAsync();
+        try
+        {
+            lock (_gate)
+            {
+                ObjectDisposedException.ThrowIf(_closing, this);
+                if (_owners.TryGetValue(typeof(TContext), out var existing))
+                    return (TtFactory<TContext>)existing;
+            }
+            var baseline = _services.GetService<TtBaselineDefinition<TContext>>();
+            TtFactory<TContext> owner;
+            try
+            {
+                owner = baseline is null
+                    ? await Tt.CreateOwnedFactoryAsync<TContext>(_options, _shutdown.Token)
+                    : await Tt.CreatePreparedFactoryAsync(_options, baseline, _shutdown.Token);
+            }
+            catch (TtLifecycleException failure) when (failure.Cleanup is not null)
+            {
+                lock (_gate) _startupCleanup.Add(failure.Cleanup);
+                throw;
+            }
+            lock (_gate)
+            {
+                _owners.Add(typeof(TContext), owner);
+                ObjectDisposedException.ThrowIf(_closing, this);
+            }
+            return owner;
+        }
+        finally { _ownerGate.Release(); }
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        Task disposal;
+        TaskCompletionSource? start = null;
+        lock (_gate)
+        {
+            _closing = true;
+            if (_disposal is null)
+            {
+                start = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                _disposal = DisposeCoreAsync(start.Task);
+            }
+            disposal = _disposal;
+        }
+        start?.TrySetResult();
+        return new ValueTask(disposal);
+    }
+
+    private async Task DisposeCoreAsync(Task start)
+    {
+        await start;
+        await _shutdown.CancelAsync();
+        await _ownerGate.WaitAsync();
+        try
+        {
+            Exception? first = null;
+            foreach (var owner in _owners.Values)
+            {
+                try { await owner.DisposeAsync(); }
+                catch (Exception error) { first ??= error; }
+            }
+            foreach (var cleanup in _startupCleanup)
+            {
+                try { await cleanup.RetryCleanupAsync().WaitAsync(_options.DrainTimeout); }
+                catch (TimeoutException error)
+                {
+                    first ??= new TtLifecycleException("DrainTimeout", error, cleanup: cleanup);
+                }
+                catch (Exception error) { first ??= error; }
+            }
+            if (first is not null) throw first;
+        }
+        finally { _ownerGate.Release(); _shutdown.Dispose(); }
+    }
+}

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="17a8d9d2-cf4a-40aa-b24a-d4dc50860c1c" name="@os-greg 2026-10-14 19:54:38" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T19:54:38.3275818+10:00" queuing="2026-10-14T19:54:38.3275818+10:00" start="2026-10-14T19:54:32.5267720+10:00" finish="2026-10-14T19:54:38.3322328+10:00" />
+  <TestSettings name="default" id="355ce2e1-604e-4734-ab48-677ac9c4e4ad">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_19_54_38" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="b44a2c6b-6853-4512-8770-287d69f2cfe9" testId="bad81f35-0058-3e0a-3d95-1979904c65af" testName="TurboTest.Tests.DiImmediateClosureTests.Every_disposal_caller_closes_returned_handles_before_returning_the_shared_job" computerName="os-greg" duration="00:00:05.2233881" startTime="2026-10-14T19:54:33.0086660+10:00" endTime="2026-10-14T19:54:38.2430611+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b44a2c6b-6853-4512-8770-287d69f2cfe9">
+      <Output>
+        <ErrorInfo>
+          <Message>TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at DrainTimeout (TimeoutException). The resource is unavailable for reuse.</Message>
+          <StackTrace>   at TurboTest.EFCore.TtServiceFactory.ObserveDrainAsync(Task drain) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtServiceFactory.cs:line 167
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.&lt;DisposeAsync&gt;g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at TurboTest.Tests.DiImmediateClosureTests.Every_disposal_caller_closes_returned_handles_before_returning_the_shared_job() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiImmediateClosureTests.cs:line 54
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.DiImmediateClosureTests.Every_disposal_caller_closes_returned_handles_before_returning_the_shared_job" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="bad81f35-0058-3e0a-3d95-1979904c65af">
+      <Execution id="b44a2c6b-6853-4512-8770-287d69f2cfe9" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DiImmediateClosureTests" name="Every_disposal_caller_closes_returned_handles_before_returning_the_shared_job" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="bad81f35-0058-3e0a-3d95-1979904c65af" executionId="b44a2c6b-6853-4512-8770-287d69f2cfe9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.19]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:05.45]       TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at DrainTimeout (TimeoutException). The resource is unavailable for reuse.
+[xUnit.net 00:00:05.45]       Stack Trace:
+[xUnit.net 00:00:05.45]         /home/dan/code/TurboTest/src/TurboTest.EFCore/TtServiceFactory.cs(167,0): at TurboTest.EFCore.TtServiceFactory.ObserveDrainAsync(Task drain)
+[xUnit.net 00:00:05.45]            at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.&lt;DisposeAsync&gt;g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+[xUnit.net 00:00:05.45]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DiImmediateClosureTests.cs(54,0): at TurboTest.Tests.DiImmediateClosureTests.Every_disposal_caller_closes_returned_handles_before_returning_the_shared_job()
+[xUnit.net 00:00:05.45]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:05.46]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T19:54:38.2456304+10:00">
+        <Text>[xUnit.net 00:00:05.45]     TurboTest.Tests.DiImmediateClosureTests.Every_disposal_caller_closes_returned_handles_before_returning_the_shared_job [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

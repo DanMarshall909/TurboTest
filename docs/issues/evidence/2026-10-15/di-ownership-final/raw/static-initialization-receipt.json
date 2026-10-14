@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~StaticInitializationTests|FullyQualifiedName~Static_leases_reuse_then_recreate_a_valid_owner_after_final_disposal|FullyQualifiedName~StaticFailedDrainTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=static-initialization.trx",
+    "--results-directory",
+    "artifacts/tt-007/static-initialization"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 43.35212886380032,
+  "log": "artifacts/tt-007/static-initialization.log"
+}

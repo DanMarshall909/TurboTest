@@ -1,0 +1,16 @@
+{
+  "outcome": "Failed; 240 passed, two ContainerPrepare setup failures",
+  "causeEvidence": "Docker daemon confirms host port bind collisions for 42929 and 44707 at the failed test timestamps",
+  "journalCommand": [
+    "journalctl",
+    "-u",
+    "docker",
+    "--since",
+    "2026-10-15 08:44:45",
+    "--until",
+    "2026-10-15 08:45:15",
+    "--no-pager"
+  ],
+  "repair": "ContainerPortTests deliberately occupies the preselected host port before Docker starts. RED rejects initialization at ContainerPrepare; allocation will be delegated to Docker, then inspection supplies the owned source port. No transient retry policy added.",
+  "source": "The 90-input port repair differs from this failed 89-input candidate; neither r2 nor r3 proves final source."
+}

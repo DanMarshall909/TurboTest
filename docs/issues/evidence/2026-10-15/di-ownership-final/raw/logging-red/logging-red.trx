@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="5f00155d-28cc-465a-843f-b167f7821bef" name="@os-greg 2026-10-14 18:59:21" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T18:59:21.9194239+10:00" queuing="2026-10-14T18:59:21.9194239+10:00" start="2026-10-14T18:59:21.2748394+10:00" finish="2026-10-14T18:59:21.9229260+10:00" />
+  <TestSettings name="default" id="7218f040-59cd-4f1c-9b17-a99347d22198">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_18_59_21" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="0e278444-8f55-4624-88f7-8e46d423c4b5" testId="33f08f28-fffa-9995-9169-cce86c0d9989" testName="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(minimum: Information)" computerName="os-greg" duration="00:00:00.0006145" startTime="2026-10-14T18:59:21.8314834+10:00" endTime="2026-10-14T18:59:21.8315455+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0e278444-8f55-4624-88f7-8e46d423c4b5">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.All() Failure: 3 out of 4 items in the collection did not pass.
+[0]: Item:  Debug
+     Error: Assert.True() Failure
+            Expected: True
+            Actual:   False
+[1]: Item:  Debug
+     Error: Assert.True() Failure
+            Expected: True
+            Actual:   False
+[2]: Item:  Debug
+     Error: Assert.True() Failure
+            Expected: True
+            Actual:   False</Message>
+          <StackTrace>   at TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(LogLevel minimum) in /home/dan/code/TurboTest/tests/TurboTest.Tests/LoggingConfigurationTests.cs:line 21
+   at TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(LogLevel minimum) in /home/dan/code/TurboTest/tests/TurboTest.Tests/LoggingConfigurationTests.cs:line 24
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="235fa078-7b87-43e6-8a85-4f07ab05e9dd" testId="4fd67c16-84ba-cda8-79bb-0d0966f711b8" testName="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(minimum: Debug)" computerName="os-greg" duration="00:00:00.0039810" startTime="2026-10-14T18:59:21.8302149+10:00" endTime="2026-10-14T18:59:21.8305093+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="235fa078-7b87-43e6-8a85-4f07ab05e9dd" />
+    <UnitTestResult executionId="a949dc9e-1ff9-4152-8f27-4663f6db59a3" testId="86af15e4-3b52-b5f3-238f-a9ddb7a33e4f" testName="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(minimum: Warning)" computerName="os-greg" duration="00:00:00.0303185" startTime="2026-10-14T18:59:21.7748348+10:00" endTime="2026-10-14T18:59:21.8174778+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a949dc9e-1ff9-4152-8f27-4663f6db59a3">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.All() Failure: 4 out of 4 items in the collection did not pass.
+[0]: Item:  Debug
+     Error: Assert.True() Failure
+            Expected: True
+            Actual:   False
+[1]: Item:  Debug
+     Error: Assert.True() Failure
+            Expected: True
+            Actual:   False
+[2]: Item:  Debug
+     Error: Assert.True() Failure
+            Expected: True
+            Actual:   False
+[3]: Item:  Information
+     Error: Assert.True() Failure
+            Expected: True
+            Actual:   False</Message>
+          <StackTrace>   at TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(LogLevel minimum) in /home/dan/code/TurboTest/tests/TurboTest.Tests/LoggingConfigurationTests.cs:line 21
+   at TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(LogLevel minimum) in /home/dan/code/TurboTest/tests/TurboTest.Tests/LoggingConfigurationTests.cs:line 24
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(minimum: Information)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="33f08f28-fffa-9995-9169-cce86c0d9989">
+      <Execution id="0e278444-8f55-4624-88f7-8e46d423c4b5" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LoggingConfigurationTests" name="Configured_minimum_level_filters_owner_logging" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(minimum: Warning)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="86af15e4-3b52-b5f3-238f-a9ddb7a33e4f">
+      <Execution id="a949dc9e-1ff9-4152-8f27-4663f6db59a3" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LoggingConfigurationTests" name="Configured_minimum_level_filters_owner_logging" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(minimum: Debug)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4fd67c16-84ba-cda8-79bb-0d0966f711b8">
+      <Execution id="235fa078-7b87-43e6-8a85-4f07ab05e9dd" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LoggingConfigurationTests" name="Configured_minimum_level_filters_owner_logging" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="33f08f28-fffa-9995-9169-cce86c0d9989" executionId="0e278444-8f55-4624-88f7-8e46d423c4b5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4fd67c16-84ba-cda8-79bb-0d0966f711b8" executionId="235fa078-7b87-43e6-8a85-4f07ab05e9dd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="86af15e4-3b52-b5f3-238f-a9ddb7a33e4f" executionId="a949dc9e-1ff9-4152-8f27-4663f6db59a3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="1" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.19]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.21]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.28]       Assert.All() Failure: 4 out of 4 items in the collection did not pass.
+[xUnit.net 00:00:00.28]       [0]: Item:  Debug
+[xUnit.net 00:00:00.28]            Error: Assert.True() Failure
+[xUnit.net 00:00:00.28]                   Expected: True
+[xUnit.net 00:00:00.28]                   Actual:   False
+[xUnit.net 00:00:00.28]       [1]: Item:  Debug
+[xUnit.net 00:00:00.28]            Error: Assert.True() Failure
+[xUnit.net 00:00:00.28]                   Expected: True
+[xUnit.net 00:00:00.28]                   Actual:   False
+[xUnit.net 00:00:00.28]       [2]: Item:  Debug
+[xUnit.net 00:00:00.28]            Error: Assert.True() Failure
+[xUnit.net 00:00:00.28]                   Expected: True
+[xUnit.net 00:00:00.28]                   Actual:   False
+[xUnit.net 00:00:00.28]       [3]: Item:  Information
+[xUnit.net 00:00:00.28]            Error: Assert.True() Failure
+[xUnit.net 00:00:00.28]                   Expected: True
+[xUnit.net 00:00:00.28]                   Actual:   False
+[xUnit.net 00:00:00.28]       Stack Trace:
+[xUnit.net 00:00:00.28]         /home/dan/code/TurboTest/tests/TurboTest.Tests/LoggingConfigurationTests.cs(21,0): at TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(LogLevel minimum)
+[xUnit.net 00:00:00.28]         /home/dan/code/TurboTest/tests/TurboTest.Tests/LoggingConfigurationTests.cs(24,0): at TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(LogLevel minimum)
+[xUnit.net 00:00:00.28]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.29]       Assert.All() Failure: 3 out of 4 items in the collection did not pass.
+[xUnit.net 00:00:00.29]       [0]: Item:  Debug
+[xUnit.net 00:00:00.29]            Error: Assert.True() Failure
+[xUnit.net 00:00:00.29]                   Expected: True
+[xUnit.net 00:00:00.29]                   Actual:   False
+[xUnit.net 00:00:00.29]       [1]: Item:  Debug
+[xUnit.net 00:00:00.29]            Error: Assert.True() Failure
+[xUnit.net 00:00:00.29]                   Expected: True
+[xUnit.net 00:00:00.29]                   Actual:   False
+[xUnit.net 00:00:00.29]       [2]: Item:  Debug
+[xUnit.net 00:00:00.29]            Error: Assert.True() Failure
+[xUnit.net 00:00:00.29]                   Expected: True
+[xUnit.net 00:00:00.29]                   Actual:   False
+[xUnit.net 00:00:00.29]       Stack Trace:
+[xUnit.net 00:00:00.29]         /home/dan/code/TurboTest/tests/TurboTest.Tests/LoggingConfigurationTests.cs(21,0): at TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(LogLevel minimum)
+[xUnit.net 00:00:00.29]         /home/dan/code/TurboTest/tests/TurboTest.Tests/LoggingConfigurationTests.cs(24,0): at TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(LogLevel minimum)
+[xUnit.net 00:00:00.29]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.29]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T18:59:21.8198314+10:00">
+        <Text>[xUnit.net 00:00:00.27]     TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(minimum: Warning) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T18:59:21.8317214+10:00">
+        <Text>[xUnit.net 00:00:00.29]     TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_filters_owner_logging(minimum: Information) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

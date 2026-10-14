@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract",
+    "--logger",
+    "trx;LogFileName=catalog-reject-rerun.trx",
+    "--results-directory",
+    "artifacts/tt-007/catalog-reject-rerun"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 56.799271709001914,
+  "log": "artifacts/tt-007/catalog-reject-rerun.log",
+  "sourceBinding": "artifacts/tt-007/catalog-reject-rerun/source-binding.json"
+}

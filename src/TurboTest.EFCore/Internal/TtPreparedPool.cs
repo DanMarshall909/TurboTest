@@ -49,6 +49,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     }
 
     private readonly TtOptions _options;
+    private readonly ILogger _logger;
     private readonly TtBaselineDefinition<TContext> _definition;
     private readonly TtPool _host;
     private readonly Func<NpgsqlDataSource, Task>? _beforeVerification;
@@ -97,6 +98,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         Budget = TtResourceBudget.Create(options, prepared: true);
         ArgumentNullException.ThrowIfNull(definition);
         _options = options;
+        _logger = new TtLogger(options.Logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance, options.LogLevel);
         _definition = definition;
         _template = $"{options.DatabaseName}_baseline_{_owner:N}";
         _beforeVerification = beforeVerification;
@@ -318,7 +320,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         finally
         {
             var execution = Stopwatch.GetElapsedTime(acquired);
-            _options.Logger?.LogDebug(new EventId(400, "BaselineReset"),
+            _logger.LogDebug(new EventId(400, "BaselineReset"),
                     "Baseline reset {OwnerId} {Strategy}: wait {ResetPermitWaitMilliseconds} ms, execution {ResetExecutionMilliseconds} ms, validation {ValidationMilliseconds} ms, success {Succeeded}",
                     Snapshot.OwnerId, strategy, wait.TotalMilliseconds,
                     execution.TotalMilliseconds, validation.TotalMilliseconds, succeeded);

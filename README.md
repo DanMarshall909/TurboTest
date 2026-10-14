@@ -143,8 +143,63 @@ Independent factories have separate configuration and shutdown.
 
 Hard capacity bounds and verified restoration are implemented. Recovery and
 drain verification is recorded in the [tracker](docs/issues/README.md).
-DI ownership remains under
-[TT-007](docs/issues/open/api/TT-007-use-the-configured-owner-in-di-and-static-apis.md).
+DI ownership and verification are tracked in
+[TT-007](docs/issues/resolved/api/TT-007-use-the-configured-owner-in-di-and-static-apis.md).
+
+## Dependency injection
+
+Initialize each test scope asynchronously before resolving its lease:
+
+```csharp
+services.AddTurboTest(options => options.PoolSize = 1);
+services.AddTurboTestDbContext<MyDbContext>();
+await using var provider = services.BuildServiceProvider(
+    new ServiceProviderOptions { ValidateScopes = true });
+await using var scope = provider.CreateAsyncScope();
+await scope.ServiceProvider.InitializeTurboTestAsync<MyDbContext>();
+var lease = scope.ServiceProvider.GetRequiredService<TtLease<MyDbContext>>();
+var context = lease.Context;
+var count = await context.Set<MyEntity>().CountAsync();
+```
+
+Resolve/inject `TtLease<TContext>` and use its `.Context`; raw `TContext` is not
+registered. This prerelease DI contract replaces the broken raw-context
+registration and keeps disposal under the lease owner. Resolution reads the
+initialized lease without blocking. Resolving early reports
+the required initialization call. Repeated initialization in one scope shares
+the job and lease. Cancellation bounds that caller's observation; scope disposal
+still waits for pending initialization and lease return. A failed initialization
+requires a new scope.
+
+For a seeded fixture, register its immutable `TtBaselineDefinition<MyDbContext>`
+as a singleton before building the provider. Its model configuration and initializer
+apply before scope acquisition. Ordinary registrations accept the optional context
+configuration callback; prepared registrations configure their model in the baseline.
+
+`ITtServiceFactory.CreateLeaseAsync<TContext>()` and
+`CreateFactoryAsync<TContext>()` use the same configured fixture as scopes.
+The provider owns one fixture per context type; keep returned factories alive
+until provider shutdown. Independent providers capture their own options and
+baselines. Logger output respects both `TtOptions.LogLevel` and the supplied
+logger's enabled levels. The former `GetConnectionString` contract is removed;
+connection details belong to the acquired context's owned data source.
+
+Use `CreateAsyncScope` and `DisposeAsync` for scopes and providers. Async scope
+disposal awaits actual lease return. Provider shutdown rejects new work and starts
+every fixture's drain before awaiting one owner, including retained failed
+initialization. One `DrainTimeout` bounds the provider caller's observation.
+A timeout reports one `TtLifecycleException.Cleanup` capability for joining or
+retrying all of that provider's unfinished owners. Its resource snapshot includes
+every retained host; repeated disposal preserves its original result.
+
+Synchronous disposal is unsupported and reports a use-`DisposeAsync` diagnostic.
+Microsoft DI marks the scope/provider closed before reporting this rejection;
+a subsequent provider disposal cannot recover it. When integrating with code that
+may dispose synchronously, capture `ITtServiceFactory` beforehand and await that
+owner's `DisposeAsync()` on rejection, then retry any reported cleanup capability.
+The native regression verifies this recovery retains the live resource until its
+context cleanup settles. See the pinned
+[DI disposal implementation](https://github.com/dotnet/runtime/blob/v10.0.9/src/libraries/Microsoft.Extensions.DependencyInjection/src/ServiceLookup/ServiceProviderEngineScope.cs).
 
 ## Prepared fixture baselines
 

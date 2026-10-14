@@ -34,6 +34,8 @@ public sealed class TtLifecycleException : InvalidOperationException
     private static string Diagnostic(Exception error) => error switch
     {
         TtLifecycleException lifecycle => lifecycle._diagnostic,
+        AggregateException aggregate => $"AggregateException[{string.Join(", ", aggregate.InnerExceptions.Select(error =>
+            error is TtLifecycleException failure ? $"{failure.Stage}:{failure._diagnostic}" : Diagnostic(error)))}]",
         PostgresException postgres => postgres.SqlState,
         _ => error.GetType().Name
     };

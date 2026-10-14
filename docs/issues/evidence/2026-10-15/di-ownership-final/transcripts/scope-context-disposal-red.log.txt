@@ -1,0 +1,19 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.29]     TurboTest.Tests.DiScopeLifetimeTests.Resolved_scope_ownership_disposes_its_context_exactly_once [FAIL]
+  Failed TurboTest.Tests.DiScopeLifetimeTests.Resolved_scope_ownership_disposes_its_context_exactly_once [62 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 1
+Actual:   2
+  Stack Trace:
+     at TurboTest.Tests.DiScopeLifetimeTests.Resolved_scope_ownership_disposes_its_context_exactly_once() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiScopeLifetimeTests.cs:line 22
+   at TurboTest.Tests.DiScopeLifetimeTests.Resolved_scope_ownership_disposes_its_context_exactly_once() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiScopeLifetimeTests.cs:line 22
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-007/scope-context-disposal-red/scope-context-disposal-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 74 ms - TurboTest.Tests.dll (net10.0)

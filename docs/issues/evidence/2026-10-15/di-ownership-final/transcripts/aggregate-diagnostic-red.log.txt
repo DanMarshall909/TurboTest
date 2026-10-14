@@ -1,0 +1,19 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.24]     TurboTest.Tests.DiMultipleFailureTests.Aggregate_lifecycle_diagnostics_preserve_each_failure_kind_without_private_payloads [FAIL]
+  Failed TurboTest.Tests.DiMultipleFailureTests.Aggregate_lifecycle_diagnostics_preserve_each_failure_kind_without_private_payloads [3 ms]
+  Error Message:
+   Assert.Contains() Failure: Sub-string not found
+String:    "TurboTest lifecycle failed at ProviderDra"···
+Not found: "IOException"
+  Stack Trace:
+     at TurboTest.Tests.DiMultipleFailureTests.Aggregate_lifecycle_diagnostics_preserve_each_failure_kind_without_private_payloads() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiMultipleFailureTests.cs:line 17
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+Results File: /home/dan/code/TurboTest/artifacts/tt-007/aggregate-diagnostic-red/aggregate-diagnostic-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 12 ms - TurboTest.Tests.dll (net10.0)

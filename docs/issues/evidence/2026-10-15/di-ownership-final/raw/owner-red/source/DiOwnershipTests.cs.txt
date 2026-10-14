@@ -1,0 +1,55 @@
+using Docker.DotNet;
+using Docker.DotNet.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using TurboTest.EFCore;
+using TurboTest.EFCore.Extensions;
+
+namespace TurboTest.Tests;
+
+[Collection("Static lifecycle")]
+public class DiOwnershipTests
+{
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Service_leases_and_factories_share_the_configured_provider_owner()
+    {
+        await Tt.DisposeAsync();
+        var prefix = $"tt-di-owner-{Guid.NewGuid():N}";
+        var services = new ServiceCollection();
+        services.AddTurboTest(options =>
+        {
+            options.PoolSize = 1;
+            options.MaxConnectionsPerDatabase = 2;
+            options.ContainerPrefix = prefix;
+            options.DatabaseName = "di_owned";
+            options.DockerHost = "unix:///var/run/docker.sock";
+            options.EnableSensitiveDataLogging = false;
+        });
+        await using var provider = services.BuildServiceProvider();
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        try
+        {
+            var service = provider.GetRequiredService<ITtServiceFactory>();
+            await using var first = await service.CreateLeaseAsync<TestDbContext>();
+            var identity = await PooledResetTests.ReadIdentityAsync(first.Context);
+            Assert.StartsWith("di_owned_", identity.Database);
+            Assert.Equal(0, await first.Context.Users.CountAsync());
+            await first.DisposeAsync();
+            var factory = await service.CreateFactoryAsync<TestDbContext>();
+            Assert.Same(factory, await service.CreateFactoryAsync<TestDbContext>());
+            Assert.Equal(2, factory.ResourceBudget.MaxConnectionsPerDatabase);
+            await using var second = await factory.CreateLeaseAsync();
+            Assert.Equal(identity, await PooledResetTests.ReadIdentityAsync(second.Context));
+            Assert.Single(await docker.Containers.ListContainersAsync(new ContainersListParameters
+            {
+                All = true,
+                Filters = new Dictionary<string, IDictionary<string, bool>>
+                {
+                    ["name"] = new Dictionary<string, bool> { [prefix] = true }
+                }
+            }));
+        }
+        finally { await Tt.DisposeAsync(); }
+    }
+}

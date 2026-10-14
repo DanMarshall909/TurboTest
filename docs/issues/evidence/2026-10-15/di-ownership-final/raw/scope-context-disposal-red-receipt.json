@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Resolved_scope_ownership_disposes_its_context_exactly_once",
+    "--logger",
+    "trx;LogFileName=scope-context-disposal-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/scope-context-disposal-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 4.454636279959232,
+  "log": "artifacts/tt-007/scope-context-disposal-red.log"
+}

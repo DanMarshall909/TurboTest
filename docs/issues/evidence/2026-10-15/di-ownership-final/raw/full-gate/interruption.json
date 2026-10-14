@@ -1,0 +1,23 @@
+{
+  "status": "Interrupted; no terminal test verdict",
+  "started": "2026-10-14T10:01:00.145420+00:00",
+  "observedAt": "2026-10-14T22:27:42.815157+00:00",
+  "reason": "Original session handle is missing; wrapper, dotnet and owned test processes are absent. Log has no completion and no TRX/exit receipt exists.",
+  "sourceUnchanged": true,
+  "cleanup": {
+    "confirmedTerminal": true,
+    "removed": [
+      {
+        "Id": "13d36ea1c5a1284bd4b33d0c77c29ed5f32d84352faff3ec52d0cce4abddf0f6",
+        "Name": "/tt_pool_5f067918e04a49dc98265a14d1d7df71_1ae7252783a94ba7846d87d6f2c290c9",
+        "reservation": "5f067918e04a49dc98265a14d1d7df71"
+      },
+      {
+        "Id": "049a27b51e9738859b24b8b5143e4004643a2b6eb9dc616c5cefec90d4f51b81",
+        "Name": "/tt-blocked-startup-790656085d634e1eb8623ed97080e893_pool_3c159652b7d64f699567849be2919d2f_d96bf4eb954a48c3a4946f70406c510b",
+        "reservation": "3c159652b7d64f699567849be2919d2f"
+      }
+    ],
+    "basis": "Unique TurboTest reservation/name labels and creation times within the sole active full-gate invocation; blocked-startup prefix matches its owning regression."
+  }
+}

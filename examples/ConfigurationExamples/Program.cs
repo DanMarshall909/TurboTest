@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using TurboTest.EFCore;
+using TurboTest.EFCore.Extensions;
 
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json").AddEnvironmentVariables().Build();
@@ -22,7 +24,19 @@ await using (var lease = await fixture.CreateLeaseAsync())
     var secondContext = lease.CreateContext();
     Console.WriteLine($"Both contexts share the test database: {await secondContext.Database.CanConnectAsync()}");
 }
-// Lease return finishes before fixture shutdown. DI registration/lifetimes are tracked in TT-007.
+// DI resolution follows explicit async initialization; the scope returns its lease.
+var services = new ServiceCollection();
+services.AddTurboTest(configuration);
+services.Configure<TtOptions>(options => options.PoolSize = 1);
+services.AddTurboTestDbContext<BlogContext>();
+await using var provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true });
+await using (var scope = provider.CreateAsyncScope())
+{
+    await scope.ServiceProvider.InitializeTurboTestAsync<BlogContext>();
+    var context = scope.ServiceProvider.GetRequiredService<TtLease<BlogContext>>().Context;
+    Console.WriteLine($"DI scope queried {await context.Blogs.CountAsync()} blogs.");
+}
+// Async provider disposal drains its own fixture after the scope return finishes.
 
 // Domain model for examples
 public class Blog

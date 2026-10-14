@@ -11,15 +11,21 @@ internal sealed class TtContainer : IAsyncDisposable
 {
     private readonly DockerClient _dockerClient;
 
-    public NpgsqlDataSource DataSource { get; }
+    private NpgsqlDataSource? _source;
+    public NpgsqlDataSource DataSource => _source ?? throw new InvalidOperationException("The container has not completed database preparation.");
 
     public string Id { get; }
 
-    public TtContainer(string id, NpgsqlDataSource dataSource, DockerClient dockerClient)
+    public TtContainer(string id, DockerClient dockerClient)
     {
         Id = id;
         _dockerClient = dockerClient;
-        DataSource = dataSource;
+    }
+
+    internal void AttachDataSource(NpgsqlDataSource source)
+    {
+        if (_source is not null) throw new InvalidOperationException("The container already owns its database source.");
+        _source = source;
     }
 
     /// <summary>
@@ -58,7 +64,7 @@ internal sealed class TtContainer : IAsyncDisposable
 
     public async ValueTask DisposeAsync()
     {
-        await DataSource.DisposeAsync();
+        if (_source is not null) await _source.DisposeAsync();
         try
         {
             await _dockerClient.Containers.StopContainerAsync(Id,

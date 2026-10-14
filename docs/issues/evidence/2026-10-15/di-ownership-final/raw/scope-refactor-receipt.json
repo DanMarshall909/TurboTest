@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiOwnershipTests",
+    "--logger",
+    "trx;LogFileName=scope-refactor.trx",
+    "--results-directory",
+    "artifacts/tt-007/scope-refactor"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 27.04783411603421,
+  "log": "artifacts/tt-007/scope-refactor.log"
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Provider_disposal_reports_both_prompt_context_cleanup_failures",
+    "--logger",
+    "trx;LogFileName=provider-prompt-failure-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/provider-prompt-failure-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 23.900034304941073,
+  "log": "artifacts/tt-007/provider-prompt-failure-red.log",
+  "sourceBinding": "artifacts/tt-007/provider-prompt-failure-red/source-binding.json"
+}

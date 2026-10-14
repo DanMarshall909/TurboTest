@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~LoggingConfigurationTests",
+    "--logger",
+    "trx;LogFileName=logging-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/logging-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 4.203887841897085,
+  "log": "artifacts/tt-007/logging-red.log"
+}

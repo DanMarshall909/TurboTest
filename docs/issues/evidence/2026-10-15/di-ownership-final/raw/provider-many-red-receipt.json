@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Provider_closes_all_fixtures_together_and_one_cleanup_capability_recovers_every_retained_host",
+    "--logger",
+    "trx;LogFileName=provider-many-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/provider-many-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 13.8637909819372,
+  "log": "artifacts/tt-007/provider-many-red.log"
+}

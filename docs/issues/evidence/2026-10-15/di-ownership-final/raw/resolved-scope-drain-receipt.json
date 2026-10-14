@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Provider_drain_preserves_a_live_owner_through_async_timeout_or_sync_disposal_rejection|FullyQualifiedName~DiScopeLifetimeTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=resolved-scope-drain.trx",
+    "--results-directory",
+    "artifacts/tt-007/resolved-scope-drain"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 27.88487511407584,
+  "log": "artifacts/tt-007/resolved-scope-drain.log",
+  "sourceBinding": "artifacts/tt-007/resolved-scope-drain/source-binding.json"
+}

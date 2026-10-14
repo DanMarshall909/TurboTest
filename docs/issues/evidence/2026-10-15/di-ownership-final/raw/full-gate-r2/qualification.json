@@ -1,0 +1,18 @@
+{
+  "outcome": "Failed; 241 passed, one ContainerPrepare setup failure",
+  "failureTime": "2026-10-15T08:33:57+10:00",
+  "causeEvidence": "Docker daemon failed binding host TCP port 41005: address already in use",
+  "journalCommand": [
+    "journalctl",
+    "-u",
+    "docker",
+    "--since",
+    "2026-10-15 08:33:45",
+    "--until",
+    "2026-10-15 08:34:10",
+    "--no-pager"
+  ],
+  "retainedJournal": "port-bind-diagnosis.txt",
+  "targetedRerun": "catalog-reject-rerun; all 10 cases passed on unchanged 89-input source",
+  "limitation": "Existing free-port selection and subsequent Docker binding can race. No behavior or retry policy changed to turn this failed run into a pass. Full gate rerun required."
+}

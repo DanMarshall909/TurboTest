@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "Category!=PostgreSQL",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=fast-current.trx",
+    "--results-directory",
+    "artifacts/tt-007/fast-current"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 8.482662157854065,
+  "log": "artifacts/tt-007/fast-current.log"
+}

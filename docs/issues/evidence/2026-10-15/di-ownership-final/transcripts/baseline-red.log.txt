@@ -1,0 +1,22 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:09.32]     TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options [FAIL]
+  Failed TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options [9 s]
+  Error Message:
+   System.InvalidOperationException : Sequence contains no elements.
+  Stack Trace:
+     at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 55
+   at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 72
+   at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 72
+   at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 72
+   at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 72
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-007/baseline-red/baseline-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 9 s - TurboTest.Tests.dll (net10.0)

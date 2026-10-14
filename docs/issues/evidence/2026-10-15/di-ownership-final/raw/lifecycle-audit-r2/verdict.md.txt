@@ -1,0 +1,9 @@
+The lease registration fixes duplicate context ownership. Drain fanout and aggregate resource retention fix the previous multi-owner recovery gaps. Two residual issues remain:
+
+- **P2: Aggregate recovery can hide a real cleanup failure.** [TtServiceFactory.cs:105](/home/dan/code/TurboTest/src/TurboTest.EFCore/TtServiceFactory.cs:105) propagates one `WhenAll` exception. If fixture A times out while fixture B promptly fails with `LeaseCleanup`, the provider reports its deadline; aggregate recovery later sees A’s timeout and suppresses it at [line 146](/home/dan/code/TurboTest/src/TurboTest.EFCore/TtServiceFactory.cs:146). B’s child cleanup considers its failure already reported internally and can succeed on retry. The provider caller therefore never receives B’s failure. Preserve material constituent failures before filtering timeouts. The new single-owner late-failure test does not cover this mixed case.
+
+- **P2: Returned factories retain a closure window.** [TtServiceFactory.cs:74](/home/dan/code/TurboTest/src/TurboTest.EFCore/TtServiceFactory.cs:74) immediately rejects service lookups, but existing factories remain open until [line 104](/home/dan/code/TurboTest/src/TurboTest.EFCore/TtServiceFactory.cs:104). Acquisition through a previously returned factory can succeed after service disposal starts. Waiting for `_ownerGate` can extend that window. Close known fixtures before waiting for startup serialization; separately join any owner published by in-flight initialization. The current test checks rejection after both cleanup callbacks start, so it does not assert immediate rejection.
+
+I found no additional orphan-resource path in the revised retention logic. Releasing `_ownerGate` before cleanup waits addresses the reported stall.
+
+Read-only reassessment; no tests were run. Full verification and completion review remain outstanding.

@@ -1,0 +1,33 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:06:33.30]     TurboTest.Tests.PooledResetTests.Failed_lease_cleanup_is_reported_and_cannot_return_a_resource_to_the_pool [FAIL]
+  Failed TurboTest.Tests.PooledResetTests.Failed_lease_cleanup_is_reported_and_cannot_return_a_resource_to_the_pool [483 ms]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at ContainerPrepare (DockerApiException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(ContainerSlot slot, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 223
+   at TurboTest.EFCore.Internal.TtSlotPool`1.PrepareAsync(Reservation reservation) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs:line 131
+   at TurboTest.EFCore.Internal.TtSlotPool`1.WarmAsync(Int32 count, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs:line 195
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync(CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 96
+   at TurboTest.Tests.PooledResetTests.Failed_lease_cleanup_is_reported_and_cannot_return_a_resource_to_the_pool() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 92
+   at TurboTest.Tests.PooledResetTests.Failed_lease_cleanup_is_reported_and_cannot_return_a_resource_to_the_pool() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 104
+--- End of stack trace from previous location ---
+[xUnit.net 00:06:41.74]     TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: False) [FAIL]
+  Failed TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: False) [275 ms]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at ContainerPrepare (DockerApiException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.InitializeOwnedPoolAsync(ITtDatabasePool pool, TtOptions options, Func`2 initialize, String stage, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 160
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken, Func`2 beforeStart, Func`2 deleteResource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 100
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 22
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-007/full-gate-r3/full-gate-r3.trx
+
+Failed!  - Failed:     2, Passed:   240, Skipped:     0, Total:   242, Duration: 7 m 39 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-007/full-gate-r3/74b0bfac-2ae0-48a0-ad12-35c55266a888/dan_os-greg_2026-10-15.08_46_05.cobertura.xml

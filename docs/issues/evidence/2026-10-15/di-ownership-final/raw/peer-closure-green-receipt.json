@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiImmediateClosureTests|FullyQualifiedName~DiStartupDrainTests|FullyQualifiedName~DiMultipleFailureTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=peer-closure-green.trx",
+    "--results-directory",
+    "artifacts/tt-007/peer-closure-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 70.57461125496775,
+  "log": "artifacts/tt-007/peer-closure-green.log",
+  "sourceBinding": "artifacts/tt-007/peer-closure-green/source-binding.json"
+}

@@ -1,0 +1,19 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:05.45]     TurboTest.Tests.DiImmediateClosureTests.Every_disposal_caller_closes_returned_handles_before_returning_the_shared_job [FAIL]
+  Failed TurboTest.Tests.DiImmediateClosureTests.Every_disposal_caller_closes_returned_handles_before_returning_the_shared_job [5 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at DrainTimeout (TimeoutException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.TtServiceFactory.ObserveDrainAsync(Task drain) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtServiceFactory.cs:line 167
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at TurboTest.Tests.DiImmediateClosureTests.Every_disposal_caller_closes_returned_handles_before_returning_the_shared_job() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiImmediateClosureTests.cs:line 54
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-007/peer-closure-red/peer-closure-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 5 s - TurboTest.Tests.dll (net10.0)

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiOwnershipTests|FullyQualifiedName~ConfigurationTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=scope-green.trx",
+    "--results-directory",
+    "artifacts/tt-007/scope-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 20.454771572025493,
+  "log": "artifacts/tt-007/scope-green.log"
+}

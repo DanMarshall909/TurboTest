@@ -1,0 +1,21 @@
+{
+  "Id": "049a27b51e9738859b24b8b5143e4004643a2b6eb9dc616c5cefec90d4f51b81",
+  "Name": "/tt-blocked-startup-790656085d634e1eb8623ed97080e893_pool_3c159652b7d64f699567849be2919d2f_d96bf4eb954a48c3a4946f70406c510b",
+  "Created": "2026-10-14T10:04:28.245955997Z",
+  "State": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 255,
+    "Error": "",
+    "StartedAt": "2026-10-14T10:04:28.313337924Z",
+    "FinishedAt": "2026-10-14T10:10:18.261712582Z"
+  },
+  "Labels": {
+    "turbotest.reservation": "3c159652b7d64f699567849be2919d2f"
+  }
+}

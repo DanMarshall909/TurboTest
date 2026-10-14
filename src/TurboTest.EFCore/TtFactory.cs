@@ -12,6 +12,7 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
 
     /// <summary>Captured ceilings for this owner's containers, databases, connections and executing work.</summary>
     public TtResourceBudget ResourceBudget => _pool.Budget;
+    internal IReadOnlyList<string> OwnedResourceIds => _pool.OwnedResourceIds;
 
     private readonly ITtDatabasePool _pool;
     private readonly TtOptions _options;

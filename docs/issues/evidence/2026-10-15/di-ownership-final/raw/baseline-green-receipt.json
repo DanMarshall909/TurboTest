@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiOwnershipTests|FullyQualifiedName~DiScopeLifetimeTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=baseline-green.trx",
+    "--results-directory",
+    "artifacts/tt-007/baseline-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 25.873097370145842,
+  "log": "artifacts/tt-007/baseline-green.log"
+}

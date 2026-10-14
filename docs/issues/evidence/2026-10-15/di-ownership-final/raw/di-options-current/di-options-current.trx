@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="9c9deb96-ecae-4060-a5de-71d6276668aa" name="@os-greg 2026-10-14 19:06:29" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T19:06:29.3255952+10:00" queuing="2026-10-14T19:06:29.3255953+10:00" start="2026-10-14T19:06:25.1158520+10:00" finish="2026-10-14T19:06:47.0885025+10:00" />
+  <TestSettings name="default" id="d031ffdf-3310-47b7-bfec-d694f2d96a41">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_19_06_29" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="cbcbc0d1-b804-4dd0-b051-8d7d8ea89859" testId="fb07b992-1f22-bd27-c225-607d14ad0e53" testName="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging(minimum: Information, enabled: True)" computerName="os-greg" duration="00:00:00.0005448" startTime="2026-10-14T19:06:28.3120162+10:00" endTime="2026-10-14T19:06:28.3120570+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cbcbc0d1-b804-4dd0-b051-8d7d8ea89859" />
+    <UnitTestResult executionId="829dc2ab-133c-4cf3-a21b-598bed1a76ed" testId="7edbf6d4-5fb8-6546-88e8-acadad32c757" testName="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging(minimum: Debug, enabled: True)" computerName="os-greg" duration="00:00:00.0044440" startTime="2026-10-14T19:06:28.3098405+10:00" endTime="2026-10-14T19:06:28.3106365+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="829dc2ab-133c-4cf3-a21b-598bed1a76ed" />
+    <UnitTestResult executionId="eedef2f3-b4e3-4190-823a-06b0597507bf" testId="7b419ece-2e31-12f9-6ea8-2c48f4c566ee" testName="TurboTest.Tests.DiOwnershipTests.A_configured_unavailable_Docker_host_cannot_fall_back_to_global_resources" computerName="os-greg" duration="00:00:00.1632987" startTime="2026-10-14T19:06:28.2433474+10:00" endTime="2026-10-14T19:06:28.3999804+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eedef2f3-b4e3-4190-823a-06b0597507bf" />
+    <UnitTestResult executionId="b813d029-345b-464e-b8b0-11f7b32e981d" testId="6b8a92c6-aad9-2d3d-68d7-62deaf3e4af0" testName="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging(minimum: Warning, enabled: True)" computerName="os-greg" duration="00:00:00.0006589" startTime="2026-10-14T19:06:28.3117212+10:00" endTime="2026-10-14T19:06:28.3117643+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b813d029-345b-464e-b8b0-11f7b32e981d" />
+    <UnitTestResult executionId="d3727b21-17f5-47b1-abf8-b791aee3d5a5" testId="8b247a4f-7819-c4d4-00b6-93641bbb44bf" testName="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging(minimum: Debug, enabled: False)" computerName="os-greg" duration="00:00:00.0502401" startTime="2026-10-14T19:06:28.2447914+10:00" endTime="2026-10-14T19:06:28.2921151+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3727b21-17f5-47b1-abf8-b791aee3d5a5" />
+    <UnitTestResult executionId="79047406-ec35-4d03-844f-54ec2c848c64" testId="290c31d0-bc84-0ff8-775e-ecb3a8c04fea" testName="TurboTest.Tests.DiOwnershipTests.Initialized_async_scopes_resolve_query_and_return_their_configured_context" computerName="os-greg" duration="00:00:03.6314817" startTime="2026-10-14T19:06:32.6293930+10:00" endTime="2026-10-14T19:06:36.2593697+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="79047406-ec35-4d03-844f-54ec2c848c64" />
+    <UnitTestResult executionId="6e392628-10c8-40b4-aa87-4fe9a21416b0" testId="a2545420-097d-f629-7f98-db6cd21e0a51" testName="TurboTest.Tests.DiOwnershipTests.Service_leases_and_factories_share_the_configured_provider_owner" computerName="os-greg" duration="00:00:04.2269799" startTime="2026-10-14T19:06:28.4007282+10:00" endTime="2026-10-14T19:06:32.6274467+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6e392628-10c8-40b4-aa87-4fe9a21416b0" />
+    <UnitTestResult executionId="0e1a60fd-3eac-4de7-a21f-5a4b5724b09c" testId="b7b0634d-c84d-61df-3ce7-b9d41deb7514" testName="TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options" computerName="os-greg" duration="00:00:10.6226430" startTime="2026-10-14T19:06:36.2602805+10:00" endTime="2026-10-14T19:06:46.8823416+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0e1a60fd-3eac-4de7-a21f-5a4b5724b09c" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging(minimum: Information, enabled: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="fb07b992-1f22-bd27-c225-607d14ad0e53">
+      <Execution id="cbcbc0d1-b804-4dd0-b051-8d7d8ea89859" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LoggingConfigurationTests" name="Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging(minimum: Debug, enabled: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="7edbf6d4-5fb8-6546-88e8-acadad32c757">
+      <Execution id="829dc2ab-133c-4cf3-a21b-598bed1a76ed" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LoggingConfigurationTests" name="Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging(minimum: Debug, enabled: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="8b247a4f-7819-c4d4-00b6-93641bbb44bf">
+      <Execution id="d3727b21-17f5-47b1-abf8-b791aee3d5a5" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LoggingConfigurationTests" name="Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DiOwnershipTests.A_configured_unavailable_Docker_host_cannot_fall_back_to_global_resources" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="7b419ece-2e31-12f9-6ea8-2c48f4c566ee">
+      <Execution id="eedef2f3-b4e3-4190-823a-06b0597507bf" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DiOwnershipTests" name="A_configured_unavailable_Docker_host_cannot_fall_back_to_global_resources" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.LoggingConfigurationTests.Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging(minimum: Warning, enabled: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="6b8a92c6-aad9-2d3d-68d7-62deaf3e4af0">
+      <Execution id="b813d029-345b-464e-b8b0-11f7b32e981d" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LoggingConfigurationTests" name="Configured_minimum_level_and_supplied_logger_policy_filter_owner_logging" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DiOwnershipTests.Initialized_async_scopes_resolve_query_and_return_their_configured_context" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="290c31d0-bc84-0ff8-775e-ecb3a8c04fea">
+      <Execution id="79047406-ec35-4d03-844f-54ec2c848c64" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DiOwnershipTests" name="Initialized_async_scopes_resolve_query_and_return_their_configured_context" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b7b0634d-c84d-61df-3ce7-b9d41deb7514">
+      <Execution id="0e1a60fd-3eac-4de7-a21f-5a4b5724b09c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DiOwnershipTests" name="Independent_providers_prepare_their_own_registered_baselines_and_preserve_options" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DiOwnershipTests.Service_leases_and_factories_share_the_configured_provider_owner" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="a2545420-097d-f629-7f98-db6cd21e0a51">
+      <Execution id="6e392628-10c8-40b4-aa87-4fe9a21416b0" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DiOwnershipTests" name="Service_leases_and_factories_share_the_configured_provider_owner" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="fb07b992-1f22-bd27-c225-607d14ad0e53" executionId="cbcbc0d1-b804-4dd0-b051-8d7d8ea89859" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7edbf6d4-5fb8-6546-88e8-acadad32c757" executionId="829dc2ab-133c-4cf3-a21b-598bed1a76ed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7b419ece-2e31-12f9-6ea8-2c48f4c566ee" executionId="eedef2f3-b4e3-4190-823a-06b0597507bf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6b8a92c6-aad9-2d3d-68d7-62deaf3e4af0" executionId="b813d029-345b-464e-b8b0-11f7b32e981d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8b247a4f-7819-c4d4-00b6-93641bbb44bf" executionId="d3727b21-17f5-47b1-abf8-b791aee3d5a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="290c31d0-bc84-0ff8-775e-ecb3a8c04fea" executionId="79047406-ec35-4d03-844f-54ec2c848c64" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a2545420-097d-f629-7f98-db6cd21e0a51" executionId="6e392628-10c8-40b4-aa87-4fe9a21416b0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b7b0634d-c84d-61df-3ce7-b9d41deb7514" executionId="0e1a60fd-3eac-4de7-a21f-5a4b5724b09c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="8" executed="8" passed="8" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.20]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.32]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.35]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:19.03]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.19_06_46.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

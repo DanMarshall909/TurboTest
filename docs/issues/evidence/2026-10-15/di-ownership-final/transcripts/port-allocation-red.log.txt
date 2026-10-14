@@ -1,0 +1,21 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.67]     TurboTest.Tests.ContainerPortTests.Container_start_and_queries_succeed_when_another_process_claims_the_prechecked_port [FAIL]
+  Failed TurboTest.Tests.ContainerPortTests.Container_start_and_queries_succeed_when_another_process_claims_the_prechecked_port [457 ms]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at ContainerPrepare (DockerApiException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(ContainerSlot slot, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 223
+   at TurboTest.EFCore.Internal.TtSlotPool`1.PrepareAsync(Reservation reservation) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs:line 131
+   at TurboTest.EFCore.Internal.TtSlotPool`1.WarmAsync(Int32 count, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs:line 195
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync(CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 96
+   at TurboTest.Tests.ContainerPortTests.Container_start_and_queries_succeed_when_another_process_claims_the_prechecked_port() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ContainerPortTests.cs:line 30
+   at TurboTest.Tests.ContainerPortTests.Container_start_and_queries_succeed_when_another_process_claims_the_prechecked_port() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ContainerPortTests.cs:line 45
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-007/port-allocation-red/port-allocation-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 469 ms - TurboTest.Tests.dll (net10.0)

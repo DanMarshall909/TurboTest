@@ -1,0 +1,25 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:23.21]     TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(bothFail: False) [FAIL]
+  Failed TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(bothFail: False) [11 s]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "DrainTimeout"
+Actual:   "LeaseCleanup"
+           ↑ (pos 0)
+  Stack Trace:
+     at TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(Boolean bothFail) in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiMultipleFailureTests.cs:line 96
+   at TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(Boolean bothFail) in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiMultipleFailureTests.cs:line 131
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-007/provider-failures-green/provider-failures-green.trx
+
+Failed!  - Failed:     1, Passed:    10, Skipped:     0, Total:    11, Duration: 35 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-007/provider-failures-green/354c49ee-b068-4b38-8719-1a2a97135c99/dan_os-greg_2026-10-14.19_35_22.cobertura.xml

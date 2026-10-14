@@ -1,0 +1,22 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:07.61]     TurboTest.Tests.DiStartupDrainTests.Provider_closure_interrupts_initialization_and_retains_pending_work_until_explicit_cleanup [FAIL]
+  Failed TurboTest.Tests.DiStartupDrainTests.Provider_closure_interrupts_initialization_and_retains_pending_work_until_explicit_cleanup [7 s]
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.TimeoutException)
+---- System.TimeoutException : The operation has timed out.
+  Stack Trace:
+     at TurboTest.Tests.DiStartupDrainTests.Provider_closure_interrupts_initialization_and_retains_pending_work_until_explicit_cleanup() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiStartupDrainTests.cs:line 40
+   at TurboTest.Tests.DiStartupDrainTests.Provider_closure_interrupts_initialization_and_retains_pending_work_until_explicit_cleanup() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiStartupDrainTests.cs:line 68
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+
+Results File: /home/dan/code/TurboTest/artifacts/tt-007/provider-startup-red/provider-startup-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 7 s - TurboTest.Tests.dll (net10.0)

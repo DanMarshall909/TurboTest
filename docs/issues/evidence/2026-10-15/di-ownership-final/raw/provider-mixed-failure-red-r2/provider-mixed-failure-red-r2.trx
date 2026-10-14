@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="aa8b0eb2-6d9b-48d8-a375-9ac354c243f2" name="@os-greg 2026-10-14 19:29:19" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T19:29:19.8143486+10:00" queuing="2026-10-14T19:29:19.8143486+10:00" start="2026-10-14T19:29:05.9167017+10:00" finish="2026-10-14T19:29:30.0476863+10:00" />
+  <TestSettings name="default" id="4ae7a568-c2be-4771-afe9-1c938d7dc50b">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_19_29_19" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ed8563a1-144f-4d29-9915-f83457931660" testId="32af0aa4-7c0d-fc82-96a9-45e7ec082f97" testName="TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(bothFail: True)" computerName="os-greg" duration="00:00:13.3834111" startTime="2026-10-14T19:29:06.3941122+10:00" endTime="2026-10-14T19:29:19.7854643+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ed8563a1-144f-4d29-9915-f83457931660">
+      <Output>
+        <ErrorInfo>
+          <Message>TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at LeaseCleanup (InvalidOperationException). The resource is unavailable for reuse.</Message>
+          <StackTrace>   at TurboTest.EFCore.TtCleanup.RunAsync(Task start) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtCleanup.cs:line 55
+   at TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(Boolean bothFail) in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiMultipleFailureTests.cs:line 52
+   at TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(Boolean bothFail) in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiMultipleFailureTests.cs:line 68
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a00194a7-801e-46e0-8721-a119aced4a40" testId="1c8a5eec-9553-792c-aefe-06a238bb20c6" testName="TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(bothFail: False)" computerName="os-greg" duration="00:00:10.1965278" startTime="2026-10-14T19:29:19.8013085+10:00" endTime="2026-10-14T19:29:29.9833918+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a00194a7-801e-46e0-8721-a119aced4a40" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(bothFail: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="1c8a5eec-9553-792c-aefe-06a238bb20c6">
+      <Execution id="a00194a7-801e-46e0-8721-a119aced4a40" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DiMultipleFailureTests" name="Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(bothFail: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="32af0aa4-7c0d-fc82-96a9-45e7ec082f97">
+      <Execution id="ed8563a1-144f-4d29-9915-f83457931660" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DiMultipleFailureTests" name="Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="32af0aa4-7c0d-fc82-96a9-45e7ec082f97" executionId="ed8563a1-144f-4d29-9915-f83457931660" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c8a5eec-9553-792c-aefe-06a238bb20c6" executionId="a00194a7-801e-46e0-8721-a119aced4a40" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="2" passed="1" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.17]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.20]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:13.61]       TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at LeaseCleanup (InvalidOperationException). The resource is unavailable for reuse.
+[xUnit.net 00:00:13.61]       Stack Trace:
+[xUnit.net 00:00:13.61]         /home/dan/code/TurboTest/src/TurboTest.EFCore/TtCleanup.cs(55,0): at TurboTest.EFCore.TtCleanup.RunAsync(Task start)
+[xUnit.net 00:00:13.61]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DiMultipleFailureTests.cs(52,0): at TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(Boolean bothFail)
+[xUnit.net 00:00:13.61]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DiMultipleFailureTests.cs(68,0): at TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(Boolean bothFail)
+[xUnit.net 00:00:13.61]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:23.81]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T19:29:19.7885441+10:00">
+        <Text>[xUnit.net 00:00:13.61]     TurboTest.Tests.DiMultipleFailureTests.Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(bothFail: True) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

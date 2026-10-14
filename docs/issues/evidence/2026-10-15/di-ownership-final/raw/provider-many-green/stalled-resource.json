@@ -1,0 +1,21 @@
+{
+  "Id": "09fe10d74d094943502ab63197be465eb3ac96af928fce9b12be672653d78a60",
+  "Name": "/tt-di-start-drain-45ae5aa41f214785a5ffde6cd064f7e1_pool_7806b15eb0e84bc9977681601ffac189_9f05d7779536458a8c7ae2f7a0d34e4c",
+  "Created": "2026-10-14T09:14:48.29029701Z",
+  "State": {
+    "Status": "running",
+    "Running": true,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 3618921,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-14T09:14:48.355602956Z",
+    "FinishedAt": "0001-01-01T00:00:00Z"
+  },
+  "Labels": {
+    "turbotest.reservation": "7806b15eb0e84bc9977681601ffac189"
+  }
+}

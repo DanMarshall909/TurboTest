@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiMultipleFailureTests|FullyQualifiedName~DiLateCleanupTests|FullyQualifiedName~CleanupOwnershipTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=provider-failures-green.trx",
+    "--results-directory",
+    "artifacts/tt-007/provider-failures-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 43.75822933879681,
+  "log": "artifacts/tt-007/provider-failures-green.log",
+  "sourceBinding": "artifacts/tt-007/provider-failures-green/source-binding.json"
+}

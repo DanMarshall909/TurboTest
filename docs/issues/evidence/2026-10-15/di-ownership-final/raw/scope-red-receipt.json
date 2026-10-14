@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Initialized_async_scopes_resolve_query_and_return_their_configured_context",
+    "--logger",
+    "trx;LogFileName=scope-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/scope-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 4.00209754309617,
+  "log": "artifacts/tt-007/scope-red.log"
+}

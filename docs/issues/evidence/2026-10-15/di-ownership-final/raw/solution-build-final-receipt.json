@@ -1,0 +1,13 @@
+{
+  "command": [
+    "dotnet",
+    "build",
+    "TurboTest.sln",
+    "--no-restore"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 2.515421439005877,
+  "log": "artifacts/tt-007/solution-build-final.log",
+  "sourceBinding": "artifacts/tt-007/solution-build-final/source-binding.json"
+}

@@ -1,0 +1,7 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+/home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs(27,29): error CS0029: Cannot implicitly convert type '(string Database, uint Oid, int Session)' to '(string Database, int ProcessId)' [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]
+/home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs(37,26): error CS1503: Argument 1: cannot convert from '(string Database, int ProcessId)' to 'System.DateTime' [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]
+/home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs(37,41): error CS1503: Argument 2: cannot convert from '(string Database, uint Oid, int Session)' to 'System.DateTime' [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]

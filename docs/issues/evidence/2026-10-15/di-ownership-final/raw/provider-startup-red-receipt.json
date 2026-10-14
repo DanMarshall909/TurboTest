@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Provider_closure_interrupts_initialization_and_retains_pending_work_until_explicit_cleanup",
+    "--logger",
+    "trx;LogFileName=provider-startup-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/provider-startup-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 11.485320640029386,
+  "log": "artifacts/tt-007/provider-startup-red.log"
+}

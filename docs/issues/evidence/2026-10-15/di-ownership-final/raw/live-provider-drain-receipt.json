@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiStartupDrainTests|FullyQualifiedName~DiScopeLifetimeTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=live-provider-drain.trx",
+    "--results-directory",
+    "artifacts/tt-007/live-provider-drain"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 21.255508611910045,
+  "log": "artifacts/tt-007/live-provider-drain.log"
+}

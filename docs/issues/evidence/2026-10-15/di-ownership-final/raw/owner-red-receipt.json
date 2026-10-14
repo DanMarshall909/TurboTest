@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Service_leases_and_factories_share_the_configured_provider_owner",
+    "--logger",
+    "trx;LogFileName=owner-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/owner-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 30.400147893000394,
+  "log": "artifacts/tt-007/owner-red.log"
+}

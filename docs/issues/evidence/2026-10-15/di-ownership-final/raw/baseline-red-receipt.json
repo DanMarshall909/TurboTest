@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Independent_providers_prepare_their_own_registered_baselines_and_preserve_options",
+    "--logger",
+    "trx;LogFileName=baseline-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/baseline-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 13.29306202987209,
+  "log": "artifacts/tt-007/baseline-red.log"
+}

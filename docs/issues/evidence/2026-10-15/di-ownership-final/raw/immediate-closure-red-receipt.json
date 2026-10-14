@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiImmediateClosureTests",
+    "--logger",
+    "trx;LogFileName=immediate-closure-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/immediate-closure-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 7.651996033964679,
+  "log": "artifacts/tt-007/immediate-closure-red.log",
+  "sourceBinding": "artifacts/tt-007/immediate-closure-red/source-binding.json"
+}

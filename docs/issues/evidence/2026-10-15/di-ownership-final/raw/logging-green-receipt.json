@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~LoggingConfigurationTests|FullyQualifiedName~ResetTimingTests|FullyQualifiedName~Independent_providers_prepare_their_own_registered_baselines_and_preserve_options",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=logging-green.trx",
+    "--results-directory",
+    "artifacts/tt-007/logging-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 49.343907785834745,
+  "log": "artifacts/tt-007/logging-green.log"
+}

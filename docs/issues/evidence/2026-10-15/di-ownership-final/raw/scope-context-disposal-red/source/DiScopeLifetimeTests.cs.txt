@@ -1,0 +1,204 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using TurboTest.EFCore;
+using TurboTest.EFCore.Extensions;
+
+namespace TurboTest.Tests;
+
+public class DiScopeLifetimeTests
+{
+    [Fact]
+    public async Task Resolved_scope_ownership_disposes_its_context_exactly_once()
+    {
+        var factory = new CountingFactory();
+        var services = new ServiceCollection();
+        services.AddSingleton<ITtServiceFactory>(_ => factory);
+        services.AddTurboTestDbContext<CountingContext>();
+        await using var provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true });
+        var scope = provider.CreateAsyncScope();
+        await scope.ServiceProvider.InitializeTurboTestAsync<CountingContext>();
+        Assert.Same(factory.Context, scope.ServiceProvider.GetRequiredService<CountingContext>());
+        await scope.DisposeAsync();
+        Assert.Equal(1, factory.Context.Disposals);
+    }
+
+    [Fact]
+    public async Task Early_resolution_requires_async_initialization_without_starting_a_lease()
+    {
+        var factory = new HeldFactory();
+        await using var provider = Provider(factory);
+        await using var scope = provider.CreateAsyncScope();
+        var failure = Assert.Throws<InvalidOperationException>(() => scope.ServiceProvider.GetRequiredService<TestDbContext>());
+        Assert.Contains("InitializeTurboTestAsync", failure.Message);
+        Assert.Contains("CreateAsyncScope", failure.Message);
+        Assert.Equal(0, factory.Created);
+    }
+
+    [Fact]
+    public async Task Scope_disposal_joins_pending_initialization_and_the_actual_lease_return()
+    {
+        var factory = new HeldFactory();
+        await using var provider = Provider(factory);
+        var scope = provider.CreateAsyncScope();
+        var initialization = scope.ServiceProvider.InitializeTurboTestAsync<TestDbContext>();
+        await factory.Started.Task.WaitAsync(TimeSpan.FromSeconds(2));
+        var duplicate = scope.ServiceProvider.InitializeTurboTestAsync<TestDbContext>();
+        var closing = scope.DisposeAsync().AsTask();
+        try
+        {
+            Assert.False(initialization.IsCompleted);
+            Assert.False(closing.IsCompleted);
+            Assert.Equal((1, 0), (factory.Created, factory.Returned));
+            factory.ReleaseInitialization.TrySetResult();
+            await initialization.WaitAsync(TimeSpan.FromSeconds(2));
+            await duplicate.WaitAsync(TimeSpan.FromSeconds(2));
+            await factory.ReturnStarted.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.False(closing.IsCompleted);
+            Assert.Equal((1, 0), (factory.Created, factory.Returned));
+            factory.ReleaseReturn.TrySetResult();
+            await closing.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((1, 1), (factory.Created, factory.Returned));
+        }
+        finally
+        {
+            factory.ReleaseInitialization.TrySetResult();
+            factory.ReleaseReturn.TrySetResult();
+            await closing;
+        }
+    }
+
+    [Fact]
+    public async Task Canceled_initialization_observation_does_not_abandon_the_scope_owned_job()
+    {
+        var factory = new HeldFactory();
+        await using var provider = Provider(factory);
+        var scope = provider.CreateAsyncScope();
+        using var cancellation = new CancellationTokenSource();
+        var initialization = scope.ServiceProvider.InitializeTurboTestAsync<TestDbContext>(cancellation.Token);
+        await factory.Started.Task.WaitAsync(TimeSpan.FromSeconds(2));
+        cancellation.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => initialization);
+        var closing = scope.DisposeAsync().AsTask();
+        try
+        {
+            Assert.False(closing.IsCompleted);
+            factory.ReleaseInitialization.TrySetResult();
+            await factory.ReturnStarted.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.False(closing.IsCompleted);
+            factory.ReleaseReturn.TrySetResult();
+            await closing.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(1, factory.Returned);
+        }
+        finally
+        {
+            factory.ReleaseInitialization.TrySetResult();
+            factory.ReleaseReturn.TrySetResult();
+            await closing;
+        }
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Synchronous_disposal_rejects_async_ownership_and_the_captured_owner_can_still_drain(bool root)
+    {
+        var factory = new HeldFactory();
+        var provider = Provider(factory);
+        var owner = provider.GetRequiredService<ITtServiceFactory>();
+        var scope = provider.CreateAsyncScope();
+        factory.ReleaseInitialization.TrySetResult();
+        await scope.ServiceProvider.InitializeTurboTestAsync<TestDbContext>();
+        try
+        {
+            var failure = Assert.Throws<InvalidOperationException>(() =>
+            {
+                if (root) provider.Dispose();
+                else scope.Dispose();
+            });
+            Assert.Contains("DisposeAsync", failure.Message);
+            Assert.Equal(0, factory.Returned);
+            var recovery = owner.DisposeAsync().AsTask();
+            await factory.ReturnStarted.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.False(recovery.IsCompleted);
+            factory.ReleaseReturn.TrySetResult();
+            await recovery.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(1, factory.Returned);
+        }
+        finally
+        {
+            factory.ReleaseReturn.TrySetResult();
+            await owner.DisposeAsync();
+            await scope.DisposeAsync();
+            await provider.DisposeAsync();
+        }
+    }
+
+    private static ServiceProvider Provider(HeldFactory factory)
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ITtServiceFactory>(_ => factory);
+        services.AddTurboTestDbContext<TestDbContext>();
+        return services.BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true });
+    }
+
+    private sealed class HeldFactory : ITtServiceFactory
+    {
+        internal TaskCompletionSource Started { get; } = Signal();
+        internal TaskCompletionSource ReleaseInitialization { get; } = Signal();
+        internal TaskCompletionSource ReturnStarted { get; } = Signal();
+        internal TaskCompletionSource ReleaseReturn { get; } = Signal();
+        internal int Created { get; private set; }
+        internal int Returned { get; private set; }
+        private TtLease<TestDbContext>? _lease;
+
+        public async Task<TtLease<TContext>> CreateLeaseAsync<TContext>(Action<DbContextOptionsBuilder>? configure = null)
+            where TContext : DbContext
+        {
+            Assert.Equal(typeof(TestDbContext), typeof(TContext));
+            Assert.Equal(1, ++Created);
+            Started.TrySetResult();
+            await ReleaseInitialization.Task;
+            var context = new TestDbContext(new DbContextOptionsBuilder<TestDbContext>().Options);
+            _lease = new TtLease<TestDbContext>(context, () => context, _ => { }, async () =>
+            {
+                ReturnStarted.TrySetResult();
+                await ReleaseReturn.Task;
+                await context.DisposeAsync();
+                Assert.Equal(1, ++Returned);
+            });
+            return (TtLease<TContext>)(object)_lease;
+        }
+
+        public Task<TtFactory<TContext>> CreateFactoryAsync<TContext>() where TContext : DbContext
+            => throw new InvalidOperationException("This scope boundary must acquire a lease directly.");
+
+        public ValueTask DisposeAsync() => _lease?.DisposeAsync() ?? ValueTask.CompletedTask;
+        private static TaskCompletionSource Signal() => new(TaskCreationOptions.RunContinuationsAsynchronously);
+    }
+
+    public sealed class CountingContext(DbContextOptions<CountingContext> options) : DbContext(options)
+    {
+        internal int Disposals { get; private set; }
+        public override ValueTask DisposeAsync()
+        {
+            Disposals++;
+            return base.DisposeAsync();
+        }
+    }
+
+    private sealed class CountingFactory : ITtServiceFactory
+    {
+        internal CountingContext Context { get; } = new(new DbContextOptionsBuilder<CountingContext>().Options);
+        private TtLease<CountingContext>? _lease;
+        public Task<TtLease<TContext>> CreateLeaseAsync<TContext>(Action<DbContextOptionsBuilder>? configure = null)
+            where TContext : DbContext
+        {
+            Assert.Equal(typeof(CountingContext), typeof(TContext));
+            _lease = new TtLease<CountingContext>(Context, () => Context, _ => { }, () => Context.DisposeAsync().AsTask());
+            return Task.FromResult((TtLease<TContext>)(object)_lease);
+        }
+        public Task<TtFactory<TContext>> CreateFactoryAsync<TContext>() where TContext : DbContext
+            => throw new InvalidOperationException("This boundary acquires a lease directly.");
+        public ValueTask DisposeAsync() => _lease?.DisposeAsync() ?? ValueTask.CompletedTask;
+    }
+}

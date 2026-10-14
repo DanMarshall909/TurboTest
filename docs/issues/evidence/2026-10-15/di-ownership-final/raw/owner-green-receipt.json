@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Service_leases_and_factories_share_the_configured_provider_owner|FullyQualifiedName~ConfigurationTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=owner-green.trx",
+    "--results-directory",
+    "artifacts/tt-007/owner-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 17.58531751204282,
+  "log": "artifacts/tt-007/owner-green.log"
+}

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="53f84290-e5cb-4125-93a8-e8b56d27e765" name="@os-greg 2026-10-14 18:52:30" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T18:52:30.7059878+10:00" queuing="2026-10-14T18:52:30.7059879+10:00" start="2026-10-14T18:52:21.0420085+10:00" finish="2026-10-14T18:52:30.7105301+10:00" />
+  <TestSettings name="default" id="b30c9fc4-93ab-436c-abb3-80491e95663c">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_18_52_30" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="581aa511-9d1e-4964-be77-c17e5bdd480b" testId="b7b0634d-c84d-61df-3ce7-b9d41deb7514" testName="TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options" computerName="os-greg" duration="00:00:09.0974640" startTime="2026-10-14T18:52:21.5020615+10:00" endTime="2026-10-14T18:52:30.6147007+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="581aa511-9d1e-4964-be77-c17e5bdd480b">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Sequence contains no elements.</Message>
+          <StackTrace>   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 55
+   at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 72
+   at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 72
+   at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 72
+   at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs:line 72
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b7b0634d-c84d-61df-3ce7-b9d41deb7514">
+      <Execution id="581aa511-9d1e-4964-be77-c17e5bdd480b" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DiOwnershipTests" name="Independent_providers_prepare_their_own_registered_baselines_and_preserve_options" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b7b0634d-c84d-61df-3ce7-b9d41deb7514" executionId="581aa511-9d1e-4964-be77-c17e5bdd480b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.18]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:09.32]       System.InvalidOperationException : Sequence contains no elements.
+[xUnit.net 00:00:09.32]       Stack Trace:
+[xUnit.net 00:00:09.32]            at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+[xUnit.net 00:00:09.32]            at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+[xUnit.net 00:00:09.32]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs(55,0): at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options()
+[xUnit.net 00:00:09.32]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs(72,0): at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options()
+[xUnit.net 00:00:09.32]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs(72,0): at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options()
+[xUnit.net 00:00:09.32]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs(72,0): at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options()
+[xUnit.net 00:00:09.32]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DiOwnershipTests.cs(72,0): at TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options()
+[xUnit.net 00:00:09.32]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:09.33]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T18:52:30.6179630+10:00">
+        <Text>[xUnit.net 00:00:09.32]     TurboTest.Tests.DiOwnershipTests.Independent_providers_prepare_their_own_registered_baselines_and_preserve_options [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

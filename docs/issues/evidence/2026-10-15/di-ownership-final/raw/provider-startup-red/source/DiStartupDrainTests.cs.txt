@@ -1,0 +1,79 @@
+using Docker.DotNet;
+using Docker.DotNet.Models;
+using Microsoft.Extensions.DependencyInjection;
+using TurboTest.EFCore;
+using TurboTest.EFCore.Extensions;
+
+namespace TurboTest.Tests;
+
+[Collection("Static lifecycle")]
+public class DiStartupDrainTests
+{
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Provider_closure_interrupts_initialization_and_retains_pending_work_until_explicit_cleanup()
+    {
+        var prefix = $"tt-di-start-drain-{Guid.NewGuid():N}";
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var seedFinished = false;
+        var services = new ServiceCollection();
+        services.AddTurboTest(options =>
+        {
+            options.PoolSize = 1;
+            options.ContainerPrefix = prefix;
+            options.DrainTimeout = TimeSpan.FromMilliseconds(100);
+        });
+        services.AddSingleton(new TtBaselineDefinition<TestDbContext>("di-held-seed-v1", TtSchemaInitialization.EnsureCreated,
+            async (_, _) => { entered.TrySetResult(); await release.Task; seedFinished = true; }));
+        var provider = services.BuildServiceProvider();
+        var service = provider.GetRequiredService<ITtServiceFactory>();
+        var initializing = service.CreateFactoryAsync<TestDbContext>();
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        Task? closing = null;
+        TtCleanup? cleanup = null;
+        try
+        {
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(45));
+            var original = Assert.Single(await OwnedAsync()).ID;
+            closing = provider.DisposeAsync().AsTask();
+            var interrupted = await Assert.ThrowsAsync<TtLifecycleException>(() => initializing.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("StartupCanceled", interrupted.Stage);
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => closing.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("DrainTimeout", failure.Stage);
+            cleanup = Assert.IsType<TtCleanup>(failure.Cleanup);
+            Assert.Same(interrupted.Cleanup, cleanup);
+            Assert.Equal(new[] { original }, cleanup.OwnedResourceIds);
+            Assert.Equal(original, Assert.Single(await OwnedAsync()).ID);
+            Assert.False(seedFinished);
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => service.CreateFactoryAsync<TestDbContext>());
+            var pending = cleanup.RetryCleanupAsync();
+            Assert.False(pending.IsCompleted);
+            release.TrySetResult();
+            await pending.WaitAsync(TimeSpan.FromSeconds(15));
+            Assert.True(seedFinished);
+            Assert.Empty(await OwnedAsync());
+            Assert.Empty(cleanup.OwnedResourceIds);
+            Assert.Same(failure, await Record.ExceptionAsync(() => service.DisposeAsync().AsTask()));
+        }
+        finally
+        {
+            release.TrySetResult();
+            await Record.ExceptionAsync(() => initializing);
+            if (closing is not null) await Record.ExceptionAsync(() => closing);
+            var failure = await Record.ExceptionAsync(() => service.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null) await cleanup.RetryCleanupAsync();
+            await provider.DisposeAsync();
+        }
+
+        Task<IList<ContainerListResponse>> OwnedAsync() => docker.Containers.ListContainersAsync(new ContainersListParameters
+        {
+            All = true,
+            Filters = new Dictionary<string, IDictionary<string, bool>>
+            {
+                ["name"] = new Dictionary<string, bool> { [prefix] = true }
+            }
+        });
+    }
+}

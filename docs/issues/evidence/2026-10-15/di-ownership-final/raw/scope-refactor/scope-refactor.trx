@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="77e2908a-5cfe-4e61-bff2-cb2ead9bbd08" name="@os-greg 2026-10-14 18:50:08" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T18:50:08.7621357+10:00" queuing="2026-10-14T18:50:08.7621357+10:00" start="2026-10-14T18:49:56.7356304+10:00" finish="2026-10-14T18:50:18.9627591+10:00" />
+  <TestSettings name="default" id="51aa33b9-83c6-484d-98e1-d9957b919ecd">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_18_50_08" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="d9f96871-0c45-4025-9314-c633fd956224" testId="a2545420-097d-f629-7f98-db6cd21e0a51" testName="TurboTest.Tests.DiOwnershipTests.Service_leases_and_factories_share_the_configured_provider_owner" computerName="os-greg" duration="00:00:11.4810981" startTime="2026-10-14T18:49:57.2456823+10:00" endTime="2026-10-14T18:50:08.7329316+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d9f96871-0c45-4025-9314-c633fd956224" />
+    <UnitTestResult executionId="62d3e5ea-491f-444f-a608-d34fc34d11ba" testId="290c31d0-bc84-0ff8-775e-ecb3a8c04fea" testName="TurboTest.Tests.DiOwnershipTests.Initialized_async_scopes_resolve_query_and_return_their_configured_context" computerName="os-greg" duration="00:00:10.1623988" startTime="2026-10-14T18:50:08.7496048+10:00" endTime="2026-10-14T18:50:18.8972619+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="62d3e5ea-491f-444f-a608-d34fc34d11ba" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.DiOwnershipTests.Initialized_async_scopes_resolve_query_and_return_their_configured_context" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="290c31d0-bc84-0ff8-775e-ecb3a8c04fea">
+      <Execution id="62d3e5ea-491f-444f-a608-d34fc34d11ba" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DiOwnershipTests" name="Initialized_async_scopes_resolve_query_and_return_their_configured_context" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DiOwnershipTests.Service_leases_and_factories_share_the_configured_provider_owner" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="a2545420-097d-f629-7f98-db6cd21e0a51">
+      <Execution id="d9f96871-0c45-4025-9314-c633fd956224" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DiOwnershipTests" name="Service_leases_and_factories_share_the_configured_provider_owner" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="a2545420-097d-f629-7f98-db6cd21e0a51" executionId="d9f96871-0c45-4025-9314-c633fd956224" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="290c31d0-bc84-0ff8-775e-ecb3a8c04fea" executionId="62d3e5ea-491f-444f-a608-d34fc34d11ba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.17]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.20]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:21.88]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

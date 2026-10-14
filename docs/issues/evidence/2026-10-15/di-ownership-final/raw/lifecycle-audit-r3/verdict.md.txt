@@ -1,0 +1,7 @@
+Aggregate diagnostics now preserve the reproduced material failures, including constituent stages/kinds without private payloads. My earlier input-order trace was incorrect; the new native two-failure oracle addresses the actual defect.
+
+One **P2 closure race** remains in [TtServiceFactory.cs:85](/home/dan/code/TurboTest/src/TurboTest.EFCore/TtServiceFactory.cs:85): the first caller publishes `_disposal` under `_gate`, then closes known factories outside that lock. A concurrent second `DisposeAsync()` can return the cached task before the first caller executes the closure loop. Acquisition through an existing factory can still succeed after that second call returns.
+
+Close known factories within the publication lock, or make every disposal call perform the idempotent synchronous closure before returning. The current immediate-closure test covers one disposal caller.
+
+No additional concrete defect found in aggregate cleanup retention or failure reporting. Tests were inspected, not run; the active GREEN, full gate, and completion review remain pending.

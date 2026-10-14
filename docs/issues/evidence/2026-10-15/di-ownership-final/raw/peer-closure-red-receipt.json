@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Every_disposal_caller_closes_returned_handles_before_returning_the_shared_job",
+    "--logger",
+    "trx;LogFileName=peer-closure-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/peer-closure-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 10.512009589932859,
+  "log": "artifacts/tt-007/peer-closure-red.log",
+  "sourceBinding": "artifacts/tt-007/peer-closure-red/source-binding.json"
+}

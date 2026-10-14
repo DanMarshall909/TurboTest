@@ -1,0 +1,23 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:06:09.80]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET "···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET "···) [286 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "BaselineUnsupportedCatalog"
+Actual:   "ContainerPrepare"
+           ↑ (pos 0)
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 156
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-007/full-gate-r2/full-gate-r2.trx
+
+Failed!  - Failed:     1, Passed:   241, Skipped:     0, Total:   242, Duration: 7 m 8 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-007/full-gate-r2/a3a4c8d7-8aae-40da-a57a-5a569986c3d8/dan_os-greg_2026-10-15.08_34_57.cobertura.xml

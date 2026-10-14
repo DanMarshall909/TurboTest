@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~DiScopeLifetimeTests|FullyQualifiedName~DiOwnershipTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=scope-context-disposal-green.trx",
+    "--results-directory",
+    "artifacts/tt-007/scope-context-disposal-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 40.96435889881104,
+  "log": "artifacts/tt-007/scope-context-disposal-green.log"
+}

@@ -14,7 +14,6 @@ internal sealed class TtPool : ITtDatabasePool
     {
         internal Guid Id { get; } = id;
         internal string Name { get; } = name;
-        internal Npgsql.NpgsqlDataSource? Source { get; set; }
         internal bool CreateIssued { get; set; }
         internal bool CreationRequestSettled { get; set; }
         internal TtContainer? Container { get; set; }
@@ -53,7 +52,7 @@ internal sealed class TtPool : ITtDatabasePool
         _prepareImage = prepareImage is null ? EnsureImageAsync : (image, _) => prepareImage(image);
         _beforeStart = beforeStart;
         _image = _options.DockerImage ?? "postgres:16-alpine";
-        _logger = _options.Logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
+        _logger = new TtLogger(_options.Logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance, _options.LogLevel);
 
         // Apply auto-allocation if enabled
         if (_options.AutoAllocateResources)
@@ -131,7 +130,7 @@ internal sealed class TtPool : ITtDatabasePool
                     !inspected.Config.Labels.TryGetValue("turbotest.reservation", out var reservationId) ||
                     reservationId != slot.Id.ToString("N"))
                     throw new TtLifecycleException("ContainerOwnership", new InvalidOperationException("The intended container identity is not owned."));
-                slot.Container = new TtContainer(inspected.ID, slot.Source!, _dockerClient);
+                slot.Container = new TtContainer(inspected.ID, _dockerClient);
                 _ownedContainers.TryAdd(inspected.ID, slot.Container);
                 _pendingCreates.TryRemove(slot.Name, out _);
             }
@@ -143,12 +142,13 @@ internal sealed class TtPool : ITtDatabasePool
             }
         }
         if (slot.Container is not null) await DeleteContainerAsync(slot.Container);
-        else if (slot.Source is not null) await slot.Source.DisposeAsync();
     }
 
     private async Task CreateContainerAsync(ContainerSlot slot, CancellationToken cancellationToken)
     {
-        var port = GetAvailablePort();
+        // Docker owns allocation and binding atomically. A free-port probe on
+        // this process cannot reserve the port for the later container start.
+        const int port = 5432; // Validate the connection template before side effects.
         var password = _options.Password ?? "test_" + Guid.NewGuid().ToString("N")[..8];
         var username = _options.Username ?? "postgres";
         var databaseName = $"{_options.DatabaseName}_{Guid.NewGuid():N}"; // Make database name unique
@@ -167,8 +167,7 @@ internal sealed class TtPool : ITtDatabasePool
         connection.MinPoolSize = 0;
         connection.MaxPoolSize = _options.MaxConnectionsPerDatabase;
         // Validate the source before creating a container, including custom connection templates.
-        var dataSource = Npgsql.NpgsqlDataSource.Create(connection.ConnectionString);
-        slot.Source = dataSource;
+        await using var validation = Npgsql.NpgsqlDataSource.Create(connection.ConnectionString);
         TtContainer? container = null;
         try
         {
@@ -198,7 +197,7 @@ internal sealed class TtPool : ITtDatabasePool
                     {
                         PortBindings = new Dictionary<string, IList<PortBinding>>
                         {
-                            ["5432/tcp"] = new[] { new PortBinding { HostPort = port.ToString() } }
+                            ["5432/tcp"] = new[] { new PortBinding { HostPort = "" } }
                         },
                         Memory = (long)_options.MemoryLimitMb * 1024 * 1024,
                         AutoRemove = false,
@@ -208,13 +207,18 @@ internal sealed class TtPool : ITtDatabasePool
             slot.CreationRequestSettled = true;
 
             // Retain ownership before any operation which can fail or await readiness.
-            container = new TtContainer(createResponse.ID, dataSource, _dockerClient);
+            container = new TtContainer(createResponse.ID, _dockerClient);
             slot.Container = container;
             _ownedContainers.TryAdd(container.Id, container);
             _pendingCreates.TryRemove(slot.Name, out _);
             if (_beforeStart is not null) await _beforeStart(container);
             cancellationToken.ThrowIfCancellationRequested();
             await _dockerClient.Containers.StartContainerAsync(createResponse.ID, new ContainerStartParameters(), cancellationToken);
+            var inspected = await _dockerClient.Containers.InspectContainerAsync(createResponse.ID, cancellationToken);
+            var published = inspected.NetworkSettings.Ports["5432/tcp"].First().HostPort;
+            connection.Port = int.Parse(published, System.Globalization.CultureInfo.InvariantCulture);
+            var dataSource = Npgsql.NpgsqlDataSource.Create(connection.ConnectionString);
+            container.AttachDataSource(dataSource);
             await WaitForDatabaseReadyAsync(dataSource, cancellationToken: cancellationToken);
         }
         catch (Exception error)
@@ -264,15 +268,6 @@ internal sealed class TtPool : ITtDatabasePool
                 null,
                 new Progress<JSONMessage>(), cancellationToken);
         }
-    }
-
-    private static int GetAvailablePort()
-    {
-        var listener = new System.Net.Sockets.TcpListener(System.Net.IPAddress.Loopback, 0);
-        listener.Start();
-        var port = ((System.Net.IPEndPoint)listener.LocalEndpoint).Port;
-        listener.Stop();
-        return port;
     }
 
     public async ValueTask DisposeAsync()

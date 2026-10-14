@@ -35,7 +35,7 @@ public static class Tt
 
     internal static async Task<TtLease<TContext>> CreateLeaseAsync<TContext>(
         Action<DbContextOptionsBuilder>? configure, CancellationToken cancellationToken,
-        Func<TtContainer, Task>? deleteResource) where TContext : DbContext
+        Func<TtContainer, Task>? deleteResource, Func<TtContainer, Task>? beforeStart = null) where TContext : DbContext
     {
         TtFactory<TContext> factory;
         await OwnerGate.WaitAsync(cancellationToken);
@@ -46,7 +46,7 @@ public static class Tt
             {
                 TtOptions options;
                 lock (ConfigurationGate) { _started = true; options = _options.Snapshot(); }
-                factory = await CreateOwnedFactoryAsync<TContext>(options, cancellationToken, deleteResource: deleteResource);
+                factory = await CreateOwnedFactoryAsync<TContext>(options, cancellationToken, beforeStart, deleteResource);
                 Owners.Add(typeof(TContext), factory);
             }
         }

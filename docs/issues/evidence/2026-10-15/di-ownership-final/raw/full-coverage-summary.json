@@ -1,0 +1,219 @@
+{
+  "src/TurboTest.EFCore/Extensions/ServiceCollectionExtensions.cs": {
+    "executed": 24,
+    "instrumented": 30,
+    "unexecuted": [
+      40,
+      41,
+      42,
+      81,
+      82,
+      83
+    ]
+  },
+  "src/TurboTest.EFCore/Internal/ITtDatabasePool.cs": {
+    "executed": 1,
+    "instrumented": 1,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/Internal/NpgsqlExtensions.cs": {
+    "executed": 4,
+    "instrumented": 8,
+    "unexecuted": [
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  "src/TurboTest.EFCore/Internal/TtAdministratorConnections.cs": {
+    "executed": 34,
+    "instrumented": 35,
+    "unexecuted": [
+      54
+    ]
+  },
+  "src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs": {
+    "executed": 172,
+    "instrumented": 174,
+    "unexecuted": [
+      152,
+      178
+    ]
+  },
+  "src/TurboTest.EFCore/Internal/TtCleanupRegistry.cs": {
+    "executed": 20,
+    "instrumented": 21,
+    "unexecuted": [
+      14
+    ]
+  },
+  "src/TurboTest.EFCore/Internal/TtContainer.cs": {
+    "executed": 45,
+    "instrumented": 48,
+    "unexecuted": [
+      75,
+      76,
+      78
+    ]
+  },
+  "src/TurboTest.EFCore/Internal/TtDatabase.cs": {
+    "executed": 57,
+    "instrumented": 57,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/Internal/TtLogger.cs": {
+    "executed": 5,
+    "instrumented": 6,
+    "unexecuted": [
+      8
+    ]
+  },
+  "src/TurboTest.EFCore/Internal/TtOwnedContextOptions.cs": {
+    "executed": 9,
+    "instrumented": 9,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/Internal/TtPool.cs": {
+    "executed": 229,
+    "instrumented": 259,
+    "unexecuted": [
+      250,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      332,
+      333,
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342,
+      343,
+      345,
+      346,
+      347,
+      349,
+      350,
+      351,
+      352,
+      355,
+      356,
+      368,
+      376
+    ]
+  },
+  "src/TurboTest.EFCore/Internal/TtPreparedConfiguration.cs": {
+    "executed": 27,
+    "instrumented": 27,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/Internal/TtPreparedPool.cs": {
+    "executed": 305,
+    "instrumented": 308,
+    "unexecuted": [
+      166,
+      279,
+      403
+    ]
+  },
+  "src/TurboTest.EFCore/Internal/TtRowResetPlan.cs": {
+    "executed": 105,
+    "instrumented": 105,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/Internal/TtScopedLease.cs": {
+    "executed": 34,
+    "instrumented": 34,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/Internal/TtSlotPool.cs": {
+    "executed": 337,
+    "instrumented": 355,
+    "unexecuted": [
+      167,
+      168,
+      169,
+      170,
+      171,
+      208,
+      260,
+      261,
+      262,
+      263,
+      352,
+      353,
+      354,
+      355,
+      356,
+      388,
+      389,
+      390
+    ]
+  },
+  "src/TurboTest.EFCore/Tt.cs": {
+    "executed": 125,
+    "instrumented": 126,
+    "unexecuted": [
+      18
+    ]
+  },
+  "src/TurboTest.EFCore/TtBaselineDefinition.cs": {
+    "executed": 11,
+    "instrumented": 11,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/TtCleanup.cs": {
+    "executed": 39,
+    "instrumented": 39,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/TtFactory.cs": {
+    "executed": 148,
+    "instrumented": 153,
+    "unexecuted": [
+      116,
+      189,
+      190,
+      191,
+      192
+    ]
+  },
+  "src/TurboTest.EFCore/TtLease.cs": {
+    "executed": 42,
+    "instrumented": 42,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/TtLifecycleException.cs": {
+    "executed": 30,
+    "instrumented": 30,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/TtOptions.cs": {
+    "executed": 25,
+    "instrumented": 25,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/TtPoolSnapshot.cs": {
+    "executed": 3,
+    "instrumented": 3,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/TtResourceBudget.cs": {
+    "executed": 25,
+    "instrumented": 25,
+    "unexecuted": []
+  },
+  "src/TurboTest.EFCore/TtServiceFactory.cs": {
+    "executed": 129,
+    "instrumented": 129,
+    "unexecuted": []
+  }
+}

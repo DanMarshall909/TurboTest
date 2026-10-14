@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~ContainerPortTests",
+    "--logger",
+    "trx;LogFileName=port-allocation-red.trx",
+    "--results-directory",
+    "artifacts/tt-007/port-allocation-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 3.3900353659992106,
+  "log": "artifacts/tt-007/port-allocation-red.log",
+  "sourceBinding": "artifacts/tt-007/port-allocation-red/source-binding.json"
+}

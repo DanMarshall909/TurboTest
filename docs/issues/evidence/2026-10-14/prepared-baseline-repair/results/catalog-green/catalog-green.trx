@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="656feb6a-6bbf-4885-a3ec-aa5943402cff" name="@os-greg 2026-10-14 10:39:13" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T10:39:13.2677465+10:00" queuing="2026-10-14T10:39:13.2677466+10:00" start="2026-10-14T10:39:05.6470660+10:00" finish="2026-10-14T10:40:13.3843068+10:00" />
+  <TestSettings name="default" id="aa0eae5f-0eb5-4098-bab4-048f8217bb78">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_10_39_13" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="fe513ae3-fdc9-42f3-8504-6c5ef9d2cee1" testId="49b3022d-7e13-b831-b13f-1e0106a803d2" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;SELECT setval(pg_get_serial_sequence('\&quot;Parents\&quot;'&quot;···)" computerName="os-greg" duration="00:00:04.6232082" startTime="2026-10-14T10:39:13.2544506+10:00" endTime="2026-10-14T10:39:17.8568863+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fe513ae3-fdc9-42f3-8504-6c5ef9d2cee1" />
+    <UnitTestResult executionId="0a9ba74d-ad2f-442f-852b-08fd50e90132" testId="91b4a6ec-e356-a480-4fb5-dcf473eb7d98" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;ALTER TABLE \&quot;Parents\&quot; ENABLE ROW LEVEL SECURITY&quot;)" computerName="os-greg" duration="00:00:04.5735173" startTime="2026-10-14T10:39:33.7799820+10:00" endTime="2026-10-14T10:39:38.3531269+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a9ba74d-ad2f-442f-852b-08fd50e90132" />
+    <UnitTestResult executionId="d6e0ec8f-d438-4ee3-a898-b52bba16d63f" testId="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER TABLE \&quot;Parents\&quot; ADD COLUMN unexpected inte&quot;···)" computerName="os-greg" duration="00:00:05.0128446" startTime="2026-10-14T10:39:17.8583509+10:00" endTime="2026-10-14T10:39:22.8700147+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d6e0ec8f-d438-4ee3-a898-b52bba16d63f" />
+    <UnitTestResult executionId="daa8ce4d-3c54-4156-a336-a182c4855245" testId="6c0b93af-d430-6096-2797-817b3315adf4" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA&quot;···)" computerName="os-greg" duration="00:00:05.6546051" startTime="2026-10-14T10:39:28.1262436+10:00" endTime="2026-10-14T10:39:33.7792669+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="daa8ce4d-3c54-4156-a336-a182c4855245" />
+    <UnitTestResult executionId="39336e05-1863-4e90-b48e-d62df6ada6a5" testId="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;UPDATE \&quot;Parents\&quot; SET \&quot;Priority\&quot; = 999&quot;)" computerName="os-greg" duration="00:00:05.2490447" startTime="2026-10-14T10:39:22.8707973+10:00" endTime="2026-10-14T10:39:28.1250936+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="39336e05-1863-4e90-b48e-d62df6ada6a5" />
+    <UnitTestResult executionId="e2bd50d0-e838-4398-956f-1c714c8ab21f" testId="50c37414-4da1-08b5-d1df-988f46ff60f0" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE VIEW unsupported_view AS SELECT 1 AS value&quot;)" computerName="os-greg" duration="00:00:04.1524129" startTime="2026-10-14T10:39:51.6124777+10:00" endTime="2026-10-14T10:39:55.7641045+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e2bd50d0-e838-4398-956f-1c714c8ab21f" />
+    <UnitTestResult executionId="3abd5765-d5d4-4fc7-a667-90f02d244ed6" testId="ce21f6fb-c811-ec15-f0f5-6c4575baff0c" testName="TurboTest.Tests.SeededBaselineTests.A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors" computerName="os-greg" duration="00:00:06.2367373" startTime="2026-10-14T10:40:06.9823729+10:00" endTime="2026-10-14T10:40:13.2188796+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3abd5765-d5d4-4fc7-a667-90f02d244ed6" />
+    <UnitTestResult executionId="3f9241d8-0d1d-499a-9837-6a5b5e5cb874" testId="c45a7fdc-8530-789b-e58a-e5ed65c2d67c" testName="TurboTest.Tests.SeededBaselineTests.Fixture_configuration_cannot_redirect_initialization_to_an_external_database" computerName="os-greg" duration="00:00:05.5655468" startTime="2026-10-14T10:39:07.6681280+10:00" endTime="2026-10-14T10:39:13.2314084+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3f9241d8-0d1d-499a-9837-6a5b5e5cb874" />
+    <UnitTestResult executionId="028a35c4-295d-478a-982f-c07e4797a7bc" testId="2b69ab29-52db-7844-ec9a-f2e6d780738c" testName="TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state" computerName="os-greg" duration="00:00:05.3870832" startTime="2026-10-14T10:39:55.7647735+10:00" endTime="2026-10-14T10:40:01.1515419+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="028a35c4-295d-478a-982f-c07e4797a7bc" />
+    <UnitTestResult executionId="cee11a46-a4e2-46d8-ab2e-6129dec7f832" testId="82dd5139-903e-e8b8-0a38-cf57e9a61569" testName="TurboTest.Tests.SeededBaselineTests.Workloads_cannot_reopen_the_connection_free_administrator_owned_template" computerName="os-greg" duration="00:00:05.8298160" startTime="2026-10-14T10:40:01.1521153+10:00" endTime="2026-10-14T10:40:06.9817206+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cee11a46-a4e2-46d8-ab2e-6129dec7f832" />
+    <UnitTestResult executionId="09df91b2-8602-408f-982f-e8ee1dc27e20" testId="ecf0860f-a026-03e8-78ac-4f939dccb4e6" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE TYPE unsupported_type AS ENUM ('one', 'two'&quot;···)" computerName="os-greg" duration="00:00:04.2065678" startTime="2026-10-14T10:39:47.4053359+10:00" endTime="2026-10-14T10:39:51.6113026+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="09df91b2-8602-408f-982f-e8ee1dc27e20" />
+    <UnitTestResult executionId="a8758645-4043-4802-8e4a-0fdea2e8ee69" testId="36882e1c-b398-341c-ec8d-381fd90ae96e" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET &quot;···)" computerName="os-greg" duration="00:00:04.9337269" startTime="2026-10-14T10:39:42.4710347+10:00" endTime="2026-10-14T10:39:47.4044169+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a8758645-4043-4802-8e4a-0fdea2e8ee69" />
+    <UnitTestResult executionId="2cf1e3cf-2686-4b9b-a10c-a8a4c49846b3" testId="f256f5d6-1d01-44a1-75cb-ee085217768c" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE FUNCTION unsupported_function() RETURNS int&quot;···)" computerName="os-greg" duration="00:00:04.1169071" startTime="2026-10-14T10:39:38.3536877+10:00" endTime="2026-10-14T10:39:42.4703775+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2cf1e3cf-2686-4b9b-a10c-a8a4c49846b3" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;UPDATE \&quot;Parents\&quot; SET \&quot;Priority\&quot; = 999&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d">
+      <Execution id="39336e05-1863-4e90-b48e-d62df6ada6a5" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="6c0b93af-d430-6096-2797-817b3315adf4">
+      <Execution id="daa8ce4d-3c54-4156-a336-a182c4855245" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="2b69ab29-52db-7844-ec9a-f2e6d780738c">
+      <Execution id="028a35c4-295d-478a-982f-c07e4797a7bc" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ce21f6fb-c811-ec15-f0f5-6c4575baff0c">
+      <Execution id="3abd5765-d5d4-4fc7-a667-90f02d244ed6" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;SELECT setval(pg_get_serial_sequence('\&quot;Parents\&quot;'&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="49b3022d-7e13-b831-b13f-1e0106a803d2">
+      <Execution id="fe513ae3-fdc9-42f3-8504-6c5ef9d2cee1" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.Fixture_configuration_cannot_redirect_initialization_to_an_external_database" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="c45a7fdc-8530-789b-e58a-e5ed65c2d67c">
+      <Execution id="3f9241d8-0d1d-499a-9837-6a5b5e5cb874" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="Fixture_configuration_cannot_redirect_initialization_to_an_external_database" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET &quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="36882e1c-b398-341c-ec8d-381fd90ae96e">
+      <Execution id="a8758645-4043-4802-8e4a-0fdea2e8ee69" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.Workloads_cannot_reopen_the_connection_free_administrator_owned_template" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="82dd5139-903e-e8b8-0a38-cf57e9a61569">
+      <Execution id="cee11a46-a4e2-46d8-ab2e-6129dec7f832" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="Workloads_cannot_reopen_the_connection_free_administrator_owned_template" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE TYPE unsupported_type AS ENUM ('one', 'two'&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ecf0860f-a026-03e8-78ac-4f939dccb4e6">
+      <Execution id="09df91b2-8602-408f-982f-e8ee1dc27e20" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;ALTER TABLE \&quot;Parents\&quot; ENABLE ROW LEVEL SECURITY&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="91b4a6ec-e356-a480-4fb5-dcf473eb7d98">
+      <Execution id="0a9ba74d-ad2f-442f-852b-08fd50e90132" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE FUNCTION unsupported_function() RETURNS int&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f256f5d6-1d01-44a1-75cb-ee085217768c">
+      <Execution id="2cf1e3cf-2686-4b9b-a10c-a8a4c49846b3" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE VIEW unsupported_view AS SELECT 1 AS value&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="50c37414-4da1-08b5-d1df-988f46ff60f0">
+      <Execution id="e2bd50d0-e838-4398-956f-1c714c8ab21f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER TABLE \&quot;Parents\&quot; ADD COLUMN unexpected inte&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc">
+      <Execution id="d6e0ec8f-d438-4ee3-a898-b52bba16d63f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="49b3022d-7e13-b831-b13f-1e0106a803d2" executionId="fe513ae3-fdc9-42f3-8504-6c5ef9d2cee1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="91b4a6ec-e356-a480-4fb5-dcf473eb7d98" executionId="0a9ba74d-ad2f-442f-852b-08fd50e90132" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc" executionId="d6e0ec8f-d438-4ee3-a898-b52bba16d63f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c0b93af-d430-6096-2797-817b3315adf4" executionId="daa8ce4d-3c54-4156-a336-a182c4855245" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d" executionId="39336e05-1863-4e90-b48e-d62df6ada6a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="50c37414-4da1-08b5-d1df-988f46ff60f0" executionId="e2bd50d0-e838-4398-956f-1c714c8ab21f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ce21f6fb-c811-ec15-f0f5-6c4575baff0c" executionId="3abd5765-d5d4-4fc7-a667-90f02d244ed6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c45a7fdc-8530-789b-e58a-e5ed65c2d67c" executionId="3f9241d8-0d1d-499a-9837-6a5b5e5cb874" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2b69ab29-52db-7844-ec9a-f2e6d780738c" executionId="028a35c4-295d-478a-982f-c07e4797a7bc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="82dd5139-903e-e8b8-0a38-cf57e9a61569" executionId="cee11a46-a4e2-46d8-ab2e-6129dec7f832" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ecf0860f-a026-03e8-78ac-4f939dccb4e6" executionId="09df91b2-8602-408f-982f-e8ee1dc27e20" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="36882e1c-b398-341c-ec8d-381fd90ae96e" executionId="a8758645-4043-4802-8e4a-0fdea2e8ee69" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f256f5d6-1d01-44a1-75cb-ee085217768c" executionId="2cf1e3cf-2686-4b9b-a10c-a8a4c49846b3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="13" executed="13" passed="13" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.14]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.22]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.25]   Starting:    TurboTest.Tests
+[xUnit.net 00:01:05.84]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.10_40_13.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

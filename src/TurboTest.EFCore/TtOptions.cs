@@ -20,7 +20,8 @@ public class TtOptions
     public TtDatabaseProvider Provider { get; set; } = TtDatabaseProvider.PostgreSql;
 
     /// <summary>
-    /// Number of containers to maintain in the pool. Defaults to 3.
+    /// Initial reusable capacity. Ordinary factories count containers; baseline
+    /// factories count prepared slots on one host. Defaults to 3; not a hard cap.
     /// Can be configured via "TurboTest:PoolSize" in appsettings.json
     /// </summary>
     public int PoolSize { get; set; } = 3;
@@ -65,7 +66,8 @@ public class TtOptions
     public string ContainerPrefix { get; set; } = "tt";
 
     /// <summary>
-    /// Database name to create in container. Defaults to "testdb".
+    /// Prefix for generated database names. Defaults to "testdb". Prepared
+    /// baselines allow at most 21 UTF-8 bytes to retain unique PostgreSQL names.
     /// </summary>
     public string DatabaseName { get; set; } = "testdb";
 

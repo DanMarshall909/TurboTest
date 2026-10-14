@@ -7,9 +7,11 @@ namespace TurboTest.EFCore;
 /// <summary>Owns a fixture's database leases. Dispose asynchronously after the tests finish.</summary>
 public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbContext
 {
-    private readonly TtPool _pool;
+    private readonly ITtDatabasePool _pool;
     private readonly TtOptions _options;
     private readonly bool _ownsPool;
+    private readonly Func<Npgsql.NpgsqlDataSource, DbContextOptions<TContext>>? _preparedOptions;
+    private readonly Action<TContext, Npgsql.NpgsqlDataSource>? _validateContext;
     private readonly SemaphoreSlim _acquisitionGate = new(1, 1);
     private readonly object _disposeGate = new();
     private readonly ConcurrentDictionary<TtLease<TContext>, byte> _leases = new();
@@ -17,17 +19,23 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
     private bool _closing;
     private Task? _disposal;
 
-    internal TtFactory(TtPool pool, TtOptions options, bool ownsPool = false)
+    internal TtFactory(ITtDatabasePool pool, TtOptions options, bool ownsPool = false,
+        Func<Npgsql.NpgsqlDataSource, DbContextOptions<TContext>>? preparedOptions = null,
+        Action<TContext, Npgsql.NpgsqlDataSource>? validateContext = null)
     {
         _pool = pool;
         _options = options;
         _ownsPool = ownsPool;
+        _preparedOptions = preparedOptions;
+        _validateContext = validateContext;
     }
 
     /// <summary>Acquires one test database. Lease disposal awaits context cleanup and reset.</summary>
     public async Task<TtLease<TContext>> CreateLeaseAsync(
         Action<DbContextOptionsBuilder>? configure = null, CancellationToken cancellationToken = default)
     {
+        if (_preparedOptions is not null && configure is not null)
+            throw new ArgumentException("Configure the model in the fixture baseline before preparation.", nameof(configure));
         await _acquisitionGate.WaitAsync(cancellationToken);
         try
         {
@@ -36,13 +44,19 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
             _databases.TryAdd(database, 0);
             TContext BuildContext()
             {
-                var builder = new DbContextOptionsBuilder<TContext>().UseNpgsql(database.DataSource);
+                var builder = _preparedOptions is null
+                    ? new DbContextOptionsBuilder<TContext>().UseNpgsql(database.DataSource)
+                    : new DbContextOptionsBuilder<TContext>(_preparedOptions(database.DataSource));
                 if (_options.EnableSensitiveDataLogging) builder.EnableSensitiveDataLogging();
                 configure?.Invoke(builder);
                 return (TContext)(Activator.CreateInstance(typeof(TContext), builder.Options)
                     ?? throw new InvalidOperationException($"Could not create {typeof(TContext).Name}"));
             }
-            void Register(TContext context) => database.OnDispose(() => context.DisposeAsync().AsTask());
+            void Register(TContext context)
+            {
+                database.OnDispose(() => context.DisposeAsync().AsTask());
+                _validateContext?.Invoke(context, database.DataSource);
+            }
             TContext context;
             var stage = "ContextCreate";
             try
@@ -52,7 +66,8 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
                 Register(context);
                 stage = "ContextInitialize";
                 cancellationToken.ThrowIfCancellationRequested();
-                if (_options.AutoMigrate) await context.Database.EnsureCreatedAsync(cancellationToken);
+                if (_preparedOptions is null && _options.AutoMigrate)
+                    await context.Database.EnsureCreatedAsync(cancellationToken);
                 cancellationToken.ThrowIfCancellationRequested();
             }
             catch (Exception error)
@@ -62,7 +77,9 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
                 catch (Exception cleanupError) { discardFailure = cleanupError; }
                 finally { _databases.TryRemove(database, out _); }
                 if (error is OperationCanceledException && discardFailure is null) throw;
-                throw new TtLifecycleException(stage, error, discardFailure);
+                var failure = error as TtLifecycleException ?? new TtLifecycleException(stage, error);
+                if (discardFailure is not null) failure = failure.WithCleanupFailure(discardFailure);
+                throw failure;
             }
             TtLease<TContext>? lease = null;
             lease = new TtLease<TContext>(context, BuildContext, Register, async () =>

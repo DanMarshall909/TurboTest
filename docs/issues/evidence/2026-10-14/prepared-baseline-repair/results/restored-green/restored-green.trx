@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="2b2bec27-f570-4adb-8239-1a1bb74d6cf9" name="@os-greg 2026-10-14 10:53:33" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T10:53:33.9257001+10:00" queuing="2026-10-14T10:53:33.9257001+10:00" start="2026-10-14T10:53:33.4226770+10:00" finish="2026-10-14T10:54:02.5201343+10:00" />
+  <TestSettings name="default" id="dbe0956e-8e11-4ccf-a8f3-9d9c5d7fa92f">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_10_53_33" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="d37cfb5c-69a2-4b30-b8f9-31513a6e2aa7" testId="36882e1c-b398-341c-ec8d-381fd90ae96e" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET &quot;···)" computerName="os-greg" duration="00:00:05.4275266" startTime="2026-10-14T10:53:47.5102417+10:00" endTime="2026-10-14T10:53:52.9375725+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d37cfb5c-69a2-4b30-b8f9-31513a6e2aa7" />
+    <UnitTestResult executionId="9d65b10b-6242-44de-961c-b4597ef094df" testId="6c0b93af-d430-6096-2797-817b3315adf4" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA&quot;···)" computerName="os-greg" duration="00:00:05.2490213" startTime="2026-10-14T10:53:33.8570839+10:00" endTime="2026-10-14T10:53:39.1119878+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9d65b10b-6242-44de-961c-b4597ef094df" />
+    <UnitTestResult executionId="f8ce4b12-79cb-418c-ac3e-4af244be77d2" testId="80bed23a-d500-3823-f308-505c6ef5f313" testName="TurboTest.Tests.BaselineValidationTests.A_frozen_baseline_rejects_a_different_database_manifest(difference: &quot;different-object&quot;)" computerName="os-greg" duration="00:00:00.0053210" startTime="2026-10-14T10:53:33.8561048+10:00" endTime="2026-10-14T10:53:33.8678016+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f8ce4b12-79cb-418c-ac3e-4af244be77d2" />
+    <UnitTestResult executionId="cd03e3c1-53dc-4bd2-bec6-7291f208256a" testId="58fc53aa-e1a1-0c6c-5773-b3b81b57defd" testName="TurboTest.Tests.BaselineValidationTests.A_frozen_baseline_rejects_a_different_database_manifest(difference: &quot;extra&quot;)" computerName="os-greg" duration="00:00:00.0000111" startTime="2026-10-14T10:53:33.8759601+10:00" endTime="2026-10-14T10:53:33.8760296+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd03e3c1-53dc-4bd2-bec6-7291f208256a" />
+    <UnitTestResult executionId="bbaa3ac2-ec9a-411e-adfe-4c78bab5528c" testId="de7323c4-fecc-64d2-943c-317d7ba42c02" testName="TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: null)" computerName="os-greg" duration="00:00:00.0005213" startTime="2026-10-14T10:53:33.8772779+10:00" endTime="2026-10-14T10:53:33.8777628+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bbaa3ac2-ec9a-411e-adfe-4c78bab5528c" />
+    <UnitTestResult executionId="f6db721a-a851-407a-a49a-21639a95ad8e" testId="0b108ea5-f206-b3ff-a19e-b4306755778c" testName="TurboTest.Tests.BaselineValidationTests.A_frozen_baseline_rejects_a_different_database_manifest(difference: &quot;changed-content&quot;)" computerName="os-greg" duration="00:00:00.0000533" startTime="2026-10-14T10:53:33.8758372+10:00" endTime="2026-10-14T10:53:33.8758815+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f6db721a-a851-407a-a49a-21639a95ad8e" />
+    <UnitTestResult executionId="883490c5-59e4-4cc8-bb8c-7023766f0715" testId="50c37414-4da1-08b5-d1df-988f46ff60f0" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE VIEW unsupported_view AS SELECT 1 AS value&quot;)" computerName="os-greg" duration="00:00:04.7666413" startTime="2026-10-14T10:53:57.6908833+10:00" endTime="2026-10-14T10:54:02.4574459+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="883490c5-59e4-4cc8-bb8c-7023766f0715" />
+    <UnitTestResult executionId="a6029c7c-5e9e-45c8-87a7-4270c38341ee" testId="a09722cd-a63b-5a67-b4ed-f4477546bba1" testName="TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: &quot; &quot;)" computerName="os-greg" duration="00:00:00.0000133" startTime="2026-10-14T10:53:33.8868791+10:00" endTime="2026-10-14T10:53:33.8877107+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a6029c7c-5e9e-45c8-87a7-4270c38341ee" />
+    <UnitTestResult executionId="5092e823-2ab1-4766-8bf9-70e90a9cd56b" testId="d661b953-92c5-3f01-2b32-5aa38a9563d7" testName="TurboTest.Tests.BaselineValidationTests.An_unknown_schema_initialization_contract_is_rejected" computerName="os-greg" duration="00:00:00.0002884" startTime="2026-10-14T10:53:33.8883826+10:00" endTime="2026-10-14T10:53:33.8884698+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5092e823-2ab1-4766-8bf9-70e90a9cd56b" />
+    <UnitTestResult executionId="f8e17152-f940-4a60-879b-98123be4ffff" testId="e3d2220c-23cc-eb5b-fbdd-017e286c00cb" testName="TurboTest.Tests.BaselineValidationTests.The_frozen_manifest_owns_its_input_and_accepts_equal_content_in_a_different_order" computerName="os-greg" duration="00:00:00.0001380" startTime="2026-10-14T10:53:33.8771225+10:00" endTime="2026-10-14T10:53:33.8771705+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f8e17152-f940-4a60-879b-98123be4ffff" />
+    <UnitTestResult executionId="93540016-a0c6-46ae-aca0-eafdc15e40a1" testId="ecf0860f-a026-03e8-78ac-4f939dccb4e6" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE TYPE unsupported_type AS ENUM ('one', 'two'&quot;···)" computerName="os-greg" duration="00:00:04.7525351" startTime="2026-10-14T10:53:52.9381224+10:00" endTime="2026-10-14T10:53:57.6904247+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="93540016-a0c6-46ae-aca0-eafdc15e40a1" />
+    <UnitTestResult executionId="22bfdcdc-c8f7-425d-81d7-508b9ff0102d" testId="37ca948e-6eea-fba7-fa78-5838771d2fe1" testName="TurboTest.Tests.BaselineValidationTests.A_prepared_fixture_rejects_per_lease_configuration_before_acquisition" computerName="os-greg" duration="00:00:00.0086956" startTime="2026-10-14T10:53:33.8768792+10:00" endTime="2026-10-14T10:53:33.8769868+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="22bfdcdc-c8f7-425d-81d7-508b9ff0102d" />
+    <UnitTestResult executionId="8f52b048-0057-4078-8334-9a4a45120477" testId="f256f5d6-1d01-44a1-75cb-ee085217768c" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE FUNCTION unsupported_function() RETURNS int&quot;···)" computerName="os-greg" duration="00:00:04.1895271" startTime="2026-10-14T10:53:43.3205120+10:00" endTime="2026-10-14T10:53:47.5097372+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8f52b048-0057-4078-8334-9a4a45120477" />
+    <UnitTestResult executionId="3b128b50-b66a-4821-be60-f42b989ef25f" testId="91b4a6ec-e356-a480-4fb5-dcf473eb7d98" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;ALTER TABLE \&quot;Parents\&quot; ENABLE ROW LEVEL SECURITY&quot;)" computerName="os-greg" duration="00:00:04.2069525" startTime="2026-10-14T10:53:39.1133454+10:00" endTime="2026-10-14T10:53:43.3199559+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3b128b50-b66a-4821-be60-f42b989ef25f" />
+    <UnitTestResult executionId="d292fb17-2f17-4132-9846-3d1ec7153516" testId="f3f6cf36-2e16-778b-11f5-6363ea735604" testName="TurboTest.Tests.BaselineValidationTests.A_frozen_baseline_rejects_a_different_database_manifest(difference: &quot;missing&quot;)" computerName="os-greg" duration="00:00:00.0001512" startTime="2026-10-14T10:53:33.8753178+10:00" endTime="2026-10-14T10:53:33.8754156+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d292fb17-2f17-4132-9846-3d1ec7153516" />
+    <UnitTestResult executionId="c4d886b7-2b71-409b-a70e-f1feb8fec4c7" testId="a34bc5d3-b26a-13ea-e3c4-77a975857c6c" testName="TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: &quot;&quot;)" computerName="os-greg" duration="00:00:00.0002721" startTime="2026-10-14T10:53:33.8778820+10:00" endTime="2026-10-14T10:53:33.8780755+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c4d886b7-2b71-409b-a70e-f1feb8fec4c7" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.BaselineValidationTests.A_frozen_baseline_rejects_a_different_database_manifest(difference: &quot;different-object&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="80bed23a-d500-3823-f308-505c6ef5f313">
+      <Execution id="f8ce4b12-79cb-418c-ac3e-4af244be77d2" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineValidationTests" name="A_frozen_baseline_rejects_a_different_database_manifest" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineValidationTests.An_unknown_schema_initialization_contract_is_rejected" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="d661b953-92c5-3f01-2b32-5aa38a9563d7">
+      <Execution id="5092e823-2ab1-4766-8bf9-70e90a9cd56b" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineValidationTests" name="An_unknown_schema_initialization_contract_is_rejected" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="6c0b93af-d430-6096-2797-817b3315adf4">
+      <Execution id="9d65b10b-6242-44de-961c-b4597ef094df" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineValidationTests.The_frozen_manifest_owns_its_input_and_accepts_equal_content_in_a_different_order" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="e3d2220c-23cc-eb5b-fbdd-017e286c00cb">
+      <Execution id="f8e17152-f940-4a60-879b-98123be4ffff" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineValidationTests" name="The_frozen_manifest_owns_its_input_and_accepts_equal_content_in_a_different_order" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineValidationTests.A_prepared_fixture_rejects_per_lease_configuration_before_acquisition" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="37ca948e-6eea-fba7-fa78-5838771d2fe1">
+      <Execution id="22bfdcdc-c8f7-425d-81d7-508b9ff0102d" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineValidationTests" name="A_prepared_fixture_rejects_per_lease_configuration_before_acquisition" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineValidationTests.A_frozen_baseline_rejects_a_different_database_manifest(difference: &quot;missing&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f3f6cf36-2e16-778b-11f5-6363ea735604">
+      <Execution id="d292fb17-2f17-4132-9846-3d1ec7153516" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineValidationTests" name="A_frozen_baseline_rejects_a_different_database_manifest" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET &quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="36882e1c-b398-341c-ec8d-381fd90ae96e">
+      <Execution id="d37cfb5c-69a2-4b30-b8f9-31513a6e2aa7" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: null)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="de7323c4-fecc-64d2-943c-317d7ba42c02">
+      <Execution id="bbaa3ac2-ec9a-411e-adfe-4c78bab5528c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineValidationTests" name="A_baseline_requires_an_explicit_initializer_version" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE TYPE unsupported_type AS ENUM ('one', 'two'&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ecf0860f-a026-03e8-78ac-4f939dccb4e6">
+      <Execution id="93540016-a0c6-46ae-aca0-eafdc15e40a1" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineValidationTests.A_frozen_baseline_rejects_a_different_database_manifest(difference: &quot;changed-content&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="0b108ea5-f206-b3ff-a19e-b4306755778c">
+      <Execution id="f6db721a-a851-407a-a49a-21639a95ad8e" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineValidationTests" name="A_frozen_baseline_rejects_a_different_database_manifest" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: &quot; &quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="a09722cd-a63b-5a67-b4ed-f4477546bba1">
+      <Execution id="a6029c7c-5e9e-45c8-87a7-4270c38341ee" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineValidationTests" name="A_baseline_requires_an_explicit_initializer_version" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;ALTER TABLE \&quot;Parents\&quot; ENABLE ROW LEVEL SECURITY&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="91b4a6ec-e356-a480-4fb5-dcf473eb7d98">
+      <Execution id="3b128b50-b66a-4821-be60-f42b989ef25f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE FUNCTION unsupported_function() RETURNS int&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f256f5d6-1d01-44a1-75cb-ee085217768c">
+      <Execution id="8f52b048-0057-4078-8334-9a4a45120477" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: &quot;&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="a34bc5d3-b26a-13ea-e3c4-77a975857c6c">
+      <Execution id="c4d886b7-2b71-409b-a70e-f1feb8fec4c7" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineValidationTests" name="A_baseline_requires_an_explicit_initializer_version" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineValidationTests.A_frozen_baseline_rejects_a_different_database_manifest(difference: &quot;extra&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="58fc53aa-e1a1-0c6c-5773-b3b81b57defd">
+      <Execution id="cd03e3c1-53dc-4bd2-bec6-7291f208256a" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineValidationTests" name="A_frozen_baseline_rejects_a_different_database_manifest" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE VIEW unsupported_view AS SELECT 1 AS value&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="50c37414-4da1-08b5-d1df-988f46ff60f0">
+      <Execution id="883490c5-59e4-4cc8-bb8c-7023766f0715" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="36882e1c-b398-341c-ec8d-381fd90ae96e" executionId="d37cfb5c-69a2-4b30-b8f9-31513a6e2aa7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c0b93af-d430-6096-2797-817b3315adf4" executionId="9d65b10b-6242-44de-961c-b4597ef094df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="80bed23a-d500-3823-f308-505c6ef5f313" executionId="f8ce4b12-79cb-418c-ac3e-4af244be77d2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="58fc53aa-e1a1-0c6c-5773-b3b81b57defd" executionId="cd03e3c1-53dc-4bd2-bec6-7291f208256a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="de7323c4-fecc-64d2-943c-317d7ba42c02" executionId="bbaa3ac2-ec9a-411e-adfe-4c78bab5528c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0b108ea5-f206-b3ff-a19e-b4306755778c" executionId="f6db721a-a851-407a-a49a-21639a95ad8e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="50c37414-4da1-08b5-d1df-988f46ff60f0" executionId="883490c5-59e4-4cc8-bb8c-7023766f0715" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a09722cd-a63b-5a67-b4ed-f4477546bba1" executionId="a6029c7c-5e9e-45c8-87a7-4270c38341ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d661b953-92c5-3f01-2b32-5aa38a9563d7" executionId="5092e823-2ab1-4766-8bf9-70e90a9cd56b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e3d2220c-23cc-eb5b-fbdd-017e286c00cb" executionId="f8e17152-f940-4a60-879b-98123be4ffff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ecf0860f-a026-03e8-78ac-4f939dccb4e6" executionId="93540016-a0c6-46ae-aca0-eafdc15e40a1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="37ca948e-6eea-fba7-fa78-5838771d2fe1" executionId="22bfdcdc-c8f7-425d-81d7-508b9ff0102d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f256f5d6-1d01-44a1-75cb-ee085217768c" executionId="8f52b048-0057-4078-8334-9a4a45120477" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="91b4a6ec-e356-a480-4fb5-dcf473eb7d98" executionId="3b128b50-b66a-4821-be60-f42b989ef25f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f3f6cf36-2e16-778b-11f5-6363ea735604" executionId="d292fb17-2f17-4132-9846-3d1ec7153516" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a34bc5d3-b26a-13ea-e3c4-77a975857c6c" executionId="c4d886b7-2b71-409b-a70e-f1feb8fec4c7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="16" executed="16" passed="16" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.07]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.12]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.15]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:28.77]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

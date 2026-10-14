@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="a73b5882-6ff2-4331-b520-3c695676eaae" name="@os-greg 2026-10-14 10:22:48" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T10:22:48.7251668+10:00" queuing="2026-10-14T10:22:48.7251669+10:00" start="2026-10-14T10:22:39.8430059+10:00" finish="2026-10-14T10:22:48.7290128+10:00" />
+  <TestSettings name="default" id="959389d3-82c9-473b-b2e0-8737ee66963c">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_10_22_48" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ebc1ee95-3ce3-4e0a-80d3-925371bcf86d" testId="2b69ab29-52db-7844-ec9a-f2e6d780738c" testName="TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state" computerName="os-greg" duration="00:00:08.3418695" startTime="2026-10-14T10:22:40.2909885+10:00" endTime="2026-10-14T10:22:48.6411057+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ebc1ee95-3ce3-4e0a-80d3-925371bcf86d" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="2b69ab29-52db-7844-ec9a-f2e6d780738c">
+      <Execution id="ebc1ee95-3ce3-4e0a-80d3-925371bcf86d" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="2b69ab29-52db-7844-ec9a-f2e6d780738c" executionId="ebc1ee95-3ce3-4e0a-80d3-925371bcf86d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.13]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.15]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:08.53]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

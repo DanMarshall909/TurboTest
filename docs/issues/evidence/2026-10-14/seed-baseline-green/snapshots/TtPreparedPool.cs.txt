@@ -1,0 +1,204 @@
+using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+
+namespace TurboTest.EFCore.Internal;
+
+/// <summary>One fixture host, one sealed baseline, and independently owned workload databases.</summary>
+internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext : DbContext
+{
+    private sealed record Slot(string Name, NpgsqlDataSource Source);
+
+    private readonly TtOptions _options;
+    private readonly TtBaselineDefinition<TContext> _definition;
+    private readonly TtPool _host;
+    private readonly string _template = $"tt_baseline_{Guid.NewGuid():N}";
+    private readonly string _workloadUser;
+    private readonly string _workloadPassword;
+    private readonly SemaphoreSlim _gate = new(1, 1);
+    private readonly Queue<Slot> _ready = new();
+    private readonly Dictionary<string, Slot> _owned = new();
+    private NpgsqlDataSource? _administrator;
+    private DbContextOptions<TContext>? _contextOptions;
+    private Task? _disposal;
+
+    internal TtPreparedPool(TtOptions options, TtBaselineDefinition<TContext> definition)
+    {
+        _options = options;
+        _definition = definition;
+        _workloadUser = options.Username ?? $"tt_workload_{Guid.NewGuid():N}";
+        _workloadPassword = options.Password ?? Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
+        var hostOptions = options.Snapshot();
+        hostOptions.PoolSize = 1;
+        hostOptions.AutoAllocateResources = false;
+        hostOptions.EnableDynamicScaling = false;
+        hostOptions.Username = $"tt_admin_{Guid.NewGuid():N}";
+        hostOptions.Password = Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
+        hostOptions.DatabaseName = "tt_control";
+        hostOptions.ConnectionStringTemplate = null;
+        _host = new TtPool(hostOptions);
+    }
+
+    internal async Task InitializeAsync(CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        await _host.InitializeAsync();
+        _administrator = (await _host.GetDatabaseAsync()).DataSource;
+        await using (var connection = await _administrator.OpenConnectionAsync(cancellationToken))
+        {
+            // PostgreSQL quotes both the identifier and password literal. The formatted
+            // command remains private and is never included in lifecycle diagnostics.
+            await using var format = new NpgsqlCommand(
+                "SELECT format('CREATE ROLE %I LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD %L', $1, $2)", connection);
+            format.Parameters.Add(new NpgsqlParameter { Value = _workloadUser });
+            format.Parameters.Add(new NpgsqlParameter { Value = _workloadPassword });
+            var createRole = (string)(await format.ExecuteScalarAsync(cancellationToken))!;
+            await using var role = new NpgsqlCommand(createRole, connection);
+            await role.ExecuteNonQueryAsync(cancellationToken);
+            await using var create = new NpgsqlCommand(
+                $"CREATE DATABASE {Quote(_template)} OWNER {Quote(_workloadUser)} TEMPLATE template0", connection);
+            await create.ExecuteNonQueryAsync(cancellationToken);
+        }
+
+        await using (var source = CreateWorkloadSource(_template))
+        {
+            var builder = new DbContextOptionsBuilder<TContext>().UseNpgsql(source);
+            if (_options.EnableSensitiveDataLogging) builder.EnableSensitiveDataLogging();
+            _definition.ConfigureContext?.Invoke(builder);
+            _contextOptions = builder.Options;
+            await using var context = (TContext)(Activator.CreateInstance(typeof(TContext), builder.Options)
+                ?? throw new InvalidOperationException("Could not construct the baseline context."));
+            switch (_definition.Schema)
+            {
+                case TtSchemaInitialization.EnsureCreated:
+                    await context.Database.EnsureCreatedAsync(cancellationToken);
+                    break;
+                case TtSchemaInitialization.Migrations:
+                    await context.Database.MigrateAsync(cancellationToken);
+                    break;
+                case TtSchemaInitialization.Caller:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(_definition.Schema));
+            }
+            if (_definition.SeedAsync is not null)
+                await _definition.SeedAsync(context, cancellationToken);
+        }
+
+        // Disposal above drains every initialization connection before cloning.
+        await using (var connection = await _administrator.OpenConnectionAsync(cancellationToken))
+        {
+            await connection.ExecuteNonQueryAsync(
+                $"ALTER DATABASE {Quote(_template)} OWNER TO {Quote(connection.UserName!)}");
+            await connection.ExecuteNonQueryAsync($"ALTER DATABASE {Quote(_template)} ALLOW_CONNECTIONS false");
+        }
+        for (var i = 0; i < _options.PoolSize; i++)
+            _ready.Enqueue(await CreateSlotAsync());
+        cancellationToken.ThrowIfCancellationRequested();
+    }
+
+    internal DbContextOptions<TContext> BuildOptions(NpgsqlDataSource source) =>
+        new DbContextOptionsBuilder<TContext>(_contextOptions!).UseNpgsql(source).Options;
+
+    public async Task<TtDatabase> GetDatabaseAsync()
+    {
+        await _gate.WaitAsync();
+        try
+        {
+            ObjectDisposedException.ThrowIf(_disposal is not null, this);
+            var slot = _ready.Count > 0 ? _ready.Dequeue() : await CreateSlotAsync();
+            return new TtDatabase(slot.Source, () => ReturnAsync(slot), () => DiscardAsync(slot));
+        }
+        finally { _gate.Release(); }
+    }
+
+    private async Task<Slot> CreateSlotAsync()
+    {
+        var name = $"tt_slot_{Guid.NewGuid():N}";
+        var slot = new Slot(name, CreateWorkloadSource(name));
+        _owned.Add(name, slot);
+        try
+        {
+            await using var connection = await _administrator!.OpenConnectionAsync();
+            await connection.ExecuteNonQueryAsync(
+                $"CREATE DATABASE {Quote(name)} TEMPLATE {Quote(_template)} OWNER {Quote(_workloadUser)}");
+            await using var probe = await slot.Source.OpenConnectionAsync();
+            await probe.ExecuteScalarAsync("SELECT 1");
+            return slot;
+        }
+        catch (Exception error)
+        {
+            var failure = new TtLifecycleException("BaselineClone", error);
+            try { await DeleteSlotAsync(slot); }
+            catch (Exception cleanupError) { failure = failure.WithCleanupFailure(cleanupError); }
+            throw failure;
+        }
+    }
+
+    private NpgsqlDataSource CreateWorkloadSource(string database)
+    {
+        var builder = new NpgsqlConnectionStringBuilder(_administrator!.ConnectionString)
+        {
+            Database = database,
+            Username = _workloadUser,
+            Password = _workloadPassword,
+            IncludeErrorDetail = false
+        };
+        return NpgsqlDataSource.Create(builder.ConnectionString);
+    }
+
+    private async Task ReturnAsync(Slot slot)
+    {
+        await _gate.WaitAsync();
+        try
+        {
+            await DeleteSlotAsync(slot);
+            if (_disposal is null) _ready.Enqueue(await CreateSlotAsync());
+        }
+        finally { _gate.Release(); }
+    }
+
+    private async Task DiscardAsync(Slot slot)
+    {
+        await _gate.WaitAsync();
+        try { await DeleteSlotAsync(slot); }
+        finally { _gate.Release(); }
+    }
+
+    private async Task DeleteSlotAsync(Slot slot)
+    {
+        await slot.Source.DisposeAsync();
+        await using var connection = await _administrator!.OpenConnectionAsync();
+        await connection.ExecuteNonQueryAsync($"DROP DATABASE IF EXISTS {Quote(slot.Name)} WITH (FORCE)");
+        _owned.Remove(slot.Name);
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        lock (_owned)
+        {
+            _disposal ??= DisposeCoreAsync();
+            return new ValueTask(_disposal);
+        }
+    }
+
+    private async Task DisposeCoreAsync()
+    {
+        await _gate.WaitAsync();
+        try
+        {
+            Exception? first = null;
+            foreach (var slot in _owned.Values)
+            {
+                try { await slot.Source.DisposeAsync(); }
+                catch (Exception error) { first ??= error; }
+            }
+            try { await _host.DisposeAsync(); }
+            catch (Exception error) { first ??= error; }
+            if (first is not null) throw new TtLifecycleException("PreparedPoolDispose", first);
+        }
+        finally { _gate.Release(); }
+    }
+
+    private static string Quote(string identifier) => new NpgsqlCommandBuilder().QuoteIdentifier(identifier);
+}

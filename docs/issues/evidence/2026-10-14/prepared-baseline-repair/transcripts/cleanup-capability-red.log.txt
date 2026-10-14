@@ -1,0 +1,27 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.21]     TurboTest.Tests.CleanupOwnershipTests.A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt(lifecycle: False) [FAIL]
+[xUnit.net 00:00:00.22]     TurboTest.Tests.CleanupOwnershipTests.A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt(lifecycle: True) [FAIL]
+  Failed TurboTest.Tests.CleanupOwnershipTests.A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt(lifecycle: False) [21 ms]
+  Error Message:
+   Assert.Same() Failure: Values are not the same instance
+Expected: TtCleanup { OwnedResourceIds = ["retained-resource"], OwnerId = 39cc9657-4d60-44b8-8c37-5cb7bb408437 }
+Actual:   null
+  Stack Trace:
+     at TurboTest.Tests.CleanupOwnershipTests.A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt(Boolean lifecycle) in /home/dan/code/TurboTest/tests/TurboTest.Tests/CleanupOwnershipTests.cs:line 61
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.CleanupOwnershipTests.A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt(lifecycle: True) [< 1 ms]
+  Error Message:
+   Assert.Same() Failure: Values are not the same instance
+Expected: TtCleanup { OwnedResourceIds = ["retained-resource"], OwnerId = 422a4194-856d-4385-bc84-49abcf6a1a24 }
+Actual:   null
+  Stack Trace:
+     at TurboTest.Tests.CleanupOwnershipTests.A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt(Boolean lifecycle) in /home/dan/code/TurboTest/tests/TurboTest.Tests/CleanupOwnershipTests.cs:line 61
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-003/cleanup-capability-red/cleanup-capability-red.trx
+
+Failed!  - Failed:     2, Passed:     1, Skipped:     0, Total:     3, Duration: 46 ms - TurboTest.Tests.dll (net10.0)

@@ -1,0 +1,76 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:09.74]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "SELECT setval(pg_get_serial_sequence('\"Parents\"'"···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "SELECT setval(pg_get_serial_sequence('\"Parents\"'"···) [4 s]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+                   ↓ (pos 8)
+Expected: "BaselineVerify"
+Actual:   "BaselineConfiguration"
+                   ↑ (pos 8)
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:14.93]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "ALTER TABLE \"Parents\" ADD COLUMN unexpected inte"···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "ALTER TABLE \"Parents\" ADD COLUMN unexpected inte"···) [5 s]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+                   ↓ (pos 8)
+Expected: "BaselineVerify"
+Actual:   "BaselineConfiguration"
+                   ↑ (pos 8)
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:19.07]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "UPDATE \"Parents\" SET \"Priority\" = 999") [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "UPDATE \"Parents\" SET \"Priority\" = 999") [4 s]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+                   ↓ (pos 8)
+Expected: "BaselineVerify"
+Actual:   "BaselineConfiguration"
+                   ↑ (pos 8)
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:23.10]     TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state [4 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineConfiguration (InvalidOperationException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 83
+   at TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 131
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:27.71]     TurboTest.Tests.SeededBaselineTests.Workloads_cannot_reopen_the_connection_free_administrator_owned_template [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.Workloads_cannot_reopen_the_connection_free_administrator_owned_template [4 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineConfiguration (InvalidOperationException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 83
+   at TurboTest.Tests.SeededBaselineTests.Workloads_cannot_reopen_the_connection_free_administrator_owned_template() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 17
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:31.77]     TurboTest.Tests.SeededBaselineTests.A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors [4 s]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+                   ↓ (pos 8)
+Expected: "BaselineInitialize"
+Actual:   "BaselineConfiguration"
+                   ↑ (pos 8)
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 63
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-003/boundary-green/boundary-green.trx
+
+Failed!  - Failed:     6, Passed:     1, Skipped:     0, Total:     7, Duration: 31 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-003/boundary-green/4e5addee-f70c-484e-959c-2f08cb94c6c5/dan_os-greg_2026-10-14.10_34_21.cobertura.xml

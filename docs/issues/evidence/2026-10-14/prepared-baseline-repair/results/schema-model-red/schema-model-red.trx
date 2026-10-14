@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="962e2066-a2fe-44a0-b774-910b7f646f46" name="@os-greg 2026-10-14 11:43:48" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T11:43:48.8237122+10:00" queuing="2026-10-14T11:43:48.8237123+10:00" start="2026-10-14T11:43:35.0644232+10:00" finish="2026-10-14T11:43:48.8286492+10:00" />
+  <TestSettings name="default" id="b4571f88-195a-40d3-93a4-a1d888361461">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_11_43_48" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="c0d86e13-69e2-4f5b-a61b-0102c35acb54" testId="0adb3a3d-3885-8069-3fce-dbbc2d8c15b3" testName="TurboTest.Tests.PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model" computerName="os-greg" duration="00:00:13.2380355" startTime="2026-10-14T11:43:35.4851355+10:00" endTime="2026-10-14T11:43:48.7358602+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c0d86e13-69e2-4f5b-a61b-0102c35acb54">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }</Message>
+          <StackTrace>   at TurboTest.Tests.PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedContextBindingTests.cs:line 25
+   at TurboTest.Tests.PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedContextBindingTests.cs:line 28
+   at TurboTest.Tests.PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedContextBindingTests.cs:line 28
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="0adb3a3d-3885-8069-3fce-dbbc2d8c15b3">
+      <Execution id="c0d86e13-69e2-4f5b-a61b-0102c35acb54" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedContextBindingTests" name="EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="0adb3a3d-3885-8069-3fce-dbbc2d8c15b3" executionId="c0d86e13-69e2-4f5b-a61b-0102c35acb54" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.07]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.13]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.15]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:13.42]       Assert.Null() Failure: Value is not null
+[xUnit.net 00:00:13.42]       Expected: null
+[xUnit.net 00:00:13.42]       Actual:   TtFactory`1 { }
+[xUnit.net 00:00:13.42]       Stack Trace:
+[xUnit.net 00:00:13.42]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedContextBindingTests.cs(25,0): at TurboTest.Tests.PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model()
+[xUnit.net 00:00:13.42]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedContextBindingTests.cs(28,0): at TurboTest.Tests.PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model()
+[xUnit.net 00:00:13.42]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedContextBindingTests.cs(28,0): at TurboTest.Tests.PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model()
+[xUnit.net 00:00:13.42]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:13.44]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T11:43:48.7383430+10:00">
+        <Text>[xUnit.net 00:00:13.42]     TurboTest.Tests.PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

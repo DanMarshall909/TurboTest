@@ -1,0 +1,76 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:08.75]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA"···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA"···) [8 s]
+  Error Message:
+   Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 262
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 265
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 105
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:14.53]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "ALTER TABLE \"Parents\" ENABLE ROW LEVEL SECURITY") [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "ALTER TABLE \"Parents\" ENABLE ROW LEVEL SECURITY") [5 s]
+  Error Message:
+   Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 262
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 265
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 105
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:20.10]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE FUNCTION unsupported_function() RETURNS int"···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE FUNCTION unsupported_function() RETURNS int"···) [5 s]
+  Error Message:
+   Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 262
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 265
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 105
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:25.42]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET "···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET "···) [5 s]
+  Error Message:
+   Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 262
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 265
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 105
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:31.62]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE TYPE unsupported_type AS ENUM ('one', 'two'"···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE TYPE unsupported_type AS ENUM ('one', 'two'"···) [6 s]
+  Error Message:
+   Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 262
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 265
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 105
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:37.88]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE VIEW unsupported_view AS SELECT 1 AS value") [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE VIEW unsupported_view AS SELECT 1 AS value") [6 s]
+  Error Message:
+   Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 262
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 265
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 105
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-003/catalog-hygiene-fault/catalog-hygiene-fault.trx
+
+Failed!  - Failed:     6, Passed:     0, Skipped:     0, Total:     6, Duration: 37 s - TurboTest.Tests.dll (net10.0)

@@ -1,0 +1,62 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:16.38]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "ALTER SEQUENCE \"Standalone\" OWNED BY NONE") [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "ALTER SEQUENCE \"Standalone\" OWNED BY NONE") [6 s]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 224
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 225
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:31.43]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE POLICY dormant_policy ON \"Parents\" USING "···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE POLICY dormant_policy ON \"Parents\" USING "···) [5 s]
+  Error Message:
+   Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 282
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 285
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 123
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:41.62]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE TEXT SEARCH CONFIGURATION unsupported_searc"···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE TEXT SEARCH CONFIGURATION unsupported_searc"···) [5 s]
+  Error Message:
+   Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 282
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 285
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 123
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:56.17]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE STATISTICS unsupported_statistics ON \"Name"···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE STATISTICS unsupported_statistics ON \"Name"···) [4 s]
+  Error Message:
+   Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 282
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 285
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 123
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:06.40]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE COLLATION unsupported_collation (locale = '"···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE COLLATION unsupported_collation (locale = '"···) [5 s]
+  Error Message:
+   Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 282
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 285
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 123
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-003/catalog-edges-red/catalog-edges-red.trx
+
+Failed!  - Failed:     5, Passed:     9, Skipped:     0, Total:    14, Duration: 1 m 11 s - TurboTest.Tests.dll (net10.0)

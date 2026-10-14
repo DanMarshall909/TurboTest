@@ -59,6 +59,46 @@ public static class Tt
         return CreateOwnedFactoryAsync<TContext>(options.Snapshot(), cancellationToken);
     }
 
+    public static async Task<TtFactory<TContext>> CreateFactoryAsync<TContext>(
+        TtBaselineDefinition<TContext> baseline, Action<TtOptions>? configure = null,
+        CancellationToken cancellationToken = default) where TContext : DbContext
+    {
+        ArgumentNullException.ThrowIfNull(baseline);
+        var options = new TtOptions();
+        configure?.Invoke(options);
+        options = options.Snapshot();
+        return await CreatePreparedFactoryAsync(options, baseline, cancellationToken);
+    }
+
+    internal static async Task<TtFactory<TContext>> CreatePreparedFactoryAsync<TContext>(
+        TtOptions options, TtBaselineDefinition<TContext> baseline, CancellationToken cancellationToken,
+        Func<TtContainer, Task>? deleteHost = null, Func<Npgsql.NpgsqlDataSource, Task>? beforeVerification = null,
+        Func<string, Task>? prepareImage = null)
+        where TContext : DbContext
+    {
+        var pool = new TtPreparedPool<TContext>(options, baseline, beforeVerification, deleteHost, prepareImage);
+        try
+        {
+            await pool.InitializeAsync(cancellationToken);
+            return new TtFactory<TContext>(pool, options, ownsPool: true,
+                preparedOptions: pool.BuildOptions, validateContext: pool.ValidateContext);
+        }
+        catch (Exception error)
+        {
+            Exception? cleanupFailure = null;
+            try { await pool.DisposeAsync(); }
+            catch (Exception cleanupError) { cleanupFailure = cleanupError; }
+            if (error is OperationCanceledException && cleanupFailure is null) throw;
+            var failure = error as TtLifecycleException ?? new TtLifecycleException("BaselineInitialize", error);
+            if (cleanupFailure is not null)
+            {
+                var cleanup = TtCleanupRegistry.Retain(pool.OwnerId, pool.RetryCleanupAsync, () => pool.OwnedResourceIds);
+                failure = new TtLifecycleException(failure.Stage, failure, cleanupFailure, cleanup);
+            }
+            throw failure;
+        }
+    }
+
     private static async Task<TtFactory<TContext>> CreateOwnedFactoryAsync<TContext>(
         TtOptions options, CancellationToken cancellationToken) where TContext : DbContext
     {
@@ -90,6 +130,8 @@ public static class Tt
                 catch (Exception error) { first ??= error; }
             }
             Owners.Clear();
+            try { await TtCleanupRegistry.DrainAsync(); }
+            catch (Exception error) { first ??= error; }
             lock (ConfigurationGate) _started = false;
             if (first is not null) throw first;
         }

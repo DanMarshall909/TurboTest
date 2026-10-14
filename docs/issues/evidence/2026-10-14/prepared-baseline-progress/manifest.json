@@ -1,0 +1,830 @@
+{
+  "status": "Uncommitted TT-003 implementation progress; ticket remains Open, independent completion review pending. TT-001/002 remain accepted at the recorded base. Eight tickets remain open.",
+  "base": "0fe83327c02602edb45141f83a55c0a1b3b2df45",
+  "results": {
+    "boundary-green/boundary-green.trx": {
+      "total": "7",
+      "executed": "7",
+      "passed": "1",
+      "failed": "6",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "boundary-green-2/boundary-green.trx": {
+      "total": "7",
+      "executed": "7",
+      "passed": "7",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "catalog-green/catalog-green.trx": {
+      "total": "13",
+      "executed": "13",
+      "passed": "13",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "catalog-hygiene-fault/catalog-hygiene-fault.trx": {
+      "total": "6",
+      "executed": "6",
+      "passed": "0",
+      "failed": "6",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "catalog-red/catalog-red.trx": {
+      "total": "6",
+      "executed": "6",
+      "passed": "0",
+      "failed": "6",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "configuration-green/configuration-green.trx": {
+      "total": "10",
+      "executed": "10",
+      "passed": "10",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "configuration-red/configuration-red.trx": {
+      "total": "5",
+      "executed": "5",
+      "passed": "0",
+      "failed": "5",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "full/baseline-full.trx": {
+      "total": "64",
+      "executed": "64",
+      "passed": "64",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "full-refactor/baseline-full.trx": {
+      "total": "64",
+      "executed": "64",
+      "passed": "64",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "migration-fault/migration-fault.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "migration-green/migration-green.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "redirect-red/redirect-red.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "restored-green/restored-green.trx": {
+      "total": "16",
+      "executed": "16",
+      "passed": "16",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "seed-coverage/seed-coverage.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "seed-green/seed-green.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "seed-red/seed-red.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "sequences-green/sequences-green.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "validation-fast/validation-fast.trx": {
+      "total": "5",
+      "executed": "5",
+      "passed": "5",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "validation-fault/validation-fault.trx": {
+      "total": "5",
+      "executed": "5",
+      "passed": "1",
+      "failed": "4",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "verify-green/verify-green.trx": {
+      "total": "4",
+      "executed": "4",
+      "passed": "0",
+      "failed": "4",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "verify-green-2/verify-green.trx": {
+      "total": "4",
+      "executed": "4",
+      "passed": "4",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "verify-red/verify-red.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "0",
+      "failed": "3",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    }
+  },
+  "phaseNotes": {
+    "seed-red": "Compiling baseline scaffold ignored initialization; expected one initializer, actual zero.",
+    "verify-red": "Three actual clone corruptions were accepted; no validation exception.",
+    "configuration-red": "Five missing version/schema/per-lease configuration rules.",
+    "redirect-red": "External database redirection reached initialization instead of being rejected with BaselineConfiguration.",
+    "catalog-red": "Six unsupported catalog/database configurations were accepted.",
+    "verify-green": "Failed candidate: redacted datasource connection string lacked admin password. This is a setup defect, not a valid RED.",
+    "boundary-green": "Failed candidate: Npgsql Host/Port are unavailable before opening; valid fixture connections were falsely rejected. This is a regression, not a valid RED.",
+    "validation-fault": "Removing the manifest validation gate makes all four difference oracles fail. Source restored by receipt hash.",
+    "migration-fault": "Substituting EnsureCreated for explicit migrations makes the migration-only fixture fail with SQLSTATE 42P01. Source restored by receipt hash.",
+    "catalog-hygiene-fault": "Removing supported-catalog rejection makes all six no-publication assertions fail; every unexpectedly published factory is disposed and no TurboTest container remains. Source restored by matching receipt digest."
+  },
+  "refactor": {
+    "production": "Prepared pool separated from legacy pooled reset. Frozen EF model/options bind one owner, context type, schema mode and initializer version. Snapshot comparison and capture separated from ownership; sorted binary-row hashes retain counts/digests rather than seed payload. Logins are private immutable values, admin sources are never handed to workloads. Exact datasource identity uses one narrowly scoped pinned Npgsql options API because endpoint equality cannot prove source ownership.",
+    "tests": "One three-table public oracle plus focused migration/caller/permission/failure/catalog cases. Fast manifest comparison tests use independently supplied differences; PostgreSQL corruption cases calibrate the actual capture boundary. No score-driven test consolidation."
+  },
+  "limits": [
+    "No independent completion review or completion commit yet.",
+    "No whole-package coverage or mutation proof. Fast manifest validation is covered separately from PostgreSQL capture.",
+    "Normal post-session mutation awaits the final committed source snapshot and excludes PostgreSQL/end-to-end tests.",
+    "Bounded capacities, recovery, DI/static ownership, parking, metrics and adaptive control remain later tickets.",
+    "Supported baseline catalog is explicit and restricted; rejection guards and large-object/default-ACL/publication cases need review against the declared contract.",
+    "Snapshots here identify the latest working implementation; earlier phase transcripts are historical and do not claim identical source bytes. Original initial RED/GREEN snapshots remain in their separate manifests."
+  ],
+  "files": [
+    {
+      "path": "results/boundary-green/boundary-green.trx",
+      "source": "artifacts/tt-003/boundary-green/boundary-green.trx",
+      "sha256": "a9ff3300fe1bee9ff9e0b73576a1c212c6efa0a107014ab58125bd2fffba1b9d"
+    },
+    {
+      "path": "results/boundary-green-2/boundary-green.trx",
+      "source": "artifacts/tt-003/boundary-green-2/boundary-green.trx",
+      "sha256": "8d23cc0c451198e03837201234e32ab39583293140cde52ba0bb2aa32cd91179"
+    },
+    {
+      "path": "transcripts/boundary-green-2.log.txt",
+      "source": "artifacts/tt-003/boundary-green-2.log",
+      "sha256": "3c73413a82bd350276ab12ad1b75b82cec4f59264542b786266e939470b3a1a7"
+    },
+    {
+      "path": "transcripts/boundary-green.log.txt",
+      "source": "artifacts/tt-003/boundary-green.log",
+      "sha256": "55d5073a7aad52815d3cf051dfd9373f16c8df4079daf24ec046d6909285f06f"
+    },
+    {
+      "path": "transcripts/build.log.txt",
+      "source": "artifacts/tt-003/build.log",
+      "sha256": "756557c4c6026a05369977fc56ff05e2c2954df5cdef823dce2c972ca40c7e3c"
+    },
+    {
+      "path": "results/catalog-green/catalog-green.trx",
+      "source": "artifacts/tt-003/catalog-green/catalog-green.trx",
+      "sha256": "52473f0b9aeb561c16fd8a000738548aeac9f76b5181bd2715db5375ac69b16c"
+    },
+    {
+      "path": "transcripts/catalog-green.log.txt",
+      "source": "artifacts/tt-003/catalog-green.log",
+      "sha256": "2cde4a9ced3d6926fe705125314877a2cf810d0f27ef896ec2b23592394455b9"
+    },
+    {
+      "path": "results/catalog-hygiene-fault/catalog-hygiene-fault.trx",
+      "source": "artifacts/tt-003/catalog-hygiene-fault/catalog-hygiene-fault.trx",
+      "sha256": "1b3f9e99e02f447172aa71a1b2ef8b260fe71a1d3b9dc09ae1451d662d873658"
+    },
+    {
+      "path": "calibration/catalog-hygiene-fault/fault.cs.txt",
+      "source": "artifacts/tt-003/catalog-hygiene-fault/fault.cs.txt",
+      "sha256": "a0d37cc7c27c9390ab1e6e802f89d325e54be829382e2d19a0554379eecfa3a5"
+    },
+    {
+      "path": "calibration/catalog-hygiene-fault/original.cs.txt",
+      "source": "artifacts/tt-003/catalog-hygiene-fault/original.cs.txt",
+      "sha256": "c7828f76d045b04ce872f9965c66298fca08e642f7d9b5a2b642f0d1e17cdc63"
+    },
+    {
+      "path": "calibration/catalog-hygiene-fault/receipt.json",
+      "source": "artifacts/tt-003/catalog-hygiene-fault/receipt.json",
+      "sha256": "bd7b0bc20dd00b4b083a5698909267163446fb41a61e7491621ee05e78e59f5b"
+    },
+    {
+      "path": "transcripts/catalog-hygiene-fault/run.log.txt",
+      "source": "artifacts/tt-003/catalog-hygiene-fault/run.log",
+      "sha256": "7b3a202940012fd1e209e03963f07a342fe5e643661def886726651f8a4db501"
+    },
+    {
+      "path": "results/catalog-red/catalog-red.trx",
+      "source": "artifacts/tt-003/catalog-red/catalog-red.trx",
+      "sha256": "2cc02b71db534f7dec7ba3e3d32f0eebe6c3a157d7fa2ea8d788eacb30bd0f46"
+    },
+    {
+      "path": "calibration/catalog-red/cleanup.json",
+      "source": "artifacts/tt-003/catalog-red/cleanup.json",
+      "sha256": "f5e01d691e11ab1fab3f6b5b00519c31389f6beebb4c1e0f50f48df0295f6ea3"
+    },
+    {
+      "path": "transcripts/catalog-red.log.txt",
+      "source": "artifacts/tt-003/catalog-red.log",
+      "sha256": "1abc1cf88a53772826ac04db6b2e6c448b73c5857cf8736faef85e6fbe71c096"
+    },
+    {
+      "path": "results/configuration-green/configuration-green.trx",
+      "source": "artifacts/tt-003/configuration-green/configuration-green.trx",
+      "sha256": "2b3e5ca0c35a6d1a7e797969ffca52a8e3d1a5fc35dae746917cd5fe7dbc62db"
+    },
+    {
+      "path": "transcripts/configuration-green.log.txt",
+      "source": "artifacts/tt-003/configuration-green.log",
+      "sha256": "2f4d986326f85e3f7261347896ecab4c16c9a100aa78fd6a2796061f9988ed51"
+    },
+    {
+      "path": "results/configuration-red/configuration-red.trx",
+      "source": "artifacts/tt-003/configuration-red/configuration-red.trx",
+      "sha256": "1e66d27fe8f4af066c588fea842f2381521faa0dae4eaf5744933a8e28a3244e"
+    },
+    {
+      "path": "transcripts/configuration-red.log.txt",
+      "source": "artifacts/tt-003/configuration-red.log",
+      "sha256": "95359e1c410f58d7983b92e86439275459e19d105f0dc2b10f966eeb9c07ca09"
+    },
+    {
+      "path": "transcripts/dynamic-example-build.log.txt",
+      "source": "artifacts/tt-003/dynamic-example-build.log",
+      "sha256": "91d39bcc7d8d388aa50ffc8bc8d0b2679e3a0ba78a4cff2e3758eeb7de10b695"
+    },
+    {
+      "path": "results/full/baseline-full.trx",
+      "source": "artifacts/tt-003/full/baseline-full.trx",
+      "sha256": "1dd3e2b689dc6374ed44b60a19331feadd5f8b959d265aa6bef2ba673ddc0712"
+    },
+    {
+      "path": "results/full-refactor/baseline-full.trx",
+      "source": "artifacts/tt-003/full-refactor/baseline-full.trx",
+      "sha256": "a89371bda86ab89bd3f916f705b06d1fad40d38a426d16e6ce70b809fd9d2cce"
+    },
+    {
+      "path": "transcripts/full-refactor.log.txt",
+      "source": "artifacts/tt-003/full-refactor.log",
+      "sha256": "fb9343a0df986618cc637f518254c1cfd990a38b91a251156d5aacfddabbb0d1"
+    },
+    {
+      "path": "transcripts/full.log.txt",
+      "source": "artifacts/tt-003/full.log",
+      "sha256": "c4bca05492f3ae4df073685822e22594f400f040e3415bf62e1cf62d975f3529"
+    },
+    {
+      "path": "calibration/migration-fault/fault.cs.txt",
+      "source": "artifacts/tt-003/migration-fault/fault.cs.txt",
+      "sha256": "c9df9a6dd2530385d26f049b077a66704d6234929f57ef15ae3961b828f54b2c"
+    },
+    {
+      "path": "results/migration-fault/migration-fault.trx",
+      "source": "artifacts/tt-003/migration-fault/migration-fault.trx",
+      "sha256": "5953c4cfe22b500b91e9cd47731b78b7461333a90836dce7c2db12c3348be68a"
+    },
+    {
+      "path": "calibration/migration-fault/original.cs.txt",
+      "source": "artifacts/tt-003/migration-fault/original.cs.txt",
+      "sha256": "e0d75177d6abf780677c3c0c34ecba7ed811b0862e1f7a7be85e12a68a42de27"
+    },
+    {
+      "path": "calibration/migration-fault/receipt.json",
+      "source": "artifacts/tt-003/migration-fault/receipt.json",
+      "sha256": "656359fda1a07f8e76720a5a0600c52bfde46b7d70a8f223f010fc7d43151997"
+    },
+    {
+      "path": "transcripts/migration-fault/run.log.txt",
+      "source": "artifacts/tt-003/migration-fault/run.log",
+      "sha256": "6eb2b5bc591215c4d095a5b8a115f23a2b2a1b44077fc6d3a991e5da0a41df9d"
+    },
+    {
+      "path": "results/migration-green/migration-green.trx",
+      "source": "artifacts/tt-003/migration-green/migration-green.trx",
+      "sha256": "40aae239db7a7159f1d979ee81fdd45a826c7aa1817f7d8ff11d5648f9933bbc"
+    },
+    {
+      "path": "transcripts/migration-green.log.txt",
+      "source": "artifacts/tt-003/migration-green.log",
+      "sha256": "4ec0822b94c15491b52605bb1c2b3fcdcb968be6e0530cdc315ce40e6af9f988"
+    },
+    {
+      "path": "results/redirect-red/redirect-red.trx",
+      "source": "artifacts/tt-003/redirect-red/redirect-red.trx",
+      "sha256": "a42c7700fa9044250e19fb5804e75db2c830371a21c7329e4f43c224432e6a89"
+    },
+    {
+      "path": "transcripts/redirect-red.log.txt",
+      "source": "artifacts/tt-003/redirect-red.log",
+      "sha256": "3f093e7c24ff0674aa8794cdc2b90d7d258fd3a0b74342afdf3af06b533c73b6"
+    },
+    {
+      "path": "results/restored-green/restored-green.trx",
+      "source": "artifacts/tt-003/restored-green/restored-green.trx",
+      "sha256": "2c806229266ce5fc7c7ddf3652f9ece0d56ad0674b6b5f868bec758b8bca93fd"
+    },
+    {
+      "path": "transcripts/restored-green.log.txt",
+      "source": "artifacts/tt-003/restored-green.log",
+      "sha256": "08d5fe5fbe94422268a28c79d39975f479f7a4a93415ef72de9f50f19d743c83"
+    },
+    {
+      "path": "results/seed-coverage/seed-coverage.trx",
+      "source": "artifacts/tt-003/seed-coverage/seed-coverage.trx",
+      "sha256": "93004b5c94794ea827fdf0b66007145b41f3c40283168e747967ec67291a472a"
+    },
+    {
+      "path": "transcripts/seed-coverage.log.txt",
+      "source": "artifacts/tt-003/seed-coverage.log",
+      "sha256": "7ba4c3107ce1a19d63b7daa83f28717cab9566d05b23f95814e6a22f406b6a17"
+    },
+    {
+      "path": "results/seed-green/seed-green.trx",
+      "source": "artifacts/tt-003/seed-green/seed-green.trx",
+      "sha256": "7a81022e97e244f4d1810a3eede29ba901590ce97e576f93ca4d25e0723afe0d"
+    },
+    {
+      "path": "transcripts/seed-green.log.txt",
+      "source": "artifacts/tt-003/seed-green.log",
+      "sha256": "371d28948ab0a2619e3fd861134593330bb2122c416ec294b379910464492ed8"
+    },
+    {
+      "path": "results/seed-red/seed-red.trx",
+      "source": "artifacts/tt-003/seed-red/seed-red.trx",
+      "sha256": "ecdc4bde901c292a32578da6398c62b5a208b563c759076bb7684898a32a3a94"
+    },
+    {
+      "path": "transcripts/seed-red.log.txt",
+      "source": "artifacts/tt-003/seed-red.log",
+      "sha256": "7d9dac49a324f178e0172e6d2689827649d14ee4d1a5aaee6ee02562f80658bd"
+    },
+    {
+      "path": "results/sequences-green/sequences-green.trx",
+      "source": "artifacts/tt-003/sequences-green/sequences-green.trx",
+      "sha256": "17765dbf8ad7963c1bfb3e7d8a8a3d650711aaaf02602d94cc648806a701a441"
+    },
+    {
+      "path": "transcripts/sequences-green.log.txt",
+      "source": "artifacts/tt-003/sequences-green.log",
+      "sha256": "27982aa0262ad5e99e8dc6a337c7de5fd7db4f363a48723fb402177c2351f38e"
+    },
+    {
+      "path": "results/validation-fast/validation-fast.trx",
+      "source": "artifacts/tt-003/validation-fast/validation-fast.trx",
+      "sha256": "f06a2821457e365415dca16342b6f1aff2ff38c430ee8cedafabb8f888db40e7"
+    },
+    {
+      "path": "transcripts/validation-fast.log.txt",
+      "source": "artifacts/tt-003/validation-fast.log",
+      "sha256": "b2b4a3732b0c97751ab5a24cd7e7b7d23797df13cc6623f45532ea698bfaf38b"
+    },
+    {
+      "path": "calibration/validation-fault/fault.cs.txt",
+      "source": "artifacts/tt-003/validation-fault/fault.cs.txt",
+      "sha256": "10d72654d498c88f42cb8815e95e875ff05febb3b7b84e3422a8e306adba601a"
+    },
+    {
+      "path": "calibration/validation-fault/original.cs.txt",
+      "source": "artifacts/tt-003/validation-fault/original.cs.txt",
+      "sha256": "b93d015de717e2a7183f89da2e4fcdc1701459f227a430246a65f3fd9af450ba"
+    },
+    {
+      "path": "calibration/validation-fault/receipt.json",
+      "source": "artifacts/tt-003/validation-fault/receipt.json",
+      "sha256": "d6fdaa800edd8c94b292eb799b25126586061e7b20245ba15a4e540bc3fd7fac"
+    },
+    {
+      "path": "transcripts/validation-fault/run.log.txt",
+      "source": "artifacts/tt-003/validation-fault/run.log",
+      "sha256": "4f68fabd76d26ee583200203877c5d3c60082f60198f5553c1c26c2990f4c60b"
+    },
+    {
+      "path": "results/validation-fault/validation-fault.trx",
+      "source": "artifacts/tt-003/validation-fault/validation-fault.trx",
+      "sha256": "33025e0b3e7dc10de9fa0b49e9488b96625152466df3de5022e370a192c19ca1"
+    },
+    {
+      "path": "results/verify-green/verify-green.trx",
+      "source": "artifacts/tt-003/verify-green/verify-green.trx",
+      "sha256": "a44fc170f645adacae9f7f61eca061fe37d21348f3516c671d041312080a8478"
+    },
+    {
+      "path": "results/verify-green-2/verify-green.trx",
+      "source": "artifacts/tt-003/verify-green-2/verify-green.trx",
+      "sha256": "1c8e451ac9cf56d527ac7872d5397f7bf7482d98aadfbf55f37d1f67f41a3f17"
+    },
+    {
+      "path": "transcripts/verify-green-2.log.txt",
+      "source": "artifacts/tt-003/verify-green-2.log",
+      "sha256": "d23dffcd218a405e66de822774aa66d5686ad7cc56ad946616508bff4663f71f"
+    },
+    {
+      "path": "transcripts/verify-green.log.txt",
+      "source": "artifacts/tt-003/verify-green.log",
+      "sha256": "1fe546a0d545de2a25010f7e74d7a1401f85057eeadd21538733ce52f4df83cd"
+    },
+    {
+      "path": "results/verify-red/verify-red.trx",
+      "source": "artifacts/tt-003/verify-red/verify-red.trx",
+      "sha256": "0b87a13b004518a79f0464f753c311f0e69fdbb6555e23ea695627a98599aa4e"
+    },
+    {
+      "path": "transcripts/verify-red.log.txt",
+      "source": "artifacts/tt-003/verify-red.log",
+      "sha256": "3240e0098a62e7f693bdccf182252e5cc050beac66951979f3c5e6d081e0420e"
+    },
+    {
+      "path": "coverage/boundary-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/boundary-green/4e5addee-f70c-484e-959c-2f08cb94c6c5/dan_os-greg_2026-10-14.10_34_21.cobertura.xml",
+      "sha256": "f05d10ea1c1cb4afbd1000aab4a8fb49ebbf87f07972afebd3653955a447da03"
+    },
+    {
+      "path": "coverage/boundary-green-2.cobertura.xml.gz",
+      "source": "artifacts/tt-003/boundary-green-2/26de3bfd-9bba-4876-a645-b1f0ad8ed0f5/dan_os-greg_2026-10-14.10_35_59.cobertura.xml",
+      "sha256": "1f3fd30335f373296c832aca9320ce6da61dd8d9fc00cbab09cc5c5c4797e47f"
+    },
+    {
+      "path": "coverage/catalog-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/catalog-green/3a65c969-afda-43ce-b31f-d00e0a331918/dan_os-greg_2026-10-14.10_40_13.cobertura.xml",
+      "sha256": "356e721d54e16adfd5e6b06b6c09b2325502d2cd139e91b8eca6abea3f2e177f"
+    },
+    {
+      "path": "coverage/configuration-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/configuration-green/a5155d62-da28-4ee8-971a-cf29b8738ab5/dan_os-greg_2026-10-14.10_30_56.cobertura.xml",
+      "sha256": "6b3120b77367aef3b6197dcd49f21e4e1485834fb444e765e0057d3b62ef2e99"
+    },
+    {
+      "path": "coverage/full.cobertura.xml.gz",
+      "source": "artifacts/tt-003/full/b23910ce-2561-4085-adb6-e0d906dc6d8f/dan_os-greg_2026-10-14.10_47_00.cobertura.xml",
+      "sha256": "c92fc7319c4e636d55c3a9cc9a50f7259e89ee167fd10849cbf87228d859307a"
+    },
+    {
+      "path": "coverage/full-refactor.cobertura.xml.gz",
+      "source": "artifacts/tt-003/full-refactor/a2de96df-1573-4fae-b091-df0cbb7f7980/dan_os-greg_2026-10-14.10_50_54.cobertura.xml",
+      "sha256": "7fcfb005a0e2a377d7e7f2da746142eb9f221b5193ce58629cfd7793f07fce63"
+    },
+    {
+      "path": "coverage/migration-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/migration-green/974f3579-d412-47c8-93a9-43979c52e9df/dan_os-greg_2026-10-14.10_40_48.cobertura.xml",
+      "sha256": "32113bb207124b57a364caaa4a65068cc22463754a300faf022807de58194008"
+    },
+    {
+      "path": "coverage/seed-coverage.cobertura.xml.gz",
+      "source": "artifacts/tt-003/seed-coverage/0f5932f3-9145-46ff-a48d-8a37a52ffd48/dan_os-greg_2026-10-14.10_23_08.cobertura.xml",
+      "sha256": "dd2ce45f4b7282282541f39b133adf7b2b8242a4dcf7446ddc39780f4c4d5dd9"
+    },
+    {
+      "path": "coverage/sequences-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/sequences-green/80ce54a9-6c64-489c-a23f-69bc710a69f8/dan_os-greg_2026-10-14.10_41_55.cobertura.xml",
+      "sha256": "5675166169feac794c74090fc74142c68fddbbe69ef4119d142715378ca7fe80"
+    },
+    {
+      "path": "coverage/validation-fast.cobertura.xml.gz",
+      "source": "artifacts/tt-003/validation-fast/521f2de1-3e81-4746-b5e1-69d90a10185d/dan_os-greg_2026-10-14.10_28_38.cobertura.xml",
+      "sha256": "0a1169c1be088e0774509375957ddee41a5564e74bf55707573c22823e042fac"
+    },
+    {
+      "path": "coverage/verify-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/verify-green/12746ed9-2690-463b-b655-91d5be986e2a/dan_os-greg_2026-10-14.10_27_05.cobertura.xml",
+      "sha256": "fb03a1090cb5a7f0ebd0d6ba77cb26af5594f7528649b814aa07b8a6a449de68"
+    },
+    {
+      "path": "coverage/verify-green-2.cobertura.xml.gz",
+      "source": "artifacts/tt-003/verify-green-2/13eeec9a-c7e2-4641-ae31-80661f0856f2/dan_os-greg_2026-10-14.10_28_01.cobertura.xml",
+      "sha256": "316f27a18d8d7d580a8b188db32080d24978839a5bbfa7de592fcac0643864fb"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Tt.cs.txt",
+      "source": "src/TurboTest.EFCore/Tt.cs",
+      "sha256": "68cdf3dd327bc17aba45b275d72ba0dd635690fbc3bf9010d16694d982668e38"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "source": "src/TurboTest.EFCore/TtFactory.cs",
+      "sha256": "f11d2aadb26d709506bd105d2fd0a4b0735d0dcfe82016f8c7af7fba684e2abb"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/TtBaselineDefinition.cs.txt",
+      "source": "src/TurboTest.EFCore/TtBaselineDefinition.cs",
+      "sha256": "61a7d2273af39aeac83df24282afe35553b41088692e4da7fc0d6d4d9b80230f"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/ITtDatabasePool.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/ITtDatabasePool.cs",
+      "sha256": "6c73af7adc31586d31d4f66cede00f99a84dc903073cb774f0632f6ee62d6cf7"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtPool.cs",
+      "sha256": "064bb546637111a3354cefddb113811859affbf52d7a8f77cd0625b2e3946bb3"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtPreparedPool.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtPreparedPool.cs",
+      "sha256": "e0d75177d6abf780677c3c0c34ecba7ed811b0862e1f7a7be85e12a68a42de27"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs",
+      "sha256": "c7828f76d045b04ce872f9965c66298fca08e642f7d9b5a2b642f0d1e17cdc63"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/SeededBaselineTests.cs.txt",
+      "source": "tests/TurboTest.Tests/SeededBaselineTests.cs",
+      "sha256": "a915a4e0aa06f4ecdb47b3e73e6b99973660e01fea0df491d56a3a3c0bbcfcfc"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/BaselineValidationTests.cs.txt",
+      "source": "tests/TurboTest.Tests/BaselineValidationTests.cs",
+      "sha256": "fae407313499fa1480cf4b3ac2777d91e30acc4911b4958e7e9755268c736d5b"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/MigratedBaselineTests.cs.txt",
+      "source": "tests/TurboTest.Tests/MigratedBaselineTests.cs",
+      "sha256": "46f65407c42f8c9fbd219088be10f52b562296ba17ffbc2f0bcc1d05c345d9b8"
+    }
+  ],
+  "build": {
+    "solution": "Build succeeds with zero warnings/errors.",
+    "extraExample": "DynamicScalingExample (outside solution) builds with zero warnings/errors."
+  },
+  "nextRepairs": [
+    "Retain failed startup ownership/accounting and an explicit cleanup retry capability.",
+    "Prove workload source usability and reject unsupported global role defaults.",
+    "Reject or fingerprint omitted catalog categories and sequence OWNED BY edges.",
+    "Validate/reject silently overridden prepared options and prepare the configured Docker image.",
+    "Independent completion review after repairs."
+  ],
+  "hygiene": "Exact six catalog-RED container IDs removed using retained correlation receipt; refactored fault and restored checks leave no TurboTest containers. Unrelated container remains untouched. HEAD and preexisting stash unchanged."
+}

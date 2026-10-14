@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="a8a89cbf-ad24-4383-9fdc-6a0b45f682b2" name="@os-greg 2026-10-14 10:33:54" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T10:33:54.7781426+10:00" queuing="2026-10-14T10:33:54.7781426+10:00" start="2026-10-14T10:33:47.9580148+10:00" finish="2026-10-14T10:34:21.5953848+10:00" />
+  <TestSettings name="default" id="c5d52091-815f-4889-8e1d-92ad80523b7f">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_10_33_54" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="1eee9679-f23e-49b3-ae8b-5310bc55dc3e" testId="ce21f6fb-c811-ec15-f0f5-6c4575baff0c" testName="TurboTest.Tests.SeededBaselineTests.A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors" computerName="os-greg" duration="00:00:04.0579729" startTime="2026-10-14T10:34:17.3837263+10:00" endTime="2026-10-14T10:34:21.4413565+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1eee9679-f23e-49b3-ae8b-5310bc55dc3e">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ
+                   ↓ (pos 8)
+Expected: "BaselineInitialize"
+Actual:   "BaselineConfiguration"
+                   ↑ (pos 8)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 63
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a80600a5-da6f-41c9-bf12-5e33bf953858" testId="2b69ab29-52db-7844-ec9a-f2e6d780738c" testName="TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state" computerName="os-greg" duration="00:00:04.0292477" startTime="2026-10-14T10:34:08.7434083+10:00" endTime="2026-10-14T10:34:12.7725509+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a80600a5-da6f-41c9-bf12-5e33bf953858">
+      <Output>
+        <ErrorInfo>
+          <Message>TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineConfiguration (InvalidOperationException). The resource is unavailable for reuse.</Message>
+          <StackTrace>   at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 83
+   at TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 131
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="71e0d9a0-89b3-4ae7-a948-886795ebb9b8" testId="82dd5139-903e-e8b8-0a38-cf57e9a61569" testName="TurboTest.Tests.SeededBaselineTests.Workloads_cannot_reopen_the_connection_free_administrator_owned_template" computerName="os-greg" duration="00:00:04.6097184" startTime="2026-10-14T10:34:12.7733570+10:00" endTime="2026-10-14T10:34:17.3828777+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="71e0d9a0-89b3-4ae7-a948-886795ebb9b8">
+      <Output>
+        <ErrorInfo>
+          <Message>TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineConfiguration (InvalidOperationException). The resource is unavailable for reuse.</Message>
+          <StackTrace>   at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 83
+   at TurboTest.Tests.SeededBaselineTests.Workloads_cannot_reopen_the_connection_free_administrator_owned_template() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 17
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="45088fa4-b874-4900-9c9b-da8bc54ac8b7" testId="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER TABLE \&quot;Parents\&quot; ADD COLUMN unexpected inte&quot;···)" computerName="os-greg" duration="00:00:05.1885049" startTime="2026-10-14T10:33:59.4252979+10:00" endTime="2026-10-14T10:34:04.6063746+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="45088fa4-b874-4900-9c9b-da8bc54ac8b7">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ
+                   ↓ (pos 8)
+Expected: "BaselineVerify"
+Actual:   "BaselineConfiguration"
+                   ↑ (pos 8)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b1075ea5-5cb8-463c-973f-0034a3139aef" testId="c45a7fdc-8530-789b-e58a-e5ed65c2d67c" testName="TurboTest.Tests.SeededBaselineTests.Fixture_configuration_cannot_redirect_initialization_to_an_external_database" computerName="os-greg" duration="00:00:04.7505572" startTime="2026-10-14T10:33:49.9953253+10:00" endTime="2026-10-14T10:33:54.7428591+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b1075ea5-5cb8-463c-973f-0034a3139aef" />
+    <UnitTestResult executionId="fe7f4868-1365-42f7-89c1-e7bf1d4786e6" testId="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;UPDATE \&quot;Parents\&quot; SET \&quot;Priority\&quot; = 999&quot;)" computerName="os-greg" duration="00:00:04.1352637" startTime="2026-10-14T10:34:04.6078880+10:00" endTime="2026-10-14T10:34:08.7421660+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fe7f4868-1365-42f7-89c1-e7bf1d4786e6">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ
+                   ↓ (pos 8)
+Expected: "BaselineVerify"
+Actual:   "BaselineConfiguration"
+                   ↑ (pos 8)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e3d193ab-31ce-4e08-852e-7f1a4a54afe3" testId="49b3022d-7e13-b831-b13f-1e0106a803d2" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;SELECT setval(pg_get_serial_sequence('\&quot;Parents\&quot;'&quot;···)" computerName="os-greg" duration="00:00:04.6568898" startTime="2026-10-14T10:33:54.7654222+10:00" endTime="2026-10-14T10:33:59.4176564+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e3d193ab-31ce-4e08-852e-7f1a4a54afe3">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ
+                   ↓ (pos 8)
+Expected: "BaselineVerify"
+Actual:   "BaselineConfiguration"
+                   ↑ (pos 8)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 108
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;UPDATE \&quot;Parents\&quot; SET \&quot;Priority\&quot; = 999&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d">
+      <Execution id="fe7f4868-1365-42f7-89c1-e7bf1d4786e6" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="2b69ab29-52db-7844-ec9a-f2e6d780738c">
+      <Execution id="a80600a5-da6f-41c9-bf12-5e33bf953858" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ce21f6fb-c811-ec15-f0f5-6c4575baff0c">
+      <Execution id="1eee9679-f23e-49b3-ae8b-5310bc55dc3e" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;SELECT setval(pg_get_serial_sequence('\&quot;Parents\&quot;'&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="49b3022d-7e13-b831-b13f-1e0106a803d2">
+      <Execution id="e3d193ab-31ce-4e08-852e-7f1a4a54afe3" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.Fixture_configuration_cannot_redirect_initialization_to_an_external_database" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="c45a7fdc-8530-789b-e58a-e5ed65c2d67c">
+      <Execution id="b1075ea5-5cb8-463c-973f-0034a3139aef" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="Fixture_configuration_cannot_redirect_initialization_to_an_external_database" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.Workloads_cannot_reopen_the_connection_free_administrator_owned_template" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="82dd5139-903e-e8b8-0a38-cf57e9a61569">
+      <Execution id="71e0d9a0-89b3-4ae7-a948-886795ebb9b8" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="Workloads_cannot_reopen_the_connection_free_administrator_owned_template" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER TABLE \&quot;Parents\&quot; ADD COLUMN unexpected inte&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc">
+      <Execution id="45088fa4-b874-4900-9c9b-da8bc54ac8b7" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="ce21f6fb-c811-ec15-f0f5-6c4575baff0c" executionId="1eee9679-f23e-49b3-ae8b-5310bc55dc3e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2b69ab29-52db-7844-ec9a-f2e6d780738c" executionId="a80600a5-da6f-41c9-bf12-5e33bf953858" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="82dd5139-903e-e8b8-0a38-cf57e9a61569" executionId="71e0d9a0-89b3-4ae7-a948-886795ebb9b8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc" executionId="45088fa4-b874-4900-9c9b-da8bc54ac8b7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c45a7fdc-8530-789b-e58a-e5ed65c2d67c" executionId="b1075ea5-5cb8-463c-973f-0034a3139aef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d" executionId="fe7f4868-1365-42f7-89c1-e7bf1d4786e6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="49b3022d-7e13-b831-b13f-1e0106a803d2" executionId="e3d193ab-31ce-4e08-852e-7f1a4a54afe3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="7" executed="7" passed="1" failed="6" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.17]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.25]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.28]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:09.75]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:09.75]                          ↓ (pos 8)
+[xUnit.net 00:00:09.75]       Expected: "BaselineVerify"
+[xUnit.net 00:00:09.75]       Actual:   "BaselineConfiguration"
+[xUnit.net 00:00:09.75]                          ↑ (pos 8)
+[xUnit.net 00:00:09.75]       Stack Trace:
+[xUnit.net 00:00:09.75]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(108,0): at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption)
+[xUnit.net 00:00:09.75]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(108,0): at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption)
+[xUnit.net 00:00:09.75]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:14.93]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:14.93]                          ↓ (pos 8)
+[xUnit.net 00:00:14.93]       Expected: "BaselineVerify"
+[xUnit.net 00:00:14.93]       Actual:   "BaselineConfiguration"
+[xUnit.net 00:00:14.93]                          ↑ (pos 8)
+[xUnit.net 00:00:14.93]       Stack Trace:
+[xUnit.net 00:00:14.93]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(108,0): at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption)
+[xUnit.net 00:00:14.93]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(108,0): at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption)
+[xUnit.net 00:00:14.93]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:19.07]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:19.07]                          ↓ (pos 8)
+[xUnit.net 00:00:19.07]       Expected: "BaselineVerify"
+[xUnit.net 00:00:19.07]       Actual:   "BaselineConfiguration"
+[xUnit.net 00:00:19.07]                          ↑ (pos 8)
+[xUnit.net 00:00:19.07]       Stack Trace:
+[xUnit.net 00:00:19.07]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(108,0): at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption)
+[xUnit.net 00:00:19.07]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(108,0): at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption)
+[xUnit.net 00:00:19.07]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:23.10]       TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineConfiguration (InvalidOperationException). The resource is unavailable for reuse.
+[xUnit.net 00:00:23.10]       Stack Trace:
+[xUnit.net 00:00:23.10]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(83,0): at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken)
+[xUnit.net 00:00:23.10]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(131,0): at TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state()
+[xUnit.net 00:00:23.10]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:27.71]       TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineConfiguration (InvalidOperationException). The resource is unavailable for reuse.
+[xUnit.net 00:00:27.71]       Stack Trace:
+[xUnit.net 00:00:27.71]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(83,0): at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken)
+[xUnit.net 00:00:27.71]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(17,0): at TurboTest.Tests.SeededBaselineTests.Workloads_cannot_reopen_the_connection_free_administrator_owned_template()
+[xUnit.net 00:00:27.71]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:31.77]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:31.77]                          ↓ (pos 8)
+[xUnit.net 00:00:31.77]       Expected: "BaselineInitialize"
+[xUnit.net 00:00:31.77]       Actual:   "BaselineConfiguration"
+[xUnit.net 00:00:31.77]                          ↑ (pos 8)
+[xUnit.net 00:00:31.77]       Stack Trace:
+[xUnit.net 00:00:31.77]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(63,0): at TurboTest.Tests.SeededBaselineTests.A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors()
+[xUnit.net 00:00:31.77]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:31.77]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:33:59.4212978+10:00">
+        <Text>[xUnit.net 00:00:09.74]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "SELECT setval(pg_get_serial_sequence('\"Parents\"'"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:34:04.6069068+10:00">
+        <Text>[xUnit.net 00:00:14.93]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "ALTER TABLE \"Parents\" ADD COLUMN unexpected inte"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:34:08.7426412+10:00">
+        <Text>[xUnit.net 00:00:19.07]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "UPDATE \"Parents\" SET \"Priority\" = 999") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:34:12.7729657+10:00">
+        <Text>[xUnit.net 00:00:23.10]     TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:34:17.3833014+10:00">
+        <Text>[xUnit.net 00:00:27.71]     TurboTest.Tests.SeededBaselineTests.Workloads_cannot_reopen_the_connection_free_administrator_owned_template [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:34:21.4416444+10:00">
+        <Text>[xUnit.net 00:00:31.77]     TurboTest.Tests.SeededBaselineTests.A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.10_34_21.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

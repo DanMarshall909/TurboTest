@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="967cb52d-d1ff-4fad-8c7f-1912f84ddd32" name="@os-greg 2026-10-14 10:40:49" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T10:40:49.0325402+10:00" queuing="2026-10-14T10:40:49.0325403+10:00" start="2026-10-14T10:40:40.7362052+10:00" finish="2026-10-14T10:40:49.0454533+10:00" />
+  <TestSettings name="default" id="2074b0d1-6fb9-4ea7-895c-ef7c119e01b0">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_10_40_49" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="cc01a400-f15b-42af-9e89-ec6273870085" testId="cdd7374e-ae23-d617-e87b-871ef761b6d2" testName="TurboTest.Tests.MigratedBaselineTests.Recreation_preserves_migration_only_schema_history_seed_and_generated_identity" computerName="os-greg" duration="00:00:06.0153086" startTime="2026-10-14T10:40:42.8482468+10:00" endTime="2026-10-14T10:40:48.8592617+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cc01a400-f15b-42af-9e89-ec6273870085" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.MigratedBaselineTests.Recreation_preserves_migration_only_schema_history_seed_and_generated_identity" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="cdd7374e-ae23-d617-e87b-871ef761b6d2">
+      <Execution id="cc01a400-f15b-42af-9e89-ec6273870085" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.MigratedBaselineTests" name="Recreation_preserves_migration_only_schema_history_seed_and_generated_identity" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="cdd7374e-ae23-d617-e87b-871ef761b6d2" executionId="cc01a400-f15b-42af-9e89-ec6273870085" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.15]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.23]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.26]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:06.32]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.10_40_48.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

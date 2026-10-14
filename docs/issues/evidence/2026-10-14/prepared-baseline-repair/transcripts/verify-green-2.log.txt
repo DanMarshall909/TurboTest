@@ -1,0 +1,13 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+Results File: /home/dan/code/TurboTest/artifacts/tt-003/verify-green-2/verify-green.trx
+
+Passed!  - Failed:     0, Passed:     4, Skipped:     0, Total:     4, Duration: 22 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-003/verify-green-2/13eeec9a-c7e2-4641-ae31-80661f0856f2/dan_os-greg_2026-10-14.10_28_01.cobertura.xml

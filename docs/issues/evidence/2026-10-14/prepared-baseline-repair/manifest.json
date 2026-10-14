@@ -1,0 +1,1611 @@
+{
+  "status": "TT-003 candidate: 108 full tests pass, zero failures/skips; independent completion review pending. Ticket remains Open.",
+  "base": "0fe83327c02602edb45141f83a55c0a1b3b2df45",
+  "results": {
+    "boundary-green/boundary-green.trx": {
+      "total": "7",
+      "executed": "7",
+      "passed": "1",
+      "failed": "6",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "boundary-green-2/boundary-green.trx": {
+      "total": "7",
+      "executed": "7",
+      "passed": "7",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "catalog-edges-green/catalog-edges-green.trx": {
+      "total": "14",
+      "executed": "14",
+      "passed": "14",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "catalog-edges-red/catalog-edges-red.trx": {
+      "total": "14",
+      "executed": "14",
+      "passed": "9",
+      "failed": "5",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "catalog-green/catalog-green.trx": {
+      "total": "13",
+      "executed": "13",
+      "passed": "13",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "catalog-hygiene-fault/catalog-hygiene-fault.trx": {
+      "total": "6",
+      "executed": "6",
+      "passed": "0",
+      "failed": "6",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "catalog-red/catalog-red.trx": {
+      "total": "6",
+      "executed": "6",
+      "passed": "0",
+      "failed": "6",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "cleanup-capability-red/cleanup-capability-red.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "1",
+      "failed": "2",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "cleanup-core-green/cleanup-core-green.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "3",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "cleanup-green/cleanup-green.trx": {
+      "total": "4",
+      "executed": "4",
+      "passed": "4",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "cleanup-red/cleanup-red.trx": {
+      "total": "4",
+      "executed": "4",
+      "passed": "0",
+      "failed": "4",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "cleanup-refactor/cleanup-refactor.trx": {
+      "total": "17",
+      "executed": "17",
+      "passed": "17",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "comments-green/comments-green.trx": {
+      "total": "5",
+      "executed": "5",
+      "passed": "5",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "comments-red-2/comments-red.trx": {
+      "total": "6",
+      "executed": "6",
+      "passed": "5",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "configuration-green/configuration-green.trx": {
+      "total": "10",
+      "executed": "10",
+      "passed": "10",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "configuration-red/configuration-red.trx": {
+      "total": "5",
+      "executed": "5",
+      "passed": "0",
+      "failed": "5",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "context-binding-green/context-binding-green.trx": {
+      "total": "5",
+      "executed": "5",
+      "passed": "5",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "context-binding-red/context-binding-red.trx": {
+      "total": "4",
+      "executed": "4",
+      "passed": "0",
+      "failed": "4",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "context-binding-refactor/context-binding-refactor.trx": {
+      "total": "5",
+      "executed": "5",
+      "passed": "5",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "full/baseline-full.trx": {
+      "total": "64",
+      "executed": "64",
+      "passed": "64",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "full-refactor/baseline-full.trx": {
+      "total": "64",
+      "executed": "64",
+      "passed": "64",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "migration-fault/migration-fault.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "migration-green/migration-green.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "null-baseline-red/null-baseline-red.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "options-green/options-green.trx": {
+      "total": "18",
+      "executed": "18",
+      "passed": "18",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "options-red/options-red.trx": {
+      "total": "17",
+      "executed": "17",
+      "passed": "0",
+      "failed": "17",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "options-refactor/options-refactor.trx": {
+      "total": "23",
+      "executed": "23",
+      "passed": "23",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "ownership-isolation/ownership-isolation.trx": {
+      "total": "2",
+      "executed": "2",
+      "passed": "1",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "redirect-red/redirect-red.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "repair-full/baseline-repair-full.trx": {
+      "total": "108",
+      "executed": "108",
+      "passed": "108",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0",
+      "sourceScope": "Current final source snapshot in this manifest."
+    },
+    "restored-green/restored-green.trx": {
+      "total": "16",
+      "executed": "16",
+      "passed": "16",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "schema-model-green/schema-model-green.trx": {
+      "total": "8",
+      "executed": "8",
+      "passed": "8",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "schema-model-red/schema-model-red.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "seed-coverage/seed-coverage.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "seed-green/seed-green.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "seed-red/seed-red.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "sequences-green/sequences-green.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "validation-fast/validation-fast.trx": {
+      "total": "5",
+      "executed": "5",
+      "passed": "5",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "validation-fault/validation-fault.trx": {
+      "total": "5",
+      "executed": "5",
+      "passed": "1",
+      "failed": "4",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "verify-green/verify-green.trx": {
+      "total": "4",
+      "executed": "4",
+      "passed": "0",
+      "failed": "4",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "verify-green-2/verify-green.trx": {
+      "total": "4",
+      "executed": "4",
+      "passed": "4",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "verify-red/verify-red.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "0",
+      "failed": "3",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "workload-green/workload-green.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "3",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "workload-red/workload-red.trx": {
+      "total": "2",
+      "executed": "2",
+      "passed": "0",
+      "failed": "2",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    }
+  },
+  "phaseNotes": {
+    "seed-red": "Compiling baseline scaffold ignored initialization; expected one initializer, actual zero.",
+    "verify-red": "Three actual clone corruptions were accepted; no validation exception.",
+    "configuration-red": "Five missing version/schema/per-lease configuration rules.",
+    "redirect-red": "External database redirection reached initialization instead of being rejected with BaselineConfiguration.",
+    "catalog-red": "Six unsupported catalog/database configurations were accepted.",
+    "verify-green": "Failed candidate: redacted datasource connection string lacked admin password. This is a setup defect, not a valid RED.",
+    "boundary-green": "Failed candidate: Npgsql Host/Port are unavailable before opening; valid fixture connections were falsely rejected. This is a regression, not a valid RED.",
+    "validation-fault": "Removing the manifest validation gate makes all four difference oracles fail. Source restored by receipt hash.",
+    "migration-fault": "Substituting EnsureCreated for explicit migrations makes the migration-only fixture fail with SQLSTATE 42P01. Source restored by receipt hash."
+  },
+  "refactor": {
+    "production": "Prepared pool separated from legacy pooled reset. Frozen EF model/options bind one owner, context type, schema mode and initializer version. Snapshot comparison and capture separated from ownership; sorted binary-row hashes retain counts/digests rather than seed payload. Logins are private immutable values, admin sources are never handed to workloads. Exact datasource identity uses one narrowly scoped pinned Npgsql options API because endpoint equality cannot prove source ownership.",
+    "tests": "One three-table public oracle plus focused migration/caller/permission/failure/catalog cases. Fast manifest comparison tests use independently supplied differences; PostgreSQL corruption cases calibrate the actual capture boundary. No score-driven test consolidation."
+  },
+  "limits": [
+    "No independent completion review or completion commit yet.",
+    "No whole-package coverage or mutation proof; actual full coverage is retained.",
+    "Normal mutation is pending the final committed source snapshot and excludes PostgreSQL/end-to-end tests.",
+    "Capacity limits, row reset, broader recovery, DI/static ownership, parking, metrics and adaptation remain later tickets.",
+    "Catalog support is restricted and explicit; 10,000-entry/relation safety guards and some compensation paths lack executable coverage.",
+    "Earlier phase results and calibrations are historical snapshots; no equivalence to current source is implied."
+  ],
+  "repairPhaseNotes": {
+    "cleanup-red": "Four expected missing cleanup capability failures.",
+    "cleanup-capability-red": "Two fast missing-handle failures, one success law already passed.",
+    "workload-red": "Two unexpected unusable factories rejected by publication assertions.",
+    "catalog-edges-red": "Five expected missing guards/dependency failures; nine existing cases pass.",
+    "options-red": "Seventeen invalid configurations reached image preparation.",
+    "null-baseline-red": "Configuration ran once for null baseline.",
+    "context-binding-red": "Four unexpected source/model substitutions escaped.",
+    "schema-model-red": "An inconsistent runtime/schema model was accepted.",
+    "comments-red-2": "Comment corruption accepted; five other cases including native configured image pass.",
+    "comments-red": "ImageTagParameters.Repository compile error; not behavioral RED.",
+    "image-boundary": "Same image-tag compile setup error, corrected to RepositoryName.",
+    "ownership-isolation": "Invalid runtime/schema model setup; corrected fixture model-cache isolation passes.",
+    "repair-build": "Incorrect solution suffix .slnx; actual .sln build passes."
+  },
+  "finalGate": {
+    "testCommand": "dotnet test tests/TurboTest.Tests --collect 'Code Coverage;Format=cobertura' --logger 'trx;LogFileName=baseline-repair-full.trx' --results-directory artifacts/tt-003/repair-full",
+    "workingDirectory": "/home/dan/code/TurboTest",
+    "exitCode": 0,
+    "tests": 108,
+    "failures": 0,
+    "skips": 0,
+    "buildCommands": [
+      "dotnet build TurboTest.sln",
+      "dotnet build examples/DynamicScalingExample/DynamicScalingExample.csproj"
+    ],
+    "buildExitCodes": [
+      0,
+      0
+    ],
+    "cleanup": "No TurboTest containers or temporary image alias remain; unrelated prismml container retained."
+  },
+  "files": [
+    {
+      "path": "results/boundary-green/boundary-green.trx",
+      "source": "artifacts/tt-003/boundary-green/boundary-green.trx",
+      "sha256": "a9ff3300fe1bee9ff9e0b73576a1c212c6efa0a107014ab58125bd2fffba1b9d"
+    },
+    {
+      "path": "results/boundary-green-2/boundary-green.trx",
+      "source": "artifacts/tt-003/boundary-green-2/boundary-green.trx",
+      "sha256": "8d23cc0c451198e03837201234e32ab39583293140cde52ba0bb2aa32cd91179"
+    },
+    {
+      "path": "transcripts/boundary-green-2.log.txt",
+      "source": "artifacts/tt-003/boundary-green-2.log",
+      "sha256": "3c73413a82bd350276ab12ad1b75b82cec4f59264542b786266e939470b3a1a7"
+    },
+    {
+      "path": "transcripts/boundary-green.log.txt",
+      "source": "artifacts/tt-003/boundary-green.log",
+      "sha256": "55d5073a7aad52815d3cf051dfd9373f16c8df4079daf24ec046d6909285f06f"
+    },
+    {
+      "path": "transcripts/build.log.txt",
+      "source": "artifacts/tt-003/build.log",
+      "sha256": "756557c4c6026a05369977fc56ff05e2c2954df5cdef823dce2c972ca40c7e3c"
+    },
+    {
+      "path": "results/catalog-edges-green/catalog-edges-green.trx",
+      "source": "artifacts/tt-003/catalog-edges-green/catalog-edges-green.trx",
+      "sha256": "73c54b27c43c3cd799ef60ee9a3b4fa407421af8a1cc96d05b16704b5ce2edc9"
+    },
+    {
+      "path": "transcripts/catalog-edges-green.log.txt",
+      "source": "artifacts/tt-003/catalog-edges-green.log",
+      "sha256": "88420ee673fe1fad660bad5973c910ebc67e86da00d3686a99215d2c8896a2f7"
+    },
+    {
+      "path": "results/catalog-edges-red/catalog-edges-red.trx",
+      "source": "artifacts/tt-003/catalog-edges-red/catalog-edges-red.trx",
+      "sha256": "ee377541800388edb12eb3c1c39f90d1660ac4636f5c5c8cca1f4ecc2c8fcf84"
+    },
+    {
+      "path": "transcripts/catalog-edges-red.log.txt",
+      "source": "artifacts/tt-003/catalog-edges-red.log",
+      "sha256": "26b651600c7a819e2d41bb2fa35a28fca3b85731f499eae42d7bfcc2c425670d"
+    },
+    {
+      "path": "results/catalog-green/catalog-green.trx",
+      "source": "artifacts/tt-003/catalog-green/catalog-green.trx",
+      "sha256": "52473f0b9aeb561c16fd8a000738548aeac9f76b5181bd2715db5375ac69b16c"
+    },
+    {
+      "path": "transcripts/catalog-green.log.txt",
+      "source": "artifacts/tt-003/catalog-green.log",
+      "sha256": "2cde4a9ced3d6926fe705125314877a2cf810d0f27ef896ec2b23592394455b9"
+    },
+    {
+      "path": "results/catalog-hygiene-fault/catalog-hygiene-fault.trx",
+      "source": "artifacts/tt-003/catalog-hygiene-fault/catalog-hygiene-fault.trx",
+      "sha256": "1b3f9e99e02f447172aa71a1b2ef8b260fe71a1d3b9dc09ae1451d662d873658"
+    },
+    {
+      "path": "calibration/catalog-hygiene-fault/fault.cs.txt",
+      "source": "artifacts/tt-003/catalog-hygiene-fault/fault.cs.txt",
+      "sha256": "a0d37cc7c27c9390ab1e6e802f89d325e54be829382e2d19a0554379eecfa3a5"
+    },
+    {
+      "path": "calibration/catalog-hygiene-fault/original.cs.txt",
+      "source": "artifacts/tt-003/catalog-hygiene-fault/original.cs.txt",
+      "sha256": "c7828f76d045b04ce872f9965c66298fca08e642f7d9b5a2b642f0d1e17cdc63"
+    },
+    {
+      "path": "calibration/catalog-hygiene-fault/receipt.json",
+      "source": "artifacts/tt-003/catalog-hygiene-fault/receipt.json",
+      "sha256": "bd7b0bc20dd00b4b083a5698909267163446fb41a61e7491621ee05e78e59f5b"
+    },
+    {
+      "path": "transcripts/catalog-hygiene-fault/run.log.txt",
+      "source": "artifacts/tt-003/catalog-hygiene-fault/run.log",
+      "sha256": "7b3a202940012fd1e209e03963f07a342fe5e643661def886726651f8a4db501"
+    },
+    {
+      "path": "results/catalog-red/catalog-red.trx",
+      "source": "artifacts/tt-003/catalog-red/catalog-red.trx",
+      "sha256": "2cc02b71db534f7dec7ba3e3d32f0eebe6c3a157d7fa2ea8d788eacb30bd0f46"
+    },
+    {
+      "path": "calibration/catalog-red/cleanup.json",
+      "source": "artifacts/tt-003/catalog-red/cleanup.json",
+      "sha256": "f5e01d691e11ab1fab3f6b5b00519c31389f6beebb4c1e0f50f48df0295f6ea3"
+    },
+    {
+      "path": "transcripts/catalog-red.log.txt",
+      "source": "artifacts/tt-003/catalog-red.log",
+      "sha256": "1abc1cf88a53772826ac04db6b2e6c448b73c5857cf8736faef85e6fbe71c096"
+    },
+    {
+      "path": "results/cleanup-capability-red/cleanup-capability-red.trx",
+      "source": "artifacts/tt-003/cleanup-capability-red/cleanup-capability-red.trx",
+      "sha256": "e8e9e5546c89127831c5c2d891359f61d949a4657b075dbef1fbb95e3b42038f"
+    },
+    {
+      "path": "transcripts/cleanup-capability-red.log.txt",
+      "source": "artifacts/tt-003/cleanup-capability-red.log",
+      "sha256": "caed7acaaf4277e0a87cd36ef0bd0f67fa8e7a41911e87261118d26a29c4f57d"
+    },
+    {
+      "path": "results/cleanup-core-green/cleanup-core-green.trx",
+      "source": "artifacts/tt-003/cleanup-core-green/cleanup-core-green.trx",
+      "sha256": "c8d733c95cf365581e15539e10ce694696366c7b814bcd90f0bf90b1ff3f667a"
+    },
+    {
+      "path": "transcripts/cleanup-core-green.log.txt",
+      "source": "artifacts/tt-003/cleanup-core-green.log",
+      "sha256": "13531bf9b04b6f8764af8ceff41a17c52cc30e9848c9b7771aae5e5965075f2d"
+    },
+    {
+      "path": "results/cleanup-green/cleanup-green.trx",
+      "source": "artifacts/tt-003/cleanup-green/cleanup-green.trx",
+      "sha256": "f0b4a6aef6fd0655f3e91e832bd0d694fcc83a0078c6f02fca4837023ce0c748"
+    },
+    {
+      "path": "transcripts/cleanup-green.log.txt",
+      "source": "artifacts/tt-003/cleanup-green.log",
+      "sha256": "e85e882d496fbc17e8b2e19fa3ca406fe020b6cae1e1809c7b95ac74c9dc87f4"
+    },
+    {
+      "path": "results/cleanup-red/cleanup-red.trx",
+      "source": "artifacts/tt-003/cleanup-red/cleanup-red.trx",
+      "sha256": "9c9b4e000511ed6cb766fea31b7d543ba937abc2b7d502296202ed165a7f2321"
+    },
+    {
+      "path": "transcripts/cleanup-red.log.txt",
+      "source": "artifacts/tt-003/cleanup-red.log",
+      "sha256": "8aeb91ac08646eee62003718d2ab435f0bdcdac727750c3161fb63fb0d6de37a"
+    },
+    {
+      "path": "results/cleanup-refactor/cleanup-refactor.trx",
+      "source": "artifacts/tt-003/cleanup-refactor/cleanup-refactor.trx",
+      "sha256": "b87d7e9d21f03d616c1bce0c2766d4c39b12197c06226cde0befb916b359fc55"
+    },
+    {
+      "path": "transcripts/cleanup-refactor.log.txt",
+      "source": "artifacts/tt-003/cleanup-refactor.log",
+      "sha256": "2992eb1b565ea28750728dc1e7ca3dba604bd2e80a97b2c936973353e1e03b3f"
+    },
+    {
+      "path": "results/comments-green/comments-green.trx",
+      "source": "artifacts/tt-003/comments-green/comments-green.trx",
+      "sha256": "f05d22d9b485657f70daf25ba6ac9b0d8a8996f0317000ce53fb360c32bcf155"
+    },
+    {
+      "path": "transcripts/comments-green.log.txt",
+      "source": "artifacts/tt-003/comments-green.log",
+      "sha256": "669f753282f93b92bbb087e585f1c39692fff3e3ed763172b4bd0f1bce13836d"
+    },
+    {
+      "path": "results/comments-red-2/comments-red.trx",
+      "source": "artifacts/tt-003/comments-red-2/comments-red.trx",
+      "sha256": "5de2d84858134ecdef42f005dbd0a7cf8803b683e8bf09feeee675c0367f5fd1"
+    },
+    {
+      "path": "transcripts/comments-red-2.log.txt",
+      "source": "artifacts/tt-003/comments-red-2.log",
+      "sha256": "c2520990e54b23a9c1ed9d730e1e21918664e27e38382e717e3883524abbd3af"
+    },
+    {
+      "path": "transcripts/comments-red.log.txt",
+      "source": "artifacts/tt-003/comments-red.log",
+      "sha256": "b09ae8fc9cc082b72b58a245dc277a22693029accb14e31b83607a9062367738"
+    },
+    {
+      "path": "results/configuration-green/configuration-green.trx",
+      "source": "artifacts/tt-003/configuration-green/configuration-green.trx",
+      "sha256": "2b3e5ca0c35a6d1a7e797969ffca52a8e3d1a5fc35dae746917cd5fe7dbc62db"
+    },
+    {
+      "path": "transcripts/configuration-green.log.txt",
+      "source": "artifacts/tt-003/configuration-green.log",
+      "sha256": "2f4d986326f85e3f7261347896ecab4c16c9a100aa78fd6a2796061f9988ed51"
+    },
+    {
+      "path": "results/configuration-red/configuration-red.trx",
+      "source": "artifacts/tt-003/configuration-red/configuration-red.trx",
+      "sha256": "1e66d27fe8f4af066c588fea842f2381521faa0dae4eaf5744933a8e28a3244e"
+    },
+    {
+      "path": "transcripts/configuration-red.log.txt",
+      "source": "artifacts/tt-003/configuration-red.log",
+      "sha256": "95359e1c410f58d7983b92e86439275459e19d105f0dc2b10f966eeb9c07ca09"
+    },
+    {
+      "path": "results/context-binding-green/context-binding-green.trx",
+      "source": "artifacts/tt-003/context-binding-green/context-binding-green.trx",
+      "sha256": "a9fea581c489e2f8854e5a4d038ad686639a57a6c3a2205065a59a98956254de"
+    },
+    {
+      "path": "transcripts/context-binding-green.log.txt",
+      "source": "artifacts/tt-003/context-binding-green.log",
+      "sha256": "e94c0d8d87728262dfaa320dc80cad5383fd5254d10ddc0b5e5402c65e355f1f"
+    },
+    {
+      "path": "results/context-binding-red/context-binding-red.trx",
+      "source": "artifacts/tt-003/context-binding-red/context-binding-red.trx",
+      "sha256": "59e65bdd20ac1e51810b42a797ab106a511515241243c9e9c18d3b2b2318b2ab"
+    },
+    {
+      "path": "transcripts/context-binding-red.log.txt",
+      "source": "artifacts/tt-003/context-binding-red.log",
+      "sha256": "feef0ff863f56327c0a2874d0db612482f708f92cd0a00af9b439cb452720176"
+    },
+    {
+      "path": "results/context-binding-refactor/context-binding-refactor.trx",
+      "source": "artifacts/tt-003/context-binding-refactor/context-binding-refactor.trx",
+      "sha256": "5c5e1a2f38045c16f2189a05761c5be7c61d6ab192ee7d14e2470f694af8dbb5"
+    },
+    {
+      "path": "transcripts/context-binding-refactor.log.txt",
+      "source": "artifacts/tt-003/context-binding-refactor.log",
+      "sha256": "da0fae4f38361998b87e1490245cf3d31c28bb422c22550835ade118fbe304b8"
+    },
+    {
+      "path": "transcripts/dynamic-example-build.log.txt",
+      "source": "artifacts/tt-003/dynamic-example-build.log",
+      "sha256": "91d39bcc7d8d388aa50ffc8bc8d0b2679e3a0ba78a4cff2e3758eeb7de10b695"
+    },
+    {
+      "path": "results/full/baseline-full.trx",
+      "source": "artifacts/tt-003/full/baseline-full.trx",
+      "sha256": "1dd3e2b689dc6374ed44b60a19331feadd5f8b959d265aa6bef2ba673ddc0712"
+    },
+    {
+      "path": "results/full-refactor/baseline-full.trx",
+      "source": "artifacts/tt-003/full-refactor/baseline-full.trx",
+      "sha256": "a89371bda86ab89bd3f916f705b06d1fad40d38a426d16e6ce70b809fd9d2cce"
+    },
+    {
+      "path": "transcripts/full-refactor.log.txt",
+      "source": "artifacts/tt-003/full-refactor.log",
+      "sha256": "fb9343a0df986618cc637f518254c1cfd990a38b91a251156d5aacfddabbb0d1"
+    },
+    {
+      "path": "transcripts/full.log.txt",
+      "source": "artifacts/tt-003/full.log",
+      "sha256": "c4bca05492f3ae4df073685822e22594f400f040e3415bf62e1cf62d975f3529"
+    },
+    {
+      "path": "transcripts/image-boundary.log.txt",
+      "source": "artifacts/tt-003/image-boundary.log",
+      "sha256": "b09ae8fc9cc082b72b58a245dc277a22693029accb14e31b83607a9062367738"
+    },
+    {
+      "path": "calibration/migration-fault/fault.cs.txt",
+      "source": "artifacts/tt-003/migration-fault/fault.cs.txt",
+      "sha256": "c9df9a6dd2530385d26f049b077a66704d6234929f57ef15ae3961b828f54b2c"
+    },
+    {
+      "path": "results/migration-fault/migration-fault.trx",
+      "source": "artifacts/tt-003/migration-fault/migration-fault.trx",
+      "sha256": "5953c4cfe22b500b91e9cd47731b78b7461333a90836dce7c2db12c3348be68a"
+    },
+    {
+      "path": "calibration/migration-fault/original.cs.txt",
+      "source": "artifacts/tt-003/migration-fault/original.cs.txt",
+      "sha256": "e0d75177d6abf780677c3c0c34ecba7ed811b0862e1f7a7be85e12a68a42de27"
+    },
+    {
+      "path": "calibration/migration-fault/receipt.json",
+      "source": "artifacts/tt-003/migration-fault/receipt.json",
+      "sha256": "656359fda1a07f8e76720a5a0600c52bfde46b7d70a8f223f010fc7d43151997"
+    },
+    {
+      "path": "transcripts/migration-fault/run.log.txt",
+      "source": "artifacts/tt-003/migration-fault/run.log",
+      "sha256": "6eb2b5bc591215c4d095a5b8a115f23a2b2a1b44077fc6d3a991e5da0a41df9d"
+    },
+    {
+      "path": "results/migration-green/migration-green.trx",
+      "source": "artifacts/tt-003/migration-green/migration-green.trx",
+      "sha256": "40aae239db7a7159f1d979ee81fdd45a826c7aa1817f7d8ff11d5648f9933bbc"
+    },
+    {
+      "path": "transcripts/migration-green.log.txt",
+      "source": "artifacts/tt-003/migration-green.log",
+      "sha256": "4ec0822b94c15491b52605bb1c2b3fcdcb968be6e0530cdc315ce40e6af9f988"
+    },
+    {
+      "path": "results/null-baseline-red/null-baseline-red.trx",
+      "source": "artifacts/tt-003/null-baseline-red/null-baseline-red.trx",
+      "sha256": "f20629f1a7f9d056a41311a355b658f88eb08a872f2d32bd103bf2b78bc657d9"
+    },
+    {
+      "path": "transcripts/null-baseline-red.log.txt",
+      "source": "artifacts/tt-003/null-baseline-red.log",
+      "sha256": "f88001dffc414e398e605033252cd9a64481335d79a63a892220dcc1296177af"
+    },
+    {
+      "path": "results/options-green/options-green.trx",
+      "source": "artifacts/tt-003/options-green/options-green.trx",
+      "sha256": "942f780e4edb9762ceec6318809f8397b4b929e551060857cf192819f396d025"
+    },
+    {
+      "path": "transcripts/options-green.log.txt",
+      "source": "artifacts/tt-003/options-green.log",
+      "sha256": "98277cd79f1dffe2ba051aec55d15a9419002bf4c3681f4a89a82b39663a944e"
+    },
+    {
+      "path": "results/options-red/options-red.trx",
+      "source": "artifacts/tt-003/options-red/options-red.trx",
+      "sha256": "7d26ae6069726a78962a83dee35ef049c77887ac8f249ca87cfe33cce1f9eb42"
+    },
+    {
+      "path": "transcripts/options-red.log.txt",
+      "source": "artifacts/tt-003/options-red.log",
+      "sha256": "e37470f2fea707c1d612f705ef53e9e4295b801720db5af440a98fc89dab21c4"
+    },
+    {
+      "path": "results/options-refactor/options-refactor.trx",
+      "source": "artifacts/tt-003/options-refactor/options-refactor.trx",
+      "sha256": "c356b0e15a5e1db630842eab65b56770dff79da418a93d0dd72516b12de8859f"
+    },
+    {
+      "path": "transcripts/options-refactor.log.txt",
+      "source": "artifacts/tt-003/options-refactor.log",
+      "sha256": "4298f041bed8a0193507e3b0abcd1c3a44165b8c68ec325a231f34c55e69e7f7"
+    },
+    {
+      "path": "results/ownership-isolation/ownership-isolation.trx",
+      "source": "artifacts/tt-003/ownership-isolation/ownership-isolation.trx",
+      "sha256": "2d9d6dc9d15337994cbcb0ba098cd43621f2462858c9d8eac11f3f080ddfa18f"
+    },
+    {
+      "path": "transcripts/ownership-isolation.log.txt",
+      "source": "artifacts/tt-003/ownership-isolation.log",
+      "sha256": "21cb06cb40b1d95b8e2374617661f70278a1dd47919910f886b5db5720a48896"
+    },
+    {
+      "path": "results/redirect-red/redirect-red.trx",
+      "source": "artifacts/tt-003/redirect-red/redirect-red.trx",
+      "sha256": "a42c7700fa9044250e19fb5804e75db2c830371a21c7329e4f43c224432e6a89"
+    },
+    {
+      "path": "transcripts/redirect-red.log.txt",
+      "source": "artifacts/tt-003/redirect-red.log",
+      "sha256": "3f093e7c24ff0674aa8794cdc2b90d7d258fd3a0b74342afdf3af06b533c73b6"
+    },
+    {
+      "path": "transcripts/repair-build.log.txt",
+      "source": "artifacts/tt-003/repair-build.log",
+      "sha256": "d73d373edab775cde8c9eb546505c737ffddb0ec4627c5320f622077796f6450"
+    },
+    {
+      "path": "transcripts/repair-example-build.log.txt",
+      "source": "artifacts/tt-003/repair-example-build.log",
+      "sha256": "9f91815ef3e670bb4a2cdcc9e35b62a53699aef9887edad25800dd5836485db0"
+    },
+    {
+      "path": "results/repair-full/baseline-repair-full.trx",
+      "source": "artifacts/tt-003/repair-full/baseline-repair-full.trx",
+      "sha256": "78806c451c5dc08599afa2980a72ac8b86397898e636fe63d136c159e73857af"
+    },
+    {
+      "path": "transcripts/repair-full.log.txt",
+      "source": "artifacts/tt-003/repair-full.log",
+      "sha256": "923c7bc4c2b38495c566c665b908af7785058c54871b5b4663dc37780754fd4e"
+    },
+    {
+      "path": "transcripts/repair-solution-build.log.txt",
+      "source": "artifacts/tt-003/repair-solution-build.log",
+      "sha256": "66baa4fc29b970a4e93e5e4f6870c4403f0e4c7bc00f00a219b54d85dc793822"
+    },
+    {
+      "path": "results/restored-green/restored-green.trx",
+      "source": "artifacts/tt-003/restored-green/restored-green.trx",
+      "sha256": "2c806229266ce5fc7c7ddf3652f9ece0d56ad0674b6b5f868bec758b8bca93fd"
+    },
+    {
+      "path": "transcripts/restored-green.log.txt",
+      "source": "artifacts/tt-003/restored-green.log",
+      "sha256": "08d5fe5fbe94422268a28c79d39975f479f7a4a93415ef72de9f50f19d743c83"
+    },
+    {
+      "path": "results/schema-model-green/schema-model-green.trx",
+      "source": "artifacts/tt-003/schema-model-green/schema-model-green.trx",
+      "sha256": "d2ef15dfa4218c444663aefa3f8281d46d27912a874f97fb59028e9d9506e4db"
+    },
+    {
+      "path": "transcripts/schema-model-green.log.txt",
+      "source": "artifacts/tt-003/schema-model-green.log",
+      "sha256": "499fc43772928895920ba552cba3a6f93887f3a9e4dffb04686d2bb1aff31480"
+    },
+    {
+      "path": "results/schema-model-red/schema-model-red.trx",
+      "source": "artifacts/tt-003/schema-model-red/schema-model-red.trx",
+      "sha256": "2383cf09aa99257eb292aa786876cd756d6cee643d7fc7a81b19d5719e7dedbf"
+    },
+    {
+      "path": "transcripts/schema-model-red.log.txt",
+      "source": "artifacts/tt-003/schema-model-red.log",
+      "sha256": "7c313ded3c3f7e8a7c2e1d63e664dca9b6f3ba0d234fd04353e0ff61cafe9350"
+    },
+    {
+      "path": "results/seed-coverage/seed-coverage.trx",
+      "source": "artifacts/tt-003/seed-coverage/seed-coverage.trx",
+      "sha256": "93004b5c94794ea827fdf0b66007145b41f3c40283168e747967ec67291a472a"
+    },
+    {
+      "path": "transcripts/seed-coverage.log.txt",
+      "source": "artifacts/tt-003/seed-coverage.log",
+      "sha256": "7ba4c3107ce1a19d63b7daa83f28717cab9566d05b23f95814e6a22f406b6a17"
+    },
+    {
+      "path": "results/seed-green/seed-green.trx",
+      "source": "artifacts/tt-003/seed-green/seed-green.trx",
+      "sha256": "7a81022e97e244f4d1810a3eede29ba901590ce97e576f93ca4d25e0723afe0d"
+    },
+    {
+      "path": "transcripts/seed-green.log.txt",
+      "source": "artifacts/tt-003/seed-green.log",
+      "sha256": "371d28948ab0a2619e3fd861134593330bb2122c416ec294b379910464492ed8"
+    },
+    {
+      "path": "results/seed-red/seed-red.trx",
+      "source": "artifacts/tt-003/seed-red/seed-red.trx",
+      "sha256": "ecdc4bde901c292a32578da6398c62b5a208b563c759076bb7684898a32a3a94"
+    },
+    {
+      "path": "transcripts/seed-red.log.txt",
+      "source": "artifacts/tt-003/seed-red.log",
+      "sha256": "7d9dac49a324f178e0172e6d2689827649d14ee4d1a5aaee6ee02562f80658bd"
+    },
+    {
+      "path": "results/sequences-green/sequences-green.trx",
+      "source": "artifacts/tt-003/sequences-green/sequences-green.trx",
+      "sha256": "17765dbf8ad7963c1bfb3e7d8a8a3d650711aaaf02602d94cc648806a701a441"
+    },
+    {
+      "path": "transcripts/sequences-green.log.txt",
+      "source": "artifacts/tt-003/sequences-green.log",
+      "sha256": "27982aa0262ad5e99e8dc6a337c7de5fd7db4f363a48723fb402177c2351f38e"
+    },
+    {
+      "path": "results/validation-fast/validation-fast.trx",
+      "source": "artifacts/tt-003/validation-fast/validation-fast.trx",
+      "sha256": "f06a2821457e365415dca16342b6f1aff2ff38c430ee8cedafabb8f888db40e7"
+    },
+    {
+      "path": "transcripts/validation-fast.log.txt",
+      "source": "artifacts/tt-003/validation-fast.log",
+      "sha256": "b2b4a3732b0c97751ab5a24cd7e7b7d23797df13cc6623f45532ea698bfaf38b"
+    },
+    {
+      "path": "calibration/validation-fault/fault.cs.txt",
+      "source": "artifacts/tt-003/validation-fault/fault.cs.txt",
+      "sha256": "10d72654d498c88f42cb8815e95e875ff05febb3b7b84e3422a8e306adba601a"
+    },
+    {
+      "path": "calibration/validation-fault/original.cs.txt",
+      "source": "artifacts/tt-003/validation-fault/original.cs.txt",
+      "sha256": "b93d015de717e2a7183f89da2e4fcdc1701459f227a430246a65f3fd9af450ba"
+    },
+    {
+      "path": "calibration/validation-fault/receipt.json",
+      "source": "artifacts/tt-003/validation-fault/receipt.json",
+      "sha256": "d6fdaa800edd8c94b292eb799b25126586061e7b20245ba15a4e540bc3fd7fac"
+    },
+    {
+      "path": "transcripts/validation-fault/run.log.txt",
+      "source": "artifacts/tt-003/validation-fault/run.log",
+      "sha256": "4f68fabd76d26ee583200203877c5d3c60082f60198f5553c1c26c2990f4c60b"
+    },
+    {
+      "path": "results/validation-fault/validation-fault.trx",
+      "source": "artifacts/tt-003/validation-fault/validation-fault.trx",
+      "sha256": "33025e0b3e7dc10de9fa0b49e9488b96625152466df3de5022e370a192c19ca1"
+    },
+    {
+      "path": "results/verify-green/verify-green.trx",
+      "source": "artifacts/tt-003/verify-green/verify-green.trx",
+      "sha256": "a44fc170f645adacae9f7f61eca061fe37d21348f3516c671d041312080a8478"
+    },
+    {
+      "path": "results/verify-green-2/verify-green.trx",
+      "source": "artifacts/tt-003/verify-green-2/verify-green.trx",
+      "sha256": "1c8e451ac9cf56d527ac7872d5397f7bf7482d98aadfbf55f37d1f67f41a3f17"
+    },
+    {
+      "path": "transcripts/verify-green-2.log.txt",
+      "source": "artifacts/tt-003/verify-green-2.log",
+      "sha256": "d23dffcd218a405e66de822774aa66d5686ad7cc56ad946616508bff4663f71f"
+    },
+    {
+      "path": "transcripts/verify-green.log.txt",
+      "source": "artifacts/tt-003/verify-green.log",
+      "sha256": "1fe546a0d545de2a25010f7e74d7a1401f85057eeadd21538733ce52f4df83cd"
+    },
+    {
+      "path": "results/verify-red/verify-red.trx",
+      "source": "artifacts/tt-003/verify-red/verify-red.trx",
+      "sha256": "0b87a13b004518a79f0464f753c311f0e69fdbb6555e23ea695627a98599aa4e"
+    },
+    {
+      "path": "transcripts/verify-red.log.txt",
+      "source": "artifacts/tt-003/verify-red.log",
+      "sha256": "3240e0098a62e7f693bdccf182252e5cc050beac66951979f3c5e6d081e0420e"
+    },
+    {
+      "path": "results/workload-green/workload-green.trx",
+      "source": "artifacts/tt-003/workload-green/workload-green.trx",
+      "sha256": "f3a3ca7f6665ae4036d92bb327c674354061989609d5c0c80ec1a8dbb369ef4d"
+    },
+    {
+      "path": "transcripts/workload-green.log.txt",
+      "source": "artifacts/tt-003/workload-green.log",
+      "sha256": "e9bb3cb8667449c5b02a5a2af67e4fbc21c98b06232fd7c8503f76c75a6c6ab9"
+    },
+    {
+      "path": "results/workload-red/workload-red.trx",
+      "source": "artifacts/tt-003/workload-red/workload-red.trx",
+      "sha256": "d21652d223ddc01874eff4f7493f15d733c6e4556083e89b9b5f5102187db865"
+    },
+    {
+      "path": "transcripts/workload-red.log.txt",
+      "source": "artifacts/tt-003/workload-red.log",
+      "sha256": "318ff29a57e89ae20d871aec01e48f2a89b3563fe61c60e8520644c648856f80"
+    },
+    {
+      "path": "coverage/boundary-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/boundary-green/4e5addee-f70c-484e-959c-2f08cb94c6c5/dan_os-greg_2026-10-14.10_34_21.cobertura.xml",
+      "sha256": "f05d10ea1c1cb4afbd1000aab4a8fb49ebbf87f07972afebd3653955a447da03"
+    },
+    {
+      "path": "coverage/boundary-green-2.cobertura.xml.gz",
+      "source": "artifacts/tt-003/boundary-green-2/26de3bfd-9bba-4876-a645-b1f0ad8ed0f5/dan_os-greg_2026-10-14.10_35_59.cobertura.xml",
+      "sha256": "1f3fd30335f373296c832aca9320ce6da61dd8d9fc00cbab09cc5c5c4797e47f"
+    },
+    {
+      "path": "coverage/catalog-edges-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/catalog-edges-green/f788ca12-f531-4c70-af5e-b55c824988b5/dan_os-greg_2026-10-14.11_19_12.cobertura.xml",
+      "sha256": "e69c9b5344d07bad7958fdef9fde635ef9e13ce44f284485df4c863ee0f59c35"
+    },
+    {
+      "path": "coverage/catalog-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/catalog-green/3a65c969-afda-43ce-b31f-d00e0a331918/dan_os-greg_2026-10-14.10_40_13.cobertura.xml",
+      "sha256": "356e721d54e16adfd5e6b06b6c09b2325502d2cd139e91b8eca6abea3f2e177f"
+    },
+    {
+      "path": "coverage/cleanup-core-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/cleanup-core-green/25ecc8df-7d2c-43e2-b790-b960b439d06d/dan_os-greg_2026-10-14.11_07_06.cobertura.xml",
+      "sha256": "97dfa0f7ef68ff76d5b6eb925221b3d25ca5497dcc0bc6db8e71afadcca0835e"
+    },
+    {
+      "path": "coverage/cleanup-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/cleanup-green/478351e1-4a5b-4bed-9727-4106b4886f50/dan_os-greg_2026-10-14.11_03_48.cobertura.xml",
+      "sha256": "2db56e4c3df78cfb4271d3601426d7ffbf6f5efce4bf30107954de4b8dae6d14"
+    },
+    {
+      "path": "coverage/cleanup-refactor.cobertura.xml.gz",
+      "source": "artifacts/tt-003/cleanup-refactor/507d5c39-ecdb-4d79-9011-0566a58c8c77/dan_os-greg_2026-10-14.11_08_49.cobertura.xml",
+      "sha256": "25ac2684750a79d0da1b36e4dd8aa8ef3b9b810f77e2334e25781b9190960240"
+    },
+    {
+      "path": "coverage/comments-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/comments-green/06f708ad-3387-41ea-8b13-094dd0bdc345/dan_os-greg_2026-10-14.11_51_41.cobertura.xml",
+      "sha256": "36dce08c5954346b5a933eb23bee0c891baabff9029442bcb699487d2d0cb2a2"
+    },
+    {
+      "path": "coverage/configuration-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/configuration-green/a5155d62-da28-4ee8-971a-cf29b8738ab5/dan_os-greg_2026-10-14.10_30_56.cobertura.xml",
+      "sha256": "6b3120b77367aef3b6197dcd49f21e4e1485834fb444e765e0057d3b62ef2e99"
+    },
+    {
+      "path": "coverage/context-binding-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/context-binding-green/c8fa175a-fef3-409e-ae4c-fd4811dd28fb/dan_os-greg_2026-10-14.11_33_28.cobertura.xml",
+      "sha256": "7101544e42084489918ca8048590b5f9cfcd099cb42a79da327c3b8bf1644dcc"
+    },
+    {
+      "path": "coverage/context-binding-refactor.cobertura.xml.gz",
+      "source": "artifacts/tt-003/context-binding-refactor/29cff29a-f224-4cc2-b3c8-332d8be0fd66/dan_os-greg_2026-10-14.11_41_44.cobertura.xml",
+      "sha256": "27c68ea2b4932049223597785b7862bb013bacd0b0c54f871ea363c0db39aec1"
+    },
+    {
+      "path": "coverage/full.cobertura.xml.gz",
+      "source": "artifacts/tt-003/full/b23910ce-2561-4085-adb6-e0d906dc6d8f/dan_os-greg_2026-10-14.10_47_00.cobertura.xml",
+      "sha256": "c92fc7319c4e636d55c3a9cc9a50f7259e89ee167fd10849cbf87228d859307a"
+    },
+    {
+      "path": "coverage/full-refactor.cobertura.xml.gz",
+      "source": "artifacts/tt-003/full-refactor/a2de96df-1573-4fae-b091-df0cbb7f7980/dan_os-greg_2026-10-14.10_50_54.cobertura.xml",
+      "sha256": "7fcfb005a0e2a377d7e7f2da746142eb9f221b5193ce58629cfd7793f07fce63"
+    },
+    {
+      "path": "coverage/migration-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/migration-green/974f3579-d412-47c8-93a9-43979c52e9df/dan_os-greg_2026-10-14.10_40_48.cobertura.xml",
+      "sha256": "32113bb207124b57a364caaa4a65068cc22463754a300faf022807de58194008"
+    },
+    {
+      "path": "coverage/options-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/options-green/62c64137-fe86-4312-b743-ac7a92dae6b0/dan_os-greg_2026-10-14.11_23_29.cobertura.xml",
+      "sha256": "3d819e1e707a0c1a98618154c249971a2e379f9b725efadad61e1da759c093ad"
+    },
+    {
+      "path": "coverage/options-refactor.cobertura.xml.gz",
+      "source": "artifacts/tt-003/options-refactor/3a243977-806a-426c-b111-be9bc753e372/dan_os-greg_2026-10-14.11_28_10.cobertura.xml",
+      "sha256": "b89db1e4475c3cef27632fb9023874cc8ef3dc2f672dbaa8385fd00ea7ab4bd5"
+    },
+    {
+      "path": "coverage/ownership-isolation.cobertura.xml.gz",
+      "source": "artifacts/tt-003/ownership-isolation/af16ed98-1def-455d-9107-cf935dc18187/dan_os-greg_2026-10-14.11_37_29.cobertura.xml",
+      "sha256": "747d7aad77dce608a62765b1cee18698344187d9e308cfd4e292500f6a8a6971"
+    },
+    {
+      "path": "coverage/repair-full.cobertura.xml.gz",
+      "source": "artifacts/tt-003/repair-full/96428107-a7e6-46a4-97b1-bd199255e6ec/dan_os-greg_2026-10-14.11_55_29.cobertura.xml",
+      "sha256": "66d7b0a97ef6a63dfb6864d2c13143f2efbbe02103f4b69af0f1216616ca0222"
+    },
+    {
+      "path": "coverage/schema-model-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/schema-model-green/ff927c38-3617-4150-92e8-067856c5630d/dan_os-greg_2026-10-14.11_47_52.cobertura.xml",
+      "sha256": "948765fd2b9b918abd12d93e2e6a977202b7fee470e1cbc7467d352baa7d5bfe"
+    },
+    {
+      "path": "coverage/seed-coverage.cobertura.xml.gz",
+      "source": "artifacts/tt-003/seed-coverage/0f5932f3-9145-46ff-a48d-8a37a52ffd48/dan_os-greg_2026-10-14.10_23_08.cobertura.xml",
+      "sha256": "dd2ce45f4b7282282541f39b133adf7b2b8242a4dcf7446ddc39780f4c4d5dd9"
+    },
+    {
+      "path": "coverage/sequences-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/sequences-green/80ce54a9-6c64-489c-a23f-69bc710a69f8/dan_os-greg_2026-10-14.10_41_55.cobertura.xml",
+      "sha256": "5675166169feac794c74090fc74142c68fddbbe69ef4119d142715378ca7fe80"
+    },
+    {
+      "path": "coverage/validation-fast.cobertura.xml.gz",
+      "source": "artifacts/tt-003/validation-fast/521f2de1-3e81-4746-b5e1-69d90a10185d/dan_os-greg_2026-10-14.10_28_38.cobertura.xml",
+      "sha256": "0a1169c1be088e0774509375957ddee41a5564e74bf55707573c22823e042fac"
+    },
+    {
+      "path": "coverage/verify-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/verify-green/12746ed9-2690-463b-b655-91d5be986e2a/dan_os-greg_2026-10-14.10_27_05.cobertura.xml",
+      "sha256": "fb03a1090cb5a7f0ebd0d6ba77cb26af5594f7528649b814aa07b8a6a449de68"
+    },
+    {
+      "path": "coverage/verify-green-2.cobertura.xml.gz",
+      "source": "artifacts/tt-003/verify-green-2/13eeec9a-c7e2-4641-ae31-80661f0856f2/dan_os-greg_2026-10-14.10_28_01.cobertura.xml",
+      "sha256": "316f27a18d8d7d580a8b188db32080d24978839a5bbfa7de592fcac0643864fb"
+    },
+    {
+      "path": "coverage/workload-green.cobertura.xml.gz",
+      "source": "artifacts/tt-003/workload-green/6edac59b-2f91-4fdf-b394-625c2a90e36b/dan_os-greg_2026-10-14.11_12_26.cobertura.xml",
+      "sha256": "45415257167c6299ef4dfffee537c1f43a6512b527f4a331949a1f5ba95cd574"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Tt.cs.txt",
+      "source": "src/TurboTest.EFCore/Tt.cs",
+      "sha256": "b76b51193659677b7f152f8e29f596cea0903f6fb352d90caaac8dfbe2756b92"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "source": "src/TurboTest.EFCore/TtFactory.cs",
+      "sha256": "1fc48935115dd004b3ccbc36caddd3c814d24c78c3e7d130c11423fc4474fcb1"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/TtBaselineDefinition.cs.txt",
+      "source": "src/TurboTest.EFCore/TtBaselineDefinition.cs",
+      "sha256": "61a7d2273af39aeac83df24282afe35553b41088692e4da7fc0d6d4d9b80230f"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/ITtDatabasePool.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/ITtDatabasePool.cs",
+      "sha256": "6c73af7adc31586d31d4f66cede00f99a84dc903073cb774f0632f6ee62d6cf7"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtPool.cs",
+      "sha256": "f49d2c2b9131d7fc8e900d4f6ada83a08952313d809ccc1ccd091b6b08dded29"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtPreparedPool.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtPreparedPool.cs",
+      "sha256": "0a5176037ac143e3081efb2fa0e2508d1aa6c29dc27d1eadd95ccbef13959a63"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs",
+      "sha256": "4a7c068e3fb11653b9fd69c43ab0a6e6f417a9632d31cb24998dbe0796a95348"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/SeededBaselineTests.cs.txt",
+      "source": "tests/TurboTest.Tests/SeededBaselineTests.cs",
+      "sha256": "76760d19fe78185d3b1b7dd7203a4a1a8ddb26129c7ce5308be27ea072e9456d"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/BaselineValidationTests.cs.txt",
+      "source": "tests/TurboTest.Tests/BaselineValidationTests.cs",
+      "sha256": "fae407313499fa1480cf4b3ac2777d91e30acc4911b4958e7e9755268c736d5b"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/MigratedBaselineTests.cs.txt",
+      "source": "tests/TurboTest.Tests/MigratedBaselineTests.cs",
+      "sha256": "a9cfa3f8df5fbeb04968f7fe0cfb71f99b035aa3de7db77498fb5b225c76e967"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/TtCleanup.cs.txt",
+      "source": "src/TurboTest.EFCore/TtCleanup.cs",
+      "sha256": "8f288e58b0af1606002835ad44f966b4a0ad3539cc277bd785309c975cd40ccf"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/TtLifecycleException.cs.txt",
+      "source": "src/TurboTest.EFCore/TtLifecycleException.cs",
+      "sha256": "9505749a1b5aa533a809b83b387d8bebcd97d4b0ff8f50cdd1fbd45e8ef5ed96"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "source": "src/TurboTest.EFCore/TtOptions.cs",
+      "sha256": "62cb6f9da4e395f0e86f921fbde5eb3ecbbf7728e54e457c95ba8bf6d9974289"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtCleanupRegistry.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtCleanupRegistry.cs",
+      "sha256": "47648da6e78984974e9a935adfcb628d5c6feb6f21c545abceb746c43156fcdc"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtPreparedConfiguration.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtPreparedConfiguration.cs",
+      "sha256": "a7495c4a0beb5df2fa256ab482bd14696491c69ea51f7a13f0d231575d7f4821"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/CleanupOwnershipTests.cs.txt",
+      "source": "tests/TurboTest.Tests/CleanupOwnershipTests.cs",
+      "sha256": "c468e24ff57289ea284b319823c679e49b87c5907b9fec8e14e53e4c193f4732"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/FailedStartupCleanupTests.cs.txt",
+      "source": "tests/TurboTest.Tests/FailedStartupCleanupTests.cs",
+      "sha256": "fcaea0a4a76dd093e89d505b27f0141b4227bef4d00486944300e96ab0afd41a"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/PreparedConfigurationTests.cs.txt",
+      "source": "tests/TurboTest.Tests/PreparedConfigurationTests.cs",
+      "sha256": "a38180a06d7507ea75da40260ef13381111c3a137d99c20940b7c94169ac4ce2"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/PreparedContextBindingTests.cs.txt",
+      "source": "tests/TurboTest.Tests/PreparedContextBindingTests.cs",
+      "sha256": "36e0763991152fb9ec2ff49e4aa5b8b5ca2753fcc1d320b2abcac97a0f1dc896"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/StaticLifecycleCollection.cs.txt",
+      "source": "tests/TurboTest.Tests/StaticLifecycleCollection.cs",
+      "sha256": "e9e198e47c4c408f19caae71563c9e15b41f039c11a43f45c7560b60a066263c"
+    },
+    {
+      "path": "snapshots/README.md.txt",
+      "source": "README.md",
+      "sha256": "e3261ec7193b517d87f583e862863e0192f238559200db538fe0e8771afcf2be"
+    }
+  ]
+}

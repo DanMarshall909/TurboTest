@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="58b18598-db53-44b3-a8f6-b9c35b8fb1e7" name="@os-greg 2026-10-14 11:14:43" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T11:14:43.1377103+10:00" queuing="2026-10-14T11:14:43.1377104+10:00" start="2026-10-14T11:14:37.2635151+10:00" finish="2026-10-14T11:15:49.0872688+10:00" />
+  <TestSettings name="default" id="897ed141-81e3-40bb-9158-7179a22d4fbe">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_11_14_43" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ed99da9e-6c25-4e73-82f6-6b930c49b7cc" testId="5a7796f0-02ea-9719-6cd4-a6593a6f323b" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER SEQUENCE \&quot;Standalone\&quot; OWNED BY NONE&quot;)" computerName="os-greg" duration="00:00:06.3453963" startTime="2026-10-14T11:14:47.5683257+10:00" endTime="2026-10-14T11:14:53.9199715+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ed99da9e-6c25-4e73-82f6-6b930c49b7cc">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 224
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 225
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4d33ba5a-925c-4d5e-88dc-f23daa0270b0" testId="91b4a6ec-e356-a480-4fb5-dcf473eb7d98" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;ALTER TABLE \&quot;Parents\&quot; ENABLE ROW LEVEL SECURITY&quot;)" computerName="os-greg" duration="00:00:05.0567307" startTime="2026-10-14T11:15:08.9782268+10:00" endTime="2026-10-14T11:15:14.0337863+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4d33ba5a-925c-4d5e-88dc-f23daa0270b0" />
+    <UnitTestResult executionId="34a1422f-7232-44d1-afa1-7e70c4d7b9e0" testId="f256f5d6-1d01-44a1-75cb-ee085217768c" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE FUNCTION unsupported_function() RETURNS int&quot;···)" computerName="os-greg" duration="00:00:04.7703618" startTime="2026-10-14T11:15:19.1676108+10:00" endTime="2026-10-14T11:15:23.9373566+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="34a1422f-7232-44d1-afa1-7e70c4d7b9e0" />
+    <UnitTestResult executionId="33210dd3-be0e-4e62-9b94-1bba79717341" testId="08731160-d412-7f17-75a3-c31a52f65d85" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE POLICY dormant_policy ON \&quot;Parents\&quot; USING &quot;···)" computerName="os-greg" duration="00:00:05.0267777" startTime="2026-10-14T11:15:03.9496337+10:00" endTime="2026-10-14T11:15:08.9767933+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="33210dd3-be0e-4e62-9b94-1bba79717341">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 282
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 285
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 123
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6c055dd4-c338-467f-93e4-ff9a5f9f6acd" testId="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER TABLE \&quot;Parents\&quot; ADD COLUMN unexpected inte&quot;···)" computerName="os-greg" duration="00:00:04.4552070" startTime="2026-10-14T11:14:43.1235446+10:00" endTime="2026-10-14T11:14:47.5670177+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6c055dd4-c338-467f-93e4-ff9a5f9f6acd" />
+    <UnitTestResult executionId="867783d3-4171-4961-b332-ba98e29a6dfc" testId="49b3022d-7e13-b831-b13f-1e0106a803d2" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;SELECT setval(pg_get_serial_sequence('\&quot;Parents\&quot;'&quot;···)" computerName="os-greg" duration="00:00:05.3915415" startTime="2026-10-14T11:14:37.7114157+10:00" endTime="2026-10-14T11:14:43.1107783+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="867783d3-4171-4961-b332-ba98e29a6dfc" />
+    <UnitTestResult executionId="75ba0f4f-d783-4900-a25f-598c54978d88" testId="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;UPDATE \&quot;Parents\&quot; SET \&quot;Priority\&quot; = 999&quot;)" computerName="os-greg" duration="00:00:04.9723236" startTime="2026-10-14T11:14:53.9250096+10:00" endTime="2026-10-14T11:14:58.8921062+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="75ba0f4f-d783-4900-a25f-598c54978d88" />
+    <UnitTestResult executionId="13ab90c5-e71a-4982-b683-080bb32ecf74" testId="97b8f3cd-4dcd-cb69-21a7-6f5bb48e6854" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE STATISTICS unsupported_statistics ON \&quot;Name&quot;···)" computerName="os-greg" duration="00:00:04.9057267" startTime="2026-10-14T11:15:28.8127323+10:00" endTime="2026-10-14T11:15:33.7186970+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="13ab90c5-e71a-4982-b683-080bb32ecf74">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 282
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 285
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 123
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c88ae7a0-2540-46f4-8edf-bab006722a6d" testId="df5dc6f9-7a04-c744-e6a7-e9fae486d885" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE COLLATION unsupported_collation (locale = '&quot;···)" computerName="os-greg" duration="00:00:05.1921302" startTime="2026-10-14T11:15:38.7478307+10:00" endTime="2026-10-14T11:15:43.9401894+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c88ae7a0-2540-46f4-8edf-bab006722a6d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 282
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 285
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 123
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a775cbcc-c4dc-4060-8559-a86ed0634084" testId="ecf0860f-a026-03e8-78ac-4f939dccb4e6" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE TYPE unsupported_type AS ENUM ('one', 'two'&quot;···)" computerName="os-greg" duration="00:00:05.0283881" startTime="2026-10-14T11:15:33.7196408+10:00" endTime="2026-10-14T11:15:38.7474224+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a775cbcc-c4dc-4060-8559-a86ed0634084" />
+    <UnitTestResult executionId="04afa296-13f5-43b2-80d4-667611749675" testId="50c37414-4da1-08b5-d1df-988f46ff60f0" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE VIEW unsupported_view AS SELECT 1 AS value&quot;)" computerName="os-greg" duration="00:00:05.0744564" startTime="2026-10-14T11:15:43.9411591+10:00" endTime="2026-10-14T11:15:49.0150400+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="04afa296-13f5-43b2-80d4-667611749675" />
+    <UnitTestResult executionId="357fe755-4dd3-4371-bff6-cdbac70da0c6" testId="6c0b93af-d430-6096-2797-817b3315adf4" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA&quot;···)" computerName="os-greg" duration="00:00:05.0556301" startTime="2026-10-14T11:14:58.8942245+10:00" endTime="2026-10-14T11:15:03.9491195+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="357fe755-4dd3-4371-bff6-cdbac70da0c6" />
+    <UnitTestResult executionId="e52947f9-2c27-4f36-bf3c-d7f64546c008" testId="7a40f1fe-3011-5632-6180-b04f2bfd3c07" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE TEXT SEARCH CONFIGURATION unsupported_searc&quot;···)" computerName="os-greg" duration="00:00:05.1321279" startTime="2026-10-14T11:15:14.0342641+10:00" endTime="2026-10-14T11:15:19.1667057+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e52947f9-2c27-4f36-bf3c-d7f64546c008">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Null() Failure: Value is not null
+Expected: null
+Actual:   TtFactory`1 { }</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 282
+   at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 285
+   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 123
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ee08554b-a4f3-4f1a-b50f-5e9243dbbb65" testId="36882e1c-b398-341c-ec8d-381fd90ae96e" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET &quot;···)" computerName="os-greg" duration="00:00:04.8746507" startTime="2026-10-14T11:15:23.9385046+10:00" endTime="2026-10-14T11:15:28.8123552+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ee08554b-a4f3-4f1a-b50f-5e9243dbbb65" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE VIEW unsupported_view AS SELECT 1 AS value&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="50c37414-4da1-08b5-d1df-988f46ff60f0">
+      <Execution id="04afa296-13f5-43b2-80d4-667611749675" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE TYPE unsupported_type AS ENUM ('one', 'two'&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ecf0860f-a026-03e8-78ac-4f939dccb4e6">
+      <Execution id="a775cbcc-c4dc-4060-8559-a86ed0634084" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;SELECT setval(pg_get_serial_sequence('\&quot;Parents\&quot;'&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="49b3022d-7e13-b831-b13f-1e0106a803d2">
+      <Execution id="867783d3-4171-4961-b332-ba98e29a6dfc" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE FUNCTION unsupported_function() RETURNS int&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f256f5d6-1d01-44a1-75cb-ee085217768c">
+      <Execution id="34a1422f-7232-44d1-afa1-7e70c4d7b9e0" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE TEXT SEARCH CONFIGURATION unsupported_searc&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="7a40f1fe-3011-5632-6180-b04f2bfd3c07">
+      <Execution id="e52947f9-2c27-4f36-bf3c-d7f64546c008" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE COLLATION unsupported_collation (locale = '&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="df5dc6f9-7a04-c744-e6a7-e9fae486d885">
+      <Execution id="c88ae7a0-2540-46f4-8edf-bab006722a6d" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE POLICY dormant_policy ON \&quot;Parents\&quot; USING &quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="08731160-d412-7f17-75a3-c31a52f65d85">
+      <Execution id="33210dd3-be0e-4e62-9b94-1bba79717341" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE STATISTICS unsupported_statistics ON \&quot;Name&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="97b8f3cd-4dcd-cb69-21a7-6f5bb48e6854">
+      <Execution id="13ab90c5-e71a-4982-b683-080bb32ecf74" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;ALTER TABLE \&quot;Parents\&quot; ENABLE ROW LEVEL SECURITY&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="91b4a6ec-e356-a480-4fb5-dcf473eb7d98">
+      <Execution id="4d33ba5a-925c-4d5e-88dc-f23daa0270b0" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="6c0b93af-d430-6096-2797-817b3315adf4">
+      <Execution id="357fe755-4dd3-4371-bff6-cdbac70da0c6" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET &quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="36882e1c-b398-341c-ec8d-381fd90ae96e">
+      <Execution id="ee08554b-a4f3-4f1a-b50f-5e9243dbbb65" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER SEQUENCE \&quot;Standalone\&quot; OWNED BY NONE&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="5a7796f0-02ea-9719-6cd4-a6593a6f323b">
+      <Execution id="ed99da9e-6c25-4e73-82f6-6b930c49b7cc" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;UPDATE \&quot;Parents\&quot; SET \&quot;Priority\&quot; = 999&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d">
+      <Execution id="75ba0f4f-d783-4900-a25f-598c54978d88" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER TABLE \&quot;Parents\&quot; ADD COLUMN unexpected inte&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc">
+      <Execution id="6c055dd4-c338-467f-93e4-ff9a5f9f6acd" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="5a7796f0-02ea-9719-6cd4-a6593a6f323b" executionId="ed99da9e-6c25-4e73-82f6-6b930c49b7cc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="91b4a6ec-e356-a480-4fb5-dcf473eb7d98" executionId="4d33ba5a-925c-4d5e-88dc-f23daa0270b0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f256f5d6-1d01-44a1-75cb-ee085217768c" executionId="34a1422f-7232-44d1-afa1-7e70c4d7b9e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="08731160-d412-7f17-75a3-c31a52f65d85" executionId="33210dd3-be0e-4e62-9b94-1bba79717341" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc" executionId="6c055dd4-c338-467f-93e4-ff9a5f9f6acd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="49b3022d-7e13-b831-b13f-1e0106a803d2" executionId="867783d3-4171-4961-b332-ba98e29a6dfc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d" executionId="75ba0f4f-d783-4900-a25f-598c54978d88" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="97b8f3cd-4dcd-cb69-21a7-6f5bb48e6854" executionId="13ab90c5-e71a-4982-b683-080bb32ecf74" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="df5dc6f9-7a04-c744-e6a7-e9fae486d885" executionId="c88ae7a0-2540-46f4-8edf-bab006722a6d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ecf0860f-a026-03e8-78ac-4f939dccb4e6" executionId="a775cbcc-c4dc-4060-8559-a86ed0634084" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="50c37414-4da1-08b5-d1df-988f46ff60f0" executionId="04afa296-13f5-43b2-80d4-667611749675" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c0b93af-d430-6096-2797-817b3315adf4" executionId="357fe755-4dd3-4371-bff6-cdbac70da0c6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7a40f1fe-3011-5632-6180-b04f2bfd3c07" executionId="e52947f9-2c27-4f36-bf3c-d7f64546c008" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="36882e1c-b398-341c-ec8d-381fd90ae96e" executionId="ee08554b-a4f3-4f1a-b50f-5e9243dbbb65" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="14" executed="14" passed="9" failed="5" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.06]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.12]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.15]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:16.38]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:16.38]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:16.38]       Stack Trace:
+[xUnit.net 00:00:16.38]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(224,0): at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption)
+[xUnit.net 00:00:16.38]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(225,0): at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption)
+[xUnit.net 00:00:16.38]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:31.43]       Assert.Null() Failure: Value is not null
+[xUnit.net 00:00:31.43]       Expected: null
+[xUnit.net 00:00:31.43]       Actual:   TtFactory`1 { }
+[xUnit.net 00:00:31.43]       Stack Trace:
+[xUnit.net 00:00:31.43]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(282,0): at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create)
+[xUnit.net 00:00:31.43]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(285,0): at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create)
+[xUnit.net 00:00:31.43]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(123,0): at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql)
+[xUnit.net 00:00:31.43]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:41.62]       Assert.Null() Failure: Value is not null
+[xUnit.net 00:00:41.62]       Expected: null
+[xUnit.net 00:00:41.62]       Actual:   TtFactory`1 { }
+[xUnit.net 00:00:41.62]       Stack Trace:
+[xUnit.net 00:00:41.62]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(282,0): at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create)
+[xUnit.net 00:00:41.62]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(285,0): at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create)
+[xUnit.net 00:00:41.62]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(123,0): at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql)
+[xUnit.net 00:00:41.62]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:56.17]       Assert.Null() Failure: Value is not null
+[xUnit.net 00:00:56.17]       Expected: null
+[xUnit.net 00:00:56.17]       Actual:   TtFactory`1 { }
+[xUnit.net 00:00:56.17]       Stack Trace:
+[xUnit.net 00:00:56.17]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(282,0): at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create)
+[xUnit.net 00:00:56.17]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(285,0): at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create)
+[xUnit.net 00:00:56.17]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(123,0): at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql)
+[xUnit.net 00:00:56.17]         --- End of stack trace from previous location ---
+[xUnit.net 00:01:06.40]       Assert.Null() Failure: Value is not null
+[xUnit.net 00:01:06.40]       Expected: null
+[xUnit.net 00:01:06.40]       Actual:   TtFactory`1 { }
+[xUnit.net 00:01:06.40]       Stack Trace:
+[xUnit.net 00:01:06.40]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(282,0): at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create)
+[xUnit.net 00:01:06.40]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(285,0): at TurboTest.Tests.SeededBaselineTests.RejectFactoryAsync(Func`1 create)
+[xUnit.net 00:01:06.40]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(123,0): at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql)
+[xUnit.net 00:01:06.40]         --- End of stack trace from previous location ---
+[xUnit.net 00:01:11.48]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T11:14:53.9227456+10:00">
+        <Text>[xUnit.net 00:00:16.38]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "ALTER SEQUENCE \"Standalone\" OWNED BY NONE") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T11:15:08.9773838+10:00">
+        <Text>[xUnit.net 00:00:31.43]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE POLICY dormant_policy ON \"Parents\" USING "···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T11:15:19.1671415+10:00">
+        <Text>[xUnit.net 00:00:41.62]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE TEXT SEARCH CONFIGURATION unsupported_searc"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T11:15:33.7190462+10:00">
+        <Text>[xUnit.net 00:00:56.17]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE STATISTICS unsupported_statistics ON \"Name"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T11:15:43.9406688+10:00">
+        <Text>[xUnit.net 00:01:06.40]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE COLLATION unsupported_collation (locale = '"···) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

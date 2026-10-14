@@ -1,0 +1,39 @@
+{
+  "status": "First seed criterion GREEN and coverage observed; TT-003 remains Open and unreviewed.",
+  "base": "0fe83327c02602edb45141f83a55c0a1b3b2df45",
+  "passed": 1,
+  "failed": 0,
+  "skipped": 0,
+  "coverageReview": "Successful initialize/seal/clone/return executes. Migration/caller modes, initialization/clone/cleanup failures and discard are not protected in this focused run. No whole-class coverage or mutation claim.",
+  "refactor": {
+    "production": "Separated prepared-database ownership behind ITtDatabasePool; legacy pooled reset remains under its existing implementation. Private admin source and workload source have distinct roles. Further clone validation belongs to the next acceptance step.",
+    "tests": "One public three-table test independently checks non-default seed values, relationships and actual generated IDs across two returns; no duplication to consolidate yet."
+  },
+  "files": [
+    {
+      "path": "transcripts/seed-green.log.txt",
+      "source": "artifacts/tt-003/seed-green.log",
+      "sha256": "371d28948ab0a2619e3fd861134593330bb2122c416ec294b379910464492ed8"
+    },
+    {
+      "path": "results/seed-green.trx",
+      "source": "artifacts/tt-003/seed-green/seed-green.trx",
+      "sha256": "7a81022e97e244f4d1810a3eede29ba901590ce97e576f93ca4d25e0723afe0d"
+    },
+    {
+      "path": "transcripts/seed-coverage.log.txt",
+      "source": "artifacts/tt-003/seed-coverage.log",
+      "sha256": "7ba4c3107ce1a19d63b7daa83f28717cab9566d05b23f95814e6a22f406b6a17"
+    },
+    {
+      "path": "snapshots/TtPreparedPool.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtPreparedPool.cs",
+      "sha256": "22df05729c55e30010f701b4c51e48e14f63a34a4f04d7e50017e464394208d3"
+    },
+    {
+      "path": "coverage/seed.cobertura.xml.gz",
+      "source": "artifacts/tt-003/seed-coverage/0f5932f3-9145-46ff-a48d-8a37a52ffd48/dan_os-greg_2026-10-14.10_23_08.cobertura.xml",
+      "sha256": "dd2ce45f4b7282282541f39b133adf7b2b8242a4dcf7446ddc39780f4c4d5dd9"
+    }
+  ]
+}

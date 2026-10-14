@@ -1,0 +1,35 @@
+{
+  "status": "Valid RED only; TT-003 remains Open. Public baseline API is an unimplemented scaffold in the working tree.",
+  "base": "0fe83327c02602edb45141f83a55c0a1b3b2df45",
+  "command": "dotnet test tests/TurboTest.Tests --filter FullyQualifiedName~SeededBaselineTests --logger trx;LogFileName=seed-red.trx --results-directory artifacts/tt-003/seed-red",
+  "exit": 1,
+  "failure": "Expected initializer calls 1, actual 0; schema/seed baseline preparation is missing.",
+  "remaining": "Implement initializer, immutable template, clone/validation and failure ownership; then coverage/refactor and other TT-003 criteria.",
+  "files": [
+    {
+      "source": "artifacts/tt-003/seed-red.log",
+      "archive": "seed-red.log.txt",
+      "sha256": "7d9dac49a324f178e0172e6d2689827649d14ee4d1a5aaee6ee02562f80658bd"
+    },
+    {
+      "source": "artifacts/tt-003/seed-red/seed-red.trx",
+      "archive": "seed-red.trx",
+      "sha256": "ecdc4bde901c292a32578da6398c62b5a208b563c759076bb7684898a32a3a94"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtBaselineDefinition.cs",
+      "archive": "source/TtBaselineDefinition.cs.txt",
+      "sha256": "91f04d029a2d0253366f5f99765da6228f8dabdcbe6ec790787fc72cd000fda4"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Tt.cs",
+      "archive": "source/Tt.cs.txt",
+      "sha256": "e90d816d0868a3f62c8ef836e9d4021fb494ba7f719c8a5b7e87bd4d089d267f"
+    },
+    {
+      "source": "tests/TurboTest.Tests/SeededBaselineTests.cs",
+      "archive": "source/SeededBaselineTests.cs.txt",
+      "sha256": "c643a286ee7459f67625bfd96ba4b7ea3d260087b9c895e80c93c559e7fa3536"
+    }
+  ]
+}

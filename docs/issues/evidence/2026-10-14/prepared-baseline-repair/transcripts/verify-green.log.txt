@@ -1,0 +1,87 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:05.49]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "SELECT setval(pg_get_serial_sequence('\"Parents\"'"···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "SELECT setval(pg_get_serial_sequence('\"Parents\"'"···) [5 s]
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(Npgsql.NpgsqlException)
+---- Npgsql.NpgsqlException : No password has been provided but the backend requires one (in SASL/SCRAM-SHA-256)
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 30
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 31
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.UnpooledDataSource.Get(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.OpenAdministratorAsync(String database, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 171
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.OpenAdministratorAsync(String database, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 177
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.InitializeAsync(CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 98
+[xUnit.net 00:00:09.66]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "ALTER TABLE \"Parents\" ADD COLUMN unexpected inte"···) [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "ALTER TABLE \"Parents\" ADD COLUMN unexpected inte"···) [4 s]
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(Npgsql.NpgsqlException)
+---- Npgsql.NpgsqlException : No password has been provided but the backend requires one (in SASL/SCRAM-SHA-256)
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 30
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 31
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.UnpooledDataSource.Get(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.OpenAdministratorAsync(String database, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 171
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.OpenAdministratorAsync(String database, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 177
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.InitializeAsync(CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 98
+[xUnit.net 00:00:14.97]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "UPDATE \"Parents\" SET \"Priority\" = 999") [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "UPDATE \"Parents\" SET \"Priority\" = 999") [5 s]
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(Npgsql.NpgsqlException)
+---- Npgsql.NpgsqlException : No password has been provided but the backend requires one (in SASL/SCRAM-SHA-256)
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 30
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 31
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.UnpooledDataSource.Get(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.OpenAdministratorAsync(String database, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 171
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.OpenAdministratorAsync(String database, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 177
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.InitializeAsync(CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 98
+[xUnit.net 00:00:19.82]     TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state [4 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (NpgsqlException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 81
+   at TurboTest.Tests.SeededBaselineTests.A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 54
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-003/verify-green/verify-green.trx
+
+Failed!  - Failed:     4, Passed:     0, Skipped:     0, Total:     4, Duration: 19 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-003/verify-green/12746ed9-2690-463b-b655-91d5be986e2a/dan_os-greg_2026-10-14.10_27_05.cobertura.xml

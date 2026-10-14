@@ -1,0 +1,50 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:06.02]     TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(clone: False, global: True) [FAIL]
+  Failed TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(clone: False, global: True) [5 s]
+  Error Message:
+   Assert.IsType() Failure: Value is null
+Expected: typeof(TurboTest.EFCore.TtCleanup)
+Actual:   null
+  Stack Trace:
+     at TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(Boolean clone, Boolean global) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FailedStartupCleanupTests.cs:line 36
+   at TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(Boolean clone, Boolean global) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FailedStartupCleanupTests.cs:line 58
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:10.79]     TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(clone: False, global: False) [FAIL]
+  Failed TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(clone: False, global: False) [4 s]
+  Error Message:
+   Assert.IsType() Failure: Value is null
+Expected: typeof(TurboTest.EFCore.TtCleanup)
+Actual:   null
+  Stack Trace:
+     at TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(Boolean clone, Boolean global) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FailedStartupCleanupTests.cs:line 36
+   at TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(Boolean clone, Boolean global) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FailedStartupCleanupTests.cs:line 58
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:18.64]     TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(clone: True, global: False) [FAIL]
+  Failed TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(clone: True, global: False) [7 s]
+  Error Message:
+   Assert.IsType() Failure: Value is null
+Expected: typeof(TurboTest.EFCore.TtCleanup)
+Actual:   null
+  Stack Trace:
+     at TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(Boolean clone, Boolean global) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FailedStartupCleanupTests.cs:line 36
+   at TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(Boolean clone, Boolean global) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FailedStartupCleanupTests.cs:line 58
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:24.41]     TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(clone: True, global: True) [FAIL]
+  Failed TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(clone: True, global: True) [5 s]
+  Error Message:
+   Assert.IsType() Failure: Value is null
+Expected: typeof(TurboTest.EFCore.TtCleanup)
+Actual:   null
+  Stack Trace:
+     at TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(Boolean clone, Boolean global) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FailedStartupCleanupTests.cs:line 36
+   at TurboTest.Tests.FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry(Boolean clone, Boolean global) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FailedStartupCleanupTests.cs:line 58
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-003/cleanup-red/cleanup-red.trx
+
+Failed!  - Failed:     4, Passed:     0, Skipped:     0, Total:     4, Duration: 24 s - TurboTest.Tests.dll (net10.0)

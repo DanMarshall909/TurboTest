@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="8e132005-1791-48bf-8d96-adf765736940" name="@os-greg 2026-10-14 11:50:05" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T11:50:05.9212087+10:00" queuing="2026-10-14T11:50:05.9212088+10:00" start="2026-10-14T11:49:57.5931319+10:00" finish="2026-10-14T11:50:26.6141663+10:00" />
+  <TestSettings name="default" id="5af5fb94-9078-4a40-bb99-d02fefeb22d6">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_11_50_05" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="3c5ae15a-c64e-49da-b219-11464d1b36cb" testId="49b3022d-7e13-b831-b13f-1e0106a803d2" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;SELECT setval(pg_get_serial_sequence('\&quot;Parents\&quot;'&quot;···)" computerName="os-greg" duration="00:00:07.8570077" startTime="2026-10-14T11:49:58.0295123+10:00" endTime="2026-10-14T11:50:05.8955637+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3c5ae15a-c64e-49da-b219-11464d1b36cb" />
+    <UnitTestResult executionId="5f9e192c-f610-40b2-bae3-2bfc49af70e4" testId="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER TABLE \&quot;Parents\&quot; ADD COLUMN unexpected inte&quot;···)" computerName="os-greg" duration="00:00:04.6289770" startTime="2026-10-14T11:50:05.9075064+10:00" endTime="2026-10-14T11:50:10.5249380+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5f9e192c-f610-40b2-bae3-2bfc49af70e4" />
+    <UnitTestResult executionId="306c5ac8-26c1-4605-9800-cd5d6c3e9914" testId="3163b100-ad75-c25d-0c11-045b63e02e05" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;COMMENT ON COLUMN \&quot;Parents\&quot;.\&quot;Name\&quot; IS 'changed&quot;···)" computerName="os-greg" duration="00:00:05.7677142" startTime="2026-10-14T11:50:15.4972503+10:00" endTime="2026-10-14T11:50:21.2711553+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="306c5ac8-26c1-4605-9800-cd5d6c3e9914">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 257
+   at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 258
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fb6025a3-b732-46ce-a822-cabaa0ccb713" testId="5a7796f0-02ea-9719-6cd4-a6593a6f323b" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER SEQUENCE \&quot;Standalone\&quot; OWNED BY NONE&quot;)" computerName="os-greg" duration="00:00:04.9714954" startTime="2026-10-14T11:50:10.5254159+10:00" endTime="2026-10-14T11:50:15.4967523+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fb6025a3-b732-46ce-a822-cabaa0ccb713" />
+    <UnitTestResult executionId="d867491a-8843-4a94-b4fa-d111618fed9c" testId="4c1a651b-997e-3ef5-cba6-ab7b7c8456ff" testName="TurboTest.Tests.PreparedConfigurationTests.A_configured_cached_image_is_prepared_and_used_by_the_fixture_host" computerName="os-greg" duration="00:00:08.6418256" startTime="2026-10-14T11:49:58.0304907+10:00" endTime="2026-10-14T11:50:06.6765928+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d867491a-8843-4a94-b4fa-d111618fed9c" />
+    <UnitTestResult executionId="c94a3e06-a025-493d-9f1f-a3bfa5d60c9d" testId="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d" testName="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;UPDATE \&quot;Parents\&quot; SET \&quot;Priority\&quot; = 999&quot;)" computerName="os-greg" duration="00:00:05.2767875" startTime="2026-10-14T11:50:21.2760060+10:00" endTime="2026-10-14T11:50:26.5476254+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c94a3e06-a025-493d-9f1f-a3bfa5d60c9d" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;COMMENT ON COLUMN \&quot;Parents\&quot;.\&quot;Name\&quot; IS 'changed&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="3163b100-ad75-c25d-0c11-045b63e02e05">
+      <Execution id="306c5ac8-26c1-4605-9800-cd5d6c3e9914" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;UPDATE \&quot;Parents\&quot; SET \&quot;Priority\&quot; = 999&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d">
+      <Execution id="c94a3e06-a025-493d-9f1f-a3bfa5d60c9d" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER SEQUENCE \&quot;Standalone\&quot; OWNED BY NONE&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="5a7796f0-02ea-9719-6cd4-a6593a6f323b">
+      <Execution id="fb6025a3-b732-46ce-a822-cabaa0ccb713" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;SELECT setval(pg_get_serial_sequence('\&quot;Parents\&quot;'&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="49b3022d-7e13-b831-b13f-1e0106a803d2">
+      <Execution id="3c5ae15a-c64e-49da-b219-11464d1b36cb" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.A_configured_cached_image_is_prepared_and_used_by_the_fixture_host" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4c1a651b-997e-3ef5-cba6-ab7b7c8456ff">
+      <Execution id="d867491a-8843-4a94-b4fa-d111618fed9c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="A_configured_cached_image_is_prepared_and_used_by_the_fixture_host" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: &quot;ALTER TABLE \&quot;Parents\&quot; ADD COLUMN unexpected inte&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc">
+      <Execution id="5f9e192c-f610-40b2-bae3-2bfc49af70e4" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_corrupted_clone_is_rejected_before_it_can_be_leased" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="49b3022d-7e13-b831-b13f-1e0106a803d2" executionId="3c5ae15a-c64e-49da-b219-11464d1b36cb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cf0ecd6e-ea1f-a04f-98c5-440f78ee8bcc" executionId="5f9e192c-f610-40b2-bae3-2bfc49af70e4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3163b100-ad75-c25d-0c11-045b63e02e05" executionId="306c5ac8-26c1-4605-9800-cd5d6c3e9914" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5a7796f0-02ea-9719-6cd4-a6593a6f323b" executionId="fb6025a3-b732-46ce-a822-cabaa0ccb713" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4c1a651b-997e-3ef5-cba6-ab7b7c8456ff" executionId="d867491a-8843-4a94-b4fa-d111618fed9c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aa2fd6f4-a15e-114c-ee07-0ec559a3d51d" executionId="c94a3e06-a025-493d-9f1f-a3bfa5d60c9d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="6" executed="6" passed="5" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.13]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.16]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:23.42]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:23.42]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:23.42]       Stack Trace:
+[xUnit.net 00:00:23.42]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(257,0): at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption)
+[xUnit.net 00:00:23.42]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(258,0): at TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(String corruption)
+[xUnit.net 00:00:23.42]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:28.70]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T11:50:21.2735639+10:00">
+        <Text>[xUnit.net 00:00:23.42]     TurboTest.Tests.SeededBaselineTests.A_corrupted_clone_is_rejected_before_it_can_be_leased(corruption: "COMMENT ON COLUMN \"Parents\".\"Name\" IS 'changed"···) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

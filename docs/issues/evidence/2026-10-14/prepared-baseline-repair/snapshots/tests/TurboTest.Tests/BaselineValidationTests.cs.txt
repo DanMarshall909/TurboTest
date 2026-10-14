@@ -1,0 +1,96 @@
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+
+namespace TurboTest.Tests;
+
+public class BaselineValidationTests
+{
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void A_baseline_requires_an_explicit_initializer_version(string? version)
+    {
+        var failure = Assert.ThrowsAny<ArgumentException>(() =>
+            new TtBaselineDefinition<TestDbContext>(version!, TtSchemaInitialization.EnsureCreated));
+        Assert.Equal("identity", failure.ParamName);
+    }
+
+    [Fact]
+    public void An_unknown_schema_initialization_contract_is_rejected()
+    {
+        var failure = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new TtBaselineDefinition<TestDbContext>("v1", (TtSchemaInitialization)999));
+        Assert.Equal("schema", failure.ParamName);
+    }
+
+    [Fact]
+    public async Task A_prepared_fixture_rejects_per_lease_configuration_before_acquisition()
+    {
+        var pool = new RejectAcquisitionPool();
+        await using var fixture = new TtFactory<TestDbContext>(pool, new TtOptions(), preparedOptions:
+            source => new DbContextOptionsBuilder<TestDbContext>().UseNpgsql(source).Options);
+        var error = await Assert.ThrowsAsync<ArgumentException>(() =>
+            fixture.CreateLeaseAsync(builder => builder.UseNpgsql("Host=another-database")));
+        Assert.Equal("configure", error.ParamName);
+        Assert.Equal(0, pool.Acquisitions);
+    }
+
+    private sealed class RejectAcquisitionPool : ITtDatabasePool
+    {
+        internal int Acquisitions { get; private set; }
+        public Task<TtDatabase> GetDatabaseAsync()
+        {
+            Acquisitions++;
+            throw new InvalidOperationException("A rejected configuration reached database acquisition.");
+        }
+        public ValueTask DisposeAsync() => ValueTask.CompletedTask;
+    }
+
+    [Theory]
+    [InlineData("missing")]
+    [InlineData("extra")]
+    [InlineData("changed-content")]
+    [InlineData("different-object")]
+    public void A_frozen_baseline_rejects_a_different_database_manifest(string difference)
+    {
+        var expected = new TtBaselineSnapshot(new Dictionary<string, string>
+        {
+            ["table:parent"] = "3:parent-digest",
+            ["sequence:parent"] = "100:true"
+        });
+        var observed = new Dictionary<string, string>
+        {
+            ["sequence:parent"] = "100:true",
+            ["table:parent"] = "3:parent-digest"
+        };
+        switch (difference)
+        {
+            case "missing": observed.Remove("sequence:parent"); break;
+            case "extra": observed.Add("table:unexpected", "0:empty-digest"); break;
+            case "changed-content": observed["table:parent"] = "3:different-digest"; break;
+            case "different-object":
+                observed.Remove("sequence:parent");
+                observed.Add("sequence:other", "100:true");
+                break;
+        }
+        var error = Assert.Throws<TtLifecycleException>(() => expected.Verify(new TtBaselineSnapshot(observed)));
+        Assert.Equal("BaselineVerify", error.Stage);
+        Assert.Null(error.SqlState);
+    }
+
+    [Fact]
+    public void The_frozen_manifest_owns_its_input_and_accepts_equal_content_in_a_different_order()
+    {
+        var supplied = new Dictionary<string, string> { ["rows"] = "7:digest", ["sequence"] = "300:false" };
+        var baseline = new TtBaselineSnapshot(supplied);
+        supplied["rows"] = "0:changed";
+        supplied.Clear();
+        baseline.Verify(new TtBaselineSnapshot(new Dictionary<string, string>
+        {
+            ["sequence"] = "300:false", ["rows"] = "7:digest"
+        }));
+    }
+}

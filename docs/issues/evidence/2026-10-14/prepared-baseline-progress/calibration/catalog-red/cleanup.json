@@ -1,0 +1,92 @@
+{
+  "reason": "Six unexpectedly successful factories during deliberate catalog RED were not disposed by Assert.ThrowsAsync. Each exact ID was created inside, or within 20 ms before, a named RED test interval, using this working implementation private admin role. Full GREEN created none of these IDs.",
+  "redTests": [
+    {
+      "testName": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"CREATE VIEW unsupported_view AS SELECT 1 AS value\")",
+      "startTime": "2026-10-14T10:37:21.7811199+10:00",
+      "endTime": "2026-10-14T10:37:25.8867362+10:00",
+      "outcome": "Failed"
+    },
+    {
+      "testName": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"CREATE TYPE unsupported_type AS ENUM ('one', 'two'\"\u00b7\u00b7\u00b7)",
+      "startTime": "2026-10-14T10:37:17.6652808+10:00",
+      "endTime": "2026-10-14T10:37:21.7800172+10:00",
+      "outcome": "Failed"
+    },
+    {
+      "testName": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA\"\u00b7\u00b7\u00b7)",
+      "startTime": "2026-10-14T10:37:03.3456658+10:00",
+      "endTime": "2026-10-14T10:37:07.5807136+10:00",
+      "outcome": "Failed"
+    },
+    {
+      "testName": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET \"\u00b7\u00b7\u00b7)",
+      "startTime": "2026-10-14T10:37:13.8522820+10:00",
+      "endTime": "2026-10-14T10:37:17.6644630+10:00",
+      "outcome": "Failed"
+    },
+    {
+      "testName": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"ALTER TABLE \\\"Parents\\\" ENABLE ROW LEVEL SECURITY\")",
+      "startTime": "2026-10-14T10:37:07.5956644+10:00",
+      "endTime": "2026-10-14T10:37:11.5121455+10:00",
+      "outcome": "Failed"
+    },
+    {
+      "testName": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"CREATE FUNCTION unsupported_function() RETURNS int\"\u00b7\u00b7\u00b7)",
+      "startTime": "2026-10-14T10:37:11.5141568+10:00",
+      "endTime": "2026-10-14T10:37:13.8513269+10:00",
+      "outcome": "Failed"
+    }
+  ],
+  "resources": [
+    {
+      "id": "7b4aef4f9f204836b6427aac6a7bfa230ea40ea6a8f68b07aa8975db2521fa75",
+      "name": "/tt_pool_0_a4cd7bc743eb4fbd93266e21d3cbb490",
+      "created": "2026-10-14T00:37:21.787149383Z",
+      "test": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"CREATE VIEW unsupported_view AS SELECT 1 AS value\")",
+      "testStartSkewMs": 0,
+      "roleKind": "private prepared-baseline administrator"
+    },
+    {
+      "id": "e93a2ffa17381a2331e6f4a9ae1f49028df6681afe4ede4ebf9865d8c721bad0",
+      "name": "/tt_pool_0_96f0c0606eec428aa6c1197b8ba1da55",
+      "created": "2026-10-14T00:37:17.668139961Z",
+      "test": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"CREATE TYPE unsupported_type AS ENUM ('one', 'two'\"\u00b7\u00b7\u00b7)",
+      "testStartSkewMs": 0,
+      "roleKind": "private prepared-baseline administrator"
+    },
+    {
+      "id": "87af92e3f7da2468cf6329fe2a01189d3d21122988a958b3886d3848b4124277",
+      "name": "/tt_pool_0_9e4400a4bd794845b21733340f0d7b93",
+      "created": "2026-10-14T00:37:13.855120682Z",
+      "test": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET \"\u00b7\u00b7\u00b7)",
+      "testStartSkewMs": 0,
+      "roleKind": "private prepared-baseline administrator"
+    },
+    {
+      "id": "99ae2c93b78c97dae7b6b693d8b7a4ca6431967ba7ac12d62e7946437bde75e8",
+      "name": "/tt_pool_0_0c5bf572a5774ea8ba65c7ec0991d58d",
+      "created": "2026-10-14T00:37:11.516502672Z",
+      "test": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"CREATE FUNCTION unsupported_function() RETURNS int\"\u00b7\u00b7\u00b7)",
+      "testStartSkewMs": 0,
+      "roleKind": "private prepared-baseline administrator"
+    },
+    {
+      "id": "8ed1a24b214bd0abf88b96074709c3f605ade147a675da1e775e42bb6c4fd57b",
+      "name": "/tt_pool_0_0f03f8f4b05b4156adc8ba9d9839c325",
+      "created": "2026-10-14T00:37:07.586134368Z",
+      "test": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"ALTER TABLE \\\"Parents\\\" ENABLE ROW LEVEL SECURITY\")",
+      "testStartSkewMs": 9.530000000000001,
+      "roleKind": "private prepared-baseline administrator"
+    },
+    {
+      "id": "c1f37ce65917665de5e670c6df540a04b45d423f3c10868b33b849e66f1aee0f",
+      "name": "/tt_pool_0_b2c6d207994b4fcc9342e47eaefc0d86",
+      "created": "2026-10-14T00:37:03.509404145Z",
+      "test": "TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: \"DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA\"\u00b7\u00b7\u00b7)",
+      "testStartSkewMs": 0,
+      "roleKind": "private prepared-baseline administrator"
+    }
+  ],
+  "removed": 6
+}

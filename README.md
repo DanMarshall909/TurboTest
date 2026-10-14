@@ -116,9 +116,58 @@ context type. Configure before the first static create; configuration changes
 require final disposal first. A subsequent create constructs a valid new owner.
 Independent factories have separate configuration and shutdown.
 
-Prepared seed/schema restoration and hard capacity bounds remain work in the
+Hard capacity bounds, row restoration and recovery policy remain work in the
 [tracker](docs/issues/README.md). DI ownership remains under
 [TT-007](docs/issues/open/api/TT-007-use-the-configured-owner-in-di-and-static-apis.md).
+
+## Prepared fixture baselines
+
+The baseline overload prepares schema and seed data once before returning a
+factory. Each lease receives a validated copy; return currently recreates that
+copy from the sealed template. Immutable prepared baselines have passed
+independent completion review under TT-003.
+
+```csharp
+var baseline = new TtBaselineDefinition<MyDbContext>(
+    "users-v1", TtSchemaInitialization.EnsureCreated,
+    async (context, cancellation) =>
+    {
+        context.Users.Add(new User { Email = "seed@example.com" });
+        await context.SaveChangesAsync(cancellation);
+    });
+await using var fixture = await Tt.CreateFactoryAsync(baseline, options => options.PoolSize = 1);
+await using var lease = await fixture.CreateLeaseAsync();
+var seededUsers = await lease.Context.Users.ToListAsync();
+```
+
+Choose `Migrations` to run EF migrations or `Caller` to initialize schema in the
+callback. This explicit mode takes precedence over legacy `AutoMigrate`.
+`ConfigureContext` belongs to the baseline definition and runs once. Contexts
+must retain their fixture's source and frozen model, including in
+`OnConfiguring`. Supplied runtime models must have table/column mappings matching
+the design-time schema model for `EnsureCreated` or migrations.
+
+Prepared fixtures use one host and `PoolSize` initial prepared slots.
+`DatabaseName` is a generated-name prefix, limited to 21 UTF-8 bytes;
+`Username` may occupy at most 63 UTF-8 bytes. Options are copied before use.
+Automatic allocation, dynamic scaling and custom connection-string templates
+are currently rejected by this path. `PoolSize` is not yet a hard capacity cap.
+
+Supported baselines contain permanent ordinary tables, namespaces, indexes,
+constraints, their catalog comments and sequences. Views, routines, custom types/extensions, user
+triggers/rules, RLS/policies, partition/inheritance structures, foreign/unlogged
+relations, collations, extended statistics and text-search objects are rejected.
+Custom database grants/settings and role defaults are also rejected. All
+permanent sequences are checked, including unused and standalone sequences,
+their ownership dependencies, `last_value` and `is_called`. PostgreSQL binary
+row hashes validate seed contents on the owning host/version. No seed payloads
+are retained in diagnostics.
+
+If startup cleanup fails, `TtLifecycleException.Cleanup` retains an opaque owner
+and resource-ID snapshot. Await `error.Cleanup.RetryCleanupAsync()` to retry;
+concurrent retries share an attempt. `Tt.DisposeAsync()` also retries registered
+failed startups. Resources remain accounted until confirmed deletion, and a
+closed owner cannot publish another lease.
 
 ## Requirements
 

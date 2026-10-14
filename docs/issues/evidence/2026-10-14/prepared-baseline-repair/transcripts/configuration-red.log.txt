@@ -1,0 +1,60 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.18]     TurboTest.Tests.BaselineValidationTests.A_prepared_fixture_rejects_per_lease_configuration_before_acquisition [FAIL]
+[xUnit.net 00:00:00.19]     TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: null) [FAIL]
+[xUnit.net 00:00:00.19]     TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: "") [FAIL]
+[xUnit.net 00:00:00.19]     TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: " ") [FAIL]
+[xUnit.net 00:00:00.19]     TurboTest.Tests.BaselineValidationTests.An_unknown_schema_initialization_contract_is_rejected [FAIL]
+  Failed TurboTest.Tests.BaselineValidationTests.A_prepared_fixture_rejects_per_lease_configuration_before_acquisition [7 ms]
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(System.ArgumentException)
+Actual:   typeof(System.InvalidOperationException)
+---- System.InvalidOperationException : A rejected configuration reached database acquisition.
+  Stack Trace:
+     at TurboTest.Tests.BaselineValidationTests.A_prepared_fixture_rejects_per_lease_configuration_before_acquisition() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineValidationTests.cs:line 35
+   at TurboTest.Tests.BaselineValidationTests.A_prepared_fixture_rejects_per_lease_configuration_before_acquisition() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineValidationTests.cs:line 38
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at TurboTest.Tests.BaselineValidationTests.RejectAcquisitionPool.GetDatabaseAsync() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineValidationTests.cs:line 47
+   at TurboTest.EFCore.TtFactory`1.CreateLeaseAsync(Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 38
+  Failed TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: null) [< 1 ms]
+  Error Message:
+   Assert.ThrowsAny() Failure: No exception was thrown
+Expected: typeof(System.ArgumentException)
+  Stack Trace:
+     at TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(String version) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineValidationTests.cs:line 16
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  Failed TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: "") [< 1 ms]
+  Error Message:
+   Assert.ThrowsAny() Failure: No exception was thrown
+Expected: typeof(System.ArgumentException)
+  Stack Trace:
+     at TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(String version) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineValidationTests.cs:line 16
+   at InvokeStub_BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(version: " ") [< 1 ms]
+  Error Message:
+   Assert.ThrowsAny() Failure: No exception was thrown
+Expected: typeof(System.ArgumentException)
+  Stack Trace:
+     at TurboTest.Tests.BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(String version) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineValidationTests.cs:line 16
+   at InvokeStub_BaselineValidationTests.A_baseline_requires_an_explicit_initializer_version(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed TurboTest.Tests.BaselineValidationTests.An_unknown_schema_initialization_contract_is_rejected [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.BaselineValidationTests.An_unknown_schema_initialization_contract_is_rejected() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineValidationTests.cs:line 24
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+Results File: /home/dan/code/TurboTest/artifacts/tt-003/configuration-red/configuration-red.trx
+
+Failed!  - Failed:     5, Passed:     0, Skipped:     0, Total:     5, Duration: 33 ms - TurboTest.Tests.dll (net10.0)

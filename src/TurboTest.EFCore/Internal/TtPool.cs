@@ -8,7 +8,7 @@ namespace TurboTest.EFCore.Internal;
 /// <summary>
 /// Internal container pool implementation. Hidden from users.
 /// </summary>
-internal sealed class TtPool : IAsyncDisposable
+internal sealed class TtPool : ITtDatabasePool
 {
     private readonly TtOptions _options;
     private readonly ILogger _logger;
@@ -17,16 +17,23 @@ internal sealed class TtPool : IAsyncDisposable
     private readonly ConcurrentDictionary<string, TtContainer> _ownedContainers = new();
     private readonly DockerClient _dockerClient;
     private readonly Func<TtContainer, Task> _deleteResource;
+    private readonly Func<string, Task> _prepareImage;
+    private readonly string _image;
     private readonly SemaphoreSlim _initSemaphore = new(1, 1);
     private bool _initialized;
     private bool _disposed;
     private Timer? _scalingTimer;
     private readonly object _scalingLock = new();
 
-    public TtPool(TtOptions? options = null, Func<TtContainer, Task>? deleteResource = null)
+    internal IReadOnlyList<string> OwnedResourceIds => _ownedContainers.Keys.Order().ToArray();
+
+    public TtPool(TtOptions? options = null, Func<TtContainer, Task>? deleteResource = null,
+        Func<string, Task>? prepareImage = null)
     {
         _options = options ?? new TtOptions();
         _deleteResource = deleteResource ?? (container => container.DisposeAsync().AsTask());
+        _prepareImage = prepareImage ?? EnsureImageAsync;
+        _image = _options.DockerImage ?? "postgres:16-alpine";
         _logger = _options.Logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
 
         // Apply auto-allocation if enabled
@@ -52,7 +59,7 @@ internal sealed class TtPool : IAsyncDisposable
             if (_initialized) return;
 
             // Pull PostgreSQL image if needed
-            await EnsureImageAsync("postgres:16-alpine");
+            await _prepareImage(_image);
 
             // Create initial pool
             _logger.LogInformation("Initializing TurboTest pool with {PoolSize} containers, {MemoryLimitMb}MB each",
@@ -154,7 +161,7 @@ internal sealed class TtPool : IAsyncDisposable
         var password = _options.Password ?? "test_" + Guid.NewGuid().ToString("N")[..8];
         var username = _options.Username ?? "postgres";
         var databaseName = $"{_options.DatabaseName}_{Guid.NewGuid():N}"; // Make database name unique
-        var image = _options.DockerImage ?? "postgres:16-alpine";
+        var image = _image;
 
         var connectionString = _options.ConnectionStringTemplate != null
             ? string.Format(_options.ConnectionStringTemplate, "localhost", port, databaseName, username, password)

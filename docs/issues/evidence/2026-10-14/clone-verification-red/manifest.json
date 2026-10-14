@@ -1,0 +1,23 @@
+{
+  "status": "Expected RED: all three corruptions accepted without a validation exception. The snapshot predates snapshot-verifier implementation.",
+  "base": "0fe83327c02602edb45141f83a55c0a1b3b2df45",
+  "exit": 1,
+  "failed": 3,
+  "files": [
+    {
+      "path": "transcripts/verify-red.log.txt",
+      "source": "artifacts/tt-003/verify-red.log",
+      "sha256": "3240e0098a62e7f693bdccf182252e5cc050beac66951979f3c5e6d081e0420e"
+    },
+    {
+      "path": "results/verify-red.trx",
+      "source": "artifacts/tt-003/verify-red/verify-red.trx",
+      "sha256": "0b87a13b004518a79f0464f753c311f0e69fdbb6555e23ea695627a98599aa4e"
+    },
+    {
+      "path": "snapshots/SeededBaselineTests.cs.txt",
+      "source": "tests/TurboTest.Tests/SeededBaselineTests.cs",
+      "sha256": "226e0effd17ca61d523db16c229237e685609eef8a54e94db48bbe3124c0ad8b"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ using TurboTest.EFCore;
 
 namespace TurboTest.Tests;
 
+[Collection("Static lifecycle")]
 public class PublicLeaseTests
 {
     [Fact]

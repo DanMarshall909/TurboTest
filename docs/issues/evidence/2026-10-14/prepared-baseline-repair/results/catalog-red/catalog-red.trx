@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="285b30db-0f6d-4d92-9603-45c28d0c9e80" name="@os-greg 2026-10-14 10:37:07" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T10:37:07.6083723+10:00" queuing="2026-10-14T10:37:07.6083723+10:00" start="2026-10-14T10:37:02.9001985+10:00" finish="2026-10-14T10:37:25.9503357+10:00" />
+  <TestSettings name="default" id="ff6013ee-e762-49f0-aae3-9857e639f024">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_10_37_07" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="99965599-f3d9-45ff-8d62-2455f029c3e1" testId="50c37414-4da1-08b5-d1df-988f46ff60f0" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE VIEW unsupported_view AS SELECT 1 AS value&quot;)" computerName="os-greg" duration="00:00:04.1060901" startTime="2026-10-14T10:37:21.7811199+10:00" endTime="2026-10-14T10:37:25.8867362+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="99965599-f3d9-45ff-8d62-2455f029c3e1">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 24
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="38b0390d-6f1f-47c2-9af1-fb896d7586cf" testId="ecf0860f-a026-03e8-78ac-4f939dccb4e6" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE TYPE unsupported_type AS ENUM ('one', 'two'&quot;···)" computerName="os-greg" duration="00:00:04.1150556" startTime="2026-10-14T10:37:17.6652808+10:00" endTime="2026-10-14T10:37:21.7800172+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="38b0390d-6f1f-47c2-9af1-fb896d7586cf">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 24
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f79392af-bffe-48c0-80da-919b65c50c80" testId="6c0b93af-d430-6096-2797-817b3315adf4" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA&quot;···)" computerName="os-greg" duration="00:00:04.2209873" startTime="2026-10-14T10:37:03.3456658+10:00" endTime="2026-10-14T10:37:07.5807136+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f79392af-bffe-48c0-80da-919b65c50c80">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 24
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="dafd1776-1ebf-47a9-a70f-35d905f89625" testId="36882e1c-b398-341c-ec8d-381fd90ae96e" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET &quot;···)" computerName="os-greg" duration="00:00:03.8125785" startTime="2026-10-14T10:37:13.8522820+10:00" endTime="2026-10-14T10:37:17.6644630+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dafd1776-1ebf-47a9-a70f-35d905f89625">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 24
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a297075d-4ad5-4175-95fa-55e563ad09a9" testId="91b4a6ec-e356-a480-4fb5-dcf473eb7d98" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;ALTER TABLE \&quot;Parents\&quot; ENABLE ROW LEVEL SECURITY&quot;)" computerName="os-greg" duration="00:00:03.9306137" startTime="2026-10-14T10:37:07.5956644+10:00" endTime="2026-10-14T10:37:11.5121455+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a297075d-4ad5-4175-95fa-55e563ad09a9">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 24
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="da5f1681-ea64-472f-b38e-4bd21ea4a5b4" testId="f256f5d6-1d01-44a1-75cb-ee085217768c" testName="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE FUNCTION unsupported_function() RETURNS int&quot;···)" computerName="os-greg" duration="00:00:02.3386665" startTime="2026-10-14T10:37:11.5141568+10:00" endTime="2026-10-14T10:37:13.8513269+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="da5f1681-ea64-472f-b38e-4bd21ea4a5b4">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)</Message>
+          <StackTrace>   at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 24
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="6c0b93af-d430-6096-2797-817b3315adf4">
+      <Execution id="f79392af-bffe-48c0-80da-919b65c50c80" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET &quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="36882e1c-b398-341c-ec8d-381fd90ae96e">
+      <Execution id="dafd1776-1ebf-47a9-a70f-35d905f89625" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE TYPE unsupported_type AS ENUM ('one', 'two'&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ecf0860f-a026-03e8-78ac-4f939dccb4e6">
+      <Execution id="38b0390d-6f1f-47c2-9af1-fb896d7586cf" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;ALTER TABLE \&quot;Parents\&quot; ENABLE ROW LEVEL SECURITY&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="91b4a6ec-e356-a480-4fb5-dcf473eb7d98">
+      <Execution id="a297075d-4ad5-4175-95fa-55e563ad09a9" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE FUNCTION unsupported_function() RETURNS int&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f256f5d6-1d01-44a1-75cb-ee085217768c">
+      <Execution id="da5f1681-ea64-472f-b38e-4bd21ea4a5b4" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: &quot;CREATE VIEW unsupported_view AS SELECT 1 AS value&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="50c37414-4da1-08b5-d1df-988f46ff60f0">
+      <Execution id="99965599-f3d9-45ff-8d62-2455f029c3e1" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SeededBaselineTests" name="A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="50c37414-4da1-08b5-d1df-988f46ff60f0" executionId="99965599-f3d9-45ff-8d62-2455f029c3e1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ecf0860f-a026-03e8-78ac-4f939dccb4e6" executionId="38b0390d-6f1f-47c2-9af1-fb896d7586cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c0b93af-d430-6096-2797-817b3315adf4" executionId="f79392af-bffe-48c0-80da-919b65c50c80" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="36882e1c-b398-341c-ec8d-381fd90ae96e" executionId="dafd1776-1ebf-47a9-a70f-35d905f89625" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="91b4a6ec-e356-a480-4fb5-dcf473eb7d98" executionId="a297075d-4ad5-4175-95fa-55e563ad09a9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f256f5d6-1d01-44a1-75cb-ee085217768c" executionId="da5f1681-ea64-472f-b38e-4bd21ea4a5b4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="6" executed="6" passed="0" failed="6" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.13]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.16]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:04.41]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:04.41]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:04.41]       Stack Trace:
+[xUnit.net 00:00:04.41]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(24,0): at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql)
+[xUnit.net 00:00:04.41]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:08.34]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:08.34]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:08.34]       Stack Trace:
+[xUnit.net 00:00:08.34]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(24,0): at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql)
+[xUnit.net 00:00:08.34]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:10.68]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:10.68]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:10.68]       Stack Trace:
+[xUnit.net 00:00:10.68]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(24,0): at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql)
+[xUnit.net 00:00:10.68]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:14.49]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:14.49]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:14.49]       Stack Trace:
+[xUnit.net 00:00:14.49]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(24,0): at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql)
+[xUnit.net 00:00:14.49]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:18.61]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:18.61]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:18.61]       Stack Trace:
+[xUnit.net 00:00:18.61]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(24,0): at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql)
+[xUnit.net 00:00:18.61]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:22.72]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:22.72]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:22.72]       Stack Trace:
+[xUnit.net 00:00:22.72]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs(24,0): at TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(String sql)
+[xUnit.net 00:00:22.72]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:22.72]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:37:07.5834241+10:00">
+        <Text>[xUnit.net 00:00:04.41]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATA"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:37:11.5126892+10:00">
+        <Text>[xUnit.net 00:00:08.34]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "ALTER TABLE \"Parents\" ENABLE ROW LEVEL SECURITY") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:37:13.8520142+10:00">
+        <Text>[xUnit.net 00:00:10.68]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE FUNCTION unsupported_function() RETURNS int"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:37:17.6649376+10:00">
+        <Text>[xUnit.net 00:00:14.49]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET "···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:37:21.7805701+10:00">
+        <Text>[xUnit.net 00:00:18.61]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE TYPE unsupported_type AS ENUM ('one', 'two'"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T10:37:25.8872926+10:00">
+        <Text>[xUnit.net 00:00:22.72]     TurboTest.Tests.SeededBaselineTests.A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(sql: "CREATE VIEW unsupported_view AS SELECT 1 AS value") [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

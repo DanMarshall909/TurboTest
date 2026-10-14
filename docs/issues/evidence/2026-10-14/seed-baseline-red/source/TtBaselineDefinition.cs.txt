@@ -1,0 +1,29 @@
+using Microsoft.EntityFrameworkCore;
+
+namespace TurboTest.EFCore;
+
+/// <summary>Defines the versioned schema and seed inputs for one fixture baseline.</summary>
+public sealed class TtBaselineDefinition<TContext> where TContext : DbContext
+{
+    public string Identity { get; }
+    public TtSchemaInitialization Schema { get; }
+    public Func<TContext, CancellationToken, Task>? SeedAsync { get; }
+    public Action<DbContextOptionsBuilder<TContext>>? ConfigureContext { get; }
+
+    public TtBaselineDefinition(string identity, TtSchemaInitialization schema,
+        Func<TContext, CancellationToken, Task>? seedAsync = null,
+        Action<DbContextOptionsBuilder<TContext>>? configureContext = null)
+    {
+        Identity = identity;
+        Schema = schema;
+        SeedAsync = seedAsync;
+        ConfigureContext = configureContext;
+    }
+}
+
+public enum TtSchemaInitialization
+{
+    EnsureCreated,
+    Migrations,
+    Caller
+}

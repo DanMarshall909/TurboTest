@@ -7,6 +7,7 @@ namespace TurboTest.EFCore;
 /// </summary>
 public class TtOptions
 {
+    internal TtOptions Snapshot() => (TtOptions)MemberwiseClone();
     /// <summary>
     /// Configuration section name for IConfiguration binding
     /// </summary>
@@ -151,7 +152,7 @@ public class TtOptions
 public enum TtDatabaseProvider
 {
     /// <summary>
-    /// PostgreSQL (fastest reset time ~50ms)
+    /// PostgreSQL, the currently implemented provider. Reset latency depends on workload.
     /// </summary>
     PostgreSql
 }

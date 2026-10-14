@@ -1,0 +1,25 @@
+{
+  "fault": "Release ownership before confirmed deletion",
+  "source": "src/TurboTest.EFCore/Internal/TtPool.cs",
+  "originalSha256": "bef88a55758ab74f772a5c6a303ed7909b1e96e7cb266c7b38976ee2a62bad57",
+  "mutatedSha256": "4cef1bb47db67743e7dec4b537ee6dc492adcb75824c331339c714c2a3bfa8b1",
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "FullyQualifiedName~Reset_then_failed_delete",
+    "--logger",
+    "trx;LogFileName=ledger-fault.trx",
+    "--results-directory",
+    "artifacts/tt-001/ledger-calibration"
+  ],
+  "exit": 1,
+  "restoredSha256": "bef88a55758ab74f772a5c6a303ed7909b1e96e7cb266c7b38976ee2a62bad57",
+  "removedFaultResources": [
+    [
+      "0710c54c3ca2",
+      "tt-delete-7438825b554a4e1e94e930b6555821db_pool_0_6c6aca7f4c574e10ba60b3ca99b0090d"
+    ]
+  ]
+}

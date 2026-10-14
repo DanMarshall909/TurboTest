@@ -1,0 +1,9 @@
+{
+  "stryker-config": {
+    "project": "TurboTest.EFCore.csproj",
+    "mutate": ["Internal/TtDatabase.cs", "TtLifecycleException.cs", "TtLease.cs"],
+    "test-case-filter": "FullyQualifiedName~DatabaseOwnershipTests|FullyQualifiedName~LeaseOwnershipTests",
+    "reporters": ["json", "cleartext"],
+    "concurrency": 2
+  }
+}

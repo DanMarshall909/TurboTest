@@ -1,0 +1,71 @@
+
+   _____ _              _               _   _ ______ _______  
+  / ____| |            | |             | \ | |  ____|__   __| 
+ | (___ | |_ _ __ _   _| | _____ _ __  |  \| | |__     | |    
+  \___ \| __| '__| | | | |/ / _ \ '__| | . ` |  __|    | |    
+  ____) | |_| |  | |_| |   <  __/ |    | |\  | |____   | |    
+ |_____/ \__|_|   \__, |_|\_\___|_| (_)|_| \_|______|  |_|    
+                   __/ |                                      
+                  |___/                                       
+
+
+Version: 5.0.0
+
+[09:21:23 INF] Stryker will use a max of 2 parallel testsessions.
+[09:21:23 INF] Analysis starting.
+[09:21:23 INF] Analyzing 1 test project(s).
+[09:21:24 WRN] Failed to identify target frameworks for project /home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj. Using analysis results: net10.0
+[09:21:24 WRN] Failed to identify target frameworks for project /home/dan/code/TurboTest/src/TurboTest.EFCore/TurboTest.EFCore.csproj. Using analysis results: net10.0
+[09:21:24 INF] Picking net10.0 for project /home/dan/code/TurboTest/src/TurboTest.EFCore/TurboTest.EFCore.csproj. 
+[09:21:24 INF] Found project /home/dan/code/TurboTest/src/TurboTest.EFCore/TurboTest.EFCore.csproj to mutate.
+[09:21:24 INF] Analysis complete.
+[09:21:24 INF] Building test project /home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj (1/1)
+[09:21:25 INF] Building project TurboTest.Tests.csproj using dotnet build TurboTest.Tests.csproj -c Debug --property:Platform=AnyCPU (directory /home/dan/code/TurboTest/tests/TurboTest.Tests.)
+[09:21:27 INF] Number of tests found: 8 for project /home/dan/code/TurboTest/src/TurboTest.EFCore/TurboTest.EFCore.csproj. Initial test run started.
+[09:21:31 WRN] An unidentified mutation in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs resulted in a compile error (at 66:42) with id: CS0165, message: Use of unassigned local variable 'context' (Source code: context)
+[09:21:31 INF] Safe Mode! Stryker will remove all mutations in CreateLeaseAsync and mark them as 'compile error'.
+[09:21:32 INF] 522 mutants created
+[09:21:32 INF] Capture mutant coverage using 'CoverageBasedTest' mode.
+[09:21:33 INF] 59    mutants got status CompileError. Reason: Mutant caused compile errors
+[09:21:33 INF] 15    mutants got status Ignored.      Reason: Removed by block already covered filter
+[09:21:33 INF] 422   mutants got status Ignored.      Reason: Removed by mutate filter
+[09:21:33 INF] 496   total mutants are skipped for the above mentioned reasons
+[09:21:33 INF] 26    total mutants will be tested
+
+
+All mutants have been tested, and your mutation score has been calculated
+╭───────────────────────────────────────┬──────┬─────┬──────┬───────┬─────┬────╮
+│ File                                  │   %  │  #  │   #  │    #  │  #  │ #  │
+│                                       │ sco… │ ki… │ tim… │ surv… │ no  │ e… │
+│                                       │      │     │      │       │ cov │    │
+├───────────────────────────────────────┼──────┼─────┼──────┼───────┼─────┼────┤
+│ /home/dan/code/TurboTest/src          │ 100. │  26 │    0 │   496 │   0 │ 59 │
+│                                       │   00 │     │      │       │     │    │
+│ Extensions/ServiceCollectionExtension │ Excl │   0 │    0 │    20 │   0 │  0 │
+│ s.cs                                  │ uded │     │      │       │     │    │
+│ Internal/NpgsqlExtensions.cs          │ Excl │   0 │    0 │     2 │   0 │  0 │
+│                                       │ uded │     │      │       │     │    │
+│ Internal/TtContainer.cs               │ Excl │   0 │    0 │    24 │   0 │  1 │
+│                                       │ uded │     │      │       │     │    │
+│ Internal/TtDatabase.cs                │ 100. │  16 │    0 │    10 │   0 │  1 │
+│                                       │   00 │     │      │       │     │    │
+│ Internal/TtPool.cs                    │ Excl │   0 │    0 │   302 │   0 │ 18 │
+│                                       │ uded │     │      │       │     │    │
+│ ITtServiceFactory.cs                  │  N/A │   0 │    0 │     0 │   0 │  0 │
+│ Properties/AssemblyInfo.cs            │ Excl │   0 │    0 │     0 │   0 │  0 │
+│                                       │ uded │     │      │       │     │    │
+│ Tt.cs                                 │  N/A │   0 │    0 │    41 │   0 │  3 │
+│ TtFactory.cs                          │  N/A │   0 │    0 │    62 │   0 │ 34 │
+│ TtLease.cs                            │ 100. │   6 │    0 │     6 │   0 │  0 │
+│                                       │   00 │     │      │       │     │    │
+│ TtLifecycleException.cs               │ 100. │   4 │    0 │     0 │   0 │  0 │
+│                                       │   00 │     │      │       │     │    │
+│ TtOptions.cs                          │  N/A │   0 │    0 │     6 │   0 │  0 │
+│ TtServiceFactory.cs                   │  N/A │   0 │    0 │    23 │   0 │  2 │
+╰───────────────────────────────────────┴──────┴─────┴──────┴───────┴─────┴────╯
+
+Your json report has been generated at:
+file:///home/dan/code/TurboTest/tests/TurboTest.Tests/../../artifacts/tt-001/str
+yker/reports/mutation-report.json
+[09:22:25 INF] Time Elapsed 00:01:02.2579859
+[09:22:25 INF] The final mutation score is 100.00 %

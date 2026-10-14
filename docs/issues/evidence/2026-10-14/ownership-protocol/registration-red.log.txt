@@ -1,0 +1,20 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.1.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.21]     TurboTest.Tests.DatabaseOwnershipTests.New_resources_cannot_be_registered_after_cleanup_begins [FAIL]
+  Failed TurboTest.Tests.DatabaseOwnershipTests.New_resources_cannot_be_registered_after_cleanup_begins [32 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ObjectDisposedException)
+  Stack Trace:
+     at TurboTest.Tests.DatabaseOwnershipTests.New_resources_cannot_be_registered_after_cleanup_begins() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs:line 92
+   at TurboTest.Tests.DatabaseOwnershipTests.New_resources_cannot_be_registered_after_cleanup_begins() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs:line 98
+   at TurboTest.Tests.DatabaseOwnershipTests.New_resources_cannot_be_registered_after_cleanup_begins() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs:line 98
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/ownership/registration-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 47 ms - TurboTest.Tests.dll (net10.0)

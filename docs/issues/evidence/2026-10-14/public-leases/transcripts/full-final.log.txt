@@ -1,0 +1,92 @@
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:01:18.27]     TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database [FAIL]
+  Failed TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database [46 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 17
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 34
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:18.55]     TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched [FAIL]
+  Failed TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched [40 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 149
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 163
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 163
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:24.75]     TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints [FAIL]
+  Failed TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints [44 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BasicTests.cs:line 33
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:57.33]     TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease [FAIL]
+  Failed TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease [39 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 59
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:58.37]     TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset [FAIL]
+  Failed TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset [39 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 122
+   at TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 140
+--- End of stack trace from previous location ---
+[xUnit.net 00:02:06.67]     TurboTest.Tests.BasicTests.Should_Enforce_Unique_Constraints [FAIL]
+  Failed TurboTest.Tests.BasicTests.Should_Enforce_Unique_Constraints [41 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.BasicTests.Should_Enforce_Unique_Constraints() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BasicTests.cs:line 57
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-001/full-final/full-final.trx
+
+Failed!  - Failed:     6, Passed:    25, Skipped:     0, Total:    31, Duration: 2 m 50 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-001/full-final/d3279eb7-18ff-464b-a897-367182bf0541/dan_os-greg_2026-10-14.09_25_41.cobertura.xml

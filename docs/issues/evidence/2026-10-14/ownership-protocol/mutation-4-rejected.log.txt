@@ -1,0 +1,172 @@
+
+   _____ _              _               _   _ ______ _______  
+  / ____| |            | |             | \ | |  ____|__   __| 
+ | (___ | |_ _ __ _   _| | _____ _ __  |  \| | |__     | |    
+  \___ \| __| '__| | | | |/ / _ \ '__| | . ` |  __|    | |    
+  ____) | |_| |  | |_| |   <  __/ |    | |\  | |____   | |    
+ |_____/ \__|_|   \__, |_|\_\___|_| (_)|_| \_|______|  |_|    
+                   __/ |                                      
+                  |___/                                       
+
+
+Version: 4.12.0
+
+[08:26:08 INF] Stryker will use a max of 2 parallel testsessions.
+[08:26:08 INF] Analysis starting.
+[08:26:08 INF] Analyzing 1 test project(s).
+[08:26:11 INF] Found project /home/dan/code/TurboTest/src/TurboTest.EFCore/TurboTest.EFCore.csproj to mutate.
+[08:26:11 INF] Analysis complete.
+[08:26:11 INF] Building test project /home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj (1/1)
+[08:26:11 INF] Building project TurboTest.Tests.csproj using dotnet build TurboTest.Tests.csproj -c Debug --property:Platform=AnyCPU (directory /home/dan/code/TurboTest/tests/TurboTest.Tests.)
+[08:26:14 INF] Number of tests found: 4 for project /home/dan/code/TurboTest/src/TurboTest.EFCore/TurboTest.EFCore.csproj. Initial test run started.
+[08:26:17 ERR] An error occurred during the mutation test run 
+System.AggregateException: One or more errors occurred. (Object reference not set to an instance of an object.)
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Stryker.Core.Helpers.RoslynHelper.InjectMutation[T](T sourceNode, Mutation mutation) in /_/src/Stryker.Core/Stryker.Core/Helpers/RoslynHelper.cs:line 123
+   at Stryker.Core.Mutants.MutationStore.<>c__DisplayClass18_0.<Inject>b__0(Mutant m) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationStore.cs:line 243
+   at System.Linq.Enumerable.ListSelectIterator`2.MoveNext()
+   at System.Linq.Enumerable.Aggregate[TSource,TAccumulate](IEnumerable`1 source, TAccumulate seed, Func`3 func)
+   at Stryker.Core.Mutants.MutantPlacer.PlaceStatementControlledMutations(StatementSyntax original, IEnumerable`1 mutants) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutantPlacer.cs:line 113
+   at Stryker.Core.Mutants.MutationStore.Inject(BlockSyntax mutatedNode, ExpressionSyntax originalNode, Boolean needReturn) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationStore.cs:line 242
+   at Stryker.Core.Mutants.MutationContext.InjectMutations(BlockSyntax mutatedNode, ExpressionSyntax originalNode, Boolean needReturn) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationContext.cs:line 196
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.BaseFunctionOrchestrator`1.InjectMutations(T sourceNode, T targetNode, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/BaseFunctionOrchestrator.cs:line 140
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.Mutate(SyntaxNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 125
+   at Stryker.Core.Mutants.MutationContext.Mutate(SyntaxNode node, SemanticModel model) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationContext.cs:line 82
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.<>c__DisplayClass7_0.<OrchestrateChildrenMutation>b__0(SyntaxNode original, SyntaxNode _) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 85
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitListElement[TNode](TNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitList[TNode](SyntaxList`1 list)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitClassDeclaration(ClassDeclarationSyntax node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax.Accept[TResult](CSharpSyntaxVisitor`1 visitor)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replace[TNode](SyntaxNode root, IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode.ReplaceCore[TNode](IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.SyntaxNodeExtensions.ReplaceNodes[TRoot,TNode](TRoot root, IEnumerable`1 nodes, Func`3 computeReplacementNode)
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.OrchestrateChildrenMutation(TNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 84
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.Mutate(SyntaxNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 125
+   at Stryker.Core.Mutants.MutationContext.Mutate(SyntaxNode node, SemanticModel model) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationContext.cs:line 82
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.<>c__DisplayClass7_0.<OrchestrateChildrenMutation>b__0(SyntaxNode original, SyntaxNode _) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 85
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitListElement[TNode](TNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitList[TNode](SyntaxList`1 list)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitFileScopedNamespaceDeclaration(FileScopedNamespaceDeclarationSyntax node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.FileScopedNamespaceDeclarationSyntax.Accept[TResult](CSharpSyntaxVisitor`1 visitor)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replace[TNode](SyntaxNode root, IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode.ReplaceCore[TNode](IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.SyntaxNodeExtensions.ReplaceNodes[TRoot,TNode](TRoot root, IEnumerable`1 nodes, Func`3 computeReplacementNode)
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.OrchestrateChildrenMutation(TNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 84
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.Mutate(SyntaxNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 125
+   at Stryker.Core.Mutants.MutationContext.Mutate(SyntaxNode node, SemanticModel model) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationContext.cs:line 82
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.<>c__DisplayClass7_0.<OrchestrateChildrenMutation>b__0(SyntaxNode original, SyntaxNode _) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 85
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitListElement[TNode](TNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitList[TNode](SyntaxList`1 list)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitCompilationUnit(CompilationUnitSyntax node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.CompilationUnitSyntax.Accept[TResult](CSharpSyntaxVisitor`1 visitor)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replace[TNode](SyntaxNode root, IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode.ReplaceCore[TNode](IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.SyntaxNodeExtensions.ReplaceNodes[TRoot,TNode](TRoot root, IEnumerable`1 nodes, Func`3 computeReplacementNode)
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.OrchestrateChildrenMutation(TNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 84
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.Mutate(SyntaxNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 125
+   at Stryker.Core.Mutants.CsharpMutantOrchestrator.Mutate(SyntaxTree input, SemanticModel semanticModel) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpMutantOrchestrator.cs:line 135
+   at Stryker.Core.MutationTest.CsharpMutationProcess.Mutate(MutationTestInput input, IStrykerOptions options) in /_/src/Stryker.Core/Stryker.Core/MutationTest/CsharpMutationProcess.cs:line 47
+   at Stryker.Core.MutationTest.MutationTestProcess.Mutate() in /_/src/Stryker.Core/Stryker.Core/MutationTest/MutationTestProcess.cs:line 65
+   at Stryker.Core.Initialisation.ProjectMutator.MutateProject(IStrykerOptions options, MutationTestInput input, IReporter reporters, IMutationTestProcess mutationTestProcess) in /_/src/Stryker.Core/Stryker.Core/Initialisation/ProjectMutator.cs:line 39
+   at Stryker.Core.Initialisation.ProjectOrchestrator.<>c__DisplayClass8_0.<MutateProjectsAsync>b__0(MutationTestInput mutationTestInput) in /_/src/Stryker.Core/Stryker.Core/Initialisation/ProjectOrchestrator.cs:line 76
+   at System.Threading.Tasks.Parallel.<>c__DisplayClass19_0`2.<ForWorker>b__1(RangeWorker& currentWorker, Int64 timeout, Boolean& replicationDelegateYieldedBeforeCompletion)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Parallel.<>c__DisplayClass19_0`2.<ForWorker>b__1(RangeWorker& currentWorker, Int64 timeout, Boolean& replicationDelegateYieldedBeforeCompletion)
+   at System.Threading.Tasks.TaskReplicator.Replica.Execute()
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.TaskReplicator.Run[TState](ReplicatableUserAction`1 action, ParallelOptions options, Boolean stopOnFirstFailure)
+   at System.Threading.Tasks.Parallel.ForWorker[TLocal,TInt](TInt fromInclusive, TInt toExclusive, ParallelOptions parallelOptions, Action`1 body, Action`2 bodyWithState, Func`4 bodyWithLocal, Func`1 localInit, Action`1 localFinally)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Parallel.ForWorker[TLocal,TInt](TInt fromInclusive, TInt toExclusive, ParallelOptions parallelOptions, Action`1 body, Action`2 bodyWithState, Func`4 bodyWithLocal, Func`1 localInit, Action`1 localFinally)
+   at System.Threading.Tasks.Parallel.ForEachWorker[TSource,TLocal](IEnumerable`1 source, ParallelOptions parallelOptions, Action`1 body, Action`2 bodyWithState, Action`3 bodyWithStateAndIndex, Func`4 bodyWithStateAndLocal, Func`5 bodyWithEverything, Func`1 localInit, Action`1 localFinally)
+   at System.Threading.Tasks.Parallel.ForEach[TSource](IEnumerable`1 source, Action`1 body)
+   at Stryker.Core.Initialisation.ProjectOrchestrator.MutateProjectsAsync(IStrykerOptions options, IReporter reporters, ITestRunner runner) in /_/src/Stryker.Core/Stryker.Core/Initialisation/ProjectOrchestrator.cs:line 74
+   at Stryker.Core.StrykerRunner.RunMutationTestAsync(IStrykerInputs inputs) in /_/src/Stryker.Core/Stryker.Core/StrykerRunner.cs:line 61
+[08:26:17 INF] Time Elapsed 00:00:08.8572609
+Unhandled exception. System.AggregateException: One or more errors occurred. (Object reference not set to an instance of an object.)
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Stryker.Core.Helpers.RoslynHelper.InjectMutation[T](T sourceNode, Mutation mutation) in /_/src/Stryker.Core/Stryker.Core/Helpers/RoslynHelper.cs:line 123
+   at Stryker.Core.Mutants.MutationStore.<>c__DisplayClass18_0.<Inject>b__0(Mutant m) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationStore.cs:line 243
+   at System.Linq.Enumerable.ListSelectIterator`2.MoveNext()
+   at System.Linq.Enumerable.Aggregate[TSource,TAccumulate](IEnumerable`1 source, TAccumulate seed, Func`3 func)
+   at Stryker.Core.Mutants.MutantPlacer.PlaceStatementControlledMutations(StatementSyntax original, IEnumerable`1 mutants) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutantPlacer.cs:line 113
+   at Stryker.Core.Mutants.MutationStore.Inject(BlockSyntax mutatedNode, ExpressionSyntax originalNode, Boolean needReturn) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationStore.cs:line 242
+   at Stryker.Core.Mutants.MutationContext.InjectMutations(BlockSyntax mutatedNode, ExpressionSyntax originalNode, Boolean needReturn) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationContext.cs:line 196
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.BaseFunctionOrchestrator`1.InjectMutations(T sourceNode, T targetNode, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/BaseFunctionOrchestrator.cs:line 140
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.Mutate(SyntaxNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 125
+   at Stryker.Core.Mutants.MutationContext.Mutate(SyntaxNode node, SemanticModel model) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationContext.cs:line 82
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.<>c__DisplayClass7_0.<OrchestrateChildrenMutation>b__0(SyntaxNode original, SyntaxNode _) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 85
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitListElement[TNode](TNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitList[TNode](SyntaxList`1 list)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitClassDeclaration(ClassDeclarationSyntax node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax.Accept[TResult](CSharpSyntaxVisitor`1 visitor)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replace[TNode](SyntaxNode root, IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode.ReplaceCore[TNode](IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.SyntaxNodeExtensions.ReplaceNodes[TRoot,TNode](TRoot root, IEnumerable`1 nodes, Func`3 computeReplacementNode)
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.OrchestrateChildrenMutation(TNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 84
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.Mutate(SyntaxNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 125
+   at Stryker.Core.Mutants.MutationContext.Mutate(SyntaxNode node, SemanticModel model) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationContext.cs:line 82
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.<>c__DisplayClass7_0.<OrchestrateChildrenMutation>b__0(SyntaxNode original, SyntaxNode _) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 85
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitListElement[TNode](TNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitList[TNode](SyntaxList`1 list)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitFileScopedNamespaceDeclaration(FileScopedNamespaceDeclarationSyntax node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.FileScopedNamespaceDeclarationSyntax.Accept[TResult](CSharpSyntaxVisitor`1 visitor)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replace[TNode](SyntaxNode root, IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode.ReplaceCore[TNode](IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.SyntaxNodeExtensions.ReplaceNodes[TRoot,TNode](TRoot root, IEnumerable`1 nodes, Func`3 computeReplacementNode)
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.OrchestrateChildrenMutation(TNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 84
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.Mutate(SyntaxNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 125
+   at Stryker.Core.Mutants.MutationContext.Mutate(SyntaxNode node, SemanticModel model) in /_/src/Stryker.Core/Stryker.Core/Mutants/MutationContext.cs:line 82
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.<>c__DisplayClass7_0.<OrchestrateChildrenMutation>b__0(SyntaxNode original, SyntaxNode _) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 85
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitListElement[TNode](TNode node)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitList[TNode](SyntaxList`1 list)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.VisitCompilationUnit(CompilationUnitSyntax node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.CompilationUnitSyntax.Accept[TResult](CSharpSyntaxVisitor`1 visitor)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replacer`1.Visit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.CSharp.Syntax.SyntaxReplacer.Replace[TNode](SyntaxNode root, IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode.ReplaceCore[TNode](IEnumerable`1 nodes, Func`3 computeReplacementNode, IEnumerable`1 tokens, Func`3 computeReplacementToken, IEnumerable`1 trivia, Func`3 computeReplacementTrivia)
+   at Microsoft.CodeAnalysis.SyntaxNodeExtensions.ReplaceNodes[TRoot,TNode](TRoot root, IEnumerable`1 nodes, Func`3 computeReplacementNode)
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.OrchestrateChildrenMutation(TNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 84
+   at Stryker.Core.Mutants.CsharpNodeOrchestrators.NodeSpecificOrchestrator`2.Mutate(SyntaxNode node, SemanticModel semanticModel, MutationContext context) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpNodeOrchestrators/NodeSpecificOrchestrator.cs:line 125
+   at Stryker.Core.Mutants.CsharpMutantOrchestrator.Mutate(SyntaxTree input, SemanticModel semanticModel) in /_/src/Stryker.Core/Stryker.Core/Mutants/CsharpMutantOrchestrator.cs:line 135
+   at Stryker.Core.MutationTest.CsharpMutationProcess.Mutate(MutationTestInput input, IStrykerOptions options) in /_/src/Stryker.Core/Stryker.Core/MutationTest/CsharpMutationProcess.cs:line 47
+   at Stryker.Core.MutationTest.MutationTestProcess.Mutate() in /_/src/Stryker.Core/Stryker.Core/MutationTest/MutationTestProcess.cs:line 65
+   at Stryker.Core.Initialisation.ProjectMutator.MutateProject(IStrykerOptions options, MutationTestInput input, IReporter reporters, IMutationTestProcess mutationTestProcess) in /_/src/Stryker.Core/Stryker.Core/Initialisation/ProjectMutator.cs:line 39
+   at Stryker.Core.Initialisation.ProjectOrchestrator.<>c__DisplayClass8_0.<MutateProjectsAsync>b__0(MutationTestInput mutationTestInput) in /_/src/Stryker.Core/Stryker.Core/Initialisation/ProjectOrchestrator.cs:line 76
+   at System.Threading.Tasks.Parallel.<>c__DisplayClass19_0`2.<ForWorker>b__1(RangeWorker& currentWorker, Int64 timeout, Boolean& replicationDelegateYieldedBeforeCompletion)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Parallel.<>c__DisplayClass19_0`2.<ForWorker>b__1(RangeWorker& currentWorker, Int64 timeout, Boolean& replicationDelegateYieldedBeforeCompletion)
+   at System.Threading.Tasks.TaskReplicator.Replica.Execute()
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.TaskReplicator.Run[TState](ReplicatableUserAction`1 action, ParallelOptions options, Boolean stopOnFirstFailure)
+   at System.Threading.Tasks.Parallel.ForWorker[TLocal,TInt](TInt fromInclusive, TInt toExclusive, ParallelOptions parallelOptions, Action`1 body, Action`2 bodyWithState, Func`4 bodyWithLocal, Func`1 localInit, Action`1 localFinally)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Parallel.ForWorker[TLocal,TInt](TInt fromInclusive, TInt toExclusive, ParallelOptions parallelOptions, Action`1 body, Action`2 bodyWithState, Func`4 bodyWithLocal, Func`1 localInit, Action`1 localFinally)
+   at System.Threading.Tasks.Parallel.ForEachWorker[TSource,TLocal](IEnumerable`1 source, ParallelOptions parallelOptions, Action`1 body, Action`2 bodyWithState, Action`3 bodyWithStateAndIndex, Func`4 bodyWithStateAndLocal, Func`5 bodyWithEverything, Func`1 localInit, Action`1 localFinally)
+   at System.Threading.Tasks.Parallel.ForEach[TSource](IEnumerable`1 source, Action`1 body)
+   at Stryker.Core.Initialisation.ProjectOrchestrator.MutateProjectsAsync(IStrykerOptions options, IReporter reporters, ITestRunner runner) in /_/src/Stryker.Core/Stryker.Core/Initialisation/ProjectOrchestrator.cs:line 74
+   at Stryker.Core.StrykerRunner.RunMutationTestAsync(IStrykerInputs inputs) in /_/src/Stryker.Core/Stryker.Core/StrykerRunner.cs:line 61
+   at Stryker.CLI.StrykerCli.RunStrykerAsync(IStrykerInputs inputs) in /_/src/Stryker.CLI/Stryker.CLI/StrykerCLI.cs:line 156
+   at Stryker.CLI.StrykerCli.<>c__DisplayClass11_0.<<RunAsync>b__0>d.MoveNext() in /_/src/Stryker.CLI/Stryker.CLI/StrykerCLI.cs:line 128
+--- End of stack trace from previous location ---
+   at McMaster.Extensions.CommandLineUtils.CommandLineApplication.ExecuteAsync(String[] args, CancellationToken cancellationToken)
+   at Stryker.CLI.StrykerCli.RunAsync(String[] args) in /_/src/Stryker.CLI/Stryker.CLI/StrykerCLI.cs:line 134
+   at Stryker.CLI.Program.Main(String[] args) in /_/src/Stryker.CLI/Stryker.CLI/Program.cs:line 28
+   at Stryker.CLI.Program.<Main>(String[] args)

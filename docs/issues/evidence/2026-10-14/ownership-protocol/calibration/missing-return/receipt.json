@@ -1,0 +1,19 @@
+{
+  "fault": "missing return",
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "FullyQualifiedName~Cleanup_finishes_before_return",
+    "--logger",
+    "trx;LogFileName=missing-return.trx",
+    "--results-directory",
+    "artifacts/ownership/calibration"
+  ],
+  "exitCode": 1,
+  "elapsedSeconds": 2.2633860069327056,
+  "originalSha256": "574697131fd250c8fce720a1470a9265ac6629ddd07074ab4b3bc0e6217fd92f",
+  "faultSha256": "97fc12ab77a529c696d29fd97889d7e922c803ed0928072a18d29cab0fd08ee3",
+  "restored": true
+}

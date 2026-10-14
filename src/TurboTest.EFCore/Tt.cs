@@ -4,129 +4,95 @@ using TurboTest.EFCore.Internal;
 
 namespace TurboTest.EFCore;
 
-/// <summary>
-/// Main entry point for TurboTest. Provides simple, EF-friendly API for containerized database testing.
-/// Supports familiar .NET configuration patterns.
-/// </summary>
+/// <summary>Creates fixture-owned leases and provides an explicitly disposable static convenience owner.</summary>
 public static class Tt
 {
-    private static TtPool? _globalPool;
-    private static readonly SemaphoreSlim _initLock = new(1, 1);
-    private static bool _initialized;
-    private static TtOptions _globalOptions = new();
+    private static readonly SemaphoreSlim OwnerGate = new(1, 1);
+    private static readonly object ConfigurationGate = new();
+    private static readonly Dictionary<Type, IAsyncDisposable> Owners = new();
+    private static TtOptions _options = new();
+    private static bool _started;
 
-    /// <summary>
-    /// Configures TurboTest globally from IConfiguration (appsettings.json).
-    /// Should be called once at application startup.
-    /// </summary>
-    /// <param name="configuration">Configuration instance</param>
-    public static void Configure(IConfiguration configuration)
-    {
-        var section = configuration.GetSection(TtOptions.SectionName);
-        section.Bind(_globalOptions);
-    }
+    /// <summary>Configure before the first static lease, or after awaiting static disposal.</summary>
+    public static void Configure(IConfiguration configuration) =>
+        Configure(options => configuration.GetSection(TtOptions.SectionName).Bind(options));
 
-    /// <summary>
-    /// Configures TurboTest globally with custom options.
-    /// Should be called once at application startup.
-    /// </summary>
-    /// <param name="configure">Configuration action</param>
     public static void Configure(Action<TtOptions> configure)
     {
-        configure(_globalOptions);
+        lock (ConfigurationGate)
+        {
+            if (_started) throw new InvalidOperationException("Await Tt.DisposeAsync before changing static configuration.");
+            var options = _options.Snapshot();
+            configure(options);
+            _options = options.Snapshot();
+        }
     }
 
-    /// <summary>
-    /// Creates a new DbContext instance backed by a real containerized database.
-    /// The database is automatically cleaned up when disposed.
-    /// </summary>
-    /// <typeparam name="TContext">The DbContext type</typeparam>
-    /// <param name="configure">Optional configuration for the DbContext</param>
-    /// <returns>A configured DbContext instance</returns>
-    public static async Task<TContext> CreateContextAsync<TContext>(
-        Action<DbContextOptionsBuilder>? configure = null)
+    public static async Task<TtLease<TContext>> CreateLeaseAsync<TContext>(
+        Action<DbContextOptionsBuilder>? configure = null, CancellationToken cancellationToken = default)
         where TContext : DbContext
     {
-        await EnsureInitializedAsync();
-
-        // Get a database from the pool
-        var database = await _globalPool!.GetDatabaseAsync();
-
-        // Build options
-        var optionsBuilder = new DbContextOptionsBuilder<TContext>();
-        optionsBuilder.UseNpgsql(database.ConnectionString);
-
-        // Apply global options
-        if (_globalOptions.EnableSensitiveDataLogging)
-        {
-            optionsBuilder.EnableSensitiveDataLogging();
-        }
-
-        // Apply any custom configuration
-        configure?.Invoke(optionsBuilder);
-
-        // Create context instance
-        var context = Activator.CreateInstance(
-            typeof(TContext),
-            optionsBuilder.Options) as TContext
-            ?? throw new InvalidOperationException($"Could not create instance of {typeof(TContext).Name}");
-
-        // Auto-migrate if needed
-        if (_globalOptions.AutoMigrate)
-        {
-            await context.Database.EnsureCreatedAsync();
-        }
-
-        // Wrap context with callback-based cleanup handling
-        var wrappedContext = new TtContext<TContext>(context, database);
-        
-        // Return the wrapped context (implicit conversion)
-        return wrappedContext;
-    }
-
-    /// <summary>
-    /// Creates a factory for creating multiple contexts with shared configuration.
-    /// Useful for test fixtures that need multiple contexts.
-    /// </summary>
-    public static async Task<TtFactory<TContext>> CreateFactoryAsync<TContext>(
-        Action<TtOptions>? configure = null)
-        where TContext : DbContext
-    {
-        await EnsureInitializedAsync();
-
-        var options = new TtOptions();
-        configure?.Invoke(options);
-
-        return new TtFactory<TContext>(_globalPool!, options);
-    }
-
-    /// <summary>
-    /// Disposes all resources. Call this in test cleanup if needed.
-    /// </summary>
-    public static async Task DisposeAsync()
-    {
-        if (_globalPool != null)
-        {
-            await _globalPool.DisposeAsync();
-        }
-    }
-
-    private static async Task EnsureInitializedAsync()
-    {
-        if (_initialized) return;
-
-        await _initLock.WaitAsync();
+        TtFactory<TContext> factory;
+        await OwnerGate.WaitAsync(cancellationToken);
         try
         {
-            if (_initialized) return;
+            if (Owners.TryGetValue(typeof(TContext), out var owner)) factory = (TtFactory<TContext>)owner;
+            else
+            {
+                TtOptions options;
+                lock (ConfigurationGate) { _started = true; options = _options.Snapshot(); }
+                factory = await CreateOwnedFactoryAsync<TContext>(options, cancellationToken);
+                Owners.Add(typeof(TContext), factory);
+            }
+        }
+        finally { OwnerGate.Release(); }
+        return await factory.CreateLeaseAsync(configure, cancellationToken);
+    }
 
-            _globalPool = new TtPool(_globalOptions);
-            await _globalPool.InitializeAsync();
-            _initialized = true;
-        }
-        finally
+    /// <summary>Creates an independent fixture. Factory disposal closes its leases and owned pool.</summary>
+    public static Task<TtFactory<TContext>> CreateFactoryAsync<TContext>(
+        Action<TtOptions>? configure = null, CancellationToken cancellationToken = default)
+        where TContext : DbContext
+    {
+        var options = new TtOptions();
+        configure?.Invoke(options);
+        return CreateOwnedFactoryAsync<TContext>(options.Snapshot(), cancellationToken);
+    }
+
+    private static async Task<TtFactory<TContext>> CreateOwnedFactoryAsync<TContext>(
+        TtOptions options, CancellationToken cancellationToken) where TContext : DbContext
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var pool = new TtPool(options);
+        try
         {
-            _initLock.Release();
+            await pool.InitializeAsync();
+            cancellationToken.ThrowIfCancellationRequested();
+            return new TtFactory<TContext>(pool, options, ownsPool: true);
         }
+        catch
+        {
+            await pool.DisposeAsync();
+            throw;
+        }
+    }
+
+    /// <summary>Closes static leases and resources. A later create starts a new owner.</summary>
+    public static async Task DisposeAsync()
+    {
+        await OwnerGate.WaitAsync();
+        try
+        {
+            Exception? first = null;
+            foreach (var owner in Owners.Values)
+            {
+                try { await owner.DisposeAsync(); }
+                catch (Exception error) { first ??= error; }
+            }
+            Owners.Clear();
+            lock (ConfigurationGate) _started = false;
+            if (first is not null) throw first;
+        }
+        finally { OwnerGate.Release(); }
     }
 }

@@ -14,7 +14,7 @@ using var loggerFactory = LoggerFactory.Create(builder =>
 
 var logger = loggerFactory.CreateLogger<Program>();
 
-Tt.Configure(options =>
+await using var fixture1 = await Tt.CreateFactoryAsync<BlogContext>(options =>
 {
     options.AutoAllocateResources = true;
     options.EnableDynamicScaling = true;  // Enable dynamic scaling
@@ -23,7 +23,8 @@ Tt.Configure(options =>
     options.Logger = logger;
 });
 
-await using var context1 = await Tt.CreateContextAsync<BlogContext>();
+await using var context1Lease = await fixture1.CreateLeaseAsync();
+        var context1 = context1Lease.Context;
 Console.WriteLine("✅ Context created with dynamic scaling enabled");
 Console.WriteLine("   Monitoring system resources every 10 seconds...");
 
@@ -31,7 +32,7 @@ Console.WriteLine("   Monitoring system resources every 10 seconds...");
 Console.WriteLine("\n2. Custom scaling thresholds");
 Console.WriteLine("----------------------------");
 
-Tt.Configure(options =>
+await using var fixture2 = await Tt.CreateFactoryAsync<BlogContext>(options =>
 {
     options.AutoAllocateResources = true;
     options.EnableDynamicScaling = true;
@@ -47,14 +48,16 @@ Tt.Configure(options =>
     options.Logger = logger;
 });
 
-await using var context2 = await Tt.CreateContextAsync<BlogContext>();
+await using var context2Lease = await fixture2.CreateLeaseAsync();
+        var context2 = context2Lease.Context;
 Console.WriteLine("✅ Context created with aggressive scaling thresholds");
 
 // Example 3: Simulate load and observe scaling
 Console.WriteLine("\n3. Simulating database load");
 Console.WriteLine("---------------------------");
 
-await using var context3 = await Tt.CreateContextAsync<BlogContext>();
+await using var context3Lease = await fixture2.CreateLeaseAsync();
+        var context3 = context3Lease.Context;
 
 // Create some test data and perform operations to potentially trigger scaling
 for (int i = 0; i < 5; i++)

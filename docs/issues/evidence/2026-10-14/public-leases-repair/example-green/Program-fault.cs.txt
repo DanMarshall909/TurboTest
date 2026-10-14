@@ -1,0 +1,73 @@
+using Microsoft.EntityFrameworkCore;
+using TurboTest.EFCore;
+
+Console.WriteLine("TurboTest Minimal Example");
+Console.WriteLine("=========================\n");
+
+// The fixture owns resources even when a query or lease return throws.
+Console.WriteLine("Creating context with real PostgreSQL database...");
+await using var fixture = await Tt.CreateFactoryAsync<TodoContext>(o => { o.PoolSize = 1; o.ContainerPrefix = "tt-example-25c5407a00324a80bca720c922a895c5"; });
+await using (var contextLease = await fixture.CreateLeaseAsync())
+{
+    var context = contextLease.Context;
+
+    Console.WriteLine("✅ Connected to database!");
+    if (Environment.GetEnvironmentVariable("TURBOTEST_EXAMPLE_FAULT") == "1") throw new InvalidOperationException("example-lifetime-fault");
+    Console.WriteLine($"   Connection: {context.Database.GetConnectionString()?.Split(';')[0..2].Aggregate((a, b) => $"{a};{b}")}...\n");
+
+    // Add some data
+    Console.WriteLine("Adding todo items...");
+    context.Todos.Add(new TodoItem { Title = "Write tests", IsComplete = true });
+    context.Todos.Add(new TodoItem { Title = "Run tests", IsComplete = false });
+    context.Todos.Add(new TodoItem { Title = "Ship code", IsComplete = false });
+    await context.SaveChangesAsync();
+
+    // Query the data
+    Console.WriteLine("\nTodo List:");
+    var todos = await context.Todos.OrderBy(t => t.CreatedAt).ToListAsync();
+    foreach (var todo in todos)
+    {
+        var status = todo.IsComplete ? "✅" : "⬜";
+        Console.WriteLine($"  {status} {todo.Title}");
+    }
+
+    // Demonstrate real database features
+    Console.WriteLine("\nDatabase Statistics:");
+    var totalCount = await context.Todos.CountAsync();
+    var completedCount = await context.Todos.CountAsync(t => t.IsComplete);
+    Console.WriteLine($"  Total items: {totalCount}");
+    Console.WriteLine($"  Completed: {completedCount}");
+    Console.WriteLine($"  Pending: {totalCount - completedCount}");
+
+    // Show that we're using a real database
+    Console.WriteLine("\nExecuting raw SQL (PostgreSQL-specific):");
+    var oldestTodo = await context.Todos
+        .FromSqlRaw("SELECT * FROM \"Todos\" ORDER BY \"CreatedAt\" LIMIT 1")
+        .FirstOrDefaultAsync();
+    Console.WriteLine($"  Oldest todo: {oldestTodo?.Title}");
+
+    Console.WriteLine("\n✨ Example complete!");
+    Console.WriteLine("Database will be automatically cleaned up on disposal.");
+
+    // Lease disposal closes contexts and resets; fixture disposal removes its containers.
+
+}
+
+// Define your domain models
+public class TodoItem
+{
+    public int Id { get; set; }
+    public required string Title { get; set; }
+    public bool IsComplete { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+}
+
+// Define your DbContext
+public class TodoContext : DbContext
+{
+    public DbSet<TodoItem> Todos => Set<TodoItem>();
+
+    public TodoContext(DbContextOptions<TodoContext> options) : base(options)
+    {
+    }
+}

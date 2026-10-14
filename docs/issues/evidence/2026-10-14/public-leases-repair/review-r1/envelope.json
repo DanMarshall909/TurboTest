@@ -1,0 +1,47 @@
+{
+  "operations": [
+    {
+      "operation": "delete",
+      "path": "docs/issues/open/api/TT-001-own-and-release-database-leases.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/resolved/api/TT-001-own-and-release-database-leases.md",
+      "mode": "100644",
+      "sha256": "28b9761bc743a9dd8d8e610d69b41440f0aaccac15bd6ea82113ea6966477356",
+      "contentPath": "artifacts/tt-001/review/post/docs/issues/resolved/api/TT-001-own-and-release-database-leases.md"
+    },
+    {
+      "operation": "delete",
+      "path": "docs/issues/open/database/TT-002-reset-with-pooled-connections.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/resolved/database/TT-002-reset-with-pooled-connections.md",
+      "mode": "100644",
+      "sha256": "7e3bfb27215791edd8706c9f68fcd1033430a9eec0d0ae541dfea6cd5a65e5e1",
+      "contentPath": "artifacts/tt-001/review/post/docs/issues/resolved/database/TT-002-reset-with-pooled-connections.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/README.md",
+      "mode": "100644",
+      "sha256": "b4dc00983deb6a7c0d39208847909fd253ad033ccc4f38fadc73f659f24bb68b",
+      "contentPath": "artifacts/tt-001/review/post/docs/issues/README.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/completion.json",
+      "mode": "100644",
+      "sha256": "066b584919a2f3e53963c8e3689724aeaa8bfb3316d9c47839041eda5a00b234",
+      "contentPath": "artifacts/tt-001/review/post/docs/issues/evidence/2026-10-14/public-leases/completion.json"
+    }
+  ],
+  "validation": [
+    "git diff --cached --check",
+    "Verify all evidence bytes against manifests and all relative Markdown file links",
+    "Verify final tree equals candidate plus these exact operations"
+  ],
+  "commitMessage": "Repair pooled reset and retain public lease ownership",
+  "publication": "No remotes; local completion commit only. No build/output cleanup."
+}

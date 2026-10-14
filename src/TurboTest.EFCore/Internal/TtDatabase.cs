@@ -5,17 +5,19 @@ namespace TurboTest.EFCore.Internal;
 /// </summary>
 internal sealed class TtDatabase : IAsyncDisposable
 {
-    private readonly TtPool _pool;
-    private readonly TtContainer _container;
+    private readonly Func<Task> _returnDatabase;
+    private readonly Func<Task> _discardDatabase;
     private readonly List<Func<Task>> _disposeCallbacks = new();
-    private bool _disposed;
+    private bool _closing;
+    private Task? _disposal;
 
-    public string ConnectionString => _container.ConnectionString;
+    public Npgsql.NpgsqlDataSource DataSource { get; }
 
-    internal TtDatabase(TtPool pool, TtContainer container)
+    internal TtDatabase(Npgsql.NpgsqlDataSource dataSource, Func<Task> returnDatabase, Func<Task> discardDatabase)
     {
-        _pool = pool;
-        _container = container;
+        DataSource = dataSource;
+        _returnDatabase = returnDatabase;
+        _discardDatabase = discardDatabase;
     }
 
     /// <summary>
@@ -25,14 +27,27 @@ internal sealed class TtDatabase : IAsyncDisposable
     {
         lock (_disposeCallbacks)
         {
+            ObjectDisposedException.ThrowIf(_closing, this);
             _disposeCallbacks.Add(callback);
         }
     }
 
-    public async ValueTask DisposeAsync()
+    public ValueTask DisposeAsync() => FinishAsync(discard: false);
+
+    internal ValueTask DiscardAsync() => FinishAsync(discard: true);
+
+    private ValueTask FinishAsync(bool discard)
     {
-        if (_disposed) return;
-        _disposed = true;
+        lock (_disposeCallbacks)
+        {
+            _closing = true;
+            _disposal ??= DisposeCoreAsync(discard);
+            return new ValueTask(_disposal);
+        }
+    }
+
+    private async Task DisposeCoreAsync(bool discard)
+    {
 
         // Execute all dispose callbacks first (EF Core context disposal)
         List<Func<Task>> callbacks;
@@ -41,19 +56,30 @@ internal sealed class TtDatabase : IAsyncDisposable
             callbacks = _disposeCallbacks.ToList();
         }
 
+        Exception? cleanupFailure = null;
         foreach (var callback in callbacks)
         {
             try
             {
                 await callback();
             }
-            catch
+            catch (Exception error)
             {
-                // Continue with other callbacks even if one fails
+                // Preserve the original failure even if later cleanup also fails.
+                cleanupFailure ??= error;
             }
         }
 
+        if (cleanupFailure is not null)
+        {
+            var failure = new TtLifecycleException("LeaseCleanup", cleanupFailure);
+            try { await _discardDatabase(); }
+            catch (Exception error) { failure = failure.WithCleanupFailure(error); }
+            throw failure;
+        }
+
         // Now return to pool (which will reset the database)
-        await _pool.ReleaseAsync(_container);
+        if (discard) await _discardDatabase();
+        else await _returnDatabase();
     }
 }

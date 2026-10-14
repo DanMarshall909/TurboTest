@@ -1,0 +1,21 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.1.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:24.23]     TurboTest.Tests.PooledResetTests.Repeated_factory_returns_reuse_the_database_and_its_warm_session [FAIL]
+  Failed TurboTest.Tests.PooledResetTests.Repeated_factory_returns_reuse_the_database_and_its_warm_session [24 s]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: Tuple ("testdb_fc3ccf8d1355486b9b850aa31b4a8d0e", 16384, 61)
+Actual:   Tuple ("testdb_6acb5bd836784bda80e4d9606d134e48", 16384, 61)
+  Stack Trace:
+     at TurboTest.Tests.PooledResetTests.Repeated_factory_returns_reuse_the_database_and_its_warm_session() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 24
+   at TurboTest.Tests.PooledResetTests.Repeated_factory_returns_reuse_the_database_and_its_warm_session() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 19
+   at TurboTest.Tests.PooledResetTests.Repeated_factory_returns_reuse_the_database_and_its_warm_session() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 19
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-002/red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 24 s - TurboTest.Tests.dll (net10.0)

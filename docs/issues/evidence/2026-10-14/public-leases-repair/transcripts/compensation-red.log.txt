@@ -1,0 +1,46 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:04.52]     TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership [FAIL]
+  Failed TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership [4 s]
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.IO.IOException)
+---- System.IO.IOException : delete-secret
+  Stack Trace:
+     at TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 40
+   at TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 54
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at TurboTest.Tests.CompensatingCleanupTests.<>c__DisplayClass0_0.<<Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership>b__0>d.MoveNext() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 20
+--- End of stack trace from previous location ---
+   at TurboTest.EFCore.Internal.TtPool.DeleteContainerAsync(TtContainer container) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 146
+   at TurboTest.EFCore.Internal.TtPool.ReleaseAsync(TtContainer container) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 133
+   at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs:line 83
+[xUnit.net 00:00:09.19]     TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership [FAIL]
+  Failed TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership [4 s]
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.IO.IOException)
+---- System.IO.IOException : discard-secret
+  Stack Trace:
+     at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 75
+   at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 85
+   at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 85
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at TurboTest.Tests.CompensatingCleanupTests.<>c__DisplayClass1_0.<<Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership>b__0>d.MoveNext() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 67
+--- End of stack trace from previous location ---
+   at TurboTest.EFCore.Internal.TtPool.DeleteContainerAsync(TtContainer container) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 146
+   at TurboTest.EFCore.Internal.TtPool.DiscardAsync(TtContainer container) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 141
+   at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs:line 82
+   at TurboTest.EFCore.TtFactory`1.CreateLeaseAsync(Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 60
+Results File: /home/dan/code/TurboTest/artifacts/tt-001/compensation-red/compensation-red.trx
+
+Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 9 s - TurboTest.Tests.dll (net10.0)

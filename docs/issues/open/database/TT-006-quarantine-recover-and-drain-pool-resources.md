@@ -33,3 +33,41 @@ Add recovery and drain behavior to the bounded owner. Keep dirty/uncertain resou
 ## Verification
 
 Inject one failure at a time: partial reset/sequence change, post-commit bad seed, invalid replacement, clone failure, failed deletion, canceled queued acquisition and shutdown during recovery. Assert the named diagnostic, non-publication, accounting and eventual drain/recovery. Retain real PostgreSQL failure-boundary tests.
+
+## Implementation log
+
+- **2026-10-14 — partial groundwork:** A broad test attempt repeatedly failed
+  during PostgreSQL initialization and left 29 task-owned containers behind.
+  The run was stopped; its processes were verified terminal, logs/identities
+  were retained and the containers/anonymous volumes were removed. Creation
+  now validates the data source before Docker creation and records the
+  container before starting/awaiting readiness. Failed preparation deletes
+  that resource, and disposal enumerates all owned containers. A regression
+  using a missing database rejected the old cleanup path and now independently
+  observes zero remaining containers. See the
+  [evidence manifest](../../evidence/2026-10-14/pooled-reset/manifest.json).
+  Bounded reservations, retries, terminal recovery, true startup deadlines,
+  tracked concurrent lifecycle work and lease-aware drain remain open; this
+  change does not resolve TT-006.
+- **2026-10-14 — startup gate investigation:** The migrated full suite passed
+  30 checks, but the final 31-check rerun then passed 25 and failed six during
+  PostgreSQL startup. Failed resources were removed; no TurboTest containers
+  remained. Sanitized Docker events show seven resources reaching cleanup
+  about 30–33 seconds after start and subsequently requiring forced termination.
+  This suggests unfinished startup but does not identify its phase. A separate
+  readiness flaw also exists: a failed query after successful connection open
+  leaves the retry loop reusing an open connection. A bounded diagnostic batch
+  now captures timestamped PostgreSQL logs before cleanup. Neither a timeout
+  increase nor a clean completion gate is inferred from the earlier pass.
+- The diagnostic batch reproduced three startup failures and retained four
+  containers' timestamped logs: each stopped after post-bootstrap initialization
+  without completing `initdb`. Disposable clusters now use the PostgreSQL
+  testing option `--no-sync` for initial creation. A real check verifies that
+  server `fsync` remains `on`; the three failed workload checks plus that check
+  pass together. README states the crash/recreation contract. This does not
+  disable server durability settings or establish a startup latency guarantee.
+- A separate real PostgreSQL fault makes the first readiness query fail after
+  opening its connection. The former loop times out instead of retrying; each
+  attempt now closes its connection wrapper and the next query succeeds. Both
+  RED/GREEN results are retained. True deadline/cancellation and controller
+  recovery remain under the acceptance criteria above.

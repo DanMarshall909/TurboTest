@@ -1,0 +1,24 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.20]     TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate [FAIL]
+  Failed TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate [28 ms]
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.IO.IOException)
+---- System.IO.IOException : discard-secret
+  Stack Trace:
+     at TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs:line 26
+   at TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs:line 34
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at TurboTest.Tests.DatabaseOwnershipTests.<>c__DisplayClass0_0.<Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate>b__1() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs:line 21
+   at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs:line 75
+Results File: /home/dan/code/TurboTest/artifacts/tt-001/discard-red/discard-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 41 ms - TurboTest.Tests.dll (net10.0)

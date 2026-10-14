@@ -1,0 +1,27 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:06.47]     TurboTest.Tests.PublicLeaseTests.Concurrent_fixtures_with_the_same_prefix_own_distinct_resources [FAIL]
+  Failed TurboTest.Tests.PublicLeaseTests.Concurrent_fixtures_with_the_same_prefix_own_distinct_resources [6 s]
+  Error Message:
+   Docker.DotNet.DockerApiException : Docker API responded with status code=Conflict, response={"message":"Conflict. The container name \"/tt-independent-b9c62c0818b342ea92de4d7413189505_pool_0_20261013231358\" is already in use by container \"8803268ab8880f6f5e1a690521435c4adf278ff34d0f28d899ef6e9fd4a0a755\". You have to remove (or rename) that container to be able to reuse that name."}
+
+  Stack Trace:
+     at Docker.DotNet.DockerClient.HandleIfErrorResponseAsync(HttpStatusCode statusCode, HttpResponseMessage response, IEnumerable`1 handlers)
+   at Docker.DotNet.DockerClient.MakeRequestAsync(IEnumerable`1 errorHandlers, HttpMethod method, String path, IQueryString queryString, IRequestContent body, IDictionary`2 headers, TimeSpan timeout, CancellationToken token)
+   at Docker.DotNet.ContainerOperations.CreateContainerAsync(CreateContainerParameters parameters, CancellationToken cancellationToken)
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 165
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.PublicLeaseTests.Concurrent_fixtures_with_the_same_prefix_own_distinct_resources() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 188
+   at TurboTest.Tests.PublicLeaseTests.Concurrent_fixtures_with_the_same_prefix_own_distinct_resources() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 193
+   at TurboTest.Tests.PublicLeaseTests.Concurrent_fixtures_with_the_same_prefix_own_distinct_resources() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 207
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-001/independent-red-valid.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 6 s - TurboTest.Tests.dll (net10.0)

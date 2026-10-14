@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="c4d8d9f2-8ca1-4d3e-b8be-b18ee3d7b7ea" name="@os-greg 2026-10-14 08:57:27" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T08:57:27.9785020+10:00" queuing="2026-10-14T08:57:27.9785021+10:00" start="2026-10-14T08:56:53.5323510+10:00" finish="2026-10-14T08:57:27.9831630+10:00" />
+  <TestSettings name="default" id="0bd63708-04a5-40b5-be5e-acaea0742436">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_08_57_27" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="33e59b3c-f6db-48a2-b13d-f6a02cd2d26f" testId="2755e700-8bc3-193c-ec82-663775d59909" testName="TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database" computerName="os-greg" duration="00:00:33.9356778" startTime="2026-10-14T08:56:53.9463377+10:00" endTime="2026-10-14T08:57:27.8947336+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="33e59b3c-f6db-48a2-b13d-f6a02cd2d26f">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: Tuple ("testdb_4c9d5c6706da454b8a231b0182ef3edf", 16384, 61)
+Actual:   Tuple ("testdb_222a1d75719f4c35a94840df63201646", 16384, 63)</Message>
+          <StackTrace>   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 22
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 25
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 17
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 31
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="2755e700-8bc3-193c-ec82-663775d59909">
+      <Execution id="33e59b3c-f6db-48a2-b13d-f6a02cd2d26f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Three_sequential_public_leases_return_and_reuse_one_database" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="2755e700-8bc3-193c-ec82-663775d59909" executionId="33e59b3c-f6db-48a2-b13d-f6a02cd2d26f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.07]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.11]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.13]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:34.10]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:34.10]       Expected: Tuple ("testdb_4c9d5c6706da454b8a231b0182ef3edf", 16384, 61)
+[xUnit.net 00:00:34.10]       Actual:   Tuple ("testdb_222a1d75719f4c35a94840df63201646", 16384, 63)
+[xUnit.net 00:00:34.10]       Stack Trace:
+[xUnit.net 00:00:34.10]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(22,0): at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database()
+[xUnit.net 00:00:34.10]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(25,0): at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database()
+[xUnit.net 00:00:34.10]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(17,0): at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database()
+[xUnit.net 00:00:34.10]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(31,0): at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database()
+[xUnit.net 00:00:34.10]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:34.11]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T08:57:27.8972562+10:00">
+        <Text>[xUnit.net 00:00:34.10]     TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

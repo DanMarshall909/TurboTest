@@ -1,0 +1,18 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:06.55]     TurboTest.Tests.PublicLeaseTests.Cancellation_during_context_configuration_cannot_publish_a_lease [FAIL]
+  Failed TurboTest.Tests.PublicLeaseTests.Cancellation_during_context_configuration_cannot_publish_a_lease [6 s]
+  Error Message:
+   Assert.ThrowsAny() Failure: No exception was thrown
+Expected: typeof(System.OperationCanceledException)
+  Stack Trace:
+     at TurboTest.Tests.PublicLeaseTests.Cancellation_during_context_configuration_cannot_publish_a_lease() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 105
+   at TurboTest.Tests.PublicLeaseTests.Cancellation_during_context_configuration_cannot_publish_a_lease() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 108
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-001/cancellation-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 6 s - TurboTest.Tests.dll (net10.0)

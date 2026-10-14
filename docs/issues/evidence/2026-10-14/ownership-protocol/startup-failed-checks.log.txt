@@ -1,0 +1,25 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:37.73]     TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database [FAIL]
+  Failed TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database [37 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 58
+   at TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 81
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/ownership/current/current.trx
+
+Failed!  - Failed:     1, Passed:    10, Skipped:     0, Total:    11, Duration: 2 m 7 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/ownership/current/abea0425-a90a-4358-987a-03d065221392/dan_os-greg_2026-10-14.08_33_08.cobertura.xml

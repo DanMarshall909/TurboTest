@@ -1,0 +1,21 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:34.10]     TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database [FAIL]
+  Failed TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database [33 s]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: Tuple ("testdb_4c9d5c6706da454b8a231b0182ef3edf", 16384, 61)
+Actual:   Tuple ("testdb_222a1d75719f4c35a94840df63201646", 16384, 63)
+  Stack Trace:
+     at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 22
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 25
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 17
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 31
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-001/public-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 33 s - TurboTest.Tests.dll (net10.0)

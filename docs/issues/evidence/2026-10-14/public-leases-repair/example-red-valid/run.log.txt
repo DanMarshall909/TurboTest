@@ -1,0 +1,9 @@
+TurboTest Minimal Example
+=========================
+
+Creating context with real PostgreSQL database...
+✅ Connected to database!
+Unhandled exception. System.InvalidOperationException: example-lifetime-fault
+   at Program.<Main>$(String[] args) in /home/dan/code/TurboTest/examples/MinimalExample/Program.cs:line 15
+   at Program.<Main>$(String[] args) in /home/dan/code/TurboTest/examples/MinimalExample/Program.cs:line 54
+   at Program.<Main>(String[] args)

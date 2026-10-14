@@ -14,16 +14,19 @@ internal sealed class TtPool : IAsyncDisposable
     private readonly ILogger _logger;
     private readonly ConcurrentQueue<TtContainer> _availableContainers = new();
     private readonly ConcurrentDictionary<string, TtContainer> _activeContainers = new();
+    private readonly ConcurrentDictionary<string, TtContainer> _ownedContainers = new();
     private readonly DockerClient _dockerClient;
+    private readonly Func<TtContainer, Task> _deleteResource;
     private readonly SemaphoreSlim _initSemaphore = new(1, 1);
     private bool _initialized;
     private bool _disposed;
     private Timer? _scalingTimer;
     private readonly object _scalingLock = new();
 
-    public TtPool(TtOptions? options = null)
+    public TtPool(TtOptions? options = null, Func<TtContainer, Task>? deleteResource = null)
     {
         _options = options ?? new TtOptions();
+        _deleteResource = deleteResource ?? (container => container.DisposeAsync().AsTask());
         _logger = _options.Logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
 
         // Apply auto-allocation if enabled
@@ -90,14 +93,17 @@ internal sealed class TtPool : IAsyncDisposable
         {
             _activeContainers.TryAdd(container.Id, container);
             // No reset needed - database should already be clean from previous release
-            return new TtDatabase(this, container);
+            return CreateLease(container);
         }
 
         // Create overflow container if pool is empty
         container = await CreateContainerAsync($"overflow_{Guid.NewGuid():N}");
         _activeContainers.TryAdd(container.Id, container);
-        return new TtDatabase(this, container);
+        return CreateLease(container);
     }
+
+    private TtDatabase CreateLease(TtContainer container) =>
+        new(container.DataSource, () => ReleaseAsync(container), () => DiscardAsync(container));
 
     internal async Task ReleaseAsync(TtContainer container)
     {
@@ -116,14 +122,30 @@ internal sealed class TtPool : IAsyncDisposable
             else
             {
                 // Pool is full, dispose the container
-                await container.DisposeAsync();
+                await DeleteContainerAsync(container);
             }
         }
         catch (Exception ex)
         {
-            _logger?.LogError("Failed to release container {ContainerId}: {Error}", container.Id, ex.Message);
-            await container.DisposeAsync();
+            var failure = ex as TtLifecycleException ?? new TtLifecycleException("Reset", ex);
+            _logger.LogError("Failed to return container {ContainerId} at {Stage}; SQLSTATE {SqlState}",
+                container.Id, failure.Stage, failure.SqlState);
+            try { await DeleteContainerAsync(container); }
+            catch (Exception cleanupError) { failure = failure.WithCleanupFailure(cleanupError); }
+            throw failure;
         }
+    }
+
+    internal async Task DiscardAsync(TtContainer container)
+    {
+        if (_activeContainers.TryRemove(container.Id, out _))
+            await DeleteContainerAsync(container);
+    }
+
+    private async Task DeleteContainerAsync(TtContainer container)
+    {
+        await _deleteResource(container);
+        _ownedContainers.TryRemove(container.Id, out _);
     }
 
     private async Task<TtContainer> CreateContainerAsync(string name)
@@ -134,56 +156,70 @@ internal sealed class TtPool : IAsyncDisposable
         var databaseName = $"{_options.DatabaseName}_{Guid.NewGuid():N}"; // Make database name unique
         var image = _options.DockerImage ?? "postgres:16-alpine";
 
-        var createResponse = await _dockerClient.Containers.CreateContainerAsync(
-            new CreateContainerParameters
-            {
-                Image = image,
-                Name = $"{_options.ContainerPrefix}_{name}_{DateTime.UtcNow:yyyyMMddHHmmss}",
-                Env = new[]
-                {
-                    $"POSTGRES_DB={databaseName}",
-                    $"POSTGRES_PASSWORD={password}",
-                    $"POSTGRES_USER={username}"
-                },
-                ExposedPorts = new Dictionary<string, EmptyStruct>
-                {
-                    { "5432/tcp", default }
-                },
-                HostConfig = new HostConfig
-                {
-                    PortBindings = new Dictionary<string, IList<PortBinding>>
-                    {
-                        ["5432/tcp"] = new[] { new PortBinding { HostPort = port.ToString() } }
-                    },
-                    Memory = (long)_options.MemoryLimitMb * 1024 * 1024,
-                    AutoRemove = false,
-                    RestartPolicy = new RestartPolicy { Name = RestartPolicyKind.No }
-                }
-            });
-
-        await _dockerClient.Containers.StartContainerAsync(createResponse.ID, new ContainerStartParameters());
-
         var connectionString = _options.ConnectionStringTemplate != null
             ? string.Format(_options.ConnectionStringTemplate, "localhost", port, databaseName, username, password)
             : $"Host=localhost;Port={port};Database={databaseName};Username={username};Password={password};Include Error Detail=true";
+        // Validate the source before creating a container, including custom connection templates.
+        var dataSource = Npgsql.NpgsqlDataSource.Create(connectionString);
+        TtContainer? container = null;
+        try
+        {
 
-        // Wait for database to be ready
-        await WaitForDatabaseReadyAsync(connectionString);
+            var createResponse = await _dockerClient.Containers.CreateContainerAsync(
+                new CreateContainerParameters
+                {
+                    Image = image,
+                    Name = $"{_options.ContainerPrefix}_{name}_{Guid.NewGuid():N}",
+                    Env = new[]
+                    {
+                    // These clusters are disposable. Skip initdb's initial disk flush,
+                    // retaining PostgreSQL server fsync for the actual test workload.
+                    "POSTGRES_INITDB_ARGS=--no-sync",
+                    $"POSTGRES_DB={databaseName}",
+                    $"POSTGRES_PASSWORD={password}",
+                    $"POSTGRES_USER={username}"
+                    },
+                    ExposedPorts = new Dictionary<string, EmptyStruct>
+                    {
+                    { "5432/tcp", default }
+                    },
+                    HostConfig = new HostConfig
+                    {
+                        PortBindings = new Dictionary<string, IList<PortBinding>>
+                        {
+                            ["5432/tcp"] = new[] { new PortBinding { HostPort = port.ToString() } }
+                        },
+                        Memory = (long)_options.MemoryLimitMb * 1024 * 1024,
+                        AutoRemove = false,
+                        RestartPolicy = new RestartPolicy { Name = RestartPolicyKind.No }
+                    }
+                });
 
-        return new TtContainer(createResponse.ID, connectionString, _dockerClient);
+            // Retain ownership before any operation which can fail or await readiness.
+            container = new TtContainer(createResponse.ID, dataSource, _dockerClient);
+            _ownedContainers.TryAdd(container.Id, container);
+            await _dockerClient.Containers.StartContainerAsync(createResponse.ID, new ContainerStartParameters());
+            await WaitForDatabaseReadyAsync(dataSource);
+            return container;
+        }
+        catch
+        {
+            if (container is not null) await DeleteContainerAsync(container);
+            else await dataSource.DisposeAsync();
+            throw;
+        }
     }
 
-    private async Task WaitForDatabaseReadyAsync(string connectionString)
+    internal static async Task WaitForDatabaseReadyAsync(Npgsql.NpgsqlDataSource dataSource,
+        Func<Npgsql.NpgsqlConnection, Task>? probe = null, int maxAttempts = 60)
     {
-        using var connection = new Npgsql.NpgsqlConnection(connectionString);
-        var maxAttempts = 60; // 30 seconds max
-
         for (int i = 0; i < maxAttempts; i++)
         {
             try
             {
+                await using var connection = dataSource.CreateConnection();
                 await connection.OpenAsync();
-                await connection.ExecuteScalarAsync("SELECT 1");
+                await (probe?.Invoke(connection) ?? connection.ExecuteScalarAsync("SELECT 1"));
                 return;
             }
             catch
@@ -220,11 +256,7 @@ internal sealed class TtPool : IAsyncDisposable
     {
         if (_disposed) return;
 
-        var allContainers = _availableContainers.ToArray()
-            .Concat(_activeContainers.Values)
-            .ToArray();
-
-        await Task.WhenAll(allContainers.Select(c => c.DisposeAsync().AsTask()));
+        await Task.WhenAll(_ownedContainers.Values.Select(DeleteContainerAsync));
 
         _scalingTimer?.Dispose();
         _dockerClient?.Dispose();
@@ -372,7 +404,7 @@ internal sealed class TtPool : IAsyncDisposable
         if (_availableContainers.TryDequeue(out var container))
         {
             _logger.LogInformation("Scaling down: Removing 1 container due to high resource usage");
-            _ = Task.Run(() => container.DisposeAsync());
+            _ = Task.Run(() => DeleteContainerAsync(container));
         }
     }
 

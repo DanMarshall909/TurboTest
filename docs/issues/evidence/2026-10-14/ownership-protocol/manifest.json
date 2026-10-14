@@ -1,0 +1,232 @@
+{
+  "status": "In progress; all ten implementation tickets remain Open",
+  "base": "5de941b6d729f62f83575f65f1420ae0262e1235",
+  "upstream": null,
+  "sdk": "10.0.301",
+  "checks": {
+    "command": "dotnet test tests/TurboTest.Tests --filter 'FullyQualifiedName~PooledResetTests|FullyQualifiedName~StartupCleanupTests|FullyQualifiedName~DatabaseOwnershipTests' --collect 'Code Coverage;Format=cobertura' --logger 'trx;LogFileName=final.trx' --results-directory artifacts/ownership/final",
+    "exit": 0,
+    "passed": 13,
+    "postgresBoundaryChecks": 8,
+    "unitChecks": 5
+  },
+  "mutation": {
+    "version": "5.0.0",
+    "cwd": "tests/TurboTest.Tests",
+    "command": "dotnet stryker --config-file ../../.config/stryker-ownership.json --output ../../artifacts/ownership/stryker-final --skip-version-check",
+    "exit": 0,
+    "scope": [
+      "Internal/TtDatabase.cs",
+      "TtLifecycleException.cs"
+    ],
+    "testFilter": "FullyQualifiedName~DatabaseOwnershipTests",
+    "statuses": {
+      "Killed": 16,
+      "Ignored": 9,
+      "CompileError": 1
+    },
+    "sourceResolvableParticipants": 5,
+    "unlistedLinks": [],
+    "sourceMatchesCurrent": true
+  },
+  "coverage": "Diagnostic only; see XML and task logs. Owning disposal/diagnostic classes execute at 100% line coverage; broader package is not claimed fully covered.",
+  "remaining": [
+    "Public lease API and migration are unimplemented",
+    "All other implementation tickets remain open",
+    "Full unfiltered test suite has no passing completion evidence",
+    "Independent completion review has not run",
+    "No final completion commit or publication"
+  ],
+  "files": [
+    {
+      "source": "artifacts/ownership/concurrent-red.log",
+      "archive": "concurrent-red.log.txt",
+      "sha256": "0c61ca13294d377c98486283e67adf33a4bf0e8d793a27af40b0abb106881142"
+    },
+    {
+      "source": "artifacts/ownership/registration-red.log",
+      "archive": "registration-red.log.txt",
+      "sha256": "53264ad96641a024332b503174ffd82811adb7d221cd54263220f9c41d277040"
+    },
+    {
+      "source": "artifacts/ownership/schema-red.log",
+      "archive": "schema-red.log.txt",
+      "sha256": "d1be66f3a32eb082213931806b3afa29bff6bbc4a434170e7abc08cff01dc313"
+    },
+    {
+      "source": "artifacts/ownership/schema-green.log",
+      "archive": "schema-green.log.txt",
+      "sha256": "40029cfb7bdefd403fe4c84cf49a7344ec30c8fc2344bba0e37b8865ede8b72e"
+    },
+    {
+      "source": "artifacts/ownership/final.log",
+      "archive": "checks-green.log.txt",
+      "sha256": "673d3305e1a69e376ef5aae49ce318cdbf0b346242ee94f8d812f4057fe0abc0"
+    },
+    {
+      "source": "artifacts/ownership/final/final.trx",
+      "archive": "checks-green.trx",
+      "sha256": "5c8c042c58190aa4526a2d74f4ad54f22a0e418e2c149224e7ddcff07795f6e7"
+    },
+    {
+      "source": "artifacts/ownership/stryker-final.log",
+      "archive": "mutation.log.txt",
+      "sha256": "d4e884e8d3940c143118872e4dfd3a1ca47cafb6a84e77d9966e5790dcbf847c"
+    },
+    {
+      "source": "artifacts/ownership/stryker.log",
+      "archive": "mutation-4-rejected.log.txt",
+      "sha256": "cae62da389f06d2d3c013f21edda8696f7f4d0be7b33438c16cdae9091ecfb1c"
+    },
+    {
+      "source": "artifacts/ownership/stryker-5-native.log",
+      "archive": "mutation-5-rejected.log.txt",
+      "sha256": "75e89661ce77ba6b7335cdfee03702d34763f2758b158b11f3ffca87a1aedf8c"
+    },
+    {
+      "source": "artifacts/ownership/current.log",
+      "archive": "startup-failed-checks.log.txt",
+      "sha256": "2b45a9fbfd571adb7bef1981de1b9fc807e641ab2c054a06d1cbe78b8b347ab8"
+    },
+    {
+      "source": "artifacts/ownership/reset-fault-current.log",
+      "archive": "startup-failed-check-rerun.log.txt",
+      "sha256": "7c2f774337319851997e32d7ade113019b6f392b0b8f05b57a86de411d3cf5e5"
+    },
+    {
+      "source": "artifacts/ownership/calibration/receipt.json",
+      "archive": "calibration/missing-return/receipt.json",
+      "sha256": "cb1f2081a9d2558d706c06af7f7db3670fd7cd787a2b9d7332a5b22f67d55264"
+    },
+    {
+      "source": "artifacts/ownership/calibration/run.log",
+      "archive": "calibration/missing-return/run.log.txt",
+      "sha256": "b50a2b0d67100e749e020daf49a8347fec17b0bf81278569d61628df18a18ced"
+    },
+    {
+      "source": "artifacts/ownership/calibration/TtDatabase-missing-return.cs.txt",
+      "archive": "calibration/missing-return/TtDatabase-missing-return.cs.txt",
+      "sha256": "97fc12ab77a529c696d29fd97889d7e922c803ed0928072a18d29cab0fd08ee3"
+    },
+    {
+      "source": "artifacts/ownership/calibration/last-failure/receipt.json",
+      "archive": "calibration/last-failure/receipt.json",
+      "sha256": "48dc8ea76ecd2016c88b7fd3235d33620da33722ab42ba22a73a09e56a0908d3"
+    },
+    {
+      "source": "artifacts/ownership/calibration/last-failure/run.log",
+      "archive": "calibration/last-failure/run.log.txt",
+      "sha256": "4b755aaafede57cc35ac4e2429b78fc1d89ff7cd2cfac50aafefacbfb3f51bab"
+    },
+    {
+      "source": "artifacts/ownership/calibration/last-failure/TtDatabase-fault.cs.txt",
+      "archive": "calibration/last-failure/TtDatabase-fault.cs.txt",
+      "sha256": "ef9cd30b9ae189b73ce1f577d4920857e77cd22bababf52627aa63142c8d0bdc"
+    },
+    {
+      "source": "artifacts/ownership/calibration/double-return/receipt.json",
+      "archive": "calibration/double-return/receipt.json",
+      "sha256": "1265af49b2c349b829ea6fc4064decdf00fa12d8b690272b66f2d1e9f47edfc3"
+    },
+    {
+      "source": "artifacts/ownership/calibration/double-return/run.log",
+      "archive": "calibration/double-return/run.log.txt",
+      "sha256": "37beac639cc404ae95a35ccff23a225c3daa75b542ac7991a18d27a80b58e760"
+    },
+    {
+      "source": "artifacts/ownership/calibration/double-return/TtDatabase-fault.cs.txt",
+      "archive": "calibration/double-return/TtDatabase-fault.cs.txt",
+      "sha256": "b3e5ed4c25aa2cca565c477942737c80a3cddb618f99cb459e6d8f379b479786"
+    },
+    {
+      "source": ".config/dotnet-tools.json",
+      "archive": "source/.config/dotnet-tools.json.txt",
+      "sha256": "f9fb85462db6b256ed4155043279286a9e5ccb72e0cdbc7d5f052bbe3221f1cb"
+    },
+    {
+      "source": ".config/stryker-ownership.json",
+      "archive": "source/.config/stryker-ownership.json.txt",
+      "sha256": "78919490914e4c07ff417382e3d637cebbc64028b5ef2dc9ba40ce57ba5b3eee"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Internal/TtContainer.cs",
+      "archive": "source/src/TurboTest.EFCore/Internal/TtContainer.cs.txt",
+      "sha256": "08198f2ad7b42d949b79771ab9872268a8ad6ff175670c601f90164f38036b7a"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Internal/TtDatabase.cs",
+      "archive": "source/src/TurboTest.EFCore/Internal/TtDatabase.cs.txt",
+      "sha256": "e3699d752dcd0643c49a33930c533dcc818dcfb2b477a559001a0e934c6cb6ad"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Internal/TtPool.cs",
+      "archive": "source/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "sha256": "e3d1b6128f7a31d8c98201b5e69d227a77a108890fb19ff5d96c734524c8fb98"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Properties/AssemblyInfo.cs",
+      "archive": "source/src/TurboTest.EFCore/Properties/AssemblyInfo.cs.txt",
+      "sha256": "99b77a3d9691cddb8cbb8bf1c97d9116ea8a994e07d6e0535c1043c2edba44f4"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Tt.cs",
+      "archive": "source/src/TurboTest.EFCore/Tt.cs.txt",
+      "sha256": "c25d336faeace4eddc54375fe73f9afbb76384bb9204a8757124d44b67a042df"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtFactory.cs",
+      "archive": "source/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "sha256": "397d9967bbe5db658d0bfeedff31ce9b83309b77d7c21654985690e32f0830c2"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtLifecycleException.cs",
+      "archive": "source/src/TurboTest.EFCore/TtLifecycleException.cs.txt",
+      "sha256": "97cdbfd083cb74185284569ae5de3c2ea67d4220cbb45c6f77e9ddf61a672bcc"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtOptions.cs",
+      "archive": "source/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "sha256": "9749caf672ee56ef140aeae8c6e01126bee7dfaedc186eee1ae944d97373eed7"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TurboTest.EFCore.csproj",
+      "archive": "source/src/TurboTest.EFCore/TurboTest.EFCore.csproj.txt",
+      "sha256": "147dcfb16b92dda5e9325e9558ebb8b7224d397a6774a973ad372e0775d0ceb6"
+    },
+    {
+      "source": "tests/TurboTest.Tests/DatabaseOwnershipTests.cs",
+      "archive": "source/tests/TurboTest.Tests/DatabaseOwnershipTests.cs.txt",
+      "sha256": "d846ea7c953af8361f988939bfc700091fc6503e9bf8f4d54ac1c07b358a9408"
+    },
+    {
+      "source": "tests/TurboTest.Tests/PooledResetTests.cs",
+      "archive": "source/tests/TurboTest.Tests/PooledResetTests.cs.txt",
+      "sha256": "f6c1646e9172e2ecaaea24b27cc0cc02737373f2381fbc59cd62158cf6b8d70e"
+    },
+    {
+      "source": "tests/TurboTest.Tests/StartupCleanupTests.cs",
+      "archive": "source/tests/TurboTest.Tests/StartupCleanupTests.cs.txt",
+      "sha256": "d16bd11a053a24103033d534822a3ffc15ca622469e8126208371d82ee3f8d37"
+    },
+    {
+      "source": "artifacts/ownership/final/_os-greg_2026-10-14_08_51_10/In/os-greg/dan_os-greg_2026-10-14.08_52_28.cobertura.xml",
+      "archive": "coverage.cobertura.xml.gz",
+      "uncompressedSha256": "dbda4c90f2ded7beb05e56a2d05f22c3cc45c9cf31987ee4f710a8d45bcc8fb7"
+    },
+    {
+      "source": "artifacts/ownership/stryker-final/reports/mutation-report.json",
+      "archive": "mutation-report.json.gz",
+      "uncompressedSha256": "4b4b52423a8dedb22d0ea61dc63344d4ba4b2d0b5b95023ac2a117cad6d16691"
+    },
+    {
+      "source": "artifacts/ownership/build-final.log",
+      "archive": "build.log.txt",
+      "sha256": "b9c52b088c28dae131c72fb50940cb8221cfada2996e7da5a585dcf7bdc6ac0a"
+    }
+  ],
+  "build": {
+    "command": "dotnet build TurboTest.sln --no-restore",
+    "exit": 0
+  },
+  "snapshotNote": "Claims in this archive apply to its retained source snapshot. Newer API and source evidence is retained separately in public-leases/manifest.json."
+}

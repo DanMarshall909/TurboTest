@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <PackageId>TurboTest.EFCore</PackageId>
-    <Version>1.0.0-alpha.1</Version>
-    <Description>Lightning-fast containerized database testing for Entity Framework Core. Real databases, real constraints, sub-second reset.</Description>
+    <Version>1.0.0-alpha.2</Version>
+    <Description>Containerized PostgreSQL testing for Entity Framework Core with real database constraints.</Description>
     <PackageTags>testing;integration;database;docker;efcore;entityframework;postgresql</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

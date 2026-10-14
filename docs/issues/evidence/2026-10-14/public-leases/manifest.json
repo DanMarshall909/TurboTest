@@ -1,0 +1,571 @@
+{
+  "status": "Candidate verified; independent completion review pending. All ten tickets remain Open.",
+  "base": "5de941b6d729f62f83575f65f1420ae0262e1235",
+  "upstream": null,
+  "sdk": "10.0.301",
+  "checks": {
+    "command": "dotnet test tests/TurboTest.Tests --no-build --collect 'Code Coverage;Format=cobertura' --logger 'trx;LogFileName=full-reviewed.trx' --results-directory artifacts/tt-001/full-reviewed",
+    "exit": 0,
+    "passed": 33,
+    "failed": 0,
+    "skipped": 0
+  },
+  "build": {
+    "command": "dotnet build TurboTest.sln --no-restore",
+    "exit": 0,
+    "warnings": 0,
+    "errors": 0,
+    "extraExample": "DynamicScalingExample is outside the solution and has a separate passing build."
+  },
+  "mutation": {
+    "version": "5.0.0",
+    "cwd": "tests/TurboTest.Tests",
+    "command": "dotnet stryker --config-file ../../.config/stryker-ownership.json --output ../../artifacts/tt-001/stryker-reviewed --skip-version-check",
+    "exit": 0,
+    "scope": [
+      "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs",
+      "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtLease.cs",
+      "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtLifecycleException.cs"
+    ],
+    "filter": "FullyQualifiedName~DatabaseOwnershipTests|FullyQualifiedName~LeaseOwnershipTests",
+    "statuses": {
+      "Killed": 26,
+      "Ignored": 15,
+      "CompileError": 1
+    },
+    "sourceResolvableParticipants": 8,
+    "unlistedLinks": [],
+    "sourceMatchesScopedSnapshot": true,
+    "limitations": "One in-scope block-removal mutant does not compile. Fifteen in-scope redundant block mutants are ignored by Stryker. End-to-end tests and other production classes are excluded. This is not whole-package mutation proof."
+  },
+  "coverage": "Eight fast ownership checks execute TtLease, TtDatabase and TtLifecycleException at 100% line and branch coverage; coverage does not prove assertions. Full boundary coverage is also retained.",
+  "remaining": [
+    "Independent completion review and final P0 completion commit",
+    "All P1/P2 implementation tickets; TT-003 design and TT-006/TT-010 partial groundwork are not completion claims"
+  ],
+  "files": [
+    {
+      "source": "artifacts/tt-001/api-green.log",
+      "archive": "transcripts/api-green.log.txt",
+      "sha256": "7b3fd71005e79be5387ebabff16e05343c0d23b0f5d0f8da5745d050949ad878"
+    },
+    {
+      "source": "artifacts/tt-001/build-final.log",
+      "archive": "transcripts/build-final.log.txt",
+      "sha256": "1ff7181dd9c53174ac253beca7ab6ce9ed2b44698a27e0bfa3776f285c409c3e"
+    },
+    {
+      "source": "artifacts/tt-001/build-reviewed.log",
+      "archive": "transcripts/build-reviewed.log.txt",
+      "sha256": "32a0d16724a48563eb6bc31c1f410775034da692f0e893855c01505fe689ad87"
+    },
+    {
+      "source": "artifacts/tt-001/cancellation-green.log",
+      "archive": "transcripts/cancellation-green.log.txt",
+      "sha256": "ad922edeb531264ed348244a4a00b20b4ada2de782ea45f9db03941ddf4d701e"
+    },
+    {
+      "source": "artifacts/tt-001/cancellation-red.log",
+      "archive": "transcripts/cancellation-red.log.txt",
+      "sha256": "6e341e1583bfa3a3283ed40162ac72163874d97ef2c65113339b3df7afe9ad31"
+    },
+    {
+      "source": "artifacts/tt-001/constructor-green.log",
+      "archive": "transcripts/constructor-green.log.txt",
+      "sha256": "ce81323fb96f8fadf797250b3245411501d15b0d3b66161f387b1badac96ccd7"
+    },
+    {
+      "source": "artifacts/tt-001/constructor-red.log",
+      "archive": "transcripts/constructor-red.log.txt",
+      "sha256": "0d75dc8b3c28068612a7c11191858534184fcefcd0f052658182ea0d29a72477"
+    },
+    {
+      "source": "artifacts/tt-001/dynamic-build.log",
+      "archive": "transcripts/dynamic-build.log.txt",
+      "sha256": "a1c3ccd0291c0e09ddba92177ec0a9aa3d3bde785efc024a6ed3a8b70eda6dcb"
+    },
+    {
+      "source": "artifacts/tt-001/dynamic-reviewed.log",
+      "archive": "transcripts/dynamic-reviewed.log.txt",
+      "sha256": "576617f1d05de67c7ece63eb9454906ad9227b15c67099d5f685e81e2c350aca"
+    },
+    {
+      "source": "artifacts/tt-001/fast-final.log",
+      "archive": "transcripts/fast-final.log.txt",
+      "sha256": "820f0745b5aac873509fa43d26a82a9969eed5d0fe9e83b169eb584fd522c170"
+    },
+    {
+      "source": "artifacts/tt-001/fast-green.log",
+      "archive": "transcripts/fast-green.log.txt",
+      "sha256": "c6647f8a20714a550a1abd035d722d6054c4c91bfca70af683eaf75913eb0c41"
+    },
+    {
+      "source": "artifacts/tt-001/fixture-green.log",
+      "archive": "transcripts/fixture-green.log.txt",
+      "sha256": "77f5fb8ad8edec2b7a861e28dc8c47444427c12cf7e8f627e533864490371411"
+    },
+    {
+      "source": "artifacts/tt-001/fixture-red.log",
+      "archive": "transcripts/fixture-red.log.txt",
+      "sha256": "fcdb447ca3257fa2019973c813345ca72a10ffb83a8d1f419f8e88fe9e4586af"
+    },
+    {
+      "source": "artifacts/tt-001/format.log",
+      "archive": "transcripts/format.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "artifacts/tt-001/full-final.log",
+      "archive": "transcripts/full-final.log.txt",
+      "sha256": "899ed06b681d89d2888d1856987079c6512fa7e7cf3eac472d3359324d4443ac"
+    },
+    {
+      "source": "artifacts/tt-001/full-green.log",
+      "archive": "transcripts/full-green.log.txt",
+      "sha256": "f5cb3881a80569dce7f615f5d189c4f7ad6edc667401495ee371957fdf9f6118"
+    },
+    {
+      "source": "artifacts/tt-001/full-reviewed.log",
+      "archive": "transcripts/full-reviewed.log.txt",
+      "sha256": "8997c98998736d86ec25f02e8a6c0d4d3ffc3029fd45d54b3d00e14a47ff1292"
+    },
+    {
+      "source": "artifacts/tt-001/independent-green.log",
+      "archive": "transcripts/independent-green.log.txt",
+      "sha256": "04572f1266e24afd2eb7e11f8a576bcb7741bc162530449ab572ac6de14d9b9b"
+    },
+    {
+      "source": "artifacts/tt-001/independent-red-valid.log",
+      "archive": "transcripts/independent-red-valid.log.txt",
+      "sha256": "564ecde36710fe46eb633d61f41c02f38dbe469c3b2e39fa97943b1be3d05094"
+    },
+    {
+      "source": "artifacts/tt-001/independent-red.log",
+      "archive": "transcripts/independent-red.log.txt",
+      "sha256": "eb4f52054c27d187088ff91013ab71c7de20b8fadcb1588ad817ce89b2ba713c"
+    },
+    {
+      "source": "artifacts/tt-001/init-sync-red.log",
+      "archive": "transcripts/init-sync-red.log.txt",
+      "sha256": "749302729eb40f56d03c136837b58a05df0548a9bff0e3781ebe95899bcfcdcb"
+    },
+    {
+      "source": "artifacts/tt-001/migration-build.log",
+      "archive": "transcripts/migration-build.log.txt",
+      "sha256": "55832c452d69f911cc605c2636196f7aed185d2a111078cb33225d19cc2dd126"
+    },
+    {
+      "source": "artifacts/tt-001/owned-fixture-green.log",
+      "archive": "transcripts/owned-fixture-green.log.txt",
+      "sha256": "3324ff38e70083c27ee34ccd8cb7016d20fbf32dacf3524023d58560e97b2bec"
+    },
+    {
+      "source": "artifacts/tt-001/probe-green.log",
+      "archive": "transcripts/probe-green.log.txt",
+      "sha256": "058b64341709722d3879bd11bb3697977798022f444f4803bc7be33187e789f0"
+    },
+    {
+      "source": "artifacts/tt-001/probe-red.log",
+      "archive": "transcripts/probe-red.log.txt",
+      "sha256": "c65fe4c5c0051677d32236ec895eb56f782cf393f6fff6304d8b5d317272f56c"
+    },
+    {
+      "source": "artifacts/tt-001/public-green.log",
+      "archive": "transcripts/public-green.log.txt",
+      "sha256": "66d2dd2dbb26f36dcf0d3e83460431feb4454d31b3e1cbae2ed64986ec6e3ad3"
+    },
+    {
+      "source": "artifacts/tt-001/public-red.log",
+      "archive": "transcripts/public-red.log.txt",
+      "sha256": "858902be99568aa2e5de9f48df08ffae74e1fb476270407a8ee3e859b8804fae"
+    },
+    {
+      "source": "artifacts/tt-001/startup-green.log",
+      "archive": "transcripts/startup-green.log.txt",
+      "sha256": "feb3ced383e88ae98eb4251752f7cbc7dca95a998b2de53fbef4ba13c678e9dc"
+    },
+    {
+      "source": "artifacts/tt-001/stryker-reviewed.log",
+      "archive": "transcripts/stryker-reviewed.log.txt",
+      "sha256": "ed266a0f5253fcdfb784b239d65a6bd38a43f8b3da2e161af67f8d7bb882afac"
+    },
+    {
+      "source": "artifacts/tt-001/stryker.log",
+      "archive": "transcripts/stryker.log.txt",
+      "sha256": "259e01822013dc936c10ba3b4ab2a7dd46c8ebc65366454e3f1905444ef54bd2"
+    },
+    {
+      "source": "artifacts/tt-001/package-body.txt",
+      "archive": "package/package-body.txt",
+      "sha256": "cf183942e7ef867c7edd001b12dfcd9d901954f78008a6b117891359a520cdae"
+    },
+    {
+      "source": "artifacts/tt-001/package-headers.txt",
+      "archive": "package/package-headers.txt",
+      "sha256": "5b1766eba7cc1163a02937f69972cf1b5b8842e048b27531d64645c445ed22c3"
+    },
+    {
+      "source": "artifacts/tt-001/package-status.txt",
+      "archive": "package/package-status.txt",
+      "sha256": "f8bf41177a5f5e808a7ccb648b51080b031f15ca8018d91a576263d6cc626eb6"
+    },
+    {
+      "source": "artifacts/tt-001/public-red.trx",
+      "archive": "results/public-red.trx",
+      "sha256": "eb4830db290b37ced3cd90d34a5f103ec577d3b625d9374aed32ad484fd487e9"
+    },
+    {
+      "source": "artifacts/tt-001/fixture-red.trx",
+      "archive": "results/fixture-red.trx",
+      "sha256": "52975db7fafadb5b7e1f3e6816f62f3e26c28440272850b0ba7fe68723839923"
+    },
+    {
+      "source": "artifacts/tt-001/constructor-red.trx",
+      "archive": "results/constructor-red.trx",
+      "sha256": "43271c0848f189bc9e0f0c8a137d116b7ca9fbfa3cf57b7b6441ac4b75cec482"
+    },
+    {
+      "source": "artifacts/tt-001/cancellation-red.trx",
+      "archive": "results/cancellation-red.trx",
+      "sha256": "b78c115006e8cbd5a29f7e4e8327e4f9e46959e347fd8be63f19a527e0b00ced"
+    },
+    {
+      "source": "artifacts/tt-001/independent-red-valid.trx",
+      "archive": "results/independent-red-valid.trx",
+      "sha256": "ded562ae9cedfbde6711769a30bccb54abb5cf3496400e7c44c098471f85b95b"
+    },
+    {
+      "source": "artifacts/tt-001/public-green/public-green.trx",
+      "archive": "results/public-green/public-green.trx",
+      "sha256": "3bc0d407528042a1475f14b89945dc79ba94cc133ed39573c03327b530f25e74"
+    },
+    {
+      "source": "artifacts/tt-001/owned-fixture-green/owned-fixture-green.trx",
+      "archive": "results/owned-fixture-green/owned-fixture-green.trx",
+      "sha256": "d038a5b3b4f4851ddc6b7967a4057948eb48ba1f9e924b42a60d5bf4212ec29b"
+    },
+    {
+      "source": "artifacts/tt-001/constructor-green/constructor-green.trx",
+      "archive": "results/constructor-green/constructor-green.trx",
+      "sha256": "d92e1471aa29e2a5c5a02a8c44f954151df9a8b2a8317ffbc3747bbe73e16c1d"
+    },
+    {
+      "source": "artifacts/tt-001/cancellation-green/cancellation-green.trx",
+      "archive": "results/cancellation-green/cancellation-green.trx",
+      "sha256": "51a926eef64f4e802c5c8561463c9f4cee558eca5f7de994d5821237013a54db"
+    },
+    {
+      "source": "artifacts/tt-001/api-green/api-green.trx",
+      "archive": "results/api-green/api-green.trx",
+      "sha256": "508fc2131f1c326d6fddc6e7557d603787082c63752441c4e3e71d7c06b71c83"
+    },
+    {
+      "source": "artifacts/tt-001/independent-green/independent-green.trx",
+      "archive": "results/independent-green/independent-green.trx",
+      "sha256": "21d50021bbd23a66c8fee6d164d0831cfa0beb95a7886050eeb459bd99420ca8"
+    },
+    {
+      "source": "artifacts/tt-001/fast-final/fast-final.trx",
+      "archive": "results/fast-final/fast-final.trx",
+      "sha256": "50330258d58da2c5cbbb132672765993638a89845ea4a7969c2c2e0360cae937"
+    },
+    {
+      "source": "artifacts/tt-001/full-green/full-green.trx",
+      "archive": "results/full-green/full-green.trx",
+      "sha256": "69a9ce7a99aea4b3737058997bc6292c0668d93353eb793ec3d0a0416a5e9f52"
+    },
+    {
+      "source": "artifacts/tt-001/full-final/full-final.trx",
+      "archive": "results/full-final/full-final.trx",
+      "sha256": "223f350a4a1ada44b609d661b24421c636cc0b71913693148e2519038cf044c2"
+    },
+    {
+      "source": "artifacts/tt-001/startup-green/startup-green.trx",
+      "archive": "results/startup-green/startup-green.trx",
+      "sha256": "be4154fd53e37c71f53d01c729b3b139abdeeddc5c86ea6e30ad982789470f65"
+    },
+    {
+      "source": "artifacts/tt-001/init-sync-red/init-sync-red.trx",
+      "archive": "results/init-sync-red/init-sync-red.trx",
+      "sha256": "6f3970acd74ec36ffcabec3a2da1aa895cb795270906773cd8590f8702d8f28f"
+    },
+    {
+      "source": "artifacts/tt-001/probe-red/probe-red.trx",
+      "archive": "results/probe-red/probe-red.trx",
+      "sha256": "0ca933f80bf2dbbe3050483dcea59c1d483166c9ec334ff5d6d6b7ec710c1981"
+    },
+    {
+      "source": "artifacts/tt-001/probe-green/probe-green.trx",
+      "archive": "results/probe-green/probe-green.trx",
+      "sha256": "93eaf65e93eb194b07d838d2ded5845ff68e34817a968b5b6f9a456a9c5a5155"
+    },
+    {
+      "source": "artifacts/tt-001/full-reviewed/full-reviewed.trx",
+      "archive": "results/full-reviewed/full-reviewed.trx",
+      "sha256": "7fe8157b2fa9df37d24c0de7a5023202d21dcbc528b822506bf80c30c0da5bb8"
+    },
+    {
+      "source": "artifacts/tt-001/calibration/double-return/TtLease-fault.cs.txt",
+      "archive": "calibration/double-return/TtLease-fault.cs.txt",
+      "sha256": "1ffab8f960cd92b56d52f8b6e62f42c7bb8fc08df1a0e86d453b29a503b62db1"
+    },
+    {
+      "source": "artifacts/tt-001/calibration/double-return/fault.trx",
+      "archive": "calibration/double-return/fault.trx",
+      "sha256": "8f34016bb116415a4b5c7d9d74fb6d70343d38db071a5dbace826da9f479545c"
+    },
+    {
+      "source": "artifacts/tt-001/calibration/double-return/receipt.json",
+      "archive": "calibration/double-return/receipt.json",
+      "sha256": "0e4ea4e6143a3231134104aadfb025359030655a98fe5fae8379bf3104d7f336"
+    },
+    {
+      "source": "artifacts/tt-001/calibration/double-return/run.log",
+      "archive": "calibration/double-return/run.log.txt",
+      "sha256": "65c17deeebc69e82c5f9275152ac20043a836ec78235d92b20f1fb0aa1fe4b2e"
+    },
+    {
+      "source": "artifacts/tt-001/calibration/missing-return/TtLease-fault.cs.txt",
+      "archive": "calibration/missing-return/TtLease-fault.cs.txt",
+      "sha256": "d9d8d9dd852d1c24420b7f63d0c4a0ee6dae6d189f5a84630ef0cd1c8714b377"
+    },
+    {
+      "source": "artifacts/tt-001/calibration/missing-return/fault.trx",
+      "archive": "calibration/missing-return/fault.trx",
+      "sha256": "f45ef248b5b49d94fde0c96430f97527746d78a89d1ba63a592a34bdd8e5d060"
+    },
+    {
+      "source": "artifacts/tt-001/calibration/missing-return/receipt.json",
+      "archive": "calibration/missing-return/receipt.json",
+      "sha256": "a9caa91620e494791e78fa47f85d51d60617a86b6bd22b7caa9c79c1016aa366"
+    },
+    {
+      "source": "artifacts/tt-001/calibration/missing-return/run.log",
+      "archive": "calibration/missing-return/run.log.txt",
+      "sha256": "7e7819c5a43c5366ff512d512ba1aae30bfec057f9106129fd0ba9a6c82d7cbe"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/0b2e35954d47-postgres.txt",
+      "archive": "startup-diagnostic-run/0b2e35954d47-postgres.txt",
+      "sha256": "e4fcf0f732e4cee84239bcabda9d50ff18779e92635d179f35c2cf1e5b363985"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/0b2e35954d47-state.txt",
+      "archive": "startup-diagnostic-run/0b2e35954d47-state.txt",
+      "sha256": "dde15569fb5db75d985b6224e4688f6a2ed4b15d6b1bcc4236d297a8e9dd613d"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/7a4fb09a5b4d-postgres.txt",
+      "archive": "startup-diagnostic-run/7a4fb09a5b4d-postgres.txt",
+      "sha256": "a2a00f80781a435ede5d680966bd5a0ed54e16439dabc6d41b18c7995c913607"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/7a4fb09a5b4d-state.txt",
+      "archive": "startup-diagnostic-run/7a4fb09a5b4d-state.txt",
+      "sha256": "91d395cc6613c0dd6e0ad1154366d61f972ed56144dfef809bb6dc0e26fa5732"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/diagnostic.trx",
+      "archive": "startup-diagnostic-run/diagnostic.trx",
+      "sha256": "96ac390abca4458cc696b14ead78a6c5a48a3e2a2ed751c1652f71c5dc327322"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/ef269f5b1bdd-postgres.txt",
+      "archive": "startup-diagnostic-run/ef269f5b1bdd-postgres.txt",
+      "sha256": "c0fb48fe1ab1b1414220a5c1c7619d57eb2c2af8c2369d600ef1b3f4d41b79c0"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/ef269f5b1bdd-state.txt",
+      "archive": "startup-diagnostic-run/ef269f5b1bdd-state.txt",
+      "sha256": "0db73b8ce310432eccb48871a7b3335be595fa46d64e7de51e77c49dad065578"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/fadf01b7186e-postgres.txt",
+      "archive": "startup-diagnostic-run/fadf01b7186e-postgres.txt",
+      "sha256": "696a5551ef5d82af3f7508138674a937d3be80df2ab092c24a79b3b626ee64e5"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/fadf01b7186e-state.txt",
+      "archive": "startup-diagnostic-run/fadf01b7186e-state.txt",
+      "sha256": "63c64c41a3ae5c0f83a26bf5acc07aecbea03e40114dc19a4eb4af10ffe6ea6a"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/receipt.json",
+      "archive": "startup-diagnostic-run/receipt.json",
+      "sha256": "72de2e201247e736f6c4846aff1606074c4fc4071cc6a4e4351b868448f2e725"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnostic-run/run.log",
+      "archive": "startup-diagnostic-run/run.log.txt",
+      "sha256": "1f9edca06cc6eacff7b3c4d1bc73ba4c748ba053d271b3fbe112123c2e8bc066"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnosis/08876fde577c-logs.txt",
+      "archive": "startup-diagnosis/08876fde577c-logs.txt",
+      "sha256": "14cdddeb495bb531ad59d8b67167af6fd0f7105b3a23f96fa955a67947407000"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnosis/08876fde577c-state.txt",
+      "archive": "startup-diagnosis/08876fde577c-state.txt",
+      "sha256": "a7df2ee79e1852e58b945c574203c974d59dbc846b5aca13218b156973dc05c1"
+    },
+    {
+      "source": "artifacts/tt-001/startup-diagnosis/docker-events-sanitized.json",
+      "archive": "startup-diagnosis/docker-events-sanitized.json",
+      "sha256": "7a98968027cbffdf95df103e0c6e09ea193a23f504ea634e5494c56ac4459120"
+    },
+    {
+      "source": "artifacts/tt-001/fast-final/795b3f94-2d49-4018-92d1-beb6f0531670/dan_os-greg_2026-10-14.09_21_05.cobertura.xml",
+      "archive": "fast-final.cobertura.xml.gz",
+      "sha256": "e8feae1b4d9d4111aaec399740df4bfb7c0a1459f825ff4aa4abb3574fa36e84",
+      "uncompressedSha256": "8206e5ca5efaa49950c7c2ab43435d22fd2b3125ac5f0206f9f5bfa088379ef0"
+    },
+    {
+      "source": "artifacts/tt-001/full-reviewed/cbae7546-193f-415f-81b0-8052d55148db/dan_os-greg_2026-10-14.09_33_53.cobertura.xml",
+      "archive": "full-reviewed.cobertura.xml.gz",
+      "sha256": "a1dd002c193c8fcd9dfed9531e19fa4dfcf0634a76b4f77b85a9bbbe00750897",
+      "uncompressedSha256": "76580fcd80a275c546148051c7f91861a4a179eec0a5e64be14915f52385d0a4"
+    },
+    {
+      "source": "artifacts/tt-001/stryker-reviewed/reports/mutation-report.json",
+      "archive": "mutation-report.json.gz",
+      "sha256": "c4e4d76c91fb5e66f8814ea879a4802361abad029687e051bdf354158b2bc283",
+      "uncompressedSha256": "7c77fb3f5a968be08741fb5ac30b4e8a1e268aa02dc68e4d6ae476438d3b9076"
+    },
+    {
+      "source": ".config/dotnet-tools.json",
+      "archive": "source/.config/dotnet-tools.json.txt",
+      "sha256": "f9fb85462db6b256ed4155043279286a9e5ccb72e0cdbc7d5f052bbe3221f1cb"
+    },
+    {
+      "source": ".config/stryker-ownership.json",
+      "archive": "source/.config/stryker-ownership.json.txt",
+      "sha256": "4c7835b75750596957899208ce5c998303f289df9aded0c172b4ca5caf827de7"
+    },
+    {
+      "source": "examples/AutoAllocationExample/Program.cs",
+      "archive": "source/examples/AutoAllocationExample/Program.cs.txt",
+      "sha256": "f7ce335714e02c5bd7ead6e1dbf0cd031722ec60c153d997069b9044dab382bd"
+    },
+    {
+      "source": "examples/ConfigurationExamples/Program.cs",
+      "archive": "source/examples/ConfigurationExamples/Program.cs.txt",
+      "sha256": "08885d1b5f1acd8827948b9a910836889e36004374e0cfc5bca2bc0c526c94b1"
+    },
+    {
+      "source": "examples/DynamicScalingExample/Program.cs",
+      "archive": "source/examples/DynamicScalingExample/Program.cs.txt",
+      "sha256": "606d2bf6a798eb79820bac79a67a621ef7066360b7314a4f672dd2eb24377c27"
+    },
+    {
+      "source": "examples/LoggingExample/Program.cs",
+      "archive": "source/examples/LoggingExample/Program.cs.txt",
+      "sha256": "1360cf0561b2d43d9659e0f6c9a21e0308e1b7f77c1a6c29b13f04a5d0256be5"
+    },
+    {
+      "source": "examples/MinimalExample/Program.cs",
+      "archive": "source/examples/MinimalExample/Program.cs.txt",
+      "sha256": "dcda6567d4cc322ca9cf76302bbb76763dbd93102cef08d8f0291057c3a6d8b9"
+    },
+    {
+      "source": "src/TurboTest.EFCore/ITtServiceFactory.cs",
+      "archive": "source/src/TurboTest.EFCore/ITtServiceFactory.cs.txt",
+      "sha256": "38e9a938345ff1d96460a8a383bd9b89e14a49a862b3a04193d3b1d82f82719f"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Internal/TtContainer.cs",
+      "archive": "source/src/TurboTest.EFCore/Internal/TtContainer.cs.txt",
+      "sha256": "08198f2ad7b42d949b79771ab9872268a8ad6ff175670c601f90164f38036b7a"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Internal/TtDatabase.cs",
+      "archive": "source/src/TurboTest.EFCore/Internal/TtDatabase.cs.txt",
+      "sha256": "6d25cb22240b9df6106d9bec126dea45e50837167df83bff22a909096d10a58d"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Internal/TtPool.cs",
+      "archive": "source/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "sha256": "c39cfa54127fcaa71daad6a586edbd538a109742bfe3297bca6bdbdca5c9ded3"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Properties/AssemblyInfo.cs",
+      "archive": "source/src/TurboTest.EFCore/Properties/AssemblyInfo.cs.txt",
+      "sha256": "99b77a3d9691cddb8cbb8bf1c97d9116ea8a994e07d6e0535c1043c2edba44f4"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Tt.cs",
+      "archive": "source/src/TurboTest.EFCore/Tt.cs.txt",
+      "sha256": "2a85903feab7bc598b5a398491edd898ea449f11da4ebc80bb6b0377de197243"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtFactory.cs",
+      "archive": "source/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "sha256": "34f0f8fdf0fa3f6a362381c4d764699801561f24f4a818b808d54840c822f7a0"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtLease.cs",
+      "archive": "source/src/TurboTest.EFCore/TtLease.cs.txt",
+      "sha256": "a0834cc774f7c05e69bd8b09c6bebcd0a69abd7e0dda8aa74fc11a4f19737f4e"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtLifecycleException.cs",
+      "archive": "source/src/TurboTest.EFCore/TtLifecycleException.cs.txt",
+      "sha256": "97cdbfd083cb74185284569ae5de3c2ea67d4220cbb45c6f77e9ddf61a672bcc"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtOptions.cs",
+      "archive": "source/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "sha256": "722b2b4d38550dd0a9d2ec65015712a124d6c8a623481da77d4535dcdf3e75f5"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtServiceFactory.cs",
+      "archive": "source/src/TurboTest.EFCore/TtServiceFactory.cs.txt",
+      "sha256": "a293e6bb55b382af1a4dbf82c92160e7eefb37dcef2e6e4e881b4535eba7a731"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TurboTest.EFCore.csproj",
+      "archive": "source/src/TurboTest.EFCore/TurboTest.EFCore.csproj.txt",
+      "sha256": "253a7b415aea24a7c827835e5c111068f9e8209295ec0229f2c400beedfb0116"
+    },
+    {
+      "source": "tests/TurboTest.Tests/AutoAllocationTests.cs",
+      "archive": "source/tests/TurboTest.Tests/AutoAllocationTests.cs.txt",
+      "sha256": "5dc7d3ed9924a8e0d11016c6bc8006a4faddbe93742b668494350f07745790bf"
+    },
+    {
+      "source": "tests/TurboTest.Tests/BasicTests.cs",
+      "archive": "source/tests/TurboTest.Tests/BasicTests.cs.txt",
+      "sha256": "35cc2d622a0a2c113c50b944774301d295101580192709a711c7f44d4339f251"
+    },
+    {
+      "source": "tests/TurboTest.Tests/ConfigurationTests.cs",
+      "archive": "source/tests/TurboTest.Tests/ConfigurationTests.cs.txt",
+      "sha256": "2bc553b5399d386140fb90e353892a5c1c4b23d9d7b34417855f7e8e0936aec8"
+    },
+    {
+      "source": "tests/TurboTest.Tests/DatabaseOwnershipTests.cs",
+      "archive": "source/tests/TurboTest.Tests/DatabaseOwnershipTests.cs.txt",
+      "sha256": "5419f419b4e4102bdc8d58cb516c0d6a20d878bfa5696f879516aadc1a77f3db"
+    },
+    {
+      "source": "tests/TurboTest.Tests/LeaseOwnershipTests.cs",
+      "archive": "source/tests/TurboTest.Tests/LeaseOwnershipTests.cs.txt",
+      "sha256": "35f82b019f35de82c0d8343e1aa606cd13d884f0178f615b4abf98de13926a6b"
+    },
+    {
+      "source": "tests/TurboTest.Tests/PooledResetTests.cs",
+      "archive": "source/tests/TurboTest.Tests/PooledResetTests.cs.txt",
+      "sha256": "2962e342be8b87a87e8383ec6fdebd271dc1e1b803cad245a7a383fe66fa64d2"
+    },
+    {
+      "source": "tests/TurboTest.Tests/PublicLeaseTests.cs",
+      "archive": "source/tests/TurboTest.Tests/PublicLeaseTests.cs.txt",
+      "sha256": "3972ce81b5c144a16f86dab8abe8d9b38ede4c02ac24aecaed2d3b05905268bc"
+    },
+    {
+      "source": "tests/TurboTest.Tests/StartupCleanupTests.cs",
+      "archive": "source/tests/TurboTest.Tests/StartupCleanupTests.cs.txt",
+      "sha256": "efd36671e7eb9647457d4343f5b30e2d05419a1834562a7c530f1c2695409d7c"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:31.45]     TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database [FAIL]
+  Failed TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database [31 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 180
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 64
+   at TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database()
+   at TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database()
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:31.62]     TurboTest.Tests.BasicTests.Should_Create_Context_With_Real_Database [FAIL]
+  Failed TurboTest.Tests.BasicTests.Should_Create_Context_With_Real_Database [31 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 180
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 64
+   at TurboTest.EFCore.Tt.EnsureInitializedAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 124
+   at TurboTest.EFCore.Tt.CreateContextAsync[TContext](Action`1 configure) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 50
+   at TurboTest.Tests.BasicTests.Should_Create_Context_With_Real_Database()
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:13.44]     TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched [FAIL]
+  Failed TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched [41 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 180
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 64
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched()
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched()
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched()
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:14.18]     TurboTest.Tests.AutoAllocationTests.Should_Create_Context_With_Auto_Allocation [FAIL]
+  Failed TurboTest.Tests.AutoAllocationTests.Should_Create_Context_With_Auto_Allocation [1 m 14 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 180
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 64
+   at TurboTest.EFCore.Tt.EnsureInitializedAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 124
+   at TurboTest.EFCore.Tt.CreateContextAsync[TContext](Action`1 configure) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 50
+   at TurboTest.Tests.AutoAllocationTests.Should_Create_Context_With_Auto_Allocation()
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:59.79]     TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset [FAIL]
+  Failed TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset [46 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 180
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 64
+   at TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset()
+   at TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset()
+--- End of stack trace from previous location ---
+[xUnit.net 00:02:00.61]     TurboTest.Tests.BasicTests.Should_Provide_Isolated_Databases [FAIL]
+  Failed TurboTest.Tests.BasicTests.Should_Provide_Isolated_Databases [1 m 28 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(String connectionString) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 205
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 180
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 64
+   at TurboTest.EFCore.Tt.EnsureInitializedAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 124
+   at TurboTest.EFCore.Tt.CreateContextAsync[TContext](Action`1 configure) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 50
+   at TurboTest.Tests.BasicTests.Should_Provide_Isolated_Databases()
+--- End of stack trace from previous location ---
+The active test run was aborted. Reason: Test host process crashed
+Results File: /home/dan/code/TurboTest/artifacts/tt-002/full/full.trx
+
+Failed!  - Failed:     6, Passed:    11, Skipped:     0, Total:    17, Duration: 2 m - TurboTest.Tests.dll (net10.0)
+Test Run Aborted.

@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="bd91b1e9-3b84-471e-8159-314c30bce02d" name="@os-greg 2026-10-14 09:22:51" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T09:22:51.2708481+10:00" queuing="2026-10-14T09:22:51.2708482+10:00" start="2026-10-14T09:22:49.4349291+10:00" finish="2026-10-14T09:25:42.0245866+10:00" />
+  <TestSettings name="default" id="c42c3ca9-35cf-4017-a990-8874b0b6abf5">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_09_22_51" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="c24535d1-6f27-41a5-82a2-c2fe7303d681" testId="1e0e39ea-55d1-03b1-35c6-df00eb665ad1" testName="TurboTest.Tests.PublicLeaseTests.Multiple_contexts_and_sync_disposal_keep_the_lease_owner_until_reader_cleanup" computerName="os-greg" duration="00:00:17.9115395" startTime="2026-10-14T09:24:48.2176702+10:00" endTime="2026-10-14T09:25:06.1281864+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c24535d1-6f27-41a5-82a2-c2fe7303d681" />
+    <UnitTestResult executionId="c8077ab0-15f8-4687-b86f-88ff5d082690" testId="1d5894b4-6fbf-fcc6-ce3c-0be7aa235f40" testName="TurboTest.Tests.StartupCleanupTests.Failed_preparation_removes_every_container_it_created" computerName="os-greg" duration="00:00:36.7349497" startTime="2026-10-14T09:22:51.1545938+10:00" endTime="2026-10-14T09:23:27.8789405+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c8077ab0-15f8-4687-b86f-88ff5d082690" />
+    <UnitTestResult executionId="c3b9c1ab-ecd3-427f-af74-bd812436ea1b" testId="42a4b21a-5d59-dfde-43d1-bcf3b1b638f5" testName="TurboTest.Tests.AutoAllocationTests.Auto_allocated_fixture_supports_reusable_public_leases" computerName="os-greg" duration="00:00:17.7634087" startTime="2026-10-14T09:22:51.1546869+10:00" endTime="2026-10-14T09:23:08.9075277+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c3b9c1ab-ecd3-427f-af74-bd812436ea1b" />
+    <UnitTestResult executionId="1d6f6dea-b525-4670-8ec5-768f599fcda8" testId="5dad28a2-424f-7abf-677b-b700e7cfb17f" testName="TurboTest.Tests.PooledResetTests.Locked_rows_cause_a_bounded_reset_failure_and_are_never_reused" computerName="os-greg" duration="00:00:22.0205885" startTime="2026-10-14T09:24:49.2591197+10:00" endTime="2026-10-14T09:25:11.2792431+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1d6f6dea-b525-4670-8ec5-768f599fcda8" />
+    <UnitTestResult executionId="e9302efa-3f2f-4527-baae-0688b54532ee" testId="ff11dc45-2941-e2b1-d9b2-3dc9207eeb17" testName="TurboTest.Tests.PublicLeaseTests.Static_leases_reuse_then_recreate_a_valid_owner_after_final_disposal" computerName="os-greg" duration="00:00:15.3011540" startTime="2026-10-14T09:25:19.8451542+10:00" endTime="2026-10-14T09:25:35.1462685+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e9302efa-3f2f-4527-baae-0688b54532ee" />
+    <UnitTestResult executionId="024f67a6-58ec-4b6d-a8e2-dcba2ff968a7" testId="29cd1b9a-9a9b-618b-2163-3475d7e159da" testName="TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition" computerName="os-greg" duration="00:00:06.7250878" startTime="2026-10-14T09:25:35.1471964+10:00" endTime="2026-10-14T09:25:41.8717915+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="024f67a6-58ec-4b6d-a8e2-dcba2ff968a7" />
+    <UnitTestResult executionId="2a0041b3-ac89-4fc1-ab46-2c15b4897852" testId="f72fc410-2f76-5f71-a6ab-6b0b05037b92" testName="TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched" computerName="os-greg" duration="00:00:40.2093069" startTime="2026-10-14T09:23:29.2286402+10:00" endTime="2026-10-14T09:24:09.4382993+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2a0041b3-ac89-4fc1-ab46-2c15b4897852">
+      <Output>
+        <ErrorInfo>
+          <Message>System.TimeoutException : Database failed to start within 30 seconds</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 149
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 163
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 163
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7edf1e1c-2f78-4c91-95e4-b5555c769f8f" testId="fa5be322-f6ba-4f38-5f8c-fbec98537a77" testName="TurboTest.Tests.PublicLeaseTests.Schema_initialization_failure_is_reported_before_a_lease_is_published" computerName="os-greg" duration="00:00:04.0085053" startTime="2026-10-14T09:25:06.1286571+10:00" endTime="2026-10-14T09:25:10.1371032+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7edf1e1c-2f78-4c91-95e4-b5555c769f8f" />
+    <UnitTestResult executionId="b423770e-4905-4bdf-b592-a7ccd00c8f81" testId="f3a5383a-8594-e9fd-d709-f63a0751b2b1" testName="TurboTest.Tests.DatabaseOwnershipTests.Later_cleanup_failures_do_not_hide_the_original_failure_diagnostic" computerName="os-greg" duration="00:00:00.0227304" startTime="2026-10-14T09:22:51.2394908+10:00" endTime="2026-10-14T09:22:51.2620395+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b423770e-4905-4bdf-b592-a7ccd00c8f81" />
+    <UnitTestResult executionId="a44afbde-ee90-4347-b339-319aeb8f6a54" testId="d30594b8-bf9d-5ae7-9809-692893df0d4d" testName="TurboTest.Tests.DatabaseOwnershipTests.Failed_cleanup_closes_remaining_resources_then_discards_without_publication" computerName="os-greg" duration="00:00:00.0018764" startTime="2026-10-14T09:22:51.2625490+10:00" endTime="2026-10-14T09:22:51.2639596+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a44afbde-ee90-4347-b339-319aeb8f6a54" />
+    <UnitTestResult executionId="4dea03b6-f7d2-4de6-9c86-fed91ff337da" testId="49e0554e-5425-e773-e846-88cbaf3b4524" testName="TurboTest.Tests.DatabaseOwnershipTests.Abandoned_reservation_closes_resources_and_discards_without_reset_publication" computerName="os-greg" duration="00:00:00.0791319" startTime="2026-10-14T09:22:51.1546310+10:00" endTime="2026-10-14T09:22:51.2363413+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4dea03b6-f7d2-4de6-9c86-fed91ff337da" />
+    <UnitTestResult executionId="8c7175ab-e8a2-4968-84ef-730de7541854" testId="ea44e954-6295-bd90-50a2-cb2a6c8d9d06" testName="TurboTest.Tests.BasicTests.Should_Create_Context_With_Real_Database" computerName="os-greg" duration="00:00:18.8192133" startTime="2026-10-14T09:22:51.1547303+10:00" endTime="2026-10-14T09:23:09.9633743+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8c7175ab-e8a2-4968-84ef-730de7541854" />
+    <UnitTestResult executionId="cd9fefb1-7637-4cbf-8896-bd8d3fe51685" testId="ab0da945-30f6-c62c-54d0-098963e32c65" testName="TurboTest.Tests.DatabaseOwnershipTests.New_resources_cannot_be_registered_after_cleanup_begins" computerName="os-greg" duration="00:00:00.0026203" startTime="2026-10-14T09:22:51.2644048+10:00" endTime="2026-10-14T09:22:51.2670351+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd9fefb1-7637-4cbf-8896-bd8d3fe51685" />
+    <UnitTestResult executionId="4b1a8092-a097-4241-820e-5f4c666a547c" testId="4a564678-ff89-acfe-6980-54e9f11fb77c" testName="TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database" computerName="os-greg" duration="00:00:38.0841242" startTime="2026-10-14T09:22:51.1546563+10:00" endTime="2026-10-14T09:23:29.2281781+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4b1a8092-a097-4241-820e-5f4c666a547c" />
+    <UnitTestResult executionId="c8095543-5cb5-4e4d-afde-e480b5aa6042" testId="fb70e237-076a-48c8-f3b2-43fda134eaa7" testName="TurboTest.Tests.ConfigurationTests.Service_registration_resolves_an_async_disposable_factory" computerName="os-greg" duration="00:00:00.0596640" startTime="2026-10-14T09:22:51.1533297+10:00" endTime="2026-10-14T09:22:51.2060024+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c8095543-5cb5-4e4d-afde-e480b5aa6042" />
+    <UnitTestResult executionId="89c33200-be40-48c8-8986-5ecee2c64c76" testId="4f5eaa28-7f8e-9531-bb13-d3c942988c55" testName="TurboTest.Tests.PooledResetTests.Repeated_factory_returns_reuse_the_database_and_its_warm_session" computerName="os-greg" duration="00:00:07.1477789" startTime="2026-10-14T09:25:19.4751301+10:00" endTime="2026-10-14T09:25:26.6228271+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="89c33200-be40-48c8-8986-5ecee2c64c76" />
+    <UnitTestResult executionId="a0fd14ed-56a5-44a3-a4ab-03927c8bab9e" testId="63c67b9f-e360-7efa-ff33-90a585815ac5" testName="TurboTest.Tests.PublicLeaseTests.Concurrent_fixtures_with_the_same_prefix_own_distinct_resources" computerName="os-greg" duration="00:00:09.7073082" startTime="2026-10-14T09:25:10.1376722+10:00" endTime="2026-10-14T09:25:19.8447415+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a0fd14ed-56a5-44a3-a4ab-03927c8bab9e" />
+    <UnitTestResult executionId="5b000b14-aa35-4426-b5a4-64d15d586785" testId="e4666783-6438-13b0-a741-db0dd18c2b2a" testName="TurboTest.Tests.PooledResetTests.Failed_lease_cleanup_is_reported_and_cannot_return_a_resource_to_the_pool" computerName="os-greg" duration="00:00:13.3766595" startTime="2026-10-14T09:25:26.6233187+10:00" endTime="2026-10-14T09:25:39.9998737+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b000b14-aa35-4426-b5a4-64d15d586785" />
+    <UnitTestResult executionId="620e6ff1-f7ec-4845-b171-d3978640d4da" testId="d02191cf-4e55-e436-3167-2496009bc49d" testName="TurboTest.Tests.LeaseOwnershipTests.Failed_public_lease_return_is_shared_without_retrying_cleanup" computerName="os-greg" duration="00:00:00.0735315" startTime="2026-10-14T09:22:51.1545583+10:00" endTime="2026-10-14T09:22:51.2258117+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="620e6ff1-f7ec-4845-b171-d3978640d4da" />
+    <UnitTestResult executionId="688bb6c7-e666-4c98-abd0-12dce3fb4640" testId="22cafa52-82a9-ac4c-3e90-fbcd2ad69704" testName="TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease" computerName="os-greg" duration="00:00:39.0649163" startTime="2026-10-14T09:24:09.1567141+10:00" endTime="2026-10-14T09:24:48.2163893+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="688bb6c7-e666-4c98-abd0-12dce3fb4640">
+      <Output>
+        <ErrorInfo>
+          <Message>System.TimeoutException : Database failed to start within 30 seconds</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 59
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d9bc3c57-34ed-46dd-9dfd-3a2f5f83e99c" testId="8f351ffd-b290-7905-5903-15eb708a3961" testName="TurboTest.Tests.ConfigurationTests.Configuration_section_is_consumed_by_the_public_fixture" computerName="os-greg" duration="00:00:18.5689768" startTime="2026-10-14T09:22:51.2257081+10:00" endTime="2026-10-14T09:23:09.7754938+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d9bc3c57-34ed-46dd-9dfd-3a2f5f83e99c" />
+    <UnitTestResult executionId="668d0d01-17f0-4859-97f0-f1b79ce5bde5" testId="2755e700-8bc3-193c-ec82-663775d59909" testName="TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database" computerName="os-greg" duration="00:00:46.6653253" startTime="2026-10-14T09:23:22.4832408+10:00" endTime="2026-10-14T09:24:09.1513106+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="668d0d01-17f0-4859-97f0-f1b79ce5bde5">
+      <Output>
+        <ErrorInfo>
+          <Message>System.TimeoutException : Database failed to start within 30 seconds</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 17
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2fd6d18f-852e-419e-b831-a79154a9f716" testId="e3cd3d71-f8b5-fd13-269e-b85293e3a91f" testName="TurboTest.Tests.BasicTests.Should_Provide_Isolated_Databases" computerName="os-greg" duration="00:00:21.6624221" startTime="2026-10-14T09:23:09.9640997+10:00" endTime="2026-10-14T09:23:31.6262218+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2fd6d18f-852e-419e-b831-a79154a9f716" />
+    <UnitTestResult executionId="9a829503-3634-4c5d-aaea-6c9a977c46f7" testId="eca4f949-99b7-e2f6-d5c8-fba0f00602d3" testName="TurboTest.Tests.PublicLeaseTests.Cancellation_during_context_configuration_cannot_publish_a_lease" computerName="os-greg" duration="00:00:31.3383674" startTime="2026-10-14T09:22:51.1547040+10:00" endTime="2026-10-14T09:23:22.4824089+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9a829503-3634-4c5d-aaea-6c9a977c46f7" />
+    <UnitTestResult executionId="50d5bd98-265e-495f-91a1-ac6e2dbb37eb" testId="e4f41d57-a43f-ebd9-88fd-4682290ffe44" testName="TurboTest.Tests.DatabaseOwnershipTests.Concurrent_disposals_wait_for_the_same_pending_return" computerName="os-greg" duration="00:00:00.0048585" startTime="2026-10-14T09:22:51.2371749+10:00" endTime="2026-10-14T09:22:51.2391605+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="50d5bd98-265e-495f-91a1-ac6e2dbb37eb" />
+    <UnitTestResult executionId="316a2f0a-c8bd-4bf3-b35e-7b92f05fec6a" testId="b703037a-5219-d599-724a-57971a7970c0" testName="TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints" computerName="os-greg" duration="00:00:44.0091680" startTime="2026-10-14T09:23:31.6267425+10:00" endTime="2026-10-14T09:24:15.6361173+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="316a2f0a-c8bd-4bf3-b35e-7b92f05fec6a">
+      <Output>
+        <ErrorInfo>
+          <Message>System.TimeoutException : Database failed to start within 30 seconds</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BasicTests.cs:line 33
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e64f66d0-500f-4c4d-b152-0aa86d40b16f" testId="910ee94f-36aa-e617-24ff-f42e31584d9b" testName="TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset" computerName="os-greg" duration="00:00:39.8193875" startTime="2026-10-14T09:24:09.4394354+10:00" endTime="2026-10-14T09:24:49.2582975+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e64f66d0-500f-4c4d-b152-0aa86d40b16f">
+      <Output>
+        <ErrorInfo>
+          <Message>System.TimeoutException : Database failed to start within 30 seconds</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 122
+   at TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 140
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ccd84a4e-e6c0-44d1-8d29-c18042e8f928" testId="39793e61-ecb0-3a40-9b42-3a680ffcf8fd" testName="TurboTest.Tests.DatabaseOwnershipTests.Cleanup_finishes_before_return_and_repeat_disposal_returns_only_once" computerName="os-greg" duration="00:00:00.0014115" startTime="2026-10-14T09:22:51.2367736+10:00" endTime="2026-10-14T09:22:51.2368274+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ccd84a4e-e6c0-44d1-8d29-c18042e8f928" />
+    <UnitTestResult executionId="d1a17ae3-8509-419e-a5fa-fc8452cf14c8" testId="f5a1b2fb-e910-ae08-fe74-fbacefd0018c" testName="TurboTest.Tests.BasicTests.Should_Enforce_Unique_Constraints" computerName="os-greg" duration="00:00:41.9155360" startTime="2026-10-14T09:24:15.6369895+10:00" endTime="2026-10-14T09:24:57.5523126+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d1a17ae3-8509-419e-a5fa-fc8452cf14c8">
+      <Output>
+        <ErrorInfo>
+          <Message>System.TimeoutException : Database failed to start within 30 seconds</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.BasicTests.Should_Enforce_Unique_Constraints() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BasicTests.cs:line 57
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="8d9b236f-6d40-45b7-9d20-e796405e5ca6" testId="c768a8d6-110c-aea9-306f-1812e543363f" testName="TurboTest.Tests.LeaseOwnershipTests.Public_lease_closes_all_contexts_and_waits_for_one_return" computerName="os-greg" duration="00:00:00.0115995" startTime="2026-10-14T09:22:51.2362835+10:00" endTime="2026-10-14T09:22:51.2372580+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8d9b236f-6d40-45b7-9d20-e796405e5ca6" />
+    <UnitTestResult executionId="c8566a15-31e5-4db9-a643-22a0d67b8f2b" testId="20cdfa71-8ef7-3a1d-0b24-0bccee79bee9" testName="TurboTest.Tests.PooledResetTests.Ordinary_rows_in_a_user_schema_starting_with_pg_are_removed" computerName="os-greg" duration="00:00:08.1950331" startTime="2026-10-14T09:25:11.2795780+10:00" endTime="2026-10-14T09:25:19.4746327+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c8566a15-31e5-4db9-a643-22a0d67b8f2b" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.DatabaseOwnershipTests.Failed_cleanup_closes_remaining_resources_then_discards_without_publication" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="d30594b8-bf9d-5ae7-9809-692893df0d4d">
+      <Execution id="a44afbde-ee90-4347-b339-319aeb8f6a54" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DatabaseOwnershipTests" name="Failed_cleanup_closes_remaining_resources_then_discards_without_publication" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Cancellation_during_context_configuration_cannot_publish_a_lease" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="eca4f949-99b7-e2f6-d5c8-fba0f00602d3">
+      <Execution id="9a829503-3634-4c5d-aaea-6c9a977c46f7" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Cancellation_during_context_configuration_cannot_publish_a_lease" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="910ee94f-36aa-e617-24ff-f42e31584d9b">
+      <Execution id="e64f66d0-500f-4c4d-b152-0aa86d40b16f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PooledResetTests" name="Return_closes_an_outstanding_reader_and_transaction_before_reset" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f72fc410-2f76-5f71-a6ab-6b0b05037b92">
+      <Execution id="2a0041b3-ac89-4fc1-ab46-2c15b4897852" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PooledResetTests" name="Reset_and_disposal_leave_another_fixture_session_and_rows_untouched" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PooledResetTests.Ordinary_rows_in_a_user_schema_starting_with_pg_are_removed" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="20cdfa71-8ef7-3a1d-0b24-0bccee79bee9">
+      <Execution id="c8566a15-31e5-4db9-a643-22a0d67b8f2b" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PooledResetTests" name="Ordinary_rows_in_a_user_schema_starting_with_pg_are_removed" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.LeaseOwnershipTests.Failed_public_lease_return_is_shared_without_retrying_cleanup" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="d02191cf-4e55-e436-3167-2496009bc49d">
+      <Execution id="620e6ff1-f7ec-4845-b171-d3978640d4da" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LeaseOwnershipTests" name="Failed_public_lease_return_is_shared_without_retrying_cleanup" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="29cd1b9a-9a9b-618b-2163-3475d7e159da">
+      <Execution id="024f67a6-58ec-4b6d-a8e2-dcba2ff968a7" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="22cafa52-82a9-ac4c-3e90-fbcd2ad69704">
+      <Execution id="688bb6c7-e666-4c98-abd0-12dce3fb4640" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Constructor_failure_does_not_leave_an_undisclosed_database_lease" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b703037a-5219-d599-724a-57971a7970c0">
+      <Execution id="316a2f0a-c8bd-4bf3-b35e-7b92f05fec6a" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BasicTests" name="Should_Enforce_Foreign_Key_Constraints" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Concurrent_fixtures_with_the_same_prefix_own_distinct_resources" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="63c67b9f-e360-7efa-ff33-90a585815ac5">
+      <Execution id="a0fd14ed-56a5-44a3-a4ab-03927c8bab9e" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Concurrent_fixtures_with_the_same_prefix_own_distinct_resources" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Multiple_contexts_and_sync_disposal_keep_the_lease_owner_until_reader_cleanup" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="1e0e39ea-55d1-03b1-35c6-df00eb665ad1">
+      <Execution id="c24535d1-6f27-41a5-82a2-c2fe7303d681" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Multiple_contexts_and_sync_disposal_keep_the_lease_owner_until_reader_cleanup" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DatabaseOwnershipTests.Cleanup_finishes_before_return_and_repeat_disposal_returns_only_once" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="39793e61-ecb0-3a40-9b42-3a680ffcf8fd">
+      <Execution id="ccd84a4e-e6c0-44d1-8d29-c18042e8f928" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DatabaseOwnershipTests" name="Cleanup_finishes_before_return_and_repeat_disposal_returns_only_once" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Schema_initialization_failure_is_reported_before_a_lease_is_published" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="fa5be322-f6ba-4f38-5f8c-fbec98537a77">
+      <Execution id="7edf1e1c-2f78-4c91-95e4-b5555c769f8f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Schema_initialization_failure_is_reported_before_a_lease_is_published" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.AutoAllocationTests.Auto_allocated_fixture_supports_reusable_public_leases" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="42a4b21a-5d59-dfde-43d1-bcf3b1b638f5">
+      <Execution id="c3b9c1ab-ecd3-427f-af74-bd812436ea1b" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.AutoAllocationTests" name="Auto_allocated_fixture_supports_reusable_public_leases" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ConfigurationTests.Service_registration_resolves_an_async_disposable_factory" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="fb70e237-076a-48c8-f3b2-43fda134eaa7">
+      <Execution id="c8095543-5cb5-4e4d-afde-e480b5aa6042" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ConfigurationTests" name="Service_registration_resolves_an_async_disposable_factory" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DatabaseOwnershipTests.Concurrent_disposals_wait_for_the_same_pending_return" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="e4f41d57-a43f-ebd9-88fd-4682290ffe44">
+      <Execution id="50d5bd98-265e-495f-91a1-ac6e2dbb37eb" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DatabaseOwnershipTests" name="Concurrent_disposals_wait_for_the_same_pending_return" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4a564678-ff89-acfe-6980-54e9f11fb77c">
+      <Execution id="4b1a8092-a097-4241-820e-5f4c666a547c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PooledResetTests" name="Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="2755e700-8bc3-193c-ec82-663775d59909">
+      <Execution id="668d0d01-17f0-4859-97f0-f1b79ce5bde5" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Three_sequential_public_leases_return_and_reuse_one_database" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BasicTests.Should_Enforce_Unique_Constraints" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f5a1b2fb-e910-ae08-fe74-fbacefd0018c">
+      <Execution id="d1a17ae3-8509-419e-a5fa-fc8452cf14c8" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BasicTests" name="Should_Enforce_Unique_Constraints" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BasicTests.Should_Provide_Isolated_Databases" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="e3cd3d71-f8b5-fd13-269e-b85293e3a91f">
+      <Execution id="2fd6d18f-852e-419e-b831-a79154a9f716" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BasicTests" name="Should_Provide_Isolated_Databases" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DatabaseOwnershipTests.Later_cleanup_failures_do_not_hide_the_original_failure_diagnostic" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f3a5383a-8594-e9fd-d709-f63a0751b2b1">
+      <Execution id="b423770e-4905-4bdf-b592-a7ccd00c8f81" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DatabaseOwnershipTests" name="Later_cleanup_failures_do_not_hide_the_original_failure_diagnostic" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DatabaseOwnershipTests.New_resources_cannot_be_registered_after_cleanup_begins" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ab0da945-30f6-c62c-54d0-098963e32c65">
+      <Execution id="cd9fefb1-7637-4cbf-8896-bd8d3fe51685" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DatabaseOwnershipTests" name="New_resources_cannot_be_registered_after_cleanup_begins" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.LeaseOwnershipTests.Public_lease_closes_all_contexts_and_waits_for_one_return" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="c768a8d6-110c-aea9-306f-1812e543363f">
+      <Execution id="8d9b236f-6d40-45b7-9d20-e796405e5ca6" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LeaseOwnershipTests" name="Public_lease_closes_all_contexts_and_waits_for_one_return" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.StartupCleanupTests.Failed_preparation_removes_every_container_it_created" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="1d5894b4-6fbf-fcc6-ce3c-0be7aa235f40">
+      <Execution id="c8077ab0-15f8-4687-b86f-88ff5d082690" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.StartupCleanupTests" name="Failed_preparation_removes_every_container_it_created" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BasicTests.Should_Create_Context_With_Real_Database" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ea44e954-6295-bd90-50a2-cb2a6c8d9d06">
+      <Execution id="8c7175ab-e8a2-4968-84ef-730de7541854" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BasicTests" name="Should_Create_Context_With_Real_Database" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PooledResetTests.Failed_lease_cleanup_is_reported_and_cannot_return_a_resource_to_the_pool" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="e4666783-6438-13b0-a741-db0dd18c2b2a">
+      <Execution id="5b000b14-aa35-4426-b5a4-64d15d586785" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PooledResetTests" name="Failed_lease_cleanup_is_reported_and_cannot_return_a_resource_to_the_pool" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PooledResetTests.Repeated_factory_returns_reuse_the_database_and_its_warm_session" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4f5eaa28-7f8e-9531-bb13-d3c942988c55">
+      <Execution id="89c33200-be40-48c8-8986-5ecee2c64c76" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PooledResetTests" name="Repeated_factory_returns_reuse_the_database_and_its_warm_session" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.DatabaseOwnershipTests.Abandoned_reservation_closes_resources_and_discards_without_reset_publication" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="49e0554e-5425-e773-e846-88cbaf3b4524">
+      <Execution id="4dea03b6-f7d2-4de6-9c86-fed91ff337da" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DatabaseOwnershipTests" name="Abandoned_reservation_closes_resources_and_discards_without_reset_publication" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PooledResetTests.Locked_rows_cause_a_bounded_reset_failure_and_are_never_reused" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="5dad28a2-424f-7abf-677b-b700e7cfb17f">
+      <Execution id="1d6f6dea-b525-4670-8ec5-768f599fcda8" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PooledResetTests" name="Locked_rows_cause_a_bounded_reset_failure_and_are_never_reused" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ConfigurationTests.Configuration_section_is_consumed_by_the_public_fixture" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="8f351ffd-b290-7905-5903-15eb708a3961">
+      <Execution id="d9bc3c57-34ed-46dd-9dfd-3a2f5f83e99c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ConfigurationTests" name="Configuration_section_is_consumed_by_the_public_fixture" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Static_leases_reuse_then_recreate_a_valid_owner_after_final_disposal" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ff11dc45-2941-e2b1-d9b2-3dc9207eeb17">
+      <Execution id="e9302efa-3f2f-4527-baae-0688b54532ee" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Static_leases_reuse_then_recreate_a_valid_owner_after_final_disposal" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1e0e39ea-55d1-03b1-35c6-df00eb665ad1" executionId="c24535d1-6f27-41a5-82a2-c2fe7303d681" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d5894b4-6fbf-fcc6-ce3c-0be7aa235f40" executionId="c8077ab0-15f8-4687-b86f-88ff5d082690" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="42a4b21a-5d59-dfde-43d1-bcf3b1b638f5" executionId="c3b9c1ab-ecd3-427f-af74-bd812436ea1b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5dad28a2-424f-7abf-677b-b700e7cfb17f" executionId="1d6f6dea-b525-4670-8ec5-768f599fcda8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ff11dc45-2941-e2b1-d9b2-3dc9207eeb17" executionId="e9302efa-3f2f-4527-baae-0688b54532ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="29cd1b9a-9a9b-618b-2163-3475d7e159da" executionId="024f67a6-58ec-4b6d-a8e2-dcba2ff968a7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f72fc410-2f76-5f71-a6ab-6b0b05037b92" executionId="2a0041b3-ac89-4fc1-ab46-2c15b4897852" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fa5be322-f6ba-4f38-5f8c-fbec98537a77" executionId="7edf1e1c-2f78-4c91-95e4-b5555c769f8f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f3a5383a-8594-e9fd-d709-f63a0751b2b1" executionId="b423770e-4905-4bdf-b592-a7ccd00c8f81" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d30594b8-bf9d-5ae7-9809-692893df0d4d" executionId="a44afbde-ee90-4347-b339-319aeb8f6a54" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="49e0554e-5425-e773-e846-88cbaf3b4524" executionId="4dea03b6-f7d2-4de6-9c86-fed91ff337da" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ea44e954-6295-bd90-50a2-cb2a6c8d9d06" executionId="8c7175ab-e8a2-4968-84ef-730de7541854" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ab0da945-30f6-c62c-54d0-098963e32c65" executionId="cd9fefb1-7637-4cbf-8896-bd8d3fe51685" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4a564678-ff89-acfe-6980-54e9f11fb77c" executionId="4b1a8092-a097-4241-820e-5f4c666a547c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fb70e237-076a-48c8-f3b2-43fda134eaa7" executionId="c8095543-5cb5-4e4d-afde-e480b5aa6042" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4f5eaa28-7f8e-9531-bb13-d3c942988c55" executionId="89c33200-be40-48c8-8986-5ecee2c64c76" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="63c67b9f-e360-7efa-ff33-90a585815ac5" executionId="a0fd14ed-56a5-44a3-a4ab-03927c8bab9e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e4666783-6438-13b0-a741-db0dd18c2b2a" executionId="5b000b14-aa35-4426-b5a4-64d15d586785" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d02191cf-4e55-e436-3167-2496009bc49d" executionId="620e6ff1-f7ec-4845-b171-d3978640d4da" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="22cafa52-82a9-ac4c-3e90-fbcd2ad69704" executionId="688bb6c7-e666-4c98-abd0-12dce3fb4640" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8f351ffd-b290-7905-5903-15eb708a3961" executionId="d9bc3c57-34ed-46dd-9dfd-3a2f5f83e99c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2755e700-8bc3-193c-ec82-663775d59909" executionId="668d0d01-17f0-4859-97f0-f1b79ce5bde5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e3cd3d71-f8b5-fd13-269e-b85293e3a91f" executionId="2fd6d18f-852e-419e-b831-a79154a9f716" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eca4f949-99b7-e2f6-d5c8-fba0f00602d3" executionId="9a829503-3634-4c5d-aaea-6c9a977c46f7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e4f41d57-a43f-ebd9-88fd-4682290ffe44" executionId="50d5bd98-265e-495f-91a1-ac6e2dbb37eb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b703037a-5219-d599-724a-57971a7970c0" executionId="316a2f0a-c8bd-4bf3-b35e-7b92f05fec6a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="910ee94f-36aa-e617-24ff-f42e31584d9b" executionId="e64f66d0-500f-4c4d-b152-0aa86d40b16f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="39793e61-ecb0-3a40-9b42-3a680ffcf8fd" executionId="ccd84a4e-e6c0-44d1-8d29-c18042e8f928" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f5a1b2fb-e910-ae08-fe74-fbacefd0018c" executionId="d1a17ae3-8509-419e-a5fa-fc8452cf14c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c768a8d6-110c-aea9-306f-1812e543363f" executionId="8d9b236f-6d40-45b7-9d20-e796405e5ca6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="20cdfa71-8ef7-3a1d-0b24-0bccee79bee9" executionId="c8566a15-31e5-4db9-a643-22a0d67b8f2b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="31" executed="31" passed="25" failed="6" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.14]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.21]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.23]   Starting:    TurboTest.Tests
+[xUnit.net 00:01:18.27]       System.TimeoutException : Database failed to start within 30 seconds
+[xUnit.net 00:01:18.27]       Stack Trace:
+[xUnit.net 00:01:18.27]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:01:18.27]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:01:18.27]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(196,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:01:18.27]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(203,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:01:18.27]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(65,0): at TurboTest.EFCore.Internal.TtPool.InitializeAsync()
+[xUnit.net 00:01:18.27]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(69,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:01:18.27]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(76,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:01:18.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(17,0): at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database()
+[xUnit.net 00:01:18.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(34,0): at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database()
+[xUnit.net 00:01:18.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:01:18.55]       System.TimeoutException : Database failed to start within 30 seconds
+[xUnit.net 00:01:18.55]       Stack Trace:
+[xUnit.net 00:01:18.55]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:01:18.55]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:01:18.55]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(196,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:01:18.55]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(203,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:01:18.55]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(65,0): at TurboTest.EFCore.Internal.TtPool.InitializeAsync()
+[xUnit.net 00:01:18.55]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs(149,0): at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched()
+[xUnit.net 00:01:18.55]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs(163,0): at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched()
+[xUnit.net 00:01:18.55]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs(163,0): at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched()
+[xUnit.net 00:01:18.55]         --- End of stack trace from previous location ---
+[xUnit.net 00:01:24.75]       System.TimeoutException : Database failed to start within 30 seconds
+[xUnit.net 00:01:24.75]       Stack Trace:
+[xUnit.net 00:01:24.75]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:01:24.75]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:01:24.75]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(196,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:01:24.75]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(203,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:01:24.75]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(65,0): at TurboTest.EFCore.Internal.TtPool.InitializeAsync()
+[xUnit.net 00:01:24.75]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(69,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:01:24.75]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(76,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:01:24.75]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BasicTests.cs(33,0): at TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints()
+[xUnit.net 00:01:24.75]         --- End of stack trace from previous location ---
+[xUnit.net 00:01:57.33]       System.TimeoutException : Database failed to start within 30 seconds
+[xUnit.net 00:01:57.33]       Stack Trace:
+[xUnit.net 00:01:57.33]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:01:57.33]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:01:57.33]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(196,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:01:57.33]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(203,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:01:57.33]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(65,0): at TurboTest.EFCore.Internal.TtPool.InitializeAsync()
+[xUnit.net 00:01:57.33]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(69,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:01:57.33]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(76,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:01:57.33]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(59,0): at TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease()
+[xUnit.net 00:01:57.33]         --- End of stack trace from previous location ---
+[xUnit.net 00:01:58.37]       System.TimeoutException : Database failed to start within 30 seconds
+[xUnit.net 00:01:58.37]       Stack Trace:
+[xUnit.net 00:01:58.37]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:01:58.37]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:01:58.37]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(196,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:01:58.37]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(203,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:01:58.37]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(65,0): at TurboTest.EFCore.Internal.TtPool.InitializeAsync()
+[xUnit.net 00:01:58.37]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs(122,0): at TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset()
+[xUnit.net 00:01:58.37]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs(140,0): at TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset()
+[xUnit.net 00:01:58.37]         --- End of stack trace from previous location ---
+[xUnit.net 00:02:06.67]       System.TimeoutException : Database failed to start within 30 seconds
+[xUnit.net 00:02:06.67]       Stack Trace:
+[xUnit.net 00:02:06.67]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:02:06.67]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:02:06.67]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(196,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:02:06.67]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(203,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:02:06.67]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(65,0): at TurboTest.EFCore.Internal.TtPool.InitializeAsync()
+[xUnit.net 00:02:06.67]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(69,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:02:06.67]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(76,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:02:06.67]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BasicTests.cs(57,0): at TurboTest.Tests.BasicTests.Should_Enforce_Unique_Constraints()
+[xUnit.net 00:02:06.67]         --- End of stack trace from previous location ---
+[xUnit.net 00:02:50.99]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:24:09.1538383+10:00">
+        <Text>[xUnit.net 00:01:18.27]     TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:24:09.4386528+10:00">
+        <Text>[xUnit.net 00:01:18.55]     TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:24:15.6365254+10:00">
+        <Text>[xUnit.net 00:01:24.75]     TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:24:48.2167671+10:00">
+        <Text>[xUnit.net 00:01:57.33]     TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:24:49.2586012+10:00">
+        <Text>[xUnit.net 00:01:58.37]     TurboTest.Tests.PooledResetTests.Return_closes_an_outstanding_reader_and_transaction_before_reset [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:24:57.5525758+10:00">
+        <Text>[xUnit.net 00:02:06.67]     TurboTest.Tests.BasicTests.Should_Enforce_Unique_Constraints [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.09_25_41.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

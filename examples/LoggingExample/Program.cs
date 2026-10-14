@@ -14,7 +14,7 @@ using var loggerFactory = LoggerFactory.Create(builder =>
 
 var logger = loggerFactory.CreateLogger<Program>();
 
-Tt.Configure(options =>
+await using var fixture1 = await Tt.CreateFactoryAsync<BlogContext>(options =>
 {
     options.AutoAllocateResources = true;
     options.ReserveMemoryMb = 1024; // Reserve 1GB for demo
@@ -22,7 +22,8 @@ Tt.Configure(options =>
     options.Logger = logger;
 });
 
-await using var context1 = await Tt.CreateContextAsync<BlogContext>();
+await using var context1Lease = await fixture1.CreateLeaseAsync();
+var context1 = context1Lease.Context;
 Console.WriteLine("✅ Context created with detailed logging");
 
 // Example 2: Production-style logging (minimal)
@@ -34,7 +35,7 @@ using var prodLoggerFactory = LoggerFactory.Create(builder =>
 
 var prodLogger = prodLoggerFactory.CreateLogger("TurboTest");
 
-Tt.Configure(options =>
+await using var fixture2 = await Tt.CreateFactoryAsync<BlogContext>(options =>
 {
     options.AutoAllocateResources = false;
     options.PoolSize = 2;
@@ -43,7 +44,8 @@ Tt.Configure(options =>
     options.Logger = prodLogger;
 });
 
-await using var context2 = await Tt.CreateContextAsync<BlogContext>();
+await using var context2Lease = await fixture2.CreateLeaseAsync();
+var context2 = context2Lease.Context;
 Console.WriteLine("✅ Context created with production logging");
 
 // Example 3: Custom logging for specific scenarios
@@ -58,7 +60,7 @@ using var customLoggerFactory = LoggerFactory.Create(builder =>
 
 var customLogger = customLoggerFactory.CreateLogger("TurboTest");
 
-Tt.Configure(options =>
+await using var fixture3 = await Tt.CreateFactoryAsync<BlogContext>(options =>
 {
     options.AutoAllocateResources = true;
     options.ReserveMemoryMb = 512;   // Reserve less memory
@@ -68,7 +70,8 @@ Tt.Configure(options =>
     options.Logger = customLogger;
 });
 
-await using var context3 = await Tt.CreateContextAsync<BlogContext>();
+await using var context3Lease = await fixture3.CreateLeaseAsync();
+var context3 = context3Lease.Context;
 Console.WriteLine("✅ Context created with custom logging configuration");
 
 Console.WriteLine("\n✨ All logging examples completed!");

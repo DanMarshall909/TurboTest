@@ -1,0 +1,19 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:31.07]     TurboTest.Tests.StartupCleanupTests.Failed_preparation_removes_every_container_it_created [FAIL]
+  Failed TurboTest.Tests.StartupCleanupTests.Failed_preparation_removes_every_container_it_created [30 s]
+  Error Message:
+   Assert.Empty() Failure: Collection was not empty
+Collection: [ContainerListResponse { Command = "docker-entrypoint.sh postgres", Created = 2026-10-13T22:10:39.0000000Z, ID = "3070184172c003c716f26a2dce981f7f22c26ebb3732a01ace"···, Image = "postgres:16-alpine", ImageID = "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b7"···, ··· }]
+  Stack Trace:
+     at TurboTest.Tests.StartupCleanupTests.Failed_preparation_removes_every_container_it_created() in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCleanupTests.cs:line 26
+   at TurboTest.Tests.StartupCleanupTests.Failed_preparation_removes_every_container_it_created() in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCleanupTests.cs:line 34
+   at TurboTest.Tests.StartupCleanupTests.Failed_preparation_removes_every_container_it_created() in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCleanupTests.cs:line 34
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-002/startup-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 30 s - TurboTest.Tests.dll (net10.0)

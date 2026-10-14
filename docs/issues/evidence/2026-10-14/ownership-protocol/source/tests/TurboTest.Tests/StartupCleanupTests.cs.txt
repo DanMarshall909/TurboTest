@@ -1,0 +1,46 @@
+using Docker.DotNet;
+using Docker.DotNet.Models;
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class StartupCleanupTests
+{
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Failed_preparation_removes_every_container_it_created()
+    {
+        var prefix = $"tt-startup-{Guid.NewGuid():N}";
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        await using var pool = new TtPool(new TtOptions
+        {
+            PoolSize = 1,
+            ContainerPrefix = prefix,
+            ConnectionStringTemplate = "Host=localhost;Port={1};Database=missing_database;Username={3};Password={4}"
+        });
+        try
+        {
+            await Assert.ThrowsAsync<TimeoutException>(() => pool.InitializeAsync());
+            await pool.DisposeAsync();
+            Assert.Empty(await OwnedContainersAsync());
+        }
+        finally
+        {
+            // Also clean up a deliberately failing RED run; only this test's unique prefix is eligible.
+            foreach (var container in await OwnedContainersAsync())
+                await docker.Containers.RemoveContainerAsync(container.ID,
+                    new ContainerRemoveParameters { Force = true, RemoveVolumes = true });
+        }
+
+        async Task<IList<ContainerListResponse>> OwnedContainersAsync() =>
+            await docker.Containers.ListContainersAsync(new ContainersListParameters
+            {
+                All = true,
+                Filters = new Dictionary<string, IDictionary<string, bool>>
+                {
+                    ["name"] = new Dictionary<string, bool> { [prefix] = true }
+                }
+            });
+    }
+}

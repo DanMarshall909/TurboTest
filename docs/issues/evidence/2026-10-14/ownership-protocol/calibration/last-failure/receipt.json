@@ -1,0 +1,19 @@
+{
+  "fault": "last-failure",
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "FullyQualifiedName~Later_cleanup_failures",
+    "--logger",
+    "trx;LogFileName=fault.trx",
+    "--results-directory",
+    "artifacts/ownership/calibration/last-failure"
+  ],
+  "exitCode": 1,
+  "elapsedSeconds": 2.2435628990642726,
+  "originalSha256": "e3699d752dcd0643c49a33930c533dcc818dcfb2b477a559001a0e934c6cb6ad",
+  "faultSha256": "ef9cd30b9ae189b73ce1f577d4920857e77cd22bababf52627aa63142c8d0bdc",
+  "restored": true
+}

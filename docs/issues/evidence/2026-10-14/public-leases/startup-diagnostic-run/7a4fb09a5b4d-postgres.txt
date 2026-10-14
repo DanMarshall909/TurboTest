@@ -1,0 +1,20 @@
+2026-10-13T23:28:30.480988787Z The files belonging to this database system will be owned by user "postgres".
+2026-10-13T23:28:30.481035216Z This user must also own the server process.
+2026-10-13T23:28:30.481039426Z 
+2026-10-13T23:28:30.481078966Z The database cluster will be initialized with locale "en_US.utf8".
+2026-10-13T23:28:30.481088696Z The default database encoding has accordingly been set to "UTF8".
+2026-10-13T23:28:30.481092336Z The default text search configuration will be set to "english".
+2026-10-13T23:28:30.481095126Z 
+2026-10-13T23:28:30.481097646Z Data page checksums are disabled.
+2026-10-13T23:28:30.481100366Z 
+2026-10-13T23:28:30.481144545Z fixing permissions on existing directory /var/lib/postgresql/data ... ok
+2026-10-13T23:28:30.481709031Z creating subdirectories ... ok
+2026-10-13T23:28:30.481790860Z selecting dynamic shared memory implementation ... posix
+2026-10-13T23:28:30.500238518Z selecting default max_connections ... 100
+2026-10-13T23:28:30.518942374Z selecting default shared_buffers ... 128MB
+2026-10-13T23:28:30.688907264Z selecting default time zone ... UTC
+2026-10-13T23:28:30.689613709Z creating configuration files ... ok
+2026-10-13T23:28:30.827575985Z running bootstrap script ... ok
+2026-10-13T23:28:31.385354885Z performing post-bootstrap initialization ... ok
+2026-10-13T23:28:31.006500046Z sh: locale: not found
+2026-10-13T23:28:31.006557605Z 2026-10-13 23:28:31.006 UTC [35] WARNING:  no usable system locales were found

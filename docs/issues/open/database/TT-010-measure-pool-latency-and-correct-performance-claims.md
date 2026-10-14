@@ -33,3 +33,14 @@ Add maintained metrics and a reproducible public-API benchmark. Define the warm 
 ## Verification
 
 Land metrics and a fixed-pool benchmark before TT-009 consumes them. Add adaptive/parking comparisons when those implementations exist; this is a follow-up within this ticket, not a prerequisite cycle. Keep reproducible raw results and rejected-run diagnostics. Baseline evidence is local exploratory data, not a portable release gate.
+
+## Implementation log
+
+- **2026-10-14 — partial documentation correction:** Removed unconditional
+  under-100-ms/50-ms reset claims and unsupported provider timings from README,
+  provider API documentation and package description. README now defines the
+  workload-specific warm aspiration, links to the prototype evidence and
+  identifies the current lease/DI ownership defects. Public lifecycle migration
+  documentation, maintained metrics and reproducible integrated benchmarks
+  remain open. No production performance claim is earned by TT-002's current
+  correctness checks.

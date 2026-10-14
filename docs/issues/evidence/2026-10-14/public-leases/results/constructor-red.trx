@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="ddd53464-6c66-445f-bf23-13bde3d11a17" name="@os-greg 2026-10-14 09:04:23" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T09:04:23.9328341+10:00" queuing="2026-10-14T09:04:23.9328342+10:00" start="2026-10-14T09:04:22.1857627+10:00" finish="2026-10-14T09:04:31.4520850+10:00" />
+  <TestSettings name="default" id="c39eac0c-ee92-4bec-9760-95db2e09c164">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_09_04_23" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="e49c2251-9ba4-45b1-8ba1-69502e65594c" testId="22cafa52-82a9-ac4c-3e90-fbcd2ad69704" testName="TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease" computerName="os-greg" duration="00:00:08.7973516" startTime="2026-10-14T09:04:22.5869314+10:00" endTime="2026-10-14T09:04:31.3925156+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e49c2251-9ba4-45b1-8ba1-69502e65594c">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection contained 2 items
+Collection: [ContainerListResponse { Command = "docker-entrypoint.sh postgres", Created = 2026-10-13T23:04:26.0000000Z, ID = "b45ae14a2e62992cb374edd483f8d644ed66409dd57848c317"···, Image = "postgres:16-alpine", ImageID = "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b7"···, ··· }, ContainerListResponse { Command = "docker-entrypoint.sh postgres", Created = 2026-10-13T23:04:22.0000000Z, ID = "40ce2f027ff7e74a0664295338f719455c984c18ebda76b902"···, Image = "postgres:16-alpine", ImageID = "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b7"···, ··· }]</Message>
+          <StackTrace>   at TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 78
+   at TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 78
+   at TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 80
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6a84a4a4-24ca-43b3-81e8-74080ebc5347" testId="c768a8d6-110c-aea9-306f-1812e543363f" testName="TurboTest.Tests.LeaseOwnershipTests.Public_lease_closes_all_contexts_and_waits_for_one_return" computerName="os-greg" duration="00:00:00.0897472" startTime="2026-10-14T09:04:22.5881367+10:00" endTime="2026-10-14T09:04:22.6845149+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6a84a4a4-24ca-43b3-81e8-74080ebc5347" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="22cafa52-82a9-ac4c-3e90-fbcd2ad69704">
+      <Execution id="e49c2251-9ba4-45b1-8ba1-69502e65594c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Constructor_failure_does_not_leave_an_undisclosed_database_lease" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.LeaseOwnershipTests.Public_lease_closes_all_contexts_and_waits_for_one_return" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="c768a8d6-110c-aea9-306f-1812e543363f">
+      <Execution id="6a84a4a4-24ca-43b3-81e8-74080ebc5347" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LeaseOwnershipTests" name="Public_lease_closes_all_contexts_and_waits_for_one_return" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="22cafa52-82a9-ac4c-3e90-fbcd2ad69704" executionId="e49c2251-9ba4-45b1-8ba1-69502e65594c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c768a8d6-110c-aea9-306f-1812e543363f" executionId="6a84a4a4-24ca-43b3-81e8-74080ebc5347" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="2" passed="1" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.07]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.11]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.13]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:08.96]       Assert.Single() Failure: The collection contained 2 items
+[xUnit.net 00:00:08.96]       Collection: [ContainerListResponse { Command = "docker-entrypoint.sh postgres", Created = 2026-10-13T23:04:26.0000000Z, ID = "b45ae14a2e62992cb374edd483f8d644ed66409dd57848c317"···, Image = "postgres:16-alpine", ImageID = "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b7"···, ··· }, ContainerListResponse { Command = "docker-entrypoint.sh postgres", Created = 2026-10-13T23:04:22.0000000Z, ID = "40ce2f027ff7e74a0664295338f719455c984c18ebda76b902"···, Image = "postgres:16-alpine", ImageID = "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b7"···, ··· }]
+[xUnit.net 00:00:08.96]       Stack Trace:
+[xUnit.net 00:00:08.96]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(78,0): at TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease()
+[xUnit.net 00:00:08.96]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(78,0): at TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease()
+[xUnit.net 00:00:08.96]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(80,0): at TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease()
+[xUnit.net 00:00:08.96]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:08.96]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:04:31.3950695+10:00">
+        <Text>[xUnit.net 00:00:08.96]     TurboTest.Tests.PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,23 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:08.55]     TurboTest.Tests.StartupCleanupTests.Disposable_cluster_skips_initial_sync_and_retains_server_fsync [FAIL]
+  Failed TurboTest.Tests.StartupCleanupTests.Disposable_cluster_skips_initial_sync_and_retains_server_fsync [8 s]
+  Error Message:
+   Assert.Equal() Failure: Collections differ
+           ↓ (pos 0)
+Expected: ["POSTGRES_INITDB_ARGS=--no-sync"]
+Actual:   []
+  Stack Trace:
+     at TurboTest.Tests.StartupCleanupTests.Disposable_cluster_skips_initial_sync_and_retains_server_fsync() in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCleanupTests.cs:line 32
+   at TurboTest.Tests.StartupCleanupTests.Disposable_cluster_skips_initial_sync_and_retains_server_fsync() in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCleanupTests.cs:line 32
+   at TurboTest.Tests.StartupCleanupTests.Disposable_cluster_skips_initial_sync_and_retains_server_fsync() in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCleanupTests.cs:line 32
+   at TurboTest.Tests.StartupCleanupTests.Disposable_cluster_skips_initial_sync_and_retains_server_fsync() in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCleanupTests.cs:line 32
+   at TurboTest.Tests.StartupCleanupTests.Disposable_cluster_skips_initial_sync_and_retains_server_fsync() in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCleanupTests.cs:line 32
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-001/init-sync-red/init-sync-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 8 s - TurboTest.Tests.dll (net10.0)

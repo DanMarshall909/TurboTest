@@ -1,0 +1,12 @@
+{
+  "source": "examples/MinimalExample/Program.cs",
+  "originalSha256": "6e8632060b197fcf4d77e5a3a33fca221e174d1c9966d0503585663c8f32aed2",
+  "mutatedSha256": "110fef3a56aae749b0461e900219ce46c8f0ae973c6c093868848227e60bb7ff",
+  "prefix": "tt-example-25c5407a00324a80bca720c922a895c5",
+  "command": "dotnet run --project examples/MinimalExample",
+  "expectedOwnedAfterExit": 0,
+  "exit": 134,
+  "ownedAfterExit": [],
+  "restoredSha256": "6e8632060b197fcf4d77e5a3a33fca221e174d1c9966d0503585663c8f32aed2",
+  "removedREDResources": []
+}

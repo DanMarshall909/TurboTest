@@ -8,14 +8,15 @@ Console.WriteLine("=========================================\n");
 Console.WriteLine("1. Auto-allocation with defaults");
 Console.WriteLine("--------------------------------");
 
-Tt.Configure(options =>
+await using var fixture1 = await Tt.CreateFactoryAsync<BlogContext>(options =>
 {
     options.AutoAllocateResources = true;
     // Reserves 2GB RAM and 2 CPU cores by default
     // Max 20 containers by default
 });
 
-await using var context1 = await Tt.CreateContextAsync<BlogContext>();
+await using var context1Lease = await fixture1.CreateLeaseAsync();
+var context1 = context1Lease.Context;
 Console.WriteLine("✅ Context created with auto-allocated resources");
 Console.WriteLine($"   Connection: {context1.Database.GetConnectionString()?.Split(';')[0]}");
 
@@ -23,7 +24,7 @@ Console.WriteLine($"   Connection: {context1.Database.GetConnectionString()?.Spl
 Console.WriteLine("\n2. Auto-allocation with custom reserves");
 Console.WriteLine("---------------------------------------");
 
-Tt.Configure(options =>
+await using var fixture2 = await Tt.CreateFactoryAsync<BlogContext>(options =>
 {
     options.AutoAllocateResources = true;
     options.ReserveMemoryMb = 4096; // Reserve 4GB for system
@@ -31,7 +32,8 @@ Tt.Configure(options =>
     options.MaxAutoContainers = 10; // Limit to 10 containers max
 });
 
-await using var context2 = await Tt.CreateContextAsync<BlogContext>();
+await using var context2Lease = await fixture2.CreateLeaseAsync();
+var context2 = context2Lease.Context;
 Console.WriteLine("✅ Context created with custom resource reserves");
 
 // Example 3: Compare manual vs auto configuration
@@ -39,24 +41,26 @@ Console.WriteLine("\n3. Manual vs Auto comparison");
 Console.WriteLine("----------------------------");
 
 // Manual configuration
-Tt.Configure(options =>
+await using var fixture3 = await Tt.CreateFactoryAsync<BlogContext>(options =>
 {
     options.AutoAllocateResources = false;
     options.PoolSize = 3;
     options.MemoryLimitMb = 256;
 });
 
-await using var context3 = await Tt.CreateContextAsync<BlogContext>();
+await using var context3Lease = await fixture3.CreateLeaseAsync();
+var context3 = context3Lease.Context;
 Console.WriteLine("✅ Manual config: 3 containers, 256MB each");
 
 // Auto configuration for high-memory systems
-Tt.Configure(options =>
+await using var fixture4 = await Tt.CreateFactoryAsync<BlogContext>(options =>
 {
     options.AutoAllocateResources = true;
     options.ReserveMemoryMb = 1024; // Only reserve 1GB
 });
 
-await using var context4 = await Tt.CreateContextAsync<BlogContext>();
+await using var context4Lease = await fixture4.CreateLeaseAsync();
+var context4 = context4Lease.Context;
 Console.WriteLine("✅ Auto config: Optimized for available resources");
 
 Console.WriteLine("\n✨ Auto-allocation examples completed!");

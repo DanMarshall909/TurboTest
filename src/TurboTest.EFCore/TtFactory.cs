@@ -1,64 +1,118 @@
+using System.Collections.Concurrent;
 using Microsoft.EntityFrameworkCore;
 using TurboTest.EFCore.Internal;
 
 namespace TurboTest.EFCore;
 
-/// <summary>
-/// Factory for creating multiple DbContext instances with shared configuration.
-/// Useful for test fixtures.
-/// </summary>
-public class TtFactory<TContext> : IAsyncDisposable where TContext : DbContext
+/// <summary>Owns a fixture's database leases. Dispose asynchronously after the tests finish.</summary>
+public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbContext
 {
     private readonly TtPool _pool;
     private readonly TtOptions _options;
-    private readonly List<TtDatabase> _activeDatabases = new();
+    private readonly bool _ownsPool;
+    private readonly SemaphoreSlim _acquisitionGate = new(1, 1);
+    private readonly object _disposeGate = new();
+    private readonly ConcurrentDictionary<TtLease<TContext>, byte> _leases = new();
+    private readonly ConcurrentDictionary<TtDatabase, byte> _databases = new();
+    private bool _closing;
+    private Task? _disposal;
 
-    internal TtFactory(TtPool pool, TtOptions options)
+    internal TtFactory(TtPool pool, TtOptions options, bool ownsPool = false)
     {
         _pool = pool;
         _options = options;
+        _ownsPool = ownsPool;
     }
 
-    /// <summary>
-    /// Creates a new context instance with a fresh database.
-    /// </summary>
-    public async Task<TContext> CreateContextAsync(Action<DbContextOptionsBuilder>? configure = null)
+    /// <summary>Acquires one test database. Lease disposal awaits context cleanup and reset.</summary>
+    public async Task<TtLease<TContext>> CreateLeaseAsync(
+        Action<DbContextOptionsBuilder>? configure = null, CancellationToken cancellationToken = default)
     {
-        var database = await _pool.GetDatabaseAsync();
-        _activeDatabases.Add(database);
-
-        var optionsBuilder = new DbContextOptionsBuilder<TContext>();
-        optionsBuilder.UseNpgsql(database.ConnectionString);
-
-        if (_options.EnableSensitiveDataLogging)
+        await _acquisitionGate.WaitAsync(cancellationToken);
+        try
         {
-            optionsBuilder.EnableSensitiveDataLogging();
+            lock (_disposeGate) ObjectDisposedException.ThrowIf(_closing, this);
+            var database = await _pool.GetDatabaseAsync();
+            _databases.TryAdd(database, 0);
+            TContext BuildContext()
+            {
+                var builder = new DbContextOptionsBuilder<TContext>().UseNpgsql(database.DataSource);
+                if (_options.EnableSensitiveDataLogging) builder.EnableSensitiveDataLogging();
+                configure?.Invoke(builder);
+                return (TContext)(Activator.CreateInstance(typeof(TContext), builder.Options)
+                    ?? throw new InvalidOperationException($"Could not create {typeof(TContext).Name}"));
+            }
+            void Register(TContext context) => database.OnDispose(() => context.DisposeAsync().AsTask());
+            TContext context;
+            var stage = "ContextCreate";
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                context = BuildContext();
+                Register(context);
+                stage = "ContextInitialize";
+                cancellationToken.ThrowIfCancellationRequested();
+                if (_options.AutoMigrate) await context.Database.EnsureCreatedAsync(cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+            }
+            catch (Exception error)
+            {
+                Exception? discardFailure = null;
+                try { await database.DiscardAsync(); }
+                catch (Exception cleanupError) { discardFailure = cleanupError; }
+                finally { _databases.TryRemove(database, out _); }
+                if (error is OperationCanceledException && discardFailure is null) throw;
+                throw new TtLifecycleException(stage, error, discardFailure);
+            }
+            TtLease<TContext>? lease = null;
+            lease = new TtLease<TContext>(context, BuildContext, Register, async () =>
+            {
+                try { await database.DisposeAsync(); }
+                finally
+                {
+                    _databases.TryRemove(database, out _);
+                    if (lease is not null) _leases.TryRemove(lease, out _);
+                }
+            });
+            _leases.TryAdd(lease, 0);
+            return lease;
         }
-
-        configure?.Invoke(optionsBuilder);
-
-        var context = Activator.CreateInstance(
-            typeof(TContext),
-            optionsBuilder.Options) as TContext
-            ?? throw new InvalidOperationException($"Could not create instance of {typeof(TContext).Name}");
-
-        if (_options.AutoMigrate)
-        {
-            await context.Database.EnsureCreatedAsync();
-        }
-
-        // Wrap context with callback-based cleanup handling
-        var wrappedContext = new TtContext<TContext>(context, database);
-
-        return wrappedContext;
+        finally { _acquisitionGate.Release(); }
     }
 
-    public async ValueTask DisposeAsync()
+    public ValueTask DisposeAsync()
     {
-        foreach (var database in _activeDatabases)
+        lock (_disposeGate)
         {
-            await database.DisposeAsync();
+            _closing = true;
+            _disposal ??= DisposeCoreAsync();
+            return new ValueTask(_disposal);
         }
-        _activeDatabases.Clear();
+    }
+
+    private async Task DisposeCoreAsync()
+    {
+        await _acquisitionGate.WaitAsync();
+        try
+        {
+            Exception? first = null;
+            foreach (var lease in _leases.Keys)
+            {
+                try { await lease.DisposeAsync(); }
+                catch (Exception error) { first ??= error; }
+            }
+            foreach (var database in _databases.Keys)
+            {
+                try { await database.DisposeAsync(); }
+                catch (Exception error) { first ??= error; }
+            }
+            if (_ownsPool)
+            {
+                try { await _pool.DisposeAsync(); }
+                catch (Exception error) { first ??= error; }
+            }
+            if (first is not null) throw first;
+        }
+        finally { _acquisitionGate.Release(); }
     }
 }

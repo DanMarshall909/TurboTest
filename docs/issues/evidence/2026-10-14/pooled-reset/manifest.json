@@ -1,0 +1,139 @@
+{
+  "status": "In progress; no implementation ticket resolved or independently approved",
+  "base": "5de941b6d729f62f83575f65f1420ae0262e1235",
+  "branch": "master",
+  "upstream": null,
+  "sdk": "10.0.301",
+  "postgresImageId": "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b72e7aa1abd43cce9887542",
+  "targetedCommand": "dotnet test tests/TurboTest.Tests --filter 'FullyQualifiedName~PooledResetTests|FullyQualifiedName~StartupCleanupTests' --collect 'Code Coverage;Format=cobertura' --logger 'trx;LogFileName=targeted-final.trx' --results-directory artifacts/tt-002/targeted-final",
+  "targetedExit": 0,
+  "targetedResults": {
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0
+  },
+  "buildCommand": "dotnet build TurboTest.sln --no-restore",
+  "buildExit": 0,
+  "fullSuite": "Failed during startup; explicitly cancelled to stop orphan creation; not a passing completion gate",
+  "mutation": "Not run: retained tests are PostgreSQL end-to-end boundary checks. Fast ownership laws and calibrated core mutation evidence remain required.",
+  "independentReview": "Not run: candidate is incomplete.",
+  "files": [
+    {
+      "source": "artifacts/tt-002/red.log",
+      "archive": "reuse-red.log.txt",
+      "sha256": "76bcafd44e00787b39575e3c6d128b075899f99b62535b6f4b48f6f93adf5f7a"
+    },
+    {
+      "source": "artifacts/tt-002/failure-red.log",
+      "archive": "reset-failure-red.log.txt",
+      "sha256": "578da7e45c4ef6356e46a935a3a85eb3cf938e6d2153a10886f59886a5e811f8"
+    },
+    {
+      "source": "artifacts/tt-002/cleanup-red.log",
+      "archive": "lease-cleanup-red.log.txt",
+      "sha256": "de51156f44ca75328e4ee7f839d43a557ee9dec8458791bc0f968649ce8e6d9d"
+    },
+    {
+      "source": "artifacts/tt-002/startup-red.log",
+      "archive": "startup-red.log.txt",
+      "sha256": "63ac9d8d911c692126e3293fad1d409641054fc6da840a0f421a3da58871e226"
+    },
+    {
+      "source": "artifacts/tt-002/startup-green.log",
+      "archive": "startup-green.log.txt",
+      "sha256": "40d23aaa223b94f0a634c99aaabaff5e3f020af66bde5e1ba9cca0db2bb716d6"
+    },
+    {
+      "source": "artifacts/tt-002/targeted.log",
+      "archive": "source-handoff-rejected.log.txt",
+      "sha256": "b6217d4d691fa11e707e157dabb70ebe84fefa8b5e88b7c45170ddccbe3a67d8"
+    },
+    {
+      "source": "artifacts/tt-002/targeted-final.log",
+      "archive": "targeted-green.log.txt",
+      "sha256": "5bee44602bdf20d85c90949d60be3c383f9a5e554a67e8708459548883da8aa0"
+    },
+    {
+      "source": "artifacts/tt-002/targeted-final/targeted-final.trx",
+      "archive": "targeted-green.trx",
+      "sha256": "bdb2a0693ab00092b6f99f081bc6829556eeba6ca37d8d215cb36f9eb298563c"
+    },
+    {
+      "source": "artifacts/tt-002/build-final.log",
+      "archive": "build.log.txt",
+      "sha256": "80acce5bf67b07593026d41fbd1788198d330fd767d85c10531392ee8557c5d2"
+    },
+    {
+      "source": "artifacts/tt-002/full.log",
+      "archive": "full-aborted.log.txt",
+      "sha256": "d5ea67f27d79236ea7c742534f1cfb47fb2abce0b64b85c99daf46f9bfbcaea2"
+    },
+    {
+      "source": "artifacts/tt-002/startup-failure/cleanup.json",
+      "archive": "failed-run-cleanup.json",
+      "sha256": "3754a455b5ad4b0ae80fd904674b84b65874aee63f83889cfaa193f4a3645354"
+    },
+    {
+      "source": "artifacts/tt-002/targeted-final/_os-greg_2026-10-14_08_15_15/In/os-greg/dan_os-greg_2026-10-14.08_16_54.cobertura.xml",
+      "archive": "coverage.cobertura.xml.gz",
+      "uncompressedSha256": "a9911d23fc5073ac1cacc5a0f6c7b9db426967437e78ca51033adddaaddcf71b"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Internal/TtContainer.cs",
+      "archive": "source/src/TurboTest.EFCore/Internal/TtContainer.cs.txt",
+      "sha256": "fc1be689db3715be21b04d8508bfe119cfcf935af543906f1ea9b76565f27512"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Internal/TtDatabase.cs",
+      "archive": "source/src/TurboTest.EFCore/Internal/TtDatabase.cs.txt",
+      "sha256": "3ff37542be97484b9b289da338876da6ebda30eef5993f38226fc37ff4044ca4"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Internal/TtPool.cs",
+      "archive": "source/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "sha256": "87fa92af2c48f53aad8a30002c312c30eafadf8ac64cf3bbd32ce9e36eef59f2"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Properties/AssemblyInfo.cs",
+      "archive": "source/src/TurboTest.EFCore/Properties/AssemblyInfo.cs.txt",
+      "sha256": "99b77a3d9691cddb8cbb8bf1c97d9116ea8a994e07d6e0535c1043c2edba44f4"
+    },
+    {
+      "source": "src/TurboTest.EFCore/Tt.cs",
+      "archive": "source/src/TurboTest.EFCore/Tt.cs.txt",
+      "sha256": "c25d336faeace4eddc54375fe73f9afbb76384bb9204a8757124d44b67a042df"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtFactory.cs",
+      "archive": "source/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "sha256": "397d9967bbe5db658d0bfeedff31ce9b83309b77d7c21654985690e32f0830c2"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtLifecycleException.cs",
+      "archive": "source/src/TurboTest.EFCore/TtLifecycleException.cs.txt",
+      "sha256": "4a1bfcfea0a4c0f6c5ef8c9815aed17e330aaa766bba6a1a7ba05d80d8fa26fd"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TtOptions.cs",
+      "archive": "source/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "sha256": "9749caf672ee56ef140aeae8c6e01126bee7dfaedc186eee1ae944d97373eed7"
+    },
+    {
+      "source": "src/TurboTest.EFCore/TurboTest.EFCore.csproj",
+      "archive": "source/src/TurboTest.EFCore/TurboTest.EFCore.csproj.txt",
+      "sha256": "147dcfb16b92dda5e9325e9558ebb8b7224d397a6774a973ad372e0775d0ceb6"
+    },
+    {
+      "source": "tests/TurboTest.Tests/PooledResetTests.cs",
+      "archive": "source/tests/TurboTest.Tests/PooledResetTests.cs.txt",
+      "sha256": "79c0b63a3fe3cf725b701bd0934bdf77a2dbcaeda476bcde048cdbd1124bd231"
+    },
+    {
+      "source": "tests/TurboTest.Tests/StartupCleanupTests.cs",
+      "archive": "source/tests/TurboTest.Tests/StartupCleanupTests.cs.txt",
+      "sha256": "d16bd11a053a24103033d534822a3ffc15ca622469e8126208371d82ee3f8d37"
+    }
+  ],
+  "availableRuntime": "10.0.9",
+  "snapshotNote": "Claims in this archive apply to its retained source snapshot. Newer API and source evidence is retained separately in public-leases/manifest.json."
+}

@@ -25,14 +25,14 @@ internal class TtServiceFactory : ITtServiceFactory, IAsyncDisposable
         // For DI scenarios, we might want to return a stable connection string
         // This is a simplified implementation - in practice you'd want to manage this better
         throw new NotSupportedException(
-            "GetConnectionString is not supported in DI scenarios. Use CreateContextAsync instead.");
+            "GetConnectionString is not supported in DI scenarios. Use CreateLeaseAsync instead.");
     }
 
-    public async Task<TContext> CreateContextAsync<TContext>(Action<DbContextOptionsBuilder>? configure = null)
+    public async Task<TtLease<TContext>> CreateLeaseAsync<TContext>(Action<DbContextOptionsBuilder>? configure = null)
         where TContext : DbContext
     {
         await EnsureInitializedAsync();
-        return await Tt.CreateContextAsync<TContext>(configure);
+        return await Tt.CreateLeaseAsync<TContext>(configure);
     }
 
     public async Task<TtFactory<TContext>> CreateFactoryAsync<TContext>() where TContext : DbContext

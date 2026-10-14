@@ -1,0 +1,2050 @@
+{
+  "baseObject": "5de941b6d729f62f83575f65f1420ae0262e1235",
+  "branch": "master",
+  "currentObject": "5de941b6d729f62f83575f65f1420ae0262e1235",
+  "integrationBase": "5de941b6d729f62f83575f65f1420ae0262e1235",
+  "paths": [
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "ef7860c22bfcce4c117e77935d119bd3d8fcf99e",
+      "mode": "100644",
+      "path": ".config/dotnet-tools.json",
+      "sha256": "f9fb85462db6b256ed4155043279286a9e5ccb72e0cdbc7d5f052bbe3221f1cb",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f14f7c210f43a0feba13070a20cab5aa397e7295",
+      "mode": "100644",
+      "path": ".config/stryker-ownership.json",
+      "sha256": "4c7835b75750596957899208ce5c998303f289df9aded0c172b4ca5caf827de7",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f389f8744cfdca019ceb2fb4e9644ba2dc2045a8",
+      "mode": "100644",
+      "path": ".gitattributes",
+      "sha256": "5cbb92a1c5398c05d9e844dbe8677f5817ae01f34a24b6de16746dd61bb1ba6a",
+      "status": "A "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "980459e24e0955e865e14fdc6bb7ee9783590418",
+      "mode": "100644",
+      "path": "README.md",
+      "sha256": "cf94914553a93484aacee797f5f006b814844d9b5db1c18318188abe9c2897d3",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d7eeaa74fb1386c03e3fb282f378798f912497ab",
+      "mode": "100644",
+      "path": "docs/issues/README.md",
+      "sha256": "03b5b3775a7404ed717140e5638a19eaa5c2088d75e52a958de54f2015c3053c",
+      "status": "M "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "e41852d522707bdea34013244dcbee9005319be1",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/build.log.txt",
+      "sha256": "b9c52b088c28dae131c72fb50940cb8221cfada2996e7da5a585dcf7bdc6ac0a",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "e4a73777d7a0631b7a3b2094bdfb3eab793dd0f9",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/calibration/double-return/TtDatabase-fault.cs.txt",
+      "sha256": "b3e5ed4c25aa2cca565c477942737c80a3cddb618f99cb459e6d8f379b479786",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "e46d48178a3d30c94971adf5813ef3c6d78174c4",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/calibration/double-return/receipt.json",
+      "sha256": "1265af49b2c349b829ea6fc4064decdf00fa12d8b690272b66f2d1e9f47edfc3",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "9f286c4d3d66766eceec2f1f25c4e8a98eb9cc62",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/calibration/double-return/run.log.txt",
+      "sha256": "37beac639cc404ae95a35ccff23a225c3daa75b542ac7991a18d27a80b58e760",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "69d15a369c7a47d30722084488cf2b4a60972d1f",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/calibration/last-failure/TtDatabase-fault.cs.txt",
+      "sha256": "ef9cd30b9ae189b73ce1f577d4920857e77cd22bababf52627aa63142c8d0bdc",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "eb158be99e66123cb4fe1e260086f48376246a19",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/calibration/last-failure/receipt.json",
+      "sha256": "48dc8ea76ecd2016c88b7fd3235d33620da33722ab42ba22a73a09e56a0908d3",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "b541f74c7cc29930415a39b081088deddf410451",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/calibration/last-failure/run.log.txt",
+      "sha256": "4b755aaafede57cc35ac4e2429b78fc1d89ff7cd2cfac50aafefacbfb3f51bab",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "e074d96ed102048483652f353748e7ee3b6148c5",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/calibration/missing-return/TtDatabase-missing-return.cs.txt",
+      "sha256": "97fc12ab77a529c696d29fd97889d7e922c803ed0928072a18d29cab0fd08ee3",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "b392899d5f9bd60b9130a00128977d1f08e79187",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/calibration/missing-return/receipt.json",
+      "sha256": "cb1f2081a9d2558d706c06af7f7db3670fd7cd787a2b9d7332a5b22f67d55264",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "9afc468c897d555719e955755584ae70eaf70850",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/calibration/missing-return/run.log.txt",
+      "sha256": "b50a2b0d67100e749e020daf49a8347fec17b0bf81278569d61628df18a18ced",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "67e365e30812ee080da0cbc324a84b6fc852b6de",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/checks-green.log.txt",
+      "sha256": "673d3305e1a69e376ef5aae49ce318cdbf0b346242ee94f8d812f4057fe0abc0",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "9741903515d9370cc109544869682cd6d056502f",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/checks-green.trx",
+      "sha256": "5c8c042c58190aa4526a2d74f4ad54f22a0e418e2c149224e7ddcff07795f6e7",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "8b9472ec0932ec9b049e119d4fdef8da0d9a0654",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/concurrent-red.log.txt",
+      "sha256": "0c61ca13294d377c98486283e67adf33a4bf0e8d793a27af40b0abb106881142",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "45e6012e9e81eae0688a6fca6777eb254fc3dbfa",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/coverage.cobertura.xml.gz",
+      "sha256": "0ad4e691b5ef4ce66ad3a3b89fc7b43d714f833f6499b2f6902a0abf1061d77f",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "7782fb6085f2e2ab172e278b848cc2ccdef77def",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/manifest.json",
+      "sha256": "7c686b1bf8c8956c31bdd5b1ecc910de039a729d14fcdc954bbac40c8a56c4fd",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d4b079a291b4d0df63ecad40a9babfccdd46cb70",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/mutation-4-rejected.log.txt",
+      "sha256": "cae62da389f06d2d3c013f21edda8696f7f4d0be7b33438c16cdae9091ecfb1c",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "ef222e7e840e46b6399939ee72f7d1f3a7431311",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/mutation-5-rejected.log.txt",
+      "sha256": "75e89661ce77ba6b7335cdfee03702d34763f2758b158b11f3ffca87a1aedf8c",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "378dd6be7f4f455c114e36c41ea4725248d6ea38",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/mutation-report.json.gz",
+      "sha256": "7e5a97b3fbe4a7109fd5d71198f2a943028dafc0f45804bdbe5df6a91bb79fbf",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d8446eef7b82703cd85a19d80435467d21174bcd",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/mutation.log.txt",
+      "sha256": "d4e884e8d3940c143118872e4dfd3a1ca47cafb6a84e77d9966e5790dcbf847c",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "4f43fe2b784e130a22b1669fd8a7b700c89d8473",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/registration-red.log.txt",
+      "sha256": "53264ad96641a024332b503174ffd82811adb7d221cd54263220f9c41d277040",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "db37f486ed7e6ee1cbb93282f15048d48a815953",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/schema-green.log.txt",
+      "sha256": "40029cfb7bdefd403fe4c84cf49a7344ec30c8fc2344bba0e37b8865ede8b72e",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "b40b6357f43f443e8f48eeefc583737a6824232e",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/schema-red.log.txt",
+      "sha256": "d1be66f3a32eb082213931806b3afa29bff6bbc4a434170e7abc08cff01dc313",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "ef7860c22bfcce4c117e77935d119bd3d8fcf99e",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/.config/dotnet-tools.json.txt",
+      "sha256": "f9fb85462db6b256ed4155043279286a9e5ccb72e0cdbc7d5f052bbe3221f1cb",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "b7bc94e57a26640ac743cff7560fd9bd9fc8bd00",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/.config/stryker-ownership.json.txt",
+      "sha256": "78919490914e4c07ff417382e3d637cebbc64028b5ef2dc9ba40ce57ba5b3eee",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a4975bb01f6d0db5a81279ec6956ca4e9f4d316e",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/src/TurboTest.EFCore/Internal/TtContainer.cs.txt",
+      "sha256": "08198f2ad7b42d949b79771ab9872268a8ad6ff175670c601f90164f38036b7a",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "b7e1cfbcf4fadd185d4b7be919044af0977155aa",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/src/TurboTest.EFCore/Internal/TtDatabase.cs.txt",
+      "sha256": "e3699d752dcd0643c49a33930c533dcc818dcfb2b477a559001a0e934c6cb6ad",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "2c1462a02720b5f5bf1b7aa4ae3cdc556bb289ed",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "sha256": "e3d1b6128f7a31d8c98201b5e69d227a77a108890fb19ff5d96c734524c8fb98",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c3f8ccbc5156f3b9bd007ee8240c65eb251fdd50",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/src/TurboTest.EFCore/Properties/AssemblyInfo.cs.txt",
+      "sha256": "99b77a3d9691cddb8cbb8bf1c97d9116ea8a994e07d6e0535c1043c2edba44f4",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "fc24ca9880a83e5d31f5b263e76839f5a5eb5d74",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/src/TurboTest.EFCore/Tt.cs.txt",
+      "sha256": "c25d336faeace4eddc54375fe73f9afbb76384bb9204a8757124d44b67a042df",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c7905ebee01b2e3e81ffcc2fb64760bb4e011ffc",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "sha256": "397d9967bbe5db658d0bfeedff31ce9b83309b77d7c21654985690e32f0830c2",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "29325120c2a683772484daac6cc2a6bf880f78fe",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/src/TurboTest.EFCore/TtLifecycleException.cs.txt",
+      "sha256": "97cdbfd083cb74185284569ae5de3c2ea67d4220cbb45c6f77e9ddf61a672bcc",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "800d4c6660d6638457f0ede4eb26534eb0f75b95",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "sha256": "9749caf672ee56ef140aeae8c6e01126bee7dfaedc186eee1ae944d97373eed7",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "4ec7edef0f6c954c097e60acab4c590dc2033e4f",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/src/TurboTest.EFCore/TurboTest.EFCore.csproj.txt",
+      "sha256": "147dcfb16b92dda5e9325e9558ebb8b7224d397a6774a973ad372e0775d0ceb6",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "5f592ba54dfe6d5c599b2f75be7e36d130cea937",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/tests/TurboTest.Tests/DatabaseOwnershipTests.cs.txt",
+      "sha256": "d846ea7c953af8361f988939bfc700091fc6503e9bf8f4d54ac1c07b358a9408",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "ae286f91c41635f6eadc9e2ba50c0812bc759c58",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/tests/TurboTest.Tests/PooledResetTests.cs.txt",
+      "sha256": "f6c1646e9172e2ecaaea24b27cc0cc02737373f2381fbc59cd62158cf6b8d70e",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "04f685238d5f6d75cee846104e1f41849c866797",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/source/tests/TurboTest.Tests/StartupCleanupTests.cs.txt",
+      "sha256": "d16bd11a053a24103033d534822a3ffc15ca622469e8126208371d82ee3f8d37",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "1255f8d3702afdf6bbc2855425d41b2cc376cb90",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/startup-failed-check-rerun.log.txt",
+      "sha256": "7c2f774337319851997e32d7ade113019b6f392b0b8f05b57a86de411d3cf5e5",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a279d1b9881ca8ed3f5927fec3ca4dc02799663e",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/ownership-protocol/startup-failed-checks.log.txt",
+      "sha256": "2b45a9fbfd571adb7bef1981de1b9fc807e641ab2c054a06d1cbe78b8b347ab8",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "16d80319f86a710019d24865fbbd1dc7f30fe35c",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/build.log.txt",
+      "sha256": "80acce5bf67b07593026d41fbd1788198d330fd767d85c10531392ee8557c5d2",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "13457dc4825cc494eb48af319a1bb5d445108971",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/coverage.cobertura.xml.gz",
+      "sha256": "576abdc41bff71ba1cbc49310cb394cfe2cf2f7c8e6c5a1d760a0294ecb9f2bb",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "aae26ca04bf0c63f4cca13c1a0ceb5be21f6cf04",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/failed-run-cleanup.json",
+      "sha256": "3754a455b5ad4b0ae80fd904674b84b65874aee63f83889cfaa193f4a3645354",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "e81b6eb2a7b6e7a27f9f29d00380ca3f28a0518f",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/full-aborted.log.txt",
+      "sha256": "d5ea67f27d79236ea7c742534f1cfb47fb2abce0b64b85c99daf46f9bfbcaea2",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "fb8220150677b081d5ba5e005596ef833d8e4e56",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/lease-cleanup-red.log.txt",
+      "sha256": "de51156f44ca75328e4ee7f839d43a557ee9dec8458791bc0f968649ce8e6d9d",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "056a917a9d15e2d212b3e5cfac16edcf63d660e2",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/manifest.json",
+      "sha256": "c23bb5ae20fb8e5244893283f6194323619013fb7f184c206b03fcd516a1c3ef",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "47621cb946308aacb555b587fa63f0df49ea340b",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/reset-failure-red.log.txt",
+      "sha256": "578da7e45c4ef6356e46a935a3a85eb3cf938e6d2153a10886f59886a5e811f8",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "3408f649a449e46983126bd731c1cca8f50630f4",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/reuse-red.log.txt",
+      "sha256": "76bcafd44e00787b39575e3c6d128b075899f99b62535b6f4b48f6f93adf5f7a",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d06ec847d76ecfc9ca2ea197f9527f919336dead",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source-handoff-rejected.log.txt",
+      "sha256": "b6217d4d691fa11e707e157dabb70ebe84fefa8b5e88b7c45170ddccbe3a67d8",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "27bf0bd359cac0e01cf709f97592931018ab7719",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/src/TurboTest.EFCore/Internal/TtContainer.cs.txt",
+      "sha256": "fc1be689db3715be21b04d8508bfe119cfcf935af543906f1ea9b76565f27512",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "ee80a305f08d42cc9b9cef61b3d9ac1e008055cc",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/src/TurboTest.EFCore/Internal/TtDatabase.cs.txt",
+      "sha256": "3ff37542be97484b9b289da338876da6ebda30eef5993f38226fc37ff4044ca4",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "fb8e1004fca4cb89bb1caf2a47d8d2e71fdc9e9a",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "sha256": "87fa92af2c48f53aad8a30002c312c30eafadf8ac64cf3bbd32ce9e36eef59f2",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c3f8ccbc5156f3b9bd007ee8240c65eb251fdd50",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/src/TurboTest.EFCore/Properties/AssemblyInfo.cs.txt",
+      "sha256": "99b77a3d9691cddb8cbb8bf1c97d9116ea8a994e07d6e0535c1043c2edba44f4",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "fc24ca9880a83e5d31f5b263e76839f5a5eb5d74",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/src/TurboTest.EFCore/Tt.cs.txt",
+      "sha256": "c25d336faeace4eddc54375fe73f9afbb76384bb9204a8757124d44b67a042df",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c7905ebee01b2e3e81ffcc2fb64760bb4e011ffc",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "sha256": "397d9967bbe5db658d0bfeedff31ce9b83309b77d7c21654985690e32f0830c2",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "2f8fc8be9f9b0d52e21cccef5bab4c38828138cc",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/src/TurboTest.EFCore/TtLifecycleException.cs.txt",
+      "sha256": "4a1bfcfea0a4c0f6c5ef8c9815aed17e330aaa766bba6a1a7ba05d80d8fa26fd",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "800d4c6660d6638457f0ede4eb26534eb0f75b95",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "sha256": "9749caf672ee56ef140aeae8c6e01126bee7dfaedc186eee1ae944d97373eed7",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "4ec7edef0f6c954c097e60acab4c590dc2033e4f",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/src/TurboTest.EFCore/TurboTest.EFCore.csproj.txt",
+      "sha256": "147dcfb16b92dda5e9325e9558ebb8b7224d397a6774a973ad372e0775d0ceb6",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f04b87a34342bb4f210a42b1d0d19c081708cb2d",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/tests/TurboTest.Tests/PooledResetTests.cs.txt",
+      "sha256": "79c0b63a3fe3cf725b701bd0934bdf77a2dbcaeda476bcde048cdbd1124bd231",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "04f685238d5f6d75cee846104e1f41849c866797",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/source/tests/TurboTest.Tests/StartupCleanupTests.cs.txt",
+      "sha256": "d16bd11a053a24103033d534822a3ffc15ca622469e8126208371d82ee3f8d37",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "05e45f4fa9f45a2c10fc39e0d7dffdb89bf580e6",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/startup-green.log.txt",
+      "sha256": "40d23aaa223b94f0a634c99aaabaff5e3f020af66bde5e1ba9cca0db2bb716d6",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "20a8a611edbcffff39dbcb2839b4b21813a77c30",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/startup-red.log.txt",
+      "sha256": "63ac9d8d911c692126e3293fad1d409641054fc6da840a0f421a3da58871e226",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "df484823ef2f694d7c4cdeade5a5c8182dfb28a7",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/targeted-green.log.txt",
+      "sha256": "5bee44602bdf20d85c90949d60be3c383f9a5e554a67e8708459548883da8aa0",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d079a2179ba6cf33bb100cee7fc6580109062d47",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/pooled-reset/targeted-green.trx",
+      "sha256": "bdb2a0693ab00092b6f99f081bc6829556eeba6ca37d8d215cb36f9eb298563c",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "0d42eaa359f34db79ee0cf627f49d50a5ee6ee99",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/calibration/double-return/TtLease-fault.cs.txt",
+      "sha256": "1ffab8f960cd92b56d52f8b6e62f42c7bb8fc08df1a0e86d453b29a503b62db1",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "0b5a4557fa1f9b07d3264487dd8068c64a807e74",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/calibration/double-return/fault.trx",
+      "sha256": "8f34016bb116415a4b5c7d9d74fb6d70343d38db071a5dbace826da9f479545c",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "0d3f8ef227abae084969b3f4ed1a523374ce6236",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/calibration/double-return/receipt.json",
+      "sha256": "0e4ea4e6143a3231134104aadfb025359030655a98fe5fae8379bf3104d7f336",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d04787b945c19734760988bb4315c7bb8cc0ba58",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/calibration/double-return/run.log.txt",
+      "sha256": "65c17deeebc69e82c5f9275152ac20043a836ec78235d92b20f1fb0aa1fe4b2e",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "e7a272d77ee049aba8cbff3c95f65052bd595abe",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/calibration/missing-return/TtLease-fault.cs.txt",
+      "sha256": "d9d8d9dd852d1c24420b7f63d0c4a0ee6dae6d189f5a84630ef0cd1c8714b377",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "66a3948bb1c9fa727bbec8c8e8d46204bff299bf",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/calibration/missing-return/fault.trx",
+      "sha256": "f45ef248b5b49d94fde0c96430f97527746d78a89d1ba63a592a34bdd8e5d060",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "49d75c0ba728913df7f919d8c30e547f16cb7386",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/calibration/missing-return/receipt.json",
+      "sha256": "a9caa91620e494791e78fa47f85d51d60617a86b6bd22b7caa9c79c1016aa366",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "2172755e69736d49f0fdf4ef479ffa48188d812a",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/calibration/missing-return/run.log.txt",
+      "sha256": "7e7819c5a43c5366ff512d512ba1aae30bfec057f9106129fd0ba9a6c82d7cbe",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "6249ff19924690f9059ce0edf56e5278aa4bd113",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/fast-final.cobertura.xml.gz",
+      "sha256": "e8feae1b4d9d4111aaec399740df4bfb7c0a1459f825ff4aa4abb3574fa36e84",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "10096187f959274a05c67cb57068329450db9275",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/full-reviewed.cobertura.xml.gz",
+      "sha256": "a1dd002c193c8fcd9dfed9531e19fa4dfcf0634a76b4f77b85a9bbbe00750897",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "09b2dc261acd5a3ff9b277a57f9d23e08ff8903b",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/manifest.json",
+      "sha256": "22a225044afa96116d6e964208b85165739aad8d503b46183c9c4ab344fe8c6a",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "ee0ee88246c2617d694d9906c73194a5ed383263",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/mutation-report.json.gz",
+      "sha256": "c4e4d76c91fb5e66f8814ea879a4802361abad029687e051bdf354158b2bc283",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c3eb1c0a2d2bed696d878f99cc741a7912c789d1",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/package/package-body.txt",
+      "sha256": "cf183942e7ef867c7edd001b12dfcd9d901954f78008a6b117891359a520cdae",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "2e8de1062834cccf7ce2c29dc16fb51a58e28e6e",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/package/package-headers.txt",
+      "sha256": "5b1766eba7cc1163a02937f69972cf1b5b8842e048b27531d64645c445ed22c3",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f1b1cb3af5394d8d49de87c57fa833c5b24a6315",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/package/package-status.txt",
+      "sha256": "f8bf41177a5f5e808a7ccb648b51080b031f15ca8018d91a576263d6cc626eb6",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "2787343056858a0dcb7dfd4aeb290a8e230e9515",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/api-green/api-green.trx",
+      "sha256": "508fc2131f1c326d6fddc6e7557d603787082c63752441c4e3e71d7c06b71c83",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d35e4a2ce13c00c5e0b9bffbd3d518033ee4997a",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/cancellation-green/cancellation-green.trx",
+      "sha256": "51a926eef64f4e802c5c8561463c9f4cee558eca5f7de994d5821237013a54db",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "cf130de574648290fa2eb241ea9ac98a03d8f7ff",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/cancellation-red.trx",
+      "sha256": "b78c115006e8cbd5a29f7e4e8327e4f9e46959e347fd8be63f19a527e0b00ced",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "01d98c8f3a70358ceb1130a259547a9e4b5eb034",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/constructor-green/constructor-green.trx",
+      "sha256": "d92e1471aa29e2a5c5a02a8c44f954151df9a8b2a8317ffbc3747bbe73e16c1d",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "1a50bf2e0c830c6ec09716ca0f86331f5b43b2f3",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/constructor-red.trx",
+      "sha256": "43271c0848f189bc9e0f0c8a137d116b7ca9fbfa3cf57b7b6441ac4b75cec482",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a69b464868534b114c092d23b444f0415eadb8d6",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/fast-final/fast-final.trx",
+      "sha256": "50330258d58da2c5cbbb132672765993638a89845ea4a7969c2c2e0360cae937",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "8610fdefde90dacd4ee6fb8ea66d4ec4ea5401b9",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/fixture-red.trx",
+      "sha256": "52975db7fafadb5b7e1f3e6816f62f3e26c28440272850b0ba7fe68723839923",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "eb0cae7f78d0a1145cc81a074e089ebf763821dd",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/full-final/full-final.trx",
+      "sha256": "223f350a4a1ada44b609d661b24421c636cc0b71913693148e2519038cf044c2",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "b95673117f9f11070b62c1e9a3cd1f4f91613f70",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/full-green/full-green.trx",
+      "sha256": "69a9ce7a99aea4b3737058997bc6292c0668d93353eb793ec3d0a0416a5e9f52",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "339faa2b7cf28052c9925b0bda161a528a95cb95",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/full-reviewed/full-reviewed.trx",
+      "sha256": "7fe8157b2fa9df37d24c0de7a5023202d21dcbc528b822506bf80c30c0da5bb8",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "55bb6d079b543d6588f57ec29dcbde9327c467a1",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/independent-green/independent-green.trx",
+      "sha256": "21d50021bbd23a66c8fee6d164d0831cfa0beb95a7886050eeb459bd99420ca8",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "475ff7fa90f9303576604356d51c1adfba3489e1",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/independent-red-valid.trx",
+      "sha256": "ded562ae9cedfbde6711769a30bccb54abb5cf3496400e7c44c098471f85b95b",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a35789441bfe22a82ba19fcbdb2522633bde8cec",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/init-sync-red/init-sync-red.trx",
+      "sha256": "6f3970acd74ec36ffcabec3a2da1aa895cb795270906773cd8590f8702d8f28f",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "929b29633f2935433f55e631037d6f53b5e1821d",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/owned-fixture-green/owned-fixture-green.trx",
+      "sha256": "d038a5b3b4f4851ddc6b7967a4057948eb48ba1f9e924b42a60d5bf4212ec29b",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "bc18e24841e8d753d885aa6a41abefcb1691ef85",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/probe-green/probe-green.trx",
+      "sha256": "93eaf65e93eb194b07d838d2ded5845ff68e34817a968b5b6f9a456a9c5a5155",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "06577aa4fe8228f171961c94cd58a057a8ef1710",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/probe-red/probe-red.trx",
+      "sha256": "0ca933f80bf2dbbe3050483dcea59c1d483166c9ec334ff5d6d6b7ec710c1981",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f85e71dcf703e30a3f7c6efb5f853ab6d735ec17",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/public-green/public-green.trx",
+      "sha256": "3bc0d407528042a1475f14b89945dc79ba94cc133ed39573c03327b530f25e74",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "66975daa3a4080f6ecc7eb8627a4179601ae4676",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/public-red.trx",
+      "sha256": "eb4830db290b37ced3cd90d34a5f103ec577d3b625d9374aed32ad484fd487e9",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "269799786a876cccbaa9ca0e2f93c7069b3b4889",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/results/startup-green/startup-green.trx",
+      "sha256": "be4154fd53e37c71f53d01c729b3b139abdeeddc5c86ea6e30ad982789470f65",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "ef7860c22bfcce4c117e77935d119bd3d8fcf99e",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/.config/dotnet-tools.json.txt",
+      "sha256": "f9fb85462db6b256ed4155043279286a9e5ccb72e0cdbc7d5f052bbe3221f1cb",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f14f7c210f43a0feba13070a20cab5aa397e7295",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/.config/stryker-ownership.json.txt",
+      "sha256": "4c7835b75750596957899208ce5c998303f289df9aded0c172b4ca5caf827de7",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "689748cbfb048b6bca16ff880aac7363547ca638",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/examples/AutoAllocationExample/Program.cs.txt",
+      "sha256": "f7ce335714e02c5bd7ead6e1dbf0cd031722ec60c153d997069b9044dab382bd",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "048d3d46e900efe60ea9df11bb4593f77967bffe",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/examples/ConfigurationExamples/Program.cs.txt",
+      "sha256": "08885d1b5f1acd8827948b9a910836889e36004374e0cfc5bca2bc0c526c94b1",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "4eb77a1d769b81e47df50d66f566f4debb841ab5",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/examples/DynamicScalingExample/Program.cs.txt",
+      "sha256": "606d2bf6a798eb79820bac79a67a621ef7066360b7314a4f672dd2eb24377c27",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "40870d85711b7a2aa69697b7d581b750911bee6d",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/examples/LoggingExample/Program.cs.txt",
+      "sha256": "1360cf0561b2d43d9659e0f6c9a21e0308e1b7f77c1a6c29b13f04a5d0256be5",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "dd400763bbea8087af3c541ce3a1832387ef1a8a",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/examples/MinimalExample/Program.cs.txt",
+      "sha256": "dcda6567d4cc322ca9cf76302bbb76763dbd93102cef08d8f0291057c3a6d8b9",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "5615b7a39a24bbe5fd93de7793e9f8995911a6eb",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/ITtServiceFactory.cs.txt",
+      "sha256": "38e9a938345ff1d96460a8a383bd9b89e14a49a862b3a04193d3b1d82f82719f",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a4975bb01f6d0db5a81279ec6956ca4e9f4d316e",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/Internal/TtContainer.cs.txt",
+      "sha256": "08198f2ad7b42d949b79771ab9872268a8ad6ff175670c601f90164f38036b7a",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "5f07c5c44cd8176bcaba3bc09f959c7918cc2b79",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/Internal/TtDatabase.cs.txt",
+      "sha256": "6d25cb22240b9df6106d9bec126dea45e50837167df83bff22a909096d10a58d",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f96aadb2f4ba6dc67d927141f2cfc0ace5fca241",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "sha256": "c39cfa54127fcaa71daad6a586edbd538a109742bfe3297bca6bdbdca5c9ded3",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c3f8ccbc5156f3b9bd007ee8240c65eb251fdd50",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/Properties/AssemblyInfo.cs.txt",
+      "sha256": "99b77a3d9691cddb8cbb8bf1c97d9116ea8a994e07d6e0535c1043c2edba44f4",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f4d68a7c6f00f0edd3b91dc86ad91a23f267e913",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/Tt.cs.txt",
+      "sha256": "2a85903feab7bc598b5a398491edd898ea449f11da4ebc80bb6b0377de197243",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "25395e8f324ad99d187ae0a30e349f696b744dae",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "sha256": "34f0f8fdf0fa3f6a362381c4d764699801561f24f4a818b808d54840c822f7a0",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "7d4e7c6d133c8f41ee11343637a9b38918c23feb",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/TtLease.cs.txt",
+      "sha256": "a0834cc774f7c05e69bd8b09c6bebcd0a69abd7e0dda8aa74fc11a4f19737f4e",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "29325120c2a683772484daac6cc2a6bf880f78fe",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/TtLifecycleException.cs.txt",
+      "sha256": "97cdbfd083cb74185284569ae5de3c2ea67d4220cbb45c6f77e9ddf61a672bcc",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d06bdb2203e71ca2ef4016ea7035bec675969f26",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "sha256": "722b2b4d38550dd0a9d2ec65015712a124d6c8a623481da77d4535dcdf3e75f5",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "21551d99bfc1e7a257df817028ca7f336cab80ea",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/TtServiceFactory.cs.txt",
+      "sha256": "a293e6bb55b382af1a4dbf82c92160e7eefb37dcef2e6e4e881b4535eba7a731",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f17db4ec96707ec5b2f71c4ce823eb3cb046eaf1",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/src/TurboTest.EFCore/TurboTest.EFCore.csproj.txt",
+      "sha256": "253a7b415aea24a7c827835e5c111068f9e8209295ec0229f2c400beedfb0116",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c2b1a59d4706950da9d53551b268adccc60d7a99",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/tests/TurboTest.Tests/AutoAllocationTests.cs.txt",
+      "sha256": "5dc7d3ed9924a8e0d11016c6bc8006a4faddbe93742b668494350f07745790bf",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "88065fd17670812cfa7b9a4a25fdb0af30e5e783",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/tests/TurboTest.Tests/BasicTests.cs.txt",
+      "sha256": "35cc2d622a0a2c113c50b944774301d295101580192709a711c7f44d4339f251",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "5c890c23549adeba4d68132758d70bb1a20d69ff",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/tests/TurboTest.Tests/ConfigurationTests.cs.txt",
+      "sha256": "2bc553b5399d386140fb90e353892a5c1c4b23d9d7b34417855f7e8e0936aec8",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a1b990f723903607b6d4aad0fb0134cd8ba65970",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/tests/TurboTest.Tests/DatabaseOwnershipTests.cs.txt",
+      "sha256": "5419f419b4e4102bdc8d58cb516c0d6a20d878bfa5696f879516aadc1a77f3db",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "41ed15944b97bec4305b07a61dbb53cd1bc6c915",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/tests/TurboTest.Tests/LeaseOwnershipTests.cs.txt",
+      "sha256": "35f82b019f35de82c0d8343e1aa606cd13d884f0178f615b4abf98de13926a6b",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "1f4024ed006eb838d85e589584cc3bdd9b053c5b",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/tests/TurboTest.Tests/PooledResetTests.cs.txt",
+      "sha256": "2962e342be8b87a87e8383ec6fdebd271dc1e1b803cad245a7a383fe66fa64d2",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "973386499f38a7a9d6e0dea9aef68d0521bc1b65",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/tests/TurboTest.Tests/PublicLeaseTests.cs.txt",
+      "sha256": "3972ce81b5c144a16f86dab8abe8d9b38ede4c02ac24aecaed2d3b05905268bc",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "78c27c64cc6c15132747314a1e6419116ca8f5ce",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/source/tests/TurboTest.Tests/StartupCleanupTests.cs.txt",
+      "sha256": "efd36671e7eb9647457d4343f5b30e2d05419a1834562a7c530f1c2695409d7c",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "5fe99a687d8a76bb6ea113029ba4fc48ad0d0396",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnosis/08876fde577c-logs.txt",
+      "sha256": "14cdddeb495bb531ad59d8b67167af6fd0f7105b3a23f96fa955a67947407000",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "0894c514877fae5af002bcc5068a7a30a656dfb1",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnosis/08876fde577c-state.txt",
+      "sha256": "a7df2ee79e1852e58b945c574203c974d59dbc846b5aca13218b156973dc05c1",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "1580495eb4220ce2bf26e1f7f8e818cefea764df",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnosis/docker-events-sanitized.json",
+      "sha256": "7a98968027cbffdf95df103e0c6e09ea193a23f504ea634e5494c56ac4459120",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "4fe8edf2f9419e717853fd3ece54610bbd7d86ba",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/0b2e35954d47-postgres.txt",
+      "sha256": "e4fcf0f732e4cee84239bcabda9d50ff18779e92635d179f35c2cf1e5b363985",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "25ea86a56d35d225cebd9518195b55c70174776b",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/0b2e35954d47-state.txt",
+      "sha256": "dde15569fb5db75d985b6224e4688f6a2ed4b15d6b1bcc4236d297a8e9dd613d",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d7c2032af42e7dff258fdc4921d7f330a112bf44",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/7a4fb09a5b4d-postgres.txt",
+      "sha256": "a2a00f80781a435ede5d680966bd5a0ed54e16439dabc6d41b18c7995c913607",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a022d8eebe8f5f5c2a56faf2fe4043c89f5b4dd7",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/7a4fb09a5b4d-state.txt",
+      "sha256": "91d395cc6613c0dd6e0ad1154366d61f972ed56144dfef809bb6dc0e26fa5732",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "fcc645cde2ec56bcc050253a0b7a2010708de889",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/diagnostic.trx",
+      "sha256": "96ac390abca4458cc696b14ead78a6c5a48a3e2a2ed751c1652f71c5dc327322",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "166a187ac6d3417327428fe10fc826d595bf8cb2",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/ef269f5b1bdd-postgres.txt",
+      "sha256": "c0fb48fe1ab1b1414220a5c1c7619d57eb2c2af8c2369d600ef1b3f4d41b79c0",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a459899bf30524b78ade230e9810ca469b3c9105",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/ef269f5b1bdd-state.txt",
+      "sha256": "0db73b8ce310432eccb48871a7b3335be595fa46d64e7de51e77c49dad065578",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c6023737c5ec9926855dd34228b4ea3f36707ecb",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/fadf01b7186e-postgres.txt",
+      "sha256": "696a5551ef5d82af3f7508138674a937d3be80df2ab092c24a79b3b626ee64e5",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a8da67a7e66fb2aec47f635ec0c099c45b0a5f5f",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/fadf01b7186e-state.txt",
+      "sha256": "63c64c41a3ae5c0f83a26bf5acc07aecbea03e40114dc19a4eb4af10ffe6ea6a",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "537248cd39663255cd5574373e1358fc493527f3",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/receipt.json",
+      "sha256": "72de2e201247e736f6c4846aff1606074c4fc4071cc6a4e4351b868448f2e725",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "048daa0a6a1c1fb398bfbcee7cccfca66a74560a",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/startup-diagnostic-run/run.log.txt",
+      "sha256": "1f9edca06cc6eacff7b3c4d1bc73ba4c748ba053d271b3fbe112123c2e8bc066",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d819e84347ad9160af6ff89b7241815232890859",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/api-green.log.txt",
+      "sha256": "7b3fd71005e79be5387ebabff16e05343c0d23b0f5d0f8da5745d050949ad878",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "30416f5f4a67d8448219d73488668978bb3e1350",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/build-final.log.txt",
+      "sha256": "1ff7181dd9c53174ac253beca7ab6ce9ed2b44698a27e0bfa3776f285c409c3e",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a1e18b32a007defa39f5bec12238c2649cb10916",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/build-reviewed.log.txt",
+      "sha256": "32a0d16724a48563eb6bc31c1f410775034da692f0e893855c01505fe689ad87",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d7993b3f8f0b9a844dd349d2eaface3d85cdb045",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/cancellation-green.log.txt",
+      "sha256": "ad922edeb531264ed348244a4a00b20b4ada2de782ea45f9db03941ddf4d701e",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "b0ce5fa69e68989a2189c1a20a476c356001895b",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/cancellation-red.log.txt",
+      "sha256": "6e341e1583bfa3a3283ed40162ac72163874d97ef2c65113339b3df7afe9ad31",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "7e09fc1d6766504fde8a6510064756a976d83855",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/constructor-green.log.txt",
+      "sha256": "ce81323fb96f8fadf797250b3245411501d15b0d3b66161f387b1badac96ccd7",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "4f9607424c97d8a63a1a0c0b089836132822c463",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/constructor-red.log.txt",
+      "sha256": "0d75dc8b3c28068612a7c11191858534184fcefcd0f052658182ea0d29a72477",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c217610ce5cb73d637bc71afc34196e257a2e434",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/dynamic-build.log.txt",
+      "sha256": "a1c3ccd0291c0e09ddba92177ec0a9aa3d3bde785efc024a6ed3a8b70eda6dcb",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "b547a51a083dcc96cdd1336c850ad1a7a8b63833",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/dynamic-reviewed.log.txt",
+      "sha256": "576617f1d05de67c7ece63eb9454906ad9227b15c67099d5f685e81e2c350aca",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c414fea8df9b2badcb55c6909d0d3102a2a5725c",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/fast-final.log.txt",
+      "sha256": "820f0745b5aac873509fa43d26a82a9969eed5d0fe9e83b169eb584fd522c170",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "099f38f2a7b85a4e9a1870acb3759643461c6df3",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/fast-green.log.txt",
+      "sha256": "c6647f8a20714a550a1abd035d722d6054c4c91bfca70af683eaf75913eb0c41",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "805c7953f90427dbb68810ce77f439001e390c1f",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/fixture-green.log.txt",
+      "sha256": "77f5fb8ad8edec2b7a861e28dc8c47444427c12cf7e8f627e533864490371411",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "13ca99fdb316e9e191be12e0e259b4010c8d8b29",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/fixture-red.log.txt",
+      "sha256": "fcdb447ca3257fa2019973c813345ca72a10ffb83a8d1f419f8e88fe9e4586af",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/format.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "380004536fd78944389a08f9407159d035dacabb",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/full-final.log.txt",
+      "sha256": "899ed06b681d89d2888d1856987079c6512fa7e7cf3eac472d3359324d4443ac",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "1a2800cdfa15257c1cd88119b4373be1b377532b",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/full-green.log.txt",
+      "sha256": "f5cb3881a80569dce7f615f5d189c4f7ad6edc667401495ee371957fdf9f6118",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "38307970cb2ab7baa40b08f90783f240191e54a9",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/full-reviewed.log.txt",
+      "sha256": "8997c98998736d86ec25f02e8a6c0d4d3ffc3029fd45d54b3d00e14a47ff1292",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d6d396ac866bec0fce3be389131c1b98a0dd69cd",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/independent-green.log.txt",
+      "sha256": "04572f1266e24afd2eb7e11f8a576bcb7741bc162530449ab572ac6de14d9b9b",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "b9c04eee25b452b6206ae11c6e024a9762b859d3",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/independent-red-valid.log.txt",
+      "sha256": "564ecde36710fe46eb633d61f41c02f38dbe469c3b2e39fa97943b1be3d05094",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "1c7a80cefb152c0d52446dd6e2bc05323de51ef2",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/independent-red.log.txt",
+      "sha256": "eb4f52054c27d187088ff91013ab71c7de20b8fadcb1588ad817ce89b2ba713c",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "b166db161e81e906e89ee29ae2b7d38743abe88c",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/init-sync-red.log.txt",
+      "sha256": "749302729eb40f56d03c136837b58a05df0548a9bff0e3781ebe95899bcfcdcb",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f77fd3f69478ad5192931f5b91321b6e11327550",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/migration-build.log.txt",
+      "sha256": "55832c452d69f911cc605c2636196f7aed185d2a111078cb33225d19cc2dd126",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "45ddf4b9fadd467da901070bb61aa7ac024418e9",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/owned-fixture-green.log.txt",
+      "sha256": "3324ff38e70083c27ee34ccd8cb7016d20fbf32dacf3524023d58560e97b2bec",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "bdfe852f561072bf0f4c78cf00f1d22add00080c",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/probe-green.log.txt",
+      "sha256": "058b64341709722d3879bd11bb3697977798022f444f4803bc7be33187e789f0",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "18e41494affd6fa7bfe6523c8dae5fc779cc4b8b",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/probe-red.log.txt",
+      "sha256": "c65fe4c5c0051677d32236ec895eb56f782cf393f6fff6304d8b5d317272f56c",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a9204b63ea2b9dd428e47abb2f74866439d14b5f",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/public-green.log.txt",
+      "sha256": "66d2dd2dbb26f36dcf0d3e83460431feb4454d31b3e1cbae2ed64986ec6e3ad3",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c4c790f1737b675d72f1e3663c2fbb7772d813e5",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/public-red.log.txt",
+      "sha256": "858902be99568aa2e5de9f48df08ffae74e1fb476270407a8ee3e859b8804fae",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d28c60febb3b058c7e5d3cc4de6bdac0259e9da3",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/startup-green.log.txt",
+      "sha256": "feb3ced383e88ae98eb4251752f7cbc7dca95a998b2de53fbef4ba13c678e9dc",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a9896a94a0e17095e7a45651a55058a54867e8c5",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/stryker-reviewed.log.txt",
+      "sha256": "ed266a0f5253fcdfb784b239d65a6bd38a43f8b3da2e161af67f8d7bb882afac",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "533b55c1e47f85180059482fbdb6b98998bb5617",
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/public-leases/transcripts/stryker.log.txt",
+      "sha256": "259e01822013dc936c10ba3b4ab2a7dd46c8ebc65366454e3f1905444ef54bd2",
+      "status": "A "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "4df391c9bf728134f6db9470b5bfce7074fe35b6",
+      "mode": "100644",
+      "path": "docs/issues/open/api/TT-001-own-and-release-database-leases.md",
+      "sha256": "0d9d8bd67b513402f5ececc1af1809423046e6b3bc5982bbb80a2720c8e6387d",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "12de639c655725779933a13e4ef67b9d0c518e27",
+      "mode": "100644",
+      "path": "docs/issues/open/database/TT-002-reset-with-pooled-connections.md",
+      "sha256": "d9df194695a2bf88b24702b0c25257b87383f87f0f7d673f6df90b0230fb579d",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "28b0bf65da4d2403173ef7fdddf7af4ba86abd62",
+      "mode": "100644",
+      "path": "docs/issues/open/database/TT-003-prepare-immutable-schema-and-seed-baselines.md",
+      "sha256": "5f3e6dc2804c209d14050d42fbecfef2e5b89690fbcd53e51f0f35d6a99d7d82",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a230dbcb999fd7b82d68a9725fcef7eaefd29405",
+      "mode": "100644",
+      "path": "docs/issues/open/database/TT-006-quarantine-recover-and-drain-pool-resources.md",
+      "sha256": "ee9aad205770adeb8cbb6d73b7898f570938da6fb243b04c61d4eff01dee33d3",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "65a1b8c8bdadc51c3eca6955ec3ae6b55581f948",
+      "mode": "100644",
+      "path": "docs/issues/open/database/TT-010-measure-pool-latency-and-correct-performance-claims.md",
+      "sha256": "93025cb103cb682e1f60959e06d3e61728a1cf78733d370e9d28bfb0ac676abd",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "689748cbfb048b6bca16ff880aac7363547ca638",
+      "mode": "100644",
+      "path": "examples/AutoAllocationExample/Program.cs",
+      "sha256": "f7ce335714e02c5bd7ead6e1dbf0cd031722ec60c153d997069b9044dab382bd",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "048d3d46e900efe60ea9df11bb4593f77967bffe",
+      "mode": "100644",
+      "path": "examples/ConfigurationExamples/Program.cs",
+      "sha256": "08885d1b5f1acd8827948b9a910836889e36004374e0cfc5bca2bc0c526c94b1",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "4eb77a1d769b81e47df50d66f566f4debb841ab5",
+      "mode": "100644",
+      "path": "examples/DynamicScalingExample/Program.cs",
+      "sha256": "606d2bf6a798eb79820bac79a67a621ef7066360b7314a4f672dd2eb24377c27",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "40870d85711b7a2aa69697b7d581b750911bee6d",
+      "mode": "100644",
+      "path": "examples/LoggingExample/Program.cs",
+      "sha256": "1360cf0561b2d43d9659e0f6c9a21e0308e1b7f77c1a6c29b13f04a5d0256be5",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "dd400763bbea8087af3c541ce3a1832387ef1a8a",
+      "mode": "100644",
+      "path": "examples/MinimalExample/Program.cs",
+      "sha256": "dcda6567d4cc322ca9cf76302bbb76763dbd93102cef08d8f0291057c3a6d8b9",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "5615b7a39a24bbe5fd93de7793e9f8995911a6eb",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/ITtServiceFactory.cs",
+      "sha256": "38e9a938345ff1d96460a8a383bd9b89e14a49a862b3a04193d3b1d82f82719f",
+      "status": "M "
+    },
+    {
+      "change": "Deleted",
+      "deletion": true,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtCleanupInterceptor.cs",
+      "sha256": null,
+      "status": "D "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a4975bb01f6d0db5a81279ec6956ca4e9f4d316e",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtContainer.cs",
+      "sha256": "08198f2ad7b42d949b79771ab9872268a8ad6ff175670c601f90164f38036b7a",
+      "status": "M "
+    },
+    {
+      "change": "Deleted",
+      "deletion": true,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtContext.cs",
+      "sha256": null,
+      "status": "D "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "5f07c5c44cd8176bcaba3bc09f959c7918cc2b79",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtDatabase.cs",
+      "sha256": "6d25cb22240b9df6106d9bec126dea45e50837167df83bff22a909096d10a58d",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f96aadb2f4ba6dc67d927141f2cfc0ace5fca241",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtPool.cs",
+      "sha256": "c39cfa54127fcaa71daad6a586edbd538a109742bfe3297bca6bdbdca5c9ded3",
+      "status": "M "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c3f8ccbc5156f3b9bd007ee8240c65eb251fdd50",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Properties/AssemblyInfo.cs",
+      "sha256": "99b77a3d9691cddb8cbb8bf1c97d9116ea8a994e07d6e0535c1043c2edba44f4",
+      "status": "A "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f4d68a7c6f00f0edd3b91dc86ad91a23f267e913",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Tt.cs",
+      "sha256": "2a85903feab7bc598b5a398491edd898ea449f11da4ebc80bb6b0377de197243",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "25395e8f324ad99d187ae0a30e349f696b744dae",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtFactory.cs",
+      "sha256": "34f0f8fdf0fa3f6a362381c4d764699801561f24f4a818b808d54840c822f7a0",
+      "status": "M "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "7d4e7c6d133c8f41ee11343637a9b38918c23feb",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtLease.cs",
+      "sha256": "a0834cc774f7c05e69bd8b09c6bebcd0a69abd7e0dda8aa74fc11a4f19737f4e",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "29325120c2a683772484daac6cc2a6bf880f78fe",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtLifecycleException.cs",
+      "sha256": "97cdbfd083cb74185284569ae5de3c2ea67d4220cbb45c6f77e9ddf61a672bcc",
+      "status": "A "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d06bdb2203e71ca2ef4016ea7035bec675969f26",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtOptions.cs",
+      "sha256": "722b2b4d38550dd0a9d2ec65015712a124d6c8a623481da77d4535dcdf3e75f5",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "21551d99bfc1e7a257df817028ca7f336cab80ea",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtServiceFactory.cs",
+      "sha256": "a293e6bb55b382af1a4dbf82c92160e7eefb37dcef2e6e4e881b4535eba7a731",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f17db4ec96707ec5b2f71c4ce823eb3cb046eaf1",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TurboTest.EFCore.csproj",
+      "sha256": "253a7b415aea24a7c827835e5c111068f9e8209295ec0229f2c400beedfb0116",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c2b1a59d4706950da9d53551b268adccc60d7a99",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/AutoAllocationTests.cs",
+      "sha256": "5dc7d3ed9924a8e0d11016c6bc8006a4faddbe93742b668494350f07745790bf",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "88065fd17670812cfa7b9a4a25fdb0af30e5e783",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/BasicTests.cs",
+      "sha256": "35cc2d622a0a2c113c50b944774301d295101580192709a711c7f44d4339f251",
+      "status": "M "
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "5c890c23549adeba4d68132758d70bb1a20d69ff",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/ConfigurationTests.cs",
+      "sha256": "2bc553b5399d386140fb90e353892a5c1c4b23d9d7b34417855f7e8e0936aec8",
+      "status": "M "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a1b990f723903607b6d4aad0fb0134cd8ba65970",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/DatabaseOwnershipTests.cs",
+      "sha256": "5419f419b4e4102bdc8d58cb516c0d6a20d878bfa5696f879516aadc1a77f3db",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "41ed15944b97bec4305b07a61dbb53cd1bc6c915",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/LeaseOwnershipTests.cs",
+      "sha256": "35f82b019f35de82c0d8343e1aa606cd13d884f0178f615b4abf98de13926a6b",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "1f4024ed006eb838d85e589584cc3bdd9b053c5b",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/PooledResetTests.cs",
+      "sha256": "2962e342be8b87a87e8383ec6fdebd271dc1e1b803cad245a7a383fe66fa64d2",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "973386499f38a7a9d6e0dea9aef68d0521bc1b65",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/PublicLeaseTests.cs",
+      "sha256": "3972ce81b5c144a16f86dab8abe8d9b38ede4c02ac24aecaed2d3b05905268bc",
+      "status": "A "
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "78c27c64cc6c15132747314a1e6419116ca8f5ce",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/StartupCleanupTests.cs",
+      "sha256": "efd36671e7eb9647457d4343f5b30e2d05419a1834562a7c530f1c2695409d7c",
+      "status": "A "
+    }
+  ],
+  "upstreamObject": null,
+  "upstreamRef": null
+}

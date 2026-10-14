@@ -1,0 +1,10 @@
+{
+  "fault": "double-return",
+  "source": "src/TurboTest.EFCore/TtLease.cs",
+  "originalSha256": "a0834cc774f7c05e69bd8b09c6bebcd0a69abd7e0dda8aa74fc11a4f19737f4e",
+  "mutatedSha256": "1ffab8f960cd92b56d52f8b6e62f42c7bb8fc08df1a0e86d453b29a503b62db1",
+  "command": "dotnet test tests/TurboTest.Tests --filter FullyQualifiedName~Failed_public_lease_return --logger trx",
+  "expectedFailure": "Missing return must throw IOException; repeated return must invoke cleanup once",
+  "exit": 1,
+  "restoredSha256": "a0834cc774f7c05e69bd8b09c6bebcd0a69abd7e0dda8aa74fc11a4f19737f4e"
+}

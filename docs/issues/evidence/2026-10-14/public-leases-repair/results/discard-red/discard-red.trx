@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6dc903b3-6068-4e12-a497-36b859f61b23" name="@os-greg 2026-10-14 09:50:25" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T09:50:25.8399619+10:00" queuing="2026-10-14T09:50:25.8399620+10:00" start="2026-10-14T09:50:25.2778402+10:00" finish="2026-10-14T09:50:25.8444214+10:00" />
+  <TestSettings name="default" id="6af9fa98-e28f-48f5-bb9b-a078fe7a73d2">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_09_50_25" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="7e8d846d-c851-4b6e-9c58-0b139f789205" testId="36615a30-f602-6a40-a6d0-8e996b66b309" testName="TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate" computerName="os-greg" duration="00:00:00.0286464" startTime="2026-10-14T09:50:25.7084155+10:00" endTime="2026-10-14T09:50:25.7495379+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7e8d846d-c851-4b6e-9c58-0b139f789205">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.IO.IOException)
+---- System.IO.IOException : discard-secret</Message>
+          <StackTrace>   at TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs:line 26
+   at TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs:line 34
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at TurboTest.Tests.DatabaseOwnershipTests.&lt;&gt;c__DisplayClass0_0.&lt;Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate&gt;b__1() in /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs:line 21
+   at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs:line 75</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="36615a30-f602-6a40-a6d0-8e996b66b309">
+      <Execution id="7e8d846d-c851-4b6e-9c58-0b139f789205" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DatabaseOwnershipTests" name="Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="36615a30-f602-6a40-a6d0-8e996b66b309" executionId="7e8d846d-c851-4b6e-9c58-0b139f789205" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.07]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.11]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.14]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.20]       Assert.Throws() Failure: Exception type was not an exact match
+[xUnit.net 00:00:00.20]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:00.20]       Actual:   typeof(System.IO.IOException)
+[xUnit.net 00:00:00.20]       ---- System.IO.IOException : discard-secret
+[xUnit.net 00:00:00.20]       Stack Trace:
+[xUnit.net 00:00:00.20]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs(26,0): at TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate()
+[xUnit.net 00:00:00.20]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs(34,0): at TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate()
+[xUnit.net 00:00:00.20]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.20]         ----- Inner Stack Trace -----
+[xUnit.net 00:00:00.20]         /home/dan/code/TurboTest/tests/TurboTest.Tests/DatabaseOwnershipTests.cs(21,0): at TurboTest.Tests.DatabaseOwnershipTests.&lt;&gt;c__DisplayClass0_0.&lt;Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate&gt;b__1()
+[xUnit.net 00:00:00.20]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs(75,0): at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard)
+[xUnit.net 00:00:00.21]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:50:25.7517943+10:00">
+        <Text>[xUnit.net 00:00:00.20]     TurboTest.Tests.DatabaseOwnershipTests.Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

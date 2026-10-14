@@ -1,0 +1,23 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.1.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:16.70]     TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition [FAIL]
+  Failed TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition [4 ms]
+  Error Message:
+   System.ObjectDisposedException : Cannot access a disposed object.
+Object name: 'System.Net.Http.HttpClient'.
+  Stack Trace:
+     at TurboTest.EFCore.TtFactory`1.DisposeCoreAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 100
+   at TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 46
+   at TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 48
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-001/fixture-green/fixture-green.trx
+
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 16 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-001/fixture-green/ffa8fa45-4436-4e7c-8b18-ade55a5d63ca/dan_os-greg_2026-10-14.09_02_26.cobertura.xml

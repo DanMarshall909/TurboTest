@@ -1,0 +1,5 @@
+# Evidence hashes describe exact bytes, including original line endings.
+docs/issues/evidence/** -text
+# Raw transcripts and source snapshots remain readable files without noisy diffs.
+docs/issues/evidence/**/*.txt -diff
+docs/issues/evidence/**/*.trx -diff

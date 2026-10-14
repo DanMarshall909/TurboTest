@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="544d935d-57f0-4aa7-bfa3-a9b8ad40f1f3" name="@os-greg 2026-10-14 09:51:56" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T09:51:56.2998133+10:00" queuing="2026-10-14T09:51:56.2998134+10:00" start="2026-10-14T09:51:51.4689651+10:00" finish="2026-10-14T09:52:00.9961622+10:00" />
+  <TestSettings name="default" id="bc768245-638f-4603-9a45-343c8f3a343e">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_09_51_56" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="44f72ff8-4c46-474c-9e6f-b91a7b13c92c" testId="6511cfd5-c792-8022-0ae4-36b917979a7d" testName="TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership" computerName="os-greg" duration="00:00:04.3407929" startTime="2026-10-14T09:51:51.9144349+10:00" endTime="2026-10-14T09:51:56.2702407+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="44f72ff8-4c46-474c-9e6f-b91a7b13c92c">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.IO.IOException)
+---- System.IO.IOException : delete-secret</Message>
+          <StackTrace>   at TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 40
+   at TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 54
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at TurboTest.Tests.CompensatingCleanupTests.&lt;&gt;c__DisplayClass0_0.&lt;&lt;Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership&gt;b__0&gt;d.MoveNext() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 20
+--- End of stack trace from previous location ---
+   at TurboTest.EFCore.Internal.TtPool.DeleteContainerAsync(TtContainer container) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 146
+   at TurboTest.EFCore.Internal.TtPool.ReleaseAsync(TtContainer container) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 133
+   at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs:line 83</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="858f68b5-886b-4960-aade-65630c4574ac" testId="926dfe37-a053-c6be-12b6-f93cd8368543" testName="TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership" computerName="os-greg" duration="00:00:04.6650489" startTime="2026-10-14T09:51:56.2866235+10:00" endTime="2026-10-14T09:52:00.9378268+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="858f68b5-886b-4960-aade-65630c4574ac">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.IO.IOException)
+---- System.IO.IOException : discard-secret</Message>
+          <StackTrace>   at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 75
+   at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 85
+   at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 85
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at TurboTest.Tests.CompensatingCleanupTests.&lt;&gt;c__DisplayClass1_0.&lt;&lt;Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership&gt;b__0&gt;d.MoveNext() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 67
+--- End of stack trace from previous location ---
+   at TurboTest.EFCore.Internal.TtPool.DeleteContainerAsync(TtContainer container) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 146
+   at TurboTest.EFCore.Internal.TtPool.DiscardAsync(TtContainer container) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 141
+   at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs:line 82
+   at TurboTest.EFCore.TtFactory`1.CreateLeaseAsync(Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 60</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="6511cfd5-c792-8022-0ae4-36b917979a7d">
+      <Execution id="44f72ff8-4c46-474c-9e6f-b91a7b13c92c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CompensatingCleanupTests" name="Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="926dfe37-a053-c6be-12b6-f93cd8368543">
+      <Execution id="858f68b5-886b-4960-aade-65630c4574ac" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CompensatingCleanupTests" name="Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="6511cfd5-c792-8022-0ae4-36b917979a7d" executionId="44f72ff8-4c46-474c-9e6f-b91a7b13c92c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="926dfe37-a053-c6be-12b6-f93cd8368543" executionId="858f68b5-886b-4960-aade-65630c4574ac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="2" passed="0" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.12]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.14]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:04.52]       Assert.Throws() Failure: Exception type was not an exact match
+[xUnit.net 00:00:04.52]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:04.52]       Actual:   typeof(System.IO.IOException)
+[xUnit.net 00:00:04.52]       ---- System.IO.IOException : delete-secret
+[xUnit.net 00:00:04.52]       Stack Trace:
+[xUnit.net 00:00:04.52]         /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs(40,0): at TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership()
+[xUnit.net 00:00:04.52]         /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs(54,0): at TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership()
+[xUnit.net 00:00:04.52]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:04.52]         ----- Inner Stack Trace -----
+[xUnit.net 00:00:04.52]         /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs(20,0): at TurboTest.Tests.CompensatingCleanupTests.&lt;&gt;c__DisplayClass0_0.&lt;&lt;Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership&gt;b__0&gt;d.MoveNext()
+[xUnit.net 00:00:04.52]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:04.52]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(146,0): at TurboTest.EFCore.Internal.TtPool.DeleteContainerAsync(TtContainer container)
+[xUnit.net 00:00:04.52]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(133,0): at TurboTest.EFCore.Internal.TtPool.ReleaseAsync(TtContainer container)
+[xUnit.net 00:00:04.52]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs(83,0): at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard)
+[xUnit.net 00:00:09.19]       Assert.Throws() Failure: Exception type was not an exact match
+[xUnit.net 00:00:09.19]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:09.19]       Actual:   typeof(System.IO.IOException)
+[xUnit.net 00:00:09.19]       ---- System.IO.IOException : discard-secret
+[xUnit.net 00:00:09.19]       Stack Trace:
+[xUnit.net 00:00:09.19]         /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs(75,0): at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership()
+[xUnit.net 00:00:09.19]         /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs(85,0): at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership()
+[xUnit.net 00:00:09.19]         /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs(85,0): at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership()
+[xUnit.net 00:00:09.19]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:09.19]         ----- Inner Stack Trace -----
+[xUnit.net 00:00:09.19]         /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs(67,0): at TurboTest.Tests.CompensatingCleanupTests.&lt;&gt;c__DisplayClass1_0.&lt;&lt;Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership&gt;b__0&gt;d.MoveNext()
+[xUnit.net 00:00:09.19]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:09.19]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(146,0): at TurboTest.EFCore.Internal.TtPool.DeleteContainerAsync(TtContainer container)
+[xUnit.net 00:00:09.19]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(141,0): at TurboTest.EFCore.Internal.TtPool.DiscardAsync(TtContainer container)
+[xUnit.net 00:00:09.19]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs(82,0): at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard)
+[xUnit.net 00:00:09.19]         /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs(60,0): at TurboTest.EFCore.TtFactory`1.CreateLeaseAsync(Action`1 configure, CancellationToken cancellationToken)
+[xUnit.net 00:00:09.19]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:51:56.2728483+10:00">
+        <Text>[xUnit.net 00:00:04.52]     TurboTest.Tests.CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:52:00.9386181+10:00">
+        <Text>[xUnit.net 00:00:09.19]     TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

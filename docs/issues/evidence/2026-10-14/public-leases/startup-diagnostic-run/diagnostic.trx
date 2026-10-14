@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="3f351119-9048-4935-9a4d-706f4418f395" name="@os-greg 2026-10-14 09:29:07" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T09:29:07.8657990+10:00" queuing="2026-10-14T09:29:07.8657991+10:00" start="2026-10-14T09:28:28.1867347+10:00" finish="2026-10-14T09:29:07.8721833+10:00" />
+  <TestSettings name="default" id="619d4ef7-e799-4614-adbb-6c6b1368424c">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_09_29_07" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="353b9621-fab1-4c3a-9dfd-5bb3d980aee1" testId="2755e700-8bc3-193c-ec82-663775d59909" testName="TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database" computerName="os-greg" duration="00:00:39.1696705" startTime="2026-10-14T09:28:28.6147759+10:00" endTime="2026-10-14T09:29:07.7894173+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="353b9621-fab1-4c3a-9dfd-5bb3d980aee1">
+      <Output>
+        <ErrorInfo>
+          <Message>System.TimeoutException : Database failed to start within 30 seconds</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 17
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="498dccd3-91cb-4ca1-a37e-5d69336e3360" testId="f72fc410-2f76-5f71-a6ab-6b0b05037b92" testName="TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched" computerName="os-greg" duration="00:00:38.8774572" startTime="2026-10-14T09:28:28.6160524+10:00" endTime="2026-10-14T09:29:07.5241336+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="498dccd3-91cb-4ca1-a37e-5d69336e3360">
+      <Output>
+        <ErrorInfo>
+          <Message>System.TimeoutException : Database failed to start within 30 seconds</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 149
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 163
+   at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 163
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="3d1ac4d9-12ff-4f01-94b2-a3a6511ab18b" testId="b703037a-5219-d599-724a-57971a7970c0" testName="TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints" computerName="os-greg" duration="00:00:39.1204966" startTime="2026-10-14T09:28:28.6161149+10:00" endTime="2026-10-14T09:29:07.7406967+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3d1ac4d9-12ff-4f01-94b2-a3a6511ab18b">
+      <Output>
+        <ErrorInfo>
+          <Message>System.TimeoutException : Database failed to start within 30 seconds</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 226
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 196
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 203
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 65
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 69
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 76
+   at TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BasicTests.cs:line 33
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f72fc410-2f76-5f71-a6ab-6b0b05037b92">
+      <Execution id="498dccd3-91cb-4ca1-a37e-5d69336e3360" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PooledResetTests" name="Reset_and_disposal_leave_another_fixture_session_and_rows_untouched" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="2755e700-8bc3-193c-ec82-663775d59909">
+      <Execution id="353b9621-fab1-4c3a-9dfd-5bb3d980aee1" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Three_sequential_public_leases_return_and_reuse_one_database" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b703037a-5219-d599-724a-57971a7970c0">
+      <Execution id="3d1ac4d9-12ff-4f01-94b2-a3a6511ab18b" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BasicTests" name="Should_Enforce_Foreign_Key_Constraints" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="2755e700-8bc3-193c-ec82-663775d59909" executionId="353b9621-fab1-4c3a-9dfd-5bb3d980aee1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f72fc410-2f76-5f71-a6ab-6b0b05037b92" executionId="498dccd3-91cb-4ca1-a37e-5d69336e3360" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b703037a-5219-d599-724a-57971a7970c0" executionId="3d1ac4d9-12ff-4f01-94b2-a3a6511ab18b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="0" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.07]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.12]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.14]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:39.08]       System.TimeoutException : Database failed to start within 30 seconds
+[xUnit.net 00:00:39.08]       Stack Trace:
+[xUnit.net 00:00:39.08]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:00:39.08]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:00:39.08]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(196,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:00:39.08]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(203,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:00:39.08]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(65,0): at TurboTest.EFCore.Internal.TtPool.InitializeAsync()
+[xUnit.net 00:00:39.08]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs(149,0): at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched()
+[xUnit.net 00:00:39.08]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs(163,0): at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched()
+[xUnit.net 00:00:39.08]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs(163,0): at TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched()
+[xUnit.net 00:00:39.08]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:39.29]       System.TimeoutException : Database failed to start within 30 seconds
+[xUnit.net 00:00:39.29]       Stack Trace:
+[xUnit.net 00:00:39.29]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:00:39.29]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:00:39.29]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(196,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:00:39.29]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(203,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:00:39.29]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(65,0): at TurboTest.EFCore.Internal.TtPool.InitializeAsync()
+[xUnit.net 00:00:39.29]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(69,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:00:39.29]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(76,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:00:39.29]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BasicTests.cs(33,0): at TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints()
+[xUnit.net 00:00:39.29]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:39.34]       System.TimeoutException : Database failed to start within 30 seconds
+[xUnit.net 00:00:39.34]       Stack Trace:
+[xUnit.net 00:00:39.34]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:00:39.34]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(226,0): at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource)
+[xUnit.net 00:00:39.34]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(196,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:00:39.34]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(203,0): at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name)
+[xUnit.net 00:00:39.34]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(65,0): at TurboTest.EFCore.Internal.TtPool.InitializeAsync()
+[xUnit.net 00:00:39.34]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(69,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:00:39.34]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(76,0): at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken)
+[xUnit.net 00:00:39.34]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(17,0): at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database()
+[xUnit.net 00:00:39.34]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(34,0): at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database()
+[xUnit.net 00:00:39.34]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:39.34]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:29:07.5268665+10:00">
+        <Text>[xUnit.net 00:00:39.08]     TurboTest.Tests.PooledResetTests.Reset_and_disposal_leave_another_fixture_session_and_rows_untouched [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:29:07.7411787+10:00">
+        <Text>[xUnit.net 00:00:39.29]     TurboTest.Tests.BasicTests.Should_Enforce_Foreign_Key_Constraints [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:29:07.7899198+10:00">
+        <Text>[xUnit.net 00:00:39.34]     TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

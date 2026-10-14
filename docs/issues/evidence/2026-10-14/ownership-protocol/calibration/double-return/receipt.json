@@ -1,0 +1,19 @@
+{
+  "fault": "double-return",
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "FullyQualifiedName~Cleanup_finishes_before_return",
+    "--logger",
+    "trx;LogFileName=fault.trx",
+    "--results-directory",
+    "artifacts/ownership/calibration/double-return"
+  ],
+  "exitCode": 1,
+  "elapsedSeconds": 2.2190618829336017,
+  "originalSha256": "e3699d752dcd0643c49a33930c533dcc818dcfb2b477a559001a0e934c6cb6ad",
+  "faultSha256": "b3e5ed4c25aa2cca565c477942737c80a3cddb618f99cb459e6d8f379b479786",
+  "restored": true
+}

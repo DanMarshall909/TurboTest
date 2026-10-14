@@ -1,0 +1,58 @@
+using Microsoft.EntityFrameworkCore;
+
+namespace TurboTest.EFCore;
+
+/// <summary>Owns one test database and all its contexts until asynchronous return completes.</summary>
+public sealed class TtLease<TContext> : IAsyncDisposable where TContext : DbContext
+{
+    private readonly object _gate = new();
+    private readonly Func<TContext> _createContext;
+    private readonly Func<Task> _return;
+    private readonly Action<TContext> _register;
+    private readonly TContext _context;
+    private Task? _disposal;
+    private bool _closing;
+
+    internal TtLease(TContext context, Func<TContext> createContext,
+        Action<TContext> register, Func<Task> returnDatabase)
+    {
+        _context = context;
+        _createContext = createContext;
+        _register = register;
+        _return = returnDatabase;
+    }
+
+    public TContext Context
+    {
+        get
+        {
+            lock (_gate)
+            {
+                ObjectDisposedException.ThrowIf(_closing, this);
+                return _context;
+            }
+        }
+    }
+
+    /// <summary>Creates another context in this test's database. The lease retains cleanup ownership.</summary>
+    public TContext CreateContext()
+    {
+        lock (_gate)
+        {
+            ObjectDisposedException.ThrowIf(_closing, this);
+            var context = _createContext();
+            _register(context);
+            return context;
+        }
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        lock (_gate)
+        {
+            _closing = true;
+            _disposal = _return();
+            return new ValueTask(_disposal);
+        }
+    }
+}

@@ -3,13 +3,16 @@ using TurboTest.EFCore;
 
 namespace TurboTest.Tests;
 
+[Trait("Category", "PostgreSQL")]
 public class BasicTests
 {
     [Fact]
     public async Task Should_Create_Context_With_Real_Database()
     {
+        await using var fixture = await Tt.CreateFactoryAsync<TestDbContext>(o => o.PoolSize = 2);
         // Act
-        await using var context = await Tt.CreateContextAsync<TestDbContext>();
+        await using var contextLease = await fixture.CreateLeaseAsync();
+        var context = contextLease.Context;
 
         // Assert
         context.ShouldNotBeNull();
@@ -27,8 +30,10 @@ public class BasicTests
     [Fact]
     public async Task Should_Enforce_Foreign_Key_Constraints()
     {
+        await using var fixture = await Tt.CreateFactoryAsync<TestDbContext>(o => o.PoolSize = 2);
         // This test would pass with InMemory database!
-        await using var context = await Tt.CreateContextAsync<TestDbContext>();
+        await using var contextLease = await fixture.CreateLeaseAsync();
+        var context = contextLease.Context;
 
         // Try to add a post without a blog (violates FK)
         context.Posts.Add(new Post
@@ -40,7 +45,7 @@ public class BasicTests
         // Act & Assert - Real database enforces FK constraint
         var act = () => context.SaveChangesAsync();
         var exception = await Should.ThrowAsync<DbUpdateException>(act);
-        
+
         // Check that it's a proper database constraint error (EF Core wraps the original exception)
         var innerException = exception.InnerException.ShouldNotBeNull();
         innerException.Message.ShouldContain("violates foreign key constraint", Case.Sensitive);
@@ -49,8 +54,10 @@ public class BasicTests
     [Fact]
     public async Task Should_Enforce_Unique_Constraints()
     {
+        await using var fixture = await Tt.CreateFactoryAsync<TestDbContext>(o => o.PoolSize = 2);
         // This test would also pass incorrectly with InMemory database!
-        await using var context = await Tt.CreateContextAsync<TestDbContext>();
+        await using var contextLease = await fixture.CreateLeaseAsync();
+        var context = contextLease.Context;
 
         // Add two users with the same email
         context.Users.Add(new User { Email = "test@example.com", Name = "User 1" });
@@ -59,7 +66,7 @@ public class BasicTests
         // Act & Assert - Real database enforces unique constraint
         var act = () => context.SaveChangesAsync();
         var exception = await Should.ThrowAsync<DbUpdateException>(act);
-        
+
         // Check that it's a proper database constraint error (EF Core wraps the original exception)
         var innerException = exception.InnerException.ShouldNotBeNull();
         innerException.Message.ShouldContain("duplicate key value violates unique constraint", Case.Sensitive);
@@ -68,9 +75,12 @@ public class BasicTests
     [Fact]
     public async Task Should_Provide_Isolated_Databases()
     {
+        await using var fixture = await Tt.CreateFactoryAsync<TestDbContext>(o => o.PoolSize = 2);
         // Create two contexts
-        await using var context1 = await Tt.CreateContextAsync<TestDbContext>();
-        await using var context2 = await Tt.CreateContextAsync<TestDbContext>();
+        await using var context1Lease = await fixture.CreateLeaseAsync();
+        var context1 = context1Lease.Context;
+        await using var context2Lease = await fixture.CreateLeaseAsync();
+        var context2 = context2Lease.Context;
 
         // Add data to first context
         context1.Users.Add(new User { Email = "user1@example.com" });
@@ -81,28 +91,4 @@ public class BasicTests
         count.ShouldBe(0, "each test should get an isolated database");
     }
 
-    [Fact]
-    public async Task Should_Reset_Database_Quickly()
-    {
-        var stopwatch = new System.Diagnostics.Stopwatch();
-
-        // First acquisition (might be slower)
-        await using var context1 = await Tt.CreateContextAsync<TestDbContext>();
-        context1.Users.Add(new User { Email = "test@example.com" });
-        await context1.SaveChangesAsync();
-        await context1.DisposeAsync();
-
-        // Second acquisition (should be fast due to reset)
-        stopwatch.Start();
-        await using var context2 = await Tt.CreateContextAsync<TestDbContext>();
-        stopwatch.Stop();
-
-        // Database should be clean
-        var count = await context2.Users.CountAsync();
-        count.ShouldBe(0);
-
-        // Reset should be fast
-        stopwatch.ElapsedMilliseconds.ShouldBeLessThan(500,
-            "database reset should be quick");
-    }
 }

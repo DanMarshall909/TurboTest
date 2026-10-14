@@ -32,3 +32,28 @@ Define a fixture initializer and immutable baseline identity. Initialization can
 ## Verification
 
 Use a nonempty three-table fixture and a separate migration-based fixture. The probe's seed IDs 100/200/300 and expected next IDs 101/201/301 provide one regression fixture, not a universal seed format. Define the supported seed/sequence capture contract before implementing reset plans.
+
+## Implementation design
+
+Separate the container host, immutable baseline and prepared database slot.
+One fixture initializes a staging database once using an explicit schema mode
+(`EnsureCreated`, migrations or caller initialization), then awaits its seed
+callback. Freeze context options at fixture creation and include owner identity,
+context type, schema mode and an explicit initializer version in baseline
+identity. Per-lease configuration cannot change the prepared model.
+
+Dispose initialization contexts and their source before sealing the template
+with `ALLOW_CONNECTIONS false`. Workloads receive cloned slots, never the
+template source. Clone and validate before publication. Whole-template
+recreation provides the first correct return path; TT-004 adds the row path.
+PostgreSQL cloning requires a connection-free source and does not copy
+database-level permissions/settings; support for those must be explicit.
+See [PostgreSQL database cloning](https://www.postgresql.org/docs/16/sql-createdatabase.html).
+
+Capture every permanent user sequence's qualified name, definition, `last_value`
+and `is_called`, including standalone and unused sequences. Do not infer state
+from primary-key maxima. Three-argument `setval` preserves unused/custom-start
+state, but its changes survive rollback. A sequence with `CACHE > 1` requires
+slot-source drainage or recreation because pooled sessions can retain allocated
+values. See [sequence functions](https://www.postgresql.org/docs/16/functions-sequence.html)
+and [sequence caching](https://www.postgresql.org/docs/16/sql-createsequence.html).

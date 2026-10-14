@@ -1,0 +1,17 @@
+using Npgsql;
+
+namespace TurboTest.EFCore;
+
+/// <summary>A lifecycle failure with a safe stage and SQLSTATE diagnostic, without SQL or credentials.</summary>
+public sealed class TtLifecycleException : InvalidOperationException
+{
+    public string Stage { get; }
+    public string? SqlState { get; }
+
+    internal TtLifecycleException(string stage, Exception cause)
+        : base($"TurboTest lifecycle failed at {stage} ({(cause is PostgresException pg ? pg.SqlState : cause.GetType().Name)}). The resource is unavailable for reuse.")
+    {
+        Stage = stage;
+        SqlState = (cause as PostgresException)?.SqlState;
+    }
+}

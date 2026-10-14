@@ -4,48 +4,53 @@ using TurboTest.EFCore;
 Console.WriteLine("TurboTest Minimal Example");
 Console.WriteLine("=========================\n");
 
-// Use TurboTest - as simple as this!
+// The fixture owns resources even when a query or lease return throws.
 Console.WriteLine("Creating context with real PostgreSQL database...");
-await using var context = await Tt.CreateContextAsync<TodoContext>();
-
-Console.WriteLine("✅ Connected to database!");
-Console.WriteLine($"   Connection: {context.Database.GetConnectionString()?.Split(';')[0..2].Aggregate((a, b) => $"{a};{b}")}...\n");
-
-// Add some data
-Console.WriteLine("Adding todo items...");
-context.Todos.Add(new TodoItem { Title = "Write tests", IsComplete = true });
-context.Todos.Add(new TodoItem { Title = "Run tests", IsComplete = false });
-context.Todos.Add(new TodoItem { Title = "Ship code", IsComplete = false });
-await context.SaveChangesAsync();
-
-// Query the data
-Console.WriteLine("\nTodo List:");
-var todos = await context.Todos.OrderBy(t => t.CreatedAt).ToListAsync();
-foreach (var todo in todos)
+await using var fixture = await Tt.CreateFactoryAsync<TodoContext>();
+await using (var contextLease = await fixture.CreateLeaseAsync())
 {
-    var status = todo.IsComplete ? "✅" : "⬜";
-    Console.WriteLine($"  {status} {todo.Title}");
+    var context = contextLease.Context;
+
+    Console.WriteLine("✅ Connected to database!");
+    Console.WriteLine($"   Connection: {context.Database.GetConnectionString()?.Split(';')[0..2].Aggregate((a, b) => $"{a};{b}")}...\n");
+
+    // Add some data
+    Console.WriteLine("Adding todo items...");
+    context.Todos.Add(new TodoItem { Title = "Write tests", IsComplete = true });
+    context.Todos.Add(new TodoItem { Title = "Run tests", IsComplete = false });
+    context.Todos.Add(new TodoItem { Title = "Ship code", IsComplete = false });
+    await context.SaveChangesAsync();
+
+    // Query the data
+    Console.WriteLine("\nTodo List:");
+    var todos = await context.Todos.OrderBy(t => t.CreatedAt).ToListAsync();
+    foreach (var todo in todos)
+    {
+        var status = todo.IsComplete ? "✅" : "⬜";
+        Console.WriteLine($"  {status} {todo.Title}");
+    }
+
+    // Demonstrate real database features
+    Console.WriteLine("\nDatabase Statistics:");
+    var totalCount = await context.Todos.CountAsync();
+    var completedCount = await context.Todos.CountAsync(t => t.IsComplete);
+    Console.WriteLine($"  Total items: {totalCount}");
+    Console.WriteLine($"  Completed: {completedCount}");
+    Console.WriteLine($"  Pending: {totalCount - completedCount}");
+
+    // Show that we're using a real database
+    Console.WriteLine("\nExecuting raw SQL (PostgreSQL-specific):");
+    var oldestTodo = await context.Todos
+        .FromSqlRaw("SELECT * FROM \"Todos\" ORDER BY \"CreatedAt\" LIMIT 1")
+        .FirstOrDefaultAsync();
+    Console.WriteLine($"  Oldest todo: {oldestTodo?.Title}");
+
+    Console.WriteLine("\n✨ Example complete!");
+    Console.WriteLine("Database will be automatically cleaned up on disposal.");
+
+    // Lease disposal closes contexts and resets; fixture disposal removes its containers.
+
 }
-
-// Demonstrate real database features
-Console.WriteLine("\nDatabase Statistics:");
-var totalCount = await context.Todos.CountAsync();
-var completedCount = await context.Todos.CountAsync(t => t.IsComplete);
-Console.WriteLine($"  Total items: {totalCount}");
-Console.WriteLine($"  Completed: {completedCount}");
-Console.WriteLine($"  Pending: {totalCount - completedCount}");
-
-// Show that we're using a real database
-Console.WriteLine("\nExecuting raw SQL (PostgreSQL-specific):");
-var oldestTodo = await context.Todos
-    .FromSqlRaw("SELECT * FROM \"Todos\" ORDER BY \"CreatedAt\" LIMIT 1")
-    .FirstOrDefaultAsync();
-Console.WriteLine($"  Oldest todo: {oldestTodo?.Title}");
-
-Console.WriteLine("\n✨ Example complete!");
-Console.WriteLine("Database will be automatically cleaned up on disposal.");
-
-// Cleanup happens automatically when context is disposed!
 
 // Define your domain models
 public class TodoItem

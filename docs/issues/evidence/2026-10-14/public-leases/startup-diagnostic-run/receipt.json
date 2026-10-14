@@ -1,0 +1,22 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--no-build",
+    "--filter",
+    "FullyQualifiedName~Should_Enforce_Foreign_Key_Constraints|FullyQualifiedName~Three_sequential_public_leases|FullyQualifiedName~Reset_and_disposal_leave_another_fixture",
+    "--logger",
+    "trx;LogFileName=diagnostic.trx",
+    "--results-directory",
+    "artifacts/tt-001/startup-diagnostic-run"
+  ],
+  "exit": 1,
+  "wallSeconds": 42.24980020523071,
+  "capturedContainers": {
+    "fadf01b7186e": "tt_pool_1_f961cce50e6a4a87916cfe43e467b4d2",
+    "ef269f5b1bdd": "tt_pool_0_f688f75083d04cb78484c470f98ac113",
+    "7a4fb09a5b4d": "tt_pool_0_5fa158327a2c436588c81bcbdf4a3ccf",
+    "0b2e35954d47": "tt_pool_0_cb14272432f448e189e02e35ea26f049"
+  }
+}

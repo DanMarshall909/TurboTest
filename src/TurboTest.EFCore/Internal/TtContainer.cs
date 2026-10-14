@@ -10,72 +10,65 @@ namespace TurboTest.EFCore.Internal;
 internal sealed class TtContainer : IAsyncDisposable
 {
     private readonly DockerClient _dockerClient;
-    private readonly string _databaseName;
-    private readonly string _templateDbName;
-    private bool _templateCreated;
+
+    public NpgsqlDataSource DataSource { get; }
 
     public string Id { get; }
-    public string ConnectionString { get; }
 
-    public TtContainer(string id, string connectionString, DockerClient dockerClient)
+    public TtContainer(string id, NpgsqlDataSource dataSource, DockerClient dockerClient)
     {
         Id = id;
-        ConnectionString = connectionString;
         _dockerClient = dockerClient;
-        
-        // Extract database name from connection string
-        var match = System.Text.RegularExpressions.Regex.Match(connectionString, @"Database=([^;]+)");
-        _databaseName = match.Success ? match.Groups[1].Value : "testdb";
-        _templateDbName = $"template_{_databaseName}";
+        DataSource = dataSource;
     }
 
     /// <summary>
-    /// Resets the database to a clean state using PostgreSQL template databases for speed.
-    /// Each container has its own unique database name to avoid conflicts.
+    /// Clears ordinary test rows without dropping the database or its owned connection pool.
+    /// Prepared seed restoration and schema recreation are separate baseline operations.
     /// </summary>
     public async Task ResetAsync()
     {
-        using var connection = new NpgsqlConnection(ConnectionString.Replace($"Database={_databaseName}", "Database=postgres"));
-        await connection.OpenAsync();
-
-        if (!_templateCreated)
+        var stage = "ResetConnect";
+        try
         {
-            // Create template on first use with proper cleanup
-            await connection.ExecuteNonQueryAsync($"DROP DATABASE IF EXISTS \"{_databaseName}\"");
-            await connection.ExecuteNonQueryAsync($"DROP DATABASE IF EXISTS \"{_templateDbName}\"");
-            await connection.ExecuteNonQueryAsync($"CREATE DATABASE \"{_databaseName}\"");
-
-            using var testConnection = new NpgsqlConnection(ConnectionString);
-            await testConnection.OpenAsync();
-            // Database is ready for use
-            await testConnection.CloseAsync();
-
-            await connection.ExecuteNonQueryAsync($"CREATE DATABASE \"{_templateDbName}\" TEMPLATE \"{_databaseName}\"");
-            _templateCreated = true;
+            await using var connection = await DataSource.OpenConnectionAsync();
+            await using var transaction = await connection.BeginTransactionAsync();
+            await connection.ExecuteNonQueryAsync("SET LOCAL lock_timeout = '5s'");
+            stage = "ResetRows";
+            await using var tables = new NpgsqlCommand("""
+                SELECT string_agg(format('%I.%I', n.nspname, c.relname), ', ' ORDER BY n.nspname, c.relname)
+                FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
+                WHERE c.relkind IN ('r', 'p') AND NOT c.relispartition
+                  AND n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
+                """, connection, transaction);
+            var names = await tables.ExecuteScalarAsync();
+            if (names is string tableNames)
+            {
+                await using var cleanup = new NpgsqlCommand($"TRUNCATE TABLE {tableNames} RESTART IDENTITY", connection, transaction);
+                await cleanup.ExecuteNonQueryAsync();
+            }
+            stage = "ResetCommit";
+            await transaction.CommitAsync();
         }
-        else
+        catch (Exception error)
         {
-            // Fast reset using template - terminate connections first
-            await connection.ExecuteNonQueryAsync($"SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '{_databaseName}' AND pid <> pg_backend_pid()");
-            
-            // Drop and recreate immediately - connection coordination handled by TtDatabase
-            await connection.ExecuteNonQueryAsync($"DROP DATABASE IF EXISTS \"{_databaseName}\"");
-            await connection.ExecuteNonQueryAsync($"CREATE DATABASE \"{_databaseName}\" TEMPLATE \"{_templateDbName}\"");
+            throw new TtLifecycleException(stage, error);
         }
     }
 
     public async ValueTask DisposeAsync()
     {
+        await DataSource.DisposeAsync();
         try
         {
             await _dockerClient.Containers.StopContainerAsync(Id,
                 new ContainerStopParameters { WaitBeforeKillSeconds = 5 });
             await _dockerClient.Containers.RemoveContainerAsync(Id,
-                new ContainerRemoveParameters { Force = true });
+                new ContainerRemoveParameters { Force = true, RemoveVolumes = true });
         }
-        catch
+        catch (DockerApiException error) when (error.StatusCode == System.Net.HttpStatusCode.NotFound)
         {
-            // Best effort cleanup
+            // A missing container is confirmed deletion, including a concurrent cleanup.
         }
     }
 }

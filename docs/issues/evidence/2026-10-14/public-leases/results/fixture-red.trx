@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="d8c31e40-39f7-4516-b24d-5becf83c96ff" name="@os-greg 2026-10-14 09:00:48" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T09:00:48.1825289+10:00" queuing="2026-10-14T09:00:48.1825290+10:00" start="2026-10-14T09:00:37.5298286+10:00" finish="2026-10-14T09:00:48.1868376+10:00" />
+  <TestSettings name="default" id="070b95b5-51c6-400d-939b-dc35f6ce75d7">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_09_00_48" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="48e4c6ec-9b51-4ec6-b8f5-9b80f50e8735" testId="29cd1b9a-9a9b-618b-2163-3475d7e159da" testName="TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition" computerName="os-greg" duration="00:00:10.1212875" startTime="2026-10-14T09:00:37.9656425+10:00" endTime="2026-10-14T09:00:48.0985925+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="48e4c6ec-9b51-4ec6-b8f5-9b80f50e8735">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ObjectDisposedException)</Message>
+          <StackTrace>   at TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 44
+   at TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 46
+   at TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 46
+   at TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 48
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="29cd1b9a-9a9b-618b-2163-3475d7e159da">
+      <Execution id="48e4c6ec-9b51-4ec6-b8f5-9b80f50e8735" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PublicLeaseTests" name="Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="29cd1b9a-9a9b-618b-2163-3475d7e159da" executionId="48e4c6ec-9b51-4ec6-b8f5-9b80f50e8735" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.07]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.12]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.14]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:10.29]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:10.29]       Expected: typeof(System.ObjectDisposedException)
+[xUnit.net 00:00:10.29]       Stack Trace:
+[xUnit.net 00:00:10.29]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(44,0): at TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition()
+[xUnit.net 00:00:10.29]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(46,0): at TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition()
+[xUnit.net 00:00:10.29]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(46,0): at TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition()
+[xUnit.net 00:00:10.29]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs(48,0): at TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition()
+[xUnit.net 00:00:10.29]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:10.30]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T09:00:48.1010773+10:00">
+        <Text>[xUnit.net 00:00:10.29]     TurboTest.Tests.PublicLeaseTests.Fixture_shutdown_closes_its_leases_and_rejects_new_acquisition [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

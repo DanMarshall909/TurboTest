@@ -15,7 +15,7 @@ public interface ITtServiceFactory
     /// <summary>
     /// Creates a configured DbContext
     /// </summary>
-    Task<TContext> CreateContextAsync<TContext>(Action<DbContextOptionsBuilder>? configure = null)
+    Task<TtLease<TContext>> CreateLeaseAsync<TContext>(Action<DbContextOptionsBuilder>? configure = null)
         where TContext : DbContext;
 
     /// <summary>

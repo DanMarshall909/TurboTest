@@ -1,0 +1,46 @@
+# TT-006 coverage classification
+
+The whole-suite gate passes212 tests. full-coverage-summary.json unions line
+execution across declaring/generated classes; raw class branch rates remain
+separate. Execution does not prove assertions for every covered statement.
+
+The candidate removes only the unused internal TtPreparedPool.OwnerId getter
+from that gate cut. Its original source and exact one-line transformation receipt
+are retained; all other62-file source binding entries match. The final103-check
+selection (101 fast/two native) and final builds validate the pruned candidate.
+Do not merge coverage from different source identities into a fresh percentage.
+
+- Lease42/42, database57/57, cleanup39/39, lifecycle diagnostics28/28, options25/25,
+  budget25/25 and public state3/3 execute completely in the whole gate. Reentry,
+  deadline, safe failure and ownership assertions supply their behavioral proof.
+- Slot ledger337/355: closing during preparation backoff167-171 and cleanup
+  backoff352-356 remain unexecuted. Held preparation/reset/delete shutdown is
+  asserted, but that does not execute these delay-cancellation catches.
+  Cancellation while waiting for reset permit260-263 and token-canceled-before-
+  assignment388-390 also remain unmeasured race paths. Invalid internal return208
+  is a misuse guard. These are disclosed gaps, not a claim of100% core coverage.
+- Factory146/152:115 is an async catch boundary; lease-drain callback aggregation
+  185 and residual database fallback188-191 are not executed. Cancellation
+  callback failure, late failure after timeout, pending context/native reset,
+  cached failure and failed pool retry have executable evidence elsewhere in
+  the same class; that evidence is not counted as executing these fallback lines.
+- Prepared pool304/308 at the whole gate:73 is the unused getter now removed.
+  Invalid schema enum165, wrong workload identity278 and source-disposal error402
+  are unmeasured guards/failure paths. Actual clone/schema/seed/sequence rejection,
+  connected-database DROP55006 and retained-host retry are native assertions.
+- Ordinary pool234/264:246 is an async catch boundary. Cached-image runs do not
+  execute uncached pull261-266. Windows memory detection337-361 is unavailable
+  here; Linux/default fallback373/381 is not fault-injected. Create/delete/accounting
+  native boundaries reject canceled lost-response deletion and prove exact drain.
+- Cleanup registry20/21: duplicate-owner rejection14 is not injected. Other-owner
+  progress, retained global deadlines and exact identity release are asserted.
+- Container41/44: already-absent container catch69-72 is not executed in this
+  gate. Create identity/absence reconciliation executes in the ordinary pool.
+- Prior baseline limits152/178, administrator catch boundary54 and nonquery
+  helper17-20 remain as previously disclosed. Prepared row restoration executes
+  105/105; exact source binding reads9/9.
+- DI registration/service factory uncovered paths belong to still-Open TT-007;
+  their existing advertised defects are not claimed repaired by TT-006.
+
+The recovery-budget fault is a named one-fault calibration with source restored
+exactly. Normal mutation remains pending the whole coding-session final source.

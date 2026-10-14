@@ -43,11 +43,11 @@ public class CompensatingCleanupTests
             Assert.Contains(nameof(IOException), error.Message);
             Assert.DoesNotContain("secret", error.ToString());
             Assert.Single(await OwnedAsync(prefix));
-            failDeletion = false;
             var unavailable = await Assert.ThrowsAsync<TtLifecycleException>(() => pool.GetDatabaseAsync());
             Assert.Equal("ResetRows", unavailable.Stage);
             Assert.Equal("P0001", unavailable.SqlState);
             Assert.Single(await OwnedAsync(prefix));
+            failDeletion = false;
             await pool.DisposeAsync();
             Assert.Empty(await OwnedAsync(prefix));
         }

@@ -18,14 +18,20 @@ internal static class TtCleanupRegistry
     internal static void Release(TtCleanup cleanup) =>
         FailedOwners.TryRemove(new KeyValuePair<Guid, TtCleanup>(cleanup.OwnerId, cleanup));
 
-    internal static async Task DrainAsync()
+    internal static async Task DrainAsync(TimeSpan timeout)
     {
-        Exception? first = null;
-        foreach (var cleanup in FailedOwners.Values)
+        async Task<Exception?> ObserveAsync(TtCleanup cleanup)
         {
-            try { await cleanup.RetryCleanupAsync(); }
-            catch (Exception error) { first ??= error; }
+            var attempt = cleanup.RetryCleanupAsync();
+            try { await attempt.WaitAsync(timeout); return null; }
+            catch (TimeoutException error) when (!attempt.IsCompleted)
+            {
+                return new TtLifecycleException("DrainTimeout", error, cleanup: cleanup);
+            }
+            catch (Exception error) { return error; }
         }
+        var errors = await Task.WhenAll(FailedOwners.Values.Select(ObserveAsync));
+        var first = errors.FirstOrDefault(error => error is not null);
         if (first is not null) throw first;
     }
 }

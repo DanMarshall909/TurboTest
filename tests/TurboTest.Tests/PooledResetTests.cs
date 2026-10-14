@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Microsoft.Extensions.Logging;
+using Docker.DotNet;
+using Docker.DotNet.Models;
 using TurboTest.EFCore;
 using TurboTest.EFCore.Internal;
 
@@ -167,7 +169,9 @@ public class PooledResetTests
     [Trait("Category", "PostgreSQL")]
     public async Task Locked_rows_cause_a_bounded_reset_failure_and_are_never_reused()
     {
-        await using var pool = new TtPool(new TtOptions { PoolSize = 1 });
+        var prefix = $"tt-locked-drain-{Guid.NewGuid():N}";
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        await using var pool = new TtPool(new TtOptions { PoolSize = 1, ContainerPrefix = prefix });
         await pool.InitializeAsync();
         var database = await pool.GetDatabaseAsync();
         await using var connection = await database.DataSource.OpenConnectionAsync();
@@ -183,6 +187,16 @@ public class PooledResetTests
         Assert.Equal("55P03", error.SqlState);
         await Assert.ThrowsAsync<ObjectDisposedException>(
             () => database.DataSource.OpenConnectionAsync().AsTask());
+        await pool.DisposeAsync();
+        Assert.Equal(0, pool.Snapshot.Reserved);
+        Assert.Empty(await docker.Containers.ListContainersAsync(new ContainersListParameters
+        {
+            All = true,
+            Filters = new Dictionary<string, IDictionary<string, bool>>
+            {
+                ["name"] = new Dictionary<string, bool> { [prefix] = true }
+            }
+        }));
     }
 
     [Fact]

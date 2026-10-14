@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "Category!=PostgreSQL",
+    "--logger",
+    "trx;LogFileName=startup-ownership-refactor.trx",
+    "--results-directory",
+    "artifacts/tt-006/startup-ownership-refactor"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 3.6339034610427916,
+  "log": "artifacts/tt-006/startup-ownership-refactor.log"
+}

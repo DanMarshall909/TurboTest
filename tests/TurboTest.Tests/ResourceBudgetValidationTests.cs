@@ -6,6 +6,35 @@ namespace TurboTest.Tests;
 public class ResourceBudgetValidationTests
 {
     [Theory]
+    [InlineData(false, nameof(TtOptions.DrainTimeout), 0)]
+    [InlineData(true, nameof(TtOptions.DrainTimeout), 0)]
+    [InlineData(false, nameof(TtOptions.DrainTimeout), -1)]
+    [InlineData(true, nameof(TtOptions.DrainTimeout), -1)]
+    [InlineData(false, nameof(TtOptions.DrainTimeout), 4294967295)]
+    [InlineData(true, nameof(TtOptions.DrainTimeout), 4294967295)]
+    [InlineData(false, nameof(TtOptions.StartupTimeout), 0)]
+    [InlineData(true, nameof(TtOptions.StartupTimeout), 0)]
+    [InlineData(false, nameof(TtOptions.StartupTimeout), -1)]
+    [InlineData(true, nameof(TtOptions.StartupTimeout), -1)]
+    [InlineData(false, nameof(TtOptions.StartupTimeout), 4294967295)]
+    [InlineData(true, nameof(TtOptions.StartupTimeout), 4294967295)]
+    public async Task A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(bool prepared, string field, long milliseconds)
+    {
+        var options = new TtOptions { PoolSize = 1 };
+        typeof(TtOptions).GetProperty(field)!.SetValue(options, TimeSpan.FromMilliseconds(milliseconds));
+        IAsyncDisposable? pool = null;
+        try
+        {
+            var error = Assert.Throws<ArgumentOutOfRangeException>(() => pool = prepared
+                ? new TtPreparedPool<TestDbContext>(options,
+                    new TtBaselineDefinition<TestDbContext>("deadline-v1", TtSchemaInitialization.EnsureCreated))
+                : new TtPool(options));
+            Assert.Equal(field, error.ParamName);
+        }
+        finally { if (pool is not null) await pool.DisposeAsync(); }
+    }
+
+    [Theory]
     [InlineData(false, nameof(TtOptions.PoolSize))]
     [InlineData(true, nameof(TtOptions.PoolSize))]
     [InlineData(false, nameof(TtOptions.PreparationConcurrency))]

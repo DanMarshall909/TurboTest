@@ -127,26 +127,58 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
     public ValueTask DisposeAsync()
     {
         Task disposal;
-        TaskCompletionSource start;
+        TaskCompletionSource<Exception?> start;
         lock (_disposeGate)
         {
             if (_disposal is not null) return new ValueTask(_disposal);
             _closing = true;
-            start = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            disposal = _disposal = DisposeCoreAsync(start.Task);
+            start = new TaskCompletionSource<Exception?>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var drain = DisposeCoreAsync(start.Task);
+            disposal = _disposal = ObserveDrainAsync(drain);
         }
-        try { _shutdown.Cancel(); }
-        finally { start.TrySetResult(); }
+        _ = CancelShutdownAsync(start);
         return new ValueTask(disposal);
     }
 
-    private async Task DisposeCoreAsync(Task start)
+    private async Task CancelShutdownAsync(TaskCompletionSource<Exception?> start)
     {
-        await start;
+        Exception? cancellationFailure = null;
+        try { await _shutdown.CancelAsync(); }
+        catch (Exception error) { cancellationFailure = error; }
+        finally { start.TrySetResult(cancellationFailure); }
+    }
+
+    private async Task ObserveDrainAsync(Task drain)
+    {
+        try { await drain.WaitAsync(_options.DrainTimeout); }
+        catch (Exception error)
+        {
+            var drainFailureReported = ReferenceEquals(drain.Exception?.InnerException, error);
+            var cleanup = TtCleanupRegistry.Retain(_pool.Snapshot.OwnerId, async () =>
+            {
+                try { await drain; }
+                catch (Exception cleanupError)
+                {
+                    if (_ownsPool) await _pool.RetryCleanupAsync();
+                    if (!drainFailureReported)
+                    {
+                        drainFailureReported = true;
+                        throw cleanupError as TtLifecycleException ?? new TtLifecycleException("FactoryDrain", cleanupError);
+                    }
+                }
+            }, () => _pool.OwnedResourceIds);
+            var stage = drainFailureReported ? "FactoryDrain" : "DrainTimeout";
+            var failure = error as TtLifecycleException ?? new TtLifecycleException(stage, error);
+            throw failure.WithCleanup(cleanup);
+        }
+    }
+
+    private async Task DisposeCoreAsync(Task<Exception?> start)
+    {
+        Exception? first = await start;
         Task[] acquisitions;
         lock (_disposeGate) acquisitions = _acquisitions.Select(acquisition => acquisition.Task).ToArray();
         await Task.WhenAll(acquisitions);
-        Exception? first = null;
         foreach (var lease in _leases.Keys)
         {
             try { await lease.DisposeAsync(); }

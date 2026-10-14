@@ -7,6 +7,86 @@ namespace TurboTest.Tests;
 public class CleanupOwnershipTests
 {
     [Fact]
+    public async Task Global_cleanup_bounds_its_wait_and_keeps_pending_work_for_a_later_drain()
+    {
+        await Tt.DisposeAsync();
+        Tt.Configure(options => options.DrainTimeout = TimeSpan.FromMilliseconds(100));
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var started = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var calls = 0;
+        var resources = new List<string> { "pending-owned-resource" };
+        var cleanup = TtCleanupRegistry.Retain(Guid.NewGuid(), async () =>
+        {
+            if (++calls > 1) throw new InvalidOperationException("Pending cleanup was restarted.");
+            started.TrySetResult();
+            await release.Task;
+            resources.Clear();
+        }, () => resources);
+        var otherCompleted = false;
+        var other = TtCleanupRegistry.Retain(Guid.NewGuid(), () =>
+        {
+            otherCompleted = true;
+            return Task.CompletedTask;
+        }, () => ["other-owned-resource"]);
+        try
+        {
+            var draining = Tt.DisposeAsync();
+            await started.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            var error = await Assert.ThrowsAsync<TtLifecycleException>(() => draining.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("DrainTimeout", error.Stage);
+            Assert.Same(cleanup, error.Cleanup);
+            Assert.Equal(["pending-owned-resource"], cleanup.OwnedResourceIds);
+            Assert.True(otherCompleted);
+            Assert.Empty(other.OwnedResourceIds);
+            var pending = cleanup.RetryCleanupAsync();
+            Assert.False(pending.IsCompleted);
+            release.TrySetResult();
+            await pending.WaitAsync(TimeSpan.FromSeconds(2));
+            await Tt.DisposeAsync();
+            Assert.Equal(1, calls);
+            Assert.Empty(cleanup.OwnedResourceIds);
+        }
+        finally
+        {
+            release.TrySetResult();
+            await cleanup.RetryCleanupAsync();
+            await other.RetryCleanupAsync();
+            await Tt.DisposeAsync();
+            Tt.Configure(options => options.DrainTimeout = TimeSpan.FromSeconds(30));
+        }
+    }
+
+    [Fact]
+    public async Task Reentrant_cleanup_observes_the_same_pending_attempt_without_repeating_the_callback()
+    {
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var calls = 0;
+        Task? nested = null;
+        TtCleanup? cleanup = null;
+        cleanup = new TtCleanup(Guid.NewGuid(), async () =>
+        {
+            if (++calls > 1) throw new InvalidOperationException("Cleanup callback was repeated.");
+            nested = cleanup!.RetryCleanupAsync();
+            entered.TrySetResult();
+            await release.Task;
+        }, () => ["held-resource"]);
+        var attempt = cleanup.RetryCleanupAsync();
+        try
+        {
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Same(attempt, nested);
+            Assert.False(attempt.IsCompleted);
+            Assert.Equal(["held-resource"], cleanup.OwnedResourceIds);
+        }
+        finally { release.TrySetResult(); }
+        await attempt.WaitAsync(TimeSpan.FromSeconds(2));
+        await cleanup.RetryCleanupAsync();
+        Assert.Equal(1, calls);
+        Assert.Empty(cleanup.OwnedResourceIds);
+    }
+
+    [Fact]
     public async Task Global_cleanup_continues_after_one_failure_and_retains_only_the_failed_owner()
     {
         var fail = true;

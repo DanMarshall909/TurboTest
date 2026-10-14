@@ -373,7 +373,7 @@ public class SlotPoolTests
             Assert.Equal("SlotReset", failure.Stage);
             await secondReturn.WaitAsync(TimeSpan.FromSeconds(2));
             Assert.True(secondReset.Task.IsCompleted);
-            Assert.Equal((1, 1), (owner.Snapshot.Reserved, owner.Snapshot.Ready));
+            Assert.Equal((2, 2), (owner.Snapshot.Reserved, owner.Snapshot.Ready));
         }
         finally
         {

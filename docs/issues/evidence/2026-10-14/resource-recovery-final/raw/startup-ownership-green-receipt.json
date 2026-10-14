@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "FullyQualifiedName~StartupCancellationOwnershipTests|FullyQualifiedName~FailedStartupCleanupTests|FullyQualifiedName~StartupDeadlineTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=startup-ownership-green.trx",
+    "--results-directory",
+    "artifacts/tt-006/startup-ownership-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 153.53475419711322,
+  "log": "artifacts/tt-006/startup-ownership-green.log"
+}

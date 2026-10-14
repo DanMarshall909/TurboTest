@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="93cae252-0ee2-4481-bb71-d04478ea1999" name="@os-greg 2026-10-14 16:21:05" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T16:21:05.2418243+10:00" queuing="2026-10-14T16:21:05.2418244+10:00" start="2026-10-14T16:21:04.6924820+10:00" finish="2026-10-14T16:21:05.2720404+10:00" />
+  <TestSettings name="default" id="72b537c2-186f-47de-a2e1-282ee33cb4c1">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_16_21_05" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="315cec0a-af33-4877-958a-4587ec508853" testId="b3b0ddb6-26e6-eb4c-8fd7-9a1969e2efec" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;DrainTimeout&quot;, milliseconds: 0)" computerName="os-greg" duration="00:00:00.0009069" startTime="2026-10-14T16:21:05.2062972+10:00" endTime="2026-10-14T16:21:05.2063374+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="315cec0a-af33-4877-958a-4587ec508853">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="449758a5-b068-43dd-bdf8-8f00352e31c8" testId="fb5e4a9d-cf0e-e079-1559-1dc060b861c7" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;DrainTimeout&quot;, milliseconds: 4294967295)" computerName="os-greg" duration="00:00:00.0007359" startTime="2026-10-14T16:21:05.2066455+10:00" endTime="2026-10-14T16:21:05.2066843+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="449758a5-b068-43dd-bdf8-8f00352e31c8">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="78d3f027-d7b3-42df-8f20-7e914b307857" testId="43e29f12-b9f1-5a05-98d0-71c94c3ead8d" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;DrainTimeout&quot;, milliseconds: -1)" computerName="os-greg" duration="00:00:00.0006870" startTime="2026-10-14T16:21:05.2073583+10:00" endTime="2026-10-14T16:21:05.2073970+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="78d3f027-d7b3-42df-8f20-7e914b307857">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1a840c56-650c-465e-b983-6b24928bd81e" testId="04fa4a2a-ad64-641b-cad3-77e82a16bbd3" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;DrainTimeout&quot;, milliseconds: 0)" computerName="os-greg" duration="00:00:00.0011275" startTime="2026-10-14T16:21:05.2038929+10:00" endTime="2026-10-14T16:21:05.2040154+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1a840c56-650c-465e-b983-6b24928bd81e">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="58399470-ae44-446a-b2d9-05de1a00fd4b" testId="c043acc7-8f8c-6bb6-df8d-b339e70d1d72" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;DrainTimeout&quot;, milliseconds: -1)" computerName="os-greg" duration="00:00:00.0007464" startTime="2026-10-14T16:21:05.2176515+10:00" endTime="2026-10-14T16:21:05.2176914+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="58399470-ae44-446a-b2d9-05de1a00fd4b">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4ea6412c-3900-4ef2-abec-8c5a709d6297" testId="76bdb5a0-f05b-ec13-3658-abe9c24d6540" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;DrainTimeout&quot;, milliseconds: 4294967295)" computerName="os-greg" duration="00:00:00.0008919" startTime="2026-10-14T16:21:05.2055641+10:00" endTime="2026-10-14T16:21:05.2056039+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4ea6412c-3900-4ef2-abec-8c5a709d6297">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0f2e4db6-52a0-4747-9765-9466c5f3d2ff" testId="4e31e561-c2a1-6a29-78c4-0fafd97b311b" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;StartupTimeout&quot;, milliseconds: -1)" computerName="os-greg" duration="00:00:00.0009538" startTime="2026-10-14T16:21:05.2050859+10:00" endTime="2026-10-14T16:21:05.2051318+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0f2e4db6-52a0-4747-9765-9466c5f3d2ff">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ed53da81-b016-4a34-ae71-08fd287a40a4" testId="7d54d98f-fa87-61d1-e42b-310ae92cf894" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;StartupTimeout&quot;, milliseconds: 0)" computerName="os-greg" duration="00:00:00.0007391" startTime="2026-10-14T16:21:05.2070051+10:00" endTime="2026-10-14T16:21:05.2070435+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ed53da81-b016-4a34-ae71-08fd287a40a4">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="dc3e3ec6-b950-47a4-afbc-b3301e706bf4" testId="18677ff5-50d7-c7cc-0800-4eeca77b2e8a" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;StartupTimeout&quot;, milliseconds: -1)" computerName="os-greg" duration="00:00:00.0006773" startTime="2026-10-14T16:21:05.2173328+10:00" endTime="2026-10-14T16:21:05.2173738+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dc3e3ec6-b950-47a4-afbc-b3301e706bf4">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="3cdccf23-1258-4dce-a981-9c9f43b7f3e3" testId="54a0646f-8437-5c3d-f727-9871d1e474eb" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;StartupTimeout&quot;, milliseconds: 0)" computerName="os-greg" duration="00:00:00.0008445" startTime="2026-10-14T16:21:05.2059310+10:00" endTime="2026-10-14T16:21:05.2059710+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3cdccf23-1258-4dce-a981-9c9f43b7f3e3">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="17116723-df0c-4100-adf8-3a0fc1e84f73" testId="723c9d82-57fe-e217-7df1-b272d71195aa" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;StartupTimeout&quot;, milliseconds: 4294967295)" computerName="os-greg" duration="00:00:00.0233387" startTime="2026-10-14T16:21:05.1567381+10:00" endTime="2026-10-14T16:21:05.1917074+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="17116723-df0c-4100-adf8-3a0fc1e84f73">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="39c351f8-0bee-4590-9a33-d58b734e4ed0" testId="2edd50c8-fa73-8db1-02ca-3abdfd5a13bc" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;StartupTimeout&quot;, milliseconds: 4294967295)" computerName="os-greg" duration="00:00:00.0006928" startTime="2026-10-14T16:21:05.2168722+10:00" endTime="2026-10-14T16:21:05.2169205+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="39c351f8-0bee-4590-9a33-d58b734e4ed0">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;DrainTimeout&quot;, milliseconds: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="04fa4a2a-ad64-641b-cad3-77e82a16bbd3">
+      <Execution id="1a840c56-650c-465e-b983-6b24928bd81e" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;DrainTimeout&quot;, milliseconds: 4294967295)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="76bdb5a0-f05b-ec13-3658-abe9c24d6540">
+      <Execution id="4ea6412c-3900-4ef2-abec-8c5a709d6297" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;DrainTimeout&quot;, milliseconds: 4294967295)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="fb5e4a9d-cf0e-e079-1559-1dc060b861c7">
+      <Execution id="449758a5-b068-43dd-bdf8-8f00352e31c8" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;StartupTimeout&quot;, milliseconds: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="54a0646f-8437-5c3d-f727-9871d1e474eb">
+      <Execution id="3cdccf23-1258-4dce-a981-9c9f43b7f3e3" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;DrainTimeout&quot;, milliseconds: -1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="43e29f12-b9f1-5a05-98d0-71c94c3ead8d">
+      <Execution id="78d3f027-d7b3-42df-8f20-7e914b307857" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;StartupTimeout&quot;, milliseconds: -1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4e31e561-c2a1-6a29-78c4-0fafd97b311b">
+      <Execution id="0f2e4db6-52a0-4747-9765-9466c5f3d2ff" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;StartupTimeout&quot;, milliseconds: -1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="18677ff5-50d7-c7cc-0800-4eeca77b2e8a">
+      <Execution id="dc3e3ec6-b950-47a4-afbc-b3301e706bf4" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;DrainTimeout&quot;, milliseconds: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b3b0ddb6-26e6-eb4c-8fd7-9a1969e2efec">
+      <Execution id="315cec0a-af33-4877-958a-4587ec508853" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: &quot;StartupTimeout&quot;, milliseconds: 4294967295)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="2edd50c8-fa73-8db1-02ca-3abdfd5a13bc">
+      <Execution id="39c351f8-0bee-4590-9a33-d58b734e4ed0" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;StartupTimeout&quot;, milliseconds: 4294967295)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="723c9d82-57fe-e217-7df1-b272d71195aa">
+      <Execution id="17116723-df0c-4100-adf8-3a0fc1e84f73" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;StartupTimeout&quot;, milliseconds: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="7d54d98f-fa87-61d1-e42b-310ae92cf894">
+      <Execution id="ed53da81-b016-4a34-ae71-08fd287a40a4" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: &quot;DrainTimeout&quot;, milliseconds: -1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="c043acc7-8f8c-6bb6-df8d-b339e70d1d72">
+      <Execution id="58399470-ae44-446a-b2d9-05de1a00fd4b" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b3b0ddb6-26e6-eb4c-8fd7-9a1969e2efec" executionId="315cec0a-af33-4877-958a-4587ec508853" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fb5e4a9d-cf0e-e079-1559-1dc060b861c7" executionId="449758a5-b068-43dd-bdf8-8f00352e31c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="43e29f12-b9f1-5a05-98d0-71c94c3ead8d" executionId="78d3f027-d7b3-42df-8f20-7e914b307857" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="04fa4a2a-ad64-641b-cad3-77e82a16bbd3" executionId="1a840c56-650c-465e-b983-6b24928bd81e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c043acc7-8f8c-6bb6-df8d-b339e70d1d72" executionId="58399470-ae44-446a-b2d9-05de1a00fd4b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="76bdb5a0-f05b-ec13-3658-abe9c24d6540" executionId="4ea6412c-3900-4ef2-abec-8c5a709d6297" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4e31e561-c2a1-6a29-78c4-0fafd97b311b" executionId="0f2e4db6-52a0-4747-9765-9466c5f3d2ff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7d54d98f-fa87-61d1-e42b-310ae92cf894" executionId="ed53da81-b016-4a34-ae71-08fd287a40a4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18677ff5-50d7-c7cc-0800-4eeca77b2e8a" executionId="dc3e3ec6-b950-47a4-afbc-b3301e706bf4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="54a0646f-8437-5c3d-f727-9871d1e474eb" executionId="3cdccf23-1258-4dce-a981-9c9f43b7f3e3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="723c9d82-57fe-e217-7df1-b272d71195aa" executionId="17116723-df0c-4100-adf8-3a0fc1e84f73" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2edd50c8-fa73-8db1-02ca-3abdfd5a13bc" executionId="39c351f8-0bee-4590-9a33-d58b734e4ed0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="12" executed="12" passed="0" failed="12" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.19]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.24]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.24]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.25]       Stack Trace:
+[xUnit.net 00:00:00.25]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.25]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.25]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.25]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.25]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.25]       Stack Trace:
+[xUnit.net 00:00:00.25]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.25]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.25]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.26]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.26]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.26]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.26]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.26]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.26]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.26]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.27]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.27]       Stack Trace:
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.27]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.27]       Stack Trace:
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.27]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.27]       Stack Trace:
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds)
+[xUnit.net 00:00:00.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.1944334+10:00">
+        <Text>[xUnit.net 00:00:00.24]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "StartupTimeout", milliseconds: 4294967295) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2042220+10:00">
+        <Text>[xUnit.net 00:00:00.25]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "DrainTimeout", milliseconds: 0) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2052696+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "StartupTimeout", milliseconds: -1) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2057244+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "DrainTimeout", milliseconds: 4294967295) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2060948+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "StartupTimeout", milliseconds: 0) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2064378+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "DrainTimeout", milliseconds: 0) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2067989+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "DrainTimeout", milliseconds: 4294967295) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2071510+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "StartupTimeout", milliseconds: 0) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2075011+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "DrainTimeout", milliseconds: -1) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2473824+10:00">
+        <Text>[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "StartupTimeout", milliseconds: 4294967295) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2474044+10:00">
+        <Text>[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "StartupTimeout", milliseconds: -1) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:21:05.2474184+10:00">
+        <Text>[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "DrainTimeout", milliseconds: -1) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

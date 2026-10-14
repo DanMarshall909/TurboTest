@@ -1,0 +1,21 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "FullyQualifiedName~Cleanup_retries_do_not_restart_the_three_candidate_recovery_budget",
+    "--logger",
+    "trx;LogFileName=recovery-budget-fault.trx",
+    "--results-directory",
+    "artifacts/tt-006/recovery-budget-fault"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 2.6338252800051123,
+  "originalSha256": "b1490479f4f3f8e0adffc59ba1456184c7f5c7780fd59d9e932ab02708c87ea1",
+  "faultSha256": "3021de879cd0094c7f34d2883698071b91560c800031854e9e4166ebf799a96d",
+  "restoredSha256": "b1490479f4f3f8e0adffc59ba1456184c7f5c7780fd59d9e932ab02708c87ea1",
+  "diagnostic": "Assert.Equal() Failure: Values differ\nExpected: 4\nActual:   5",
+  "status": "Named one-fault calibration rejected; not a full mutation run"
+}

@@ -1,0 +1,27 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:12.27]     TurboTest.Tests.PreparedRecoveryTests.Recovery_rejects_a_corrupt_clone_and_publishes_the_verified_seed_and_sequence [FAIL]
+  Failed TurboTest.Tests.PreparedRecoveryTests.Recovery_rejects_a_corrupt_clone_and_publishes_the_verified_seed_and_sequence [11 s]
+  Error Message:
+   System.InvalidOperationException : Connection is not open
+  Stack Trace:
+     at Npgsql.ThrowHelper.ThrowInvalidOperationException(String message)
+   at Npgsql.NpgsqlCommand.CheckAndGetConnection()
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
+   at TurboTest.Tests.PreparedRecoveryTests.Recovery_rejects_a_corrupt_clone_and_publishes_the_verified_seed_and_sequence() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedRecoveryTests.cs:line 68
+   at TurboTest.Tests.PreparedRecoveryTests.Recovery_rejects_a_corrupt_clone_and_publishes_the_verified_seed_and_sequence() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedRecoveryTests.cs:line 69
+   at TurboTest.Tests.PreparedRecoveryTests.Recovery_rejects_a_corrupt_clone_and_publishes_the_verified_seed_and_sequence() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedRecoveryTests.cs:line 69
+   at TurboTest.Tests.PreparedRecoveryTests.Recovery_rejects_a_corrupt_clone_and_publishes_the_verified_seed_and_sequence() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedRecoveryTests.cs:line 81
+   at TurboTest.Tests.PreparedRecoveryTests.Recovery_rejects_a_corrupt_clone_and_publishes_the_verified_seed_and_sequence() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedRecoveryTests.cs:line 81
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-006/recovery-native-green/recovery-native-green.trx
+
+Failed!  - Failed:     1, Passed:     2, Skipped:     0, Total:     3, Duration: 11 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-006/recovery-native-green/070483fe-3d39-4d71-85dd-d136ba68eb58/dan_os-greg_2026-10-14.15_42_57.cobertura.xml

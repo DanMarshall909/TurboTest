@@ -42,6 +42,12 @@ public class TtOptions
     /// <summary>Container ceiling; defaults to the slot cap for ordinary fixtures and one for prepared fixtures.</summary>
     public int? MaxContainers { get; set; }
 
+    /// <summary>Maximum time the caller waits for resource drain. Cleanup ownership survives a timeout. Defaults to 30 seconds.</summary>
+    public TimeSpan DrainTimeout { get; set; } = TimeSpan.FromSeconds(30);
+
+    /// <summary>Maximum time the caller waits for fixture initialization. Defaults to 30 seconds.</summary>
+    public TimeSpan StartupTimeout { get; set; } = TimeSpan.FromSeconds(30);
+
     /// <summary>
     /// Automatically run EnsureCreated when creating contexts. Defaults to true.
     /// Can be configured via "TurboTest:AutoMigrate" in appsettings.json

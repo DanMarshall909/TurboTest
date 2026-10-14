@@ -7,6 +7,47 @@ namespace TurboTest.Tests;
 
 public class LeaseOwnershipTests
 {
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Reentrant_disposal_shares_the_pending_return_before_context_cleanup_starts(bool throughLease)
+    {
+        await using var source = NpgsqlDataSource.Create("Host=unused;Username=test");
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var callbacks = 0;
+        var resets = 0;
+        var discards = 0;
+        Task? nested = null;
+        var database = new TtDatabase(source,
+            () => { resets++; return Task.CompletedTask; },
+            () => { discards++; return Task.CompletedTask; });
+        var context = new RecordingContext(new(), "primary");
+        var lease = new TtLease<RecordingContext>(context, () => throw new InvalidOperationException(),
+            _ => throw new InvalidOperationException(), () => database.DisposeAsync().AsTask());
+        database.OnDispose(async () =>
+        {
+            if (++callbacks > 1) throw new InvalidOperationException("Context cleanup was repeated.");
+            nested = throughLease ? lease.DisposeAsync().AsTask() : database.DisposeAsync().AsTask();
+            entered.TrySetResult();
+            await release.Task;
+            await context.DisposeAsync();
+        });
+        var attempt = throughLease ? lease.DisposeAsync().AsTask() : database.DisposeAsync().AsTask();
+        try
+        {
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Same(attempt, nested);
+            Assert.False(attempt.IsCompleted);
+            Assert.Equal((1, 0, 0), (callbacks, resets, discards));
+        }
+        finally { release.TrySetResult(); }
+        await attempt.WaitAsync(TimeSpan.FromSeconds(2));
+        if (throughLease) await lease.DisposeAsync();
+        else await database.DisposeAsync();
+        Assert.Equal((1, 1, 0), (callbacks, resets, discards));
+    }
+
     [Fact]
     public async Task Failed_public_lease_return_is_shared_without_retrying_cleanup()
     {

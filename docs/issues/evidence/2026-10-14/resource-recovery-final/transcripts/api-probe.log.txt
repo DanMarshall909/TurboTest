@@ -1,0 +1,7 @@
+System.Threading.Tasks.Task`1[Docker.DotNet.Models.CreateContainerResponse] CreateContainerAsync(Docker.DotNet.Models.CreateContainerParameters, System.Threading.CancellationToken)
+System.Threading.Tasks.Task`1[System.Boolean] StartContainerAsync(System.String, Docker.DotNet.Models.ContainerStartParameters, System.Threading.CancellationToken)
+System.Threading.Tasks.Task`1[System.Collections.Generic.IList`1[Docker.DotNet.Models.ImagesListResponse]] ListImagesAsync(Docker.DotNet.Models.ImagesListParameters, System.Threading.CancellationToken)
+System.Threading.Tasks.Task CreateImageAsync(Docker.DotNet.Models.ImagesCreateParameters, Docker.DotNet.Models.AuthConfig, System.IProgress`1[Docker.DotNet.Models.JSONMessage], System.Threading.CancellationToken)
+System.Threading.Tasks.Task CreateImageAsync(Docker.DotNet.Models.ImagesCreateParameters, Docker.DotNet.Models.AuthConfig, System.Collections.Generic.IDictionary`2[System.String,System.String], System.IProgress`1[Docker.DotNet.Models.JSONMessage], System.Threading.CancellationToken)
+System.Threading.Tasks.Task CreateImageAsync(Docker.DotNet.Models.ImagesCreateParameters, System.IO.Stream, Docker.DotNet.Models.AuthConfig, System.IProgress`1[Docker.DotNet.Models.JSONMessage], System.Threading.CancellationToken)
+System.Threading.Tasks.Task CreateImageAsync(Docker.DotNet.Models.ImagesCreateParameters, System.IO.Stream, Docker.DotNet.Models.AuthConfig, System.Collections.Generic.IDictionary`2[System.String,System.String], System.IProgress`1[Docker.DotNet.Models.JSONMessage], System.Threading.CancellationToken)

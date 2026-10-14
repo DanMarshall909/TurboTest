@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="a5d4e88f-8a99-4b4e-ab70-a9132c3847c4" name="@os-greg 2026-10-14 18:09:28" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T18:09:28.5488735+10:00" queuing="2026-10-14T18:09:28.5488735+10:00" start="2026-10-14T18:08:55.1013984+10:00" finish="2026-10-14T18:09:42.0015664+10:00" />
+  <TestSettings name="default" id="402ed461-6184-440c-8c8d-b74a91d3cb96">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_18_09_28" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="2b01a901-c692-4094-aa43-0e5660010fc3" testId="8a71ed95-6146-e9ca-05bc-9bff8de657bc" testName="TurboTest.Tests.StartupCancellationOwnershipTests.Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle(callerCancellation: True, lateFailure: True)" computerName="os-greg" duration="00:00:07.3592991" startTime="2026-10-14T18:09:34.5568681+10:00" endTime="2026-10-14T18:09:41.9154848+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2b01a901-c692-4094-aa43-0e5660010fc3">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.TimeoutException)
+---- System.TimeoutException : The operation has timed out.</Message>
+          <StackTrace>   at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs:line 76
+   at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs:line 116
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4436e371-7de7-4822-a159-bcf8402ff3e2" testId="2188049d-8163-7876-4f27-9cde848d735d" testName="TurboTest.Tests.StartupCancellationOwnershipTests.Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle(callerCancellation: True, lateFailure: False)" computerName="os-greg" duration="00:00:06.0356282" startTime="2026-10-14T18:09:28.5359578+10:00" endTime="2026-10-14T18:09:34.5551472+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4436e371-7de7-4822-a159-bcf8402ff3e2">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.TimeoutException)
+---- System.TimeoutException : The operation has timed out.</Message>
+          <StackTrace>   at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs:line 76
+   at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs:line 116
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ad02489a-a010-4445-9a37-d6b96f896298" testId="6d4bc1cd-832e-f8e8-0d18-51ea66a18801" testName="TurboTest.Tests.StartupCancellationOwnershipTests.Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle(callerCancellation: False, lateFailure: False)" computerName="os-greg" duration="00:00:32.9253939" startTime="2026-10-14T18:08:55.5793084+10:00" endTime="2026-10-14T18:09:28.5179550+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad02489a-a010-4445-9a37-d6b96f896298">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.TimeoutException)
+---- System.TimeoutException : The operation has timed out.</Message>
+          <StackTrace>   at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs:line 76
+   at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs:line 116
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.StartupCancellationOwnershipTests.Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle(callerCancellation: False, lateFailure: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="6d4bc1cd-832e-f8e8-0d18-51ea66a18801">
+      <Execution id="ad02489a-a010-4445-9a37-d6b96f896298" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.StartupCancellationOwnershipTests" name="Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.StartupCancellationOwnershipTests.Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle(callerCancellation: True, lateFailure: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="2188049d-8163-7876-4f27-9cde848d735d">
+      <Execution id="4436e371-7de7-4822-a159-bcf8402ff3e2" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.StartupCancellationOwnershipTests" name="Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.StartupCancellationOwnershipTests.Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle(callerCancellation: True, lateFailure: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="8a71ed95-6146-e9ca-05bc-9bff8de657bc">
+      <Execution id="2b01a901-c692-4094-aa43-0e5660010fc3" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.StartupCancellationOwnershipTests" name="Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="8a71ed95-6146-e9ca-05bc-9bff8de657bc" executionId="2b01a901-c692-4094-aa43-0e5660010fc3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2188049d-8163-7876-4f27-9cde848d735d" executionId="4436e371-7de7-4822-a159-bcf8402ff3e2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6d4bc1cd-832e-f8e8-0d18-51ea66a18801" executionId="ad02489a-a010-4445-9a37-d6b96f896298" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="0" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.19]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:33.15]       Assert.Throws() Failure: Exception type was not an exact match
+[xUnit.net 00:00:33.15]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:33.15]       Actual:   typeof(System.TimeoutException)
+[xUnit.net 00:00:33.15]       ---- System.TimeoutException : The operation has timed out.
+[xUnit.net 00:00:33.15]       Stack Trace:
+[xUnit.net 00:00:33.15]         /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs(76,0): at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure)
+[xUnit.net 00:00:33.15]         /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs(116,0): at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure)
+[xUnit.net 00:00:33.15]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:33.15]         ----- Inner Stack Trace -----
+[xUnit.net 00:00:33.15]         
+[xUnit.net 00:00:39.18]       Assert.Throws() Failure: Exception type was not an exact match
+[xUnit.net 00:00:39.18]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:39.18]       Actual:   typeof(System.TimeoutException)
+[xUnit.net 00:00:39.18]       ---- System.TimeoutException : The operation has timed out.
+[xUnit.net 00:00:39.18]       Stack Trace:
+[xUnit.net 00:00:39.18]         /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs(76,0): at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure)
+[xUnit.net 00:00:39.18]         /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs(116,0): at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure)
+[xUnit.net 00:00:39.18]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:39.19]         ----- Inner Stack Trace -----
+[xUnit.net 00:00:39.19]         
+[xUnit.net 00:00:46.55]       Assert.Throws() Failure: Exception type was not an exact match
+[xUnit.net 00:00:46.55]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:46.55]       Actual:   typeof(System.TimeoutException)
+[xUnit.net 00:00:46.55]       ---- System.TimeoutException : The operation has timed out.
+[xUnit.net 00:00:46.55]       Stack Trace:
+[xUnit.net 00:00:46.55]         /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs(76,0): at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure)
+[xUnit.net 00:00:46.55]         /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs(116,0): at TurboTest.Tests.StartupCancellationOwnershipTests.RunAsync(Boolean callerCancellation, Boolean lateFailure)
+[xUnit.net 00:00:46.55]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:46.55]         ----- Inner Stack Trace -----
+[xUnit.net 00:00:46.55]         
+[xUnit.net 00:00:46.55]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T18:09:28.5227457+10:00">
+        <Text>[xUnit.net 00:00:33.15]     TurboTest.Tests.StartupCancellationOwnershipTests.Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle(callerCancellation: False, lateFailure: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T18:09:34.5557024+10:00">
+        <Text>[xUnit.net 00:00:39.18]     TurboTest.Tests.StartupCancellationOwnershipTests.Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle(callerCancellation: True, lateFailure: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T18:09:41.9162838+10:00">
+        <Text>[xUnit.net 00:00:46.54]     TurboTest.Tests.StartupCancellationOwnershipTests.Interruption_owns_noncooperative_initialization_and_cancellation_until_both_settle(callerCancellation: True, lateFailure: True) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

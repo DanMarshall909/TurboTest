@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "TurboTest.sln",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=full-gate-r3.trx",
+    "--results-directory",
+    "artifacts/tt-006/full-gate-r3"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 444.2945829301607,
+  "log": "artifacts/tt-006/full-gate-r3.log"
+}

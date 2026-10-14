@@ -1,0 +1,36 @@
+{
+  "operations": [
+    {
+      "operation": "delete",
+      "path": "docs/issues/open/database/TT-006-quarantine-recover-and-drain-pool-resources.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/resolved/database/TT-006-quarantine-recover-and-drain-pool-resources.md",
+      "mode": "100644",
+      "sha256": "ecd082774ffe506fe0e41cfda477f2be2735ce779175d79a199ad1260cec0ed9",
+      "contentPath": "artifacts/tt-006/review/post/docs/issues/resolved/database/TT-006-quarantine-recover-and-drain-pool-resources.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/README.md",
+      "mode": "100644",
+      "sha256": "be9139d8a4fba961f6835cd838345dc60dacf05e7f1bc73411db8fd33818f4e8",
+      "contentPath": "artifacts/tt-006/review/post/docs/issues/README.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/completion.json",
+      "mode": "100644",
+      "sha256": "1bc069d08e371abb32895bf4536f193af2f1f7d7147a2fb74259eab8186f8eb5",
+      "contentPath": "artifacts/tt-006/review/post/docs/issues/evidence/2026-10-14/resource-recovery-final/completion.json"
+    }
+  ],
+  "validation": [
+    "git diff --cached --check",
+    "Verify all archived content/raw digests and final relative Markdown links",
+    "Compare complete final tree with exact candidate plus envelope"
+  ],
+  "commitMessage": "Recover quarantined resources and retain ownership through bounded drain",
+  "publication": "Normal local completion commit; no remote, no reusable cache/build deletion. Inspect processes and Docker inventory after commit; preserve unknown state."
+}

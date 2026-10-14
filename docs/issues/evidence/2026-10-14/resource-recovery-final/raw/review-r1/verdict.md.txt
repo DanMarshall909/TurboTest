@@ -1,0 +1,59 @@
+FAIL
+
+The candidate has one actionable startup cancellation defect. TT-006 cannot yet be resolved.
+
+**F1 — Startup deadline and caller cancellation bypass the owned asynchronous cancellation path.**
+Location: [Tt.cs:107](/home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:107), `InitializeOwnedPoolAsync`. A timed source is directly linked to the token passed to initialization and used by `WaitAsync`. The later `linked.CancelAsync()` does not own cancellation already initiated by that timer or the caller.
+
+This produces three related failures:
+
+- A throwing seed cancellation callback can propagate through the linked source onto the deadline timer thread, escaping the lifecycle error handler and potentially terminating the test process.
+- A blocking callback registered after `WaitAsync` can delay that observer’s cancellation notification. If initialization awaits a noncooperative task, the configured startup deadline need not return control to the caller.
+- The catch-path `CancelAsync()` does not join callbacks already running; initialization can settle and resource disposal can start before those callbacks finish.
+
+These conclusions follow from the candidate call chain and .NET 10’s implementation: timed and linked cancellation invoke handlers synchronously, and `CancelAsync()` returns immediately when cancellation has already been requested. [.NET 10 CancellationTokenSource source](https://raw.githubusercontent.com/dotnet/runtime/v10.0.0/src/libraries/System.Private.CoreLib/src/System/Threading/CancellationTokenSource.cs)
+
+The existing tests miss this combination. `Throwing_startup_cancellation_callbacks_cannot_replace_the_initializer_error_or_lose_cleanup` initiates cancellation through the initializer-failure catch path. The deadline variant of `A_blocking_startup_cancellation_callback_keeps_its_host_owned_without_blocking_the_failure_observer` returns a token-cancelable `Task.Delay`, which supplies another route to initialization completion; its callback does not throw.
+
+**Required outcome:** Separate caller/deadline observation from cancellation of initialization work. Ensure every cancellation origin starts and retains one asynchronous cancellation task; bound the observer independently, capture callback failures safely, and join cancellation plus initialization before resource disposal. Add behavioral RED/GREEN evidence for deadline and caller cancellation with a noncooperative initializer and a held callback, including a late callback failure. Assert bounded caller completion, exact resource retention until work settles, safe error reporting, and eventual single cleanup. A deadline-triggered throwing-callback RED should be isolated from the main test runner.
+
+Task-to-implementation matrix:
+
+| TT-006 task | Implementation inspected | Assessment |
+|---|---|---|
+| Quarantine failed resources | `TtSlotPool` states, reset compensation, cleanup recovery | Implemented |
+| Verify replacements before publication | `PrepareSlotAsync`, baseline capture/verification, workload identity, `PublishReady` | Implemented |
+| Preserve capacity and resource ownership | Shared reservation ledger, Docker create acknowledgement/reconciliation, bounded episode budget | Implemented |
+| Own cancellation and initialization work | `InitializeOwnedPoolAsync`, readiness cancellation, queued request cancellation | F1 requires correction |
+| Drain and retain failed owners | Factory drain observer, prepared host retention, cleanup registry | Implemented for reviewed drain paths; startup ownership affected by F1 |
+| Make repeated disposal observable and idempotent | Published pending tasks in lease/database/cleanup; cached factory outcome | Implemented |
+| Restore service or terminate waiters | Three-attempt recovery, conservative deletion, terminal diagnostics | Implemented |
+| Document and resolve only TT-006 | README, ticket, tracker and exact completion envelope | Resolution premature until F1 is repaired |
+
+Criterion-to-test matrix:
+
+| Acceptance criterion | Actual executable evidence inspected | Assessment |
+|---|---|---|
+| 1. Quarantine/non-publication | Held replacement/deletion assertions in `SlotRecoveryTests`; native corrupt clone rejection | Supported |
+| 2. Schema, seed, sequences and identity | `PreparedRecoveryTests` checks distinct databases, exact seed ID/value, next sequence value and removal of rejected databases; existing baseline suites retained | Supported |
+| 3. Cap and conservative accounting | Reservation assertions, whole-episode attempt/deletion counts, `CreationAccountingTests`, native locked-row physical inventory and ordinary deletion recovery | Supported |
+| 4. Cancellation retains an owner | Queue/backpressure tests, held image/create/readiness work, startup tests | Incomplete: F1 |
+| 5. Shutdown drains owned work under policy | Three held lifecycle phases, native reset/backend-session retention, prepared DROP `55006` retry, static owner retention | Supported for shutdown; startup callback ownership requires F1 |
+| 6. Bounded/idempotent disposal and callback errors | Reentrant task identity/count guards, factory blocking/throwing callbacks, global retained-owner progress | Incomplete for externally initiated startup cancellation: F1 |
+| 7. Recovery or actionable terminal failure | Eager replacement without demand, rejected candidate retry, exactly three preparations/deletions, settled terminal waiters | Supported |
+
+I independently verified:
+
+- All **464** manifest paths match actual status, mode, content digest and staged identity; no dirty paths are omitted.
+- Manifest SHA-256: `4fed9f43e00dd57ad44281e68aafbadd545070c598e67a3dd5efd5537a0952b6`.
+- Base/current/integration: `bd5cbb40f986844fe4a0ea162f83cf62b346ee84`; only `master`, the recorded unchanged stash and primary worktree exist; no remote/upstream exists.
+- All **321** final archive entries match retained content/raw digests.
+- Raw TRX results confirm **212 passing** full-gate checks and **103 passing** post-prune checks. The archived pre-prune source differs by precisely the removed unused getter. Final build receipts report success.
+- The revised administrative envelope reconstructs the exact **1,679-path** final tree. Its hash is `d13799bb49090aef21a3b83c514990b66a34ab9e20c5ed015bcfba51191f577a`; final-tree hash is `d584f89ffb185a1848a15515ccd7ba8a50f6aa934237812ecbe096748f6636b6`.
+- The envelope resolves only TT-006 and leaves TT-007–TT-010 Open. It must not be applied with this verdict.
+
+The shared ledger and single retained cleanup mechanism are reasonable designs; another allocator or generalized retry framework would add unnecessary complexity. The necessary improvement is the narrower separation described in F1.
+
+Coverage limitations are disclosed accurately; execution counts do not establish the missing callback behavior. The named recovery-budget calibration is useful evidence, and pending whole-session mutation is not itself a blocker.
+
+Reusable lesson candidate for the existing repair record: **Cancellation requested is not cancellation settled.** Owner: startup lifecycle implementation/tests. Preserve a regression covering each cancellation origin; avoid introducing a general cancellation framework solely for this fix. No repository edits, builds, tests or Docker mutations were performed during this review.

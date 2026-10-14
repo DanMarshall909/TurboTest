@@ -30,16 +30,24 @@ public sealed class TtCleanup
     /// <summary>Shares a pending attempt; a completed failure can be explicitly retried.</summary>
     public Task RetryCleanupAsync()
     {
+        Task attempt;
+        TaskCompletionSource? start = null;
         lock (_gate)
         {
             if (_attempt is null || _attempt.IsFaulted)
-                _attempt = RunAsync();
-            return _attempt;
+            {
+                start = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                _attempt = RunAsync(start.Task);
+            }
+            attempt = _attempt;
         }
+        start?.TrySetResult();
+        return attempt;
     }
 
-    private async Task RunAsync()
+    private async Task RunAsync(Task start)
     {
+        await start;
         try { await _cleanup!(); }
         catch (Exception error)
         {

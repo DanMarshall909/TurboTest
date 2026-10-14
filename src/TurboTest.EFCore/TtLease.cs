@@ -48,11 +48,25 @@ public sealed class TtLease<TContext> : IAsyncDisposable where TContext : DbCont
 
     public ValueTask DisposeAsync()
     {
+        Task disposal;
+        TaskCompletionSource? start = null;
         lock (_gate)
         {
             _closing = true;
-            _disposal ??= _return();
-            return new ValueTask(_disposal);
+            if (_disposal is null)
+            {
+                start = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                _disposal = ReturnAsync(start.Task);
+            }
+            disposal = _disposal;
         }
+        start?.TrySetResult();
+        return new ValueTask(disposal);
+    }
+
+    private async Task ReturnAsync(Task start)
+    {
+        await start;
+        await _return();
     }
 }

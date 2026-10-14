@@ -1,0 +1,1271 @@
+{
+  "report": "artifacts/tt-006/full-gate-r4/f10b0903-92fa-462d-b701-92ce7e58c25a/dan_os-greg_2026-10-14.18_31_24.cobertura.xml",
+  "reportSha256": "f9f146d88a2421b46d6ec29abbf9764d1ae9d586b5eabf82ef6c378e38ad9831",
+  "interpretation": "Union line execution across declaring/generated classes; raw branch rates remain separate and are not assertion proof.",
+  "files": {
+    "src/TurboTest.EFCore/Extensions/ServiceCollectionExtensions.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Extensions.ServiceCollectionExtensions",
+          "lineRate": "0.2",
+          "branchRate": "0"
+        },
+        {
+          "name": "TurboTest.EFCore.Extensions.ServiceCollectionExtensions.<>c",
+          "lineRate": "0",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Extensions.ServiceCollectionExtensions.<>c__2<TContext>",
+          "lineRate": "0",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Extensions.ServiceCollectionExtensions.<>c__DisplayClass2_0<TContext>",
+          "lineRate": "0",
+          "branchRate": "0"
+        }
+      ],
+      "coveredLines": 5,
+      "executableLines": 31,
+      "uncovered": [
+        {
+          "line": 23,
+          "source": "    {"
+        },
+        {
+          "line": 25,
+          "source": "        if (configuration != null)"
+        },
+        {
+          "line": 26,
+          "source": "        {"
+        },
+        {
+          "line": 27,
+          "source": "            services.Configure<TtOptions>(configuration.GetSection(TtOptions.SectionName));"
+        },
+        {
+          "line": 28,
+          "source": "        }"
+        },
+        {
+          "line": 30,
+          "source": "        {"
+        },
+        {
+          "line": 31,
+          "source": "            services.Configure<TtOptions>(_ => { });"
+        },
+        {
+          "line": 32,
+          "source": "        }"
+        },
+        {
+          "line": 35,
+          "source": "        services.AddSingleton<ITtServiceFactory, TtServiceFactory>();"
+        },
+        {
+          "line": 37,
+          "source": "        return services;"
+        },
+        {
+          "line": 38,
+          "source": "    }"
+        },
+        {
+          "line": 67,
+          "source": "    {"
+        },
+        {
+          "line": 69,
+          "source": "        if (!services.Any(s => s.ServiceType == typeof(ITtServiceFactory)))"
+        },
+        {
+          "line": 70,
+          "source": "        {"
+        },
+        {
+          "line": 71,
+          "source": "            services.AddTurboTest();"
+        },
+        {
+          "line": 72,
+          "source": "        }"
+        },
+        {
+          "line": 74,
+          "source": "        services.AddDbContext<TContext>((serviceProvider, options) =>"
+        },
+        {
+          "line": 75,
+          "source": "        {"
+        },
+        {
+          "line": 76,
+          "source": "            var factory = serviceProvider.GetRequiredService<ITtServiceFactory>();"
+        },
+        {
+          "line": 77,
+          "source": "            var connectionString = factory.GetConnectionString();"
+        },
+        {
+          "line": 78,
+          "source": ""
+        },
+        {
+          "line": 79,
+          "source": "            options.UseNpgsql(connectionString);"
+        },
+        {
+          "line": 80,
+          "source": "            configure?.Invoke(options);"
+        },
+        {
+          "line": 81,
+          "source": "        });"
+        },
+        {
+          "line": 83,
+          "source": "        return services;"
+        },
+        {
+          "line": 84,
+          "source": "    }"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/Internal/ITtDatabasePool.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.ITtDatabasePool",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 1,
+      "executableLines": 1,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/Internal/NpgsqlExtensions.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.NpgsqlExtensions.<ExecuteNonQueryAsync>d__0",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.NpgsqlExtensions.<ExecuteScalarAsync>d__1",
+          "lineRate": "0",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 4,
+      "executableLines": 8,
+      "uncovered": [
+        {
+          "line": 17,
+          "source": "    {"
+        },
+        {
+          "line": 18,
+          "source": "        using var command = new NpgsqlCommand(sql, connection);"
+        },
+        {
+          "line": 19,
+          "source": "        return await command.ExecuteScalarAsync();"
+        },
+        {
+          "line": 20,
+          "source": "    }"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/Internal/TtAdministratorConnections.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtAdministratorConnections",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtAdministratorConnections.Lease",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtAdministratorConnections.<OpenAsync>d__9",
+          "lineRate": "0.9411764705882353",
+          "branchRate": "0.75"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtAdministratorConnections.Lease.<CloseAsync>d__8",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 34,
+      "executableLines": 35,
+      "uncovered": [
+        {
+          "line": 54,
+          "source": "        }"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtBaselineSnapshot",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtBaselineSnapshot.<>c",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtBaselineSnapshot.<>c__DisplayClass4_0",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtBaselineSnapshot.<CaptureAsync>d__7",
+          "lineRate": "0.9877300613496932",
+          "branchRate": "0.8"
+        }
+      ],
+      "coveredLines": 172,
+      "executableLines": 174,
+      "uncovered": [
+        {
+          "line": 152,
+          "source": "                    throw new TtLifecycleException(\"BaselineLimit\", new InvalidOperationException(\"Too many baseline objects.\"));"
+        },
+        {
+          "line": 178,
+          "source": "                    throw new TtLifecycleException(\"BaselineLimit\", new InvalidOperationException(\"Too many baseline relations.\"));"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/Internal/TtCleanupRegistry.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtCleanupRegistry",
+          "lineRate": "0.875",
+          "branchRate": "0.5"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtCleanupRegistry.<>c",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtCleanupRegistry.<DrainAsync>d__3",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtCleanupRegistry.<>c__DisplayClass3_0.<<DrainAsync>g__ObserveAsync|0>d",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 20,
+      "executableLines": 21,
+      "uncovered": [
+        {
+          "line": 14,
+          "source": "            throw new InvalidOperationException(\"The failed startup owner is already retained.\");"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/Internal/TtContainer.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtContainer",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtContainer.<DisposeAsync>d__9",
+          "lineRate": "0.75",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtContainer.<ResetAsync>d__8",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 41,
+      "executableLines": 44,
+      "uncovered": [
+        {
+          "line": 69,
+          "source": "        catch (DockerApiException error) when (error.StatusCode == System.Net.HttpStatusCode.NotFound)"
+        },
+        {
+          "line": 70,
+          "source": "        {"
+        },
+        {
+          "line": 72,
+          "source": "        }"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/Internal/TtDatabase.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtDatabase",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtDatabase.<DisposeCoreAsync>d__13",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 57,
+      "executableLines": 57,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/Internal/TtOwnedContextOptions.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtOwnedContextOptions",
+          "lineRate": "1",
+          "branchRate": "0.75"
+        }
+      ],
+      "coveredLines": 9,
+      "executableLines": 9,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/Internal/TtPool.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool",
+          "lineRate": "0.7604166666666666",
+          "branchRate": "0.7058823529411765"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.ContainerSlot",
+          "lineRate": "1",
+          "branchRate": "0.5"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.SystemInfo",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<>c",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<>c__DisplayClass23_0",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<>c__DisplayClass25_0",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<>c__DisplayClass30_0",
+          "lineRate": "1",
+          "branchRate": "0.5"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<CreateContainerAsync>d__28",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<DeleteContainerAsync>d__26",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<DeleteSlotAsync>d__27",
+          "lineRate": "1",
+          "branchRate": "0.875"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<DisposeAsync>d__32",
+          "lineRate": "1",
+          "branchRate": "0.6666666666666666"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<EnsureImageAsync>d__30",
+          "lineRate": "0.4",
+          "branchRate": "0.5"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<GetDatabaseAsync>d__25",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<InitializeAsync>d__24",
+          "lineRate": "1",
+          "branchRate": "0.5"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPool.<WaitForDatabaseReadyAsync>d__29",
+          "lineRate": "0.9565217391304348",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 234,
+      "executableLines": 264,
+      "uncovered": [
+        {
+          "line": 246,
+          "source": "            }"
+        },
+        {
+          "line": 261,
+          "source": "        {"
+        },
+        {
+          "line": 262,
+          "source": "            await _dockerClient.Images.CreateImageAsync("
+        },
+        {
+          "line": 263,
+          "source": "                new ImagesCreateParameters { FromImage = image },"
+        },
+        {
+          "line": 264,
+          "source": "                null,"
+        },
+        {
+          "line": 265,
+          "source": "                new Progress<JSONMessage>(), cancellationToken);"
+        },
+        {
+          "line": 266,
+          "source": "        }"
+        },
+        {
+          "line": 337,
+          "source": "    {"
+        },
+        {
+          "line": 338,
+          "source": "        using var process = new System.Diagnostics.Process"
+        },
+        {
+          "line": 339,
+          "source": "        {"
+        },
+        {
+          "line": 340,
+          "source": "            StartInfo = new System.Diagnostics.ProcessStartInfo"
+        },
+        {
+          "line": 341,
+          "source": "            {"
+        },
+        {
+          "line": 342,
+          "source": "                FileName = \"wmic\","
+        },
+        {
+          "line": 343,
+          "source": "                Arguments = \"computersystem get TotalPhysicalMemory /value\","
+        },
+        {
+          "line": 344,
+          "source": "                UseShellExecute = false,"
+        },
+        {
+          "line": 345,
+          "source": "                RedirectStandardOutput = true,"
+        },
+        {
+          "line": 346,
+          "source": "                CreateNoWindow = true"
+        },
+        {
+          "line": 347,
+          "source": "            }"
+        },
+        {
+          "line": 348,
+          "source": "        };"
+        },
+        {
+          "line": 350,
+          "source": "        process.Start();"
+        },
+        {
+          "line": 351,
+          "source": "        var output = process.StandardOutput.ReadToEnd();"
+        },
+        {
+          "line": 352,
+          "source": "        process.WaitForExit();"
+        },
+        {
+          "line": 354,
+          "source": "        var match = System.Text.RegularExpressions.Regex.Match(output, @\"TotalPhysicalMemory=(\\d+)\");"
+        },
+        {
+          "line": 355,
+          "source": "        if (match.Success && long.TryParse(match.Groups[1].Value, out var bytes))"
+        },
+        {
+          "line": 356,
+          "source": "        {"
+        },
+        {
+          "line": 357,
+          "source": "            return (int)(bytes / 1024 / 1024); // Convert to MB"
+        },
+        {
+          "line": 360,
+          "source": "        return 8192; // Fallback"
+        },
+        {
+          "line": 361,
+          "source": "    }"
+        },
+        {
+          "line": 373,
+          "source": "        return 8192; // Fallback"
+        },
+        {
+          "line": 381,
+          "source": "        catch { return fallback; }"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/Internal/TtPreparedConfiguration.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedConfiguration",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 27,
+      "executableLines": 27,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/Internal/TtPreparedPool.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool<TContext>",
+          "lineRate": "1",
+          "branchRate": "0.9615384615384616"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.Slot<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.BaselineIdentity<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.Login<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass36_0<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass37_0<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass44_0<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<DeleteSlotAsync>d__46<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<DisposeCoreAsync>d__49<TContext>",
+          "lineRate": "0.9545454545454546",
+          "branchRate": "0.8"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<GetDatabaseAsync>d__37<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<InitializeAsync>d__32<TContext>",
+          "lineRate": "0.9821428571428571",
+          "branchRate": "0.875"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<PrepareSlotAsync>d__39<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<ReturnAsync>d__44<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<TryResetRowsAsync>d__45<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<VerifyWorkloadAsync>d__41<TContext>",
+          "lineRate": "0.875",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.Login.<CreateWorkloadRoleAsync>d__6<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass44_0.<<ReturnAsync>b__1>d<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 304,
+      "executableLines": 307,
+      "uncovered": [
+        {
+          "line": 164,
+          "source": "                    throw new ArgumentOutOfRangeException(nameof(_definition.Schema));"
+        },
+        {
+          "line": 277,
+          "source": "            throw new InvalidOperationException(\"The workload connection does not match its owned slot.\");"
+        },
+        {
+          "line": 401,
+          "source": "                catch (Exception error) { first ??= error; }"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/Internal/TtRowResetPlan.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtRowResetPlan",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtRowResetPlan.Table",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtRowResetPlan.Sequence",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtRowResetPlan.<>c",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtRowResetPlan.<CaptureAsync>d__5",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtRowResetPlan.<RestoreAsync>d__6",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 105,
+      "executableLines": 105,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/Internal/TtSlotPool.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool<T>",
+          "lineRate": "0.9772727272727273",
+          "branchRate": "0.9"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.Reservation<T>",
+          "lineRate": "1",
+          "branchRate": "0.5"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.Waiter<T>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c<T>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass23_0<T>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass24_0<T>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass31_0<T>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<DiscardCoreAsync>d__34<T>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<DisposeCoreAsync>d__44<T>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<PrepareAsync>d__27<T>",
+          "lineRate": "0.8979591836734694",
+          "branchRate": "0.9166666666666666"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<RecoverCleanupAsync>d__39<T>",
+          "lineRate": "0.8611111111111112",
+          "branchRate": "0.8333333333333334"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<ResetAsync>d__35<T>",
+          "lineRate": "0.9090909090909091",
+          "branchRate": "0.8"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<WarmAsync>d__31<T>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass29_0.<<ReturnAsync>b__0>d<T>",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 337,
+      "executableLines": 355,
+      "uncovered": [
+        {
+          "line": 167,
+          "source": "        }"
+        },
+        {
+          "line": 168,
+          "source": "        catch (OperationCanceledException) when (_closing.IsCancellationRequested)"
+        },
+        {
+          "line": 169,
+          "source": "        {"
+        },
+        {
+          "line": 170,
+          "source": "            lock (_gate) _owned[reservation] = State.Retiring;"
+        },
+        {
+          "line": 171,
+          "source": "        }"
+        },
+        {
+          "line": 208,
+          "source": "                throw new InvalidOperationException(\"The reservation is not leased by this pool.\");"
+        },
+        {
+          "line": 260,
+          "source": "            {"
+        },
+        {
+          "line": 261,
+          "source": "                await _resetLimit.WaitAsync();"
+        },
+        {
+          "line": 262,
+          "source": "                permitHeld = true;"
+        },
+        {
+          "line": 263,
+          "source": "            }"
+        },
+        {
+          "line": 352,
+          "source": "        }"
+        },
+        {
+          "line": 353,
+          "source": "        catch (OperationCanceledException) when (_closing.IsCancellationRequested)"
+        },
+        {
+          "line": 354,
+          "source": "        {"
+        },
+        {
+          "line": 355,
+          "source": "            lock (_gate) _owned[reservation] = State.Quarantined;"
+        },
+        {
+          "line": 356,
+          "source": "        }"
+        },
+        {
+          "line": 388,
+          "source": "                {"
+        },
+        {
+          "line": 389,
+          "source": "                    waiter.Completion.TrySetCanceled(waiter.Token);"
+        },
+        {
+          "line": 390,
+          "source": "                    continue;"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/Tt.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.Tt",
+          "lineRate": "0.95",
+          "branchRate": "0.75"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<>c__DisplayClass13_0",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<>c__DisplayClass13_2",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<>c__DisplayClass5_0",
+          "lineRate": "0",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<CreateFactoryAsync>d__10<TContext>",
+          "lineRate": "1",
+          "branchRate": "0.5"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<CreateLeaseAsync>d__8<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<CreateOwnedFactoryAsync>d__12<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<CreatePreparedFactoryAsync>d__11<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<DisposeAsync>d__14",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<InitializeOwnedPoolAsync>d__13",
+          "lineRate": "1",
+          "branchRate": "0.9444444444444444"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<>c__DisplayClass13_2.<<InitializeOwnedPoolAsync>g__DrainAsync|0>d",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.Tt.<>c__DisplayClass13_3.<<InitializeOwnedPoolAsync>b__2>d",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 125,
+      "executableLines": 126,
+      "uncovered": [
+        {
+          "line": 18,
+          "source": "        Configure(options => configuration.GetSection(TtOptions.SectionName).Bind(options));"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/TtBaselineDefinition.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.TtBaselineDefinition<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 11,
+      "executableLines": 11,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/TtCleanup.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.TtCleanup",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtCleanup.<RunAsync>d__11",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 39,
+      "executableLines": 39,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/TtFactory.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.TtFactory<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtFactory.<>c<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass17_1<TContext>",
+          "lineRate": "1",
+          "branchRate": "0.9"
+        },
+        {
+          "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass17_2<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass20_0<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtFactory.<CancelShutdownAsync>d__19<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtFactory.<CreateLeaseAsync>d__17<TContext>",
+          "lineRate": "0.9807692307692307",
+          "branchRate": "0.9583333333333334"
+        },
+        {
+          "name": "TurboTest.EFCore.TtFactory.<DisposeCoreAsync>d__21<TContext>",
+          "lineRate": "0.7619047619047619",
+          "branchRate": "0.6875"
+        },
+        {
+          "name": "TurboTest.EFCore.TtFactory.<ObserveDrainAsync>d__20<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass17_3.<<CreateLeaseAsync>b__4>d<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass20_1.<<ObserveDrainAsync>b__0>d<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 146,
+      "executableLines": 152,
+      "uncovered": [
+        {
+          "line": 115,
+          "source": "        }"
+        },
+        {
+          "line": 185,
+          "source": "            catch (Exception error) { first ??= error; }"
+        },
+        {
+          "line": 188,
+          "source": "        {"
+        },
+        {
+          "line": 189,
+          "source": "            try { await database.DisposeAsync(); }"
+        },
+        {
+          "line": 190,
+          "source": "            catch (Exception error) { first ??= error; }"
+        },
+        {
+          "line": 191,
+          "source": "        }"
+        }
+      ]
+    },
+    "src/TurboTest.EFCore/TtLease.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.TtLease<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtLease.<ReturnAsync>d__12<TContext>",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 42,
+      "executableLines": 42,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/TtLifecycleException.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.TtLifecycleException",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 28,
+      "executableLines": 28,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/TtOptions.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.TtOptions",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 25,
+      "executableLines": 25,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/TtPoolSnapshot.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.TtPoolSnapshot",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 3,
+      "executableLines": 3,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/TtResourceBudget.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.TtResourceBudget",
+          "lineRate": "1",
+          "branchRate": "1"
+        }
+      ],
+      "coveredLines": 25,
+      "executableLines": 25,
+      "uncovered": []
+    },
+    "src/TurboTest.EFCore/TtServiceFactory.cs": {
+      "rawClassRates": [
+        {
+          "name": "TurboTest.EFCore.TtServiceFactory",
+          "lineRate": "0.35294117647058826",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtServiceFactory.<CreateFactoryAsync>d__7<TContext>",
+          "lineRate": "0",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtServiceFactory.<CreateLeaseAsync>d__6<TContext>",
+          "lineRate": "0",
+          "branchRate": "1"
+        },
+        {
+          "name": "TurboTest.EFCore.TtServiceFactory.<DisposeAsync>d__9",
+          "lineRate": "1",
+          "branchRate": "0.5"
+        },
+        {
+          "name": "TurboTest.EFCore.TtServiceFactory.<EnsureInitializedAsync>d__8",
+          "lineRate": "0",
+          "branchRate": "0"
+        }
+      ],
+      "coveredLines": 10,
+      "executableLines": 41,
+      "uncovered": [
+        {
+          "line": 24,
+          "source": "    {"
+        },
+        {
+          "line": 27,
+          "source": "        throw new NotSupportedException("
+        },
+        {
+          "line": 28,
+          "source": "            \"GetConnectionString is not supported in DI scenarios. Use CreateLeaseAsync instead.\");"
+        },
+        {
+          "line": 33,
+          "source": "    {"
+        },
+        {
+          "line": 34,
+          "source": "        await EnsureInitializedAsync();"
+        },
+        {
+          "line": 35,
+          "source": "        return await Tt.CreateLeaseAsync<TContext>(configure);"
+        },
+        {
+          "line": 36,
+          "source": "    }"
+        },
+        {
+          "line": 39,
+          "source": "    {"
+        },
+        {
+          "line": 40,
+          "source": "        await EnsureInitializedAsync();"
+        },
+        {
+          "line": 41,
+          "source": "        return await Tt.CreateFactoryAsync<TContext>(options =>"
+        },
+        {
+          "line": 42,
+          "source": "        {"
+        },
+        {
+          "line": 43,
+          "source": "            options.Provider = _options.Provider;"
+        },
+        {
+          "line": 44,
+          "source": "            options.PoolSize = _options.PoolSize;"
+        },
+        {
+          "line": 45,
+          "source": "            options.AutoMigrate = _options.AutoMigrate;"
+        },
+        {
+          "line": 46,
+          "source": "            options.EnableSensitiveDataLogging = _options.EnableSensitiveDataLogging;"
+        },
+        {
+          "line": 47,
+          "source": "            options.DockerImage = _options.DockerImage;"
+        },
+        {
+          "line": 48,
+          "source": "            options.MemoryLimitMb = _options.MemoryLimitMb;"
+        },
+        {
+          "line": 49,
+          "source": "        });"
+        },
+        {
+          "line": 50,
+          "source": "    }"
+        },
+        {
+          "line": 53,
+          "source": "    {"
+        },
+        {
+          "line": 54,
+          "source": "        if (_initialized) return;"
+        },
+        {
+          "line": 56,
+          "source": "        await _initLock.WaitAsync();"
+        },
+        {
+          "line": 58,
+          "source": "        {"
+        },
+        {
+          "line": 59,
+          "source": "            if (_initialized) return;"
+        },
+        {
+          "line": 61,
+          "source": "            await _pool.InitializeAsync();"
+        },
+        {
+          "line": 62,
+          "source": "            _initialized = true;"
+        },
+        {
+          "line": 63,
+          "source": "        }"
+        },
+        {
+          "line": 65,
+          "source": "        {"
+        },
+        {
+          "line": 66,
+          "source": "            _initLock.Release();"
+        },
+        {
+          "line": 67,
+          "source": "        }"
+        },
+        {
+          "line": 68,
+          "source": "    }"
+        }
+      ]
+    }
+  }
+}

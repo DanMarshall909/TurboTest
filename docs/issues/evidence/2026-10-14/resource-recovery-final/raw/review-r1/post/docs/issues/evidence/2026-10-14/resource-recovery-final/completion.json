@@ -1,0 +1,18 @@
+{
+  "scope": [
+    "TT-006"
+  ],
+  "verdict": "PASS",
+  "date": "2026-10-14",
+  "reviewedManifestSha256": "4fed9f43e00dd57ad44281e68aafbadd545070c598e67a3dd5efd5537a0952b6",
+  "baseObject": "bd5cbb40f986844fe4a0ea162f83cf62b346ee84",
+  "publication": "Local only; no remote configured.",
+  "rawVerdict": "artifacts/tt-006/review/verdict.md",
+  "remainingTickets": [
+    "TT-007",
+    "TT-008",
+    "TT-009",
+    "TT-010"
+  ],
+  "mutation": "Pending whole coding-session final committed snapshot; not passing evidence."
+}

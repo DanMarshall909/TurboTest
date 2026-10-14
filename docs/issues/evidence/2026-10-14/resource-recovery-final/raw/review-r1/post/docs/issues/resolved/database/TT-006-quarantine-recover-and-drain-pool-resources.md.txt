@@ -1,0 +1,385 @@
+---
+id: TT-006
+title: Quarantine recover cancel and drain pool resources
+status: Resolved
+priority: P1
+type: Bug
+created: 2026-10-14
+depends_on: [TT-005]
+---
+
+# TT-006: Quarantine, recover, cancel and drain pool resources
+
+## Problem
+
+Reset failure currently destroys a container without replenishing usable capacity. The prototype also exposed a recovery ordering bug: it briefly marked a replacement Ready before validation. Production ownership must remain correct through failures, cancellations and shutdown.
+
+Evidence: [TT-000](../../resolved/database/TT-000-pool-feasibility-investigation.md), including the named replacement-validation RED/GREEN probe.
+
+## Scope
+
+Add recovery and drain behavior to the bounded owner. Keep dirty/uncertain resources quarantined, track all lifecycle work and expose terminal failure when recovery cannot restore service. Use bounded retries/backoff rather than indefinite creation loops.
+
+## Acceptance criteria
+
+- [x] Reset or validation failure quarantines the slot; it cannot be leased while a replacement is being created or validated.
+- [x] Recovery verifies the replacement's schema, seed, sequences and identity before publication. A corrupt replacement remains unavailable and retains correct accounting.
+- [x] Creation/reset/drop failure and competing recovery attempts cannot exceed the cap or lose a reservation. Unconfirmed deletion stays accounted until cleanup succeeds or the owner reports a terminal failure.
+- [x] Queue cancellation removes only that request and cannot lose a slot. Cancellation after acquisition/while preparing/resetting has a documented cleanup owner.
+- [x] Shutdown stops new acquisitions/controller work, settles queued requests, drains leases and lifecycle work under a documented timeout policy, and releases task-owned sources/databases/containers without touching unrelated resources.
+- [x] Disposing twice, concurrent return/shutdown and failed disposal are observable, bounded and idempotent; callback errors are not silently reported as successful cleanup.
+- [x] After a recoverable failure, effective capacity is restored. After terminal failure, waiting callers receive an actionable error rather than hanging indefinitely.
+
+## Verification
+
+Inject one failure at a time: partial reset/sequence change, post-commit bad seed, invalid replacement, clone failure, failed deletion, canceled queued acquisition and shutdown during recovery. Assert the named diagnostic, non-publication, accounting and eventual drain/recovery. Retain real PostgreSQL failure-boundary tests.
+
+## Implementation log
+
+- **2026-10-14 — partial groundwork:** A broad test attempt repeatedly failed
+  during PostgreSQL initialization and left 29 task-owned containers behind.
+  The run was stopped; its processes were verified terminal, logs/identities
+  were retained and the containers/anonymous volumes were removed. Creation
+  now validates the data source before Docker creation and records the
+  container before starting/awaiting readiness. Failed preparation deletes
+  that resource, and disposal enumerates all owned containers. A regression
+  using a missing database rejected the old cleanup path and now independently
+  observes zero remaining containers. See the
+  [evidence manifest](../../evidence/2026-10-14/pooled-reset/manifest.json).
+  Bounded reservations, retries, terminal recovery, true startup deadlines,
+  tracked concurrent lifecycle work and lease-aware drain remain open; this
+  change does not resolve TT-006.
+- **2026-10-14 — startup gate investigation:** The migrated full suite passed
+  30 checks, but the final 31-check rerun then passed 25 and failed six during
+  PostgreSQL startup. Failed resources were removed; no TurboTest containers
+  remained. Sanitized Docker events show seven resources reaching cleanup
+  about 30–33 seconds after start and subsequently requiring forced termination.
+  This suggests unfinished startup but does not identify its phase. A separate
+  readiness flaw also exists: a failed query after successful connection open
+  leaves the retry loop reusing an open connection. A bounded diagnostic batch
+  now captures timestamped PostgreSQL logs before cleanup. Neither a timeout
+  increase nor a clean completion gate is inferred from the earlier pass.
+- The diagnostic batch reproduced three startup failures and retained four
+  containers' timestamped logs: each stopped after post-bootstrap initialization
+  without completing `initdb`. Disposable clusters now use the PostgreSQL
+  testing option `--no-sync` for initial creation. A real check verifies that
+  server `fsync` remains `on`; the three failed workload checks plus that check
+  pass together. README states the crash/recreation contract. This does not
+  disable server durability settings or establish a startup latency guarantee.
+- A separate real PostgreSQL fault makes the first readiness query fail after
+  opening its connection. The former loop times out instead of retrying; each
+  attempt now closes its connection wrapper and the next query succeeds. Both
+  RED/GREEN results are retained. True deadline/cancellation and controller
+  recovery remain under the acceptance criteria above.
+
+## Current implementation
+
+- **2026-10-14 — dependency-ready:** TT-005 is independently accepted and
+  committed at `bd5cbb40f986844fe4a0ea162f83cf62b346ee84`; five tickets remain
+  Open. Work continues on the shared bounded owner rather than a second allocator.
+- **Warm recovery after reset failure:** The fast RED proves that a failed reset
+  with no queued caller leaves zero prepared capacity. Confirmed deletion now
+  starts one replacement without requiring new demand. Its held preparation
+  retains a reservation and cannot be handed out before verification; a later
+  caller receives the distinct clean resource after validation. The selected
+  fast/native GREEN passes12 checks, including the existing sequence and
+  post-commit corruption boundaries. The old two-slot compensation expectation
+  is updated to require both slots restored, preserving its cleanup-permit law.
+  Coverage exercises the replacement decision; terminal preparation, uncertain
+  deletion and canceled drain need their own subsequent criteria. Production
+  refactoring keeps one reservation helper with an explicit replenish decision;
+  the test's held verification and finite creation guard need no extra helper.
+
+Recovery policy will distinguish initial startup failure from recovery of a
+previously usable slot. Failed/uncertain deletion must retain the resource and
+capacity; bounded retries may proceed only after ownership is reconciled.
+Tracked jobs and safe terminal diagnostics must remain effective during closure.
+Startup cancellation/deadline and drain timeout/retry policy remain unfinished.
+
+- **Verified recovery retries:** A corrupt replacement initially made the pool
+  terminal before another validated candidate could be prepared. Recovery now
+  retries at most three preparations, with 100ms spacing and the same counted
+  reservation; initial startup preparation still fails once and drains. Each
+  failed candidate is deleted before a fresh one is reserved. A held successful
+  retry cannot publish Ready early. Twelve fast checks pass, including exhaustion
+  after exactly three recovery attempts with settled terminal waiters and no
+  further creation. The native clone-corruption/seed/sequence check passes along
+  with two fast laws; an earlier native query used a closed connection and is
+  retained as a test-setup failure, then corrected. Coverage executes success,
+  rejection, retry and terminal bounds; failed deletion and cancellation during
+  backoff remain subsequent criteria. Production refactoring names the bounded
+  policy constants; tests retain direct counts, blocked verification and native
+  catalog/seed/sequence oracles without extra fixture machinery.
+
+- **Unconfirmed reset cleanup:** A failed drop formerly failed queued callers
+  immediately and never retried. Reset compensation now transfers ownership to
+  a tracked cleanup job, retains Quarantined/Retiring capacity and retries up to
+  three total delete attempts with spacing. Confirmed deletion starts a verified
+  replacement; exhaustion settles callers while retaining the original resource.
+  Fifteen selected checks pass, including the retained native terminal-container
+  failure; six fast/native checks prove transient deletion recovery while the
+  actual original container survives a held retry, then disappears before the
+  replacement can be leased. The existing native terminal test now keeps its
+  injected deletion failure active until bounded exhaustion before explicit drain.
+  Coverage includes transient success and exhaustion; canceled recovery and
+  preparation-compensation failure remain separate gaps. Production refactoring
+  consolidates post-deletion replenishment; tests retain distinct transient,
+  terminal and real container oracles without another adapter.
+
+- **Whole recovery-episode bound:** A failed replacement plus failed compensation
+  originally terminated after one candidate. Recovery now supports that transient
+  cleanup while carrying the remaining preparation budget into the next candidate;
+  cleanup success cannot restart three fresh attempts indefinitely. The RED
+  observes only two created resources; the GREEN creates exactly the initial
+  resource plus three rejected recovery candidates, confirms each deletion once
+  after its one injected failure, settles terminal waiters and leaves no Ready or
+  owned resource. Fifteen fast checks pass. Coverage includes this preparation
+  cleanup path and zero-remaining-budget termination. Production refactoring
+  shares terminal publication after confirmed deletion; tests keep per-resource
+  delete counts and a finite reservation-factory guard without extra helpers.
+
+The bounded read-only drain investigation identifies remaining lifecycle work:
+startup ignores cancellation during host initialization/readiness; drain has no
+caller deadline; prepared cleanup retries a cached slot failure after deleting its
+host; factory/static failed disposal can forget owners; ordinary startup cleanup
+can replace the original error. Subsequent criteria will retain actual pending
+jobs and cleanup capability while bounding the caller's wait, and distinguish
+retrying a completed failure from launching overlapping cleanup.
+
+- **Caller drain deadline:** A held context callback formerly exceeded the
+  test's external timeout. `DrainTimeout` now bounds the factory caller's wait
+  (default30s); `DrainTimeout` diagnostics retain a `TtCleanup` capability and
+  the actual pending drain. Repeat disposal shares the original outcome;
+  concurrent cleanup retries share the unfinished job, never rerun the callback
+  or delete its source early. Nineteen selected fast checks pass. Two fast/native
+  checks independently observe that the container and its actual backend session
+  survive the deadline, then disappear only after callback release and completed
+  drain. Coverage leaves completed-failure retry for its own criterion.
+  Production refactoring keeps the actual drain task in its observation closure,
+  without redundant mutable state; tests keep callback counts, pending-job and
+  actual-session oracles. Finite timeout validation and startup deadline remain
+  pending, as do prepared failed-drain retry and static owner retention.
+
+- **Prepared failed-drain retry:** A real PostgreSQL DROP rejection (55006)
+  proves that failed workload cleanup formerly removed the host and made later
+  retries reuse the cached slot failure. Cleanup now explicitly retries the slot
+  owner and retains its host until all workload/source cleanup is confirmed.
+  The retained capability reports the same host and Quarantined reservation;
+  a permitted retry performs the second actual DROP, drains the host and leaves
+  zero reservations/resources while repeated factory disposal preserves its
+  original failure. Seven selected lifecycle checks pass (six native, one fast), including
+  existing startup cleanup retries. Coverage executes failed and successful
+  prepared disposal and the actual DDL boundary. Production already uses the
+  common slot retry contract and needs no additional helper for this criterion;
+  the native test retains its independent host/attempt/accounting oracles.
+
+- **Current combined progress gate:** All90 selected checks pass without
+  failures/skips:79 fast and11 native checks. This is the complete fast lane
+  plus targeted recovery, deadline, failed-drain and prior failure-boundary tests;
+  it is not a whole-package completion gate. [Retained progress evidence](../../evidence/2026-10-14/resource-recovery-progress/manifest.json)
+  binds this source cut and keeps the earlier RED/GREEN/setup-failure reports.
+  All acceptance boxes remain unchecked until the ticket's complete scope passes
+  full verification and independent review. Startup deadline/cancellation,
+  finite timeout validation, static failed-owner retention and remaining races
+  are still unfinished. Normal mutation remains pending the whole coding session.
+
+- **Finite deadline validation:** Twelve RED cases accepted invalid lifecycle
+  durations. Both backends now reject zero/infinite or timer-unsupported startup
+  and drain values with the public option name before preparation. Twenty-six
+  selected configuration/deadline checks pass. Coverage executes both invalid
+  bounds and valid defaults; shared validation avoids duplicate backend policy.
+  The table-driven tests retain parameter-name and pre-preparation oracles.
+- **Startup caller deadline/cancellation:** A blocked image job previously kept
+  startup pending after either interruption. Startup now uses one owned observer
+  for ordinary and prepared factories (default30s), forwards cancellation through
+  host initialization, and retains a cleanup task that awaits actual initialization
+  before disposal. New `StartupTimeout`/`StartupCanceled` diagnostics expose that
+  capability. Cleanup starts in the background and shares pending attempts;
+  after image release, cancellation guards prevent late host/clone creation.
+  Thirty-one selected checks pass, including existing native failed-startup
+  ownership and deadline validation. Coverage includes interrupted and failed
+  initialization; deep readiness cancellation, ordinary interrupted startup and
+  pending drain failure remain distinct evidence gaps. Production refactoring
+  shares initialization observation across backends; held-job/resource counters
+  and cleanup-completion tests need no extra fixture helper.
+
+- **Deep readiness cancellation:** Two native REDs prove readiness could report
+  success after a held probe completed, or retry after cancellation. Readiness
+  now forwards cancellation to opens/queries/delays, checks it before Ready and
+  stops retrying. A noncooperative probe retains its actual connection until it
+  settles; cancellation does not dispose that connection underneath active work.
+  Default Docker image/create/start operations also receive cooperative tokens;
+  injected noncooperative boundaries remain awaited and tracked. Pinned API
+  signatures were inspected directly from Docker.DotNet3.125.15. Fifteen selected
+  startup/readiness/create checks pass. Coverage includes retry/cancellation,
+  held completion and successful readiness. Production refactoring uses explicit
+  command lifetime for the cancelable probe; tests preserve native query,
+  connection-release and finite retry oracles. Ordinary interrupted startup and
+  remaining return/shutdown races are still pending.
+
+- **Ordinary interrupted startup boundary:** Cancellation after Docker create
+  retains the known container while its noncooperative pre-start hook runs.
+  The caller receives `StartupCanceled` and the exact cleanup capability;
+  cleanup remains pending, then deletes the created resource after release.
+  Seven selected ordinary/prepared startup checks pass. This is additional
+  boundary evidence for the shared initializer, not a separate deadline policy.
+  The internal hook forwards to the existing pool seam; no extra production
+  observer or test helper is needed. Deep readiness cancellation and ordinary
+  interruption are now verified; static failure retention and races remain.
+
+- **Static failed-owner retention:** Two native static lifecycle checks pass.
+  Failed global drain retains the exact container and cleanup capability; the
+  next global cleanup deletes that resource once, and repeated drain does no
+  additional deletion. This exercises the existing factory retention policy
+  through the static API, using an internal deletion seam rather than a second
+  ownership mechanism.
+- **Reentrant cleanup idempotency:** A fast RED repeats the cleanup callback
+  when it re-enters `RetryCleanupAsync` before the pending task is published.
+  Cleanup now publishes its attempt before releasing a start barrier. Six
+  selected checks pass; cleanup execution has 100% line/branch coverage in that
+  selection. Production refactoring releases the callback outside the ownership
+  lock; the test keeps a finite repeated-call guard, task-identity and retained
+  resource assertions without additional fixture machinery.
+- **Shutdown callback failure:** A fast RED exposes a synchronous aggregate
+  exception from cancellation that bypasses the factory's cached disposal
+  result. Factory shutdown now carries that error into its tracked drain and
+  still closes leases and owned resources. Eleven selected checks pass, then
+  all93 fast checks pass. Coverage executes cancellation failure and retained
+  cleanup; broader context/native branches are covered by the full gate rather
+  than claimed here. Production refactoring uses the existing start barrier to
+  transfer the error; the calibrated in-process owner needs only one optional
+  throwing cancellation callback. Diagnostics remain safe and repeated disposal
+  shares the original failure.
+- **Retained global drain deadline:** A fast RED shows global cleanup waiting
+  indefinitely on a retained owner after the factory caller already timed out.
+  Global drain now starts all retained attempts and bounds each observation by
+  the configured drain timeout, without canceling or restarting actual work.
+  Eight selected checks pass, then all94 fast checks pass. Coverage exercises
+  timeout, completed failure, other-owner progress and eventual cleanup. The
+  registry's duplicate-owner rejection is an uncovered guard in this selection,
+  not a claimed behavior proof. Production refactoring uses one local observer
+  for all handles; the test retains a finite callback guard and independently
+  proves that another owner's cleanup completes while the first remains held.
+- **Concurrent lifecycle shutdown:** Three held-job cases prove shutdown during
+  reset, replacement verification and an unconfirmed-delete retry. Eighteen
+  selected ledger checks pass. Waiters settle, closure cannot publish Ready or
+  start another replacement, and every confirmed resource is deleted once after
+  its pending callback settles. These add race evidence to existing tracked-job
+  behavior rather than introducing a second shutdown mechanism. The theory
+  shares phase setup while retaining independent resource IDs and finite
+  creation/deletion guards. README documents caller deadlines, cleanup ownership,
+  explicit retry waits and the bounded recovery policy.
+- **Lease/database synchronous reentry:** Two fast REDs reproduce repeated
+  callbacks through the public lease and its database owner. Both now publish
+  their pending task before releasing the callback start barrier. Ten selected
+  checks pass, then all99 fast checks pass. Lease disposal has 100% line/branch
+  execution; database callback-failure branches rely on their existing owning
+  tests and the full gate. Production follows the same publication-before-work
+  pattern as retained cleanup; the theory keeps finite callback guards and
+  exactly-one-reset/no-discard assertions without an extra abstraction.
+- **First full gate:** The 203-check pre-audit source cut passes202 and fails
+  one native locked-row test during final `SlotDispose`, reporting an actual
+  `DockerContainerNotFoundException`. One late task container remains Created.
+  This is a failed gate, not completion evidence; ownership reconciliation and
+  the remaining callback/native drain corrections precede another full run.
+- **Issued create during shutdown:** The locked-row failure reproduces on its
+  own. A temporary payload-free trace identifies `ContainerCreateUnconfirmed`:
+  canceling the create HTTP request leaves Docker creating the resource after
+  the caller's observation ends. An issued create now stays awaited until its
+  identity is recorded; caller deadline observation remains separate. Six
+  selected native checks pass, then fourteen recovery/accounting checks pass.
+  Coverage executes every line of create/delete/dispose in that selection,
+  with remaining branch limits disclosed in raw coverage. The locked-row test
+  now independently checks its unique-prefix inventory is empty after drain.
+  Three exact failed-test containers were reconciled by reservation label,
+  names and TRX timestamps, then removed; unrelated resources were preserved.
+  The temporary diagnostic is removed. Production refactoring drops the unused
+  create-token adapter while retaining cancellation before issuance and after
+  acknowledgment; tests add a physical cleanup oracle without extra scenarios.
+- **Startup cancellation callback failure:** Two native REDs show callback
+  exceptions bypassing drain and replacing the baseline initializer error.
+  Initialization now captures cancellation callback failure while always
+  starting owned drain, preserving the original stage and safe secondary
+  diagnostic. Nine selected checks pass for successful and failed cleanup,
+  held startup work and explicit/global retry. Coverage executes both callback
+  outcomes and retained ownership; success initialization is exercised by the
+  full gate. Production shares the existing initializer/drain observer rather
+  than adding another path; the theory independently checks exact host ownership
+  or physical absence, with no credential-bearing exception payloads.
+- **Native reset drain boundary:** Five selected deadline/recovery checks pass.
+  A held prepared reset keeps its actual PostgreSQL administrator session and
+  host alive after the factory caller times out; the retained cleanup shares
+  that reset, rejects acquisition, then drains every resource after release.
+  The first test build used a misspelled snapshot member and is retained as a
+  setup failure, not a behavioral RED. Production already tracks this work and
+  needs no additional cancellation path. The test proves live backend session,
+  counted reset, one invocation and final physical absence; its boundary cost
+  earns its PostgreSQL lane placement.
+- **Finite recovery calibration:** A single temporary fault increases the
+  preparation budget to four. The whole-episode budget test rejects it with
+  Expected4/Actual5 after326ms; the original production SHA256 is restored
+  exactly. Raw fault source, result and restoration receipt are retained. This
+  is a named one-fault calibration, not a normal mutation result; normal mutation
+  remains pending the whole coding-session final committed snapshot.
+- **Blocking cancellation callbacks:** Two fast factory REDs and one native
+  startup RED show synchronous cancellation blocking the caller before its
+  deadline result can be observed. Both paths now track `CancelAsync` as actual
+  owned work before resource drain. Fourteen selected factory checks and ten
+  selected startup checks pass. A callback failure after factory timeout is
+  reported by the pending cleanup attempt; subsequent retry confirms resources
+  without rerunning callbacks. Startup token sources remain owned until actual
+  cancellation and initialization settle. The production observer distinguishes
+  the reported drain exception from a timeout; tests keep held callbacks,
+  finite invocation guards and native host survival/absence oracles.
+- **Second full gate:** The 208-check source cut passes207/fails1. The locked-row
+  drain repair passes; reset timing samples state before the newly asynchronous
+  second return reaches its reset queue. This is a synchronization defect in
+  the test, not a passing final gate; it will await the observable queue state
+  before asserting measured permit wait. Blocking cancellation corrections
+  also require the subsequent full gate.
+- **Deadline-triggered startup callback:** Both native callback cases pass,
+  including expiry during a pending seed operation. Cancellation settlement
+  retains the host until callback release. The first expanded attempt used a
+  ten-second startup bound and its initializer-error case expired before seed;
+  that setup failure remains archived. The corrected run uses the documented
+  thirty-second bound. Refactoring removes the extra background cleanup observer:
+  actual owned drain already starts immediately, while its registered capability
+  exposes callback failures on explicit cleanup instead of consuming them in a
+  fire-and-forget retry.
+- **Queue-state synchronization:** Both native reset timing and execution-budget
+  checks pass after bounded waiting for the observable reset queue. The second
+  full gate preserves the failing timing assertion. Production timing behavior
+  is unchanged; tests synchronize actual state before sampling rather than
+  assuming callback work executes inline with lease disposal. Counts, bounds
+  and separate permit/execution/validation assertions remain intact.
+
+## Completion candidate
+
+The whole-suite gate passes212 tests without failures or skips. Coverage then
+identifies an unused internal `TtPreparedPool.OwnerId` getter, which is removed;
+an exact transformation receipt proves this is the only source difference from
+that gate. All101 fast checks and two native recovery checks pass after pruning,
+and final solution/separate example builds pass without warnings or errors.
+The [final evidence manifest](../../evidence/2026-10-14/resource-recovery-final/manifest.json)
+retains the source cuts, raw results, earlier failed attempts and named calibration.
+
+Coverage classification discloses unexecuted backoff-cancellation, reset-permit
+cancellation, canceled-token assignment and disposal fallback branches. Native
+held-job shutdown and resource identity assertions are not claimed to execute
+those branches. No100% whole-core or full mutation claim is made. Normal mutation
+awaits the whole coding-session final committed snapshot.
+
+Independent completion review passed for the exact candidate and administrative
+completion envelope recorded in the linked receipt. Four implementation tickets
+remain Open.
+
+## Decision log
+
+- **2026-10-14 — Resolved:** Bounded verified recovery, cancellation and owned
+  drain passed independent completion review for the exact candidate and
+  administrative envelope. The whole-suite gate passes212 tests without failures
+  or skips; a subsequent unused-getter pruning passes103 fast/native checks,
+  and final solution/separate example builds pass. The
+  [completion receipt](../../evidence/2026-10-14/resource-recovery-final/completion.json)
+  binds the review identity. DI, parking, metrics and adaptation remain in four
+  Open tickets. Normal mutation awaits the whole coding-session final snapshot.

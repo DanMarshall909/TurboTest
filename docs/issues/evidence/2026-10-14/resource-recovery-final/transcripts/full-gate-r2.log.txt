@@ -1,0 +1,24 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:05:52.00]     TurboTest.Tests.ResetTimingTests.Reset_measurements_distinguish_permit_wait_execution_and_validation_without_payloads [FAIL]
+  Failed TurboTest.Tests.ResetTimingTests.Reset_measurements_distinguish_permit_wait_execution_and_validation_without_payloads [4 s]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: Tuple (2, 1, 1, 0)
+Actual:   Tuple (2, 0, 1, 0)
+  Stack Trace:
+     at TurboTest.Tests.ResetTimingTests.Reset_measurements_distinguish_permit_wait_execution_and_validation_without_payloads() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResetTimingTests.cs:line 41
+   at TurboTest.Tests.ResetTimingTests.Reset_measurements_distinguish_permit_wait_execution_and_validation_without_payloads() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResetTimingTests.cs:line 70
+   at TurboTest.Tests.ResetTimingTests.Reset_measurements_distinguish_permit_wait_execution_and_validation_without_payloads() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResetTimingTests.cs:line 70
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-006/full-gate-r2/full-gate-r2.trx
+
+Failed!  - Failed:     1, Passed:   207, Skipped:     0, Total:   208, Duration: 6 m 42 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-006/full-gate-r2/25c2246b-ac1f-458b-b8f5-b3a84f1463f9/dan_os-greg_2026-10-14.17_26_55.cobertura.xml

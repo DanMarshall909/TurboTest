@@ -1,0 +1,108 @@
+# TT-006 recovery, cancellation and drain completion candidate
+
+Review this entire bounded TT-006 candidate. The goal is all ten implementation
+tickets in docs/issues/README.md; TT-001 through TT-005 are committed/Resolved.
+This envelope resolves only TT-006, leaving TT-007/008/009/010 Open.
+
+Read AGENTS.md, rule-sets/ai-rules.md, the authoritative TT-006 ticket, and
+/home/dan/.agents/skills/agentic-delivery/references/completion-review.md.
+Use read-only access. Do not edit/stage, build/test, create Docker resources or
+delegate approval. Independently reconstruct manifest and integration identity.
+Return exactly PASS, FAIL or BLOCKED with explicit task-to-implementation and
+criterion-to-test matrices and actionable in-scope findings.
+
+## Identity and envelope
+
+manifest.json/manifest.sha256 bind every modified/untracked task-owned path,
+including evidence, with bytewise ordering, status, canonical mode, digest and
+index object. Base/current/integration is bd5cbb40f986844fe4a0ea162f83cf62b346ee84.
+master is the only branch and primary worktree; no remote/upstream exists.
+Stash0811caaa6d33c0107d31416a68b3dc30a8a218ec is unchanged. Local-only publication
+is the existing tracker policy. No unrelated dirty paths are excluded.
+
+envelope.json and final-tree.json specify exact administrative transformations:
+move/resolve TT-006, update tracker links/status, add completion receipt, validate
+and commit normally. No semantic source/test changes or reusable-state deletion
+are authorized after PASS. Inspect unknown processes/resources, never remove them.
+
+## Falsifiable evidence
+
+Final archive: docs/issues/evidence/2026-10-14/resource-recovery-final/manifest.json
+(321 raw/source entries,74 TRX reports). Historical resource-recovery-progress
+is unchanged and binds its old90-test cut. Final archive retains REDs, setup
+failures, two failed full gates, source cuts, calibration and restored-source
+receipts. Each archived digest/raw digest is reconstructible from original bytes;
+coverage uses deterministic gzip. Review actual oracles, not just counters.
+
+Full gate: dotnet test TurboTest.sln --collect 'Code Coverage;Format=cobertura'
+--logger 'trx;LogFileName=full-gate-r3.trx' --results-directory artifacts/tt-006/full-gate-r3.
+Actual exit0;212pass/0fail/0skip, elapsed444.2946s. Its62-source binding was checked
+at completion. Candidate subsequently removes only the unused internal
+TtPreparedPool.OwnerId getter: raw/full-gate-r3/source-before-prune and
+raw/owner-id-prune/source-receipt.json prove that one-line difference and every
+other source hash. Post-prune command selects Category!=PostgreSQL plus
+PreparedRecoveryTests/PreparedDrainRetryTests with coverage;103pass (101 fast,
+two native), exit0. Final solution and separate DynamicScalingExample builds
+exit0 with zero warnings/errors. Raw receipts retain exact command/cwd/elapsed.
+Do not claim that old coverage source identity is the pruned assembly identity.
+
+No task Docker resource remains. Unrelated0a95e88a68d8 is retained. Three late
+Created resources from failed gates were reconciled by exact labels/names/TRX
+creation timestamps, archived, then removed. No warm cache/build tree was deleted.
+
+Normal mutation remains pending the whole coding-session final committed source,
+including later tickets. It does not block this ticket under the skill. A single
+fault increasing the recovery budget to4 is rejected by the named episode test,
+Expected4/Actual5 after326ms; source SHA is restored exactly. This is scoped
+calibration, not a full mutation result.
+
+## Accepted criteria to reconstruct independently
+
+1. Quarantine/non-publication: SlotRecoveryTests held replacement and cleanup;
+PreparedRecoveryTests rejects an actual corrupted clone before a verified retry;
+OrdinaryRecoveryTests retains actual failed-reset/deletion identity.
+2. Complete replacement verification: native seed/id/sequence/schema checks in
+PreparedRecoveryTests plus retained BaselineRestore/SeededBaseline suites and
+identity/source binding. Candidate callbacks run before normal baseline verifier.
+3. Cap/conservative ownership: shared ledger counts preparing/retiring/quarantine;
+creation accounting tests use actual Docker inspect404/label mismatch/lost response
+and acknowledged absence; retry episode carries remaining preparation budget.
+Locked_rows_cause... rejects canceled HTTP observation and asserts empty physical
+inventory after issued creation is acknowledged and final drain completes.
+4. Cancellation cleanup owner: existing SlotPool FIFO/request-cancellation laws,
+FactoryBackpressure and CompensatingCleanup context-publication laws; native
+StartupDeadline/ReadinessCancellation tests hold actual jobs/connections/resources
+through caller interruption. Deadline values validate before preparation.
+5. Owned shutdown: new ledger theory holds reset/replacement/delete; fast factory
+closure cancels queues. Native DrainDeadline holds actual context/backend reset
+sessions after timeout, proves host survival and exact post-release deletion.
+PreparedDrainRetry proves actual DROP55006 and host retention for explicit retry.
+6. Bounded/idempotent/error reporting: reentrant lease/database/cleanup tests use
+finite guards and task identity; blocking/throwing cancellation callback tests
+prove bounded observation and late safe failure without overlap. StaticFailedDrain
+retains exact owner for later global cleanup; registry progresses other owners.
+7. Effective/terminal service: eager no-demand replacement, corrupt-candidate retry,
+three preparation/deletion exhaustion, whole-episode budget and bounded actionable
+waiter failure in SlotRecoveryTests, with independent real-boundary calibration.
+
+README documents default30s StartupTimeout/DrainTimeout, caller versus actual-job
+ownership, explicit retry without implicit deadline, global per-retained-owner
+observation bounds, initial failure versus recovery and three attempts/100ms.
+Dynamic controller remains rejected until TT-009, not claimed implemented here.
+
+## Coverage and known boundary
+
+raw/coverage-classification.md.txt names every material unexecuted changed-core
+path from full-coverage-summary.json. Lease/database/cleanup/diagnostics/options/
+budget/state execute completely; ledger337/355, factory146/152, ordinary234/264,
+prepared304/308 before pruning have disclosed limits. Closing during backoff,
+waiting-reset cancellation, token-canceled-before-assignment and disposal fallback
+branches remain unexecuted. Determine their in-scope significance; held-job/native
+shutdown proof is not presented as executing those branches. Windows detection and
+uncached image pull are not measured. No100% whole-core claim is made.
+
+DI registration/service factory defects remain explicitly owned by Open TT-007.
+Parking, comprehensive metrics and adaptation remain in Open TT-008/010/009.
+Evaluate materially simpler, safer or clearer in-scope alternatives. Style or
+speculative extensibility alone does not justify failure. Preserve supported
+lessons in the review record with evidence, owner, downside and disposition.

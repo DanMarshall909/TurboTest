@@ -38,6 +38,8 @@ public class ResetTimingTests
             await entered.Task.WaitAsync(TimeSpan.FromSeconds(30));
             secondReturn = second.DisposeAsync().AsTask();
             Assert.False(secondReturn.IsCompleted);
+            using var queued = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            while (fixture.PoolState.WaitingResets == 0) await Task.Delay(1, queued.Token);
             Assert.Equal((2, 1, 1, 0), (fixture.PoolState.Reserved, fixture.PoolState.WaitingResets,
                 fixture.PoolState.ExecutingResets, fixture.PoolState.Ready));
             await Task.Delay(25);

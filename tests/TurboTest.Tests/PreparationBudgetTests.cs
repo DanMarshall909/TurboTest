@@ -49,6 +49,8 @@ public class PreparationBudgetTests
             returns.Add(leases[1].DisposeAsync().AsTask());
             await resetsStarted.Task.WaitAsync(TimeSpan.FromSeconds(5));
             returns.Add(leases[2].DisposeAsync().AsTask());
+            using var queued = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            while (pool.Snapshot.WaitingResets == 0) await Task.Delay(1, queued.Token);
             Assert.Equal((4, 2, 1, 1), (pool.Snapshot.Reserved, pool.Snapshot.ExecutingResets,
                 pool.Snapshot.WaitingResets, pool.Snapshot.Ready));
             releaseResets.TrySetResult();

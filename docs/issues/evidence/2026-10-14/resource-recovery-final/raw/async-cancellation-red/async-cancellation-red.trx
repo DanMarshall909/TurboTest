@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="62dcb104-5671-4437-afbe-9ab67605ce8e" name="@os-greg 2026-10-14 17:27:49" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T17:27:49.1861569+10:00" queuing="2026-10-14T17:27:49.1861569+10:00" start="2026-10-14T17:27:45.9298485+10:00" finish="2026-10-14T17:27:50.9011835+10:00" />
+  <TestSettings name="default" id="0c1e3fbf-a697-43bb-9be0-84dc69c0bc56">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_17_27_49" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="21b2dbbe-7096-4575-9cbf-612c667445f2" testId="d25ea06a-491a-7a74-a8d8-5914504733de" testName="TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: False)" computerName="os-greg" duration="00:00:02.0187544" startTime="2026-10-14T17:27:48.8396328+10:00" endTime="2026-10-14T17:27:50.8462682+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="21b2dbbe-7096-4575-9cbf-612c667445f2">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.TimeoutException)
+---- System.TimeoutException : The operation has timed out.</Message>
+          <StackTrace>   at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 112
+   at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 146
+   at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 146
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="cd7b059b-f3cc-4e2c-add3-6dee9c415386" testId="99ee8ce0-752f-798f-660a-4a732c8666f1" testName="TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: True)" computerName="os-greg" duration="00:00:02.3989538" startTime="2026-10-14T17:27:46.4145329+10:00" endTime="2026-10-14T17:27:48.8260167+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd7b059b-f3cc-4e2c-add3-6dee9c415386">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.TimeoutException)
+---- System.TimeoutException : The operation has timed out.</Message>
+          <StackTrace>   at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 112
+   at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 146
+   at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 146
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="d25ea06a-491a-7a74-a8d8-5914504733de">
+      <Execution id="21b2dbbe-7096-4575-9cbf-612c667445f2" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryBackpressureTests" name="A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="99ee8ce0-752f-798f-660a-4a732c8666f1">
+      <Execution id="cd7b059b-f3cc-4e2c-add3-6dee9c415386" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryBackpressureTests" name="A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="d25ea06a-491a-7a74-a8d8-5914504733de" executionId="21b2dbbe-7096-4575-9cbf-612c667445f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="99ee8ce0-752f-798f-660a-4a732c8666f1" executionId="cd7b059b-f3cc-4e2c-add3-6dee9c415386" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="2" passed="0" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.15]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.18]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:02.61]       Assert.Throws() Failure: Exception type was not an exact match
+[xUnit.net 00:00:02.61]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:02.61]       Actual:   typeof(System.TimeoutException)
+[xUnit.net 00:00:02.61]       ---- System.TimeoutException : The operation has timed out.
+[xUnit.net 00:00:02.61]       Stack Trace:
+[xUnit.net 00:00:02.61]         /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs(112,0): at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure)
+[xUnit.net 00:00:02.61]         /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs(146,0): at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure)
+[xUnit.net 00:00:02.61]         /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs(146,0): at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure)
+[xUnit.net 00:00:02.61]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.61]         ----- Inner Stack Trace -----
+[xUnit.net 00:00:02.61]         
+[xUnit.net 00:00:04.63]       Assert.Throws() Failure: Exception type was not an exact match
+[xUnit.net 00:00:04.63]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:04.63]       Actual:   typeof(System.TimeoutException)
+[xUnit.net 00:00:04.63]       ---- System.TimeoutException : The operation has timed out.
+[xUnit.net 00:00:04.63]       Stack Trace:
+[xUnit.net 00:00:04.63]         /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs(112,0): at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure)
+[xUnit.net 00:00:04.63]         /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs(146,0): at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure)
+[xUnit.net 00:00:04.63]         /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs(146,0): at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure)
+[xUnit.net 00:00:04.63]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:04.63]         ----- Inner Stack Trace -----
+[xUnit.net 00:00:04.63]         
+[xUnit.net 00:00:04.63]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T17:27:48.8287755+10:00">
+        <Text>[xUnit.net 00:00:02.61]     TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T17:27:50.8467898+10:00">
+        <Text>[xUnit.net 00:00:04.63]     TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: False) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

@@ -42,6 +42,7 @@ public class BaselineValidationTests
     {
         public TtPoolSnapshot Snapshot => throw new InvalidOperationException("The rejected configuration has no pool.");
         public TtResourceBudget Budget => throw new InvalidOperationException("The rejected configuration has no pool.");
+        public IReadOnlyList<string> OwnedResourceIds => Array.Empty<string>();
         internal int Acquisitions { get; private set; }
         public Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
         {

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="e1e5ad7d-c806-446a-bb6b-86ec8ec4c301" name="@os-greg 2026-10-14 15:40:50" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T15:40:50.5429172+10:00" queuing="2026-10-14T15:40:50.5429172+10:00" start="2026-10-14T15:40:47.9505704+10:00" finish="2026-10-14T15:40:50.5469904+10:00" />
+  <TestSettings name="default" id="4e8e477b-93ae-4bff-b189-3f0bbf13e57d">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_15_40_50" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="a52be90d-489b-4d34-8f4a-a31ba70eee5d" testId="b3f73e84-72f4-fed2-a7df-1542f5ed0afa" testName="TurboTest.Tests.SlotRecoveryTests.A_corrupt_recovery_candidate_is_deleted_and_a_verified_retry_restores_capacity" computerName="os-greg" duration="00:00:02.0175487" startTime="2026-10-14T15:40:48.4322437+10:00" endTime="2026-10-14T15:40:50.4635739+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a52be90d-489b-4d34-8f4a-a31ba70eee5d">
+      <Output>
+        <ErrorInfo>
+          <Message>System.TimeoutException : The operation has timed out.</Message>
+          <StackTrace>   at TurboTest.Tests.SlotRecoveryTests.A_corrupt_recovery_candidate_is_deleted_and_a_verified_retry_restores_capacity() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRecoveryTests.cs:line 47
+   at TurboTest.Tests.SlotRecoveryTests.A_corrupt_recovery_candidate_is_deleted_and_a_verified_retry_restores_capacity() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRecoveryTests.cs:line 64
+   at TurboTest.Tests.SlotRecoveryTests.A_corrupt_recovery_candidate_is_deleted_and_a_verified_retry_restores_capacity() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRecoveryTests.cs:line 64
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SlotRecoveryTests.A_corrupt_recovery_candidate_is_deleted_and_a_verified_retry_restores_capacity" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b3f73e84-72f4-fed2-a7df-1542f5ed0afa">
+      <Execution id="a52be90d-489b-4d34-8f4a-a31ba70eee5d" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SlotRecoveryTests" name="A_corrupt_recovery_candidate_is_deleted_and_a_verified_retry_restores_capacity" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b3f73e84-72f4-fed2-a7df-1542f5ed0afa" executionId="a52be90d-489b-4d34-8f4a-a31ba70eee5d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.19]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:02.24]       System.TimeoutException : The operation has timed out.
+[xUnit.net 00:00:02.24]       Stack Trace:
+[xUnit.net 00:00:02.24]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRecoveryTests.cs(47,0): at TurboTest.Tests.SlotRecoveryTests.A_corrupt_recovery_candidate_is_deleted_and_a_verified_retry_restores_capacity()
+[xUnit.net 00:00:02.24]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRecoveryTests.cs(64,0): at TurboTest.Tests.SlotRecoveryTests.A_corrupt_recovery_candidate_is_deleted_and_a_verified_retry_restores_capacity()
+[xUnit.net 00:00:02.24]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRecoveryTests.cs(64,0): at TurboTest.Tests.SlotRecoveryTests.A_corrupt_recovery_candidate_is_deleted_and_a_verified_retry_restores_capacity()
+[xUnit.net 00:00:02.24]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.25]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T15:40:50.4668672+10:00">
+        <Text>[xUnit.net 00:00:02.24]     TurboTest.Tests.SlotRecoveryTests.A_corrupt_recovery_candidate_is_deleted_and_a_verified_retry_restores_capacity [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

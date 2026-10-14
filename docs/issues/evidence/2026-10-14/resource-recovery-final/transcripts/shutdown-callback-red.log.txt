@@ -1,0 +1,20 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.64]     TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources [FAIL]
+  Failed TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources [418 ms]
+  Error Message:
+   Assert.IsType() Failure: Value is not the exact type
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.AggregateException)
+  Stack Trace:
+     at TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 68
+   at TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 85
+   at TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 85
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-006/shutdown-callback-red/shutdown-callback-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 429 ms - TurboTest.Tests.dll (net10.0)

@@ -1,0 +1,7 @@
+{
+  "change": "Remove unused internal OwnerId getter; canonical cleanup identity is Snapshot.OwnerId. No caller remains.",
+  "originalSha256": "d376e61346ddb0b95054d7f535dcf4a49083979aff717ae72eb6bbecf94e7843",
+  "candidateSha256": "6ae4933a9c3b03bbd813a0048ef30dffa79bc0a4f10c8dc14c06ce92c88e27f8",
+  "allOtherSourceFilesMatchGate": true,
+  "qualification": "212-test full gate predates one-line dead-code pruning; final selected fast/native and build receipts validate the pruned candidate."
+}

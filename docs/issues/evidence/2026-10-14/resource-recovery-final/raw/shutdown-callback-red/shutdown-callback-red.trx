@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="678ca37f-e778-4679-953e-df81c6d368e7" name="@os-greg 2026-10-14 16:56:04" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T16:56:04.3838147+10:00" queuing="2026-10-14T16:56:04.3838147+10:00" start="2026-10-14T16:56:03.3706597+10:00" finish="2026-10-14T16:56:04.3878909+10:00" />
+  <TestSettings name="default" id="77c141b2-e633-40e1-a11c-433c40d98321">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_16_56_04" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="56bd4a90-435c-40f6-b369-8a255fb9d12c" testId="4f1ad525-a531-2559-cade-5d6492df2012" testName="TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources" computerName="os-greg" duration="00:00:00.4180061" startTime="2026-10-14T16:56:03.8587707+10:00" endTime="2026-10-14T16:56:04.2887070+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="56bd4a90-435c-40f6-b369-8a255fb9d12c">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsType() Failure: Value is not the exact type
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.AggregateException)</Message>
+          <StackTrace>   at TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 68
+   at TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 85
+   at TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 85
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4f1ad525-a531-2559-cade-5d6492df2012">
+      <Execution id="56bd4a90-435c-40f6-b369-8a255fb9d12c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryBackpressureTests" name="A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="4f1ad525-a531-2559-cade-5d6492df2012" executionId="56bd4a90-435c-40f6-b369-8a255fb9d12c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.17]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.19]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.64]       Assert.IsType() Failure: Value is not the exact type
+[xUnit.net 00:00:00.64]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:00.64]       Actual:   typeof(System.AggregateException)
+[xUnit.net 00:00:00.64]       Stack Trace:
+[xUnit.net 00:00:00.64]         /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs(68,0): at TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources()
+[xUnit.net 00:00:00.64]         /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs(85,0): at TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources()
+[xUnit.net 00:00:00.64]         /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs(85,0): at TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources()
+[xUnit.net 00:00:00.64]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.65]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:56:04.2910006+10:00">
+        <Text>[xUnit.net 00:00:00.64]     TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

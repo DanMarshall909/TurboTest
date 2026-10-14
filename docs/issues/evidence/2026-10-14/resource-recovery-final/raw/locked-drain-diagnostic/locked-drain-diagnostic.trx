@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="3266494d-b824-46a4-a727-0a3481a0a273" name="@os-greg 2026-10-14 17:11:24" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T17:11:24.6317601+10:00" queuing="2026-10-14T17:11:24.6317601+10:00" start="2026-10-14T17:11:11.3578077+10:00" finish="2026-10-14T17:11:24.6359816+10:00" />
+  <TestSettings name="default" id="32095dc4-be88-4323-8af9-68e3cd8570ec">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_17_11_24" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="40684936-cd1d-4a67-bbca-e6861c36f9b7" testId="5dad28a2-424f-7abf-677b-b700e7cfb17f" testName="TurboTest.Tests.PooledResetTests.Locked_rows_cause_a_bounded_reset_failure_and_are_never_reused" computerName="os-greg" duration="00:00:12.7036653" startTime="2026-10-14T17:11:11.8377401+10:00" endTime="2026-10-14T17:11:24.5517805+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="40684936-cd1d-4a67-bbca-e6861c36f9b7">
+      <Output>
+        <ErrorInfo>
+          <Message>TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at SlotDispose (DockerContainerNotFoundException). The resource is unavailable for reuse.</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtSlotPool`1.DisposeCoreAsync(Task start) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs:line 466
+   at TurboTest.EFCore.Internal.TtPool.DisposeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 282
+   at TurboTest.Tests.PooledResetTests.Locked_rows_cause_a_bounded_reset_failure_and_are_never_reused() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 184
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.PooledResetTests.Locked_rows_cause_a_bounded_reset_failure_and_are_never_reused" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="5dad28a2-424f-7abf-677b-b700e7cfb17f">
+      <Execution id="40684936-cd1d-4a67-bbca-e6861c36f9b7" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PooledResetTests" name="Locked_rows_cause_a_bounded_reset_failure_and_are_never_reused" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="5dad28a2-424f-7abf-677b-b700e7cfb17f" executionId="40684936-cd1d-4a67-bbca-e6861c36f9b7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.17]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.19]   Starting:    TurboTest.Tests
+DRAIN-DIAGNOSTIC TtLifecycleException     at TurboTest.EFCore.Internal.TtPool.DeleteSlotAsync(ContainerSlot slot) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 141
+   at TurboTest.EFCore.Internal.TtSlotPool`1.DisposeCoreAsync(Task start) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs:line 455
+[xUnit.net 00:00:12.93]       TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at SlotDispose (DockerContainerNotFoundException). The resource is unavailable for reuse.
+[xUnit.net 00:00:12.93]       Stack Trace:
+[xUnit.net 00:00:12.93]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs(466,0): at TurboTest.EFCore.Internal.TtSlotPool`1.DisposeCoreAsync(Task start)
+[xUnit.net 00:00:12.93]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(282,0): at TurboTest.EFCore.Internal.TtPool.DisposeAsync()
+[xUnit.net 00:00:12.93]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs(184,0): at TurboTest.Tests.PooledResetTests.Locked_rows_cause_a_bounded_reset_failure_and_are_never_reused()
+[xUnit.net 00:00:12.93]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:12.94]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T17:11:24.5540787+10:00">
+        <Text>[xUnit.net 00:00:12.93]     TurboTest.Tests.PooledResetTests.Locked_rows_cause_a_bounded_reset_failure_and_are_never_reused [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

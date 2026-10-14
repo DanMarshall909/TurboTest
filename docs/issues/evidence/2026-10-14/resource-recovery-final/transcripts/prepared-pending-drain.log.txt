@@ -1,0 +1,4 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+/home/dan/code/TurboTest/tests/TurboTest.Tests/DrainDeadlineTests.cs(58,84): error CS1061: 'TtPoolSnapshot' does not contain a definition for 'ExecutingReset' and no accessible extension method 'ExecutingReset' accepting a first argument of type 'TtPoolSnapshot' could be found (are you missing a using directive or an assembly reference?) [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]

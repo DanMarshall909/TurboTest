@@ -102,8 +102,33 @@ If compensating cleanup also fails, the lifecycle diagnostic retains the origina
 stage/SQLSTATE and reports the secondary failure without its payload. Failed
 cancellation cleanup reports this lifecycle failure; successful cleanup preserves
 the cancellation result. Unconfirmed resources remain owned for final cleanup.
-Factory startup observes cancellation at its startup checkpoints and retains
-cleanup ownership during an in-flight startup operation.
+`StartupTimeout` bounds the caller's initialization wait (default 30 seconds).
+Caller cancellation or expiry reports `StartupCanceled` or `StartupTimeout`
+with a cleanup capability. Cooperative Docker/readiness work receives the
+token; any pending noncooperative work remains owned until it actually settles.
+An issued container create stays awaited until its response records the resource
+identity, because canceling an HTTP request cannot undo Docker's creation.
+Cleanup starts in the background and waits for initialization before deleting
+resources. A canceled queued acquisition removes only that request; preparation
+continues under its owner and can serve another caller.
+
+`DrainTimeout` bounds the factory caller's drain wait (default 30 seconds).
+Shutdown rejects new acquisitions, cancels queued requests, and awaits active
+acquisition, context cleanup, return and lifecycle jobs before deleting resources.
+A timeout reports `DrainTimeout` with `TtLifecycleException.Cleanup`; it leaves
+actual work running under that owner. Repeated disposal shares its original
+result. Await `error.Cleanup.RetryCleanupAsync()` to join unfinished work or retry
+completed failed cleanup; retries share one pending attempt. Explicit retry waits
+for actual completion and has no implicit deadline. Global `Tt.DisposeAsync()`
+also retries retained owners, bounding each retained observation by the configured
+drain timeout while allowing other owners to progress. A failed prepared workload
+drop retains its host until workload cleanup succeeds.
+Cancellation callbacks are tracked asynchronously and cannot block the caller's
+deadline observation. Callback failures after a timeout are reported through the
+retained cleanup attempt; a subsequent retry confirms remaining resources.
+Startup observes the caller token and deadline separately from the private token
+passed to initialization. Every interruption starts one owned asynchronous
+cancellation task; cleanup joins that task and initialization before deletion.
 
 Initial disposable cluster creation uses `initdb --no-sync` to avoid waiting for
 its initial disk flush. PostgreSQL server `fsync` remains enabled for test
@@ -116,8 +141,9 @@ context type. Configure before the first static create; configuration changes
 require final disposal first. A subsequent create constructs a valid new owner.
 Independent factories have separate configuration and shutdown.
 
-Hard capacity bounds, row restoration and recovery policy remain work in the
-[tracker](docs/issues/README.md). DI ownership remains under
+Hard capacity bounds and verified restoration are implemented. Recovery and
+drain verification is recorded in the [tracker](docs/issues/README.md).
+DI ownership remains under
 [TT-007](docs/issues/open/api/TT-007-use-the-configured-owner-in-di-and-static-apis.md).
 
 ## Prepared fixture baselines
@@ -175,6 +201,16 @@ Automatic allocation and custom connection-string templates are rejected by
 the prepared path. Ordinary startup allocation respects `MaxContainers`.
 Dynamic scaling is rejected until the bounded adaptive controller is available.
 
+Failed reset or validation quarantines the slot. Confirmed deletion starts a
+replacement even without queued demand; schema, seed, sequences and identity
+must verify before it becomes Ready. Recovery permits at most three preparation
+attempts with 100 ms spacing. Unconfirmed deletion keeps the reservation and
+permits at most three deletion attempts; cleanup retries cannot restart the
+preparation budget. Initial startup preparation fails once and drains rather
+than starting recovery. Terminal exhaustion settles waiters with a lifecycle
+diagnostic; retained resources require explicit cleanup. No retry creates an
+overflow reservation.
+
 Supported baselines contain permanent ordinary tables, namespaces, indexes,
 constraints, their catalog comments and sequences. Views, routines, custom types/extensions, user
 triggers/rules, RLS/policies, partition/inheritance structures, foreign/unlogged
@@ -197,10 +233,10 @@ Execution includes restoration and validation; permit wait is separate.
 Preparation and reset use their independent configured concurrency limits.
 Diagnostic emission is outside measured work.
 
-If startup cleanup fails, `TtLifecycleException.Cleanup` retains an opaque owner
+If startup or drain cleanup fails, `TtLifecycleException.Cleanup` retains an opaque owner
 and resource-ID snapshot. Await `error.Cleanup.RetryCleanupAsync()` to retry;
 concurrent retries share an attempt. `Tt.DisposeAsync()` also retries registered
-failed startups. Resources remain accounted until confirmed deletion, and a
+failed owners. Resources remain accounted until confirmed deletion, and a
 closed owner cannot publish another lease.
 
 ## Requirements

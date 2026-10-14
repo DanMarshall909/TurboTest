@@ -28,9 +28,14 @@ public static class Tt
         }
     }
 
-    public static async Task<TtLease<TContext>> CreateLeaseAsync<TContext>(
+    public static Task<TtLease<TContext>> CreateLeaseAsync<TContext>(
         Action<DbContextOptionsBuilder>? configure = null, CancellationToken cancellationToken = default)
         where TContext : DbContext
+        => CreateLeaseAsync<TContext>(configure, cancellationToken, null);
+
+    internal static async Task<TtLease<TContext>> CreateLeaseAsync<TContext>(
+        Action<DbContextOptionsBuilder>? configure, CancellationToken cancellationToken,
+        Func<TtContainer, Task>? deleteResource) where TContext : DbContext
     {
         TtFactory<TContext> factory;
         await OwnerGate.WaitAsync(cancellationToken);
@@ -41,7 +46,7 @@ public static class Tt
             {
                 TtOptions options;
                 lock (ConfigurationGate) { _started = true; options = _options.Snapshot(); }
-                factory = await CreateOwnedFactoryAsync<TContext>(options, cancellationToken);
+                factory = await CreateOwnedFactoryAsync<TContext>(options, cancellationToken, deleteResource: deleteResource);
                 Owners.Add(typeof(TContext), factory);
             }
         }
@@ -75,48 +80,88 @@ public static class Tt
         Func<TtContainer, Task>? deleteHost = null, Func<Npgsql.NpgsqlDataSource, Task>? beforeVerification = null,
         Func<string, Task>? prepareImage = null,
         Func<Npgsql.NpgsqlConnection, Npgsql.NpgsqlTransaction, Task>? afterSequenceRestore = null,
-        Func<Npgsql.NpgsqlConnection, Task>? afterRowCommit = null)
+        Func<Npgsql.NpgsqlConnection, Task>? afterRowCommit = null,
+        Func<Npgsql.NpgsqlConnection, string, Task>? dropDatabase = null)
         where TContext : DbContext
     {
         var pool = new TtPreparedPool<TContext>(options, baseline, beforeVerification, deleteHost, prepareImage,
-            afterSequenceRestore, afterRowCommit);
+            afterSequenceRestore, afterRowCommit, dropDatabase);
+        await InitializeOwnedPoolAsync(pool, options, pool.InitializeAsync, "BaselineInitialize", cancellationToken);
+        return new TtFactory<TContext>(pool, options, ownsPool: true,
+            preparedOptions: pool.BuildOptions, validateContext: pool.ValidateContext);
+    }
+
+    internal static async Task<TtFactory<TContext>> CreateOwnedFactoryAsync<TContext>(
+        TtOptions options, CancellationToken cancellationToken, Func<TtContainer, Task>? beforeStart = null,
+        Func<TtContainer, Task>? deleteResource = null) where TContext : DbContext
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var pool = new TtPool(options, deleteResource, beforeStart: beforeStart);
+        await InitializeOwnedPoolAsync(pool, options, pool.InitializeAsync, "ContainerInitialize", cancellationToken);
+        return new TtFactory<TContext>(pool, options, ownsPool: true);
+    }
+
+    private static async Task InitializeOwnedPoolAsync(ITtDatabasePool pool, TtOptions options,
+        Func<CancellationToken, Task> initialize, string stage, CancellationToken cancellationToken)
+    {
+        var initializationCancellation = new CancellationTokenSource();
+        var cleanupOwnsCancellation = false;
+        var initialization = initialize(initializationCancellation.Token);
         try
         {
-            await pool.InitializeAsync(cancellationToken);
-            return new TtFactory<TContext>(pool, options, ownsPool: true,
-                preparedOptions: pool.BuildOptions, validateContext: pool.ValidateContext);
+            await initialization.WaitAsync(options.StartupTimeout, cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
         }
         catch (Exception error)
         {
-            Exception? cleanupFailure = null;
-            try { await pool.DisposeAsync(); }
-            catch (Exception cleanupError) { cleanupFailure = cleanupError; }
-            if (error is OperationCanceledException && cleanupFailure is null) throw;
-            var failure = error as TtLifecycleException ?? new TtLifecycleException("BaselineInitialize", error);
-            if (cleanupFailure is not null)
+            var interrupted = cancellationToken.IsCancellationRequested ||
+                (error is TimeoutException && !ReferenceEquals(initialization.Exception?.InnerException, error));
+            Exception? cancellationFailure = null;
+            cleanupOwnsCancellation = true;
+            var cancellation = initializationCancellation.CancelAsync();
+            async Task DrainAsync()
             {
-                var cleanup = TtCleanupRegistry.Retain(pool.OwnerId, pool.RetryCleanupAsync, () => pool.OwnedResourceIds);
-                failure = new TtLifecycleException(failure.Stage, failure, cleanupFailure, cleanup);
+                try { await initialization; }
+                catch { /* Failure is reported separately; ownership still drains. */ }
+                try { await cancellation; }
+                catch (Exception callbackError) { cancellationFailure = callbackError; }
+                try { await pool.DisposeAsync(); }
+                finally { initializationCancellation.Dispose(); }
             }
+            var drain = DrainAsync();
+            TtCleanup RetainCleanup()
+            {
+                var cancellationFailureReported = false;
+                var cleanup = TtCleanupRegistry.Retain(pool.Snapshot.OwnerId, async () =>
+                {
+                    try { await drain; }
+                    catch { await pool.RetryCleanupAsync(); }
+                    if (cancellationFailure is not null && !cancellationFailureReported)
+                    {
+                        cancellationFailureReported = true;
+                        throw new TtLifecycleException("StartupCancellation", cancellationFailure);
+                    }
+                }, () => pool.OwnedResourceIds);
+                return cleanup;
+            }
+            if (interrupted)
+            {
+                var interruptedStage = cancellationToken.IsCancellationRequested ? "StartupCanceled" : "StartupTimeout";
+                throw new TtLifecycleException(interruptedStage, error, cancellationFailure, RetainCleanup());
+            }
+            var failure = error as TtLifecycleException ?? new TtLifecycleException(stage, error);
+            try { await drain.WaitAsync(options.DrainTimeout); }
+            catch (Exception cleanupError)
+            {
+                failure = new TtLifecycleException(failure.Stage, failure, cleanupError, RetainCleanup());
+            }
+            if (cancellationFailure is not null && failure.Cleanup is null)
+                failure = failure.WithCleanupFailure(cancellationFailure);
             throw failure;
         }
-    }
-
-    private static async Task<TtFactory<TContext>> CreateOwnedFactoryAsync<TContext>(
-        TtOptions options, CancellationToken cancellationToken) where TContext : DbContext
-    {
-        cancellationToken.ThrowIfCancellationRequested();
-        var pool = new TtPool(options);
-        try
+        finally
         {
-            await pool.InitializeAsync();
-            cancellationToken.ThrowIfCancellationRequested();
-            return new TtFactory<TContext>(pool, options, ownsPool: true);
-        }
-        catch
-        {
-            await pool.DisposeAsync();
-            throw;
+            if (!cleanupOwnsCancellation) initializationCancellation.Dispose();
         }
     }
 
@@ -133,7 +178,9 @@ public static class Tt
                 catch (Exception error) { first ??= error; }
             }
             Owners.Clear();
-            try { await TtCleanupRegistry.DrainAsync(); }
+            TimeSpan timeout;
+            lock (ConfigurationGate) timeout = _options.DrainTimeout;
+            try { await TtCleanupRegistry.DrainAsync(timeout); }
             catch (Exception error) { first ??= error; }
             lock (ConfigurationGate) _started = false;
             if (first is not null) throw first;

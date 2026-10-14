@@ -1,0 +1,4654 @@
+{
+  "baseObject": "bd5cbb40f986844fe4a0ea162f83cf62b346ee84",
+  "branch": "master",
+  "currentObject": "bd5cbb40f986844fe4a0ea162f83cf62b346ee84",
+  "integrationBase": "bd5cbb40f986844fe4a0ea162f83cf62b346ee84",
+  "paths": [
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "487e2293f4f5c500dd7b3e4c5725066629174743",
+      "mode": "100644",
+      "path": "README.md",
+      "sha256": "ff3b9a3acd9b529633ba3704a7a24bd2ba387a6dc3d0839c28a0bf120ca7aee9",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "5b6e960f3120456ba285a2a95e28566396038765",
+      "mode": "100644",
+      "path": "docs/issues/README.md",
+      "sha256": "808d2e2c652b733823b8ffa5777d37abd746f32ba673fd9090473388b18c83fb",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/manifest.json",
+      "sha256": "76596e6b0a37965219c6bfa6233fd08f4d7a45626e7c5129e849ca932779a0ee",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-cancellation-green/0cd25674-d1cc-43f6-836d-56d915541ece/dan_os-greg_2026-10-14.17_28_09.cobertura.xml.gz",
+      "sha256": "d8d4b9abd2f2f2ba4d41171e429048017e055f97e4e021a1bb342cbe63541318",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-cancellation-green/_os-greg_2026-10-14_17_28_08/In/os-greg/dan_os-greg_2026-10-14.17_28_09.cobertura.xml.gz",
+      "sha256": "d8d4b9abd2f2f2ba4d41171e429048017e055f97e4e021a1bb342cbe63541318",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-cancellation-green/async-cancellation-green.trx",
+      "sha256": "358975297532a41dda08a3a7ddd181d2d69228e8a9914b7c75efbe167803a217",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-cancellation-red/async-cancellation-red.trx",
+      "sha256": "83526faebbe303801d2c1e4d002324f56673e9800246da82a3791abb524ce3d6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-cancellation-red/source/TtFactory.cs.txt",
+      "sha256": "521b95ef4ea8a625ef87b622a2b1f2b49db2ccacdca88ba900a4ef5494a75e18",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-cancellation-refactor/65ebbe93-f0a9-4f50-9388-4fc377417885/dan_os-greg_2026-10-14.17_29_10.cobertura.xml.gz",
+      "sha256": "e74e381b0c9d653fdaacc22eb8e30c05fa047782c6d3f9ce942b895ee15bfe7e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-cancellation-refactor/_os-greg_2026-10-14_17_29_08/In/os-greg/dan_os-greg_2026-10-14.17_29_10.cobertura.xml.gz",
+      "sha256": "e74e381b0c9d653fdaacc22eb8e30c05fa047782c6d3f9ce942b895ee15bfe7e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-cancellation-refactor/async-cancellation-refactor.trx",
+      "sha256": "60b0fba2a81ea9d31364076491c270ee1b003401feef2d8ca93910a6afc57fcf",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-startup-cancellation-green/40472be2-a8a0-4822-be43-b8908421a07f/dan_os-greg_2026-10-14.17_31_44.cobertura.xml.gz",
+      "sha256": "d2c22c8a0f06ef7e96782e3d6380a0dc7549f16c21095323486e3da1a55c8810",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-startup-cancellation-green/_os-greg_2026-10-14_17_31_09/In/os-greg/dan_os-greg_2026-10-14.17_31_44.cobertura.xml.gz",
+      "sha256": "d2c22c8a0f06ef7e96782e3d6380a0dc7549f16c21095323486e3da1a55c8810",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-startup-cancellation-green/async-startup-cancellation-green.trx",
+      "sha256": "ecd0870c3cb513f714316acd5df23e8e74cf502f6fcb2234f1e96214aacf9be9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-startup-cancellation-red/async-startup-cancellation-red.trx",
+      "sha256": "cce12b89c210449bd0da7d436831f8273d4b32d1698498b83b95bfe455accda5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-startup-cancellation-red/source/Tt.cs.txt",
+      "sha256": "7bf4b5e6c871171513b2d2a862bf86e1268201a0ba53d7defe0f29015e2ab60d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/async-startup-cancellation-refactor/async-startup-cancellation-refactor.trx",
+      "sha256": "c8ef6e93e93f8d88f37ec554d06836e44fd01d8f83791b0955462ebba2d8b8b6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/cleanup-reentry-green/4240a35f-0a39-425e-b2c2-fe4b4c1db078/dan_os-greg_2026-10-14.16_54_47.cobertura.xml.gz",
+      "sha256": "dba0cbecd036f726fc9488dff8015fd8d97b2744518c2a870ae421d2c5cc2ece",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/cleanup-reentry-green/_os-greg_2026-10-14_16_54_47/In/os-greg/dan_os-greg_2026-10-14.16_54_47.cobertura.xml.gz",
+      "sha256": "dba0cbecd036f726fc9488dff8015fd8d97b2744518c2a870ae421d2c5cc2ece",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/cleanup-reentry-green/cleanup-reentry-green.trx",
+      "sha256": "3a7a311c72ad1b6be626f4e22f9446e554b2e89c966c06f1c9191d2944735aaa",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/cleanup-reentry-red/cleanup-reentry-red.trx",
+      "sha256": "c4ba0df771dcf8e523d7cc50445561c68cbd6fc16c702435fd10de2804db39a4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/cleanup-reentry-red/source/TtCleanup.cs.txt",
+      "sha256": "8f288e58b0af1606002835ad44f966b4a0ad3539cc277bd785309c975cd40ccf",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/cleanup-reentry-refactor/cleanup-reentry-refactor.trx",
+      "sha256": "afa8aab305b9937ad5e9ec620f914884c53b269bd6ceda73a34573b4b8c154a1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/coverage-classification.md.txt",
+      "sha256": "6d0284d924577a49eac6f2298c104aea03a4f06aa7b0d62e7b3c7887c219c92e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/deadline-validation-green/9cf46a68-66cb-4184-a9bd-705a95cf26c8/dan_os-greg_2026-10-14.16_21_55.cobertura.xml.gz",
+      "sha256": "3c5a99c8a453c0a3c265c3abc27769ae40fcd608abbb182bc496c64d3eab98bb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/deadline-validation-green/_os-greg_2026-10-14_16_21_55/In/os-greg/dan_os-greg_2026-10-14.16_21_55.cobertura.xml.gz",
+      "sha256": "3c5a99c8a453c0a3c265c3abc27769ae40fcd608abbb182bc496c64d3eab98bb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/deadline-validation-green/deadline-validation-green.trx",
+      "sha256": "46fbcee0d220db83fe80b45cb85e3d450ab59a41af0f880e459cfa3eb643e02a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/deadline-validation-red/deadline-validation-red.trx",
+      "sha256": "80192a0cfce69b35cc72c0cfefebf9b8efa1820397efdc0b43d604686ebf7dbe",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/deadline-validation-red/source/ResourceBudgetValidationTests.cs.txt",
+      "sha256": "a7da471bb867be23149f50d2eee1ec6d191787bc9c0dab551e9c6307a585b136",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/deadline-validation-red/source/TtResourceBudget.cs.txt",
+      "sha256": "5e666240a1818f9faf64a08e79f5355321d668f84faf05d3ce9c85f2f946a263",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/deadline-validation-refactor/deadline-validation-refactor.trx",
+      "sha256": "0514329686e492860184cef899f9c659e1533b18ee673282209f9f1586302725",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/docker-container-not-found.txt",
+      "sha256": "cb75a33a66ba7aedf1065dbf7aa55d50f0c847680fef0bd344d7fdf7b2f1c8db",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/docker-container-operations.txt",
+      "sha256": "d967f9ec30e9ec563cb749e48445857b473aba08196c488afac197ae8f96ffe2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drain-native-green/_os-greg_2026-10-14_16_04_48/In/os-greg/dan_os-greg_2026-10-14.16_04_49.cobertura.xml.gz",
+      "sha256": "a1aa8692a368e034f37d1a7eaac8b24072631faf9d029ef225d6679796bdb0ed",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drain-native-green/ca7492e0-9d01-4180-bf21-6ee982792a93/dan_os-greg_2026-10-14.16_04_49.cobertura.xml.gz",
+      "sha256": "a1aa8692a368e034f37d1a7eaac8b24072631faf9d029ef225d6679796bdb0ed",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drain-native-green/drain-native-green.trx",
+      "sha256": "f5e70f998aa2654e779481ee0c544a93292620ecc7973fe4400b4d2c29f9fad8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drain-timeout-green/_os-greg_2026-10-14_16_02_09/In/os-greg/dan_os-greg_2026-10-14.16_02_10.cobertura.xml.gz",
+      "sha256": "825897c303cd1a71ea1c94e45303e3e27722b6192ee58e8710a84087e5338fde",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drain-timeout-green/b21b6890-406b-498d-a6af-2eed8f6b5db1/dan_os-greg_2026-10-14.16_02_10.cobertura.xml.gz",
+      "sha256": "825897c303cd1a71ea1c94e45303e3e27722b6192ee58e8710a84087e5338fde",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drain-timeout-green/drain-timeout-green.trx",
+      "sha256": "b06e1975ed1632ac165bc21d1d9a76a5442a3e43b61204a0420af35ab30cd60a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drain-timeout-red/drain-timeout-red.trx",
+      "sha256": "08f3fbf72c3ba06e7186960de288fb48323e774cef4fcf255f773c05cc9cb587",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drain-timeout-red/source/DrainDeadlineTests.cs.txt",
+      "sha256": "8438116414bbf95785365affe2004617adfb10a461e43ef6ffdd2c8d3cf7bf52",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drain-timeout-red/source/TtFactory.cs.txt",
+      "sha256": "2a684c1148185d4e65b0cf395e83671409da51b16c50d79be02b7f20d63a3829",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drain-timeout-refactor/drain-timeout-refactor.trx",
+      "sha256": "2fadc8ed397e579b3d9dc6c79df3346148004ef3ab9fc006914a78fedcc0db9d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-bounds-green/5bd48c58-cac4-457f-8fe2-677548c68fc9/dan_os-greg_2026-10-14.15_49_17.cobertura.xml.gz",
+      "sha256": "2fcb757fc7fc5bdb74bd55201e31953ec266ffca22257f5dde694e4a687df7e9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-bounds-green/_os-greg_2026-10-14_15_49_09/In/os-greg/dan_os-greg_2026-10-14.15_49_17.cobertura.xml.gz",
+      "sha256": "2fcb757fc7fc5bdb74bd55201e31953ec266ffca22257f5dde694e4a687df7e9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-bounds-green/drop-bounds-green.trx",
+      "sha256": "3a3e691d306ed3d7119a51e719e10b40e706da2f9c206b4a96bb2318ca94d0df",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-native-green/09fa0f95-d9d5-4419-a2a5-2ccf470de35d/dan_os-greg_2026-10-14.15_50_34.cobertura.xml.gz",
+      "sha256": "1dc34590c41e099ffee54a51159bc2832f808ae4d947b6ff8703fc8d80bd195a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-native-green/_os-greg_2026-10-14_15_50_26/In/os-greg/dan_os-greg_2026-10-14.15_50_34.cobertura.xml.gz",
+      "sha256": "1dc34590c41e099ffee54a51159bc2832f808ae4d947b6ff8703fc8d80bd195a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-native-green/drop-native-green.trx",
+      "sha256": "ea87ed20eeb21bc18c8d0e4e2510aab0c9284d7e187a178c29cc7fed9b3aa2e6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-refactor/drop-refactor.trx",
+      "sha256": "0567442204f981ea1bbe20eab0760e43dadf5d52c36772d806f355efbc4c8205",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-retry-green/3ea98522-5da6-4368-b83d-d944273a73e4/dan_os-greg_2026-10-14.15_47_47.cobertura.xml.gz",
+      "sha256": "0b958286eb544c19f9fc44677e6cfdd873c4054c8031d800edebb03f426ec14c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-retry-green/_os-greg_2026-10-14_15_47_47/In/os-greg/dan_os-greg_2026-10-14.15_47_47.cobertura.xml.gz",
+      "sha256": "0b958286eb544c19f9fc44677e6cfdd873c4054c8031d800edebb03f426ec14c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-retry-green/drop-retry-green.trx",
+      "sha256": "2a7815c10b7e65dcbb119578119e2e07c4906ccf0bf9f3e84604424e7357b81c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-retry-red/drop-retry-red.trx",
+      "sha256": "229202b899c696576123f705573732a8a4e0b6a60b98aca7cf1e7f5e32e6582b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-retry-red/source/SlotRecoveryTests.cs.txt",
+      "sha256": "962bf7819f7a8a859ec865789aa0bd35a2f3edf7e36a801c1f30c2ad7635d0b9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/drop-retry-red/source/TtSlotPool.cs.txt",
+      "sha256": "83bfe5601cef6c86cfcd5c891241ce27d872ed43323edeec5150586a2cdeade9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/episode-budget-green/_os-greg_2026-10-14_15_56_19/In/os-greg/dan_os-greg_2026-10-14.15_56_20.cobertura.xml.gz",
+      "sha256": "f52450b2ab7c554e7cf34245dd5dfbb984100e228d0a239adf98865994908933",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/episode-budget-green/episode-budget-green.trx",
+      "sha256": "f721841356ef156b7c14e38b73a6b06ca2f630f6c7703aa17151e3fb7d20d2fa",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/episode-budget-green/f8ae58bc-11e7-4505-bba7-556bb63995e4/dan_os-greg_2026-10-14.15_56_20.cobertura.xml.gz",
+      "sha256": "f52450b2ab7c554e7cf34245dd5dfbb984100e228d0a239adf98865994908933",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/episode-budget-red/episode-budget-red.trx",
+      "sha256": "37e22dab56d43f179858b008e692070972a0f2e564e98fc14517cb1a2c8e4bc2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/episode-budget-red/source/SlotRecoveryTests.cs.txt",
+      "sha256": "04b8efa73c168b71b9ab46667ff8d870e8a4afb3a765ded3084b8a19d0e1e25b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/episode-budget-red/source/TtSlotPool.cs.txt",
+      "sha256": "495f13454da1b5f21794313e519c6a98837ae96c791b418305bb8c2a9621b505",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/episode-budget-refactor/episode-budget-refactor.trx",
+      "sha256": "7b0dab8c67bf435d56923a39e5ef530d498cbdbf007decd45c60a34b55155100",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/fast-progress/_os-greg_2026-10-14_16_14_25/In/os-greg/dan_os-greg_2026-10-14.16_14_26.cobertura.xml.gz",
+      "sha256": "dc786021ea125d5c318d9c5061679a32c1a9aee85583c529251cdcdbb6b07447",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/fast-progress/ea68c864-250d-4915-8a32-6fbba6e19aeb/dan_os-greg_2026-10-14.16_14_26.cobertura.xml.gz",
+      "sha256": "dc786021ea125d5c318d9c5061679a32c1a9aee85583c529251cdcdbb6b07447",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/fast-progress/fast-progress.trx",
+      "sha256": "c1ce10d429866e757d2f64566f93d8ff1652d3d80d6819ed8ee3a5c33871d0fd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/final-refactor/03b3e7a7-78bf-44d7-8e6d-d1e26e8079fc/dan_os-greg_2026-10-14.17_38_27.cobertura.xml.gz",
+      "sha256": "b9abbaa1335046d9649598535d2cd12175e791bad44dd9aca2cf5e09641ef5dc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/final-refactor/_os-greg_2026-10-14_17_38_13/In/os-greg/dan_os-greg_2026-10-14.17_38_27.cobertura.xml.gz",
+      "sha256": "b9abbaa1335046d9649598535d2cd12175e791bad44dd9aca2cf5e09641ef5dc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/final-refactor/final-refactor.trx",
+      "sha256": "73fc765cbbb3ff30f3593dab4d21d993a2a5877a658471803d1a094854c0b27c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-coverage-summary-r2.json",
+      "sha256": "6fa2e6dc73d3c33fe4f496a1ffd180092afe299b6819f2b4ac265377e51720fb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-coverage-summary.json",
+      "sha256": "6e969f29b3994c71eb407fec3066e76b3721a90ec41f818df719e4805d43979b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate-r2/25c2246b-ac1f-458b-b8f5-b3a84f1463f9/dan_os-greg_2026-10-14.17_26_55.cobertura.xml.gz",
+      "sha256": "59e7d86ae65e68ba82bece15f12a271106f6b7ab56dbb5247072fe7bfa41a2a4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate-r2/_os-greg_2026-10-14_17_20_17/In/os-greg/dan_os-greg_2026-10-14.17_26_55.cobertura.xml.gz",
+      "sha256": "59e7d86ae65e68ba82bece15f12a271106f6b7ab56dbb5247072fe7bfa41a2a4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate-r2/full-gate-r2.trx",
+      "sha256": "3286171beebaf58c37f4779bcdfd73408a03149a30b8de52ff53b333dec6d8ee",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate-r2/source-binding.json",
+      "sha256": "dcf564f0c230620522722ca7ea54acfd25ff70078b1bfac5e6152db879b9ccc3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate-r3-receipt.json",
+      "sha256": "217b51efd2136f25971f0b0459a260977a3029110c3f630ba6356d181fe1df0a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate-r3/7117e7fd-c7ff-4bb2-968e-281ea942e4e2/dan_os-greg_2026-10-14.17_46_31.cobertura.xml.gz",
+      "sha256": "4a5a3e8bac480f347df59b49b925e788cbfdc56958475cd6d7a3174bf004a358",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate-r3/_os-greg_2026-10-14_17_39_13/In/os-greg/dan_os-greg_2026-10-14.17_46_31.cobertura.xml.gz",
+      "sha256": "4a5a3e8bac480f347df59b49b925e788cbfdc56958475cd6d7a3174bf004a358",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate-r3/full-gate-r3.trx",
+      "sha256": "5f50ea6e7ad12f3409f9da040d01e08b4aff7e54a261a307591661a5387d5b60",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate-r3/source-before-prune/TtPreparedPool.cs.txt",
+      "sha256": "d376e61346ddb0b95054d7f535dcf4a49083979aff717ae72eb6bbecf94e7843",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate-r3/source-binding.json",
+      "sha256": "f4672c781c6a7aa46b4296084045662367facd3f55248376e974d326d50eb7e9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate/4c4fde3e-ace4-4391-9f60-109958ba1129/dan_os-greg_2026-10-14.17_07_27.cobertura.xml.gz",
+      "sha256": "e8b57ae3e190f153ca7fd6479564127c00876bcac7059cfc65df5177fdc77502",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate/_os-greg_2026-10-14_17_00_00/In/os-greg/dan_os-greg_2026-10-14.17_07_27.cobertura.xml.gz",
+      "sha256": "e8b57ae3e190f153ca7fd6479564127c00876bcac7059cfc65df5177fdc77502",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate/full-gate.trx",
+      "sha256": "1faa574f905fa6cf5270d5650087c348a360e5df63abf14e47d8f16cdc66ec01",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate/source/Tt.cs.txt",
+      "sha256": "cb41293205eae5f56d73483053a7652be94f38f5b0afe1a79a19a7f42e73b476",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate/source/TtCleanup.cs.txt",
+      "sha256": "972bd020db88bb591c235479b0280930223828b556c717abe7756aa1e8831746",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate/source/TtFactory.cs.txt",
+      "sha256": "521b95ef4ea8a625ef87b622a2b1f2b49db2ccacdca88ba900a4ef5494a75e18",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/full-gate/source/TtLease.cs.txt",
+      "sha256": "a0834cc774f7c05e69bd8b09c6bebcd0a69abd7e0dda8aa74fc11a4f19737f4e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/global-deadline-green/0faa2552-d6e8-47c2-9f4a-02f89769a10f/dan_os-greg_2026-10-14.16_57_57.cobertura.xml.gz",
+      "sha256": "dc14beda33bb7b992e6c2f300ca2848e3511795fc84e455c41e903dd7d7943e7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/global-deadline-green/_os-greg_2026-10-14_16_57_57/In/os-greg/dan_os-greg_2026-10-14.16_57_57.cobertura.xml.gz",
+      "sha256": "dc14beda33bb7b992e6c2f300ca2848e3511795fc84e455c41e903dd7d7943e7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/global-deadline-green/global-deadline-green.trx",
+      "sha256": "55a11a4d68b48f0f0a5cd0533a45a57b8ff11b088d9295660caa6f6beff7d1f0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/global-deadline-red/global-deadline-red.trx",
+      "sha256": "caf8bc527400da1504682841cac2ce229130ec7c447d91376468e95b7bf2cad7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/global-deadline-red/source/Tt.cs.txt",
+      "sha256": "051da3f5f0b0a8b9618192cc35fb676f02af74ffbb28922e795727d1502fa0ec",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/global-deadline-red/source/TtCleanupRegistry.cs.txt",
+      "sha256": "47648da6e78984974e9a935adfcb628d5c6feb6f21c545abceb746c43156fcdc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/global-deadline-refactor/global-deadline-refactor.trx",
+      "sha256": "d4f07b6bf6924912f779a58a4d50b28758c752bebb5628d1a970ab3f15782bfc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/late-create-owned-cleanup.json",
+      "sha256": "c9d1954756ff31561d09e982030ec6be158949feb08f293369c30d8926ca0c01",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/lease-reentry-green/98d9f2bf-b413-441e-a52a-d95e43242c3c/dan_os-greg_2026-10-14.17_09_17.cobertura.xml.gz",
+      "sha256": "9bb37d9f542cadd8f71ecdbbb5d492287cacc7c8db2535b0271e014af1e067f6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/lease-reentry-green/_os-greg_2026-10-14_17_09_17/In/os-greg/dan_os-greg_2026-10-14.17_09_17.cobertura.xml.gz",
+      "sha256": "9bb37d9f542cadd8f71ecdbbb5d492287cacc7c8db2535b0271e014af1e067f6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/lease-reentry-green/lease-reentry-green.trx",
+      "sha256": "4cdb1cdbdf77bcce3fdafde78ecfb06cf3508264519c335828dbc7d6cb9f5016",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/lease-reentry-red/lease-reentry-red.trx",
+      "sha256": "d74958769f7c81cc53df15955a0c325c898a6a1740352628de4a18e77750329e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/lease-reentry-red/source/TtDatabase.cs.txt",
+      "sha256": "c80c7451a6deed09970d4a6711b86f50899f0515a6a916f97d336f47ae1c0ed9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/lease-reentry-red/source/TtLease.cs.txt",
+      "sha256": "a0834cc774f7c05e69bd8b09c6bebcd0a69abd7e0dda8aa74fc11a4f19737f4e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/lease-reentry-refactor/lease-reentry-refactor.trx",
+      "sha256": "635f9f910c9b8f62eb3a0fbcf9158c79a0dbd9b9eb60cead0ed308ecd157a712",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-diagnostic/locked-drain-diagnostic.trx",
+      "sha256": "6264d7ee717dd4a7daf8019ae863deed662c0443b27a9235588644270540c006",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-green/1025a577-070f-4cad-8f67-ff0db69bbb6e/dan_os-greg_2026-10-14.17_12_32.cobertura.xml.gz",
+      "sha256": "75e642ea2a3ca6306dbee9af23cbb729c986eb2b026f7af4bd4e83c3d82fd73f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-green/_os-greg_2026-10-14_17_12_23/In/os-greg/dan_os-greg_2026-10-14.17_12_32.cobertura.xml.gz",
+      "sha256": "75e642ea2a3ca6306dbee9af23cbb729c986eb2b026f7af4bd4e83c3d82fd73f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-green/locked-drain-green.trx",
+      "sha256": "35c81b3ecdcf989045c9f64f1eaf7328c433cd32039001d0e0becdd04580b366",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-investigation/2ac6fd35-4631-4828-accf-6c16dc434597/dan_os-greg_2026-10-14.17_10_40.cobertura.xml.gz",
+      "sha256": "e81601728ef8bf576a129e3f52b791a03f8edd9909d627ad015bbc3958c8c3da",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-investigation/_os-greg_2026-10-14_17_10_40/In/os-greg/dan_os-greg_2026-10-14.17_10_40.cobertura.xml.gz",
+      "sha256": "e81601728ef8bf576a129e3f52b791a03f8edd9909d627ad015bbc3958c8c3da",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-investigation/locked-drain-investigation.trx",
+      "sha256": "fe90b18f9d708bba54f172a3d94385e1e00d9c3a6f0c6ef5af8b393b518899f1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-red/source/TtContainer.cs.txt",
+      "sha256": "08198f2ad7b42d949b79771ab9872268a8ad6ff175670c601f90164f38036b7a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-red/source/TtPool.cs.txt",
+      "sha256": "30528117c65c830cd41c4b12c7c0777951e9adfa1777e86f3c7d31694a1610bc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-red/source/TtSlotPool.cs.txt",
+      "sha256": "b1490479f4f3f8e0adffc59ba1456184c7f5c7780fd59d9e932ab02708c87ea1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/locked-drain-refactor/locked-drain-refactor.trx",
+      "sha256": "326aa7bcbf54f6332b976e0fb61467487b77a7bcf3dc72be514fd4ecac4b82c7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/ordinary-startup-green/17b99052-3b28-47a9-8470-ec29895dd3db/dan_os-greg_2026-10-14.16_43_50.cobertura.xml.gz",
+      "sha256": "2bd30307801e740725885616899df80da5ee0299000c5fefef86865210fa4efb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/ordinary-startup-green/_os-greg_2026-10-14_16_43_30/In/os-greg/dan_os-greg_2026-10-14.16_43_50.cobertura.xml.gz",
+      "sha256": "2bd30307801e740725885616899df80da5ee0299000c5fefef86865210fa4efb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/ordinary-startup-green/ordinary-startup-green.trx",
+      "sha256": "d8e2efa92cbde08427db28c29d9a14229e89e034f4e98a9dc7056e4f1ed64b81",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/ordinary-startup-refactor-fast/ordinary-startup-refactor-fast.trx",
+      "sha256": "4b667948cc0edb7efd94df04157ebceb91dfbe88ed03eeb653804aa9dd606788",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/owner-id-prune-receipt.json",
+      "sha256": "7cb0b3f1c1aef0a055a6839f5d59f81d6c8e4dc173be0c3573444b3e198960ce",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/owner-id-prune/_os-greg_2026-10-14_17_51_25/In/os-greg/dan_os-greg_2026-10-14.17_51_33.cobertura.xml.gz",
+      "sha256": "2c03343d475f5139088d412c2e177f3aa73a760d39233df42ea843b9ffe8bc6a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/owner-id-prune/beeeb831-b43f-4824-8be2-9e0910064913/dan_os-greg_2026-10-14.17_51_33.cobertura.xml.gz",
+      "sha256": "2c03343d475f5139088d412c2e177f3aa73a760d39233df42ea843b9ffe8bc6a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/owner-id-prune/owner-id-prune.trx",
+      "sha256": "93c8dc5998fc49d328b02e1207d91550ab6ef63f049bdd3d5c8f027f4fe1854f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/owner-id-prune/source-receipt.json",
+      "sha256": "9b05863753f9a76fcfe0d512bb1999d6013dd8a57c80b41e0cfaa0a8c1ead2d1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/prepared-drain-green/_os-greg_2026-10-14_16_11_42/In/os-greg/dan_os-greg_2026-10-14.16_12_05.cobertura.xml.gz",
+      "sha256": "a7c1ecb70892f430efcb77db34be502f6e978dee26e8d990561c474021c9df59",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/prepared-drain-green/a6a723ba-daad-4c1d-aa80-24c51aaa4ebe/dan_os-greg_2026-10-14.16_12_05.cobertura.xml.gz",
+      "sha256": "a7c1ecb70892f430efcb77db34be502f6e978dee26e8d990561c474021c9df59",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/prepared-drain-green/prepared-drain-green.trx",
+      "sha256": "bb30fedc1bc178788a613e1cdb9a0775db282f6711add11cc6e5875671220e36",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/prepared-drain-red/prepared-drain-red.trx",
+      "sha256": "36b0ea4bc304126a707fa739f7ca9ee55e6bed67642847b639a7a9a9f4d7747a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/prepared-drain-red/source/PreparedDrainRetryTests.cs.txt",
+      "sha256": "206d2180930a6a27fb4f5ee60115a324844220b395ed560e6a8584e9f5c2f6a2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/prepared-drain-red/source/TtPreparedPool.cs.txt",
+      "sha256": "8ec0c7910563584793ddb1126ad289666db70652826bb10db98717c0f77dc8ad",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/prepared-pending-drain-r2/5cc6fcaa-368f-45a5-8839-23a80e89b005/dan_os-greg_2026-10-14.17_18_46.cobertura.xml.gz",
+      "sha256": "867acfa83205403de60a43015703a19e45ac52977820a883b611d4b4a0569c0b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/prepared-pending-drain-r2/_os-greg_2026-10-14_17_18_28/In/os-greg/dan_os-greg_2026-10-14.17_18_46.cobertura.xml.gz",
+      "sha256": "867acfa83205403de60a43015703a19e45ac52977820a883b611d4b4a0569c0b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/prepared-pending-drain-r2/prepared-pending-drain-r2.trx",
+      "sha256": "e84abdbe1ae7e6c85c0348b83b19a12edd7d8b674b8baaffdac157c6aaf8458b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/progress-receipt.json",
+      "sha256": "b439596dbed0aab82dd561f03be12753ce5c02309704c917e3afc3d11e273ae2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/progress-selection/4713a576-715c-4300-a168-665fd5923507/dan_os-greg_2026-10-14.16_16_36.cobertura.xml.gz",
+      "sha256": "756f04e10be4f59e9c02a2786ae3d2103b37322b2a18ea9d0be0e6bd7417d5a0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/progress-selection/_os-greg_2026-10-14_16_16_04/In/os-greg/dan_os-greg_2026-10-14.16_16_36.cobertura.xml.gz",
+      "sha256": "756f04e10be4f59e9c02a2786ae3d2103b37322b2a18ea9d0be0e6bd7417d5a0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/progress-selection/progress-selection.trx",
+      "sha256": "65617cffa3b923570fc2203a91663839aa6fefe9e44da4f6c013e18239e74c20",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/readiness-cancel-green/4b4727d3-3cb3-41a2-ba42-47e9af51b532/dan_os-greg_2026-10-14.16_39_41.cobertura.xml.gz",
+      "sha256": "c8c74929b3ce944344aaf0bf7d2b1517689e8b60c53d3bb1ff0d544ec199cd6d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/readiness-cancel-green/_os-greg_2026-10-14_16_38_58/In/os-greg/dan_os-greg_2026-10-14.16_39_41.cobertura.xml.gz",
+      "sha256": "c8c74929b3ce944344aaf0bf7d2b1517689e8b60c53d3bb1ff0d544ec199cd6d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/readiness-cancel-green/readiness-cancel-green.trx",
+      "sha256": "e32486b00cbb018d0223ea684eac7710199c4ce7002ee6b9db2b01f3d43cdebb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/readiness-cancel-red/readiness-cancel-red.trx",
+      "sha256": "53598f0b4a824a394dee0fbbbde73969cde088a22de9d1a5fabd60a81666ff21",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/readiness-cancel-red/source/ReadinessCancellationTests.cs.txt",
+      "sha256": "4ce0cd6f65641c727573ef35df4589ef793f5092fab37520e9a8182fbfaac56c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/readiness-cancel-red/source/TtPool.cs.txt",
+      "sha256": "dde748a98358dfd148878f9df4fe65f4c04850214936732c255a13d6c4aa467c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/readiness-refactor-fast/readiness-refactor-fast.trx",
+      "sha256": "ed8636b73012da79a97ba1238fc6afde94e57ccaf74e816e92b70c19acca5880",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-bounds-green/1cab456b-154f-44f9-af74-5cd135bc0e30/dan_os-greg_2026-10-14.15_44_34.cobertura.xml.gz",
+      "sha256": "935b3834cc794548c99c8f216b7f882bdad685914c8d3ebc5ac1218c2b9814cd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-bounds-green/_os-greg_2026-10-14_15_44_33/In/os-greg/dan_os-greg_2026-10-14.15_44_34.cobertura.xml.gz",
+      "sha256": "935b3834cc794548c99c8f216b7f882bdad685914c8d3ebc5ac1218c2b9814cd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-bounds-green/recovery-bounds-green.trx",
+      "sha256": "70ede619ccf90a1c0ac49fbdb326cc725ba2f7f0fe8475f996da75bad5af24fe",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-budget-fault/TtSlotPool.fault.cs.txt",
+      "sha256": "3021de879cd0094c7f34d2883698071b91560c800031854e9e4166ebf799a96d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-budget-fault/TtSlotPool.original.cs.txt",
+      "sha256": "b1490479f4f3f8e0adffc59ba1456184c7f5c7780fd59d9e932ab02708c87ea1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-budget-fault/receipt.json",
+      "sha256": "4d70da13082db5840277cdbc16b7787a4dae810e0d496f063a2a8853d599d2e5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-budget-fault/recovery-budget-fault.trx",
+      "sha256": "3596770696518e1096ef504692525c6aba4f975abd5352b745b05b8e46a809bd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-native-green-2/3bcddbe5-4b4d-4d81-bcb3-02c1e6f2ff20/dan_os-greg_2026-10-14.15_43_25.cobertura.xml.gz",
+      "sha256": "122b00e4bad59e87a21de4f752b4a6a5f6a1698c5c70de6b9bd0f8b95303765d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-native-green-2/_os-greg_2026-10-14_15_43_19/In/os-greg/dan_os-greg_2026-10-14.15_43_25.cobertura.xml.gz",
+      "sha256": "122b00e4bad59e87a21de4f752b4a6a5f6a1698c5c70de6b9bd0f8b95303765d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-native-green-2/recovery-native-green.trx",
+      "sha256": "65c36a7793993041d2f6b296c48efb9897ab0347580a481884a9cdb874871ede",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-native-green/070483fe-3d39-4d71-85dd-d136ba68eb58/dan_os-greg_2026-10-14.15_42_57.cobertura.xml.gz",
+      "sha256": "7381d02751be9b452cfb1c6eb785bf6f6c3e215ba9765624b06d54d621a591fc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-native-green/_os-greg_2026-10-14_15_42_46/In/os-greg/dan_os-greg_2026-10-14.15_42_57.cobertura.xml.gz",
+      "sha256": "7381d02751be9b452cfb1c6eb785bf6f6c3e215ba9765624b06d54d621a591fc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-native-green/recovery-native-green.trx",
+      "sha256": "c71f9c1a9fa7d413b4d67453c51a2099d261f1196e0b94b7f76fc811f7a87592",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-validation-green/925a64ed-e8c1-40f1-a4e1-c80e3f7b3769/dan_os-greg_2026-10-14.15_41_55.cobertura.xml.gz",
+      "sha256": "73d7dc46a2f7a70fb30463af49e00820dfad8ba18823b056242495328cdc4707",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-validation-green/_os-greg_2026-10-14_15_41_55/In/os-greg/dan_os-greg_2026-10-14.15_41_55.cobertura.xml.gz",
+      "sha256": "73d7dc46a2f7a70fb30463af49e00820dfad8ba18823b056242495328cdc4707",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-validation-green/recovery-validation-green.trx",
+      "sha256": "c13f475edc8f8689fbed21dfe91b578fdf503a657e846e235cda3fbf2b3e46f0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-validation-red/recovery-validation-red.trx",
+      "sha256": "ba3e25474c064d39d3f7386dfcb688b4359a5f6fa642cca151aa82c38434a2d9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-validation-red/source/SlotRecoveryTests.cs.txt",
+      "sha256": "b581c74065b0869796d0f958d827b511a82585a3742dd5e92eff85492bd011ab",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-validation-red/source/TtSlotPool.cs.txt",
+      "sha256": "52c9b93684c642cab25729eb12dd9336795a0318c0799d34017c65d4c8be6265",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/recovery-validation-refactor/recovery-validation-refactor.trx",
+      "sha256": "84a073e06398c47e34d33e310ca0dd17a7f33904e9f55ffb5d4366419682b6d2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/replacement-green/_os-greg_2026-10-14_15_37_56/In/os-greg/dan_os-greg_2026-10-14.15_38_07.cobertura.xml.gz",
+      "sha256": "9d317f279dc047bc516779914e1505ec7938485a1792b950da54b16a7497c90d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/replacement-green/e5aca7ad-d69e-4f2e-816d-38e9dfc947dc/dan_os-greg_2026-10-14.15_38_07.cobertura.xml.gz",
+      "sha256": "9d317f279dc047bc516779914e1505ec7938485a1792b950da54b16a7497c90d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/replacement-green/replacement-green.trx",
+      "sha256": "809909d24f8dcda7a1903b794f1c20717f8b9b5ccb865afa3b0561d051d1e56b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/replacement-red/replacement-red.trx",
+      "sha256": "647fc078df0d0de1f6a6a7ba97240e8efb3df9a7fb7a4b48a1d2996aaf59eec1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/replacement-red/source/SlotRecoveryTests.cs.txt",
+      "sha256": "be85eb7edcc34fb311f0fc84637d2a5599952b9c2b1aef35afee078bdf065a54",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/replacement-red/source/TtSlotPool.cs.txt",
+      "sha256": "71a8ca6c12fdb5de029ea53f0cdbb89fdbb68a93ca7388008d4209c75f0eb410",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/replacement-refactor/replacement-refactor.trx",
+      "sha256": "9a44aec7e8a5387a70f4964e544539e28cc9bba85ffa4f0a7c1fef37ad79726e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/return-queue-synchronization/_os-greg_2026-10-14_17_36_39/In/os-greg/dan_os-greg_2026-10-14.17_36_40.cobertura.xml.gz",
+      "sha256": "374db34f890dce39da9b4a6c3fbdf5147c01dfa3cb2ad19a20683ca5e9456e01",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/return-queue-synchronization/d728977f-5d6f-43f3-a800-7e70a3537da0/dan_os-greg_2026-10-14.17_36_40.cobertura.xml.gz",
+      "sha256": "374db34f890dce39da9b4a6c3fbdf5147c01dfa3cb2ad19a20683ca5e9456e01",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/return-queue-synchronization/return-queue-synchronization.trx",
+      "sha256": "c8f29fa887812cd743826e2676a564a3c1d21628a2ab8ee7a8b1fb7d710b9d43",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/separate-example-build-final-receipt.json",
+      "sha256": "d304eef70ab69361e3ea6dda38185dc1fb737fce47f427f113a8f9b993b2af2a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/separate-example-build-receipt.json",
+      "sha256": "edd2068b71cdcd489ef60c0fed6b93819f69fd8d4a4a67b5b75d383f8a0164d8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/shutdown-callback-green/7e436353-2b7c-4669-abab-def10bce0de1/dan_os-greg_2026-10-14.16_56_36.cobertura.xml.gz",
+      "sha256": "1ec65cee94109d74995eb95c8777c1a1a439b3bf89f4455165e30d1961272c77",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/shutdown-callback-green/_os-greg_2026-10-14_16_56_35/In/os-greg/dan_os-greg_2026-10-14.16_56_36.cobertura.xml.gz",
+      "sha256": "1ec65cee94109d74995eb95c8777c1a1a439b3bf89f4455165e30d1961272c77",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/shutdown-callback-green/shutdown-callback-green.trx",
+      "sha256": "6299f38c369fce23cc78a81171b3f7226d628167f292ac2f7f234e0778c1753c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/shutdown-callback-red/shutdown-callback-red.trx",
+      "sha256": "9bdfed91c6a5979fca1090814e1681c399b061b71498b80a144277536cd1e017",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/shutdown-callback-red/source/TtFactory.cs.txt",
+      "sha256": "b4d9192c2a7f9d7fa98478ba9e4b3a45eedd239f3e2d66ca10d99e52607b3bb7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/shutdown-callback-refactor/shutdown-callback-refactor.trx",
+      "sha256": "e20747c72de888de6bbb74b75487e451973d1ce55659b9913c44bf19bb03ccc7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/shutdown-races/0c9c7f53-11b7-44ee-9a62-45a6b14b9731/dan_os-greg_2026-10-14.16_59_07.cobertura.xml.gz",
+      "sha256": "09d2a57105d6578f31a2cbee8bd9aa50eac0fb44bd00516af542ac01318e0ff6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/shutdown-races/_os-greg_2026-10-14_16_59_06/In/os-greg/dan_os-greg_2026-10-14.16_59_07.cobertura.xml.gz",
+      "sha256": "09d2a57105d6578f31a2cbee8bd9aa50eac0fb44bd00516af542ac01318e0ff6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/shutdown-races/shutdown-races.trx",
+      "sha256": "90da2594ed0ac644a5e470f22fb6887b0834c1d7162e274fad8ecca13cd67068",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/solution-build-final-receipt.json",
+      "sha256": "7108a81b9a601bfe5d44ea8c875d57a8d851cc110103192a227d785f93ade5bb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/solution-build-receipt.json",
+      "sha256": "c91c5f0edabc31c0dabe07110e6228ab1de19fa089c406a7e5263c2dfe757431",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-callback-green/84f7c4cd-90a1-4adb-903f-a25f9b488484/dan_os-greg_2026-10-14.17_15_45.cobertura.xml.gz",
+      "sha256": "56676341fc381e64b8d44ef76a90c15452f21dbb30e717688a6067ee0376a510",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-callback-green/_os-greg_2026-10-14_17_15_17/In/os-greg/dan_os-greg_2026-10-14.17_15_45.cobertura.xml.gz",
+      "sha256": "56676341fc381e64b8d44ef76a90c15452f21dbb30e717688a6067ee0376a510",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-callback-green/startup-callback-green.trx",
+      "sha256": "a4dfcdbddd2a750078bf38d91d66b0dbf1b273292e2bb1bd29803a5e4080afa3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-callback-red-r2/startup-callback-red-r2.trx",
+      "sha256": "9b5e0e96af50970b93ae67405a1948375dcbbaa0d2f8e9436d7313131ccbd28d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-callback-red/source/Tt.cs.txt",
+      "sha256": "cb41293205eae5f56d73483053a7652be94f38f5b0afe1a79a19a7f42e73b476",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-callback-red/startup-callback-red.trx",
+      "sha256": "a1fb6b68f680a6aa9f4c890c441d350520e13fcc3dbfc74090ce8a1c586e9833",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-callback-refactor/startup-callback-refactor.trx",
+      "sha256": "df5bfa31347648390b4e69c9a19dc4df7fa9c8a32c04a7553d439b1b5482aad1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-callback-green/_os-greg_2026-10-14_17_35_27/In/os-greg/dan_os-greg_2026-10-14.17_35_58.cobertura.xml.gz",
+      "sha256": "8a13f413872a27c9ba89baef03d0d080de74fe59f7c239e5385e683df020540d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-callback-green/e09701ea-96e8-4c34-a186-8ad501435a8e/dan_os-greg_2026-10-14.17_35_58.cobertura.xml.gz",
+      "sha256": "8a13f413872a27c9ba89baef03d0d080de74fe59f7c239e5385e683df020540d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-callback-green/startup-deadline-callback-green.trx",
+      "sha256": "6323098dfb0ee44f7e28c5859cec5aa9b891b79da7e459eeacc579ec8bc2cb9c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-callback-red/startup-deadline-callback-red.trx",
+      "sha256": "bee822ee7007bbfddc3513ed301c0ee54f1d597a43485b9f2dc9ccf24cbae00e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-green/_os-greg_2026-10-14_16_29_01/In/os-greg/dan_os-greg_2026-10-14.16_29_33.cobertura.xml.gz",
+      "sha256": "f8fd06daf5d4931c134dd010118bcda63f373970617c8105f09e15f8b5483fe4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-green/e16652bf-6aeb-441d-84b5-0fe3cb15dead/dan_os-greg_2026-10-14.16_29_33.cobertura.xml.gz",
+      "sha256": "f8fd06daf5d4931c134dd010118bcda63f373970617c8105f09e15f8b5483fe4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-green/startup-deadline-green.trx",
+      "sha256": "acd3901f4a74b10f196e1825948228911d849f0c56709c6281838a6e4f97df37",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-red/source/StartupDeadlineTests.cs.txt",
+      "sha256": "616bd217452e031b45d081a7e1e318e2fdd4bd28ca72a115797e6a6d496b8125",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-red/source/Tt.cs.txt",
+      "sha256": "7d3d7055222bde46ba84126526f6526ae3874a90a703c755e1bd94767187f1c4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-red/source/TtPool.cs.txt",
+      "sha256": "58b54f5bdc3860a6f927bd042395a301605ba83a9797d1c36f22b802c92538f5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-red/startup-deadline-red.trx",
+      "sha256": "278499e09939048814614bd36c23f85b55caccbdc3c38eb403316719f57ea086",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/startup-deadline-refactor/startup-deadline-refactor.trx",
+      "sha256": "2d740eab7a6fbdb76a70053674d474a0ae09c4362d34feef9adc9e796c48b0ab",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/static-drain-green/6e509b4b-d9ff-463a-a634-893a549d50c6/dan_os-greg_2026-10-14.16_50_28.cobertura.xml.gz",
+      "sha256": "fbcbee585e6d10f04d6db62e7e4785d25e0c8a25ac2079ee913ec766440f586b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/static-drain-green/_os-greg_2026-10-14_16_50_21/In/os-greg/dan_os-greg_2026-10-14.16_50_28.cobertura.xml.gz",
+      "sha256": "fbcbee585e6d10f04d6db62e7e4785d25e0c8a25ac2079ee913ec766440f586b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/raw/static-drain-green/static-drain-green.trx",
+      "sha256": "bf8d9a9071a04b85070842ceaa71c33ed64bf4b5534bb6e89ea90a1efa6e9745",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/Internal/ITtDatabasePool.cs.txt",
+      "sha256": "49dc4620b886cfd878dcd9a036ebc45a4b4c8688935a627d630f5ccf3195981b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/Internal/TtCleanupRegistry.cs.txt",
+      "sha256": "79f6f0d35df77dcf630d0301b58667170f8d0dc9d86020ef15d25dd7b89709e8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/Internal/TtDatabase.cs.txt",
+      "sha256": "42cfe0587de50fa5492b6e249452540bb21e8b5d993fce4c9c49627b1a11181a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "sha256": "1d9d6636653e31a87a7eb650c4f7a3d0f349a8aa3a6478a2e892140fa9bf729c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/Internal/TtPreparedPool.cs.txt",
+      "sha256": "6ae4933a9c3b03bbd813a0048ef30dffa79bc0a4f10c8dc14c06ce92c88e27f8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/Internal/TtSlotPool.cs.txt",
+      "sha256": "b1490479f4f3f8e0adffc59ba1456184c7f5c7780fd59d9e932ab02708c87ea1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/Tt.cs.txt",
+      "sha256": "e8b087529a0d334791864db6392b17d6dfcefb931cefd899b2299694cd5686ea",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/TtCleanup.cs.txt",
+      "sha256": "972bd020db88bb591c235479b0280930223828b556c717abe7756aa1e8831746",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "sha256": "cc0c50d8f6276ae6be1c0f33fbb09e9f4f469573535943cef8bcada6cd9c7d82",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/TtLease.cs.txt",
+      "sha256": "335dfc27258d032ff2ede46f6d60842d7409b46a9ac32aa6a75484617753baf0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "sha256": "fd1860d46a498f31a2f17130fa44eb6b787e5eed026feed05d4b4878e52c4579",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/src/TurboTest.EFCore/TtResourceBudget.cs.txt",
+      "sha256": "cf8ecda8670bd75f1c885b2066c2d09b3beecb1cc17185e835beb1cf49e96073",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/BaselineValidationTests.cs.txt",
+      "sha256": "070d1748b61fb84557fb11d0b391534466ae0a40b97013f2dcf9f2fd9fc12ff2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/CleanupOwnershipTests.cs.txt",
+      "sha256": "eb9790496954512fd6c5494b086365e13b6cc2cbff1c74e09adb730b04a4db0f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/CompensatingCleanupTests.cs.txt",
+      "sha256": "c43e210ba21159e6837b9cd8051687492d19d826bf17b00eaea9ea82b2715d6b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/DrainDeadlineTests.cs.txt",
+      "sha256": "daa4e1f1e175c8ba994db78854e9c8cd1397fb473a24e267875c65e590d6b2b3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/FactoryBackpressureTests.cs.txt",
+      "sha256": "43f0bbfe75d0b184145031e6d15440826aed7f48d14a8e712b4ae27fd47da6bc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/FailedStartupCleanupTests.cs.txt",
+      "sha256": "60ca5333678cc28a42309c6b3fd74d1b3d85b0ab440ea37eb6d61c798c1b29e3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/LeaseOwnershipTests.cs.txt",
+      "sha256": "9cb4a0d8c2ae2816fe3276ed57b6ab3931e18ab394ab0af1c06ba86ae77af30b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/OrdinaryRecoveryTests.cs.txt",
+      "sha256": "4b7ea9714327b3021d2a45ecca7695f95d77c766744762a805c8b195a38a6848",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/PooledResetTests.cs.txt",
+      "sha256": "caf60d3c4ca6f162f653f6bab864ab533f6ed4dd1c29914385c840b77ad89ad1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/PreparationBudgetTests.cs.txt",
+      "sha256": "6c7d6758a90e7ff4511dae2c69668e6568bf5ce38436ce9616d78dd855faab80",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/PreparedDrainRetryTests.cs.txt",
+      "sha256": "206d2180930a6a27fb4f5ee60115a324844220b395ed560e6a8584e9f5c2f6a2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/PreparedRecoveryTests.cs.txt",
+      "sha256": "286ebc270447226810e6d310027713ebcea1e9958648c026b21f222bf4219cf5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/ReadinessCancellationTests.cs.txt",
+      "sha256": "4ce0cd6f65641c727573ef35df4589ef793f5092fab37520e9a8182fbfaac56c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/ResetTimingTests.cs.txt",
+      "sha256": "48b6773ed680ad4772253b6de8be9dcc1432f93bf70d2ff937bb2e6341b6839e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs.txt",
+      "sha256": "a7da471bb867be23149f50d2eee1ec6d191787bc9c0dab551e9c6307a585b136",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/SlotPoolTests.cs.txt",
+      "sha256": "9dc551465d2e8575ee0a83cb6170ceaaa19085d80edfd494252cfc832ac26e1e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/SlotRecoveryTests.cs.txt",
+      "sha256": "86c1a7d48a0d19c84d14e230cdd8ae1c389d4060d802dd75765e2a5ffbeb14be",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/StartupDeadlineTests.cs.txt",
+      "sha256": "5847a0c6b835ae4e0d95ec44fcaf708afe1ceea1129e66a2e0b98517d9851feb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/source-final/tests/TurboTest.Tests/StaticFailedDrainTests.cs.txt",
+      "sha256": "f81f7b002b7eb97f0a69f52be9c39efafa9b57e21e48a64131aabb92056e6025",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/api-probe.log.txt",
+      "sha256": "b8276d6d15f1901647a2d44e4ac57aafad67324e551641f11227ca66d78505f0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/async-cancellation-green.log.txt",
+      "sha256": "e630afea12fda082668158865489aab6c5545566bfc4df2b135583e8f7a0b320",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/async-cancellation-red.log.txt",
+      "sha256": "3274c32daca0ffd706aa44b2ed6134c0e7fb1ffbf7fe9b2efcf7328578eecb06",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/async-cancellation-refactor.log.txt",
+      "sha256": "c2973bedf8f27c6732ee82ce156299202e39c824c0be6012fbc459c55502c20e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/async-startup-cancellation-green.log.txt",
+      "sha256": "130c481213246576015e12e96a115e0fc62da9a7fb05cb5433471d80802e1087",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/async-startup-cancellation-red.log.txt",
+      "sha256": "fb24af3833600b530ca9b76eba7d32f69adf5c0ba7021b4b9261440c9fd35f48",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/async-startup-cancellation-refactor.log.txt",
+      "sha256": "e23300035c3c617bec05c29dd85681e31d69910eeacef96e49d8d96c87e2d044",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/cleanup-reentry-green.log.txt",
+      "sha256": "e8df07d25def88c0307ab4333981ca94ec4460b6175a43ca9992eb29d6fc553e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/cleanup-reentry-red.log.txt",
+      "sha256": "e5852632adf7b8f783900f0e127388487901e9f44dd329c8a49c8f1d65fe3cd5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/cleanup-reentry-refactor.log.txt",
+      "sha256": "a0bc6ad14f69f6055668ddde7b6422e0d9c4514dda514e8105f272eea719b305",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/deadline-validation-green.log.txt",
+      "sha256": "c021b2d670f0c04cf1220e3f616d8e80b04fbde1977dc9ebfa40ae82232384cb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/deadline-validation-red.log.txt",
+      "sha256": "eee6ec3aeb3ad33be4ed30f1744df838d146bef8ea9ae706cf9aea2f24aa9972",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/deadline-validation-refactor.log.txt",
+      "sha256": "337eb7ea5f3d5bf13f9dafcbc27b4bab62ba993b23aca5cb1424dc4faa2eafbd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/docker-version.log.txt",
+      "sha256": "6342478cb803b7163676e90a47b9fbdfe6b1913e2c248616aaf20be289cd7eb1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/dotnet-info.log.txt",
+      "sha256": "85c7cfbfda2f04cfd8cae3d23c05cdf33276c0777a94c27f11971c3327e1413f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/drain-native-green.log.txt",
+      "sha256": "cbc784f771c4b77141bbb929fa295d09f525264730a351f3ae59f4f571f356fd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/drain-timeout-green.log.txt",
+      "sha256": "f29e88c7f4e5c7e21a740aedf78c1892e5b4c47a6e64999c0073bb8f408f734c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/drain-timeout-red.log.txt",
+      "sha256": "1021e49ed28a8f096b55b5844f3cdd7f053c709e64c4085b66bf855f90b0e711",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/drain-timeout-refactor.log.txt",
+      "sha256": "994d2298c41c511f3d97493c5ec68b0e234add853fad96672b79a1ddad116f87",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/drop-bounds-green.log.txt",
+      "sha256": "767c4b6918c3d5663417995ecdc3c6d986005c9ed63af7cbbbf38a28036e49ed",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/drop-native-green.log.txt",
+      "sha256": "3fc9feacafbf5d651b2928fbce3a8f46ca128308bcfdcd923fabe81d744a70a8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/drop-refactor.log.txt",
+      "sha256": "74e1010f9504c7249ac0172a74517bb02a5659c87e15c5722b5af0b818d0f913",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/drop-retry-green.log.txt",
+      "sha256": "c2c44052c1f1fcad7f30555e80fc0576918d12e91242a4b699c68f7f4989256b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/drop-retry-red.log.txt",
+      "sha256": "e392b570ec2e4de4b1055e6abdd88ed628ac415d40774cad8c6c46e2abeb1e33",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/episode-budget-green.log.txt",
+      "sha256": "5a344e1a5549b544c2b5bf3aae1467772d66691a21380e6a1ed0a33fe57eb35e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/episode-budget-red.log.txt",
+      "sha256": "48e9578888b416096faf8ab597c7621291a36bcf8d6069e439c46bc1b9c5ab4d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/episode-budget-refactor.log.txt",
+      "sha256": "8c907bc021102ac248801aa869a7772c4e30e14497f1edb48b2d13aab8e2cd63",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/fast-progress.log.txt",
+      "sha256": "6b70788a72733370b384a362fab294f4ef0cc3c29bf8d3de5fcf270a55d65ebb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/final-refactor.log.txt",
+      "sha256": "8dcfd3bc6e9e814744bb93e773cc407e40f71edded87cc3b98ea48670031f338",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/full-coverage-summary-r2.log.txt",
+      "sha256": "61e3f88ce7d34bdab91cd4fd1ff229823dac8919ce22ec4d0f836b0f461f83ca",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/full-coverage-summary.log.txt",
+      "sha256": "ec732b34ff6864fdacd61b090d09d69b16fd58c24731b51dd3f18a2767201e58",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/full-gate-r2.log.txt",
+      "sha256": "694a05e0f6533394f4afb7fad0bafa1ff6fdf726d436e67cc89038af69c63695",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/full-gate-r3.log.txt",
+      "sha256": "a96e4c64c40144cb8219503e3745d3aa66fd72d0f4bef09d71c29fe438e3ac67",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/full-gate.log.txt",
+      "sha256": "37e262238e420ba69a8ef6ebb22b101711e1a23cf1200cb5eb2b00e5d268d92f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/global-deadline-green.log.txt",
+      "sha256": "7370103de3e085a632abfc6fb52b5c91f1ec0806eabdd67d91ea392e31acc61f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/global-deadline-red.log.txt",
+      "sha256": "2f4b951fba0b2a214bab8cae1f09b4f8ba328c186c0d90df91f3c540543e7c41",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/global-deadline-refactor.log.txt",
+      "sha256": "9a3ac7dd783ed459d732d2472a2c279325174d212753f9561b6b91e01b805075",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/lease-reentry-green.log.txt",
+      "sha256": "cb6636337d0a7a55aa4323e180359eed4513bbce6cef9c6a59e090582f1373b8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/lease-reentry-red.log.txt",
+      "sha256": "275398fa0edfcc6fe8aa341027e9e3378891b6b2cf9db9e4cbe24c42675c5140",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/lease-reentry-refactor.log.txt",
+      "sha256": "bf098e0ff038da6dd01f51b22377738f0be45b3353bc68d6ad20edcaed3520d1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/locked-drain-diagnostic.log.txt",
+      "sha256": "a8ba0adc96f2827498634248a1e80b1021bb26ef16898b3751c97d035dac2f02",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/locked-drain-green.log.txt",
+      "sha256": "fe89dfb1bb98c499f2e78903b6bf4ef4e4d96d3cd547ff5fdfa0b9b7e7923492",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/locked-drain-investigation.log.txt",
+      "sha256": "b2e0c11ee8bcf625a3441ffa0e33c7edc3c72b551010800c41c8007900bfa531",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/locked-drain-refactor.log.txt",
+      "sha256": "b038b8d796aaacd36284b4340cfc51c2a279a47b68081ed0cd9925462e04558a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/ordinary-startup-green.log.txt",
+      "sha256": "e9eb99f7a145f04d362af08a5b030624a1e4cbea96dcd0325010955d789bd97b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/ordinary-startup-refactor-fast.log.txt",
+      "sha256": "c31eb70c58d46f5bd9f4fd46f3566ff8c5f72e871647482c27f2ccfd727226a8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/owner-id-prune.log.txt",
+      "sha256": "2de1a91345d1f63782b9b356539d072e1cb726bfab43e0cdaa6c7b48e89ae0d2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/postgres-image.log.txt",
+      "sha256": "6bcb1a22c363d1d25b7e03e39f87004c80d9e324f1b501831c621c5265c42776",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/prepared-drain-green.log.txt",
+      "sha256": "2f726997edb7731113b096eda3c7cb468eed833fc912b8f6fc40ea4feb9810df",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/prepared-drain-red.log.txt",
+      "sha256": "62c5b05788142dbd856dcb217cd8ba6cda8bb74b8a54c236d5cdb58e1944e5d1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/prepared-pending-drain-r2.log.txt",
+      "sha256": "fb402bb2491221b3b979a3c220e3a5b2c8c3ba739a6f765490f9fdecbcc20809",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/prepared-pending-drain.log.txt",
+      "sha256": "5394274ea7e30b363eda55daf5cb2c021fc617c90eb650ff4f1631e766ffe027",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/progress-selection.log.txt",
+      "sha256": "9e918dd32f9e6191fea9bde982fdc7c58162a77cc2c3775b67c5a3161bcb6b74",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/readiness-cancel-green.log.txt",
+      "sha256": "b78524d2448ca107284fd5ab9fc5d2dd539b2cce5e79e33941a1153f57f00963",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/readiness-cancel-red.log.txt",
+      "sha256": "cdc11689ecb5f8cddd2f38041cd7a818e1282e1124f6fff49d37052a43dadf23",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/readiness-refactor-fast.log.txt",
+      "sha256": "4d502f6d0e90663bf0c82234aceb448e3a569c5fb6d5ffb3532ed3cd173fd267",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/recovery-bounds-green.log.txt",
+      "sha256": "6c104320473f13a3d97867d05e8d51335e9b082bffa261860926abfe4fac228e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/recovery-budget-fault/run.log.txt",
+      "sha256": "5a86f3ea03b0f7a030bb3fb94de1fec0c3161e9c314bc60cc7376d4c12fb0653",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/recovery-native-green-2.log.txt",
+      "sha256": "a2633b3c8af03de8b7e15eeb29b1e6edb4d34de1bc66107c4318f30c896e0403",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/recovery-native-green.log.txt",
+      "sha256": "2cdc5c6ff3a68b9e875cf93db24dc6db982bf626005d24ae4fe286c4642c7c5b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/recovery-validation-green.log.txt",
+      "sha256": "ad31e7657cd9d1dc4393f5b3ad13d34ba17b205ac734448534eb4a0132506ecf",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/recovery-validation-red.log.txt",
+      "sha256": "7db6ae9153798f48fb128cf927fd396990a0e46e3bc2f25bde57aeeac751a0f6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/recovery-validation-refactor.log.txt",
+      "sha256": "895e512591a1337cbfd5a9f5271bcd1c64317054f95902d347189cc204db4f03",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/replacement-green.log.txt",
+      "sha256": "39a92fc3d9a0b9c0da82fa887e47b0b50b2b5f9e539e44e115aae86101c165bd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/replacement-red.log.txt",
+      "sha256": "9571809c6f8fbc60c9bb76b559e02cdc03f252db4e68521347fe80347866d38b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/replacement-refactor.log.txt",
+      "sha256": "869da227ffee393a624e09e2ded8089f4069f597a2b2ac4e0ac69078001d1333",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/return-queue-synchronization.log.txt",
+      "sha256": "6df7659f839ba71316710211970a6da2d9938eacdf7c1e05ca67183bf5334e9c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/separate-example-build-final.log.txt",
+      "sha256": "fc7c70a192eed76af3d0a262f99ae6be4039c3994ddeea179c7112b6a4d3b76e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/separate-example-build.log.txt",
+      "sha256": "a5a35018c0a444e96a38284e5ba24660458a3f7ca9dab510721f83b73f647cbf",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/shutdown-callback-green.log.txt",
+      "sha256": "f45d90ef88bfce630773816ac735c37a4ba15fe776450f072ec6dec3cf59fdb2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/shutdown-callback-red.log.txt",
+      "sha256": "12f8ab9859eb0dabc398eaa748ddaf3f28cdb2987d306e070a32676776b10ee3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/shutdown-callback-refactor.log.txt",
+      "sha256": "b5990be8a725531edb331dce2492af9811dff80f282406dc224b463b5082913f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/shutdown-races.log.txt",
+      "sha256": "b7c81474a314c3fc8010b9489f1030f10cf7476e0c154970ddf9e878d42baf78",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/solution-build-final.log.txt",
+      "sha256": "205b8794036cad2353dab451e5f61390714d5e80777748d45c7a799eb061b7b5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/solution-build.log.txt",
+      "sha256": "dbe22994a679a9ce21de06f063c097ffba2bca8ef5403cfa11aedefa63bcb0f1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/startup-callback-green.log.txt",
+      "sha256": "43d07210baa3c7ceb8bad1c657a79b26e922c8b87151066613145b65e0daea14",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/startup-callback-red-r2.log.txt",
+      "sha256": "fe4f8acccefb529ac45ef97ca4b72632149e837707a6970e05cf19ac04d55a07",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/startup-callback-red.log.txt",
+      "sha256": "432392cf42ff91065aa6f68a93345cdcb30324ae6d982926eff0442ee8f9ec78",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/startup-callback-refactor.log.txt",
+      "sha256": "5a99222b3ddf4d7a6550fbdc04c631365630fa12e46ec3e7fb38a8622d09ce73",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/startup-deadline-callback-green.log.txt",
+      "sha256": "65526f4254d0f0b1fb9ddbf2cac58bd6b5b53e1ca3276b6d79d00ddf8e6af7d2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/startup-deadline-callback-red.log.txt",
+      "sha256": "ec354d4cf7e45185a0673c5d2c287a763c825d878c64031ef58631904e11aa8c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/startup-deadline-green.log.txt",
+      "sha256": "507eefb6e389a45a2094f06e83121f4910f9a78f8f70efaad4508137585df6a3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/startup-deadline-red.log.txt",
+      "sha256": "dc32c01dfd319c629870b3011066066087d8c4e3f973550b4901362942e5248a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/startup-deadline-refactor.log.txt",
+      "sha256": "977a4fd41f7057b0d8b715ffc75763b96b8ec050f9428200b5af5719ead63b99",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-final/transcripts/static-drain-green.log.txt",
+      "sha256": "117658499403e3db7c10762c5ec9992670b512922f621ac0e0440881389d0c74",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/manifest.json",
+      "sha256": "0a2692cd7b1c1726f2609493b0da80d345e8de98b3a536eed020eae2ae8aa104",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drain-native-green/_os-greg_2026-10-14_16_04_48/In/os-greg/dan_os-greg_2026-10-14.16_04_49.cobertura.xml.gz",
+      "sha256": "a1aa8692a368e034f37d1a7eaac8b24072631faf9d029ef225d6679796bdb0ed",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drain-native-green/ca7492e0-9d01-4180-bf21-6ee982792a93/dan_os-greg_2026-10-14.16_04_49.cobertura.xml.gz",
+      "sha256": "a1aa8692a368e034f37d1a7eaac8b24072631faf9d029ef225d6679796bdb0ed",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drain-native-green/drain-native-green.trx",
+      "sha256": "f5e70f998aa2654e779481ee0c544a93292620ecc7973fe4400b4d2c29f9fad8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drain-timeout-green/_os-greg_2026-10-14_16_02_09/In/os-greg/dan_os-greg_2026-10-14.16_02_10.cobertura.xml.gz",
+      "sha256": "825897c303cd1a71ea1c94e45303e3e27722b6192ee58e8710a84087e5338fde",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drain-timeout-green/b21b6890-406b-498d-a6af-2eed8f6b5db1/dan_os-greg_2026-10-14.16_02_10.cobertura.xml.gz",
+      "sha256": "825897c303cd1a71ea1c94e45303e3e27722b6192ee58e8710a84087e5338fde",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drain-timeout-green/drain-timeout-green.trx",
+      "sha256": "b06e1975ed1632ac165bc21d1d9a76a5442a3e43b61204a0420af35ab30cd60a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drain-timeout-red/drain-timeout-red.trx",
+      "sha256": "08f3fbf72c3ba06e7186960de288fb48323e774cef4fcf255f773c05cc9cb587",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drain-timeout-red/source/DrainDeadlineTests.cs.txt",
+      "sha256": "8438116414bbf95785365affe2004617adfb10a461e43ef6ffdd2c8d3cf7bf52",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drain-timeout-red/source/TtFactory.cs.txt",
+      "sha256": "2a684c1148185d4e65b0cf395e83671409da51b16c50d79be02b7f20d63a3829",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drain-timeout-refactor/drain-timeout-refactor.trx",
+      "sha256": "2fadc8ed397e579b3d9dc6c79df3346148004ef3ab9fc006914a78fedcc0db9d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-bounds-green/5bd48c58-cac4-457f-8fe2-677548c68fc9/dan_os-greg_2026-10-14.15_49_17.cobertura.xml.gz",
+      "sha256": "2fcb757fc7fc5bdb74bd55201e31953ec266ffca22257f5dde694e4a687df7e9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-bounds-green/_os-greg_2026-10-14_15_49_09/In/os-greg/dan_os-greg_2026-10-14.15_49_17.cobertura.xml.gz",
+      "sha256": "2fcb757fc7fc5bdb74bd55201e31953ec266ffca22257f5dde694e4a687df7e9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-bounds-green/drop-bounds-green.trx",
+      "sha256": "3a3e691d306ed3d7119a51e719e10b40e706da2f9c206b4a96bb2318ca94d0df",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-native-green/09fa0f95-d9d5-4419-a2a5-2ccf470de35d/dan_os-greg_2026-10-14.15_50_34.cobertura.xml.gz",
+      "sha256": "1dc34590c41e099ffee54a51159bc2832f808ae4d947b6ff8703fc8d80bd195a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-native-green/_os-greg_2026-10-14_15_50_26/In/os-greg/dan_os-greg_2026-10-14.15_50_34.cobertura.xml.gz",
+      "sha256": "1dc34590c41e099ffee54a51159bc2832f808ae4d947b6ff8703fc8d80bd195a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-native-green/drop-native-green.trx",
+      "sha256": "ea87ed20eeb21bc18c8d0e4e2510aab0c9284d7e187a178c29cc7fed9b3aa2e6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-refactor/drop-refactor.trx",
+      "sha256": "0567442204f981ea1bbe20eab0760e43dadf5d52c36772d806f355efbc4c8205",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-retry-green/3ea98522-5da6-4368-b83d-d944273a73e4/dan_os-greg_2026-10-14.15_47_47.cobertura.xml.gz",
+      "sha256": "0b958286eb544c19f9fc44677e6cfdd873c4054c8031d800edebb03f426ec14c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-retry-green/_os-greg_2026-10-14_15_47_47/In/os-greg/dan_os-greg_2026-10-14.15_47_47.cobertura.xml.gz",
+      "sha256": "0b958286eb544c19f9fc44677e6cfdd873c4054c8031d800edebb03f426ec14c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-retry-green/drop-retry-green.trx",
+      "sha256": "2a7815c10b7e65dcbb119578119e2e07c4906ccf0bf9f3e84604424e7357b81c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-retry-red/drop-retry-red.trx",
+      "sha256": "229202b899c696576123f705573732a8a4e0b6a60b98aca7cf1e7f5e32e6582b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-retry-red/source/SlotRecoveryTests.cs.txt",
+      "sha256": "962bf7819f7a8a859ec865789aa0bd35a2f3edf7e36a801c1f30c2ad7635d0b9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/drop-retry-red/source/TtSlotPool.cs.txt",
+      "sha256": "83bfe5601cef6c86cfcd5c891241ce27d872ed43323edeec5150586a2cdeade9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/episode-budget-green/_os-greg_2026-10-14_15_56_19/In/os-greg/dan_os-greg_2026-10-14.15_56_20.cobertura.xml.gz",
+      "sha256": "f52450b2ab7c554e7cf34245dd5dfbb984100e228d0a239adf98865994908933",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/episode-budget-green/episode-budget-green.trx",
+      "sha256": "f721841356ef156b7c14e38b73a6b06ca2f630f6c7703aa17151e3fb7d20d2fa",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/episode-budget-green/f8ae58bc-11e7-4505-bba7-556bb63995e4/dan_os-greg_2026-10-14.15_56_20.cobertura.xml.gz",
+      "sha256": "f52450b2ab7c554e7cf34245dd5dfbb984100e228d0a239adf98865994908933",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/episode-budget-red/episode-budget-red.trx",
+      "sha256": "37e22dab56d43f179858b008e692070972a0f2e564e98fc14517cb1a2c8e4bc2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/episode-budget-red/source/SlotRecoveryTests.cs.txt",
+      "sha256": "04b8efa73c168b71b9ab46667ff8d870e8a4afb3a765ded3084b8a19d0e1e25b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/episode-budget-red/source/TtSlotPool.cs.txt",
+      "sha256": "495f13454da1b5f21794313e519c6a98837ae96c791b418305bb8c2a9621b505",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/episode-budget-refactor/episode-budget-refactor.trx",
+      "sha256": "7b0dab8c67bf435d56923a39e5ef530d498cbdbf007decd45c60a34b55155100",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/fast-progress/_os-greg_2026-10-14_16_14_25/In/os-greg/dan_os-greg_2026-10-14.16_14_26.cobertura.xml.gz",
+      "sha256": "dc786021ea125d5c318d9c5061679a32c1a9aee85583c529251cdcdbb6b07447",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/fast-progress/ea68c864-250d-4915-8a32-6fbba6e19aeb/dan_os-greg_2026-10-14.16_14_26.cobertura.xml.gz",
+      "sha256": "dc786021ea125d5c318d9c5061679a32c1a9aee85583c529251cdcdbb6b07447",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/fast-progress/fast-progress.trx",
+      "sha256": "c1ce10d429866e757d2f64566f93d8ff1652d3d80d6819ed8ee3a5c33871d0fd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/prepared-drain-green/_os-greg_2026-10-14_16_11_42/In/os-greg/dan_os-greg_2026-10-14.16_12_05.cobertura.xml.gz",
+      "sha256": "a7c1ecb70892f430efcb77db34be502f6e978dee26e8d990561c474021c9df59",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/prepared-drain-green/a6a723ba-daad-4c1d-aa80-24c51aaa4ebe/dan_os-greg_2026-10-14.16_12_05.cobertura.xml.gz",
+      "sha256": "a7c1ecb70892f430efcb77db34be502f6e978dee26e8d990561c474021c9df59",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/prepared-drain-green/prepared-drain-green.trx",
+      "sha256": "bb30fedc1bc178788a613e1cdb9a0775db282f6711add11cc6e5875671220e36",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/prepared-drain-red/prepared-drain-red.trx",
+      "sha256": "36b0ea4bc304126a707fa739f7ca9ee55e6bed67642847b639a7a9a9f4d7747a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/prepared-drain-red/source/PreparedDrainRetryTests.cs.txt",
+      "sha256": "206d2180930a6a27fb4f5ee60115a324844220b395ed560e6a8584e9f5c2f6a2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/prepared-drain-red/source/TtPreparedPool.cs.txt",
+      "sha256": "8ec0c7910563584793ddb1126ad289666db70652826bb10db98717c0f77dc8ad",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/progress-receipt.json",
+      "sha256": "b439596dbed0aab82dd561f03be12753ce5c02309704c917e3afc3d11e273ae2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/progress-selection/4713a576-715c-4300-a168-665fd5923507/dan_os-greg_2026-10-14.16_16_36.cobertura.xml.gz",
+      "sha256": "756f04e10be4f59e9c02a2786ae3d2103b37322b2a18ea9d0be0e6bd7417d5a0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/progress-selection/_os-greg_2026-10-14_16_16_04/In/os-greg/dan_os-greg_2026-10-14.16_16_36.cobertura.xml.gz",
+      "sha256": "756f04e10be4f59e9c02a2786ae3d2103b37322b2a18ea9d0be0e6bd7417d5a0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/progress-selection/progress-selection.trx",
+      "sha256": "65617cffa3b923570fc2203a91663839aa6fefe9e44da4f6c013e18239e74c20",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-bounds-green/1cab456b-154f-44f9-af74-5cd135bc0e30/dan_os-greg_2026-10-14.15_44_34.cobertura.xml.gz",
+      "sha256": "935b3834cc794548c99c8f216b7f882bdad685914c8d3ebc5ac1218c2b9814cd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-bounds-green/_os-greg_2026-10-14_15_44_33/In/os-greg/dan_os-greg_2026-10-14.15_44_34.cobertura.xml.gz",
+      "sha256": "935b3834cc794548c99c8f216b7f882bdad685914c8d3ebc5ac1218c2b9814cd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-bounds-green/recovery-bounds-green.trx",
+      "sha256": "70ede619ccf90a1c0ac49fbdb326cc725ba2f7f0fe8475f996da75bad5af24fe",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-native-green-2/3bcddbe5-4b4d-4d81-bcb3-02c1e6f2ff20/dan_os-greg_2026-10-14.15_43_25.cobertura.xml.gz",
+      "sha256": "122b00e4bad59e87a21de4f752b4a6a5f6a1698c5c70de6b9bd0f8b95303765d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-native-green-2/_os-greg_2026-10-14_15_43_19/In/os-greg/dan_os-greg_2026-10-14.15_43_25.cobertura.xml.gz",
+      "sha256": "122b00e4bad59e87a21de4f752b4a6a5f6a1698c5c70de6b9bd0f8b95303765d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-native-green-2/recovery-native-green.trx",
+      "sha256": "65c36a7793993041d2f6b296c48efb9897ab0347580a481884a9cdb874871ede",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-native-green/070483fe-3d39-4d71-85dd-d136ba68eb58/dan_os-greg_2026-10-14.15_42_57.cobertura.xml.gz",
+      "sha256": "7381d02751be9b452cfb1c6eb785bf6f6c3e215ba9765624b06d54d621a591fc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-native-green/_os-greg_2026-10-14_15_42_46/In/os-greg/dan_os-greg_2026-10-14.15_42_57.cobertura.xml.gz",
+      "sha256": "7381d02751be9b452cfb1c6eb785bf6f6c3e215ba9765624b06d54d621a591fc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-native-green/recovery-native-green.trx",
+      "sha256": "c71f9c1a9fa7d413b4d67453c51a2099d261f1196e0b94b7f76fc811f7a87592",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-validation-green/925a64ed-e8c1-40f1-a4e1-c80e3f7b3769/dan_os-greg_2026-10-14.15_41_55.cobertura.xml.gz",
+      "sha256": "73d7dc46a2f7a70fb30463af49e00820dfad8ba18823b056242495328cdc4707",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-validation-green/_os-greg_2026-10-14_15_41_55/In/os-greg/dan_os-greg_2026-10-14.15_41_55.cobertura.xml.gz",
+      "sha256": "73d7dc46a2f7a70fb30463af49e00820dfad8ba18823b056242495328cdc4707",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-validation-green/recovery-validation-green.trx",
+      "sha256": "c13f475edc8f8689fbed21dfe91b578fdf503a657e846e235cda3fbf2b3e46f0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-validation-red/recovery-validation-red.trx",
+      "sha256": "ba3e25474c064d39d3f7386dfcb688b4359a5f6fa642cca151aa82c38434a2d9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-validation-red/source/SlotRecoveryTests.cs.txt",
+      "sha256": "b581c74065b0869796d0f958d827b511a82585a3742dd5e92eff85492bd011ab",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-validation-red/source/TtSlotPool.cs.txt",
+      "sha256": "52c9b93684c642cab25729eb12dd9336795a0318c0799d34017c65d4c8be6265",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/recovery-validation-refactor/recovery-validation-refactor.trx",
+      "sha256": "84a073e06398c47e34d33e310ca0dd17a7f33904e9f55ffb5d4366419682b6d2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/replacement-green/_os-greg_2026-10-14_15_37_56/In/os-greg/dan_os-greg_2026-10-14.15_38_07.cobertura.xml.gz",
+      "sha256": "9d317f279dc047bc516779914e1505ec7938485a1792b950da54b16a7497c90d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/replacement-green/e5aca7ad-d69e-4f2e-816d-38e9dfc947dc/dan_os-greg_2026-10-14.15_38_07.cobertura.xml.gz",
+      "sha256": "9d317f279dc047bc516779914e1505ec7938485a1792b950da54b16a7497c90d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/replacement-green/replacement-green.trx",
+      "sha256": "809909d24f8dcda7a1903b794f1c20717f8b9b5ccb865afa3b0561d051d1e56b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/replacement-red/replacement-red.trx",
+      "sha256": "647fc078df0d0de1f6a6a7ba97240e8efb3df9a7fb7a4b48a1d2996aaf59eec1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/replacement-red/source/SlotRecoveryTests.cs.txt",
+      "sha256": "be85eb7edcc34fb311f0fc84637d2a5599952b9c2b1aef35afee078bdf065a54",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/replacement-red/source/TtSlotPool.cs.txt",
+      "sha256": "71a8ca6c12fdb5de029ea53f0cdbb89fdbb68a93ca7388008d4209c75f0eb410",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/raw/replacement-refactor/replacement-refactor.trx",
+      "sha256": "9a44aec7e8a5387a70f4964e544539e28cc9bba85ffa4f0a7c1fef37ad79726e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/src/TurboTest.EFCore/Internal/ITtDatabasePool.cs.txt",
+      "sha256": "49dc4620b886cfd878dcd9a036ebc45a4b4c8688935a627d630f5ccf3195981b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "sha256": "58b54f5bdc3860a6f927bd042395a301605ba83a9797d1c36f22b802c92538f5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/src/TurboTest.EFCore/Internal/TtPreparedPool.cs.txt",
+      "sha256": "e8a845b5f784629dbd8c2ab837c3829aa11279a006442947590d8645e752e20f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/src/TurboTest.EFCore/Internal/TtSlotPool.cs.txt",
+      "sha256": "b1490479f4f3f8e0adffc59ba1456184c7f5c7780fd59d9e932ab02708c87ea1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/src/TurboTest.EFCore/Tt.cs.txt",
+      "sha256": "7d3d7055222bde46ba84126526f6526ae3874a90a703c755e1bd94767187f1c4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "sha256": "b4d9192c2a7f9d7fa98478ba9e4b3a45eedd239f3e2d66ca10d99e52607b3bb7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "sha256": "90fd7cdad4f94d00692acff342f26efffebe5b22b14fcd6f6aa632dbd73b6fe7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/tests/TurboTest.Tests/BaselineValidationTests.cs.txt",
+      "sha256": "070d1748b61fb84557fb11d0b391534466ae0a40b97013f2dcf9f2fd9fc12ff2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/tests/TurboTest.Tests/CompensatingCleanupTests.cs.txt",
+      "sha256": "c43e210ba21159e6837b9cd8051687492d19d826bf17b00eaea9ea82b2715d6b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/tests/TurboTest.Tests/DrainDeadlineTests.cs.txt",
+      "sha256": "5ba23c0420a5ef014fc55f3585409c05b948eda36dd6982797111658f04fb4d8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/tests/TurboTest.Tests/FactoryBackpressureTests.cs.txt",
+      "sha256": "dc313ace149eb40a0f5c97df79cf5a1d7661791ad95d2bc105355d661b0d0c54",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/tests/TurboTest.Tests/OrdinaryRecoveryTests.cs.txt",
+      "sha256": "4b7ea9714327b3021d2a45ecca7695f95d77c766744762a805c8b195a38a6848",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/tests/TurboTest.Tests/PreparedDrainRetryTests.cs.txt",
+      "sha256": "206d2180930a6a27fb4f5ee60115a324844220b395ed560e6a8584e9f5c2f6a2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/tests/TurboTest.Tests/PreparedRecoveryTests.cs.txt",
+      "sha256": "286ebc270447226810e6d310027713ebcea1e9958648c026b21f222bf4219cf5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/tests/TurboTest.Tests/SlotPoolTests.cs.txt",
+      "sha256": "9dc551465d2e8575ee0a83cb6170ceaaa19085d80edfd494252cfc832ac26e1e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/source-current/tests/TurboTest.Tests/SlotRecoveryTests.cs.txt",
+      "sha256": "04b8efa73c168b71b9ab46667ff8d870e8a4afb3a765ded3084b8a19d0e1e25b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/drain-native-green.log.txt",
+      "sha256": "cbc784f771c4b77141bbb929fa295d09f525264730a351f3ae59f4f571f356fd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/drain-timeout-green.log.txt",
+      "sha256": "f29e88c7f4e5c7e21a740aedf78c1892e5b4c47a6e64999c0073bb8f408f734c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/drain-timeout-red.log.txt",
+      "sha256": "1021e49ed28a8f096b55b5844f3cdd7f053c709e64c4085b66bf855f90b0e711",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/drain-timeout-refactor.log.txt",
+      "sha256": "994d2298c41c511f3d97493c5ec68b0e234add853fad96672b79a1ddad116f87",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/drop-bounds-green.log.txt",
+      "sha256": "767c4b6918c3d5663417995ecdc3c6d986005c9ed63af7cbbbf38a28036e49ed",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/drop-native-green.log.txt",
+      "sha256": "3fc9feacafbf5d651b2928fbce3a8f46ca128308bcfdcd923fabe81d744a70a8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/drop-refactor.log.txt",
+      "sha256": "74e1010f9504c7249ac0172a74517bb02a5659c87e15c5722b5af0b818d0f913",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/drop-retry-green.log.txt",
+      "sha256": "c2c44052c1f1fcad7f30555e80fc0576918d12e91242a4b699c68f7f4989256b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/drop-retry-red.log.txt",
+      "sha256": "e392b570ec2e4de4b1055e6abdd88ed628ac415d40774cad8c6c46e2abeb1e33",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/episode-budget-green.log.txt",
+      "sha256": "5a344e1a5549b544c2b5bf3aae1467772d66691a21380e6a1ed0a33fe57eb35e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/episode-budget-red.log.txt",
+      "sha256": "48e9578888b416096faf8ab597c7621291a36bcf8d6069e439c46bc1b9c5ab4d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/episode-budget-refactor.log.txt",
+      "sha256": "8c907bc021102ac248801aa869a7772c4e30e14497f1edb48b2d13aab8e2cd63",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/fast-progress.log.txt",
+      "sha256": "6b70788a72733370b384a362fab294f4ef0cc3c29bf8d3de5fcf270a55d65ebb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/prepared-drain-green.log.txt",
+      "sha256": "2f726997edb7731113b096eda3c7cb468eed833fc912b8f6fc40ea4feb9810df",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/prepared-drain-red.log.txt",
+      "sha256": "62c5b05788142dbd856dcb217cd8ba6cda8bb74b8a54c236d5cdb58e1944e5d1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/progress-selection.log.txt",
+      "sha256": "9e918dd32f9e6191fea9bde982fdc7c58162a77cc2c3775b67c5a3161bcb6b74",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/recovery-bounds-green.log.txt",
+      "sha256": "6c104320473f13a3d97867d05e8d51335e9b082bffa261860926abfe4fac228e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/recovery-native-green-2.log.txt",
+      "sha256": "a2633b3c8af03de8b7e15eeb29b1e6edb4d34de1bc66107c4318f30c896e0403",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/recovery-native-green.log.txt",
+      "sha256": "2cdc5c6ff3a68b9e875cf93db24dc6db982bf626005d24ae4fe286c4642c7c5b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/recovery-validation-green.log.txt",
+      "sha256": "ad31e7657cd9d1dc4393f5b3ad13d34ba17b205ac734448534eb4a0132506ecf",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/recovery-validation-red.log.txt",
+      "sha256": "7db6ae9153798f48fb128cf927fd396990a0e46e3bc2f25bde57aeeac751a0f6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/recovery-validation-refactor.log.txt",
+      "sha256": "895e512591a1337cbfd5a9f5271bcd1c64317054f95902d347189cc204db4f03",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/replacement-green.log.txt",
+      "sha256": "39a92fc3d9a0b9c0da82fa887e47b0b50b2b5f9e539e44e115aae86101c165bd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/replacement-red.log.txt",
+      "sha256": "9571809c6f8fbc60c9bb76b559e02cdc03f252db4e68521347fe80347866d38b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/resource-recovery-progress/transcripts/replacement-refactor.log.txt",
+      "sha256": "869da227ffee393a624e09e2ded8089f4069f597a2b2ac4e0ac69078001d1333",
+      "status": "??"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a230dbcb999fd7b82d68a9725fcef7eaefd29405",
+      "mode": "100644",
+      "path": "docs/issues/open/database/TT-006-quarantine-recover-and-drain-pool-resources.md",
+      "sha256": "19dc4630013858214d301e01b401ea6acaeff420d45666c5e42cbe3d798b9890",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "d13793fc0f678cd29af45b1a6040ccb99c99b468",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/ITtDatabasePool.cs",
+      "sha256": "49dc4620b886cfd878dcd9a036ebc45a4b4c8688935a627d630f5ccf3195981b",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "6473386b671e6da904dbbec06f1eb9ecf05b060b",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtCleanupRegistry.cs",
+      "sha256": "79f6f0d35df77dcf630d0301b58667170f8d0dc9d86020ef15d25dd7b89709e8",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "130aafa5f1c04111f61e4d35e4e9902a854049d3",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtDatabase.cs",
+      "sha256": "42cfe0587de50fa5492b6e249452540bb21e8b5d993fce4c9c49627b1a11181a",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "3bb423200989c37cc1112cbeda96067812ea8e10",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtPool.cs",
+      "sha256": "1d9d6636653e31a87a7eb650c4f7a3d0f349a8aa3a6478a2e892140fa9bf729c",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "e5c562e14af57c2160dfe35e76da3d0d24bf7dd3",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtPreparedPool.cs",
+      "sha256": "6ae4933a9c3b03bbd813a0048ef30dffa79bc0a4f10c8dc14c06ce92c88e27f8",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "006c899aedda428c8cab50df604f9c258f070cb5",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+      "sha256": "b1490479f4f3f8e0adffc59ba1456184c7f5c7780fd59d9e932ab02708c87ea1",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "359a169b9fb409b284cbe7f23bd10a6706805f75",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Tt.cs",
+      "sha256": "e8b087529a0d334791864db6392b17d6dfcefb931cefd899b2299694cd5686ea",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "12db7c5d9e058c3892b8ee2304c42cb180ede5c9",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtCleanup.cs",
+      "sha256": "972bd020db88bb591c235479b0280930223828b556c717abe7756aa1e8831746",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "249d404816701ed1c2402055237e478a79ab71c6",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtFactory.cs",
+      "sha256": "cc0c50d8f6276ae6be1c0f33fbb09e9f4f469573535943cef8bcada6cd9c7d82",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "7d4e7c6d133c8f41ee11343637a9b38918c23feb",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtLease.cs",
+      "sha256": "335dfc27258d032ff2ede46f6d60842d7409b46a9ac32aa6a75484617753baf0",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a33c2c0ffc18d00d8f1d87861f2a58f9e0605b05",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtOptions.cs",
+      "sha256": "fd1860d46a498f31a2f17130fa44eb6b787e5eed026feed05d4b4878e52c4579",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "94d9c4be0472f91acc059e2fdc08e667b7c371f2",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtResourceBudget.cs",
+      "sha256": "cf8ecda8670bd75f1c885b2066c2d09b3beecb1cc17185e835beb1cf49e96073",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "a48db960cd4e172696731f1402241288a7a0839e",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/BaselineValidationTests.cs",
+      "sha256": "070d1748b61fb84557fb11d0b391534466ae0a40b97013f2dcf9f2fd9fc12ff2",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "19b54cbdb43bdedd14e2fb259700c5b3bc7f51f1",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/CleanupOwnershipTests.cs",
+      "sha256": "eb9790496954512fd6c5494b086365e13b6cc2cbff1c74e09adb730b04a4db0f",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "23181e668fb633d709453e259591ae881057c935",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/CompensatingCleanupTests.cs",
+      "sha256": "c43e210ba21159e6837b9cd8051687492d19d826bf17b00eaea9ea82b2715d6b",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/DrainDeadlineTests.cs",
+      "sha256": "daa4e1f1e175c8ba994db78854e9c8cd1397fb473a24e267875c65e590d6b2b3",
+      "status": "??"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "bb1c862dcfe463b0180959f4c60d437234bcbe0e",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/FactoryBackpressureTests.cs",
+      "sha256": "43f0bbfe75d0b184145031e6d15440826aed7f48d14a8e712b4ae27fd47da6bc",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "e4a47102005217f9e940771f56ea3ff2f1c741ea",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/FailedStartupCleanupTests.cs",
+      "sha256": "60ca5333678cc28a42309c6b3fd74d1b3d85b0ab440ea37eb6d61c798c1b29e3",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "41ed15944b97bec4305b07a61dbb53cd1bc6c915",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/LeaseOwnershipTests.cs",
+      "sha256": "9cb4a0d8c2ae2816fe3276ed57b6ab3931e18ab394ab0af1c06ba86ae77af30b",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/OrdinaryRecoveryTests.cs",
+      "sha256": "4b7ea9714327b3021d2a45ecca7695f95d77c766744762a805c8b195a38a6848",
+      "status": "??"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "1f4024ed006eb838d85e589584cc3bdd9b053c5b",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/PooledResetTests.cs",
+      "sha256": "caf60d3c4ca6f162f653f6bab864ab533f6ed4dd1c29914385c840b77ad89ad1",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "e94fec8d8d7698fcdb693c1cdc399a78c12d9fc3",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/PreparationBudgetTests.cs",
+      "sha256": "6c7d6758a90e7ff4511dae2c69668e6568bf5ce38436ce9616d78dd855faab80",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/PreparedDrainRetryTests.cs",
+      "sha256": "206d2180930a6a27fb4f5ee60115a324844220b395ed560e6a8584e9f5c2f6a2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/PreparedRecoveryTests.cs",
+      "sha256": "286ebc270447226810e6d310027713ebcea1e9958648c026b21f222bf4219cf5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/ReadinessCancellationTests.cs",
+      "sha256": "4ce0cd6f65641c727573ef35df4589ef793f5092fab37520e9a8182fbfaac56c",
+      "status": "??"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "138b329f985f5db9da71e4926bc6a1734be2a233",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/ResetTimingTests.cs",
+      "sha256": "48b6773ed680ad4772253b6de8be9dcc1432f93bf70d2ff937bb2e6341b6839e",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "007d336be476c1fb9f468be59fd589779431408b",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/ResourceBudgetValidationTests.cs",
+      "sha256": "a7da471bb867be23149f50d2eee1ec6d191787bc9c0dab551e9c6307a585b136",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "138f4ee50b10aa5fdfced555c0573c35b254f691",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/SlotPoolTests.cs",
+      "sha256": "9dc551465d2e8575ee0a83cb6170ceaaa19085d80edfd494252cfc832ac26e1e",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/SlotRecoveryTests.cs",
+      "sha256": "86c1a7d48a0d19c84d14e230cdd8ae1c389d4060d802dd75765e2a5ffbeb14be",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/StartupDeadlineTests.cs",
+      "sha256": "5847a0c6b835ae4e0d95ec44fcaf708afe1ceea1129e66a2e0b98517d9851feb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/StaticFailedDrainTests.cs",
+      "sha256": "f81f7b002b7eb97f0a69f52be9c39efafa9b57e21e48a64131aabb92056e6025",
+      "status": "??"
+    }
+  ],
+  "refsInventory": {
+    "refs/heads/master": "bd5cbb40f986844fe4a0ea162f83cf62b346ee84",
+    "refs/stash": "0811caaa6d33c0107d31416a68b3dc30a8a218ec"
+  },
+  "upstreamObject": null,
+  "upstreamRef": null
+}

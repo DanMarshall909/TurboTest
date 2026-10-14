@@ -1,0 +1,44 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "Category!=PostgreSQL|FullyQualifiedName~PreparedRecoveryTests|FullyQualifiedName~OrdinaryRecoveryTests|FullyQualifiedName~PreparedDrainRetryTests|FullyQualifiedName~DrainDeadlineTests|FullyQualifiedName~FailedStartupCleanupTests|FullyQualifiedName~Failed_sequence_restoration_or_post_commit_validation|FullyQualifiedName~Reset_then_failed_delete_preserves_diagnostic",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=progress-selection.trx",
+    "--results-directory",
+    "artifacts/tt-006/progress-selection"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "times": {
+    "creation": "2026-10-14T16:16:04.8121918+10:00",
+    "queuing": "2026-10-14T16:16:04.8121918+10:00",
+    "start": "2026-10-14T16:16:02.0561150+10:00",
+    "finish": "2026-10-14T16:16:36.3789449+10:00"
+  },
+  "counters": {
+    "total": "90",
+    "executed": "90",
+    "passed": "90",
+    "failed": "0",
+    "error": "0",
+    "timeout": "0",
+    "aborted": "0",
+    "inconclusive": "0",
+    "passedButRunAborted": "0",
+    "notRunnable": "0",
+    "notExecuted": "0",
+    "disconnected": "0",
+    "warning": "0",
+    "completed": "0",
+    "inProgress": "0",
+    "pending": "0"
+  },
+  "scope": "79 fast and11 native checks; not the entire package suite",
+  "log": "artifacts/tt-006/progress-selection.log",
+  "sourceBinding": "source-current in progress manifest"
+}

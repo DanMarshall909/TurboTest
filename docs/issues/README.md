@@ -13,7 +13,7 @@ Priority: **P0** repairs broken advertised behavior; **P1** establishes reliable
 | [TT-003](resolved/database/TT-003-prepare-immutable-schema-and-seed-baselines.md) | Prepare immutable schema and seed baselines | P1 | TT-001, TT-002 |
 | [TT-004](resolved/database/TT-004-restore-data-and-handle-schema-changes.md) | Restore data and handle schema changes | P1 | TT-003 |
 | [TT-005](resolved/database/TT-005-bound-fixture-owned-prepared-database-pools.md) | Bound fixture-owned prepared database pools | P1 | TT-001, TT-003, TT-004 |
-| [TT-006](open/database/TT-006-quarantine-recover-and-drain-pool-resources.md) | Quarantine, recover, cancel and drain resources | P1 | TT-005 |
+| [TT-006](resolved/database/TT-006-quarantine-recover-and-drain-pool-resources.md) | Quarantine, recover, cancel and drain resources | P1 | TT-005 |
 | [TT-007](open/api/TT-007-use-the-configured-owner-in-di-and-static-apis.md) | Fix DI and static lifecycle ownership | P1 | TT-005, TT-006 |
 | [TT-008](open/database/TT-008-park-and-rewarm-prepared-databases.md) | Park and rewarm prepared databases | P2 | TT-005, TT-006 |
 | [TT-010](open/database/TT-010-measure-pool-latency-and-correct-performance-claims.md) | Measure latency and correct performance claims | P1 | TT-005, TT-006 for integrated benchmarks |
@@ -25,7 +25,7 @@ TT-007 and TT-008 can proceed independently once their prerequisites are complet
 
 [TT-000: completed pool feasibility investigation](resolved/database/TT-000-pool-feasibility-investigation.md) records the source revision, observed bugs, prototype measurements, caveats and retained evidence. It is a completed experiment, not completion of any implementation ticket above.
 
-TT-001 through TT-005 are Resolved. The remaining five implementation tickets are Open. Their acceptance criteria describe future work; the prototypes do not satisfy the production acceptance gates. The 50 ms goal applies to a defined warm operation and workload, with queueing and full lifecycle costs reported separately.
+TT-001 through TT-006 are Resolved. The remaining four implementation tickets are Open. Their acceptance criteria describe future work; the prototypes do not satisfy the production acceptance gates. The 50 ms goal applies to a defined warm operation and workload, with queueing and full lifecycle costs reported separately.
 
 ## Implementation progress
 
@@ -101,3 +101,14 @@ Independent completion review passed; TT-005 is Resolved. Recovery, DI, parking,
 comprehensive metrics and adaptation remain in five open tickets.
 The [earlier progress manifest](evidence/2026-10-14/bounded-pool-progress/manifest.json)
 remains an unchanged historical public-state checkpoint.
+
+TT-006 implements bounded verified recovery, startup cancellation and owned
+drain. Uncertain resources retain capacity, terminal exhaustion settles waiters,
+and caller deadlines preserve actual jobs through cleanup capabilities. Blocking
+and throwing callbacks remain tracked; failed prepared workload cleanup retains
+its host. The whole-suite gate passes216 checks without failures/skips. Exact source bindings and final solution/separate
+example builds pass. [Final evidence](evidence/2026-10-14/resource-recovery-final/manifest.json)
+retains raw results, source cuts and earlier failed attempts. Independent
+completion review passed; TT-006 is Resolved. DI, parking, metrics and adaptation
+remain in four Open tickets. The [earlier progress archive](evidence/2026-10-14/resource-recovery-progress/manifest.json)
+remains an unchanged historical90-check checkpoint.

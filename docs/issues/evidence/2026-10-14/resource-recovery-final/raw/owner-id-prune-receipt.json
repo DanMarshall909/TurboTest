@@ -1,0 +1,19 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "Category!=PostgreSQL|FullyQualifiedName~PreparedRecoveryTests|FullyQualifiedName~PreparedDrainRetryTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=owner-id-prune.trx",
+    "--results-directory",
+    "artifacts/tt-006/owner-id-prune"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 13.617183734895661,
+  "log": "artifacts/tt-006/owner-id-prune.log"
+}

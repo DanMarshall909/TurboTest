@@ -1,0 +1,85 @@
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class DrainDeadlineTests
+{
+    [Fact]
+    public async Task Drain_timeout_retains_the_pending_callback_and_concurrent_cleanup_shares_that_work()
+    {
+        await using var pool = new OwnedPool();
+        var options = new TtOptions { PoolSize = 1, AutoMigrate = false, DrainTimeout = TimeSpan.FromMilliseconds(100) };
+        var fixture = new TtFactory<BlockingContext>(pool, options, ownsPool: true);
+        var lease = await fixture.CreateLeaseAsync();
+        var context = lease.Context;
+        var closing = fixture.DisposeAsync().AsTask();
+        TtCleanup? cleanup = null;
+        try
+        {
+            await context.Closing.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            var error = await Assert.ThrowsAsync<TtLifecycleException>(() => closing.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("DrainTimeout", error.Stage);
+            cleanup = Assert.IsType<TtCleanup>(error.Cleanup);
+            Assert.NotEmpty(cleanup.OwnedResourceIds);
+            Assert.Equal((1, 0, 1), (pool.Snapshot.Reserved, pool.Deleted, context.Attempts));
+            Assert.Same(error, await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask()));
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => fixture.CreateLeaseAsync());
+            var firstRetry = cleanup.RetryCleanupAsync();
+            var concurrentRetry = cleanup.RetryCleanupAsync();
+            Assert.Same(firstRetry, concurrentRetry);
+            Assert.False(firstRetry.IsCompleted);
+            Assert.Equal((0, 1), (pool.Deleted, context.Attempts));
+            context.Release.TrySetResult();
+            await firstRetry.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((0, 1, 1), (pool.Snapshot.Reserved, pool.Deleted, context.Attempts));
+            Assert.Empty(cleanup.OwnedResourceIds);
+        }
+        finally
+        {
+            context.Release.TrySetResult();
+            await Record.ExceptionAsync(() => closing);
+            if (cleanup is not null) await cleanup.RetryCleanupAsync();
+        }
+    }
+
+    public sealed class BlockingContext(DbContextOptions<BlockingContext> options) : DbContext(options)
+    {
+        internal TaskCompletionSource Closing { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal TaskCompletionSource Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal int Attempts { get; private set; }
+
+        public override async ValueTask DisposeAsync()
+        {
+            Attempts++;
+            Closing.TrySetResult();
+            await Release.Task;
+            await base.DisposeAsync();
+        }
+    }
+
+    private sealed class OwnedPool : ITtDatabasePool
+    {
+        private readonly TtSlotPool<NpgsqlDataSource> _slots;
+        internal int Deleted { get; private set; }
+        public TtPoolSnapshot Snapshot => _slots.Snapshot;
+        public TtResourceBudget Budget => TtResourceBudget.Create(new TtOptions { PoolSize = 1 }, false);
+
+        internal OwnedPool() => _slots = new TtSlotPool<NpgsqlDataSource>(1, 1,
+            _ => NpgsqlDataSource.Create("Host=unused;Database=unused;Username=unused"),
+            (_, _) => Task.CompletedTask,
+            async source => { await source.DisposeAsync(); Deleted++; });
+
+        public async Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
+        {
+            var reservation = await _slots.AcquireAsync(cancellationToken);
+            return new TtDatabase(reservation.Value,
+                () => _slots.ReturnAsync(reservation, (_, _) => Task.CompletedTask),
+                () => _slots.DiscardAsync(reservation));
+        }
+
+        public ValueTask DisposeAsync() => _slots.DisposeAsync();
+    }
+}

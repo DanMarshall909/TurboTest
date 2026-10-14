@@ -12,6 +12,8 @@ public sealed record TtResourceBudget(int WorkloadSlotLimit, int ContainerLimit,
 
     internal static TtResourceBudget Create(TtOptions options, bool prepared)
     {
+        ValidateDeadline(options.StartupTimeout, nameof(TtOptions.StartupTimeout));
+        ValidateDeadline(options.DrainTimeout, nameof(TtOptions.DrainTimeout));
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(options.PoolSize, nameof(TtOptions.PoolSize));
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(options.PreparationConcurrency, nameof(TtOptions.PreparationConcurrency));
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(options.ResetConcurrency, nameof(TtOptions.ResetConcurrency));
@@ -25,5 +27,11 @@ public sealed record TtResourceBudget(int WorkloadSlotLimit, int ContainerLimit,
         return new TtResourceBudget(options.PoolSize, containers, options.MaxConnectionsPerDatabase,
             prepared ? options.MaxAdministratorConnections : 0, options.PreparationConcurrency,
             options.ResetConcurrency, prepared ? 2 : 0);
+    }
+
+    private static void ValidateDeadline(TimeSpan value, string name)
+    {
+        if (value <= TimeSpan.Zero || value.TotalMilliseconds > uint.MaxValue - 1)
+            throw new ArgumentOutOfRangeException(name, "The deadline must be positive and supported by the runtime timer.");
     }
 }

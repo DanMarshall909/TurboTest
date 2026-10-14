@@ -1,0 +1,29 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.28]     TurboTest.Tests.LeaseOwnershipTests.Reentrant_disposal_shares_the_pending_return_before_context_cleanup_starts(throughLease: False) [FAIL]
+[xUnit.net 00:00:00.29]     TurboTest.Tests.LeaseOwnershipTests.Reentrant_disposal_shares_the_pending_return_before_context_cleanup_starts(throughLease: True) [FAIL]
+  Failed TurboTest.Tests.LeaseOwnershipTests.Reentrant_disposal_shares_the_pending_return_before_context_cleanup_starts(throughLease: False) [73 ms]
+  Error Message:
+   Assert.Same() Failure: Values are not the same instance
+Expected: Task<VoidTaskResult,<DisposeCoreAsync>d__13> { Status = WaitingForActivation }
+Actual:   Task<VoidTaskResult> { Status = Faulted }
+  Stack Trace:
+     at TurboTest.Tests.LeaseOwnershipTests.Reentrant_disposal_shares_the_pending_return_before_context_cleanup_starts(Boolean throughLease) in /home/dan/code/TurboTest/tests/TurboTest.Tests/LeaseOwnershipTests.cs:line 40
+   at TurboTest.Tests.LeaseOwnershipTests.Reentrant_disposal_shares_the_pending_return_before_context_cleanup_starts(Boolean throughLease) in /home/dan/code/TurboTest/tests/TurboTest.Tests/LeaseOwnershipTests.cs:line 48
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.LeaseOwnershipTests.Reentrant_disposal_shares_the_pending_return_before_context_cleanup_starts(throughLease: True) [3 ms]
+  Error Message:
+   Assert.Same() Failure: Values are not the same instance
+Expected: Task<VoidTaskResult,<DisposeCoreAsync>d__13> { Status = WaitingForActivation }
+Actual:   Task<VoidTaskResult> { Status = Faulted }
+  Stack Trace:
+     at TurboTest.Tests.LeaseOwnershipTests.Reentrant_disposal_shares_the_pending_return_before_context_cleanup_starts(Boolean throughLease) in /home/dan/code/TurboTest/tests/TurboTest.Tests/LeaseOwnershipTests.cs:line 40
+   at TurboTest.Tests.LeaseOwnershipTests.Reentrant_disposal_shares_the_pending_return_before_context_cleanup_starts(Boolean throughLease) in /home/dan/code/TurboTest/tests/TurboTest.Tests/LeaseOwnershipTests.cs:line 48
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-006/lease-reentry-red/lease-reentry-red.trx
+
+Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 96 ms - TurboTest.Tests.dll (net10.0)

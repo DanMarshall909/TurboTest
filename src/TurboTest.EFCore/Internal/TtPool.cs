@@ -28,7 +28,7 @@ internal sealed class TtPool : ITtDatabasePool
     private readonly ConcurrentDictionary<string, ContainerSlot> _pendingCreates = new();
     private readonly DockerClient _dockerClient;
     private readonly Func<TtContainer, Task> _deleteResource;
-    private readonly Func<string, Task> _prepareImage;
+    private readonly Func<string, CancellationToken, Task> _prepareImage;
     private readonly Func<TtContainer, Task>? _beforeStart;
     private readonly Func<CreateContainerParameters, Task<CreateContainerResponse>> _createResource;
     private readonly string _image;
@@ -37,7 +37,7 @@ internal sealed class TtPool : ITtDatabasePool
     private bool _initialized;
     private bool _disposed;
 
-    internal IReadOnlyList<string> OwnedResourceIds => _ownedContainers.Keys.Concat(_pendingCreates.Keys).Order().ToArray();
+    public IReadOnlyList<string> OwnedResourceIds => _ownedContainers.Keys.Concat(_pendingCreates.Keys).Order().ToArray();
     public TtPoolSnapshot Snapshot => _slots.Snapshot;
     public TtResourceBudget Budget { get; }
 
@@ -50,7 +50,7 @@ internal sealed class TtPool : ITtDatabasePool
         if (_options.EnableDynamicScaling)
             throw new ArgumentException("Use fixed capacity until the bounded adaptive controller is available.", nameof(TtOptions.EnableDynamicScaling));
         _deleteResource = deleteResource ?? (container => container.DisposeAsync().AsTask());
-        _prepareImage = prepareImage ?? EnsureImageAsync;
+        _prepareImage = prepareImage is null ? EnsureImageAsync : (image, _) => prepareImage(image);
         _beforeStart = beforeStart;
         _image = _options.DockerImage ?? "postgres:16-alpine";
         _logger = _options.Logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
@@ -67,29 +67,33 @@ internal sealed class TtPool : ITtDatabasePool
             : "unix:///var/run/docker.sock");
 
         _dockerClient = new DockerClientConfiguration(new Uri(dockerUri)).CreateClient();
+        // Once issued, creation must settle so its response can establish cleanup
+        // identity. Canceling HTTP observation cannot undo Docker's side effect.
         _createResource = createResource ?? (parameters => _dockerClient.Containers.CreateContainerAsync(parameters));
         _slots = new TtSlotPool<ContainerSlot>(_options.PoolSize, _options.PreparationConcurrency,
             id => new ContainerSlot(id, $"{_options.ContainerPrefix}_pool_{id:N}_{Guid.NewGuid():N}"),
-            (slot, _) => CreateContainerAsync(slot), DeleteSlotAsync, _options.ResetConcurrency);
+            CreateContainerAsync, DeleteSlotAsync, _options.ResetConcurrency);
     }
 
-    public async Task InitializeAsync()
+    public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         if (_initialized) return;
 
-        await _initSemaphore.WaitAsync();
+        await _initSemaphore.WaitAsync(cancellationToken);
         try
         {
             if (_initialized) return;
 
             // Pull PostgreSQL image if needed
-            await _prepareImage(_image);
+            cancellationToken.ThrowIfCancellationRequested();
+            await _prepareImage(_image, cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
 
             // Create initial pool
             _logger.LogInformation("Initializing TurboTest pool with {PoolSize} containers, {MemoryLimitMb}MB each",
                 _options.PoolSize, _options.MemoryLimitMb);
 
-            await _slots.WarmAsync(_options.PoolSize, default);
+            await _slots.WarmAsync(_options.PoolSize, cancellationToken);
 
             _logger.LogInformation("TurboTest pool initialized successfully with {ContainerCount} containers",
                 _options.PoolSize);
@@ -142,7 +146,7 @@ internal sealed class TtPool : ITtDatabasePool
         else if (slot.Source is not null) await slot.Source.DisposeAsync();
     }
 
-    private async Task CreateContainerAsync(ContainerSlot slot)
+    private async Task CreateContainerAsync(ContainerSlot slot, CancellationToken cancellationToken)
     {
         var port = GetAvailablePort();
         var password = _options.Password ?? "test_" + Guid.NewGuid().ToString("N")[..8];
@@ -168,6 +172,7 @@ internal sealed class TtPool : ITtDatabasePool
         TtContainer? container = null;
         try
         {
+            cancellationToken.ThrowIfCancellationRequested();
             slot.CreateIssued = true;
             _pendingCreates.TryAdd(slot.Name, slot);
             var createResponse = await _createResource(
@@ -208,8 +213,9 @@ internal sealed class TtPool : ITtDatabasePool
             _ownedContainers.TryAdd(container.Id, container);
             _pendingCreates.TryRemove(slot.Name, out _);
             if (_beforeStart is not null) await _beforeStart(container);
-            await _dockerClient.Containers.StartContainerAsync(createResponse.ID, new ContainerStartParameters());
-            await WaitForDatabaseReadyAsync(dataSource);
+            cancellationToken.ThrowIfCancellationRequested();
+            await _dockerClient.Containers.StartContainerAsync(createResponse.ID, new ContainerStartParameters(), cancellationToken);
+            await WaitForDatabaseReadyAsync(dataSource, cancellationToken: cancellationToken);
         }
         catch (Exception error)
         {
@@ -219,35 +225,44 @@ internal sealed class TtPool : ITtDatabasePool
     }
 
     internal static async Task WaitForDatabaseReadyAsync(Npgsql.NpgsqlDataSource dataSource,
-        Func<Npgsql.NpgsqlConnection, Task>? probe = null, int maxAttempts = 60)
+        Func<Npgsql.NpgsqlConnection, Task>? probe = null, int maxAttempts = 60,
+        CancellationToken cancellationToken = default)
     {
         for (int i = 0; i < maxAttempts; i++)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             try
             {
                 await using var connection = dataSource.CreateConnection();
-                await connection.OpenAsync();
-                await (probe?.Invoke(connection) ?? connection.ExecuteScalarAsync("SELECT 1"));
+                await connection.OpenAsync(cancellationToken);
+                if (probe is not null) await probe(connection);
+                else
+                {
+                    await using var query = new Npgsql.NpgsqlCommand("SELECT 1", connection);
+                    await query.ExecuteScalarAsync(cancellationToken);
+                }
+                cancellationToken.ThrowIfCancellationRequested();
                 return;
             }
             catch
             {
-                await Task.Delay(500);
+                cancellationToken.ThrowIfCancellationRequested();
+                await Task.Delay(500, cancellationToken);
             }
         }
 
         throw new TimeoutException("Database failed to start within 30 seconds");
     }
 
-    private async Task EnsureImageAsync(string image)
+    private async Task EnsureImageAsync(string image, CancellationToken cancellationToken)
     {
-        var images = await _dockerClient.Images.ListImagesAsync(new ImagesListParameters());
+        var images = await _dockerClient.Images.ListImagesAsync(new ImagesListParameters(), cancellationToken);
         if (!images.Any(i => i.RepoTags?.Contains(image) == true))
         {
             await _dockerClient.Images.CreateImageAsync(
                 new ImagesCreateParameters { FromImage = image },
                 null,
-                new Progress<JSONMessage>());
+                new Progress<JSONMessage>(), cancellationToken);
         }
     }
 

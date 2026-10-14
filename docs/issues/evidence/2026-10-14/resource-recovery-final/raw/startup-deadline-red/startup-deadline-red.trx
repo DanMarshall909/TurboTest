@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="52ba2e53-f6d3-4313-b569-e0766e663e0a" name="@os-greg 2026-10-14 16:25:56" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T16:25:56.1638414+10:00" queuing="2026-10-14T16:25:56.1638415+10:00" start="2026-10-14T16:25:50.5182473+10:00" finish="2026-10-14T16:26:05.7370413+10:00" />
+  <TestSettings name="default" id="feeda677-aa3a-419a-8b86-7ff64ca8285a">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_16_25_56" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="85290e11-fffc-4dc6-ab8a-b1912e3a250c" testId="90d5d83f-e777-2d19-d93c-186704bf3b36" testName="TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(callerCancellation: False)" computerName="os-greg" duration="00:00:09.5348713" startTime="2026-10-14T16:25:56.1513214+10:00" endTime="2026-10-14T16:26:05.6728417+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="85290e11-fffc-4dc6-ab8a-b1912e3a250c">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.TimeoutException)
+---- System.TimeoutException : The operation has timed out.</Message>
+          <StackTrace>   at TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(Boolean callerCancellation) in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupDeadlineTests.cs:line 33
+   at TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(Boolean callerCancellation) in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupDeadlineTests.cs:line 50
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="06bb3cc4-fa3a-4c87-8927-6696985c565d" testId="9895d1cc-fe0f-3cac-dfcd-8532b8dbc372" testName="TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(callerCancellation: True)" computerName="os-greg" duration="00:00:05.1245021" startTime="2026-10-14T16:25:50.9979748+10:00" endTime="2026-10-14T16:25:56.1366389+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="06bb3cc4-fa3a-4c87-8927-6696985c565d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.TimeoutException)
+---- System.TimeoutException : The operation has timed out.</Message>
+          <StackTrace>   at TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(Boolean callerCancellation) in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupDeadlineTests.cs:line 33
+   at TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(Boolean callerCancellation) in /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupDeadlineTests.cs:line 50
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(callerCancellation: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="9895d1cc-fe0f-3cac-dfcd-8532b8dbc372">
+      <Execution id="06bb3cc4-fa3a-4c87-8927-6696985c565d" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.StartupDeadlineTests" name="Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(callerCancellation: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="90d5d83f-e777-2d19-d93c-186704bf3b36">
+      <Execution id="85290e11-fffc-4dc6-ab8a-b1912e3a250c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.StartupDeadlineTests" name="Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="90d5d83f-e777-2d19-d93c-186704bf3b36" executionId="85290e11-fffc-4dc6-ab8a-b1912e3a250c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9895d1cc-fe0f-3cac-dfcd-8532b8dbc372" executionId="06bb3cc4-fa3a-4c87-8927-6696985c565d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="2" passed="0" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.19]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:05.35]       Assert.Throws() Failure: Exception type was not an exact match
+[xUnit.net 00:00:05.35]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:05.35]       Actual:   typeof(System.TimeoutException)
+[xUnit.net 00:00:05.35]       ---- System.TimeoutException : The operation has timed out.
+[xUnit.net 00:00:05.35]       Stack Trace:
+[xUnit.net 00:00:05.35]         /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupDeadlineTests.cs(33,0): at TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(Boolean callerCancellation)
+[xUnit.net 00:00:05.35]         /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupDeadlineTests.cs(50,0): at TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(Boolean callerCancellation)
+[xUnit.net 00:00:05.35]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:05.35]         ----- Inner Stack Trace -----
+[xUnit.net 00:00:05.35]         
+[xUnit.net 00:00:14.89]       Assert.Throws() Failure: Exception type was not an exact match
+[xUnit.net 00:00:14.89]       Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+[xUnit.net 00:00:14.89]       Actual:   typeof(System.TimeoutException)
+[xUnit.net 00:00:14.89]       ---- System.TimeoutException : The operation has timed out.
+[xUnit.net 00:00:14.89]       Stack Trace:
+[xUnit.net 00:00:14.89]         /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupDeadlineTests.cs(33,0): at TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(Boolean callerCancellation)
+[xUnit.net 00:00:14.89]         /home/dan/code/TurboTest/tests/TurboTest.Tests/StartupDeadlineTests.cs(50,0): at TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(Boolean callerCancellation)
+[xUnit.net 00:00:14.89]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:14.89]         ----- Inner Stack Trace -----
+[xUnit.net 00:00:14.89]         
+[xUnit.net 00:00:14.89]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:25:56.1391808+10:00">
+        <Text>[xUnit.net 00:00:05.35]     TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(callerCancellation: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T16:26:05.6733917+10:00">
+        <Text>[xUnit.net 00:00:14.89]     TurboTest.Tests.StartupDeadlineTests.Interrupted_startup_retains_the_pending_image_job_and_prevents_late_resource_creation(callerCancellation: False) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

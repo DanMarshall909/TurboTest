@@ -1,0 +1,118 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.24]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "StartupTimeout", milliseconds: 4294967295) [FAIL]
+[xUnit.net 00:00:00.25]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "DrainTimeout", milliseconds: 0) [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "StartupTimeout", milliseconds: -1) [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "DrainTimeout", milliseconds: 4294967295) [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "StartupTimeout", milliseconds: 0) [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "DrainTimeout", milliseconds: 0) [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "DrainTimeout", milliseconds: 4294967295) [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "StartupTimeout", milliseconds: 0) [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "DrainTimeout", milliseconds: -1) [FAIL]
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "StartupTimeout", milliseconds: 4294967295) [23 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "DrainTimeout", milliseconds: 0) [1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "StartupTimeout", milliseconds: -1) [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "DrainTimeout", milliseconds: 4294967295) [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "StartupTimeout", milliseconds: 0) [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "DrainTimeout", milliseconds: 0) [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "DrainTimeout", milliseconds: 4294967295) [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "StartupTimeout", milliseconds: 0) [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "DrainTimeout", milliseconds: -1) [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "StartupTimeout", milliseconds: 4294967295) [FAIL]
+[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "StartupTimeout", milliseconds: -1) [FAIL]
+[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "DrainTimeout", milliseconds: -1) [FAIL]
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "StartupTimeout", milliseconds: 4294967295) [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: False, field: "StartupTimeout", milliseconds: -1) [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(prepared: True, field: "DrainTimeout", milliseconds: -1) [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_lifecycle_deadline_must_be_positive_finite_and_supported_before_preparation(Boolean prepared, String field, Int64 milliseconds) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-006/deadline-validation-red/deadline-validation-red.trx
+
+Failed!  - Failed:    12, Passed:     0, Skipped:     0, Total:    12, Duration: 60 ms - TurboTest.Tests.dll (net10.0)

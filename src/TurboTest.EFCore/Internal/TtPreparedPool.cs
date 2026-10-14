@@ -54,6 +54,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     private readonly Func<NpgsqlDataSource, Task>? _beforeVerification;
     private readonly Func<NpgsqlConnection, NpgsqlTransaction, Task>? _afterSequenceRestore;
     private readonly Func<NpgsqlConnection, Task>? _afterRowCommit;
+    private readonly Func<NpgsqlConnection, string, Task>? _dropDatabase;
     private readonly Guid _owner = Guid.NewGuid();
     private readonly string _template;
     private readonly Login _workload;
@@ -69,8 +70,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     private TtRowResetPlan? _rowReset;
     private Task? _disposal;
 
-    internal Guid OwnerId => _owner;
-    internal IReadOnlyList<string> OwnedResourceIds => _host.OwnedResourceIds;
+    public IReadOnlyList<string> OwnedResourceIds => _host.OwnedResourceIds;
     public TtResourceBudget Budget { get; }
     public TtPoolSnapshot Snapshot
     {
@@ -89,7 +89,8 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         Func<NpgsqlDataSource, Task>? beforeVerification = null, Func<TtContainer, Task>? deleteHost = null,
         Func<string, Task>? prepareImage = null,
         Func<NpgsqlConnection, NpgsqlTransaction, Task>? afterSequenceRestore = null,
-        Func<NpgsqlConnection, Task>? afterRowCommit = null)
+        Func<NpgsqlConnection, Task>? afterRowCommit = null,
+        Func<NpgsqlConnection, string, Task>? dropDatabase = null)
     {
         options = options.Snapshot();
         TtPreparedConfiguration.Validate(options);
@@ -101,6 +102,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         _beforeVerification = beforeVerification;
         _afterSequenceRestore = afterSequenceRestore;
         _afterRowCommit = afterRowCommit;
+        _dropDatabase = dropDatabase;
         _workload = new Login(options.Username ?? $"tt_workload_{Guid.NewGuid():N}",
             options.Password ?? Convert.ToHexString(RandomNumberGenerator.GetBytes(32)));
         var hostOptions = options.Snapshot();
@@ -122,7 +124,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     {
         using var privateWork = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
         cancellationToken.ThrowIfCancellationRequested();
-        await _host.InitializeAsync();
+        await _host.InitializeAsync(cancellationToken);
         _administrator = (await _host.GetDatabaseAsync()).DataSource;
         await using (var administrative = await OpenAdministratorAsync(cancellationToken: cancellationToken))
         {
@@ -361,7 +363,8 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
             if (await templateFlag.ExecuteScalarAsync() is true)
                 await connection.ExecuteNonQueryAsync($"ALTER DATABASE {Quote(slot.Name)} IS_TEMPLATE false");
         }
-        await connection.ExecuteNonQueryAsync($"DROP DATABASE IF EXISTS {Quote(slot.Name)} WITH (FORCE)");
+        if (_dropDatabase is not null) await _dropDatabase(connection, slot.Name);
+        else await connection.ExecuteNonQueryAsync($"DROP DATABASE IF EXISTS {Quote(slot.Name)} WITH (FORCE)");
         _owned.TryRemove(slot.Name, out _);
     }
 
@@ -374,7 +377,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         }
     }
 
-    internal Task RetryCleanupAsync()
+    public Task RetryCleanupAsync()
     {
         lock (_owned)
         {
@@ -390,15 +393,18 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         try
         {
             Exception? first = null;
-            try { await _slots.DisposeAsync(); }
+            try { await _slots.RetryCleanupAsync(); }
             catch (Exception error) { first ??= error; }
             foreach (var slot in _owned.Values)
             {
                 try { await slot.Source.DisposeAsync(); }
                 catch (Exception error) { first ??= error; }
             }
-            try { await _host.DisposeAsync(); }
-            catch (Exception error) { first ??= error; }
+            if (first is null)
+            {
+                try { await _host.DisposeAsync(); }
+                catch (Exception error) { first = error; }
+            }
             if (first is not null) throw new TtLifecycleException("PreparedPoolDispose", first);
             _owned.Clear();
             _rowReset = null;

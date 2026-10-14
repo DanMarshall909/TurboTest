@@ -1,0 +1,17 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "FullyQualifiedName~Deadline_triggered_throwing_callback_is_reported",
+    "--logger",
+    "trx;LogFileName=startup-throw-isolated-red.trx",
+    "--results-directory",
+    "artifacts/tt-006/startup-throw-isolated-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 34.31705771503039,
+  "log": "artifacts/tt-006/startup-throw-isolated-red.log"
+}

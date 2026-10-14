@@ -1,0 +1,54 @@
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class SlotRecoveryTests
+{
+    [Fact]
+    public async Task A_failed_reset_restores_verified_capacity_even_without_a_waiting_acquisition()
+    {
+        var replacementStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var verifyReplacement = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var preparations = 0;
+        var deletions = new List<Guid>();
+        await using var owner = new TtSlotPool<Resource>(1, 1, id => new Resource(id),
+            async (_, token) =>
+            {
+                var attempt = Interlocked.Increment(ref preparations);
+                if (attempt > 2) throw new InvalidOperationException("Recovery created more than one replacement.");
+                if (attempt == 2)
+                {
+                    replacementStarted.TrySetResult();
+                    await verifyReplacement.Task.WaitAsync(token);
+                }
+            }, resource => { deletions.Add(resource.Id); return Task.CompletedTask; });
+        var dirty = await owner.AcquireAsync();
+        using var deadline = new CancellationTokenSource(TimeSpan.FromSeconds(3));
+        Task<TtSlotPool<Resource>.Reservation>? next = null;
+        try
+        {
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => owner.ReturnAsync(dirty,
+                (_, _) => Task.FromException(new IOException("The reset failed."))));
+            Assert.Equal("SlotReset", failure.Stage);
+            await replacementStarted.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(new[] { dirty.Id }, deletions);
+            Assert.Equal((1, 1, 0), (owner.Snapshot.Reserved, owner.Snapshot.Preparing, owner.Snapshot.Ready));
+            next = owner.AcquireAsync(deadline.Token);
+            Assert.False(next.IsCompleted);
+            verifyReplacement.TrySetResult();
+            var clean = await next;
+            Assert.NotEqual(dirty.Id, clean.Id);
+            Assert.Equal((1, 1, 0), (owner.Snapshot.Reserved, owner.Snapshot.Leased, owner.Snapshot.QueuedAcquisitions));
+            Assert.Equal(2, preparations);
+        }
+        finally
+        {
+            deadline.Cancel();
+            verifyReplacement.TrySetResult();
+            if (next is not null) await Record.ExceptionAsync(async () => await next);
+        }
+    }
+
+    private sealed record Resource(Guid Id);
+}

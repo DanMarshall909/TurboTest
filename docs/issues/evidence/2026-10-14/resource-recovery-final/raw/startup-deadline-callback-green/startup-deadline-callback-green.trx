@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="db13575d-70b4-4f96-9d94-78d0d599499b" name="@os-greg 2026-10-14 17:35:27" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T17:35:27.1373118+10:00" queuing="2026-10-14T17:35:27.1373118+10:00" start="2026-10-14T17:35:06.0462764+10:00" finish="2026-10-14T17:35:58.1856669+10:00" />
+  <TestSettings name="default" id="bac858cc-2b2e-4088-b19e-249ef0ffadb6">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_17_35_27" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="a94b435c-1fd6-434a-9158-840a39d38a90" testId="57d6c966-a514-7e5d-9242-d5d8a61b7f49" testName="TurboTest.Tests.FailedStartupCleanupTests.A_blocking_startup_cancellation_callback_keeps_its_host_owned_without_blocking_the_failure_observer(initializationFailure: True)" computerName="os-greg" duration="00:00:16.0104474" startTime="2026-10-14T17:35:11.0993883+10:00" endTime="2026-10-14T17:35:27.1040505+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a94b435c-1fd6-434a-9158-840a39d38a90" />
+    <UnitTestResult executionId="5535df68-128f-4cfa-94b7-f62cac7fe8fd" testId="16a025b8-96a8-1599-965d-4a8907764fca" testName="TurboTest.Tests.FailedStartupCleanupTests.A_blocking_startup_cancellation_callback_keeps_its_host_owned_without_blocking_the_failure_observer(initializationFailure: False)" computerName="os-greg" duration="00:00:30.9062739" startTime="2026-10-14T17:35:27.1245155+10:00" endTime="2026-10-14T17:35:58.0110997+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5535df68-128f-4cfa-94b7-f62cac7fe8fd" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.FailedStartupCleanupTests.A_blocking_startup_cancellation_callback_keeps_its_host_owned_without_blocking_the_failure_observer(initializationFailure: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="16a025b8-96a8-1599-965d-4a8907764fca">
+      <Execution id="5535df68-128f-4cfa-94b7-f62cac7fe8fd" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FailedStartupCleanupTests" name="A_blocking_startup_cancellation_callback_keeps_its_host_owned_without_blocking_the_failure_observer" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FailedStartupCleanupTests.A_blocking_startup_cancellation_callback_keeps_its_host_owned_without_blocking_the_failure_observer(initializationFailure: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="57d6c966-a514-7e5d-9242-d5d8a61b7f49">
+      <Execution id="a94b435c-1fd6-434a-9158-840a39d38a90" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FailedStartupCleanupTests" name="A_blocking_startup_cancellation_callback_keeps_its_host_owned_without_blocking_the_failure_observer" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="57d6c966-a514-7e5d-9242-d5d8a61b7f49" executionId="a94b435c-1fd6-434a-9158-840a39d38a90" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16a025b8-96a8-1599-965d-4a8907764fca" executionId="5535df68-128f-4cfa-94b7-f62cac7fe8fd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.59]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.84]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.87]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:47.83]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.17_35_58.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

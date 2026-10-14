@@ -1,0 +1,37 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:02.61]     TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: True) [FAIL]
+  Failed TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: True) [2 s]
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.TimeoutException)
+---- System.TimeoutException : The operation has timed out.
+  Stack Trace:
+     at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 112
+   at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 146
+   at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 146
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+
+[xUnit.net 00:00:04.63]     TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: False) [FAIL]
+  Failed TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: False) [2 s]
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.TimeoutException)
+---- System.TimeoutException : The operation has timed out.
+  Stack Trace:
+     at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 112
+   at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 146
+   at TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(Boolean lateFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryBackpressureTests.cs:line 146
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+
+Results File: /home/dan/code/TurboTest/artifacts/tt-006/async-cancellation-red/async-cancellation-red.trx
+
+Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 4 s - TurboTest.Tests.dll (net10.0)

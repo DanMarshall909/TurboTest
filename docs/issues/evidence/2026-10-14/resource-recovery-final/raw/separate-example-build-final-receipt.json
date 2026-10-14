@@ -1,0 +1,11 @@
+{
+  "command": [
+    "dotnet",
+    "build",
+    "examples/DynamicScalingExample/DynamicScalingExample.csproj"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 1.4123793637845665,
+  "log": "artifacts/tt-006/separate-example-build-final.log"
+}

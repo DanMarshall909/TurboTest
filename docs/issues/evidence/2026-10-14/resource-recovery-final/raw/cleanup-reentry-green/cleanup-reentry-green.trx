@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="99b483e6-3400-4154-879a-1c735d3191ff" name="@os-greg 2026-10-14 16:54:47" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T16:54:47.8955886+10:00" queuing="2026-10-14T16:54:47.8955887+10:00" start="2026-10-14T16:54:44.1576212+10:00" finish="2026-10-14T16:54:47.9089506+10:00" />
+  <TestSettings name="default" id="505c79dc-ebbd-4a15-a83b-5c5006ce6236">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_16_54_47" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="5563cc67-7ce1-4a32-aacf-cae890c01842" testId="b4c53761-81e2-5d1a-f728-b81bde6701b7" testName="TurboTest.Tests.CleanupOwnershipTests.Reentrant_cleanup_observes_the_same_pending_attempt_without_repeating_the_callback" computerName="os-greg" duration="00:00:00.0019567" startTime="2026-10-14T16:54:47.7066348+10:00" endTime="2026-10-14T16:54:47.7084381+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5563cc67-7ce1-4a32-aacf-cae890c01842" />
+    <UnitTestResult executionId="406fc02f-b9a7-4b1d-9660-4af1697f4646" testId="82fe6e30-482a-7081-c5ec-a6096ae6a2bf" testName="TurboTest.Tests.CleanupOwnershipTests.A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt(lifecycle: False)" computerName="os-greg" duration="00:00:00.0351441" startTime="2026-10-14T16:54:47.6788788+10:00" endTime="2026-10-14T16:54:47.6998430+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="406fc02f-b9a7-4b1d-9660-4af1697f4646" />
+    <UnitTestResult executionId="83a5d70a-6231-43a3-ac4a-bdc96703ad0d" testId="f0b3a12b-55c9-450f-bd31-9ddfb25b86a8" testName="TurboTest.Tests.CleanupOwnershipTests.Concurrent_cleanup_shares_one_attempt_and_retains_accounting_until_completion" computerName="os-greg" duration="00:00:00.0026631" startTime="2026-10-14T16:54:47.7037540+10:00" endTime="2026-10-14T16:54:47.7062374+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="83a5d70a-6231-43a3-ac4a-bdc96703ad0d" />
+    <UnitTestResult executionId="fa5008f4-78a4-4b88-9698-a8088254ca27" testId="b2ba6adc-1528-659e-a07e-a2107d566ea8" testName="TurboTest.Tests.CleanupOwnershipTests.Global_cleanup_continues_after_one_failure_and_retains_only_the_failed_owner" computerName="os-greg" duration="00:00:00.0050823" startTime="2026-10-14T16:54:47.7088188+10:00" endTime="2026-10-14T16:54:47.7137496+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fa5008f4-78a4-4b88-9698-a8088254ca27" />
+    <UnitTestResult executionId="207103cc-a2c2-4616-b8d9-f9c9d1a72a7f" testId="a08c1ccd-dbe7-f860-aede-75228d9440ec" testName="TurboTest.Tests.DrainDeadlineTests.Drain_timeout_retains_the_pending_callback_and_concurrent_cleanup_shares_that_work" computerName="os-greg" duration="00:00:00.4803392" startTime="2026-10-14T16:54:47.1844914+10:00" endTime="2026-10-14T16:54:47.6606131+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="207103cc-a2c2-4616-b8d9-f9c9d1a72a7f" />
+    <UnitTestResult executionId="0a673ef6-8601-4d84-9974-83ac54d53b8e" testId="67ab495e-6c2b-5d6a-7e9b-c1dab2e90a3a" testName="TurboTest.Tests.CleanupOwnershipTests.A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt(lifecycle: True)" computerName="os-greg" duration="00:00:00.0032366" startTime="2026-10-14T16:54:47.7009105+10:00" endTime="2026-10-14T16:54:47.7033006+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a673ef6-8601-4d84-9974-83ac54d53b8e" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.DrainDeadlineTests.Drain_timeout_retains_the_pending_callback_and_concurrent_cleanup_shares_that_work" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="a08c1ccd-dbe7-f860-aede-75228d9440ec">
+      <Execution id="207103cc-a2c2-4616-b8d9-f9c9d1a72a7f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.DrainDeadlineTests" name="Drain_timeout_retains_the_pending_callback_and_concurrent_cleanup_shares_that_work" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.CleanupOwnershipTests.A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt(lifecycle: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="67ab495e-6c2b-5d6a-7e9b-c1dab2e90a3a">
+      <Execution id="0a673ef6-8601-4d84-9974-83ac54d53b8e" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CleanupOwnershipTests" name="A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.CleanupOwnershipTests.Global_cleanup_continues_after_one_failure_and_retains_only_the_failed_owner" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b2ba6adc-1528-659e-a07e-a2107d566ea8">
+      <Execution id="fa5008f4-78a4-4b88-9698-a8088254ca27" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CleanupOwnershipTests" name="Global_cleanup_continues_after_one_failure_and_retains_only_the_failed_owner" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.CleanupOwnershipTests.A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt(lifecycle: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="82fe6e30-482a-7081-c5ec-a6096ae6a2bf">
+      <Execution id="406fc02f-b9a7-4b1d-9660-4af1697f4646" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CleanupOwnershipTests" name="A_failed_retry_keeps_safe_diagnostics_and_the_capability_for_another_attempt" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.CleanupOwnershipTests.Concurrent_cleanup_shares_one_attempt_and_retains_accounting_until_completion" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f0b3a12b-55c9-450f-bd31-9ddfb25b86a8">
+      <Execution id="83a5d70a-6231-43a3-ac4a-bdc96703ad0d" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CleanupOwnershipTests" name="Concurrent_cleanup_shares_one_attempt_and_retains_accounting_until_completion" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.CleanupOwnershipTests.Reentrant_cleanup_observes_the_same_pending_attempt_without_repeating_the_callback" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b4c53761-81e2-5d1a-f728-b81bde6701b7">
+      <Execution id="5563cc67-7ce1-4a32-aacf-cae890c01842" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CleanupOwnershipTests" name="Reentrant_cleanup_observes_the_same_pending_attempt_without_repeating_the_callback" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b4c53761-81e2-5d1a-f728-b81bde6701b7" executionId="5563cc67-7ce1-4a32-aacf-cae890c01842" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="82fe6e30-482a-7081-c5ec-a6096ae6a2bf" executionId="406fc02f-b9a7-4b1d-9660-4af1697f4646" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f0b3a12b-55c9-450f-bd31-9ddfb25b86a8" executionId="83a5d70a-6231-43a3-ac4a-bdc96703ad0d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b2ba6adc-1528-659e-a07e-a2107d566ea8" executionId="fa5008f4-78a4-4b88-9698-a8088254ca27" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a08c1ccd-dbe7-f860-aede-75228d9440ec" executionId="207103cc-a2c2-4616-b8d9-f9c9d1a72a7f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="67ab495e-6c2b-5d6a-7e9b-c1dab2e90a3a" executionId="0a673ef6-8601-4d84-9974-83ac54d53b8e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.16]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.27]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.31]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.87]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.16_54_47.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,18 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.24]     TurboTest.Tests.CleanupOwnershipTests.Reentrant_cleanup_observes_the_same_pending_attempt_without_repeating_the_callback [FAIL]
+  Failed TurboTest.Tests.CleanupOwnershipTests.Reentrant_cleanup_observes_the_same_pending_attempt_without_repeating_the_callback [6 ms]
+  Error Message:
+   Assert.Same() Failure: Values are not the same instance
+Expected: Task<VoidTaskResult,<RunAsync>d__11> { Status = WaitingForActivation }
+Actual:   Task<VoidTaskResult> { Status = Faulted }
+  Stack Trace:
+     at TurboTest.Tests.CleanupOwnershipTests.Reentrant_cleanup_observes_the_same_pending_attempt_without_repeating_the_callback() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CleanupOwnershipTests.cs:line 28
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-006/cleanup-reentry-red/cleanup-reentry-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 17 ms - TurboTest.Tests.dll (net10.0)

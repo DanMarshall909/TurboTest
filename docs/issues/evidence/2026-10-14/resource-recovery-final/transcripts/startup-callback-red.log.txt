@@ -1,0 +1,19 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:04.30]     TurboTest.Tests.FailedStartupCleanupTests.Throwing_startup_cancellation_callbacks_cannot_replace_the_initializer_error_or_lose_cleanup [FAIL]
+  Failed TurboTest.Tests.FailedStartupCleanupTests.Throwing_startup_cancellation_callbacks_cannot_replace_the_initializer_error_or_lose_cleanup [4 s]
+  Error Message:
+   Assert.IsType() Failure: Value is not the exact type
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   typeof(System.AggregateException)
+  Stack Trace:
+     at TurboTest.Tests.FailedStartupCleanupTests.Throwing_startup_cancellation_callbacks_cannot_replace_the_initializer_error_or_lose_cleanup() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FailedStartupCleanupTests.cs:line 35
+   at TurboTest.Tests.FailedStartupCleanupTests.Throwing_startup_cancellation_callbacks_cannot_replace_the_initializer_error_or_lose_cleanup() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FailedStartupCleanupTests.cs:line 55
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-006/startup-callback-red/startup-callback-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 4 s - TurboTest.Tests.dll (net10.0)

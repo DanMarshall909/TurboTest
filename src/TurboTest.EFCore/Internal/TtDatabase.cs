@@ -38,17 +38,25 @@ internal sealed class TtDatabase : IAsyncDisposable
 
     private ValueTask FinishAsync(bool discard)
     {
+        Task disposal;
+        TaskCompletionSource? start = null;
         lock (_disposeCallbacks)
         {
             _closing = true;
-            _disposal ??= DisposeCoreAsync(discard);
-            return new ValueTask(_disposal);
+            if (_disposal is null)
+            {
+                start = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                _disposal = DisposeCoreAsync(discard, start.Task);
+            }
+            disposal = _disposal;
         }
+        start?.TrySetResult();
+        return new ValueTask(disposal);
     }
 
-    private async Task DisposeCoreAsync(bool discard)
+    private async Task DisposeCoreAsync(bool discard, Task start)
     {
-
+        await start;
         // Execute all dispose callbacks first (EF Core context disposal)
         List<Func<Task>> callbacks;
         lock (_disposeCallbacks)

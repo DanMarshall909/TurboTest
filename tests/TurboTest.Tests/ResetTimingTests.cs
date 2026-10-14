@@ -38,6 +38,8 @@ public class ResetTimingTests
             await entered.Task.WaitAsync(TimeSpan.FromSeconds(30));
             secondReturn = second.DisposeAsync().AsTask();
             Assert.False(secondReturn.IsCompleted);
+            Assert.Equal((2, 1, 1, 0), (fixture.PoolState.Reserved, fixture.PoolState.WaitingResets,
+                fixture.PoolState.ExecutingResets, fixture.PoolState.Ready));
             await Task.Delay(25);
             release.SetResult();
             await Task.WhenAll(firstReturn, secondReturn);
@@ -48,6 +50,7 @@ public class ResetTimingTests
                 Assert.Equal("Rows", record["Strategy"]);
                 Assert.Equal(true, record["Succeeded"]);
                 Assert.IsType<Guid>(record["OwnerId"]);
+                Assert.Equal(fixture.PoolState.OwnerId, record["OwnerId"]);
                 var execution = Assert.IsType<double>(record["ResetExecutionMilliseconds"]);
                 var validation = Assert.IsType<double>(record["ValidationMilliseconds"]);
                 Assert.True(validation > 0);

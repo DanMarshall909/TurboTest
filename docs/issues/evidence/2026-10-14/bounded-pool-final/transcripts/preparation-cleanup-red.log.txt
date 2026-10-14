@@ -1,0 +1,18 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:02.23]     TurboTest.Tests.SlotPoolTests.Failed_preparations_share_the_cleanup_limit_before_releasing_reservations [FAIL]
+  Failed TurboTest.Tests.SlotPoolTests.Failed_preparations_share_the_cleanup_limit_before_releasing_reservations [2 s]
+  Error Message:
+   System.TimeoutException : The operation has timed out.
+  Stack Trace:
+     at TurboTest.Tests.SlotPoolTests.Failed_preparations_share_the_cleanup_limit_before_releasing_reservations() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 276
+   at TurboTest.Tests.SlotPoolTests.Failed_preparations_share_the_cleanup_limit_before_releasing_reservations() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 294
+   at TurboTest.Tests.SlotPoolTests.Failed_preparations_share_the_cleanup_limit_before_releasing_reservations() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 294
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/preparation-cleanup-red/preparation-cleanup-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 2 s - TurboTest.Tests.dll (net10.0)

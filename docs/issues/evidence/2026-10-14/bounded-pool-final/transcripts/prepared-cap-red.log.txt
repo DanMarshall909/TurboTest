@@ -1,0 +1,25 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:09.04]     TurboTest.Tests.PreparedCapacityTests.Four_exclusive_databases_isolate_markers_and_a_fifth_waits_for_verified_return [FAIL]
+  Failed TurboTest.Tests.PreparedCapacityTests.Four_exclusive_databases_isolate_markers_and_a_fifth_waits_for_verified_return [8 s]
+  Error Message:
+   Assert.ThrowsAny() Failure: Exception type was not compatible
+Expected: typeof(System.OperationCanceledException)
+Actual:   typeof(TurboTest.EFCore.TtLifecycleException)
+---- TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineClone (InvalidOperationException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.Tests.PreparedCapacityTests.Four_exclusive_databases_isolate_markers_and_a_fifth_waits_for_verified_return() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedCapacityTests.cs:line 43
+   at TurboTest.Tests.PreparedCapacityTests.Four_exclusive_databases_isolate_markers_and_a_fifth_waits_for_verified_return() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedCapacityTests.cs:line 59
+   at TurboTest.Tests.PreparedCapacityTests.Four_exclusive_databases_isolate_markers_and_a_fifth_waits_for_verified_return() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedCapacityTests.cs:line 59
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.CreateSlotAsync(Action`1 observeValidation) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 242
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.GetDatabaseAsync(CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 207
+   at TurboTest.EFCore.TtFactory`1.CreateLeaseAsync(Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 50
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/prepared-cap-red/prepared-cap-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 8 s - TurboTest.Tests.dll (net10.0)

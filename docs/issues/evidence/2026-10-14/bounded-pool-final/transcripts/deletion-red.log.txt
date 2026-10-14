@@ -1,0 +1,6 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+/home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(140,52): error CS0246: The type or namespace name 'TtLifecycleException' could not be found (are you missing a using directive or an assembly reference?) [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]
+/home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(143,58): error CS0246: The type or namespace name 'TtLifecycleException' could not be found (are you missing a using directive or an assembly reference?) [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]

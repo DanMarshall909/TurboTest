@@ -1,0 +1,24 @@
+[
+  {
+    "command": [
+      "dotnet",
+      "build",
+      "TurboTest.sln"
+    ],
+    "cwd": "/home/dan/code/TurboTest",
+    "exitCode": 0,
+    "durationSeconds": 1.807159662246704,
+    "log": "artifacts/tt-005/solution-build.log"
+  },
+  {
+    "command": [
+      "dotnet",
+      "build",
+      "examples/DynamicScalingExample/DynamicScalingExample.csproj"
+    ],
+    "cwd": "/home/dan/code/TurboTest",
+    "exitCode": 0,
+    "durationSeconds": 1.4569981098175049,
+    "log": "artifacts/tt-005/dynamic-example-build.log"
+  }
+]

@@ -1,0 +1,53 @@
+FAIL
+
+The implementation and publication identity are coherent, but two TT-005 failure-accounting contracts need executable protection before marking the ticket complete.
+
+1. **Preparation compensation failure lacks an observable regression.** In [TtSlotPool.cs:139](/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs:139), failed preparation followed by failed deletion takes a distinct quarantine path. The retained coverage explicitly confirms that this path did not execute. `Failed_preparations_share_the_cleanup_limit_before_releasing_reservations` covers successful compensation; discard/reset tests exercise different entry paths.
+
+   This concerns acceptance criterion 2: failed cleanup must retain physical capacity. Add a fast test that fails preparation and compensation, asserts the reservation remains Quarantined, queued acquisitions settle with the retained diagnostic, and no replacement is created. Then confirm successful cleanup releases that reservation exactly once. Calibrate the assertion against a fault that prematurely releases the reservation or omits quarantine.
+
+2. **Lost-create absence and ownership checks lack boundary evidence.** In [TtPool.cs:125](/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:125), cleanup distinguishes matching ownership, mismatched ownership, and absence after an unconfirmed create. The current `CreationAccountingTests` exercises only successful discovery of an actually created container. The disclosed unexecuted branches decide whether capacity may be released and whether a resource may be deleted.
+
+   Add executable cases proving that an unconfirmed create followed by NotFound retains its reservation, and that mismatched reservation ownership neither deletes the discovered resource nor frees capacity. Also protect the acknowledged-absence outcome if retained as a supported release path. Use the actual boundary or a narrowly calibrated boundary adapter. These checks belong to TT-005’s conservative accounting; retry policy can remain TT-006.
+
+Task-to-implementation matrix:
+
+| Task | Implementation | Assessment |
+|---|---|---|
+| Shared physical reservation cap | `TtSlotPool`, both backend integrations | Implemented; failure evidence requires findings 1–2 |
+| Cancelable acquisition and closure | Pool cancellation, factory acquisition registry and shutdown | Main contracts evidenced |
+| Verified readiness | Preparation/reset callbacks before `PublishReady` | Evidenced |
+| Independent execution bounds | Preparation and reset semaphores, compensation ownership | Success and successful compensation evidenced |
+| Resource and source isolation | Resource budgets, administrator leases, exact context-source check | Main contracts evidenced |
+| Fixed observable mode | Public snapshots/budgets, dynamic-mode rejection, README | Implemented and evidenced |
+| Completion publication | Exact administrative envelope | Reproducible; do not apply while findings remain |
+
+Criterion-to-test matrix:
+
+| Acceptance criterion | Executable evidence | Assessment |
+|---|---|---|
+| Exclusive databases and cross-marker absence | `PreparedCapacityTests`, ordinary identity reuse | Sufficient |
+| Every undeleted reservation counts | `SlotPoolTests`, `CreationAccountingTests`, compensating-cleanup regressions | Incomplete in the two specified failure cases |
+| Backpressure and cancellation without overflow | Prepared/ordinary capacity tests, factory closure test | Sufficient |
+| Ready only after completed reset/validation | Held-reset ledger/native tests, restoration and corrupt-clone regressions | Sufficient |
+| Separate preparation/cleanup limits | `PreparationBudgetTests`, compensation permit tests | Sufficient for measured contracts |
+| Connection budgets and fixture isolation | `ConnectionBudgetTests`, source-binding, baseline-isolation and validation tests | Sufficient for measured contracts |
+| Usable observable fixed capacity | Snapshot/budget assertions, automatic allocation clamp, dynamic rejection | Sufficient |
+
+The tests generally use strong independent outcomes: database identities, marker absence, session reuse, actual server connection counts, blocked execution, and deletion counts. Fast ownership tests complement native PostgreSQL checks without claiming to replace them. The administrator pooling fault provides useful calibrated evidence. Missing percentages alone are not the reason for this verdict; the findings concern distinct, meaningful decisions enforcing the accepted physical-cap invariant.
+
+The shared reservation owner is a reasonable simplification over separate backend allocators. Preparation permits are released before compensation waits for cleanup permits, and reset compensation retains its cleanup permit. Exact data-source validation and unpooled administrator connections support the stated ownership and connection budgets. I found no materially simpler design warranting an architectural rewrite.
+
+Other disclosed gaps—Windows detection, uncached image pull, broader failed-disposal recovery, and lifecycle-drain policy—do not independently block this bounded ticket. Normal mutation remains legitimately pending the whole-session final immutable source and is not passing evidence.
+
+Publication reconstruction succeeded:
+
+- All **420 candidate paths** match their status, mode, content digest and index identity.
+- Manifest SHA256 matches `d2b06b46ff8e3d24ed2dac1f74c89e299dff282c8d4d953733e86d07f9ae4465`.
+- Base/current/integration identity is `a849728fca0696ea06694922155447683d5b8855`, on `master`.
+- No remotes/upstream exist; the sole worktree and preserved stash match the packet.
+- The exact envelope produces the recorded **1,177-path final tree**.
+- All **281 final** and **111 progress** archive digests verify; the 23 final source entries match current files.
+- Retained raw evidence confirms **164 passed, zero failed/skipped**, and both builds succeeded without warnings.
+
+Reusable lesson candidate: classify cleanup evidence by the transition that relinquishes ownership, not merely by a shared helper’s coverage. Proposed owner: TT-005’s existing evidence/review record. Benefit: exposes release-accounting gaps despite covered quarantine helpers. Downside: additional failure fixtures. Disposition: apply narrowly through the two findings; no standing-guidance change required.

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="4f7ca8dc-2b6b-4d3d-9c48-6c03abe81062" name="@os-greg 2026-10-14 13:27:20" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T13:27:20.0988193+10:00" queuing="2026-10-14T13:27:20.0988193+10:00" start="2026-10-14T13:27:17.0888581+10:00" finish="2026-10-14T13:27:20.1125844+10:00" />
+  <TestSettings name="default" id="6ce8226a-d0c5-4abd-9e52-f1de4d218420">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_13_27_20" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="0fbdcbc6-a12c-4cf5-bb9d-583d7b9a9430" testId="b7e8aa29-06f3-be02-bd68-31fa5be17775" testName="TurboTest.Tests.SlotPoolTests.Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits" computerName="os-greg" duration="00:00:00.0365325" startTime="2026-10-14T13:27:19.8723191+10:00" endTime="2026-10-14T13:27:19.9204015+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0fbdcbc6-a12c-4cf5-bb9d-583d7b9a9430">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: 1
+Actual:   5</Message>
+          <StackTrace>   at TurboTest.Tests.SlotPoolTests.Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 38
+   at TurboTest.Tests.SlotPoolTests.Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 52
+   at TurboTest.Tests.SlotPoolTests.Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 55
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SlotPoolTests.Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b7e8aa29-06f3-be02-bd68-31fa5be17775">
+      <Execution id="0fbdcbc6-a12c-4cf5-bb9d-583d7b9a9430" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SlotPoolTests" name="Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b7e8aa29-06f3-be02-bd68-31fa5be17775" executionId="0fbdcbc6-a12c-4cf5-bb9d-583d7b9a9430" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.17]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.25]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.28]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.36]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:00.36]       Expected: 1
+[xUnit.net 00:00:00.36]       Actual:   5
+[xUnit.net 00:00:00.36]       Stack Trace:
+[xUnit.net 00:00:00.36]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(38,0): at TurboTest.Tests.SlotPoolTests.Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits()
+[xUnit.net 00:00:00.36]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(52,0): at TurboTest.Tests.SlotPoolTests.Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits()
+[xUnit.net 00:00:00.36]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(55,0): at TurboTest.Tests.SlotPoolTests.Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits()
+[xUnit.net 00:00:00.36]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.38]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T13:27:19.9233495+10:00">
+        <Text>[xUnit.net 00:00:00.36]     TurboTest.Tests.SlotPoolTests.Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.13_27_19.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

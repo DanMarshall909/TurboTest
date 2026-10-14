@@ -1,0 +1,20 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.19]     TurboTest.Tests.SlotPoolTests.Unconfirmed_deletion_retains_capacity_and_fails_waiters_until_cleanup_succeeds [FAIL]
+  Failed TurboTest.Tests.SlotPoolTests.Unconfirmed_deletion_retains_capacity_and_fails_waiters_until_cleanup_succeeds [11 ms]
+  Error Message:
+   Assert.False() Failure
+Expected: False
+Actual:   True
+  Stack Trace:
+     at TurboTest.Tests.SlotPoolTests.Unconfirmed_deletion_retains_capacity_and_fails_waiters_until_cleanup_succeeds() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 136
+   at TurboTest.Tests.SlotPoolTests.Unconfirmed_deletion_retains_capacity_and_fails_waiters_until_cleanup_succeeds() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 157
+   at TurboTest.Tests.SlotPoolTests.Unconfirmed_deletion_retains_capacity_and_fails_waiters_until_cleanup_succeeds() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 157
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/deletion-red-2/deletion-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 23 ms - TurboTest.Tests.dll (net10.0)

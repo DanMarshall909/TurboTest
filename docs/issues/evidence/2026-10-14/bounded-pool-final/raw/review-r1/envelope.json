@@ -1,0 +1,36 @@
+{
+  "operations": [
+    {
+      "operation": "delete",
+      "path": "docs/issues/open/database/TT-005-bound-fixture-owned-prepared-database-pools.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/resolved/database/TT-005-bound-fixture-owned-prepared-database-pools.md",
+      "mode": "100644",
+      "sha256": "b011911c6723762f7be994dd0b100d4ef4f648a9ef85019812d0365debe787bb",
+      "contentPath": "artifacts/tt-005/review/post/docs/issues/resolved/database/TT-005-bound-fixture-owned-prepared-database-pools.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/README.md",
+      "mode": "100644",
+      "sha256": "2fe37e531730fac0e849be70b7f9ddef33501c1993c865d44ef6aa3f908ffe39",
+      "contentPath": "artifacts/tt-005/review/post/docs/issues/README.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/completion.json",
+      "mode": "100644",
+      "sha256": "88a054ce7c1d1c46ba8290b71ece06b314c9d079f37da5352d1938cd3571dd0f",
+      "contentPath": "artifacts/tt-005/review/post/docs/issues/evidence/2026-10-14/bounded-pool-final/completion.json"
+    }
+  ],
+  "validation": [
+    "git diff --cached --check",
+    "Verify archived bytes/digests and final relative Markdown links",
+    "Compare complete final tree with exact candidate plus envelope"
+  ],
+  "commitMessage": "Bound fixture-owned database capacity and connection budgets",
+  "publication": "Normal local completion commit; no remotes or output cleanup."
+}

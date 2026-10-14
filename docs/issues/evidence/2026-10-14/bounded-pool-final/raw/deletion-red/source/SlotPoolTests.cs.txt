@@ -1,0 +1,161 @@
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class SlotPoolTests
+{
+    [Fact]
+    public async Task Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits()
+    {
+        var begun = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var reserved = 0;
+        var preparing = 0;
+        var deleted = new List<Guid>();
+        await using var owner = new TtSlotPool<Resource>(4, 4,
+            id =>
+            {
+                if (Interlocked.Increment(ref reserved) > 4)
+                    throw new InvalidOperationException("The capacity owner created a fifth reservation.");
+                return new Resource(id);
+            },
+            async (_, _) =>
+            {
+                if (Interlocked.Increment(ref preparing) == 4) begun.TrySetResult();
+                await release.Task;
+            },
+            resource => { deleted.Add(resource.Id); return Task.CompletedTask; });
+        using var cancelFifth = new CancellationTokenSource();
+        var first = Enumerable.Range(0, 4).Select(_ => owner.AcquireAsync()).ToArray();
+        Task<TtSlotPool<Resource>.Reservation>? fifth = null;
+        try
+        {
+            await begun.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((4, 4, 0), (owner.Snapshot.Reserved, owner.Snapshot.Preparing, owner.Snapshot.Leased));
+            fifth = owner.AcquireAsync(cancelFifth.Token);
+            Assert.False(fifth.IsCompleted);
+            Assert.Equal(4, reserved);
+            // All five callers await a verified result, including the four preparations.
+            Assert.Equal(5, owner.Snapshot.QueuedAcquisitions);
+            cancelFifth.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => fifth);
+            release.TrySetResult();
+            var leases = await Task.WhenAll(first);
+            Assert.Equal(4, leases.Select(lease => lease.Id).Distinct().Count());
+            Assert.Equal((4, 0, 4, 0), (owner.Snapshot.Reserved, owner.Snapshot.Preparing, owner.Snapshot.Leased, owner.Snapshot.QueuedAcquisitions));
+        }
+        finally
+        {
+            cancelFifth.Cancel();
+            release.TrySetResult();
+            await Task.WhenAll(first);
+            if (fifth is not null) await Record.ExceptionAsync(async () => await fifth);
+        }
+        await owner.DisposeAsync();
+        Assert.Equal(4, deleted.Count);
+        Assert.Equal(4, deleted.Distinct().Count());
+        Assert.Equal(0, owner.Snapshot.Reserved);
+    }
+
+    [Fact]
+    public async Task Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish()
+    {
+        var firstStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var executing = 0;
+        await using var owner = new TtSlotPool<Resource>(2, 2, id => new Resource(id),
+            (_, _) => Task.CompletedTask, _ => Task.CompletedTask);
+        var first = await owner.AcquireAsync();
+        var second = await owner.AcquireAsync();
+        async Task Reset(Resource _, CancellationToken token)
+        {
+            if (Interlocked.Increment(ref executing) > 1)
+                throw new InvalidOperationException("A second reset bypassed the execution limit.");
+            firstStarted.TrySetResult();
+            try { await release.Task.WaitAsync(token); }
+            finally { Interlocked.Decrement(ref executing); }
+        }
+        Task? returnedFirst = null;
+        Task? returnedSecond = null;
+        using var cancelWaiting = new CancellationTokenSource();
+        Task<TtSlotPool<Resource>.Reservation>? waiting = null;
+        try
+        {
+            returnedFirst = owner.ReturnAsync(first, Reset);
+            Assert.False(returnedFirst.IsCompleted);
+            await firstStarted.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            returnedSecond = owner.ReturnAsync(second, Reset);
+            Assert.Equal((2, 1, 1, 0), (owner.Snapshot.Reserved, owner.Snapshot.WaitingResets,
+                owner.Snapshot.ExecutingResets, owner.Snapshot.Ready));
+            waiting = owner.AcquireAsync(cancelWaiting.Token);
+            Assert.False(waiting.IsCompleted);
+            release.TrySetResult();
+            await Task.WhenAll(returnedFirst, returnedSecond).WaitAsync(TimeSpan.FromSeconds(2));
+            var reassigned = await waiting.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Contains(reassigned.Id, new[] { first.Id, second.Id });
+            Assert.Equal((2, 1, 1, 0, 0), (owner.Snapshot.Reserved, owner.Snapshot.Leased,
+                owner.Snapshot.Ready, owner.Snapshot.WaitingResets, owner.Snapshot.ExecutingResets));
+        }
+        finally
+        {
+            cancelWaiting.Cancel();
+            release.TrySetResult();
+            if (returnedFirst is not null) await returnedFirst;
+            if (returnedSecond is not null) await returnedSecond;
+            if (waiting is not null) await Record.ExceptionAsync(async () => await waiting);
+        }
+    }
+
+    [Fact]
+    public async Task Unconfirmed_deletion_retains_capacity_and_fails_waiters_until_cleanup_succeeds()
+    {
+        var deleting = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var failDeletion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var created = 0;
+        var deletionAttempts = 0;
+        await using var owner = new TtSlotPool<Resource>(1, 1,
+            id => { Interlocked.Increment(ref created); return new Resource(id); },
+            (_, _) => Task.CompletedTask,
+            async _ =>
+            {
+                if (Interlocked.Increment(ref deletionAttempts) == 1)
+                {
+                    deleting.TrySetResult();
+                    await failDeletion.Task;
+                    throw new IOException("A backend cleanup failed with private details.");
+                }
+            });
+        var leased = await owner.AcquireAsync();
+        using var cancelWaiting = new CancellationTokenSource();
+        var waiting = owner.AcquireAsync(cancelWaiting.Token);
+        Task? discarded = null;
+        try
+        {
+            discarded = owner.DiscardAsync(leased);
+            Assert.False(discarded.IsCompleted);
+            await deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((1, 1, 0), (owner.Snapshot.Reserved, owner.Snapshot.Retiring, owner.Snapshot.Ready));
+            Assert.False(waiting.IsCompleted);
+            failDeletion.TrySetResult();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => discarded);
+            Assert.Equal("SlotDiscard", failure.Stage);
+            Assert.Null(failure.InnerException);
+            var queuedFailure = await Assert.ThrowsAsync<TtLifecycleException>(() => waiting);
+            Assert.Equal("SlotDiscard", queuedFailure.Stage);
+            Assert.Equal((1, 1, 1), (created, owner.Snapshot.Reserved, owner.Snapshot.Quarantined));
+            await owner.DisposeAsync();
+            Assert.Equal(2, deletionAttempts);
+            Assert.Equal(0, owner.Snapshot.Reserved);
+        }
+        finally
+        {
+            cancelWaiting.Cancel();
+            failDeletion.TrySetResult();
+            if (discarded is not null) await Record.ExceptionAsync(async () => await discarded);
+            await Record.ExceptionAsync(async () => await waiting);
+        }
+    }
+
+    private sealed record Resource(Guid Id);
+}

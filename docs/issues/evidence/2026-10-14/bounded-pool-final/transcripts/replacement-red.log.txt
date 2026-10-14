@@ -1,0 +1,18 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:02.22]     TurboTest.Tests.SlotPoolTests.Confirmed_deletion_frees_capacity_for_a_queued_replacement [FAIL]
+  Failed TurboTest.Tests.SlotPoolTests.Confirmed_deletion_frees_capacity_for_a_queued_replacement [2 s]
+  Error Message:
+   System.TimeoutException : The operation has timed out.
+  Stack Trace:
+     at TurboTest.Tests.SlotPoolTests.Confirmed_deletion_frees_capacity_for_a_queued_replacement() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 180
+   at TurboTest.Tests.SlotPoolTests.Confirmed_deletion_frees_capacity_for_a_queued_replacement() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 189
+   at TurboTest.Tests.SlotPoolTests.Confirmed_deletion_frees_capacity_for_a_queued_replacement() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 189
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/replacement-red/replacement-red.trx
+
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 2 s - TurboTest.Tests.dll (net10.0)

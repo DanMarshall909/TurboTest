@@ -148,11 +148,32 @@ must retain their fixture's source and frozen model, including in
 `OnConfiguring`. Supplied runtime models must have table/column mappings matching
 the design-time schema model for `EnsureCreated` or migrations.
 
-Prepared fixtures use one host and `PoolSize` initial prepared slots.
+`PoolSize` is the fixed workload database cap. Preparing, leased, resetting,
+quarantined and retiring slots retain capacity until cleanup is confirmed.
+Prepared fixtures use one host; ordinary fixtures use one container per slot.
+At capacity, `CreateLeaseAsync(cancellationToken: token)` waits for a verified
+Ready slot. Supply a deadline with `CancellationTokenSource(TimeSpan)`; there
+is no implicit acquisition timeout and cancellation does not create overflow.
+`fixture.PoolState` reports reservations, queued acquisitions, waiting resets
+and executing work. `fixture.ResourceBudget` reports the captured ceilings.
+
+`PreparationConcurrency` and `ResetConcurrency` independently limit executing
+work (both default to one). `MaxConnectionsPerDatabase` limits each owned
+workload source (default four); prepared fixtures also share
+`MaxAdministratorConnections` for private control and verification connections
+(default two). The managed connection ceiling is slots times per-database
+connections plus that administrator allowance. Baseline initialization drains
+before workload warming. Prepared fixtures own two fixed infrastructure
+databases in addition to their workload slots. PostgreSQL built-in databases,
+background processes and independently created test-client sources are outside
+these counts. `MaxContainers` defaults to the ordinary slot cap or one prepared
+host; a ceiling too small for the configured fixed capacity is rejected.
+
 `DatabaseName` is a generated-name prefix, limited to 21 UTF-8 bytes;
 `Username` may occupy at most 63 UTF-8 bytes. Options are copied before use.
-Automatic allocation, dynamic scaling and custom connection-string templates
-are currently rejected by this path. `PoolSize` is not yet a hard capacity cap.
+Automatic allocation and custom connection-string templates are rejected by
+the prepared path. Ordinary startup allocation respects `MaxContainers`.
+Dynamic scaling is rejected until the bounded adaptive controller is available.
 
 Supported baselines contain permanent ordinary tables, namespaces, indexes,
 constraints, their catalog comments and sequences. Views, routines, custom types/extensions, user
@@ -173,8 +194,8 @@ When a supplied logger enables Debug, event `400` (`BaselineReset`) reports
 `ResetPermitWaitMilliseconds`, `ResetExecutionMilliseconds`,
 `ValidationMilliseconds`, `Strategy` and `Succeeded`, with an opaque owner ID.
 Execution includes restoration and validation; permit wait is separate.
-The current shared lifecycle gate serializes preparation and resets; separate
-concurrency limits remain TT-005. Diagnostic emission is outside measured work.
+Preparation and reset use their independent configured concurrency limits.
+Diagnostic emission is outside measured work.
 
 If startup cleanup fails, `TtLifecycleException.Cleanup` retains an opaque owner
 and resource-ID snapshot. Await `error.Cleanup.RetryCleanupAsync()` to retry;

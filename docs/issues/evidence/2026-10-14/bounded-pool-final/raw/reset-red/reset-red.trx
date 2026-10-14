@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="593382bc-49eb-4030-80af-72c859781e6c" name="@os-greg 2026-10-14 13:32:21" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T13:32:21.5946364+10:00" queuing="2026-10-14T13:32:21.5946365+10:00" start="2026-10-14T13:32:21.0203144+10:00" finish="2026-10-14T13:32:21.5991749+10:00" />
+  <TestSettings name="default" id="61a8372a-80f5-422a-ad45-6454c15a713c">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_13_32_21" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="a66d2cff-8b90-4e18-87da-55f717e0cf03" testId="9019b0b2-6a0e-7297-cb14-32ff1d90ca9d" testName="TurboTest.Tests.SlotPoolTests.Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish" computerName="os-greg" duration="00:00:00.0130858" startTime="2026-10-14T13:32:21.4738280+10:00" endTime="2026-10-14T13:32:21.5014266+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a66d2cff-8b90-4e18-87da-55f717e0cf03">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.False() Failure
+Expected: False
+Actual:   True</Message>
+          <StackTrace>   at TurboTest.Tests.SlotPoolTests.Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 85
+   at TurboTest.Tests.SlotPoolTests.Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 106
+   at TurboTest.Tests.SlotPoolTests.Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 106
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SlotPoolTests.Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="9019b0b2-6a0e-7297-cb14-32ff1d90ca9d">
+      <Execution id="a66d2cff-8b90-4e18-87da-55f717e0cf03" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SlotPoolTests" name="Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="9019b0b2-6a0e-7297-cb14-32ff1d90ca9d" executionId="a66d2cff-8b90-4e18-87da-55f717e0cf03" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.14]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.17]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.22]       Assert.False() Failure
+[xUnit.net 00:00:00.22]       Expected: False
+[xUnit.net 00:00:00.22]       Actual:   True
+[xUnit.net 00:00:00.22]       Stack Trace:
+[xUnit.net 00:00:00.22]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(85,0): at TurboTest.Tests.SlotPoolTests.Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish()
+[xUnit.net 00:00:00.22]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(106,0): at TurboTest.Tests.SlotPoolTests.Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish()
+[xUnit.net 00:00:00.22]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(106,0): at TurboTest.Tests.SlotPoolTests.Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish()
+[xUnit.net 00:00:00.22]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.23]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T13:32:21.5037891+10:00">
+        <Text>[xUnit.net 00:00:00.22]     TurboTest.Tests.SlotPoolTests.Returning_slots_remain_unavailable_until_bounded_reset_and_validation_finish [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,19 @@
+{
+  "scope": [
+    "TT-005"
+  ],
+  "verdict": "PASS",
+  "date": "2026-10-14",
+  "reviewedManifestSha256": "b6bfc1b1f83a45b4a2b25f47df8772b87a4a50e1b675be10269b766bf4d45d2c",
+  "baseObject": "a849728fca0696ea06694922155447683d5b8855",
+  "publication": "Local only; no remote configured.",
+  "rawVerdict": "artifacts/tt-005/review/verdict.md",
+  "remainingTickets": [
+    "TT-006",
+    "TT-007",
+    "TT-008",
+    "TT-009",
+    "TT-010"
+  ],
+  "mutation": "Pending whole coding-session final committed source; not a passing mutation claim."
+}

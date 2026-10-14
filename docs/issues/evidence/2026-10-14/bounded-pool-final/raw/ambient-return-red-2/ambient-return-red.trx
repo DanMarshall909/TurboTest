@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6a039b31-bd0d-42e6-afab-d0fb564800c4" name="@os-greg 2026-10-14 14:56:12" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T14:56:12.2356503+10:00" queuing="2026-10-14T14:56:12.2356503+10:00" start="2026-10-14T14:55:53.5032755+10:00" finish="2026-10-14T14:56:12.2404066+10:00" />
+  <TestSettings name="default" id="0802cef6-4da2-4b30-8ac5-0a75ab3acb5b">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_14_56_12" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="e92d6d1f-1e91-427e-b929-b9629fa0b23c" testId="8108bd13-5360-2e48-42ac-f48647b08420" testName="TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions" computerName="os-greg" duration="00:00:18.1521140" startTime="2026-10-14T14:55:53.9863447+10:00" endTime="2026-10-14T14:56:12.1523982+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e92d6d1f-1e91-427e-b929-b9629fa0b23c">
+      <Output>
+        <ErrorInfo>
+          <Message>TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineRowReset (InvalidOperationException). The resource is unavailable for reuse. Cleanup also failed at Discard (25001).</Message>
+          <StackTrace>   at TurboTest.EFCore.Internal.TtSlotPool`1.ResetAsync(Reservation reservation, Func`3 reset, TaskCompletionSource settled, Action`1 observeWait, Func`3 prepareReplacement) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs:line 240
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.ReturnAsync(Reservation reservation) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 301
+   at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs:line 83
+   at TurboTest.EFCore.TtFactory`1.&lt;&gt;c__DisplayClass17_3.&lt;&lt;CreateLeaseAsync&gt;b__3&gt;d.MoveNext() in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 89
+--- End of stack trace from previous location ---
+   at TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 126
+   at TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 133
+   at TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 133
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="8108bd13-5360-2e48-42ac-f48647b08420">
+      <Execution id="e92d6d1f-1e91-427e-b929-b9629fa0b23c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ConnectionBudgetTests" name="Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="8108bd13-5360-2e48-42ac-f48647b08420" executionId="e92d6d1f-1e91-427e-b929-b9629fa0b23c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.19]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:18.38]       TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineRowReset (InvalidOperationException). The resource is unavailable for reuse. Cleanup also failed at Discard (25001).
+[xUnit.net 00:00:18.38]       Stack Trace:
+[xUnit.net 00:00:18.38]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs(240,0): at TurboTest.EFCore.Internal.TtSlotPool`1.ResetAsync(Reservation reservation, Func`3 reset, TaskCompletionSource settled, Action`1 observeWait, Func`3 prepareReplacement)
+[xUnit.net 00:00:18.38]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs(301,0): at TurboTest.EFCore.Internal.TtPreparedPool`1.ReturnAsync(Reservation reservation)
+[xUnit.net 00:00:18.38]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs(83,0): at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard)
+[xUnit.net 00:00:18.38]         /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs(89,0): at TurboTest.EFCore.TtFactory`1.&lt;&gt;c__DisplayClass17_3.&lt;&lt;CreateLeaseAsync&gt;b__3&gt;d.MoveNext()
+[xUnit.net 00:00:18.38]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:18.38]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(126,0): at TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions()
+[xUnit.net 00:00:18.38]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(133,0): at TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions()
+[xUnit.net 00:00:18.38]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(133,0): at TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions()
+[xUnit.net 00:00:18.38]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:18.39]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:56:12.1550215+10:00">
+        <Text>[xUnit.net 00:00:18.38]     TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

@@ -20,11 +20,27 @@ public class TtOptions
     public TtDatabaseProvider Provider { get; set; } = TtDatabaseProvider.PostgreSql;
 
     /// <summary>
-    /// Initial reusable capacity. Ordinary factories count containers; baseline
-    /// factories count prepared slots on one host. Defaults to 3; not a hard cap.
+    /// Fixed physical workload-slot cap, including preparing, leased and resetting
+    /// slots. Ordinary factories use one container per slot; baseline factories
+    /// use several slots on one host. Defaults to 3. Acquisitions wait at capacity.
     /// Can be configured via "TurboTest:PoolSize" in appsettings.json
     /// </summary>
     public int PoolSize { get; set; } = 3;
+
+    /// <summary>Maximum pooled connections in each owned workload data source. Defaults to 4.</summary>
+    public int MaxConnectionsPerDatabase { get; set; } = 4;
+
+    /// <summary>Maximum executing workload preparations. Defaults to 1.</summary>
+    public int PreparationConcurrency { get; set; } = 1;
+
+    /// <summary>Maximum executing resets/deletions, separate from preparation. Defaults to 1.</summary>
+    public int ResetConcurrency { get; set; } = 1;
+
+    /// <summary>Prepared-fixture administrator connection allowance, including bootstrap. Defaults to 2.</summary>
+    public int MaxAdministratorConnections { get; set; } = 2;
+
+    /// <summary>Container ceiling; defaults to the slot cap for ordinary fixtures and one for prepared fixtures.</summary>
+    public int? MaxContainers { get; set; }
 
     /// <summary>
     /// Automatically run EnsureCreated when creating contexts. Defaults to true.

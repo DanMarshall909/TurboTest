@@ -1,0 +1,30 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:12.15]     TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: True) [FAIL]
+  Failed TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: True) [11 s]
+  Error Message:
+   Assert.ThrowsAny() Failure: No exception was thrown
+Expected: typeof(System.OperationCanceledException)
+  Stack Trace:
+     at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 32
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 37
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 37
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:19.86]     TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: False) [FAIL]
+  Failed TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: False) [7 s]
+  Error Message:
+   Assert.ThrowsAny() Failure: No exception was thrown
+Expected: typeof(System.OperationCanceledException)
+  Stack Trace:
+     at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 32
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 37
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 37
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/workload-connections-red/workload-connections-red.trx
+
+Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 19 s - TurboTest.Tests.dll (net10.0)

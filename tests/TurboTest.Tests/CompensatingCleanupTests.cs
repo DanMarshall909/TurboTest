@@ -22,7 +22,6 @@ public class CompensatingCleanupTests
         });
         await pool.InitializeAsync();
         var database = await pool.GetDatabaseAsync();
-        var original = new NpgsqlConnectionStringBuilder(database.DataSource.ConnectionString).Database;
         await using (var connection = await database.DataSource.OpenConnectionAsync())
         {
             await using var command = new NpgsqlCommand("""
@@ -45,9 +44,10 @@ public class CompensatingCleanupTests
             Assert.DoesNotContain("secret", error.ToString());
             Assert.Single(await OwnedAsync(prefix));
             failDeletion = false;
-            await using var next = await pool.GetDatabaseAsync();
-            Assert.NotEqual(original, new NpgsqlConnectionStringBuilder(next.DataSource.ConnectionString).Database);
-            await next.DisposeAsync();
+            var unavailable = await Assert.ThrowsAsync<TtLifecycleException>(() => pool.GetDatabaseAsync());
+            Assert.Equal("ResetRows", unavailable.Stage);
+            Assert.Equal("P0001", unavailable.SqlState);
+            Assert.Single(await OwnedAsync(prefix));
             await pool.DisposeAsync();
             Assert.Empty(await OwnedAsync(prefix));
         }

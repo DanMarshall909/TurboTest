@@ -1,0 +1,6 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+/home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(122,23): error CS1061: 'TestDbContext' does not contain a definition for 'TestEntities' and no accessible extension method 'TestEntities' accepting a first argument of type 'TestDbContext' could be found (are you missing a using directive or an assembly reference?) [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]
+/home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(122,44): error CS0246: The type or namespace name 'TestEntity' could not be found (are you missing a using directive or an assembly reference?) [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]
+/home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(133,41): error CS1061: 'TestDbContext' does not contain a definition for 'TestEntities' and no accessible extension method 'TestEntities' accepting a first argument of type 'TestDbContext' could be found (are you missing a using directive or an assembly reference?) [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]

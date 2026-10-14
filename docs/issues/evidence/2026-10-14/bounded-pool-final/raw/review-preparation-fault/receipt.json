@@ -1,0 +1,19 @@
+{
+  "fault": "Remove a quarantined preparation reservation before confirmed deletion",
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "FullyQualifiedName~Failed_preparation_and_compensation_keep_capacity",
+    "--logger",
+    "trx;LogFileName=review-preparation-fault.trx",
+    "--results-directory",
+    "artifacts/tt-005/review-preparation-fault"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "durationSeconds": 2.477325916290283,
+  "originalSha256": "71a8ca6c12fdb5de029ea53f0cdbb89fdbb68a93ca7388008d4209c75f0eb410",
+  "faultSha256": "6f3c61af6e8d3102f753ffaac9d71162bd283eda6b55fecb11eadf7ba7e33580"
+}

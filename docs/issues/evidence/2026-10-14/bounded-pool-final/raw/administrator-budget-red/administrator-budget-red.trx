@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="62336300-c02a-4149-a03f-a1f73531d56e" name="@os-greg 2026-10-14 14:12:44" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T14:12:44.1888879+10:00" queuing="2026-10-14T14:12:44.1888879+10:00" start="2026-10-14T14:12:36.6788073+10:00" finish="2026-10-14T14:12:44.1932422+10:00" />
+  <TestSettings name="default" id="66cf9585-5800-4eaa-b4ff-72764d8065b1">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_14_12_44" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="6edfe97e-7884-4a28-8a7d-688249d4b17e" testId="97a48850-ef8e-775d-60c0-44e269b69093" testName="TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections" computerName="os-greg" duration="00:00:06.9273435" startTime="2026-10-14T14:12:37.1600649+10:00" endTime="2026-10-14T14:12:44.1023185+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6edfe97e-7884-4a28-8a7d-688249d4b17e">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: 1
+Actual:   0</Message>
+          <StackTrace>   at TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 75
+   at TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 97
+   at TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 97
+   at TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 97
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="97a48850-ef8e-775d-60c0-44e269b69093">
+      <Execution id="6edfe97e-7884-4a28-8a7d-688249d4b17e" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ConnectionBudgetTests" name="Administrator_allowance_includes_idle_control_and_executing_reset_connections" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="97a48850-ef8e-775d-60c0-44e269b69093" executionId="6edfe97e-7884-4a28-8a7d-688249d4b17e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.18]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:07.15]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:07.15]       Expected: 1
+[xUnit.net 00:00:07.15]       Actual:   0
+[xUnit.net 00:00:07.15]       Stack Trace:
+[xUnit.net 00:00:07.15]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(75,0): at TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections()
+[xUnit.net 00:00:07.15]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(97,0): at TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections()
+[xUnit.net 00:00:07.15]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(97,0): at TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections()
+[xUnit.net 00:00:07.15]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(97,0): at TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections()
+[xUnit.net 00:00:07.15]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:07.16]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:12:44.1055403+10:00">
+        <Text>[xUnit.net 00:00:07.15]     TurboTest.Tests.ConnectionBudgetTests.Administrator_allowance_includes_idle_control_and_executing_reset_connections [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,4214 @@
+{
+  "baseObject": "a849728fca0696ea06694922155447683d5b8855",
+  "branch": "master",
+  "currentObject": "a849728fca0696ea06694922155447683d5b8855",
+  "integrationBase": "a849728fca0696ea06694922155447683d5b8855",
+  "paths": [
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "6f273d6ce7087dbba34ac5a6a40d64df38c43883",
+      "mode": "100644",
+      "path": "README.md",
+      "sha256": "d4f1199d379e0ad419fa8b82bfec38ff56666de0bccacf9cc53a2e4046c8e8d1",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "4f5dbbde9dbf468ebe3dfa7f02469a66c6d9a235",
+      "mode": "100644",
+      "path": "docs/issues/README.md",
+      "sha256": "b9e1e0faf5e272965927f87041022931616c83ee3172015bcff214042c2da174",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/manifest.json",
+      "sha256": "6e293182be7daea6f2313901e6d4848bc117f7bf39c83918c675ab9785f79c71",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/admin-diagnosis/connections.txt",
+      "sha256": "742428082147bc03d577e676be5a87f0be25c161ff9679ad14b7d9e4cd9228a9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/admin-idle-fault/admin-idle-fault.trx",
+      "sha256": "bb915b29e4095efac5e31eb3c52ea0d0fa1817a3ca7253e9c8d3bb3ab9bd5b85",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/admin-idle-fault/patch.json",
+      "sha256": "a40a837504050c95c47cb1c1bb6d06321d420f655f4d918bde062e734db2671d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/admin-idle-fault/restored.json",
+      "sha256": "6584d62bdefc775bcfd669aaca90cd67fea37b2571c694e790483827857fd23a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/admin-idle-fault/source/ConnectionBudgetTests.cs.txt",
+      "sha256": "bcbad5efe2824e18168b94ee8f13e8ee605701acb786bc1935ef854a20df01b7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/admin-idle-fault/source/TtPool.fault.cs.txt",
+      "sha256": "52d23c467a3f6f6de8f1af83799e7298acea4f4b2713071bd04fd9026d6c3b40",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/admin-idle-fault/source/TtPool.original.cs.txt",
+      "sha256": "f8eb26b72dfb52a50fabd6c61c66b673b2fe66b0fec3d3f71f369098688147ef",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-diagnosis/administrator-budget-diagnosis.trx",
+      "sha256": "65307526575f91d40f6f897e40cdef39fab6a76af81c2f593eccbf50b9716182",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-diagnosis/source/ConnectionBudgetTests.cs.txt",
+      "sha256": "3b4beba7e49d0a78d4c3ff53023fd16455d8437a5663c67f1a0e41412738fe80",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-green-2/_os-greg_2026-10-14_14_20_24/In/os-greg/dan_os-greg_2026-10-14.14_20_34.cobertura.xml.gz",
+      "sha256": "a91adaecb87038370c01145cc40dcfb615b65e3fb601877ad1af37b438eb5762",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-green-2/administrator-budget-green.trx",
+      "sha256": "1358d48b2810d8690bb3795860e42bf574eee2fa33a218ebe53f073c8dff1827",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-green-2/faf71d75-8dcd-453c-89f4-fa0e94fd3cc4/dan_os-greg_2026-10-14.14_20_34.cobertura.xml.gz",
+      "sha256": "a91adaecb87038370c01145cc40dcfb615b65e3fb601877ad1af37b438eb5762",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-green-2/source/ConnectionBudgetTests.cs.txt",
+      "sha256": "bcbad5efe2824e18168b94ee8f13e8ee605701acb786bc1935ef854a20df01b7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-green-2/source/TtAdministratorConnections.cs.txt",
+      "sha256": "0edcc7d3e8f9928ef5f9ff8babd4bfac44d58e3393521ae8c98f1edc29ee41a1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-green-2/source/TtPool.cs.txt",
+      "sha256": "f8eb26b72dfb52a50fabd6c61c66b673b2fe66b0fec3d3f71f369098688147ef",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-green-2/source/TtPreparedPool.cs.txt",
+      "sha256": "2e28002836ca99a189f807288c94220b7c02e17d937fab4d5071940072f11ab6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-green/_os-greg_2026-10-14_14_15_59/In/os-greg/dan_os-greg_2026-10-14.14_16_12.cobertura.xml.gz",
+      "sha256": "7be4ef8ab99d5f85fabc046045e175550bb612d02b206e2608d36e33183a3a2e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-green/administrator-budget-green.trx",
+      "sha256": "6d6c540aa1c47a85ccd0a86283a01a0837ee48064e1695feac778b26e9d48994",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-green/d79ceb4a-71bc-4e3b-9612-3342b31e7fac/dan_os-greg_2026-10-14.14_16_12.cobertura.xml.gz",
+      "sha256": "7be4ef8ab99d5f85fabc046045e175550bb612d02b206e2608d36e33183a3a2e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-red-2/administrator-budget-red.trx",
+      "sha256": "970a39c6ebc6ce265fdf5351f2d06a6dfa4d77f526e63e501c3afdc812a2312e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-red-2/source/ConnectionBudgetTests.cs.txt",
+      "sha256": "2b59b14682c0a0cff60d7ffc8e31fad3f75c8123c04bdf07b259ee8aea4b12eb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-red-2/source/TtPreparedPool.cs.txt",
+      "sha256": "195a3b8ce3f99c125b1cdfb10d3e45452bf27e084fee2447213c484d2dfb9a98",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-red/administrator-budget-red.trx",
+      "sha256": "125b414db9be4448d1e6cde45ceaec34a0d642b60adbbf1778e0f1c074aedc65",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-red/source/ConnectionBudgetTests.reconstructed-initial-probe.cs.txt",
+      "sha256": "35cfa43f484473fc8402c69b49b7799b0457e63cc03522ead582443ab6d60221",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-red/source/TtPreparedPool.cs.txt",
+      "sha256": "195a3b8ce3f99c125b1cdfb10d3e45452bf27e084fee2447213c484d2dfb9a98",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-refactor/_os-greg_2026-10-14_14_24_07/In/os-greg/dan_os-greg_2026-10-14.14_24_47.cobertura.xml.gz",
+      "sha256": "a7abe0120f04d815c50c3e76c12261437a174ed39d8aa162b16a57eaf1928e1e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-refactor/a400c528-2fc6-480a-85a4-166326b8767f/dan_os-greg_2026-10-14.14_24_47.cobertura.xml.gz",
+      "sha256": "a7abe0120f04d815c50c3e76c12261437a174ed39d8aa162b16a57eaf1928e1e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-budget-refactor/administrator-budget-refactor.trx",
+      "sha256": "9945b868c15f8285881c76fbe942b0a8072c885e439812cdd574ad2867506999",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-errors-2/525fe513-da67-463d-9cb5-536b5203cdf9/dan_os-greg_2026-10-14.14_59_39.cobertura.xml.gz",
+      "sha256": "e756b7edc156ed864ef28b682baabd94c67e61605440331f9c9c5350f7edab28",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-errors-2/_os-greg_2026-10-14_14_59_39/In/os-greg/dan_os-greg_2026-10-14.14_59_39.cobertura.xml.gz",
+      "sha256": "e756b7edc156ed864ef28b682baabd94c67e61605440331f9c9c5350f7edab28",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-errors-2/administrator-errors.trx",
+      "sha256": "4f0319cbd4b4a69652a6c683151f61339beecded81323bf866e1da0e2015f05e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-errors/1c1e8a9d-4f7d-4b6d-b975-6de61181212b/dan_os-greg_2026-10-14.14_59_15.cobertura.xml.gz",
+      "sha256": "0344b2762307b846df3e440be4df0a7a422f3878f45dc7738252c09a1d66abac",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-errors/_os-greg_2026-10-14_14_59_15/In/os-greg/dan_os-greg_2026-10-14.14_59_15.cobertura.xml.gz",
+      "sha256": "0344b2762307b846df3e440be4df0a7a422f3878f45dc7738252c09a1d66abac",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/administrator-errors/administrator-errors.trx",
+      "sha256": "bb4ff505867cfe3a22e4c41a619c6f31c62752582c59e78807275e4aa9371e8e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-return-green/2155679e-227b-4076-8e43-345827149496/dan_os-greg_2026-10-14.14_56_56.cobertura.xml.gz",
+      "sha256": "d9402d1c8d12ed35f66692782576e40330b4873221c907b194af4d68e5acd8fe",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-return-green/_os-greg_2026-10-14_14_56_32/In/os-greg/dan_os-greg_2026-10-14.14_56_56.cobertura.xml.gz",
+      "sha256": "d9402d1c8d12ed35f66692782576e40330b4873221c907b194af4d68e5acd8fe",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-return-green/ambient-return-green.trx",
+      "sha256": "deed899bcad08b6b3e049afc7260f737f38feb336fac985bb3a91dce70c3a1fa",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-return-red-2/ambient-return-red.trx",
+      "sha256": "7f5f82bc4ef7d037509e50b6c46362db6b144c28c46f6813ee0f9abf6e9ce6f4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-return-red-2/source/ConnectionBudgetTests.cs.txt",
+      "sha256": "0638d9dcf8dcd1e7d253384eac847048c547d68204680f73cb19bb92b96b66cd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-return-red-2/source/TtPreparedPool.cs.txt",
+      "sha256": "a1e4ea14065c2e711153bac5202f4812e6305378878c389f58b2edf5e3bf89a4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-return-red/source/ConnectionBudgetTests.cs.txt",
+      "sha256": "5ab53474111b5fe5e082be3b31bc281ec015d8f2ee431b217a56ebf3472e6090",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-return-red/source/TtPreparedPool.cs.txt",
+      "sha256": "a1e4ea14065c2e711153bac5202f4812e6305378878c389f58b2edf5e3bf89a4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-workload-red/ambient-workload-red.trx",
+      "sha256": "0f0dfcded7364713b5848afbf50e5c2cf6caecd1503ee54bae39e622251cbd1e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-workload-red/source/ConnectionBudgetTests.cs.txt",
+      "sha256": "aaa005ce654ff7efa28cc53ba76a9fef553c4488fc59efecb35cff61217ca1ec",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ambient-workload-red/source/TtPreparedPool.cs.txt",
+      "sha256": "53dec8d110257fd59cccec2d88d01c87237daa030a8e6e4b684cb50d8a643866",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/build-receipts.json",
+      "sha256": "aeb102d9849947ff064bd7c415b5e0771a731f5001b2fde67caff718b6177f00",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/compensation-bound-green/3a67821d-c846-419a-9693-6a1c0a0f04a1/dan_os-greg_2026-10-14.14_58_25.cobertura.xml.gz",
+      "sha256": "ca6510ba106988087e593a923fcb3c79fec03cef2c510d9cb2d27e9150d55889",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/compensation-bound-green/_os-greg_2026-10-14_14_58_25/In/os-greg/dan_os-greg_2026-10-14.14_58_25.cobertura.xml.gz",
+      "sha256": "ca6510ba106988087e593a923fcb3c79fec03cef2c510d9cb2d27e9150d55889",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/compensation-bound-green/compensation-bound-green.trx",
+      "sha256": "0c67023740113fadcda613b7c336725d0350a6e69d45cc3880d4ee0d5d95f8f2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/compensation-bound-red/compensation-bound-red.trx",
+      "sha256": "9c4fffcdc01eb7e392100c7493b5ffb9c93b081a2f71344f33baba6fadefc1d9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/compensation-bound-red/source/SlotPoolTests.cs.txt",
+      "sha256": "41a45dd4a0d3af65f932542a432f94ae467d7c467ff21fefc01c7b7972fa0bfa",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/compensation-bound-red/source/TtSlotPool.cs.txt",
+      "sha256": "f8e0aa22a4a252bf3ab6636656866a98d94ce739b200cab02fe6b775d8c9206f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/compensation-bound-refactor/compensation-bound-refactor.trx",
+      "sha256": "5fe3672ce43b553106a96bd51e410e11c72fbeafeb0702c2d1ee9ee2ff85adc1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/context-owner-green/_os-greg_2026-10-14_14_44_41/In/os-greg/dan_os-greg_2026-10-14.14_45_29.cobertura.xml.gz",
+      "sha256": "60313e79f401b160f9f3d8fb7d23c5c26676aa7d364a4c54809761257fd04eb8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/context-owner-green/context-owner-green.trx",
+      "sha256": "65f1042b1e1e1f5e66efec3e5ae41a8f8d0d3a76edbcce5fdbc4694da6625348",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/context-owner-green/d6a8b530-d4e1-4b1c-bb56-6e2dd02557ae/dan_os-greg_2026-10-14.14_45_29.cobertura.xml.gz",
+      "sha256": "60313e79f401b160f9f3d8fb7d23c5c26676aa7d364a4c54809761257fd04eb8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/context-owner-red/context-owner-red.trx",
+      "sha256": "870755d986fd94646e4b1934bfd2ce111e7c51263cc7287c09f615061a83cbe3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/context-owner-red/source/FactoryBackpressureTests.cs.txt",
+      "sha256": "0f763fbe1e6447eef0fe194d9558637ecbbf1f52e6d597b22a21b7202c543ded",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/context-owner-red/source/TtFactory.cs.txt",
+      "sha256": "bcbb2eadbb7c5e2e1a6433fff5766ced66e55ce8150da5fce66268b37f3fb419",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/context-owner-refactor/context-owner-refactor.trx",
+      "sha256": "4c18c3b85c2802022445b43f783992828c39e015b83bfde05c9e297f031a8e19",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/coverage-classification.md.txt",
+      "sha256": "29ff17b5fb4c8425f8261cd423b5367a6e01777f7490ede1623109a7f209a219",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/deletion-green/7ad9bd38-1248-47fe-a42a-5cf0ab0f7ff6/dan_os-greg_2026-10-14.13_35_29.cobertura.xml.gz",
+      "sha256": "ea9bceb4809e3c1bc73321f09391f97a51d72ae6fca23be4fe0e9ae5bf02eb81",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/deletion-green/_os-greg_2026-10-14_13_35_29/In/os-greg/dan_os-greg_2026-10-14.13_35_29.cobertura.xml.gz",
+      "sha256": "ea9bceb4809e3c1bc73321f09391f97a51d72ae6fca23be4fe0e9ae5bf02eb81",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/deletion-green/deletion-green.trx",
+      "sha256": "58e9df744c32c9f9bb763e1d9e70cad7601a06fbeab5ea300c50fb364bb561c4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/deletion-red-2/deletion-red.trx",
+      "sha256": "de20d1c442bb436cb8a79d1a218ff35ed31e7e8da422de3c31530d059284aa3b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/deletion-red/source/SlotPoolTests.cs.txt",
+      "sha256": "41c8da4c2de2ff38715d7aa9982955b321a755227120f1f0f2721861d333b4d7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/deletion-red/source/TtSlotPool.cs.txt",
+      "sha256": "77c452fcd75a25affb61eaa9cf2f1dcec18d0ba738670d9690b075d7c611d990",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/deletion-refactor/deletion-refactor.trx",
+      "sha256": "9ce88702aff522afdf077de485d7687e11175b306492d82bcf99670a66e6b435",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/dynamic-bypass-red/dynamic-bypass-red.trx",
+      "sha256": "1b7aabc7bfa0ed8458e03a9bdc9f47d960568a7bfadff0062e152d72936ec09b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/executor-bounds-green/087ce61b-f523-4f4a-a0bc-f4e9ae8ac57e/dan_os-greg_2026-10-14.14_09_39.cobertura.xml.gz",
+      "sha256": "2c93b61a837e5f0310179ef8781dc216b4f113bd3e226a7246b354480be9657f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/executor-bounds-green/_os-greg_2026-10-14_14_09_39/In/os-greg/dan_os-greg_2026-10-14.14_09_39.cobertura.xml.gz",
+      "sha256": "2c93b61a837e5f0310179ef8781dc216b4f113bd3e226a7246b354480be9657f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/executor-bounds-green/executor-bounds-green.trx",
+      "sha256": "52c91940d0fed02c56f7790e22e2f3069576ec503a28e538f3976b91f93c3c6c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/executor-bounds-red/executor-bounds-red.trx",
+      "sha256": "81f155499e274f1f32706a6a552b55b48ca87a5e09ad47a442f7590a5957578b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/executor-bounds-red/source/PreparationBudgetTests.cs.txt",
+      "sha256": "e3c579688b3d5f4a6a2797b4a6c2788bfa22157cf80c408b8517ef1e9cb46444",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/executor-bounds-red/source/TtPreparedPool.cs.txt",
+      "sha256": "d385ab3144e6cbb23901ffabc7fd0512beee10ab7e83e144e057aebae48a5957",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/executor-bounds-refactor/executor-bounds-refactor.trx",
+      "sha256": "f1044657f3d9dcf5f189807d2cd7496619e1183b38f3392b047e4d4921313b55",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/factory-close-green/16539223-41f0-4bd7-b8ee-584a3540178a/dan_os-greg_2026-10-14.13_41_36.cobertura.xml.gz",
+      "sha256": "cd1bb7f0c6dcff3956ddd26629dda1ee9b47a33a7270b1a43504f32f4c30bd47",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/factory-close-green/_os-greg_2026-10-14_13_41_35/In/os-greg/dan_os-greg_2026-10-14.13_41_36.cobertura.xml.gz",
+      "sha256": "cd1bb7f0c6dcff3956ddd26629dda1ee9b47a33a7270b1a43504f32f4c30bd47",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/factory-close-green/factory-close-green.trx",
+      "sha256": "536dda534fc0ecb7abd5cfba0e751fc572d426bc0c481c5a1c1d394e478099b3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/factory-close-red/factory-close-red.trx",
+      "sha256": "c86b56801655dd5a89ac97e57f8d270f906d238dbd84e6b88aa5779bffb4182c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/factory-close-red/source/FactoryBackpressureTests.cs.txt",
+      "sha256": "fd83c5c8e3dd9f84633991047ba749200ab1ce6f4039f1f5dc5d00e568e9c919",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/factory-close-red/source/TtFactory.cs.txt",
+      "sha256": "1fc48935115dd004b3ccbc36caddd3c814d24c78c3e7d130c11423fc4474fcb1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/factory-close-refactor/_os-greg_2026-10-14_13_42_44/In/os-greg/dan_os-greg_2026-10-14.13_42_44.cobertura.xml.gz",
+      "sha256": "c114e91b3815c45fc797b34c7bdfa41ee99b723056e4b7c3a49cf4f3540b685b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/factory-close-refactor/e743a496-35d1-47d4-8508-0d1dd24a7951/dan_os-greg_2026-10-14.13_42_44.cobertura.xml.gz",
+      "sha256": "c114e91b3815c45fc797b34c7bdfa41ee99b723056e4b7c3a49cf4f3540b685b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/factory-close-refactor/factory-close-refactor.trx",
+      "sha256": "11f77003d786d9290aceea5cd869a5907beda0563e14ddd98021711c090b57f0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/full-coverage-summary.json",
+      "sha256": "84cb13bb0966c7ffa829215efbe471d035013316209a3338985509c44b18cc09",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/full-gate-receipt.json",
+      "sha256": "ddcbbbbc8d2f06981d8ed63875e525003f84eebab921fd8a2b847f9782f01383",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/full-gate/_os-greg_2026-10-14_15_03_50/In/os-greg/dan_os-greg_2026-10-14.15_09_51.cobertura.xml.gz",
+      "sha256": "a1fe9df714bb191c858d93505921fd8810a93693980d5c6c046d79fa22c1ff32",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/full-gate/f67b7673-45c4-4009-9205-1a38deac4b98/dan_os-greg_2026-10-14.15_09_51.cobertura.xml.gz",
+      "sha256": "a1fe9df714bb191c858d93505921fd8810a93693980d5c6c046d79fa22c1ff32",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/full-gate/full-gate.trx",
+      "sha256": "189c82e50641a502df5e4ad259cbfed9981adffce9d1b9968bd297280ae3fe00",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/lost-create-green-2/_os-greg_2026-10-14_14_55_04/In/os-greg/dan_os-greg_2026-10-14.14_55_12.cobertura.xml.gz",
+      "sha256": "97602d844a697e6064239b9afb3f6b8dbecb0312ee8b42fce4b4d6b2026beecc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/lost-create-green-2/d3e180e1-c539-4fed-93f9-3b382e572987/dan_os-greg_2026-10-14.14_55_12.cobertura.xml.gz",
+      "sha256": "97602d844a697e6064239b9afb3f6b8dbecb0312ee8b42fce4b4d6b2026beecc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/lost-create-green-2/lost-create-green.trx",
+      "sha256": "6f0ce7d40d5c3f8f17f10cc6bdbf5dfa586c1445cbb5fe5eb4c0a85fc98898a9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/lost-create-red/lost-create-red.trx",
+      "sha256": "4a537a66698ad9d14dadbd0573e38fc0d4b45a741cc2f6d714d675045810f7b1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/lost-create-red/source/CreationAccountingTests.cs.txt",
+      "sha256": "27ab6b200c7d22cb6199f4702dc3f9e104e901600797c46d6b8217f29134ca8b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/lost-create-red/source/TtPool.cs.txt",
+      "sha256": "bba1f6309a5f4eea86d865195e1f2ee95d9b78de50fe5c3c6a9f968549c34415",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ordinary-cap-green/_os-greg_2026-10-14_13_54_10/In/os-greg/dan_os-greg_2026-10-14.13_54_14.cobertura.xml.gz",
+      "sha256": "046493f9ffc8391a26aca1d5b5d0ce3e950a20ced4edeb572d2550c3265e1a26",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ordinary-cap-green/d07dd7dd-8390-4361-9236-90ff993431d6/dan_os-greg_2026-10-14.13_54_14.cobertura.xml.gz",
+      "sha256": "046493f9ffc8391a26aca1d5b5d0ce3e950a20ced4edeb572d2550c3265e1a26",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ordinary-cap-green/ordinary-cap-green.trx",
+      "sha256": "b9221e012742e149195efe48f1fbf131ccf4c4266beadd97910a90d2cf1094e2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ordinary-cap-red/ordinary-cap-red.trx",
+      "sha256": "11e0a84ca78b63feeff2ab08722dee4605281c4aabf01f66b57237386f10d7dc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ordinary-cap-red/source/OrdinaryCapacityTests.cs.txt",
+      "sha256": "1b252a1c2aae922e7d903103fe2116f710ff07b11e514de3f2be5eb20d9890f7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ordinary-cap-red/source/TtPool.cs.txt",
+      "sha256": "115fbd9a6bfba1a3fa818cdb05728bf65bb6a7f18493c885a0ce7aa7c546279e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ordinary-cap-refactor/ordinary-cap-refactor.trx",
+      "sha256": "7180dffca941583cb68fd80368b4c9c5233d271c7958ba68f191209e1bb20d63",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ordinary-cap-regression/105b470c-c513-4404-b665-44aff67e81be/dan_os-greg_2026-10-14.13_57_25.cobertura.xml.gz",
+      "sha256": "31dd2914f85e401283d84487abd004090556e84cb50060ece35d117612c7e3a4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ordinary-cap-regression/_os-greg_2026-10-14_13_55_56/In/os-greg/dan_os-greg_2026-10-14.13_57_25.cobertura.xml.gz",
+      "sha256": "31dd2914f85e401283d84487abd004090556e84cb50060ece35d117612c7e3a4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ordinary-cap-regression/ordinary-cap-regression.trx",
+      "sha256": "0b55fec97983769b875c12e13f2cc20975bb68c73ae029c272d35b0983e8d1bf",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ownership-error-coverage-2/4dcf2412-606e-4ddb-af06-b9224b053591/dan_os-greg_2026-10-14.14_40_23.cobertura.xml.gz",
+      "sha256": "7643f24ced0df9a2317f1f32bdc028bc640598d7b1067a1f38f4d9441fbe0a54",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ownership-error-coverage-2/_os-greg_2026-10-14_14_40_23/In/os-greg/dan_os-greg_2026-10-14.14_40_23.cobertura.xml.gz",
+      "sha256": "7643f24ced0df9a2317f1f32bdc028bc640598d7b1067a1f38f4d9441fbe0a54",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ownership-error-coverage-2/ownership-error-coverage.trx",
+      "sha256": "e8faa352c920e733d96c1368824d371d86ba713ea74af6985b065682239b909c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ownership-final-green/15d589ea-813c-455f-9f04-38107329ffdb/dan_os-greg_2026-10-14.15_03_29.cobertura.xml.gz",
+      "sha256": "d929cb3eeb69c631c64fe8f81f8a45a5698197d7ac7a9dbf2a822f30be7e5d12",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ownership-final-green/_os-greg_2026-10-14_15_03_00/In/os-greg/dan_os-greg_2026-10-14.15_03_29.cobertura.xml.gz",
+      "sha256": "d929cb3eeb69c631c64fe8f81f8a45a5698197d7ac7a9dbf2a822f30be7e5d12",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/ownership-final-green/ownership-final-green.trx",
+      "sha256": "d0a735b9a3c0dc50ac65170e2f4b3681606009b6cda3ccfbf63645c7a058243b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-green/21c5175d-4f75-4f02-b56b-c13044f75f5a/dan_os-greg_2026-10-14.15_02_06.cobertura.xml.gz",
+      "sha256": "15236b003b018515d92d04a387fe55185e880488f8d265e2b5c9baabd4b9b20c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-green/_os-greg_2026-10-14_15_00_54/In/os-greg/dan_os-greg_2026-10-14.15_02_06.cobertura.xml.gz",
+      "sha256": "15236b003b018515d92d04a387fe55185e880488f8d265e2b5c9baabd4b9b20c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-green/preparation-cleanup-green.trx",
+      "sha256": "7c613909b3c44f818f93ac6722c449999a755497483adceae18bf794add884bb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-green/source/SlotPoolTests.cs.txt",
+      "sha256": "bdb374da9d7c4f43d7fa61354f9b804b1a96c4f4d04bf8c5515c3f38a96f9974",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-green/source/TtFactory.cs.txt",
+      "sha256": "8ea6fd02f4cf927c534f57e2ec1c9abbd4035cd2542db8e107fa369d936e9d68",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-green/source/TtPool.cs.txt",
+      "sha256": "eed5020a5f59379e232c40f952cb26586bd065ba97373f4aa6ded55e561ec18c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-green/source/TtPreparedPool.cs.txt",
+      "sha256": "53dec8d110257fd59cccec2d88d01c87237daa030a8e6e4b684cb50d8a643866",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-green/source/TtSlotPool.cs.txt",
+      "sha256": "71a8ca6c12fdb5de029ea53f0cdbb89fdbb68a93ca7388008d4209c75f0eb410",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-red/preparation-cleanup-red.trx",
+      "sha256": "8529f5863cbf71dc231c37f54c3556cc00e2159589b70e8eb488b95a2005d14d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-red/source/SlotPoolTests.cs.txt",
+      "sha256": "bdb374da9d7c4f43d7fa61354f9b804b1a96c4f4d04bf8c5515c3f38a96f9974",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/preparation-cleanup-red/source/TtSlotPool.cs.txt",
+      "sha256": "dd7f266a609b14aaf08721d60b253939d15e595dfdc84c5321f9442b56ab62a8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/prepared-cap-green/856f0be0-5d4a-4f43-9974-0da5f317be6c/dan_os-greg_2026-10-14.13_47_26.cobertura.xml.gz",
+      "sha256": "2f432c34e7f2c733454a682d2fc33cb39ede69e615f7b78d3271bc36503db35a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/prepared-cap-green/_os-greg_2026-10-14_13_47_02/In/os-greg/dan_os-greg_2026-10-14.13_47_26.cobertura.xml.gz",
+      "sha256": "2f432c34e7f2c733454a682d2fc33cb39ede69e615f7b78d3271bc36503db35a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/prepared-cap-green/prepared-cap-green.trx",
+      "sha256": "d5f7f2192d2aa6c20510d74b151e6d8008a5dbd82e883f57470aa846475f07c1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/prepared-cap-red/prepared-cap-red.trx",
+      "sha256": "2764ff59cb4e3476d38b321771d7bdf7c3967a5e23167467dc23ae434cc2856a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/prepared-cap-red/source/PreparedCapacityTests.cs.txt",
+      "sha256": "fefa001bb311eca6ad44a09c017047d836bb9185870b264129de612463b09204",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/prepared-cap-red/source/TtPreparedPool.cs.txt",
+      "sha256": "2c6347573cbd88d8adae8d5f4469ad8799420dab67299bbdf1c2da4468249a3b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/prepared-cap-refactor/prepared-cap-refactor.trx",
+      "sha256": "4809d0e1dcc852815e0f50c56065903120e4cf549081fddd7b698345b025a321",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/prepared-cap-regression/25a96049-2715-47bb-8422-cf386ee1dd6c/dan_os-greg_2026-10-14.13_50_02.cobertura.xml.gz",
+      "sha256": "fb3dd1315f185babf7ec30d27c1aa41e56691939dcd2388f73eeb41b0be7c154",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/prepared-cap-regression/_os-greg_2026-10-14_13_48_08/In/os-greg/dan_os-greg_2026-10-14.13_50_02.cobertura.xml.gz",
+      "sha256": "fb3dd1315f185babf7ec30d27c1aa41e56691939dcd2388f73eeb41b0be7c154",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/prepared-cap-regression/prepared-cap-regression.trx",
+      "sha256": "d48bc6366547ed59590d81e8b8f7a684f57a9e00f5d5b0c2a8bb2b612f89bdb5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-budget-green/52cca219-9fac-4c8c-a0f7-274ac6f6234c/dan_os-greg_2026-10-14.14_33_49.cobertura.xml.gz",
+      "sha256": "1236b273b4604d623d8a58691d1bbf774be86cd769c49c85f6c71456e8f4ff32",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-budget-green/_os-greg_2026-10-14_14_33_22/In/os-greg/dan_os-greg_2026-10-14.14_33_49.cobertura.xml.gz",
+      "sha256": "1236b273b4604d623d8a58691d1bbf774be86cd769c49c85f6c71456e8f4ff32",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-budget-green/public-budget-green.trx",
+      "sha256": "4c9fb2409c794c10b988f8b3d826acdc513aa8ef82e3771688992ddcf5d32d17",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-budget-red/public-budget-red.trx",
+      "sha256": "de33430f1e56700a4e22f612713183d650b85f70209210e5c24a524e75cabf14",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-budget-red/source/ConnectionBudgetTests.cs.txt",
+      "sha256": "0145d2ffbfd959f247280c399251f6e5e8ebcef3e73189b3383a6b66d4940c1c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-budget-red/source/TtFactory.cs.txt",
+      "sha256": "c207d19aacc5adb14c18dd5f3044beb110af9c6fc128ad6c8b3d9dd906d1056b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-budget-refactor/public-budget-refactor.trx",
+      "sha256": "a64d2e5bc3ab65d9e8bb7be95fc9484804721b3cd360deafd06412aabe3d8998",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-state-green/45d812d3-4af0-459f-b215-196a3563e1e1/dan_os-greg_2026-10-14.13_59_51.cobertura.xml.gz",
+      "sha256": "a18e10ac354afc94f1f429d29ddba1ebbfeb4f4d8b8596f5efdc84ab1f65ed16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-state-green/_os-greg_2026-10-14_13_59_08/In/os-greg/dan_os-greg_2026-10-14.13_59_51.cobertura.xml.gz",
+      "sha256": "a18e10ac354afc94f1f429d29ddba1ebbfeb4f4d8b8596f5efdc84ab1f65ed16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-state-green/public-state-green.trx",
+      "sha256": "8f9f3803d5660a9cefe84ebee6ebb2a4ddb192404c56b9a610fc3438b8849bd1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-state-red/public-state-red.trx",
+      "sha256": "f1a6106d33dd450004c43d26e98259fbf7651943a51d8a7233d82bcb5d88ce44",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-state-red/source/FactoryBackpressureTests.cs.txt",
+      "sha256": "93e60272ae30ead7bdfa21fa066e676c2408ebaa6a7c24253eef62eb70e8bbe9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-state-red/source/TtFactory.cs.txt",
+      "sha256": "ff2b77f533e2c985ce6004f209e6d9538683bf05568ebc5baee6fa229d8d8e16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/public-state-refactor/public-state-refactor.trx",
+      "sha256": "764bc45f9b4495c01e7c633273e41bc9f0ad124d648b878687ad980f8220c890",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/replacement-green/039e3ec1-e354-4003-bdeb-abc53bf37bbb/dan_os-greg_2026-10-14.13_38_31.cobertura.xml.gz",
+      "sha256": "c89b5d00ed47d267d2dbf6b768b320a49e53b7eb193222e9e17f0d5635f37158",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/replacement-green/_os-greg_2026-10-14_13_38_31/In/os-greg/dan_os-greg_2026-10-14.13_38_31.cobertura.xml.gz",
+      "sha256": "c89b5d00ed47d267d2dbf6b768b320a49e53b7eb193222e9e17f0d5635f37158",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/replacement-green/replacement-green.trx",
+      "sha256": "e2d64a77efa376d58925e629056c75f13cccbab0babc7606f4e3d454c8527967",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/replacement-red/replacement-red.trx",
+      "sha256": "a2da8a3cc7c958f04f061fe25dd8a0f9ef07c9f29efb15bad7a5f8acad162699",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/replacement-red/source/SlotPoolTests.cs.txt",
+      "sha256": "632c2a28bf734353ec9c82d05cb18f36a4a58f3de81657feddf1c53629debf1c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/replacement-red/source/TtSlotPool.cs.txt",
+      "sha256": "797a589e5533acae298de7b0163bf6429e18ca2bfe8059f5aae604da0c17dde4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/replacement-refactor/replacement-refactor.trx",
+      "sha256": "9313a3f67abaa0e2eae49131629fa8288ada42e5bbf9f36f0fcb71ddc18cd97d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reservation-green-2/4640f5ad-3d6f-4664-87ac-7750e30a69f3/dan_os-greg_2026-10-14.13_31_15.cobertura.xml.gz",
+      "sha256": "edf7bb5132d2297b0676597de1888e52dcf35be51de4ced82cf181fc887a89c9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reservation-green-2/_os-greg_2026-10-14_13_31_15/In/os-greg/dan_os-greg_2026-10-14.13_31_15.cobertura.xml.gz",
+      "sha256": "edf7bb5132d2297b0676597de1888e52dcf35be51de4ced82cf181fc887a89c9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reservation-green-2/reservation-green.trx",
+      "sha256": "bfe0608ec2b155e773f2ec94a673744308f777839efd2fa5fc1d89afee91da19",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reservation-green/_os-greg_2026-10-14_13_27_20/In/os-greg/dan_os-greg_2026-10-14.13_27_19.cobertura.xml.gz",
+      "sha256": "0e25f857bf4edc7e825acc82eb20459a6a13d7a50528781cd62519ff6965c342",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reservation-green/d0f5bc39-0e31-482f-a807-7e34ad237c25/dan_os-greg_2026-10-14.13_27_19.cobertura.xml.gz",
+      "sha256": "0e25f857bf4edc7e825acc82eb20459a6a13d7a50528781cd62519ff6965c342",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reservation-green/reservation-green.trx",
+      "sha256": "a191f65bb47d9f9fb34b0f079864be068318ec2bcf38f5cbc0183e304fbe0f16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reservation-red/reservation-red.trx",
+      "sha256": "3a2f3df9447813e09e55cf0ac5a153c825520e7ab5791beda56de1f220e510f5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reservation-red/source/SlotPoolTests.cs.txt",
+      "sha256": "99054f2341937fada8c52a1f3900fb2ca84427a662fba1910c9297c70ddc2267",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reservation-red/source/TtPoolSnapshot.cs.txt",
+      "sha256": "3daed08f1a0cce3ee77be4ca9ba148258b773bb46915a991931af9a6cfd5bf8b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reservation-red/source/TtSlotPool.cs.txt",
+      "sha256": "01190a79421703666c0d526594874460963bdc61a7e622bc69b7f4ad18b0dcfb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reset-green/23786cd8-64c5-40c6-bd9f-339190de0c39/dan_os-greg_2026-10-14.13_33_10.cobertura.xml.gz",
+      "sha256": "185bd03c73fbc6ff606bc5fd5e56fe8368b6955cf2e962f90e99056c2ed50e66",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reset-green/_os-greg_2026-10-14_13_33_10/In/os-greg/dan_os-greg_2026-10-14.13_33_10.cobertura.xml.gz",
+      "sha256": "185bd03c73fbc6ff606bc5fd5e56fe8368b6955cf2e962f90e99056c2ed50e66",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reset-green/reset-green.trx",
+      "sha256": "39d60ba0b151759dfe5b5536a021213b02adf47f65cf6fafd200bb015219ce8a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reset-red/reset-red.trx",
+      "sha256": "d7762fc41484acce646902da960168f1d16809bcccbf8a6687448c5753d31ca1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reset-red/source/SlotPoolTests.cs.txt",
+      "sha256": "4e4e5a0e2fb1737f9ca94ca1da5b03833cfd38777967a390c99f23d92a1a3651",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reset-red/source/TtSlotPool.cs.txt",
+      "sha256": "be26237de3f4f7b6e71ab2b2871f9e4766e2c6bb1cf30eae72a493d341ba0d2a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/reset-refactor/reset-refactor.trx",
+      "sha256": "3c3583f2b00047d8ffe83bbca943f4db169ee64418335d5657c31ecc800851ac",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/resource-budget-green/1449c021-3a14-4f49-b290-b281b82cadb1/dan_os-greg_2026-10-14.14_28_20.cobertura.xml.gz",
+      "sha256": "341a3f8bed47fd6e20d23647242cfa44fd129ab9b9b9287230a0836cf3d93dcc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/resource-budget-green/_os-greg_2026-10-14_14_28_14/In/os-greg/dan_os-greg_2026-10-14.14_28_20.cobertura.xml.gz",
+      "sha256": "341a3f8bed47fd6e20d23647242cfa44fd129ab9b9b9287230a0836cf3d93dcc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/resource-budget-green/resource-budget-green.trx",
+      "sha256": "aa9ad577b1dced6ab54f821965047c3e92e42941342ed89e43d110ae342ed913",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/resource-budget-red/resource-budget-red.trx",
+      "sha256": "213475813307293e85088fb7dd7e5b1ca58da1e5c11c1de2c35c1af5412f4564",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/resource-budget-red/source/ResourceBudgetValidationTests.cs.txt",
+      "sha256": "1cf68f003d68f9b35fd9e1f37fba28851d732346f34707f464c0bddbd22bebc8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/resource-budget-red/source/TtPool.cs.txt",
+      "sha256": "f8eb26b72dfb52a50fabd6c61c66b673b2fe66b0fec3d3f71f369098688147ef",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/resource-budget-red/source/TtPreparedPool.cs.txt",
+      "sha256": "2e28002836ca99a189f807288c94220b7c02e17d937fab4d5071940072f11ab6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/resource-budget-refactor/resource-budget-refactor.trx",
+      "sha256": "47dc7a806381b98fb379b1799087df9a1f79e2bece511b954955f0b5ed9c3a8e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/workload-connections-green/5ecdf646-aed0-4418-96a1-05b211f94a31/dan_os-greg_2026-10-14.14_06_00.cobertura.xml.gz",
+      "sha256": "f52d134058252296b04fd6251ba5fe6c0f45bd0a91f4fde4b2cc77491e5d9dbc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/workload-connections-green/_os-greg_2026-10-14_14_05_56/In/os-greg/dan_os-greg_2026-10-14.14_06_00.cobertura.xml.gz",
+      "sha256": "f52d134058252296b04fd6251ba5fe6c0f45bd0a91f4fde4b2cc77491e5d9dbc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/workload-connections-green/workload-connections-green.trx",
+      "sha256": "ba09f2719e58e8965edfab2a146d263450d09e7462ffa36e00d576608d967370",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/workload-connections-red/source/ConnectionBudgetTests.cs.txt",
+      "sha256": "22608324a7d91519908de2adc74fb59a09d82840cb739226123611a78395329e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/workload-connections-red/source/TtOptions.cs.txt",
+      "sha256": "f2a7ab590c42162106a4ba8bb60ac635295fc18253f6920ca13176696c810a0a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/workload-connections-red/source/TtPool.cs.txt",
+      "sha256": "3d4df49553b961aa78dfaae1274d088bba927d3e62d80afb2761fd92de8d56e3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/workload-connections-red/source/TtPreparedPool.cs.txt",
+      "sha256": "34ee70a5d1c8109813d29e284addf7553ae73923752565ecc82eb03618574aa6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/workload-connections-red/workload-connections-red.trx",
+      "sha256": "0fc44cb24e4fa39b69850f009836b5cbd6184d65ee8f1c89885326db9d134a77",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/raw/workload-connections-refactor/workload-connections-refactor.trx",
+      "sha256": "c44d83e00b060efd9c76bc3cc37c4ecbb14f0f8a0fe8a1af5d4f040198311a9f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/src/TurboTest.EFCore/Internal/ITtDatabasePool.cs.txt",
+      "sha256": "9c311724c8e3a81c8fb37e52d45e575304c4c5398ba29665aa7b7f952cbce421",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/src/TurboTest.EFCore/Internal/TtAdministratorConnections.cs.txt",
+      "sha256": "0edcc7d3e8f9928ef5f9ff8babd4bfac44d58e3393521ae8c98f1edc29ee41a1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/src/TurboTest.EFCore/Internal/TtOwnedContextOptions.cs.txt",
+      "sha256": "af16cc9590861f1dc03bcc7b3fe9461a7fe6fce1f71b6905bea940711d041dd4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "sha256": "eed5020a5f59379e232c40f952cb26586bd065ba97373f4aa6ded55e561ec18c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/src/TurboTest.EFCore/Internal/TtPreparedPool.cs.txt",
+      "sha256": "2427132d55698fa8737e4336daedaf7d1d3bfc474925c9bbb730837a8b2f890c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/src/TurboTest.EFCore/Internal/TtSlotPool.cs.txt",
+      "sha256": "71a8ca6c12fdb5de029ea53f0cdbb89fdbb68a93ca7388008d4209c75f0eb410",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "sha256": "2a684c1148185d4e65b0cf395e83671409da51b16c50d79be02b7f20d63a3829",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "sha256": "f76d50b7bb0ad6d03b2d7b08c61d11b3084106a730831e29ca24a3e02d017e19",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/src/TurboTest.EFCore/TtPoolSnapshot.cs.txt",
+      "sha256": "16035d5efc65a2ebf72e031105f1227486fa41c480767c636c5bbd0630b740de",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/src/TurboTest.EFCore/TtResourceBudget.cs.txt",
+      "sha256": "5e666240a1818f9faf64a08e79f5355321d668f84faf05d3ce9c85f2f946a263",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/AutoAllocationTests.cs.txt",
+      "sha256": "40c03f7c916e73f213cd8d5abbb350080d3774c0f7f7a1e0a53bd87e31249dbb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/BaselineValidationTests.cs.txt",
+      "sha256": "6577fd6955a5f4933570086bed28a484a8704ef8a87e4f871f9d917815a399d4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/CompensatingCleanupTests.cs.txt",
+      "sha256": "c270d9146fd823f10695afb9a73d9139b3fc970af6223818654d5f3e5931d580",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/ConnectionBudgetTests.cs.txt",
+      "sha256": "aaa005ce654ff7efa28cc53ba76a9fef553c4488fc59efecb35cff61217ca1ec",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/CreationAccountingTests.cs.txt",
+      "sha256": "27ab6b200c7d22cb6199f4702dc3f9e104e901600797c46d6b8217f29134ca8b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/FactoryBackpressureTests.cs.txt",
+      "sha256": "0f763fbe1e6447eef0fe194d9558637ecbbf1f52e6d597b22a21b7202c543ded",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/OrdinaryCapacityTests.cs.txt",
+      "sha256": "f8af0c036dbb057cf3e864e3e7840bcb23e21f123a152909acfdda5ddad8a7af",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/PreparationBudgetTests.cs.txt",
+      "sha256": "e3c579688b3d5f4a6a2797b4a6c2788bfa22157cf80c408b8517ef1e9cb46444",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/PreparedCapacityTests.cs.txt",
+      "sha256": "910317a25612d9e36a0182e697ed1ce8b03f3ace78629daf5dcac03ad963e5be",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/ResetTimingTests.cs.txt",
+      "sha256": "06481ea1e4cf9307c9c22bd3c85f1b26d40ff6a0c1ef32f484e378a07be83f85",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs.txt",
+      "sha256": "1cf68f003d68f9b35fd9e1f37fba28851d732346f34707f464c0bddbd22bebc8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/SlotPoolTests.cs.txt",
+      "sha256": "bdb374da9d7c4f43d7fa61354f9b804b1a96c4f4d04bf8c5515c3f38a96f9974",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/source-final/tests/TurboTest.Tests/StartupCleanupTests.cs.txt",
+      "sha256": "3b698a9cd1bf574bd515261ac2cf54db139980fee9346429723c1e084946d9f5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/admin-idle-fault.log.txt",
+      "sha256": "73abeef65ce54a3c45ddacbe0efa328ffdcb75a955553221486e0232627330c9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/administrator-budget-diagnosis.log.txt",
+      "sha256": "3db31fadcd69c4616f202b39ac3b9925335183f1d56b8e15970cdea68b4d4416",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/administrator-budget-green-2.log.txt",
+      "sha256": "d45bb770eddafb9463bce14113df732284f71c11a1aff94b5131999f759c4f40",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/administrator-budget-green.log.txt",
+      "sha256": "63e9554892b1d138636c8180dd44623874940be772409b3ad2b7828079dc98c0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/administrator-budget-red-2.log.txt",
+      "sha256": "e759eae1d7360d01273f2002af292c39cd70d02da246ab000b72c3b4d5090a62",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/administrator-budget-red.log.txt",
+      "sha256": "f6fb75f47b3753f3fa01eb34360e650e636d9204a6090e789658102a804604da",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/administrator-budget-refactor.log.txt",
+      "sha256": "c06a38b65a1e2935ccd5dcba7a4979593c76925e5e37680f50c349c8641c0f83",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/administrator-errors-2.log.txt",
+      "sha256": "0a7535b1f5eb1907061785efe1cd7fd748f31b695516e4ceabf4326c746a6536",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/administrator-errors.log.txt",
+      "sha256": "a5608f55366b7c34450a6e18b0a0963fd7c4d81e150fea48d623ce039b644cb6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ambient-return-green.log.txt",
+      "sha256": "c189e03b7ab351c3189315acedc15990ecdbd38383a1231cc2348490c6154ac5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ambient-return-red-2.log.txt",
+      "sha256": "68a93c1ade455b90c890a0e09502c8d8d239dff1f179d8187da116d3687a4737",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ambient-return-red.log.txt",
+      "sha256": "e2715b3b62a2450446a91b9dd33c23de58d5ee69f73f359297d27735987103d4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ambient-workload-red.log.txt",
+      "sha256": "bec1525acd49bfbb0d571c7375d207d5087493bffb0f7d85c875c4eb275a9cb3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/compensation-bound-green.log.txt",
+      "sha256": "2b7c70300dccc5082df3b97aae9a110991d67d12fdcede57fff17ed1b98b6285",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/compensation-bound-red.log.txt",
+      "sha256": "7a915bfbd59661f69c1730e44ce85a14c92362863c48296f6271daaba394fa16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/compensation-bound-refactor.log.txt",
+      "sha256": "6712c9dea6bfadfc1aee1496a028ecf651b99b95cfaee1370fb60c64c35b5652",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/context-owner-green.log.txt",
+      "sha256": "d68d78b4cd0106f064f787c4f3f6a054cae7272f4b016df4c56638f2f52c00dc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/context-owner-red.log.txt",
+      "sha256": "5cb39a46069277f8fce99eb71054fb4b88f12bbaa248a020216ea7d6c40e2908",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/context-owner-refactor.log.txt",
+      "sha256": "4ce61dfa6f2ea585818d61bf8c97c89421f311a124f831d5108b8140bc833f26",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/deletion-green.log.txt",
+      "sha256": "af05db8880313b9782b7263d3a7a04acf7bff46b0d61ebc0bb9e29466464d36c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/deletion-red-2.log.txt",
+      "sha256": "74f18b3070bb08ff6fe524faea3651f198e09b9b8ee8950f6ab553f4610bb927",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/deletion-red.log.txt",
+      "sha256": "cf4cb9439058dcd51a2d8eb5b8d6b293bae0f1af7229f67441d158c7f43dbcf7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/deletion-refactor.log.txt",
+      "sha256": "b3cb82990254fac7f145315883df02984f8d27c8027b67a8ea35cd894a51bd16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/dynamic-bypass-red.log.txt",
+      "sha256": "bb5509813874e607d09bce6afd3b80e6425dc95546baf41e6a3c969404f1d99a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/dynamic-example-build.log.txt",
+      "sha256": "b7b4b4c2ead11bddf0bccc17b6a7f801c5eb1c76c65d6c6e07fab5ac4b29b77f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/executor-bounds-green.log.txt",
+      "sha256": "fdf7ec2eefcc02e2bb7397719baf2888c9ca79fdd67f573a01e7b7e53232f4c0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/executor-bounds-red.log.txt",
+      "sha256": "82acce16efc81ff0ecf031917a194032f3ebca7e4dfccaa38be3629ae5910e88",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/executor-bounds-refactor.log.txt",
+      "sha256": "b6ca4b30be10966f866bbd4fd59ddbc6cb3a4791e00dad0a23a5d539330042b6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/factory-close-green.log.txt",
+      "sha256": "41ed084ed49d0b7cc48cf1ecee92ad471e01dd5f7afccb1560d0735d9bdc01c6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/factory-close-red.log.txt",
+      "sha256": "293051677036e03c54b97b755f48dc4dcb5652aa9e9d89c940c1c17e46a620c9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/factory-close-refactor.log.txt",
+      "sha256": "8de47a2747bf83912df4cd18b80b6cac0fcdcf1e1943e6bf5b57077367464539",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/full-gate.log.txt",
+      "sha256": "2bbc70e3884245993cc5aa4edeedf9acf6ebf1100ce5c371913a70662267972b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/lost-create-green-2.log.txt",
+      "sha256": "37cb013b28f0e913c486c76da08368fa0f219a4cd0d518844afb3f030668644e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/lost-create-green.log.txt",
+      "sha256": "67d61bc989574ce3f7155f7df54b09ee1e8801712470e12c021e3a2fa5e6d9c3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/lost-create-red.log.txt",
+      "sha256": "60ebea3880ef50dcba0b1094160ef23e5fcbd981e4384a50888600484067e197",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ordinary-cap-green.log.txt",
+      "sha256": "7ae9363dca7be52e25608289e2e435025a5f9e07077cb7f50e2be83f837a2b33",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ordinary-cap-red.log.txt",
+      "sha256": "248937361b638ed7fe2437b29f476ecc9b55b4c06c73a0a6cdbb5efe3661be36",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ordinary-cap-refactor.log.txt",
+      "sha256": "3bceb718fe6b949b04ef957c8f0795a2ce1f979cf70d100cf889a36e87b5e2ea",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ordinary-cap-regression.log.txt",
+      "sha256": "36e788d0a95a85a3a604cdd6324623891297c62c90f5046f9a1dce466c2071ea",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ownership-error-coverage-2.log.txt",
+      "sha256": "9792157bb44bf55cb7afbf955d9a991ce498a45003f70a9f7330abf18c9f7192",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ownership-error-coverage.log.txt",
+      "sha256": "9297ecb0c354c8b0e2bd4b44684f34f449ab78000927eaaf44cec86345d52cdb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/ownership-final-green.log.txt",
+      "sha256": "93d3da2bc0e16489e3682c796ae251ade234a6c1e5ebb2a5391adda71c3426ea",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/preparation-cleanup-green.log.txt",
+      "sha256": "a1b8e41bb15602fca1b7d55f6a59ccee752d8349f6db0430586754b068c1de5b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/preparation-cleanup-red.log.txt",
+      "sha256": "bfe294899434db22c44f0573a66b329e5de5018c071ffe8f5044b63e2c996048",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/prepared-cap-green.log.txt",
+      "sha256": "bed2f27bd3919b0cf615e8e7768382b56a04dca816edc808468fd1ffadc50115",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/prepared-cap-red.log.txt",
+      "sha256": "4dc7f215a7776a56dbba91213e968f41249e24276c571d87aa2ac9c5040837d5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/prepared-cap-refactor.log.txt",
+      "sha256": "ec07d3d63f407e6b3c1c45ed11dd09cc78b1321fd60282f001594a8d4c9f6bfe",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/prepared-cap-regression.log.txt",
+      "sha256": "ed3ad89b6420c97c84c5422331f09bb5f74603ccc80370559d08729aa56733cc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/public-budget-green.log.txt",
+      "sha256": "a0477530463711db6efcbbc6f847bf3f0d291e200c669a5ce380f91856f9aa37",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/public-budget-red.log.txt",
+      "sha256": "de04bd7c926f41baf86e753c8e817fcdb780e903b085d924acde6a2ab4e6a9ad",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/public-budget-refactor.log.txt",
+      "sha256": "007ea53c58f186e9179996a70816c3c1690cfc6092f0fb77d18632a4a997a5c3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/public-state-green.log.txt",
+      "sha256": "ae6892d0665d08cd7846cbaad55a8c84d681562f37cca272a46c63b1931ef924",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/public-state-red.log.txt",
+      "sha256": "5c811810e0886b6652c05808ea7a090e4c5d27471c26421d136b126fc28c16a9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/public-state-refactor.log.txt",
+      "sha256": "1c089c560d5e7a8dc8afd3e26834f59142a7b735317e285c2f88f2b2a6616151",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/replacement-green.log.txt",
+      "sha256": "c3d9dd40860de117a6ba18e7fd28779cb4b5ef68479c76e33af872ddbc59a7f8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/replacement-red.log.txt",
+      "sha256": "7955cefeae53fb659ba72a4a6e370d0ce6f90ce2ff4ad9f72b583e668843cbc1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/replacement-refactor.log.txt",
+      "sha256": "8496d45802fe5ede97b249bc968e7e3e2872a321a3e2593db2bd1938ddc86dc2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/reservation-green-2.log.txt",
+      "sha256": "20ea4c20a5b58e3aaad03773cc864247cbe63cb556d499ebb216be74f112887e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/reservation-green.log.txt",
+      "sha256": "9e8d2bbcc297f07bebf9f93e51cebb5f7ac4dea01613713fc4df7a13e5f718ba",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/reservation-red.log.txt",
+      "sha256": "0205769bf9b6fbaa446e9473706d2583af8014e8f384b0d44249c6df923c778c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/reset-green.log.txt",
+      "sha256": "ec29df1e36ed19d73ea165b209f2d0e7a10f3d8119647d805f977fa6797163dd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/reset-red.log.txt",
+      "sha256": "2c64538d8ea9cf9128a0793a2c2139adc4ff797686101f7a56e9120f6ddc4cd8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/reset-refactor.log.txt",
+      "sha256": "d886e7da5df63d65f68eac42b7e209344c5a77b2a9b7d59a4df8f635880c6cc3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/resource-budget-green.log.txt",
+      "sha256": "31cc4317ec1a7d98ca32fb0d7df098ab47ff46d687c7de631c6844c6e61b9ce6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/resource-budget-red.log.txt",
+      "sha256": "100a0e34454e64ad0194fae7359c87504421f55663aaeabe714d411119e764d8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/resource-budget-refactor.log.txt",
+      "sha256": "6bd9699abd088668afe798fe8181fa150307867ce710246eeae75d8cf151ca8f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/solution-build.log.txt",
+      "sha256": "5959082c84b8e90dd8b31e75247371f1cd7542174efb2c6fac31079bd1bade59",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/workload-connections-green.log.txt",
+      "sha256": "ffb2272c049738e3bc44cba837abd590b25f348ce90ac6ea3687a9e4151cecbe",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/workload-connections-red.log.txt",
+      "sha256": "9ed386977cb141d4b3e979fa85234bf349feb5e5cb390af5567078c4e65b23c5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-final/transcripts/workload-connections-refactor.log.txt",
+      "sha256": "5ad92ec3970e55b8bbdb3b85d500dccf653332d0442186b62401cd3c708223ab",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/deletion-green/7ad9bd38-1248-47fe-a42a-5cf0ab0f7ff6/dan_os-greg_2026-10-14.13_35_29.cobertura.xml.gz",
+      "sha256": "ea9bceb4809e3c1bc73321f09391f97a51d72ae6fca23be4fe0e9ae5bf02eb81",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/deletion-green/_os-greg_2026-10-14_13_35_29/In/os-greg/dan_os-greg_2026-10-14.13_35_29.cobertura.xml.gz",
+      "sha256": "ea9bceb4809e3c1bc73321f09391f97a51d72ae6fca23be4fe0e9ae5bf02eb81",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/factory-close-green/16539223-41f0-4bd7-b8ee-584a3540178a/dan_os-greg_2026-10-14.13_41_36.cobertura.xml.gz",
+      "sha256": "cd1bb7f0c6dcff3956ddd26629dda1ee9b47a33a7270b1a43504f32f4c30bd47",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/factory-close-green/_os-greg_2026-10-14_13_41_35/In/os-greg/dan_os-greg_2026-10-14.13_41_36.cobertura.xml.gz",
+      "sha256": "cd1bb7f0c6dcff3956ddd26629dda1ee9b47a33a7270b1a43504f32f4c30bd47",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/factory-close-refactor/_os-greg_2026-10-14_13_42_44/In/os-greg/dan_os-greg_2026-10-14.13_42_44.cobertura.xml.gz",
+      "sha256": "c114e91b3815c45fc797b34c7bdfa41ee99b723056e4b7c3a49cf4f3540b685b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/factory-close-refactor/e743a496-35d1-47d4-8508-0d1dd24a7951/dan_os-greg_2026-10-14.13_42_44.cobertura.xml.gz",
+      "sha256": "c114e91b3815c45fc797b34c7bdfa41ee99b723056e4b7c3a49cf4f3540b685b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/ordinary-cap-green/_os-greg_2026-10-14_13_54_10/In/os-greg/dan_os-greg_2026-10-14.13_54_14.cobertura.xml.gz",
+      "sha256": "046493f9ffc8391a26aca1d5b5d0ce3e950a20ced4edeb572d2550c3265e1a26",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/ordinary-cap-green/d07dd7dd-8390-4361-9236-90ff993431d6/dan_os-greg_2026-10-14.13_54_14.cobertura.xml.gz",
+      "sha256": "046493f9ffc8391a26aca1d5b5d0ce3e950a20ced4edeb572d2550c3265e1a26",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/ordinary-cap-regression/105b470c-c513-4404-b665-44aff67e81be/dan_os-greg_2026-10-14.13_57_25.cobertura.xml.gz",
+      "sha256": "31dd2914f85e401283d84487abd004090556e84cb50060ece35d117612c7e3a4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/ordinary-cap-regression/_os-greg_2026-10-14_13_55_56/In/os-greg/dan_os-greg_2026-10-14.13_57_25.cobertura.xml.gz",
+      "sha256": "31dd2914f85e401283d84487abd004090556e84cb50060ece35d117612c7e3a4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/prepared-cap-green/856f0be0-5d4a-4f43-9974-0da5f317be6c/dan_os-greg_2026-10-14.13_47_26.cobertura.xml.gz",
+      "sha256": "2f432c34e7f2c733454a682d2fc33cb39ede69e615f7b78d3271bc36503db35a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/prepared-cap-green/_os-greg_2026-10-14_13_47_02/In/os-greg/dan_os-greg_2026-10-14.13_47_26.cobertura.xml.gz",
+      "sha256": "2f432c34e7f2c733454a682d2fc33cb39ede69e615f7b78d3271bc36503db35a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/prepared-cap-regression/25a96049-2715-47bb-8422-cf386ee1dd6c/dan_os-greg_2026-10-14.13_50_02.cobertura.xml.gz",
+      "sha256": "fb3dd1315f185babf7ec30d27c1aa41e56691939dcd2388f73eeb41b0be7c154",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/prepared-cap-regression/_os-greg_2026-10-14_13_48_08/In/os-greg/dan_os-greg_2026-10-14.13_50_02.cobertura.xml.gz",
+      "sha256": "fb3dd1315f185babf7ec30d27c1aa41e56691939dcd2388f73eeb41b0be7c154",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/public-state-green/45d812d3-4af0-459f-b215-196a3563e1e1/dan_os-greg_2026-10-14.13_59_51.cobertura.xml.gz",
+      "sha256": "a18e10ac354afc94f1f429d29ddba1ebbfeb4f4d8b8596f5efdc84ab1f65ed16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/public-state-green/_os-greg_2026-10-14_13_59_08/In/os-greg/dan_os-greg_2026-10-14.13_59_51.cobertura.xml.gz",
+      "sha256": "a18e10ac354afc94f1f429d29ddba1ebbfeb4f4d8b8596f5efdc84ab1f65ed16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/replacement-green/039e3ec1-e354-4003-bdeb-abc53bf37bbb/dan_os-greg_2026-10-14.13_38_31.cobertura.xml.gz",
+      "sha256": "c89b5d00ed47d267d2dbf6b768b320a49e53b7eb193222e9e17f0d5635f37158",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/replacement-green/_os-greg_2026-10-14_13_38_31/In/os-greg/dan_os-greg_2026-10-14.13_38_31.cobertura.xml.gz",
+      "sha256": "c89b5d00ed47d267d2dbf6b768b320a49e53b7eb193222e9e17f0d5635f37158",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/reservation-green-2/4640f5ad-3d6f-4664-87ac-7750e30a69f3/dan_os-greg_2026-10-14.13_31_15.cobertura.xml.gz",
+      "sha256": "edf7bb5132d2297b0676597de1888e52dcf35be51de4ced82cf181fc887a89c9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/reservation-green-2/_os-greg_2026-10-14_13_31_15/In/os-greg/dan_os-greg_2026-10-14.13_31_15.cobertura.xml.gz",
+      "sha256": "edf7bb5132d2297b0676597de1888e52dcf35be51de4ced82cf181fc887a89c9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/reservation-green/_os-greg_2026-10-14_13_27_20/In/os-greg/dan_os-greg_2026-10-14.13_27_19.cobertura.xml.gz",
+      "sha256": "0e25f857bf4edc7e825acc82eb20459a6a13d7a50528781cd62519ff6965c342",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/reservation-green/d0f5bc39-0e31-482f-a807-7e34ad237c25/dan_os-greg_2026-10-14.13_27_19.cobertura.xml.gz",
+      "sha256": "0e25f857bf4edc7e825acc82eb20459a6a13d7a50528781cd62519ff6965c342",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/reset-green/23786cd8-64c5-40c6-bd9f-339190de0c39/dan_os-greg_2026-10-14.13_33_10.cobertura.xml.gz",
+      "sha256": "185bd03c73fbc6ff606bc5fd5e56fe8368b6955cf2e962f90e99056c2ed50e66",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/coverage/reset-green/_os-greg_2026-10-14_13_33_10/In/os-greg/dan_os-greg_2026-10-14.13_33_10.cobertura.xml.gz",
+      "sha256": "185bd03c73fbc6ff606bc5fd5e56fe8368b6955cf2e962f90e99056c2ed50e66",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/manifest.json",
+      "sha256": "e11c51b27b0bc9e465c62d559089f459fafb211afb96df01c38e387edaa90969",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/deletion-red/source/SlotPoolTests.cs.txt",
+      "sha256": "41c8da4c2de2ff38715d7aa9982955b321a755227120f1f0f2721861d333b4d7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/deletion-red/source/TtSlotPool.cs.txt",
+      "sha256": "77c452fcd75a25affb61eaa9cf2f1dcec18d0ba738670d9690b075d7c611d990",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/factory-close-red/source/FactoryBackpressureTests.cs.txt",
+      "sha256": "fd83c5c8e3dd9f84633991047ba749200ab1ce6f4039f1f5dc5d00e568e9c919",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/factory-close-red/source/TtFactory.cs.txt",
+      "sha256": "1fc48935115dd004b3ccbc36caddd3c814d24c78c3e7d130c11423fc4474fcb1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/ordinary-cap-red/source/OrdinaryCapacityTests.cs.txt",
+      "sha256": "1b252a1c2aae922e7d903103fe2116f710ff07b11e514de3f2be5eb20d9890f7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/ordinary-cap-red/source/TtPool.cs.txt",
+      "sha256": "115fbd9a6bfba1a3fa818cdb05728bf65bb6a7f18493c885a0ce7aa7c546279e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/prepared-cap-red/source/PreparedCapacityTests.cs.txt",
+      "sha256": "fefa001bb311eca6ad44a09c017047d836bb9185870b264129de612463b09204",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/prepared-cap-red/source/TtPreparedPool.cs.txt",
+      "sha256": "2c6347573cbd88d8adae8d5f4469ad8799420dab67299bbdf1c2da4468249a3b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/public-state-red/source/FactoryBackpressureTests.cs.txt",
+      "sha256": "93e60272ae30ead7bdfa21fa066e676c2408ebaa6a7c24253eef62eb70e8bbe9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/public-state-red/source/TtFactory.cs.txt",
+      "sha256": "ff2b77f533e2c985ce6004f209e6d9538683bf05568ebc5baee6fa229d8d8e16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/replacement-red/source/SlotPoolTests.cs.txt",
+      "sha256": "632c2a28bf734353ec9c82d05cb18f36a4a58f3de81657feddf1c53629debf1c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/replacement-red/source/TtSlotPool.cs.txt",
+      "sha256": "797a589e5533acae298de7b0163bf6429e18ca2bfe8059f5aae604da0c17dde4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/reservation-red/source/SlotPoolTests.cs.txt",
+      "sha256": "99054f2341937fada8c52a1f3900fb2ca84427a662fba1910c9297c70ddc2267",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/reservation-red/source/TtPoolSnapshot.cs.txt",
+      "sha256": "3daed08f1a0cce3ee77be4ca9ba148258b773bb46915a991931af9a6cfd5bf8b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/reservation-red/source/TtSlotPool.cs.txt",
+      "sha256": "01190a79421703666c0d526594874460963bdc61a7e622bc69b7f4ad18b0dcfb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/reset-red/source/SlotPoolTests.cs.txt",
+      "sha256": "4e4e5a0e2fb1737f9ca94ca1da5b03833cfd38777967a390c99f23d92a1a3651",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/red-sources/reset-red/source/TtSlotPool.cs.txt",
+      "sha256": "be26237de3f4f7b6e71ab2b2871f9e4766e2c6bb1cf30eae72a493d341ba0d2a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/deletion-green/deletion-green.trx",
+      "sha256": "58e9df744c32c9f9bb763e1d9e70cad7601a06fbeab5ea300c50fb364bb561c4",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/deletion-red-2/deletion-red.trx",
+      "sha256": "de20d1c442bb436cb8a79d1a218ff35ed31e7e8da422de3c31530d059284aa3b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/deletion-refactor/deletion-refactor.trx",
+      "sha256": "9ce88702aff522afdf077de485d7687e11175b306492d82bcf99670a66e6b435",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/dynamic-bypass-red/dynamic-bypass-red.trx",
+      "sha256": "1b7aabc7bfa0ed8458e03a9bdc9f47d960568a7bfadff0062e152d72936ec09b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/factory-close-green/factory-close-green.trx",
+      "sha256": "536dda534fc0ecb7abd5cfba0e751fc572d426bc0c481c5a1c1d394e478099b3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/factory-close-red/factory-close-red.trx",
+      "sha256": "c86b56801655dd5a89ac97e57f8d270f906d238dbd84e6b88aa5779bffb4182c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/factory-close-refactor/factory-close-refactor.trx",
+      "sha256": "11f77003d786d9290aceea5cd869a5907beda0563e14ddd98021711c090b57f0",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/ordinary-cap-green/ordinary-cap-green.trx",
+      "sha256": "b9221e012742e149195efe48f1fbf131ccf4c4266beadd97910a90d2cf1094e2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/ordinary-cap-red/ordinary-cap-red.trx",
+      "sha256": "11e0a84ca78b63feeff2ab08722dee4605281c4aabf01f66b57237386f10d7dc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/ordinary-cap-refactor/ordinary-cap-refactor.trx",
+      "sha256": "7180dffca941583cb68fd80368b4c9c5233d271c7958ba68f191209e1bb20d63",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/ordinary-cap-regression/ordinary-cap-regression.trx",
+      "sha256": "0b55fec97983769b875c12e13f2cc20975bb68c73ae029c272d35b0983e8d1bf",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/prepared-cap-green/prepared-cap-green.trx",
+      "sha256": "d5f7f2192d2aa6c20510d74b151e6d8008a5dbd82e883f57470aa846475f07c1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/prepared-cap-red/prepared-cap-red.trx",
+      "sha256": "2764ff59cb4e3476d38b321771d7bdf7c3967a5e23167467dc23ae434cc2856a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/prepared-cap-refactor/prepared-cap-refactor.trx",
+      "sha256": "4809d0e1dcc852815e0f50c56065903120e4cf549081fddd7b698345b025a321",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/prepared-cap-regression/prepared-cap-regression.trx",
+      "sha256": "d48bc6366547ed59590d81e8b8f7a684f57a9e00f5d5b0c2a8bb2b612f89bdb5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/public-state-green/public-state-green.trx",
+      "sha256": "8f9f3803d5660a9cefe84ebee6ebb2a4ddb192404c56b9a610fc3438b8849bd1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/public-state-red/public-state-red.trx",
+      "sha256": "f1a6106d33dd450004c43d26e98259fbf7651943a51d8a7233d82bcb5d88ce44",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/public-state-refactor/public-state-refactor.trx",
+      "sha256": "764bc45f9b4495c01e7c633273e41bc9f0ad124d648b878687ad980f8220c890",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/replacement-green/replacement-green.trx",
+      "sha256": "e2d64a77efa376d58925e629056c75f13cccbab0babc7606f4e3d454c8527967",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/replacement-red/replacement-red.trx",
+      "sha256": "a2da8a3cc7c958f04f061fe25dd8a0f9ef07c9f29efb15bad7a5f8acad162699",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/replacement-refactor/replacement-refactor.trx",
+      "sha256": "9313a3f67abaa0e2eae49131629fa8288ada42e5bbf9f36f0fcb71ddc18cd97d",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/reservation-green-2/reservation-green.trx",
+      "sha256": "bfe0608ec2b155e773f2ec94a673744308f777839efd2fa5fc1d89afee91da19",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/reservation-green/reservation-green.trx",
+      "sha256": "a191f65bb47d9f9fb34b0f079864be068318ec2bcf38f5cbc0183e304fbe0f16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/reservation-red/reservation-red.trx",
+      "sha256": "3a2f3df9447813e09e55cf0ac5a153c825520e7ab5791beda56de1f220e510f5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/reset-green/reset-green.trx",
+      "sha256": "39d60ba0b151759dfe5b5536a021213b02adf47f65cf6fafd200bb015219ce8a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/reset-red/reset-red.trx",
+      "sha256": "d7762fc41484acce646902da960168f1d16809bcccbf8a6687448c5753d31ca1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/results/reset-refactor/reset-refactor.trx",
+      "sha256": "3c3583f2b00047d8ffe83bbca943f4db169ee64418335d5657c31ecc800851ac",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/src/TurboTest.EFCore/Internal/ITtDatabasePool.cs.txt",
+      "sha256": "6a70b51c13a3d62340b5dd46addabae3f6a0e58ae88105cd6921944103eff56b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/src/TurboTest.EFCore/Internal/TtPool.cs.txt",
+      "sha256": "3d4df49553b961aa78dfaae1274d088bba927d3e62d80afb2761fd92de8d56e3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/src/TurboTest.EFCore/Internal/TtPreparedPool.cs.txt",
+      "sha256": "34ee70a5d1c8109813d29e284addf7553ae73923752565ecc82eb03618574aa6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/src/TurboTest.EFCore/Internal/TtSlotPool.cs.txt",
+      "sha256": "f8e0aa22a4a252bf3ab6636656866a98d94ce739b200cab02fe6b775d8c9206f",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/src/TurboTest.EFCore/TtFactory.cs.txt",
+      "sha256": "ae2ce96ff5a218284c08de9dfbcf25a9bad36e112f986c288135e6c78ecc995e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/src/TurboTest.EFCore/TtOptions.cs.txt",
+      "sha256": "035b99d41eea809bb4ac2fe8e845e2956d8e70473b9d632c18e73f10a9d46038",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/src/TurboTest.EFCore/TtPoolSnapshot.cs.txt",
+      "sha256": "3daed08f1a0cce3ee77be4ca9ba148258b773bb46915a991931af9a6cfd5bf8b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/tests/TurboTest.Tests/BaselineValidationTests.cs.txt",
+      "sha256": "558d21cd5de9a150bc5887e0a98fb8efa41d8255664e94a4260eb9c48f2aeff3",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/tests/TurboTest.Tests/CompensatingCleanupTests.cs.txt",
+      "sha256": "c270d9146fd823f10695afb9a73d9139b3fc970af6223818654d5f3e5931d580",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/tests/TurboTest.Tests/FactoryBackpressureTests.cs.txt",
+      "sha256": "6ce66092b95077722a41b46e70400689d2a1555de477fec9ea04eb8dbb28edeb",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/tests/TurboTest.Tests/OrdinaryCapacityTests.cs.txt",
+      "sha256": "f8af0c036dbb057cf3e864e3e7840bcb23e21f123a152909acfdda5ddad8a7af",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/tests/TurboTest.Tests/PreparedCapacityTests.cs.txt",
+      "sha256": "286bf6c0bbeba5ea7f867587fe7658dd5cb9dae8adcd863c3ca13eae2853a5f1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/tests/TurboTest.Tests/ResetTimingTests.cs.txt",
+      "sha256": "06481ea1e4cf9307c9c22bd3c85f1b26d40ff6a0c1ef32f484e378a07be83f85",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/tests/TurboTest.Tests/SlotPoolTests.cs.txt",
+      "sha256": "632c2a28bf734353ec9c82d05cb18f36a4a58f3de81657feddf1c53629debf1c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/source-current/tests/TurboTest.Tests/StartupCleanupTests.cs.txt",
+      "sha256": "3b698a9cd1bf574bd515261ac2cf54db139980fee9346429723c1e084946d9f5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/deletion-green.log.txt",
+      "sha256": "af05db8880313b9782b7263d3a7a04acf7bff46b0d61ebc0bb9e29466464d36c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/deletion-red-2.log.txt",
+      "sha256": "74f18b3070bb08ff6fe524faea3651f198e09b9b8ee8950f6ab553f4610bb927",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/deletion-red.log.txt",
+      "sha256": "cf4cb9439058dcd51a2d8eb5b8d6b293bae0f1af7229f67441d158c7f43dbcf7",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/deletion-refactor.log.txt",
+      "sha256": "b3cb82990254fac7f145315883df02984f8d27c8027b67a8ea35cd894a51bd16",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/dynamic-bypass-red.log.txt",
+      "sha256": "bb5509813874e607d09bce6afd3b80e6425dc95546baf41e6a3c969404f1d99a",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/factory-close-green.log.txt",
+      "sha256": "41ed084ed49d0b7cc48cf1ecee92ad471e01dd5f7afccb1560d0735d9bdc01c6",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/factory-close-red.log.txt",
+      "sha256": "293051677036e03c54b97b755f48dc4dcb5652aa9e9d89c940c1c17e46a620c9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/factory-close-refactor.log.txt",
+      "sha256": "8de47a2747bf83912df4cd18b80b6cac0fcdcf1e1943e6bf5b57077367464539",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/ordinary-cap-green.log.txt",
+      "sha256": "7ae9363dca7be52e25608289e2e435025a5f9e07077cb7f50e2be83f837a2b33",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/ordinary-cap-red.log.txt",
+      "sha256": "248937361b638ed7fe2437b29f476ecc9b55b4c06c73a0a6cdbb5efe3661be36",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/ordinary-cap-refactor.log.txt",
+      "sha256": "3bceb718fe6b949b04ef957c8f0795a2ce1f979cf70d100cf889a36e87b5e2ea",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/ordinary-cap-regression.log.txt",
+      "sha256": "36e788d0a95a85a3a604cdd6324623891297c62c90f5046f9a1dce466c2071ea",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/prepared-cap-green.log.txt",
+      "sha256": "bed2f27bd3919b0cf615e8e7768382b56a04dca816edc808468fd1ffadc50115",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/prepared-cap-red.log.txt",
+      "sha256": "4dc7f215a7776a56dbba91213e968f41249e24276c571d87aa2ac9c5040837d5",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/prepared-cap-refactor.log.txt",
+      "sha256": "ec07d3d63f407e6b3c1c45ed11dd09cc78b1321fd60282f001594a8d4c9f6bfe",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/prepared-cap-regression.log.txt",
+      "sha256": "ed3ad89b6420c97c84c5422331f09bb5f74603ccc80370559d08729aa56733cc",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/public-state-green.log.txt",
+      "sha256": "ae6892d0665d08cd7846cbaad55a8c84d681562f37cca272a46c63b1931ef924",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/public-state-red.log.txt",
+      "sha256": "5c811810e0886b6652c05808ea7a090e4c5d27471c26421d136b126fc28c16a9",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/public-state-refactor.log.txt",
+      "sha256": "1c089c560d5e7a8dc8afd3e26834f59142a7b735317e285c2f88f2b2a6616151",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/replacement-green.log.txt",
+      "sha256": "c3d9dd40860de117a6ba18e7fd28779cb4b5ef68479c76e33af872ddbc59a7f8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/replacement-red.log.txt",
+      "sha256": "7955cefeae53fb659ba72a4a6e370d0ce6f90ce2ff4ad9f72b583e668843cbc1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/replacement-refactor.log.txt",
+      "sha256": "8496d45802fe5ede97b249bc968e7e3e2872a321a3e2593db2bd1938ddc86dc2",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/reservation-green-2.log.txt",
+      "sha256": "20ea4c20a5b58e3aaad03773cc864247cbe63cb556d499ebb216be74f112887e",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/reservation-green.log.txt",
+      "sha256": "9e8d2bbcc297f07bebf9f93e51cebb5f7ac4dea01613713fc4df7a13e5f718ba",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/reservation-red.log.txt",
+      "sha256": "0205769bf9b6fbaa446e9473706d2583af8014e8f384b0d44249c6df923c778c",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/reset-green.log.txt",
+      "sha256": "ec29df1e36ed19d73ea165b209f2d0e7a10f3d8119647d805f977fa6797163dd",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/reset-red.log.txt",
+      "sha256": "2c64538d8ea9cf9128a0793a2c2139adc4ff797686101f7a56e9120f6ddc4cd8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "docs/issues/evidence/2026-10-14/bounded-pool-progress/transcripts/reset-refactor.log.txt",
+      "sha256": "d886e7da5df63d65f68eac42b7e209344c5a77b2a9b7d59a4df8f635880c6cc3",
+      "status": "??"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "f06dd60afcecc4ae8c05b4049d7742795fb97415",
+      "mode": "100644",
+      "path": "docs/issues/open/database/TT-005-bound-fixture-owned-prepared-database-pools.md",
+      "sha256": "7df4dc2cc5b94da9a2300c03d130c6a4c0584ada601ad04b067021b705a48703",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "5ae9ac5cb72214c67cfdebe7423a56f3ad013913",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/ITtDatabasePool.cs",
+      "sha256": "9c311724c8e3a81c8fb37e52d45e575304c4c5398ba29665aa7b7f952cbce421",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtAdministratorConnections.cs",
+      "sha256": "0edcc7d3e8f9928ef5f9ff8babd4bfac44d58e3393521ae8c98f1edc29ee41a1",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtOwnedContextOptions.cs",
+      "sha256": "af16cc9590861f1dc03bcc7b3fe9461a7fe6fce1f71b6905bea940711d041dd4",
+      "status": "??"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "9bffcdf88ad833dfab04cc9fbf9162ec0294c9ec",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtPool.cs",
+      "sha256": "eed5020a5f59379e232c40f952cb26586bd065ba97373f4aa6ded55e561ec18c",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "da093e3cdfc55351bb38545bcefe1e031c82f941",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtPreparedPool.cs",
+      "sha256": "2427132d55698fa8737e4336daedaf7d1d3bfc474925c9bbb730837a8b2f890c",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+      "sha256": "71a8ca6c12fdb5de029ea53f0cdbb89fdbb68a93ca7388008d4209c75f0eb410",
+      "status": "??"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "177f6e4d800e9b31f6c67e71062057f2d9026286",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtFactory.cs",
+      "sha256": "2a684c1148185d4e65b0cf395e83671409da51b16c50d79be02b7f20d63a3829",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "2b348cc95183f4c1bc8f7dec24986dc6f6a460ff",
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtOptions.cs",
+      "sha256": "f76d50b7bb0ad6d03b2d7b08c61d11b3084106a730831e29ca24a3e02d017e19",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtPoolSnapshot.cs",
+      "sha256": "16035d5efc65a2ebf72e031105f1227486fa41c480767c636c5bbd0630b740de",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "src/TurboTest.EFCore/TtResourceBudget.cs",
+      "sha256": "5e666240a1818f9faf64a08e79f5355321d668f84faf05d3ce9c85f2f946a263",
+      "status": "??"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "c2b1a59d4706950da9d53551b268adccc60d7a99",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/AutoAllocationTests.cs",
+      "sha256": "40c03f7c916e73f213cd8d5abbb350080d3774c0f7f7a1e0a53bd87e31249dbb",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "159e4cd2f36282aa90dde45341bfaf87080ba53f",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/BaselineValidationTests.cs",
+      "sha256": "6577fd6955a5f4933570086bed28a484a8704ef8a87e4f871f9d917815a399d4",
+      "status": " M"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "33c2fc26eabda37ff811fae89d5e5770d0996ddb",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/CompensatingCleanupTests.cs",
+      "sha256": "c270d9146fd823f10695afb9a73d9139b3fc970af6223818654d5f3e5931d580",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/ConnectionBudgetTests.cs",
+      "sha256": "aaa005ce654ff7efa28cc53ba76a9fef553c4488fc59efecb35cff61217ca1ec",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/CreationAccountingTests.cs",
+      "sha256": "27ab6b200c7d22cb6199f4702dc3f9e104e901600797c46d6b8217f29134ca8b",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/FactoryBackpressureTests.cs",
+      "sha256": "0f763fbe1e6447eef0fe194d9558637ecbbf1f52e6d597b22a21b7202c543ded",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/OrdinaryCapacityTests.cs",
+      "sha256": "f8af0c036dbb057cf3e864e3e7840bcb23e21f123a152909acfdda5ddad8a7af",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/PreparationBudgetTests.cs",
+      "sha256": "e3c579688b3d5f4a6a2797b4a6c2788bfa22157cf80c408b8517ef1e9cb46444",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/PreparedCapacityTests.cs",
+      "sha256": "910317a25612d9e36a0182e697ed1ce8b03f3ace78629daf5dcac03ad963e5be",
+      "status": "??"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "969ca14f26dc9f6e0bd6e0941844a38d0e86633c",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/ResetTimingTests.cs",
+      "sha256": "06481ea1e4cf9307c9c22bd3c85f1b26d40ff6a0c1ef32f484e378a07be83f85",
+      "status": " M"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/ResourceBudgetValidationTests.cs",
+      "sha256": "1cf68f003d68f9b35fd9e1f37fba28851d732346f34707f464c0bddbd22bebc8",
+      "status": "??"
+    },
+    {
+      "change": "Added",
+      "deletion": false,
+      "indexMode": null,
+      "indexObject": null,
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/SlotPoolTests.cs",
+      "sha256": "bdb374da9d7c4f43d7fa61354f9b804b1a96c4f4d04bf8c5515c3f38a96f9974",
+      "status": "??"
+    },
+    {
+      "change": "Modified",
+      "deletion": false,
+      "indexMode": "100644",
+      "indexObject": "78c27c64cc6c15132747314a1e6419116ca8f5ce",
+      "mode": "100644",
+      "path": "tests/TurboTest.Tests/StartupCleanupTests.cs",
+      "sha256": "3b698a9cd1bf574bd515261ac2cf54db139980fee9346429723c1e084946d9f5",
+      "status": " M"
+    }
+  ],
+  "refsInventory": {
+    "refs/heads/master": "a849728fca0696ea06694922155447683d5b8855",
+    "refs/stash": "0811caaa6d33c0107d31416a68b3dc30a8a218ec"
+  },
+  "upstreamObject": null,
+  "upstreamRef": null
+}

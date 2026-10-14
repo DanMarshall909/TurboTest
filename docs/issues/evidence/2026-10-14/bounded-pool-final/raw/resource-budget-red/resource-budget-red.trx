@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="9f8b8eca-1ff4-46c0-a07a-46700cd1d879" name="@os-greg 2026-10-14 14:26:35" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T14:26:35.6570561+10:00" queuing="2026-10-14T14:26:35.6570564+10:00" start="2026-10-14T14:26:35.0837897+10:00" finish="2026-10-14T14:26:35.6904173+10:00" />
+  <TestSettings name="default" id="29ce4646-ef2c-46b7-ac0b-ef2ef8069054">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_14_26_35" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="829be022-748a-4efa-83bd-a7f109fa7988" testId="e16fc53f-be4f-5068-1e4f-b4bc90748f5a" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;MaxConnectionsPerDatabase&quot;)" computerName="os-greg" duration="00:00:00.0008025" startTime="2026-10-14T14:26:35.6209065+10:00" endTime="2026-10-14T14:26:35.6209470+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="829be022-748a-4efa-83bd-a7f109fa7988">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c700900a-dc4c-4312-b094-10c68b52dc01" testId="7814d77f-01b9-f826-dcce-f5972e6e06ae" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;MaxContainers&quot;)" computerName="os-greg" duration="00:00:00.0008371" startTime="2026-10-14T14:26:35.6212654+10:00" endTime="2026-10-14T14:26:35.6213037+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c700900a-dc4c-4312-b094-10c68b52dc01">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7ed0c102-54da-472e-8fa1-0e0e37d28d50" testId="3aaa8532-af92-92ad-f8c6-276ca74002e6" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;PreparationConcurrency&quot;)" computerName="os-greg" duration="00:00:00.0001834" startTime="2026-10-14T14:26:35.6321872+10:00" endTime="2026-10-14T14:26:35.6322292+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7ed0c102-54da-472e-8fa1-0e0e37d28d50">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "PreparationConcurrency"
+Actual:   "preparationConcurrency"
+           ↑ (pos 0)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="31a79b70-823e-4d7d-805f-ae41c564ea40" testId="17c8d44f-65a7-1b45-15e6-02bd6944124f" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;MaxAdministratorConnections&quot;)" computerName="os-greg" duration="00:00:00.0009805" startTime="2026-10-14T14:26:35.6187491+10:00" endTime="2026-10-14T14:26:35.6187908+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="31a79b70-823e-4d7d-805f-ae41c564ea40">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c5c447d1-7bed-4ef9-85b0-66650aeb0361" testId="8df7d8d3-7691-d2d0-078e-b2b96a0c727f" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;PoolSize&quot;)" computerName="os-greg" duration="00:00:00.0002327" startTime="2026-10-14T14:26:35.6216151+10:00" endTime="2026-10-14T14:26:35.6216538+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c5c447d1-7bed-4ef9-85b0-66650aeb0361">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "PoolSize"
+Actual:   "capacity"
+           ↑ (pos 0)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="da6d2c43-5e36-40de-8576-af6c0bafe448" testId="7c54be43-4c6b-e7c3-a4eb-5976da41cb51" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;PoolSize&quot;)" computerName="os-greg" duration="00:00:00.0000805" startTime="2026-10-14T14:26:35.6191394+10:00" endTime="2026-10-14T14:26:35.6193749+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="da6d2c43-5e36-40de-8576-af6c0bafe448" />
+    <UnitTestResult executionId="31f1f26f-5cd7-4f0e-9009-fdf7354a89ab" testId="c0a24e94-ff59-d5ad-4599-a244544a85f2" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;ResetConcurrency&quot;)" computerName="os-greg" duration="00:00:00.0002729" startTime="2026-10-14T14:26:35.6200355+10:00" endTime="2026-10-14T14:26:35.6200785+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="31f1f26f-5cd7-4f0e-9009-fdf7354a89ab">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "ResetConcurrency"
+Actual:   "resetConcurrency"
+           ↑ (pos 0)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1f8f6eab-044c-4406-a535-b5ff657b93cd" testId="f1b4f79d-4665-41a4-a0e4-27f7fc83ff62" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;MaxConnectionsPerDatabase&quot;)" computerName="os-greg" duration="00:00:00.0007281" startTime="2026-10-14T14:26:35.6318311+10:00" endTime="2026-10-14T14:26:35.6318741+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1f8f6eab-044c-4406-a535-b5ff657b93cd">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="63a06bc1-6527-402b-a06f-e0f447ec4042" testId="f7cedb08-3a34-6dde-73d1-8662b695f97f" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;MaxContainers&quot;)" computerName="os-greg" duration="00:00:00.0226782" startTime="2026-10-14T14:26:35.5695905+10:00" endTime="2026-10-14T14:26:35.6054433+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="63a06bc1-6527-402b-a06f-e0f447ec4042">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a89e424e-032e-423e-aa6a-f059d0cf6e62" testId="07c46d51-3b67-c094-6596-266631e3b157" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;MaxAdministratorConnections&quot;)" computerName="os-greg" duration="00:00:00.0002148" startTime="2026-10-14T14:26:35.6312890+10:00" endTime="2026-10-14T14:26:35.6313401+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a89e424e-032e-423e-aa6a-f059d0cf6e62">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "MaxAdministratorConnections"
+Actual:   "maxCount"
+           ↑ (pos 0)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="bd79a9a0-6d11-42ae-b12d-301f860697b2" testId="5cc2e1e0-4c91-28d3-c6ec-e7fe2c868eed" testName="TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling" computerName="os-greg" duration="00:00:00.0012444" startTime="2026-10-14T14:26:35.6331249+10:00" endTime="2026-10-14T14:26:35.6331710+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bd79a9a0-6d11-42ae-b12d-301f860697b2">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentException)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 43
+   at TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 47
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="20caa71d-9c1a-48fc-8283-efc1afc79b0c" testId="7ffebfff-46f4-a56c-b1e5-7e35a33af359" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;ResetConcurrency&quot;)" computerName="os-greg" duration="00:00:00.0016793" startTime="2026-10-14T14:26:35.6176201+10:00" endTime="2026-10-14T14:26:35.6177123+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="20caa71d-9c1a-48fc-8283-efc1afc79b0c">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "ResetConcurrency"
+Actual:   "resetConcurrency"
+           ↑ (pos 0)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="48cc0a1b-546a-47c3-9e3e-35a4b1711351" testId="eda44f05-abce-4840-9d43-27416a563bd4" testName="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;PreparationConcurrency&quot;)" computerName="os-greg" duration="00:00:00.0001287" startTime="2026-10-14T14:26:35.6204801+10:00" endTime="2026-10-14T14:26:35.6205215+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="48cc0a1b-546a-47c3-9e3e-35a4b1711351">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "PreparationConcurrency"
+Actual:   "preparationConcurrency"
+           ↑ (pos 0)</Message>
+          <StackTrace>   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="5cc2e1e0-4c91-28d3-c6ec-e7fe2c868eed">
+      <Execution id="bd79a9a0-6d11-42ae-b12d-301f860697b2" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;PoolSize&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="7c54be43-4c6b-e7c3-a4eb-5976da41cb51">
+      <Execution id="da6d2c43-5e36-40de-8576-af6c0bafe448" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;PoolSize&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="8df7d8d3-7691-d2d0-078e-b2b96a0c727f">
+      <Execution id="c5c447d1-7bed-4ef9-85b0-66650aeb0361" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;MaxAdministratorConnections&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="17c8d44f-65a7-1b45-15e6-02bd6944124f">
+      <Execution id="31a79b70-823e-4d7d-805f-ae41c564ea40" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;ResetConcurrency&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="7ffebfff-46f4-a56c-b1e5-7e35a33af359">
+      <Execution id="20caa71d-9c1a-48fc-8283-efc1afc79b0c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;PreparationConcurrency&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="eda44f05-abce-4840-9d43-27416a563bd4">
+      <Execution id="48cc0a1b-546a-47c3-9e3e-35a4b1711351" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;PreparationConcurrency&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="3aaa8532-af92-92ad-f8c6-276ca74002e6">
+      <Execution id="7ed0c102-54da-472e-8fa1-0e0e37d28d50" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;MaxAdministratorConnections&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="07c46d51-3b67-c094-6596-266631e3b157">
+      <Execution id="a89e424e-032e-423e-aa6a-f059d0cf6e62" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;MaxConnectionsPerDatabase&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f1b4f79d-4665-41a4-a0e4-27f7fc83ff62">
+      <Execution id="1f8f6eab-044c-4406-a535-b5ff657b93cd" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: &quot;MaxContainers&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="7814d77f-01b9-f826-dcce-f5972e6e06ae">
+      <Execution id="c700900a-dc4c-4312-b094-10c68b52dc01" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;MaxConnectionsPerDatabase&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="e16fc53f-be4f-5068-1e4f-b4bc90748f5a">
+      <Execution id="829be022-748a-4efa-83bd-a7f109fa7988" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;ResetConcurrency&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="c0a24e94-ff59-d5ad-4599-a244544a85f2">
+      <Execution id="31f1f26f-5cd7-4f0e-9009-fdf7354a89ab" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: &quot;MaxContainers&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="f7cedb08-3a34-6dde-73d1-8662b695f97f">
+      <Execution id="63a06bc1-6527-402b-a06f-e0f447ec4042" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ResourceBudgetValidationTests" name="A_nonpositive_resource_budget_is_rejected_before_preparation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="e16fc53f-be4f-5068-1e4f-b4bc90748f5a" executionId="829be022-748a-4efa-83bd-a7f109fa7988" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7814d77f-01b9-f826-dcce-f5972e6e06ae" executionId="c700900a-dc4c-4312-b094-10c68b52dc01" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3aaa8532-af92-92ad-f8c6-276ca74002e6" executionId="7ed0c102-54da-472e-8fa1-0e0e37d28d50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17c8d44f-65a7-1b45-15e6-02bd6944124f" executionId="31a79b70-823e-4d7d-805f-ae41c564ea40" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8df7d8d3-7691-d2d0-078e-b2b96a0c727f" executionId="c5c447d1-7bed-4ef9-85b0-66650aeb0361" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7c54be43-4c6b-e7c3-a4eb-5976da41cb51" executionId="da6d2c43-5e36-40de-8576-af6c0bafe448" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c0a24e94-ff59-d5ad-4599-a244544a85f2" executionId="31f1f26f-5cd7-4f0e-9009-fdf7354a89ab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f1b4f79d-4665-41a4-a0e4-27f7fc83ff62" executionId="1f8f6eab-044c-4406-a535-b5ff657b93cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7cedb08-3a34-6dde-73d1-8662b695f97f" executionId="63a06bc1-6527-402b-a06f-e0f447ec4042" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="07c46d51-3b67-c094-6596-266631e3b157" executionId="a89e424e-032e-423e-aa6a-f059d0cf6e62" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5cc2e1e0-4c91-28d3-c6ec-e7fe2c868eed" executionId="bd79a9a0-6d11-42ae-b12d-301f860697b2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7ffebfff-46f4-a56c-b1e5-7e35a33af359" executionId="20caa71d-9c1a-48fc-8283-efc1afc79b0c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eda44f05-abce-4840-9d43-27416a563bd4" executionId="48cc0a1b-546a-47c3-9e3e-35a4b1711351" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="13" executed="13" passed="1" failed="12" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.19]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.25]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.25]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.25]       Stack Trace:
+[xUnit.net 00:00:00.25]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.25]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.25]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:00.26]                  ↓ (pos 0)
+[xUnit.net 00:00:00.26]       Expected: "ResetConcurrency"
+[xUnit.net 00:00:00.26]       Actual:   "resetConcurrency"
+[xUnit.net 00:00:00.26]                  ↑ (pos 0)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(32,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.26]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:00.26]                  ↓ (pos 0)
+[xUnit.net 00:00:00.26]       Expected: "ResetConcurrency"
+[xUnit.net 00:00:00.26]       Actual:   "resetConcurrency"
+[xUnit.net 00:00:00.26]                  ↑ (pos 0)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(32,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:00.26]                  ↓ (pos 0)
+[xUnit.net 00:00:00.26]       Expected: "PreparationConcurrency"
+[xUnit.net 00:00:00.26]       Actual:   "preparationConcurrency"
+[xUnit.net 00:00:00.26]                  ↑ (pos 0)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(32,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.26]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.26]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.26]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:00.26]                  ↓ (pos 0)
+[xUnit.net 00:00:00.26]       Expected: "PoolSize"
+[xUnit.net 00:00:00.26]       Actual:   "capacity"
+[xUnit.net 00:00:00.26]                  ↑ (pos 0)
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(32,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:00.27]                  ↓ (pos 0)
+[xUnit.net 00:00:00.27]       Expected: "MaxAdministratorConnections"
+[xUnit.net 00:00:00.27]       Actual:   "maxCount"
+[xUnit.net 00:00:00.27]                  ↑ (pos 0)
+[xUnit.net 00:00:00.27]       Stack Trace:
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(32,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.27]       Expected: typeof(System.ArgumentOutOfRangeException)
+[xUnit.net 00:00:00.27]       Stack Trace:
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(28,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:00.27]                  ↓ (pos 0)
+[xUnit.net 00:00:00.27]       Expected: "PreparationConcurrency"
+[xUnit.net 00:00:00.27]       Actual:   "preparationConcurrency"
+[xUnit.net 00:00:00.27]                  ↑ (pos 0)
+[xUnit.net 00:00:00.27]       Stack Trace:
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(32,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(34,0): at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field)
+[xUnit.net 00:00:00.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]       Assert.Throws() Failure: No exception was thrown
+[xUnit.net 00:00:00.27]       Expected: typeof(System.ArgumentException)
+[xUnit.net 00:00:00.27]       Stack Trace:
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(43,0): at TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling()
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs(47,0): at TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling()
+[xUnit.net 00:00:00.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6081333+10:00">
+        <Text>[xUnit.net 00:00:00.24]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "MaxContainers") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6179295+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "ResetConcurrency") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6189563+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "MaxAdministratorConnections") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6202438+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "ResetConcurrency") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6209669+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "PreparationConcurrency") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6215758+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "MaxConnectionsPerDatabase") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6219223+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "MaxContainers") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6223505+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "PoolSize") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6624026+10:00">
+        <Text>[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "MaxAdministratorConnections") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6624328+10:00">
+        <Text>[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "MaxConnectionsPerDatabase") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6624467+10:00">
+        <Text>[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "PreparationConcurrency") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:26:35.6624638+10:00">
+        <Text>[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

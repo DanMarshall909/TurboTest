@@ -1,0 +1,36 @@
+# Final TT-005 coverage classification
+
+Expanded full gate: 168 pass, no failure/skip. Raw report and per-source summary are
+retained. Counts union line hits across generated async and declaring classes;
+this summary does not claim a branch score or assertions for every covered line.
+
+- Administrator connections: 34/35 lines; uncovered catch closing brace 54.
+  Native construction/authentication failures and canceled waits have assertions.
+- Owned-context options: 9/9; valid exact source and same-endpoint unowned source
+  are checked. Missing provider-extension/null-source branch is unmeasured.
+- Reservation ledger: 276/284. Distinct preparation-compensation failure139-142
+  now executes under the new retained-capacity test and its rejected early-release
+  calibration. Invalid return181 remains an internal guard. Return cancellation
+  while waiting for execution239-242 and canceled-token-before-ready assignment
+  297-299 remain unmeasured race paths. Broader drain/recovery semantics belong
+  to TT-006; successful drain does not prove these branches.
+- Ordinary pool: 223/253. Windows memory detection322-346 is unavailable on this
+  Linux host; /proc parse fallback358 and generic fallback366 were not injected.
+  Docker label mismatch, acknowledged/unacknowledged missing-create and source-only
+  cleanup now execute via real create/inspect/delete boundaries with independent
+  reservation, survival and deletion oracles.
+  Uncached image pull246-251 is not exercised with the cached image. Readiness
+  query failure is a native retained test; uncovered232 is an async catch brace.
+- Prepared pool: 295/302. Failed source disposal394-399, invalid schema enum162
+  and wrong workload identity275 are unmeasured guards/failure paths. The actual
+  baseline/clone catalog, source binding and role restrictions have native tests.
+- Factory: 118/125. Shutdown cancellation translation115 and failed disposal
+  aggregation153,156-159,163 remain unmeasured. Normal closure settles queued and
+  live leases; broader failed/canceled drain behavior remains TT-006.
+- Public resource budget19/19 and snapshot3/3 have behavioral native/fast oracles;
+  coverage is not a claim that public record instances validate user construction.
+
+These classifications disclose measurement limits; they are not independent
+approval or a claim of 100% core coverage. Normal mutation remains pending the
+whole coding session final committed snapshot. The admin-idle one-fault pilot
+is a scoped real server oracle calibration, not the normal mutation result.

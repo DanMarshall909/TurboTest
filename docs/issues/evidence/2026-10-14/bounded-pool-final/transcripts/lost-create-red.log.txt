@@ -1,0 +1,20 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.48]     TurboTest.Tests.CreationAccountingTests.A_lost_create_response_does_not_release_a_container_without_confirmed_cleanup [FAIL]
+  Failed TurboTest.Tests.CreationAccountingTests.A_lost_create_response_does_not_release_a_container_without_confirmed_cleanup [255 ms]
+  Error Message:
+   Assert.Empty() Failure: Collection was not empty
+Collection: [ContainerListResponse { Command = "docker-entrypoint.sh postgres", Created = 2026-10-14T04:49:21.0000000Z, ID = "f6e4f2d487c99b6c2f8c8970070f8231e0a34ce28d06117ad7"···, Image = "postgres:16-alpine", ImageID = "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b7"···, ··· }]
+  Stack Trace:
+     at TurboTest.Tests.CreationAccountingTests.A_lost_create_response_does_not_release_a_container_without_confirmed_cleanup() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CreationAccountingTests.cs:line 29
+   at TurboTest.Tests.CreationAccountingTests.A_lost_create_response_does_not_release_a_container_without_confirmed_cleanup() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CreationAccountingTests.cs:line 37
+   at TurboTest.Tests.CreationAccountingTests.A_lost_create_response_does_not_release_a_container_without_confirmed_cleanup() in /home/dan/code/TurboTest/tests/TurboTest.Tests/CreationAccountingTests.cs:line 37
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/lost-create-red/lost-create-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 267 ms - TurboTest.Tests.dll (net10.0)

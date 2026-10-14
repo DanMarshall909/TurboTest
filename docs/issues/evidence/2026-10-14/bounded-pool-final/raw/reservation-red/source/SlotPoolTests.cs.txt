@@ -1,0 +1,59 @@
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class SlotPoolTests
+{
+    [Fact]
+    public async Task Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits()
+    {
+        var begun = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var reserved = 0;
+        var preparing = 0;
+        var deleted = new HashSet<Guid>();
+        await using var owner = new TtSlotPool<Resource>(4, 4,
+            id =>
+            {
+                if (Interlocked.Increment(ref reserved) > 4)
+                    throw new InvalidOperationException("The capacity owner created a fifth reservation.");
+                return new Resource(id);
+            },
+            async (_, _) =>
+            {
+                if (Interlocked.Increment(ref preparing) == 4) begun.TrySetResult();
+                await release.Task;
+            },
+            resource => { deleted.Add(resource.Id); return Task.CompletedTask; });
+        using var cancelFifth = new CancellationTokenSource();
+        var first = Enumerable.Range(0, 4).Select(_ => owner.AcquireAsync()).ToArray();
+        Task<TtSlotPool<Resource>.Reservation>? fifth = null;
+        try
+        {
+            await begun.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((4, 4, 0), (owner.Snapshot.Reserved, owner.Snapshot.Preparing, owner.Snapshot.Leased));
+            fifth = owner.AcquireAsync(cancelFifth.Token);
+            Assert.False(fifth.IsCompleted);
+            Assert.Equal(4, reserved);
+            Assert.Equal(1, owner.Snapshot.QueuedAcquisitions);
+            cancelFifth.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => fifth);
+            release.TrySetResult();
+            var leases = await Task.WhenAll(first);
+            Assert.Equal(4, leases.Select(lease => lease.Id).Distinct().Count());
+            Assert.Equal((4, 0, 4, 0), (owner.Snapshot.Reserved, owner.Snapshot.Preparing, owner.Snapshot.Leased, owner.Snapshot.QueuedAcquisitions));
+        }
+        finally
+        {
+            cancelFifth.Cancel();
+            release.TrySetResult();
+            await Task.WhenAll(first);
+            if (fifth is not null) await Record.ExceptionAsync(async () => await fifth);
+        }
+        await owner.DisposeAsync();
+        Assert.Equal(4, deleted.Count);
+        Assert.Equal(0, owner.Snapshot.Reserved);
+    }
+
+    private sealed record Resource(Guid Id);
+}

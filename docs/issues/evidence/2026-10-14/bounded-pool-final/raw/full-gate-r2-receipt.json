@@ -1,0 +1,40 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "TurboTest.sln",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=full-gate-r2.trx",
+    "--results-directory",
+    "artifacts/tt-005/full-gate-r2"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "times": {
+    "creation": "2026-10-14T15:24:05.4017308+10:00",
+    "queuing": "2026-10-14T15:24:05.4017309+10:00",
+    "start": "2026-10-14T15:23:54.7474575+10:00",
+    "finish": "2026-10-14T15:29:40.7034549+10:00"
+  },
+  "counters": {
+    "total": "168",
+    "executed": "168",
+    "passed": "168",
+    "failed": "0",
+    "error": "0",
+    "timeout": "0",
+    "aborted": "0",
+    "inconclusive": "0",
+    "passedButRunAborted": "0",
+    "notRunnable": "0",
+    "notExecuted": "0",
+    "disconnected": "0",
+    "warning": "0",
+    "completed": "0",
+    "inProgress": "0",
+    "pending": "0"
+  },
+  "sourceBinding": "source-final records in final evidence manifest"
+}

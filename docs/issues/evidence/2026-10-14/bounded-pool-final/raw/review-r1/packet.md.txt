@@ -1,0 +1,97 @@
+# TT-005 fixed-capacity and resource-budget candidate
+
+Review this entire bounded TT-005 candidate for completion. The active goal is
+all ten implementation tickets from docs/issues/README.md; TT-001 through TT-004
+are committed and Resolved. This envelope would resolve only TT-005 and leave
+five Open tickets. Read AGENTS.md, rule-sets/ai-rules.md and
+/home/dan/.agents/skills/agentic-delivery/references/completion-review.md.
+
+Use read-only repository access. Do not edit, stage, build/test, create Docker
+resources or delegate approval. Independently reconstruct the manifest and
+integration identity. Return exactly PASS, FAIL or BLOCKED, with explicit
+task-to-implementation and criterion-to-test matrices and actionable findings.
+Missing measurement is disclosed below; determine its in-scope significance.
+
+## Candidate identity and proposed publication
+
+The packet's manifest.json and manifest.sha256 bind every modified/untracked
+in-scope path in bytewise order, with index/worktree status, mode, content digest
+and index object. All dirty paths are TT-005-owned; no unrelated changes are
+excluded. Base/current/integration object is a849728fca0696ea06694922155447683d5b8855.
+Only master and one primary worktree exist. No remote or upstream is configured;
+local-only work is the existing authoritative tracker policy. Stash
+0811caaa6d33c0107d31416a68b3dc30a8a218ec remains unchanged.
+
+envelope.json contains exact proposed administrative changes: resolve/move the
+ticket, update index links/status and add a completion receipt. final-tree.json
+describes the complete expected tree. No semantic source/test changes or cleanup
+are allowed after PASS. The author will preserve this raw verdict and packet.
+
+## Evidence and status claims
+
+Authoritative ticket: docs/issues/open/database/TT-005-bound-fixture-owned-prepared-database-pools.md.
+Final evidence: docs/issues/evidence/2026-10-14/bounded-pool-final/manifest.json.
+Historical evidence: bounded-pool-progress/manifest.json, unchanged earlier cut.
+The final archive includes 164-pass whole-solution TRX/coverage/log, build
+receipts, failed regressions, error/setup qualifications and exact current
+production/test source cut. All raw archive content digests can be reconstructed
+from originals; compressed coverage has deterministic gzip and raw SHA256.
+
+Current whole-suite command: dotnet test TurboTest.sln --collect 'Code Coverage;Format=cobertura'
+--logger 'trx;LogFileName=full-gate.trx' --results-directory artifacts/tt-005/full-gate.
+Exit0,164pass,0fail,0skip,6m1s reported test duration. Solution build and the
+separate DynamicScalingExample build exit0 with zero warnings/errors. The normal
+runner's already-committed maxParallelThreads2/conservative configuration is used.
+No TurboTest containers remain; unrelated 0a95e88a68d8 is retained.
+
+Normal mutation remains pending the whole coding session final committed source.
+It does not block ticket publication under the skill. The scoped admin-idle
+fault reenables bootstrap pooling and is rejected by a calibrated actual-client
+connection oracle; original source SHA is restored. It is not a full mutation run.
+
+## Acceptance mapping to inspect independently
+
+1. Exclusive owned databases: PreparedCapacityTests four actual DB names and
+cross-marker absence; OrdinaryCapacityTests warm OID/session reuse;
+FactoryBackpressureTests denies exact-endpoint unowned context sources.
+2. Reservation cap and confirmed release: SlotPoolTests blocked creation,
+uncertain/confirmed deletion, compensation and closure; CreationAccountingTests
+real Docker create with lost response must locate/delete reserved identity.
+3. Cancelable backpressure: native fifth/next acquisition cancellation and reuse;
+fast factory closure settles capacity waiters; no overflow path remains.
+4. Verified Ready: held reset/validation fast and native tests; existing corrupted
+clone and row/sequence/schema regressions in the final full gate.
+5. Execution bounds: PreparationBudgetTests configures two preparations/resets,
+holds actual work and observes waiting reset; fast failure compensation holds
+cleanup permits for preparation and reset.
+6. Connection/baseline/source budgets: ConnectionBudgetTests native max2 workloads,
+allowance1 with concurrent resets and no idle admin clients, failed/canceled
+admin opens, private ambient return and caller workload rollback. Existing
+PreparedContextBindingTests independent same-version/context templates and
+SeededBaselineTests role/template isolation. ResourceBudgetValidationTests
+reject invalid public limits before preparation; auto allocation clamps max.
+7. Fixed observable mode: public PoolState and ResourceBudget assertions across
+capacity, held work, return and closure. Dynamic scaling is rejected until TT-009.
+
+## Disclosed coverage limits and remaining ticket boundary
+
+The raw full-coverage-summary and coverage-classification in the final archive
+name every unexecuted core line. Ledger272/284, administrators34/35, prepared295/302,
+factory118/125, ordinary215/253; public budget and snapshot are fully executed.
+These are union line counts, not branch scores or assertion claims. In particular
+preparation-compensation failure, canceled return permit acquisition, canceled
+token race at Ready publication, lost-create identity mismatch/missing-resource
+guards and failed factory/source disposal are unmeasured paths. The packet does
+not disguise them as proven by nearby coverage. Windows memory detection is
+unavailable on Linux; uncached Docker image pull is unexercised.
+
+TT-006 owns broader recovery/retries, terminal recovery, true startup deadlines,
+failed-disposal observability and lifecycle drain policy. TT-007 owns DI/static
+configuration, TT-008 parking, TT-010 comprehensive latency metrics and TT-009
+bounded adaptation. This candidate implements fixed capacity and conservative
+failure accounting; do not treat those future acceptance criteria as completed.
+
+Consider materially simpler or safer alternatives, preserving the existing
+ordinary warm-session and prepared baseline contracts. Style preferences and
+future extensibility alone do not justify failure. Record supported reusable
+lesson candidates with owner, evidence, proposed change, downside and disposition.

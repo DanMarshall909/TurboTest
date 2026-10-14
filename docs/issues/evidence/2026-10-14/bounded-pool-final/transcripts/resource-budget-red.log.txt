@@ -1,0 +1,136 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.24]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "MaxContainers") [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "ResetConcurrency") [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "MaxAdministratorConnections") [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "ResetConcurrency") [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "PreparationConcurrency") [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "MaxConnectionsPerDatabase") [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "MaxContainers") [FAIL]
+[xUnit.net 00:00:00.26]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "PoolSize") [FAIL]
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "MaxContainers") [22 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "ResetConcurrency") [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "ResetConcurrency"
+Actual:   "resetConcurrency"
+           ↑ (pos 0)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "MaxAdministratorConnections") [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "ResetConcurrency") [< 1 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "ResetConcurrency"
+Actual:   "resetConcurrency"
+           ↑ (pos 0)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "PreparationConcurrency") [< 1 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "PreparationConcurrency"
+Actual:   "preparationConcurrency"
+           ↑ (pos 0)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "MaxConnectionsPerDatabase") [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "MaxContainers") [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "PoolSize") [< 1 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "PoolSize"
+Actual:   "capacity"
+           ↑ (pos 0)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "MaxAdministratorConnections") [FAIL]
+[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "MaxConnectionsPerDatabase") [FAIL]
+[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "PreparationConcurrency") [FAIL]
+[xUnit.net 00:00:00.27]     TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling [FAIL]
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: True, field: "MaxAdministratorConnections") [< 1 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "MaxAdministratorConnections"
+Actual:   "maxCount"
+           ↑ (pos 0)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "MaxConnectionsPerDatabase") [< 1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentOutOfRangeException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 28
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(prepared: False, field: "PreparationConcurrency") [< 1 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "PreparationConcurrency"
+Actual:   "preparationConcurrency"
+           ↑ (pos 0)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 32
+   at TurboTest.Tests.ResourceBudgetValidationTests.A_nonpositive_resource_budget_is_rejected_before_preparation(Boolean prepared, String field) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 34
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling [1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(System.ArgumentException)
+  Stack Trace:
+     at TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 43
+   at TurboTest.Tests.ResourceBudgetValidationTests.An_ordinary_fixture_cannot_warm_more_slots_than_its_container_ceiling() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs:line 47
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/resource-budget-red/resource-budget-red.trx
+
+Failed!  - Failed:    12, Passed:     1, Skipped:     0, Total:    13, Duration: 63 ms - TurboTest.Tests.dll (net10.0)

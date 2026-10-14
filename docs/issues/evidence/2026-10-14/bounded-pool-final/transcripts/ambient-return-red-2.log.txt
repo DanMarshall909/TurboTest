@@ -1,0 +1,23 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:18.38]     TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions [FAIL]
+  Failed TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions [18 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineRowReset (InvalidOperationException). The resource is unavailable for reuse. Cleanup also failed at Discard (25001).
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtSlotPool`1.ResetAsync(Reservation reservation, Func`3 reset, TaskCompletionSource settled, Action`1 observeWait, Func`3 prepareReplacement) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs:line 240
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.ReturnAsync(Reservation reservation) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 301
+   at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs:line 83
+   at TurboTest.EFCore.TtFactory`1.<>c__DisplayClass17_3.<<CreateLeaseAsync>b__3>d.MoveNext() in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 89
+--- End of stack trace from previous location ---
+   at TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 126
+   at TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 133
+   at TurboTest.Tests.ConnectionBudgetTests.Returning_a_prepared_lease_inside_an_ambient_transaction_restores_it_without_retaining_private_sessions() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 133
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/ambient-return-red-2/ambient-return-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 18 s - TurboTest.Tests.dll (net10.0)

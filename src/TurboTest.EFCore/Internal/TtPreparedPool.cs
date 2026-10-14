@@ -1,5 +1,7 @@
 using System.Security.Cryptography;
+using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Transactions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Npgsql;
@@ -57,8 +59,9 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     private readonly Login _workload;
     private readonly Login _adminLogin;
     private readonly SemaphoreSlim _gate = new(1, 1);
-    private readonly Queue<Slot> _ready = new();
-    private readonly Dictionary<string, Slot> _owned = new();
+    private readonly TtSlotPool<Slot> _slots;
+    private readonly TtAdministratorConnections _administrators;
+    private readonly ConcurrentDictionary<string, Slot> _owned = new();
     private NpgsqlDataSource? _administrator;
     private BaselineIdentity? _identity;
     private TtBaselineSnapshot? _snapshot;
@@ -68,6 +71,19 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
 
     internal Guid OwnerId => _owner;
     internal IReadOnlyList<string> OwnedResourceIds => _host.OwnedResourceIds;
+    public TtResourceBudget Budget { get; }
+    public TtPoolSnapshot Snapshot
+    {
+        get
+        {
+            var administrators = _administrators.Snapshot;
+            return _slots.Snapshot with
+            {
+                ExecutingAdministratorConnections = administrators.Active,
+                WaitingAdministratorConnections = administrators.Waiting
+            };
+        }
+    }
 
     internal TtPreparedPool(TtOptions options, TtBaselineDefinition<TContext> definition,
         Func<NpgsqlDataSource, Task>? beforeVerification = null, Func<TtContainer, Task>? deleteHost = null,
@@ -77,6 +93,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     {
         options = options.Snapshot();
         TtPreparedConfiguration.Validate(options);
+        Budget = TtResourceBudget.Create(options, prepared: true);
         ArgumentNullException.ThrowIfNull(definition);
         _options = options;
         _definition = definition;
@@ -95,16 +112,21 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         _adminLogin = new Login(hostOptions.Username, hostOptions.Password);
         hostOptions.DatabaseName = "tt_control";
         hostOptions.ConnectionStringTemplate = null;
-        _host = new TtPool(hostOptions, deleteHost, prepareImage);
+        _host = new TtPool(hostOptions, deleteHost, prepareImage, administratorHost: true);
+        _administrators = new TtAdministratorConnections(options.MaxAdministratorConnections, CreateAdministratorConnection);
+        _slots = new TtSlotPool<Slot>(options.PoolSize, options.PreparationConcurrency, ReserveSlot,
+            (slot, token) => PrepareSlotAsync(slot, token), DeleteSlotAsync, options.ResetConcurrency);
     }
 
     internal async Task InitializeAsync(CancellationToken cancellationToken)
     {
+        using var privateWork = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
         cancellationToken.ThrowIfCancellationRequested();
         await _host.InitializeAsync();
         _administrator = (await _host.GetDatabaseAsync()).DataSource;
-        await using (var connection = await _administrator.OpenConnectionAsync(cancellationToken))
+        await using (var administrative = await OpenAdministratorAsync(cancellationToken: cancellationToken))
         {
+            var connection = administrative.Connection;
             await _workload.CreateWorkloadRoleAsync(connection, cancellationToken);
             await using var create = new NpgsqlCommand(
                 $"CREATE DATABASE {Quote(_template)} OWNER {Quote(_workload.Name)} TEMPLATE template0", connection);
@@ -144,21 +166,22 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         }
 
         // Disposal above drains every initialization connection before cloning.
-        await using (var connection = await _administrator.OpenConnectionAsync(cancellationToken))
+        await using (var administrative = await OpenAdministratorAsync(cancellationToken: cancellationToken))
         {
+            var connection = administrative.Connection;
             await connection.ExecuteNonQueryAsync(
                 $"ALTER DATABASE {Quote(_template)} OWNER TO {Quote(connection.UserName!)}");
         }
-        await using (var connection = await OpenAdministratorAsync(_template, cancellationToken))
+        await using (var administrative = await OpenAdministratorAsync(_template, cancellationToken))
         {
+            var connection = administrative.Connection;
             _snapshot = await TtBaselineSnapshot.CaptureAsync(connection, cancellationToken);
             _schemaSnapshot = _snapshot.Schema;
             _rowReset = await TtRowResetPlan.CaptureAsync(connection, cancellationToken);
         }
-        await using (var connection = await _administrator.OpenConnectionAsync(cancellationToken))
-            await connection.ExecuteNonQueryAsync($"ALTER DATABASE {Quote(_template)} ALLOW_CONNECTIONS false");
-        for (var i = 0; i < _options.PoolSize; i++)
-            _ready.Enqueue(await CreateSlotAsync());
+        await using (var administrative = await OpenAdministratorAsync(cancellationToken: cancellationToken))
+            await administrative.Connection.ExecuteNonQueryAsync($"ALTER DATABASE {Quote(_template)} ALLOW_CONNECTIONS false");
+        await _slots.WarmAsync(_options.PoolSize, cancellationToken);
         cancellationToken.ThrowIfCancellationRequested();
     }
 
@@ -174,19 +197,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     }
 
     private static DbContextOptions<TContext> OwnedOptions(TContext context, NpgsqlDataSource source, string stage)
-    {
-        var configuration = (DbContextOptions<TContext>)context.GetService<IDbContextOptions>();
-        // The pinned provider's extension exposes exact datasource identity. An
-        // endpoint comparison would also accept an unowned connection pool.
-#pragma warning disable EF1001
-        var configuredSource = configuration.Extensions
-            .OfType<Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal.NpgsqlOptionsExtension>()
-            .SingleOrDefault()?.DataSource;
-#pragma warning restore EF1001
-        if (!ReferenceEquals(configuredSource, source))
-            throw new TtLifecycleException(stage, new InvalidOperationException("The context must use its fixture-owned source."));
-        return configuration;
-    }
+        => TtOwnedContextOptions.Read(context, source, stage);
 
     private static IEnumerable<(string Schema, string Table, string Column, string Type, bool Nullable)> ModelColumns(
         Microsoft.EntityFrameworkCore.Metadata.IModel model) => model.GetRelationalModel().Tables
@@ -198,48 +209,44 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         .ThenBy(column => column.Type, StringComparer.Ordinal)
         .ThenBy(column => column.Nullable);
 
-    public async Task<TtDatabase> GetDatabaseAsync()
+    public async Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
     {
-        await _gate.WaitAsync();
-        try
-        {
-            ObjectDisposedException.ThrowIf(_disposal is not null, this);
-            var slot = _ready.Count > 0 ? _ready.Dequeue() : await CreateSlotAsync();
-            return new TtDatabase(slot.Source, () => ReturnAsync(slot), () => DiscardAsync(slot));
-        }
-        finally { _gate.Release(); }
+        var reservation = await _slots.AcquireAsync(cancellationToken);
+        return new TtDatabase(reservation.Value.Source, () => ReturnAsync(reservation), () => _slots.DiscardAsync(reservation));
     }
 
-    private async Task<Slot> CreateSlotAsync(Action<TimeSpan>? observeValidation = null)
+    private Slot ReserveSlot(Guid _)
     {
         var name = $"{_options.DatabaseName}_slot_{Guid.NewGuid():N}";
         var slot = new Slot(name, CreateWorkloadSource(name));
-        _owned.Add(name, slot);
+        _owned.TryAdd(name, slot);
+        return slot;
+    }
+
+    private async Task PrepareSlotAsync(Slot slot, CancellationToken cancellationToken, Action<TimeSpan>? observeValidation = null)
+    {
+        var name = slot.Name;
         var stage = "BaselineClone";
         try
         {
-            await using var connection = await _administrator!.OpenConnectionAsync();
-            await connection.ExecuteNonQueryAsync(
-                $"CREATE DATABASE {Quote(name)} TEMPLATE {Quote(_template)} OWNER {Quote(_workload.Name)}");
+            await using (var administrative = await OpenAdministratorAsync(cancellationToken: cancellationToken))
+                await administrative.Connection.ExecuteNonQueryAsync(
+                    $"CREATE DATABASE {Quote(name)} TEMPLATE {Quote(_template)} OWNER {Quote(_workload.Name)}");
             if (_beforeVerification is not null) await _beforeVerification(slot.Source);
             stage = "BaselineVerify";
             var validation = Stopwatch.GetTimestamp();
             try
             {
-                await using var probe = await OpenAdministratorAsync(name);
-                _snapshot!.Verify(await TtBaselineSnapshot.CaptureAsync(probe));
+                await using var probe = await OpenAdministratorAsync(name, cancellationToken);
+                _snapshot!.Verify(await TtBaselineSnapshot.CaptureAsync(probe.Connection, cancellationToken));
                 stage = "BaselineWorkloadVerify";
                 await VerifyWorkloadAsync(slot);
             }
             finally { observeValidation?.Invoke(Stopwatch.GetElapsedTime(validation)); }
-            return slot;
         }
         catch (Exception error)
         {
-            var failure = new TtLifecycleException(stage, error);
-            try { await DeleteSlotAsync(slot); }
-            catch (Exception cleanupError) { failure = failure.WithCleanupFailure(cleanupError); }
-            throw failure;
+            throw new TtLifecycleException(stage, error);
         }
     }
 
@@ -248,7 +255,11 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         var builder = new NpgsqlConnectionStringBuilder(_administrator!.ConnectionString)
         {
             Database = database,
-            IncludeErrorDetail = false
+            IncludeErrorDetail = false,
+            Pooling = true,
+            Enlist = true,
+            MinPoolSize = 0,
+            MaxPoolSize = _options.MaxConnectionsPerDatabase
         };
         _workload.ApplyTo(builder);
         return NpgsqlDataSource.Create(builder.ConnectionString);
@@ -256,6 +267,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
 
     private async Task VerifyWorkloadAsync(Slot slot)
     {
+        using var privateWork = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
         await using var workload = await slot.Source.OpenConnectionAsync();
         await using var identity = new NpgsqlCommand("SELECT current_database(), current_user", workload);
         await using var reader = await identity.ExecuteReaderAsync();
@@ -263,78 +275,51 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
             throw new InvalidOperationException("The workload connection does not match its owned slot.");
     }
 
-    private async Task<NpgsqlConnection> OpenAdministratorAsync(string database,
-        CancellationToken cancellationToken = default)
+    private Task<TtAdministratorConnections.Lease> OpenAdministratorAsync(string? database = null,
+        CancellationToken cancellationToken = default) => _administrators.OpenAsync(database, cancellationToken);
+
+    private NpgsqlConnection CreateAdministratorConnection(string? database)
     {
         var builder = new NpgsqlConnectionStringBuilder(_administrator!.ConnectionString)
         {
-            Database = database,
-            Pooling = false
+            Pooling = false,
+            Enlist = false
         };
+        if (database is not null) builder.Database = database;
         _adminLogin.ApplyTo(builder);
-        var connection = new NpgsqlConnection(builder.ConnectionString);
-        try
-        {
-            await connection.OpenAsync(cancellationToken);
-            return connection;
-        }
-        catch
-        {
-            await connection.DisposeAsync();
-            throw;
-        }
+        return new NpgsqlConnection(builder.ConnectionString);
     }
 
-    private async Task ReturnAsync(Slot slot)
+    private async Task ReturnAsync(TtSlotPool<Slot>.Reservation reservation)
     {
-        var requested = Stopwatch.GetTimestamp();
-        await _gate.WaitAsync();
         var acquired = Stopwatch.GetTimestamp();
+        var wait = TimeSpan.Zero;
         var validation = TimeSpan.Zero;
         var strategy = "Rows";
         var succeeded = false;
         void ObserveValidation(TimeSpan duration) => validation += duration;
         try
         {
-            if (_disposal is not null)
+            await _slots.ReturnAsync(reservation, async (slot, _) =>
             {
-                strategy = "Shutdown";
-                await DeleteSlotAsync(slot);
-                succeeded = true;
-                return;
-            }
-            bool reusable;
-            try
-            {
-                reusable = await TryResetRowsAsync(slot, ObserveValidation);
-            }
-            catch (Exception error)
-            {
-                var failure = new TtLifecycleException("BaselineRowReset", error);
-                try { await DeleteSlotAsync(slot); }
-                catch (Exception cleanupError) { failure = failure.WithCleanupFailure(cleanupError); }
-                throw failure;
-            }
-            if (reusable) _ready.Enqueue(slot);
-            else
-            {
-                strategy = "Recreate";
-                await DeleteSlotAsync(slot);
-                if (_disposal is null) _ready.Enqueue(await CreateSlotAsync(ObserveValidation));
-            }
+                try
+                {
+                    var reusable = await TryResetRowsAsync(slot, ObserveValidation);
+                    if (!reusable) strategy = "Recreate";
+                    return reusable;
+                }
+                catch (Exception error) { throw new TtLifecycleException("BaselineRowReset", error); }
+            }, duration => { wait = duration; acquired = Stopwatch.GetTimestamp(); },
+                (slot, token) => PrepareSlotAsync(slot, token, ObserveValidation));
             succeeded = true;
         }
         finally
         {
             var execution = Stopwatch.GetElapsedTime(acquired);
-            try
-            {
-                _options.Logger?.LogDebug(new EventId(400, "BaselineReset"),
+            _options.Logger?.LogDebug(new EventId(400, "BaselineReset"),
                     "Baseline reset {OwnerId} {Strategy}: wait {ResetPermitWaitMilliseconds} ms, execution {ResetExecutionMilliseconds} ms, validation {ValidationMilliseconds} ms, success {Succeeded}",
-                    _owner, strategy, Stopwatch.GetElapsedTime(requested, acquired).TotalMilliseconds,
+                    Snapshot.OwnerId, strategy, wait.TotalMilliseconds,
                     execution.TotalMilliseconds, validation.TotalMilliseconds, succeeded);
-            }
-            finally { _gate.Release(); }
         }
     }
 
@@ -342,8 +327,9 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     {
         if (_rowReset is null) return false;
         slot.Source.Clear();
-        await using (var connection = await OpenAdministratorAsync(slot.Name))
+        await using (var administrative = await OpenAdministratorAsync(slot.Name))
         {
+            var connection = administrative.Connection;
             var validation = Stopwatch.GetTimestamp();
             try { _schemaSnapshot!.Verify(await TtBaselineSnapshot.CaptureSchemaAsync(connection)); }
             catch (TtLifecycleException error) when (error.Stage is "BaselineVerify" or "BaselineUnsupportedCatalog")
@@ -364,17 +350,11 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         return true;
     }
 
-    private async Task DiscardAsync(Slot slot)
-    {
-        await _gate.WaitAsync();
-        try { await DeleteSlotAsync(slot); }
-        finally { _gate.Release(); }
-    }
-
     private async Task DeleteSlotAsync(Slot slot)
     {
         await slot.Source.DisposeAsync();
-        await using var connection = await _administrator!.OpenConnectionAsync();
+        await using var administrative = await OpenAdministratorAsync();
+        var connection = administrative.Connection;
         await using (var templateFlag = new NpgsqlCommand("SELECT datistemplate FROM pg_database WHERE datname = $1", connection))
         {
             templateFlag.Parameters.Add(new NpgsqlParameter { Value = slot.Name });
@@ -382,7 +362,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
                 await connection.ExecuteNonQueryAsync($"ALTER DATABASE {Quote(slot.Name)} IS_TEMPLATE false");
         }
         await connection.ExecuteNonQueryAsync($"DROP DATABASE IF EXISTS {Quote(slot.Name)} WITH (FORCE)");
-        _owned.Remove(slot.Name);
+        _owned.TryRemove(slot.Name, out _);
     }
 
     public ValueTask DisposeAsync()
@@ -410,6 +390,8 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         try
         {
             Exception? first = null;
+            try { await _slots.DisposeAsync(); }
+            catch (Exception error) { first ??= error; }
             foreach (var slot in _owned.Values)
             {
                 try { await slot.Source.DisposeAsync(); }
@@ -419,7 +401,6 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
             catch (Exception error) { first ??= error; }
             if (first is not null) throw new TtLifecycleException("PreparedPoolDispose", first);
             _owned.Clear();
-            _ready.Clear();
             _rowReset = null;
         }
         finally { _gate.Release(); }

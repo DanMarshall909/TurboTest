@@ -1,0 +1,5 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+/home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(245,13): error CS0619: 'Assert.Throws<T>(Func<Task>)' is obsolete: 'You must call Assert.ThrowsAsync<T> (and await the result) when testing async code.' [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]
+/home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(245,13): error xUnit2014: Do not use Assert.Throws() to check for asynchronously thrown exceptions. Use Assert.ThrowsAsync instead. (https://xunit.net/xunit.analyzers/rules/xUnit2014) [/home/dan/code/TurboTest/tests/TurboTest.Tests/TurboTest.Tests.csproj]

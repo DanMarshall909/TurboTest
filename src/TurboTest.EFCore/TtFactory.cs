@@ -7,13 +7,20 @@ namespace TurboTest.EFCore;
 /// <summary>Owns a fixture's database leases. Dispose asynchronously after the tests finish.</summary>
 public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbContext
 {
+    /// <summary>Current owned workload reservations and queued acquisition/reset work.</summary>
+    public TtPoolSnapshot PoolState => _pool.Snapshot;
+
+    /// <summary>Captured ceilings for this owner's containers, databases, connections and executing work.</summary>
+    public TtResourceBudget ResourceBudget => _pool.Budget;
+
     private readonly ITtDatabasePool _pool;
     private readonly TtOptions _options;
     private readonly bool _ownsPool;
     private readonly Func<Npgsql.NpgsqlDataSource, DbContextOptions<TContext>>? _preparedOptions;
     private readonly Action<TContext, Npgsql.NpgsqlDataSource>? _validateContext;
-    private readonly SemaphoreSlim _acquisitionGate = new(1, 1);
     private readonly object _disposeGate = new();
+    private readonly CancellationTokenSource _shutdown = new();
+    private readonly HashSet<TaskCompletionSource> _acquisitions = new();
     private readonly ConcurrentDictionary<TtLease<TContext>, byte> _leases = new();
     private readonly ConcurrentDictionary<TtDatabase, byte> _databases = new();
     private bool _closing;
@@ -36,11 +43,17 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
     {
         if (_preparedOptions is not null && configure is not null)
             throw new ArgumentException("Configure the model in the fixture baseline before preparation.", nameof(configure));
-        await _acquisitionGate.WaitAsync(cancellationToken);
+        var settled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        lock (_disposeGate)
+        {
+            ObjectDisposedException.ThrowIf(_closing, this);
+            _acquisitions.Add(settled);
+        }
         try
         {
-            lock (_disposeGate) ObjectDisposedException.ThrowIf(_closing, this);
-            var database = await _pool.GetDatabaseAsync();
+            using var linked = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _shutdown.Token);
+            var acquisitionToken = linked.Token;
+            var database = await _pool.GetDatabaseAsync(acquisitionToken);
             _databases.TryAdd(database, 0);
             TContext BuildContext()
             {
@@ -52,23 +65,41 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
                 return (TContext)(Activator.CreateInstance(typeof(TContext), builder.Options)
                     ?? throw new InvalidOperationException($"Could not create {typeof(TContext).Name}"));
             }
-            void Register(TContext context)
+            void Register(TContext context, CancellationToken validationToken = default)
             {
                 database.OnDispose(() => context.DisposeAsync().AsTask());
+                validationToken.ThrowIfCancellationRequested();
+                TtOwnedContextOptions.Read(context, database.DataSource, "ContextConfiguration");
                 _validateContext?.Invoke(context, database.DataSource);
             }
             TContext context;
             var stage = "ContextCreate";
             try
             {
-                cancellationToken.ThrowIfCancellationRequested();
+                acquisitionToken.ThrowIfCancellationRequested();
                 context = BuildContext();
-                Register(context);
                 stage = "ContextInitialize";
-                cancellationToken.ThrowIfCancellationRequested();
+                Register(context, acquisitionToken);
+                acquisitionToken.ThrowIfCancellationRequested();
                 if (_preparedOptions is null && _options.AutoMigrate)
-                    await context.Database.EnsureCreatedAsync(cancellationToken);
-                cancellationToken.ThrowIfCancellationRequested();
+                    await context.Database.EnsureCreatedAsync(acquisitionToken);
+                acquisitionToken.ThrowIfCancellationRequested();
+                TtLease<TContext>? lease = null;
+                lease = new TtLease<TContext>(context, BuildContext, context => Register(context), async () =>
+                {
+                    try { await database.DisposeAsync(); }
+                    finally
+                    {
+                        _databases.TryRemove(database, out _);
+                        if (lease is not null) _leases.TryRemove(lease, out _);
+                    }
+                });
+                lock (_disposeGate)
+                {
+                    ObjectDisposedException.ThrowIf(_closing, this);
+                    _leases.TryAdd(lease, 0);
+                }
+                return lease;
             }
             catch (Exception error)
             {
@@ -76,60 +107,61 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
                 try { await database.DiscardAsync(); }
                 catch (Exception cleanupError) { discardFailure = cleanupError; }
                 finally { _databases.TryRemove(database, out _); }
-                if (error is OperationCanceledException && discardFailure is null) throw;
+                if (error is OperationCanceledException or ObjectDisposedException && discardFailure is null) throw;
                 var failure = error as TtLifecycleException ?? new TtLifecycleException(stage, error);
                 if (discardFailure is not null) failure = failure.WithCleanupFailure(discardFailure);
                 throw failure;
             }
-            TtLease<TContext>? lease = null;
-            lease = new TtLease<TContext>(context, BuildContext, Register, async () =>
-            {
-                try { await database.DisposeAsync(); }
-                finally
-                {
-                    _databases.TryRemove(database, out _);
-                    if (lease is not null) _leases.TryRemove(lease, out _);
-                }
-            });
-            _leases.TryAdd(lease, 0);
-            return lease;
         }
-        finally { _acquisitionGate.Release(); }
+        catch (OperationCanceledException) when (_shutdown.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
+        {
+            throw new ObjectDisposedException(nameof(TtFactory<TContext>));
+        }
+        finally
+        {
+            lock (_disposeGate) _acquisitions.Remove(settled);
+            settled.TrySetResult();
+        }
     }
 
     public ValueTask DisposeAsync()
     {
+        Task disposal;
+        TaskCompletionSource start;
         lock (_disposeGate)
         {
+            if (_disposal is not null) return new ValueTask(_disposal);
             _closing = true;
-            _disposal ??= DisposeCoreAsync();
-            return new ValueTask(_disposal);
+            start = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            disposal = _disposal = DisposeCoreAsync(start.Task);
         }
+        try { _shutdown.Cancel(); }
+        finally { start.TrySetResult(); }
+        return new ValueTask(disposal);
     }
 
-    private async Task DisposeCoreAsync()
+    private async Task DisposeCoreAsync(Task start)
     {
-        await _acquisitionGate.WaitAsync();
-        try
+        await start;
+        Task[] acquisitions;
+        lock (_disposeGate) acquisitions = _acquisitions.Select(acquisition => acquisition.Task).ToArray();
+        await Task.WhenAll(acquisitions);
+        Exception? first = null;
+        foreach (var lease in _leases.Keys)
         {
-            Exception? first = null;
-            foreach (var lease in _leases.Keys)
-            {
-                try { await lease.DisposeAsync(); }
-                catch (Exception error) { first ??= error; }
-            }
-            foreach (var database in _databases.Keys)
-            {
-                try { await database.DisposeAsync(); }
-                catch (Exception error) { first ??= error; }
-            }
-            if (_ownsPool)
-            {
-                try { await _pool.DisposeAsync(); }
-                catch (Exception error) { first ??= error; }
-            }
-            if (first is not null) throw first;
+            try { await lease.DisposeAsync(); }
+            catch (Exception error) { first ??= error; }
         }
-        finally { _acquisitionGate.Release(); }
+        foreach (var database in _databases.Keys)
+        {
+            try { await database.DisposeAsync(); }
+            catch (Exception error) { first ??= error; }
+        }
+        if (_ownsPool)
+        {
+            try { await _pool.DisposeAsync(); }
+            catch (Exception error) { first ??= error; }
+        }
+        if (first is not null) throw first;
     }
 }

@@ -2,5 +2,7 @@ namespace TurboTest.EFCore.Internal;
 
 internal interface ITtDatabasePool : IAsyncDisposable
 {
-    Task<TtDatabase> GetDatabaseAsync();
+    TtPoolSnapshot Snapshot { get; }
+    TtResourceBudget Budget { get; }
+    Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default);
 }

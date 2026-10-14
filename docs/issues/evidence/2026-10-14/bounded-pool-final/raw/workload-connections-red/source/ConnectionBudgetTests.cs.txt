@@ -1,0 +1,46 @@
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using TurboTest.EFCore;
+
+namespace TurboTest.Tests;
+
+public class ConnectionBudgetTests
+{
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(bool prepared)
+    {
+        void Configure(TtOptions options)
+        {
+            options.PoolSize = 1;
+            options.MaxConnectionsPerDatabase = 2;
+        }
+        await using var fixture = prepared
+            ? await Tt.CreateFactoryAsync(new TtBaselineDefinition<TestDbContext>("connections-v1",
+                TtSchemaInitialization.EnsureCreated), Configure)
+            : await Tt.CreateFactoryAsync<TestDbContext>(Configure);
+        await using var lease = await fixture.CreateLeaseAsync();
+        var second = lease.CreateContext();
+        var third = lease.CreateContext();
+        await lease.Context.Database.OpenConnectionAsync();
+        await second.Database.OpenConnectionAsync();
+        var firstSession = await SessionAsync(lease.Context);
+        Assert.NotEqual(firstSession, await SessionAsync(second));
+        using var cancellation = new CancellationTokenSource(TimeSpan.FromMilliseconds(250));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => third.Database.OpenConnectionAsync(
+            cancellation.Token).WaitAsync(TimeSpan.FromSeconds(5)));
+        await lease.Context.Database.CloseConnectionAsync();
+        using var nextCancellation = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+        await third.Database.OpenConnectionAsync(nextCancellation.Token);
+        Assert.Equal(firstSession, await SessionAsync(third));
+    }
+
+    private static async Task<int> SessionAsync(DbContext context)
+    {
+        await using var command = new NpgsqlCommand("SELECT pg_backend_pid()",
+            (NpgsqlConnection)context.Database.GetDbConnection());
+        return (int)(await command.ExecuteScalarAsync())!;
+    }
+}

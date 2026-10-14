@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="481fa060-b2f4-4c6f-8350-17e4dd32024f" name="@os-greg 2026-10-14 14:32:01" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T14:32:01.3710625+10:00" queuing="2026-10-14T14:32:01.3710625+10:00" start="2026-10-14T14:31:55.3933124+10:00" finish="2026-10-14T14:32:05.6476822+10:00" />
+  <TestSettings name="default" id="a928aeab-9db0-4385-bbc2-2d8adc0f5361">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_14_32_01" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="b88de1b0-40c6-405f-8968-1ee38fc977dd" testId="a1c56881-7936-c90a-4a70-529935c91909" testName="TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: False)" computerName="os-greg" duration="00:00:04.2457776" startTime="2026-10-14T14:32:01.3568392+10:00" endTime="2026-10-14T14:32:05.5871900+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b88de1b0-40c6-405f-8968-1ee38fc977dd">
+      <Output>
+        <ErrorInfo>
+          <Message>System.NotSupportedException : Specified method is not supported.</Message>
+          <StackTrace>   at TurboTest.EFCore.TtFactory`1.get_ResourceBudget() in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 14
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 31
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 40
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 40
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="789165ec-ae14-4cb0-a2f7-ea1660e23457" testId="66166ae7-4d09-3d37-eeb3-3dff6435a5bf" testName="TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: True)" computerName="os-greg" duration="00:00:05.4636086" startTime="2026-10-14T14:31:55.8626476+10:00" endTime="2026-10-14T14:32:01.3401956+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="789165ec-ae14-4cb0-a2f7-ea1660e23457">
+      <Output>
+        <ErrorInfo>
+          <Message>System.NotSupportedException : Specified method is not supported.</Message>
+          <StackTrace>   at TurboTest.EFCore.TtFactory`1.get_ResourceBudget() in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 14
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 31
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 40
+   at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared) in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 40
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="a1c56881-7936-c90a-4a70-529935c91909">
+      <Execution id="b88de1b0-40c6-405f-8968-1ee38fc977dd" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ConnectionBudgetTests" name="Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="66166ae7-4d09-3d37-eeb3-3dff6435a5bf">
+      <Execution id="789165ec-ae14-4cb0-a2f7-ea1660e23457" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.ConnectionBudgetTests" name="Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="a1c56881-7936-c90a-4a70-529935c91909" executionId="b88de1b0-40c6-405f-8968-1ee38fc977dd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="66166ae7-4d09-3d37-eeb3-3dff6435a5bf" executionId="789165ec-ae14-4cb0-a2f7-ea1660e23457" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="2" passed="0" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.19]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:05.69]       System.NotSupportedException : Specified method is not supported.
+[xUnit.net 00:00:05.69]       Stack Trace:
+[xUnit.net 00:00:05.69]         /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs(14,0): at TurboTest.EFCore.TtFactory`1.get_ResourceBudget()
+[xUnit.net 00:00:05.69]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(31,0): at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared)
+[xUnit.net 00:00:05.69]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(40,0): at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared)
+[xUnit.net 00:00:05.69]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(40,0): at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared)
+[xUnit.net 00:00:05.69]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:09.93]       System.NotSupportedException : Specified method is not supported.
+[xUnit.net 00:00:09.93]       Stack Trace:
+[xUnit.net 00:00:09.93]         /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs(14,0): at TurboTest.EFCore.TtFactory`1.get_ResourceBudget()
+[xUnit.net 00:00:09.93]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(31,0): at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared)
+[xUnit.net 00:00:09.93]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(40,0): at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared)
+[xUnit.net 00:00:09.93]         /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs(40,0): at TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(Boolean prepared)
+[xUnit.net 00:00:09.93]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:09.94]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:32:01.3426729+10:00">
+        <Text>[xUnit.net 00:00:05.69]     TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:32:05.5877263+10:00">
+        <Text>[xUnit.net 00:00:09.93]     TurboTest.Tests.ConnectionBudgetTests.Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(prepared: False) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

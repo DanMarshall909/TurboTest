@@ -1,0 +1,19 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:35.54]     TurboTest.Tests.PreparationBudgetTests.Configured_preparation_and_reset_bounds_govern_actual_executing_work [FAIL]
+  Failed TurboTest.Tests.PreparationBudgetTests.Configured_preparation_and_reset_bounds_govern_actual_executing_work [35 s]
+  Error Message:
+   System.TimeoutException : The operation has timed out.
+  Stack Trace:
+     at TurboTest.Tests.PreparationBudgetTests.Configured_preparation_and_reset_bounds_govern_actual_executing_work() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparationBudgetTests.cs:line 42
+   at TurboTest.Tests.PreparationBudgetTests.Configured_preparation_and_reset_bounds_govern_actual_executing_work() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparationBudgetTests.cs:line 65
+   at TurboTest.Tests.PreparationBudgetTests.Configured_preparation_and_reset_bounds_govern_actual_executing_work() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparationBudgetTests.cs:line 65
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/executor-bounds-red/executor-bounds-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 35 s - TurboTest.Tests.dll (net10.0)

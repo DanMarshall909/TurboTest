@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="1a756ab7-17ba-489c-a632-90060d760ce4" name="@os-greg 2026-10-14 14:57:44" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T14:57:44.5535298+10:00" queuing="2026-10-14T14:57:44.5535298+10:00" start="2026-10-14T14:57:43.9480346+10:00" finish="2026-10-14T14:57:44.5577965+10:00" />
+  <TestSettings name="default" id="7145a496-fc1d-44c3-a6a7-c9d354a34b98">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_14_57_44" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="0d9885bc-812c-4800-b076-1d6adef426d1" testId="acca8cf6-6edb-efbf-df72-b5bfdf1a4f1a" testName="TurboTest.Tests.SlotPoolTests.A_failed_reset_keeps_its_execution_permit_until_compensating_cleanup_finishes" computerName="os-greg" duration="00:00:00.0166925" startTime="2026-10-14T14:57:44.4330184+10:00" endTime="2026-10-14T14:57:44.4630047+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0d9885bc-812c-4800-b076-1d6adef426d1">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.False() Failure
+Expected: False
+Actual:   True</Message>
+          <StackTrace>   at TurboTest.Tests.SlotPoolTests.A_failed_reset_keeps_its_execution_permit_until_compensating_cleanup_finishes() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 279
+   at TurboTest.Tests.SlotPoolTests.A_failed_reset_keeps_its_execution_permit_until_compensating_cleanup_finishes() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 293
+   at TurboTest.Tests.SlotPoolTests.A_failed_reset_keeps_its_execution_permit_until_compensating_cleanup_finishes() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs:line 293
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SlotPoolTests.A_failed_reset_keeps_its_execution_permit_until_compensating_cleanup_finishes" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="acca8cf6-6edb-efbf-df72-b5bfdf1a4f1a">
+      <Execution id="0d9885bc-812c-4800-b076-1d6adef426d1" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SlotPoolTests" name="A_failed_reset_keeps_its_execution_permit_until_compensating_cleanup_finishes" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="acca8cf6-6edb-efbf-df72-b5bfdf1a4f1a" executionId="0d9885bc-812c-4800-b076-1d6adef426d1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.18]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.24]       Assert.False() Failure
+[xUnit.net 00:00:00.24]       Expected: False
+[xUnit.net 00:00:00.24]       Actual:   True
+[xUnit.net 00:00:00.24]       Stack Trace:
+[xUnit.net 00:00:00.24]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(279,0): at TurboTest.Tests.SlotPoolTests.A_failed_reset_keeps_its_execution_permit_until_compensating_cleanup_finishes()
+[xUnit.net 00:00:00.24]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(293,0): at TurboTest.Tests.SlotPoolTests.A_failed_reset_keeps_its_execution_permit_until_compensating_cleanup_finishes()
+[xUnit.net 00:00:00.24]         /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotPoolTests.cs(293,0): at TurboTest.Tests.SlotPoolTests.A_failed_reset_keeps_its_execution_permit_until_compensating_cleanup_finishes()
+[xUnit.net 00:00:00.24]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.25]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T14:57:44.4654397+10:00">
+        <Text>[xUnit.net 00:00:00.23]     TurboTest.Tests.SlotPoolTests.A_failed_reset_keeps_its_execution_permit_until_compensating_cleanup_finishes [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

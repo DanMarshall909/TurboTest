@@ -1,0 +1,10 @@
+namespace TurboTest.EFCore;
+
+/// <summary>Immutable counts of workload reservations, including unavailable capacity.</summary>
+public sealed record TtPoolSnapshot(Guid OwnerId, int SlotLimit, int Preparing, int Ready, int Leased,
+    int WaitingResets, int ExecutingResets, int Quarantined, int Parked, int Retiring, int QueuedAcquisitions)
+{
+    public int WaitingAdministratorConnections { get; init; }
+    public int ExecutingAdministratorConnections { get; init; }
+    public int Reserved => Preparing + Ready + Leased + WaitingResets + ExecutingResets + Quarantined + Parked + Retiring;
+}

@@ -1,0 +1,111 @@
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using TurboTest.EFCore;
+
+namespace TurboTest.Tests;
+
+public class ConnectionBudgetTests
+{
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Owned_contexts_wait_at_the_database_connection_cap_and_reuse_a_released_session(bool prepared)
+    {
+        void Configure(TtOptions options)
+        {
+            options.PoolSize = 1;
+            options.MaxConnectionsPerDatabase = 2;
+        }
+        await using var fixture = prepared
+            ? await Tt.CreateFactoryAsync(new TtBaselineDefinition<TestDbContext>("connections-v1",
+                TtSchemaInitialization.EnsureCreated), Configure)
+            : await Tt.CreateFactoryAsync<TestDbContext>(Configure);
+        await using var lease = await fixture.CreateLeaseAsync();
+        var second = lease.CreateContext();
+        var third = lease.CreateContext();
+        await lease.Context.Database.OpenConnectionAsync();
+        await second.Database.OpenConnectionAsync();
+        var firstSession = await SessionAsync(lease.Context);
+        Assert.NotEqual(firstSession, await SessionAsync(second));
+        using var cancellation = new CancellationTokenSource(TimeSpan.FromMilliseconds(250));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => third.Database.OpenConnectionAsync(
+            cancellation.Token).WaitAsync(TimeSpan.FromSeconds(5)));
+        await lease.Context.Database.CloseConnectionAsync();
+        using var nextCancellation = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+        await third.Database.OpenConnectionAsync(nextCancellation.Token);
+        Assert.Equal(firstSession, await SessionAsync(third));
+    }
+
+    private static async Task<int> SessionAsync(DbContext context)
+    {
+        await using var command = new NpgsqlCommand("SELECT pg_backend_pid()",
+            (NpgsqlConnection)context.Database.GetDbConnection());
+        return (int)(await command.ExecuteScalarAsync())!;
+    }
+
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Administrator_allowance_includes_idle_control_and_executing_reset_connections()
+    {
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var active = 0;
+        await using var fixture = await Tt.CreatePreparedFactoryAsync(new TtOptions
+        {
+            PoolSize = 3, ResetConcurrency = 2, MaxAdministratorConnections = 1
+        }, new TtBaselineDefinition<TestDbContext>("administrators-v1", TtSchemaInitialization.EnsureCreated), default,
+            afterSequenceRestore: async (connection, transaction) =>
+            {
+                await using (var diagnostic = new NpgsqlCommand("SELECT pid, datname, application_name, state, backend_type FROM pg_stat_activity WHERE usename = current_user ORDER BY pid", connection, transaction))
+                await using (var rows = await diagnostic.ExecuteReaderAsync())
+                {
+                    var details = new List<string>();
+                    while (await rows.ReadAsync()) details.Add(string.Join(" | ", Enumerable.Range(0, rows.FieldCount).Select(rows.GetValue)));
+                    Directory.CreateDirectory("/home/dan/code/TurboTest/artifacts/tt-005/admin-diagnosis");
+                    await File.WriteAllLinesAsync("/home/dan/code/TurboTest/artifacts/tt-005/admin-diagnosis/connections.txt", details);
+                }
+                if (Interlocked.Increment(ref active) > 1)
+                    throw new InvalidOperationException("Two administrator resets exceeded the allowance.");
+                entered.TrySetResult();
+                try { await release.Task; }
+                finally { Interlocked.Decrement(ref active); }
+            });
+        var first = await fixture.CreateLeaseAsync();
+        var second = await fixture.CreateLeaseAsync();
+        await using var observer = await fixture.CreateLeaseAsync();
+        Task? firstReturn = null;
+        Task? secondReturn = null;
+        try
+        {
+            firstReturn = first.DisposeAsync().AsTask();
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            Assert.Equal(1, await AdministratorCountAsync(observer.Context));
+            secondReturn = second.DisposeAsync().AsTask();
+            using var deadline = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            while (fixture.PoolState.WaitingAdministratorConnections != 1)
+                await Task.Delay(5, deadline.Token);
+            Assert.Equal((2, 1, 1), (fixture.PoolState.ExecutingResets,
+                fixture.PoolState.ExecutingAdministratorConnections, fixture.PoolState.WaitingAdministratorConnections));
+            Assert.False(secondReturn.IsCompleted);
+            Assert.Equal(1, await AdministratorCountAsync(observer.Context));
+            release.TrySetResult();
+            await Task.WhenAll(firstReturn, secondReturn);
+            Assert.Equal((0, 0), (fixture.PoolState.ExecutingAdministratorConnections,
+                fixture.PoolState.WaitingAdministratorConnections));
+            Assert.Equal(0, await AdministratorCountAsync(observer.Context));
+        }
+        finally
+        {
+            release.TrySetResult();
+            if (firstReturn is not null) await firstReturn;
+            if (secondReturn is not null) await secondReturn;
+            await first.DisposeAsync();
+            await second.DisposeAsync();
+        }
+    }
+
+    private static Task<int> AdministratorCountAsync(DbContext context) => context.Database.SqlQueryRaw<int>(
+        "SELECT count(*)::integer AS \"Value\" FROM pg_stat_activity WHERE usename LIKE 'tt_admin_%'")
+        .SingleAsync();
+}

@@ -1,0 +1,51 @@
+using System.Collections.Concurrent;
+
+namespace TurboTest.EFCore.Internal;
+
+internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
+{
+    internal sealed class Reservation(Guid id, T value)
+    {
+        internal Guid Id { get; } = id;
+        internal T Value { get; } = value;
+        internal bool Preparing { get; set; } = true;
+    }
+
+    private readonly Guid _owner = Guid.NewGuid();
+    private readonly int _capacity;
+    private readonly Func<Guid, T> _reserve;
+    private readonly Func<T, CancellationToken, Task> _prepare;
+    private readonly Func<T, Task> _delete;
+    private readonly ConcurrentDictionary<Guid, Reservation> _owned = new();
+
+    internal TtSlotPool(int capacity, int preparationConcurrency,
+        Func<Guid, T> reserve, Func<T, CancellationToken, Task> prepare, Func<T, Task> delete)
+    {
+        _capacity = capacity;
+        _reserve = reserve;
+        _prepare = prepare;
+        _delete = delete;
+    }
+
+    internal TtPoolSnapshot Snapshot => new(_owner, _capacity, _owned.Values.Count(r => r.Preparing), 0,
+        _owned.Values.Count(r => !r.Preparing), 0, 0, 0, 0, 0, 0);
+
+    internal async Task<Reservation> AcquireAsync(CancellationToken cancellationToken = default)
+    {
+        var id = Guid.NewGuid();
+        var reservation = new Reservation(id, _reserve(id));
+        _owned.TryAdd(id, reservation);
+        await _prepare(reservation.Value, cancellationToken);
+        reservation.Preparing = false;
+        return reservation;
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        foreach (var reservation in _owned.Values)
+        {
+            await _delete(reservation.Value);
+            _owned.TryRemove(reservation.Id, out _);
+        }
+    }
+}

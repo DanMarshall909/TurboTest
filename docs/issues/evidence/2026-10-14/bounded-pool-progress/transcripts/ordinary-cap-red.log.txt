@@ -1,0 +1,29 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:09.25]     TurboTest.Tests.OrdinaryCapacityTests.An_ordinary_fixture_waits_at_its_container_cap_and_reuses_the_warm_session [FAIL]
+  Failed TurboTest.Tests.OrdinaryCapacityTests.An_ordinary_fixture_waits_at_its_container_cap_and_reuses_the_warm_session [9 s]
+  Error Message:
+   Assert.ThrowsAny() Failure: Exception type was not compatible
+Expected: typeof(System.OperationCanceledException)
+Actual:   typeof(System.InvalidOperationException)
+---- System.InvalidOperationException : An overflow container bypassed the physical cap.
+  Stack Trace:
+     at TurboTest.Tests.OrdinaryCapacityTests.An_ordinary_fixture_waits_at_its_container_cap_and_reuses_the_warm_session() in /home/dan/code/TurboTest/tests/TurboTest.Tests/OrdinaryCapacityTests.cs:line 25
+   at TurboTest.Tests.OrdinaryCapacityTests.An_ordinary_fixture_waits_at_its_container_cap_and_reuses_the_warm_session() in /home/dan/code/TurboTest/tests/TurboTest.Tests/OrdinaryCapacityTests.cs:line 34
+   at TurboTest.Tests.OrdinaryCapacityTests.An_ordinary_fixture_waits_at_its_container_cap_and_reuses_the_warm_session() in /home/dan/code/TurboTest/tests/TurboTest.Tests/OrdinaryCapacityTests.cs:line 34
+   at TurboTest.Tests.OrdinaryCapacityTests.An_ordinary_fixture_waits_at_its_container_cap_and_reuses_the_warm_session() in /home/dan/code/TurboTest/tests/TurboTest.Tests/OrdinaryCapacityTests.cs:line 34
+--- End of stack trace from previous location ---
+----- Inner Stack Trace -----
+   at TurboTest.Tests.OrdinaryCapacityTests.<>c__DisplayClass0_0.<An_ordinary_fixture_waits_at_its_container_cap_and_reuses_the_warm_session>b__0(TtContainer _) in /home/dan/code/TurboTest/tests/TurboTest.Tests/OrdinaryCapacityTests.cs:line 17
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 210
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 219
+   at TurboTest.EFCore.Internal.TtPool.GetDatabaseAsync(CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 109
+   at TurboTest.EFCore.TtFactory`1.CreateLeaseAsync(Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 50
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/ordinary-cap-red/ordinary-cap-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 9 s - TurboTest.Tests.dll (net10.0)

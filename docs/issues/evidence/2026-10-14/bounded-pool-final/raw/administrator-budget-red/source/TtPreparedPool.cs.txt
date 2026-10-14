@@ -1,0 +1,408 @@
+using System.Security.Cryptography;
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Npgsql;
+using Microsoft.Extensions.Logging;
+
+namespace TurboTest.EFCore.Internal;
+
+/// <summary>One fixture host, one sealed baseline, and independently owned workload databases.</summary>
+internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext : DbContext
+{
+    private sealed record Slot(string Name, NpgsqlDataSource Source);
+    private sealed record BaselineIdentity(Guid Owner, Type ContextType, TtSchemaInitialization Schema,
+        string InitializerVersion, DbContextOptions<TContext> Configuration, Microsoft.EntityFrameworkCore.Metadata.IModel Model);
+
+    private sealed class Login
+    {
+        private readonly string _password;
+        internal string Name { get; }
+
+        internal Login(string name, string password)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(name);
+            ArgumentException.ThrowIfNullOrEmpty(password);
+            Name = name;
+            _password = password;
+        }
+
+        internal void ApplyTo(NpgsqlConnectionStringBuilder builder)
+        {
+            builder.Username = Name;
+            builder.Password = _password;
+        }
+
+        internal async Task CreateWorkloadRoleAsync(NpgsqlConnection connection, CancellationToken cancellationToken)
+        {
+            // Server formatting quotes both parameters; never log the resulting SQL.
+            await using var format = new NpgsqlCommand(
+                "SELECT format('CREATE ROLE %I LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD %L', $1, $2)", connection);
+            format.Parameters.Add(new NpgsqlParameter { Value = Name });
+            format.Parameters.Add(new NpgsqlParameter { Value = _password });
+            var sql = (string)(await format.ExecuteScalarAsync(cancellationToken))!;
+            await using var role = new NpgsqlCommand(sql, connection);
+            await role.ExecuteNonQueryAsync(cancellationToken);
+        }
+    }
+
+    private readonly TtOptions _options;
+    private readonly TtBaselineDefinition<TContext> _definition;
+    private readonly TtPool _host;
+    private readonly Func<NpgsqlDataSource, Task>? _beforeVerification;
+    private readonly Func<NpgsqlConnection, NpgsqlTransaction, Task>? _afterSequenceRestore;
+    private readonly Func<NpgsqlConnection, Task>? _afterRowCommit;
+    private readonly Guid _owner = Guid.NewGuid();
+    private readonly string _template;
+    private readonly Login _workload;
+    private readonly Login _adminLogin;
+    private readonly SemaphoreSlim _gate = new(1, 1);
+    private readonly TtSlotPool<Slot> _slots;
+    private readonly ConcurrentDictionary<string, Slot> _owned = new();
+    private NpgsqlDataSource? _administrator;
+    private BaselineIdentity? _identity;
+    private TtBaselineSnapshot? _snapshot;
+    private TtBaselineSnapshot? _schemaSnapshot;
+    private TtRowResetPlan? _rowReset;
+    private Task? _disposal;
+
+    internal Guid OwnerId => _owner;
+    internal IReadOnlyList<string> OwnedResourceIds => _host.OwnedResourceIds;
+    public TtPoolSnapshot Snapshot => _slots.Snapshot;
+
+    internal TtPreparedPool(TtOptions options, TtBaselineDefinition<TContext> definition,
+        Func<NpgsqlDataSource, Task>? beforeVerification = null, Func<TtContainer, Task>? deleteHost = null,
+        Func<string, Task>? prepareImage = null,
+        Func<NpgsqlConnection, NpgsqlTransaction, Task>? afterSequenceRestore = null,
+        Func<NpgsqlConnection, Task>? afterRowCommit = null)
+    {
+        options = options.Snapshot();
+        TtPreparedConfiguration.Validate(options);
+        ArgumentNullException.ThrowIfNull(definition);
+        _options = options;
+        _definition = definition;
+        _template = $"{options.DatabaseName}_baseline_{_owner:N}";
+        _beforeVerification = beforeVerification;
+        _afterSequenceRestore = afterSequenceRestore;
+        _afterRowCommit = afterRowCommit;
+        _workload = new Login(options.Username ?? $"tt_workload_{Guid.NewGuid():N}",
+            options.Password ?? Convert.ToHexString(RandomNumberGenerator.GetBytes(32)));
+        var hostOptions = options.Snapshot();
+        hostOptions.PoolSize = 1;
+        hostOptions.AutoAllocateResources = false;
+        hostOptions.EnableDynamicScaling = false;
+        hostOptions.Username = $"tt_admin_{Guid.NewGuid():N}";
+        hostOptions.Password = Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
+        _adminLogin = new Login(hostOptions.Username, hostOptions.Password);
+        hostOptions.DatabaseName = "tt_control";
+        hostOptions.ConnectionStringTemplate = null;
+        _host = new TtPool(hostOptions, deleteHost, prepareImage);
+        _slots = new TtSlotPool<Slot>(options.PoolSize, options.PreparationConcurrency, ReserveSlot,
+            (slot, token) => PrepareSlotAsync(slot, token), DeleteSlotAsync, options.ResetConcurrency);
+    }
+
+    internal async Task InitializeAsync(CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        await _host.InitializeAsync();
+        _administrator = (await _host.GetDatabaseAsync()).DataSource;
+        await using (var connection = await _administrator.OpenConnectionAsync(cancellationToken))
+        {
+            await _workload.CreateWorkloadRoleAsync(connection, cancellationToken);
+            await using var create = new NpgsqlCommand(
+                $"CREATE DATABASE {Quote(_template)} OWNER {Quote(_workload.Name)} TEMPLATE template0", connection);
+            await create.ExecuteNonQueryAsync(cancellationToken);
+        }
+
+        await using (var source = CreateWorkloadSource(_template))
+        {
+            var builder = new DbContextOptionsBuilder<TContext>().UseNpgsql(source);
+            if (_options.EnableSensitiveDataLogging) builder.EnableSensitiveDataLogging();
+            _definition.ConfigureContext?.Invoke(builder);
+            await using var context = (TContext)(Activator.CreateInstance(typeof(TContext), builder.Options)
+                ?? throw new InvalidOperationException("Could not construct the baseline context."));
+            var configuration = OwnedOptions(context, source, "BaselineConfiguration");
+            _identity = new BaselineIdentity(_owner, typeof(TContext), _definition.Schema, _definition.Identity,
+                new DbContextOptionsBuilder<TContext>(configuration).UseModel(context.Model).Options, context.Model);
+            if (_definition.Schema != TtSchemaInitialization.Caller &&
+                !ModelColumns(context.Model).SequenceEqual(ModelColumns(
+                    context.GetService<Microsoft.EntityFrameworkCore.Metadata.IDesignTimeModel>().Model)))
+                throw new TtLifecycleException("BaselineConfiguration",
+                    new InvalidOperationException("The runtime and schema models must have matching table and column mappings."));
+            switch (_definition.Schema)
+            {
+                case TtSchemaInitialization.EnsureCreated:
+                    await context.Database.EnsureCreatedAsync(cancellationToken);
+                    break;
+                case TtSchemaInitialization.Migrations:
+                    await context.Database.MigrateAsync(cancellationToken);
+                    break;
+                case TtSchemaInitialization.Caller:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(_definition.Schema));
+            }
+            if (_definition.SeedAsync is not null)
+                await _definition.SeedAsync(context, cancellationToken);
+        }
+
+        // Disposal above drains every initialization connection before cloning.
+        await using (var connection = await _administrator.OpenConnectionAsync(cancellationToken))
+        {
+            await connection.ExecuteNonQueryAsync(
+                $"ALTER DATABASE {Quote(_template)} OWNER TO {Quote(connection.UserName!)}");
+        }
+        await using (var connection = await OpenAdministratorAsync(_template, cancellationToken))
+        {
+            _snapshot = await TtBaselineSnapshot.CaptureAsync(connection, cancellationToken);
+            _schemaSnapshot = _snapshot.Schema;
+            _rowReset = await TtRowResetPlan.CaptureAsync(connection, cancellationToken);
+        }
+        await using (var connection = await _administrator.OpenConnectionAsync(cancellationToken))
+            await connection.ExecuteNonQueryAsync($"ALTER DATABASE {Quote(_template)} ALLOW_CONNECTIONS false");
+        await _slots.WarmAsync(_options.PoolSize, cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
+    }
+
+    internal DbContextOptions<TContext> BuildOptions(NpgsqlDataSource source) =>
+        new DbContextOptionsBuilder<TContext>(_identity!.Configuration).UseNpgsql(source).Options;
+
+    internal void ValidateContext(TContext context, NpgsqlDataSource source)
+    {
+        OwnedOptions(context, source, "ContextConfiguration");
+        if (!ReferenceEquals(context.Model, _identity!.Model))
+            throw new TtLifecycleException("ContextConfiguration",
+                new InvalidOperationException("The context must use its frozen fixture model."));
+    }
+
+    private static DbContextOptions<TContext> OwnedOptions(TContext context, NpgsqlDataSource source, string stage)
+    {
+        var configuration = (DbContextOptions<TContext>)context.GetService<IDbContextOptions>();
+        // The pinned provider's extension exposes exact datasource identity. An
+        // endpoint comparison would also accept an unowned connection pool.
+#pragma warning disable EF1001
+        var configuredSource = configuration.Extensions
+            .OfType<Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal.NpgsqlOptionsExtension>()
+            .SingleOrDefault()?.DataSource;
+#pragma warning restore EF1001
+        if (!ReferenceEquals(configuredSource, source))
+            throw new TtLifecycleException(stage, new InvalidOperationException("The context must use its fixture-owned source."));
+        return configuration;
+    }
+
+    private static IEnumerable<(string Schema, string Table, string Column, string Type, bool Nullable)> ModelColumns(
+        Microsoft.EntityFrameworkCore.Metadata.IModel model) => model.GetRelationalModel().Tables
+        .SelectMany(table => table.Columns.Select(column =>
+            (Schema: table.Schema ?? "public", Table: table.Name, Column: column.Name, Type: column.StoreType, Nullable: column.IsNullable)))
+        .OrderBy(column => column.Schema, StringComparer.Ordinal)
+        .ThenBy(column => column.Table, StringComparer.Ordinal)
+        .ThenBy(column => column.Column, StringComparer.Ordinal)
+        .ThenBy(column => column.Type, StringComparer.Ordinal)
+        .ThenBy(column => column.Nullable);
+
+    public async Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
+    {
+        var reservation = await _slots.AcquireAsync(cancellationToken);
+        return new TtDatabase(reservation.Value.Source, () => ReturnAsync(reservation), () => _slots.DiscardAsync(reservation));
+    }
+
+    private Slot ReserveSlot(Guid _)
+    {
+        var name = $"{_options.DatabaseName}_slot_{Guid.NewGuid():N}";
+        var slot = new Slot(name, CreateWorkloadSource(name));
+        _owned.TryAdd(name, slot);
+        return slot;
+    }
+
+    private async Task PrepareSlotAsync(Slot slot, CancellationToken cancellationToken, Action<TimeSpan>? observeValidation = null)
+    {
+        var name = slot.Name;
+        var stage = "BaselineClone";
+        try
+        {
+            await using (var connection = await _administrator!.OpenConnectionAsync(cancellationToken))
+                await connection.ExecuteNonQueryAsync(
+                    $"CREATE DATABASE {Quote(name)} TEMPLATE {Quote(_template)} OWNER {Quote(_workload.Name)}");
+            if (_beforeVerification is not null) await _beforeVerification(slot.Source);
+            stage = "BaselineVerify";
+            var validation = Stopwatch.GetTimestamp();
+            try
+            {
+                await using var probe = await OpenAdministratorAsync(name, cancellationToken);
+                _snapshot!.Verify(await TtBaselineSnapshot.CaptureAsync(probe, cancellationToken));
+                stage = "BaselineWorkloadVerify";
+                await VerifyWorkloadAsync(slot);
+            }
+            finally { observeValidation?.Invoke(Stopwatch.GetElapsedTime(validation)); }
+        }
+        catch (Exception error)
+        {
+            var failure = new TtLifecycleException(stage, error);
+            try { await DeleteSlotAsync(slot); }
+            catch (Exception cleanupError) { failure = failure.WithCleanupFailure(cleanupError); }
+            throw failure;
+        }
+    }
+
+    private NpgsqlDataSource CreateWorkloadSource(string database)
+    {
+        var builder = new NpgsqlConnectionStringBuilder(_administrator!.ConnectionString)
+        {
+            Database = database,
+            IncludeErrorDetail = false,
+            Pooling = true,
+            MinPoolSize = 0,
+            MaxPoolSize = _options.MaxConnectionsPerDatabase
+        };
+        _workload.ApplyTo(builder);
+        return NpgsqlDataSource.Create(builder.ConnectionString);
+    }
+
+    private async Task VerifyWorkloadAsync(Slot slot)
+    {
+        await using var workload = await slot.Source.OpenConnectionAsync();
+        await using var identity = new NpgsqlCommand("SELECT current_database(), current_user", workload);
+        await using var reader = await identity.ExecuteReaderAsync();
+        if (!await reader.ReadAsync() || reader.GetString(0) != slot.Name || reader.GetString(1) != _workload.Name)
+            throw new InvalidOperationException("The workload connection does not match its owned slot.");
+    }
+
+    private async Task<NpgsqlConnection> OpenAdministratorAsync(string database,
+        CancellationToken cancellationToken = default)
+    {
+        var builder = new NpgsqlConnectionStringBuilder(_administrator!.ConnectionString)
+        {
+            Database = database,
+            Pooling = false
+        };
+        _adminLogin.ApplyTo(builder);
+        var connection = new NpgsqlConnection(builder.ConnectionString);
+        try
+        {
+            await connection.OpenAsync(cancellationToken);
+            return connection;
+        }
+        catch
+        {
+            await connection.DisposeAsync();
+            throw;
+        }
+    }
+
+    private async Task ReturnAsync(TtSlotPool<Slot>.Reservation reservation)
+    {
+        var acquired = Stopwatch.GetTimestamp();
+        var wait = TimeSpan.Zero;
+        var validation = TimeSpan.Zero;
+        var strategy = "Rows";
+        var succeeded = false;
+        void ObserveValidation(TimeSpan duration) => validation += duration;
+        try
+        {
+            await _slots.ReturnAsync(reservation, async (slot, _) =>
+            {
+                try
+                {
+                    var reusable = await TryResetRowsAsync(slot, ObserveValidation);
+                    if (!reusable) strategy = "Recreate";
+                    return reusable;
+                }
+                catch (Exception error) { throw new TtLifecycleException("BaselineRowReset", error); }
+            }, duration => { wait = duration; acquired = Stopwatch.GetTimestamp(); },
+                (slot, token) => PrepareSlotAsync(slot, token, ObserveValidation));
+            succeeded = true;
+        }
+        finally
+        {
+            var execution = Stopwatch.GetElapsedTime(acquired);
+            _options.Logger?.LogDebug(new EventId(400, "BaselineReset"),
+                    "Baseline reset {OwnerId} {Strategy}: wait {ResetPermitWaitMilliseconds} ms, execution {ResetExecutionMilliseconds} ms, validation {ValidationMilliseconds} ms, success {Succeeded}",
+                    Snapshot.OwnerId, strategy, wait.TotalMilliseconds,
+                    execution.TotalMilliseconds, validation.TotalMilliseconds, succeeded);
+        }
+    }
+
+    private async Task<bool> TryResetRowsAsync(Slot slot, Action<TimeSpan> observeValidation)
+    {
+        if (_rowReset is null) return false;
+        slot.Source.Clear();
+        await using (var connection = await OpenAdministratorAsync(slot.Name))
+        {
+            var validation = Stopwatch.GetTimestamp();
+            try { _schemaSnapshot!.Verify(await TtBaselineSnapshot.CaptureSchemaAsync(connection)); }
+            catch (TtLifecycleException error) when (error.Stage is "BaselineVerify" or "BaselineUnsupportedCatalog")
+            {
+                // Changed/unsupported catalog requires whole-template recreation.
+                return false;
+            }
+            finally { observeValidation(Stopwatch.GetElapsedTime(validation)); }
+            await _rowReset.RestoreAsync(connection, _afterSequenceRestore);
+            if (_afterRowCommit is not null) await _afterRowCommit(connection);
+            validation = Stopwatch.GetTimestamp();
+            try { _snapshot!.Verify(await TtBaselineSnapshot.CaptureAsync(connection)); }
+            finally { observeValidation(Stopwatch.GetElapsedTime(validation)); }
+        }
+        var workloadValidation = Stopwatch.GetTimestamp();
+        try { await VerifyWorkloadAsync(slot); }
+        finally { observeValidation(Stopwatch.GetElapsedTime(workloadValidation)); }
+        return true;
+    }
+
+    private async Task DeleteSlotAsync(Slot slot)
+    {
+        await slot.Source.DisposeAsync();
+        await using var connection = await _administrator!.OpenConnectionAsync();
+        await using (var templateFlag = new NpgsqlCommand("SELECT datistemplate FROM pg_database WHERE datname = $1", connection))
+        {
+            templateFlag.Parameters.Add(new NpgsqlParameter { Value = slot.Name });
+            if (await templateFlag.ExecuteScalarAsync() is true)
+                await connection.ExecuteNonQueryAsync($"ALTER DATABASE {Quote(slot.Name)} IS_TEMPLATE false");
+        }
+        await connection.ExecuteNonQueryAsync($"DROP DATABASE IF EXISTS {Quote(slot.Name)} WITH (FORCE)");
+        _owned.TryRemove(slot.Name, out _);
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        lock (_owned)
+        {
+            _disposal ??= DisposeCoreAsync();
+            return new ValueTask(_disposal);
+        }
+    }
+
+    internal Task RetryCleanupAsync()
+    {
+        lock (_owned)
+        {
+            if (_disposal is null || _disposal.IsFaulted)
+                _disposal = DisposeCoreAsync();
+            return _disposal;
+        }
+    }
+
+    private async Task DisposeCoreAsync()
+    {
+        await _gate.WaitAsync();
+        try
+        {
+            Exception? first = null;
+            try { await _slots.DisposeAsync(); }
+            catch (Exception error) { first ??= error; }
+            foreach (var slot in _owned.Values)
+            {
+                try { await slot.Source.DisposeAsync(); }
+                catch (Exception error) { first ??= error; }
+            }
+            try { await _host.DisposeAsync(); }
+            catch (Exception error) { first ??= error; }
+            if (first is not null) throw new TtLifecycleException("PreparedPoolDispose", first);
+            _owned.Clear();
+            _rowReset = null;
+        }
+        finally { _gate.Release(); }
+    }
+
+    private static string Quote(string identifier) => new NpgsqlCommandBuilder().QuoteIdentifier(identifier);
+}

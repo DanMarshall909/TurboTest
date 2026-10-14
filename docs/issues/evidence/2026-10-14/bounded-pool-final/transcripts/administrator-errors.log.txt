@@ -1,0 +1,30 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:04.59]     TurboTest.Tests.ConnectionBudgetTests.Failed_and_canceled_administrator_opens_release_only_their_own_permits [FAIL]
+  Failed TurboTest.Tests.ConnectionBudgetTests.Failed_and_canceled_administrator_opens_release_only_their_own_permits [4 s]
+  Error Message:
+   Npgsql.NpgsqlException : No password has been provided but the backend requires one (in SASL/SCRAM-SHA-256)
+  Stack Trace:
+     at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.UnpooledDataSource.Get(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at TurboTest.EFCore.Internal.TtAdministratorConnections.OpenAsync(String database, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtAdministratorConnections.cs:line 46
+   at TurboTest.EFCore.Internal.TtAdministratorConnections.OpenAsync(String database, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtAdministratorConnections.cs:line 53
+   at TurboTest.Tests.ConnectionBudgetTests.Failed_and_canceled_administrator_opens_release_only_their_own_permits() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 165
+   at TurboTest.Tests.ConnectionBudgetTests.Failed_and_canceled_administrator_opens_release_only_their_own_permits() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 184
+   at TurboTest.Tests.ConnectionBudgetTests.Failed_and_canceled_administrator_opens_release_only_their_own_permits() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConnectionBudgetTests.cs:line 184
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-005/administrator-errors/administrator-errors.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 4 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-005/administrator-errors/1c1e8a9d-4f7d-4b6d-b975-6de61181212b/dan_os-greg_2026-10-14.14_59_15.cobertura.xml

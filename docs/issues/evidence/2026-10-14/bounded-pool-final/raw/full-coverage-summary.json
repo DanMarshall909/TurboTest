@@ -1,0 +1,120 @@
+[
+  {
+    "file": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtAdministratorConnections.cs",
+    "covered": 34,
+    "total": 35,
+    "uncovered": [
+      54
+    ]
+  },
+  {
+    "file": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtOwnedContextOptions.cs",
+    "covered": 9,
+    "total": 9,
+    "uncovered": []
+  },
+  {
+    "file": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs",
+    "covered": 215,
+    "total": 253,
+    "uncovered": [
+      322,
+      323,
+      324,
+      325,
+      326,
+      327,
+      328,
+      329,
+      330,
+      331,
+      332,
+      333,
+      335,
+      336,
+      337,
+      339,
+      340,
+      341,
+      342,
+      345,
+      346,
+      358,
+      366,
+      129,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      142,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      232
+    ]
+  },
+  {
+    "file": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs",
+    "covered": 295,
+    "total": 302,
+    "uncovered": [
+      394,
+      396,
+      397,
+      398,
+      399,
+      162,
+      275
+    ]
+  },
+  {
+    "file": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+    "covered": 272,
+    "total": 284,
+    "uncovered": [
+      181,
+      297,
+      298,
+      299,
+      139,
+      140,
+      141,
+      142,
+      239,
+      240,
+      241,
+      242
+    ]
+  },
+  {
+    "file": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs",
+    "covered": 118,
+    "total": 125,
+    "uncovered": [
+      115,
+      153,
+      156,
+      157,
+      158,
+      159,
+      163
+    ]
+  },
+  {
+    "file": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtPoolSnapshot.cs",
+    "covered": 3,
+    "total": 3,
+    "uncovered": []
+  },
+  {
+    "file": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtResourceBudget.cs",
+    "covered": 19,
+    "total": 19,
+    "uncovered": []
+  }
+]

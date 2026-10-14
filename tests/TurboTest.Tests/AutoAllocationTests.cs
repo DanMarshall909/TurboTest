@@ -11,11 +11,13 @@ public class AutoAllocationTests
         await using var fixture = await Tt.CreateFactoryAsync<TestDbContext>(o =>
         {
             o.AutoAllocateResources = true;
-            o.MaxAutoContainers = 1;
+            o.MaxAutoContainers = 4;
+            o.MaxContainers = 1;
             o.ReserveMemoryMb = 2048;
             o.ReserveCpuCores = 1;
         });
         await using var first = await fixture.CreateLeaseAsync();
+        Assert.Equal((1, 1), (fixture.ResourceBudget.WorkloadSlotLimit, fixture.ResourceBudget.ContainerLimit));
         var identity = await PooledResetTests.ReadIdentityAsync(first.Context);
         await first.DisposeAsync();
         await using var second = await fixture.CreateLeaseAsync();

@@ -1,0 +1,321 @@
+---
+id: TT-005
+title: Bound fixture-owned prepared database pools
+status: Open
+priority: P1
+type: Feature
+created: 2026-10-14
+depends_on: [TT-001, TT-003, TT-004]
+---
+
+# TT-005: Bound fixture-owned prepared database pools
+
+## Problem
+
+The existing allocator can create overflow containers as acquisition pressure increases. Tests need exclusive prepared databases with bounded resource use and explicit queueing. Warming pooled connections alone does not produce available clean databases.
+
+Source: [TtPool.cs](../../../../src/TurboTest.EFCore/Internal/TtPool.cs). Evidence: [TT-000](../../resolved/database/TT-000-pool-feasibility-investigation.md).
+
+## Scope
+
+Introduce a fixture-owned pool of prepared database slots with owned Npgsql data sources. Support several databases in a container where appropriate. Define separate limits for containers, physical database reservations, connections and executing resets; clarify how existing `PoolSize` configuration maps to them.
+
+## Acceptance criteria
+
+- [ ] Each test lease owns exactly one database; concurrent leases cannot obtain the same slot. Add a cross-database marker test that explicitly checks markers are absent from other leased databases.
+- [ ] Preparing, Ready, Leased, Resetting, Quarantined, Parked and Retiring reservations count against the physical cap whenever those states exist. Reserve before creation; release only after confirmed cleanup/deletion.
+- [ ] At capacity, acquisition waits with documented cancellation/timeout behavior. It cannot create an unbounded overflow container or bypass the cap during concurrent requests.
+- [ ] Only a verified Ready slot is handed out. Return/reset/validation can run in the background, but readiness and throughput cannot be reported before that work completes.
+- [ ] Preparation and executing cleanup have separate concurrency bounds; waiting resets are distinguished from actual executing resets.
+- [ ] Per-database connection limits and an administrator/bootstrap allowance form an explicit connection budget. One fixture cannot reuse another fixture's baseline/data source.
+- [ ] A fixed-capacity mode is usable and observable before adaptive decisions are introduced.
+
+## Verification
+
+Test cap enforcement before async creation completes, concurrent exclusive leases, fifth-request backpressure on four slots, release only after validation, and fixture isolation. Exercise the public API against real PostgreSQL; pure ownership/controller tests provide fast feedback.
+
+## Implementation design
+
+Use one bounded reservation owner for ordinary and prepared backends, retaining
+their existing reset behavior. Reserve before physical creation and count every
+non-deleted reservation. Separate preparation and reset permits; a waiting reset
+already owns capacity but is not executing cleanup. Ready publication follows
+backend validation. Acquisition waits outside ledger locks and is cancelable;
+failed or uncertain deletion remains accounted.
+
+The factory must settle in-flight acquisitions during closure. Its current
+acquisition gate cannot remain held by a capacity waiter while shutdown waits
+for that gate to drain leases. Likewise, a pool cannot wait for Ready while
+holding the gate required by return/reset. Closing/cancellation must wake only
+the appropriate queued requests before resource drain.
+
+`PoolSize` will become the fixed workload-slot cap. Prepared fixtures use one
+host with several databases; ordinary fixtures retain one database/container per
+slot and their warm session. Define container, managed per-database connection
+and administrator/bootstrap budgets explicitly, including unpooled verification
+connections and fixed baseline/control infrastructure. Legacy scaling must not
+bypass the reservations; broader recovery and adaptation remain TT-006/009.
+
+## Implementation progress
+
+- **2026-10-14 — dependency-ready:** TT-004 is independently accepted at
+  `a849728fca0696ea06694922155447683d5b8855`. A bounded read-only investigation
+  identified the factory/pool wait-versus-drain deadlocks above. The first fast
+  regression reserves four resources whose creation is blocked, then requires a
+  fifth request to wait without creating another reservation. No capacity
+  completion is claimed; six tickets remain Open.
+- **Reservation law:** the first regression failed because a fifth blocked
+  acquisition attempted to reserve a fifth resource. The bounded owner now
+  passes the same law and disposes each reservation exactly once. One initial
+  GREEN attempt exposed a test expectation error: `QueuedAcquisitions` counts
+  every caller awaiting a verified result (five here), including callers whose
+  preparations are running. That expectation was corrected explicitly. The
+  narrow coverage run leaves Ready reuse, preparation failure/closure, and
+  uncertain deletion unproved; the next criteria exercise those transitions.
+  Test refactoring preserves duplicate-deletion detection with a list; production
+  refactoring needs no change for this first reservation law. The new owner is
+  still unwired and this ticket remains Open.
+- **Reset readiness law:** the next regression failed when return published
+  Ready before invoking reset. Both fast laws now pass: two returning slots
+  retain capacity with one executing and one waiting reset; another acquisition
+  waits until the reset/validation callback completes. Coverage identifies the
+  failure/closure/deletion paths as subsequent behavior gaps. Production
+  refactoring shares Ready assignment between preparation and return and keeps
+  each job's settlement signal so an immediately reassigned reservation cannot
+  make shutdown overlook its next reset. The test already uses independent
+  blocked-work and execution-limit oracles and needs no further refactoring.
+- **Deletion accounting law:** a setup compile failure (missing namespace
+  import) was corrected before the genuine RED. That RED demonstrates early
+  capacity release without deletion. All three fast laws now pass, including
+  a blocked deletion, retained Quarantined reservation after failure, explicit
+  failure of queued callers, and final drain releasing capacity after confirmed
+  deletion. No backend exception details are exposed. Coverage leaves successful
+  deletion/replacement, preparation/closure failures and reset compensation for
+  subsequent criteria. Production refactoring consolidates lifecycle start and
+  quarantine transitions; the focused deletion test needs no refactoring.
+- **Confirmed replacement law:** the queued replacement regression times out
+  after successful deletion because no preparation was scheduled. Four fast
+  laws now pass; confirmed deletion starts exactly one reserved replacement.
+  The owning discard method reaches every measured line and branch in this
+  narrow run. Production refactoring shares reservation creation and refreshes
+  drain's ownership inventory after recorded work settles, avoiding deletion of
+  a resource already removed by that work. The queued-replacement test's
+  identity, deletion and finite creation-bound oracles need no change. Native
+  PostgreSQL calibration and production wiring remain outstanding.
+- **Factory closure foundation:** the public factory over the actual bounded
+  owner reproduces a drain timeout when a capacity waiter holds the old
+  acquisition gate. Cancellation now flows through the pool interface; the
+  factory records in-flight calls before waiting, cancels them on closure,
+  settles them before drain, and checks closure atomically when publishing a
+  lease. The focused 15-test run passes without skips. Its coverage scope
+  covers this closure path and nearby baseline validation; context-init failure
+  paths and PostgreSQL pool integration still require their wider gates.
+  Production refactoring removes the long-held acquisition semaphore and
+  formats the resulting drain; the test adapter uses genuine ownership logic
+  and needs no structural refactoring. No network behavior is inferred from it.
+- **Prepared PostgreSQL boundary:** the native four-database marker regression
+  reproduces the fifth clone attempt. The prepared backend now uses the bounded
+  owner for warming, checkout, return and discard. The fifth call cancels while
+  retaining the four reservations; a later call receives the returned database
+  only after verified reset. Six focused tests pass, then all 26 selected
+  restoration, reset-timing, seeded initialization and corrupt-clone regressions
+  pass without skips. Preparation and reset use separate permits; schema
+  recreation retains its reservation through confirmed deletion and verified
+  replacement. Coverage is scoped to those cases, with broader initialization
+  and closure paths awaiting the full gate. Refactoring splits descriptor
+  reservation from async creation, removes the checkout/reset gate, and uses a
+  concurrent cleanup inventory; the native test needs no structural changes.
+  Ordinary container overflow, public state and connection budgets remain
+  unfinished.
+- **Ordinary PostgreSQL boundary:** the ordinary cap regression reproduces an
+  overflow container before cancellation. The ordinary backend now uses the
+  same reservation owner and passes seven focused laws, including identical
+  database/session identity after verified return. Automatic startup allocation
+  still chooses a fixed cap. The legacy timer's untracked creation/deletion
+  paths are removed, and dynamic mode is rejected until TT-009 supplies the
+  bounded controller; a fast RED protects that rejection. Startup failures now
+  expose safe `ContainerPrepare` diagnostics rather than a raw timeout.
+  The old failed-delete regression expected a replacement while its first
+  container was still unconfirmed; that expectation contradicts the physical
+  cap. It now requires the safe retained failure and unchanged physical ownership
+  until explicit cleanup confirms deletion. Production refactoring removes
+  obsolete queues and scaler helpers and starts cleanup outside the ledger lock;
+  the ordinary cap test needs no structural changes. Wider cleanup/reset evidence
+  follows before this criterion is accepted.
+- **Ordinary compatibility gate:** all 26 selected pooled-reset, compensating
+  cleanup, startup, auto-allocation and public-lease regressions pass without
+  skips. Confirmed cleanup allows replacement; an uncertain failed deletion
+  retains the original physical reservation and diagnostic until explicit drain.
+  Native tests still preserve warm database/session identity and independent
+  fixture contents. The run leaves no live TurboTest containers. This remains
+  selected evidence, not the final whole-suite or completion-review gate.
+- **Public state law:** a RED on the public factory's missing state accessor
+  precedes its implementation. `PoolState` now exposes immutable owner/capacity
+  counts, including all queued callers and waiting versus executing resets.
+  The 54-test fast-plus-capacity/timing selection passes without skips; both
+  native backends report their actual reservations and queue state, and reset
+  diagnostics use the same owner identity. Production refactoring forwards the
+  existing authoritative ledger snapshot rather than adding another counter;
+  tests extend the existing physical ownership and blocked-reset cases rather
+  than adding getter-only tests. Connection/container budgets and configurable
+  concurrency bounds still need implementation and native evidence.
+
+## Remaining implementation gates
+
+The bounded ownership investigation identified ordinary context redirection as
+an in-scope isolation gap. Three fast RED cases publish an unowned source through
+the per-lease callback, `OnConfiguring`, or an additional context. Every factory
+context now checks exact fixture-owned source identity before publication, using
+the same narrow pinned-provider check as baseline initialization; prepared model
+freezing remains additional validation. The 83-test fast/public-lease/prepared
+binding gate passes, including existing initialization failures. Coverage reaches
+both source-match outcomes. Refactoring extracts the shared identity boundary;
+the same-endpoint source redirection tests need no structural changes. Lost
+Docker creation responses and ambient maintenance transactions remain concrete
+accounting/budget findings to fix before review.
+
+`ResourceBudget` now reports captured workload/container ceilings, managed
+connection maximums, preparation/reset concurrency, and the prepared owner's two
+fixed baseline/control databases. The public-budget RED follows two held native
+sessions before the missing accessor fails. The 70-test fast/native budget gate
+passes, including four workload databases on a one-container ceiling and automatic
+allocation clamped to one container. Budget math counts baseline initialization
+within the workload connection allowance because that source closes before
+warming; ordinary bootstrap/reset uses the workload source and needs no extra
+administrator channel. PostgreSQL's built-in databases/background processes and
+separately created client sources are outside this owned-resource budget.
+Coverage reaches the budget's reported calculations and validation decisions.
+Production refactoring forwards the backend's immutable budget; existing native
+capacity/connection cases assert it alongside their physical outcomes instead
+of adding getter-only tests. Error/assignment races and the full gate remain.
+
+Budget validation now rejects nonpositive slot, connection, administrator,
+preparation/reset and container values with the owning public option name before
+preparation. An ordinary fixture cannot warm two slots under a one-container
+ceiling; automatic startup allocation also clamps to `MaxContainers`. The fast
+RED records twelve missing/wrong validations, and the 34-test budget/configuration
+GREEN passes. Coverage includes those validation decisions; public budget
+reporting and its positive native capacity cases follow next. Production
+refactoring computes one immutable budget per backend and shares the named
+validation; the table-driven public-option tests need no structural changes.
+
+Administrator connections now share one permit pool, including control DDL,
+fresh template/slot verification, row reset and deletion. The host bootstrap
+uses one unpooled connection before those phases; the control source retains no
+idle administrator sessions. Public state distinguishes waiting and executing
+administrator opens. Three native connection laws pass, including allowance one
+with two executing reset jobs: one admin client is held and another queues.
+The observer required calibration: the workload role cannot inspect other
+roles' `backend_type`, and counting all matching role processes includes the
+logical replication launcher. The corrected probe excludes that database-free
+server process. A one-fault calibration reenables host admin pooling and the
+corrected test rejects two client connections against allowance one; the source
+is restored byte-for-byte. The earlier three-process observation comprised two
+clients plus that launcher. Coverage leaves canceled/failed admin opens and
+connection-factory failure for owning error-path tests. Production refactoring
+centralizes connection lifetime/permit release in one lease; the native test
+retains its calibrated independent server and queue oracles.
+
+Configured executor bounds are now wired to both backends. The native RED
+reproduced the ignored preparation value: a second preparation never entered
+while the first was held. With preparation/reset concurrency set to two, the
+GREEN keeps four reservations during two blocked preparations, then runs two
+blocked resets while a third reset waits. It publishes all four Ready only
+after release and validation. Coverage exercises the core warm/preparation/reset
+success paths; fault and closure branches remain in their owning selections.
+Production needs no additional scheduling helper: the existing independent
+permits now take the captured options. The test's finite active-work guards and
+blocked-work signals need no structural refactoring.
+
+The managed workload connection regression is now GREEN for both backends:
+with `MaxConnectionsPerDatabase = 2`, two owned contexts hold distinct sessions,
+a third cancels while waiting, and a released session is reused. Both native RED
+cases demonstrated the formerly unbounded third connection. Ordinary connection
+construction now uses the provider's structured builder and forces the owned
+pooling/minimum/maximum settings, including with advanced templates; prepared
+sources apply the same limit. Coverage is scoped to those successful managed
+source paths; admin and error paths remain separate criteria. No extra production
+helper is needed for these two small construction sites. The test's direct
+session and cancellation oracles need no structural refactoring. This budget
+covers TurboTest-owned data sources; separately created test-client sources are
+outside that ownership boundary.
+
+[Retained progress evidence](../../evidence/2026-10-14/bounded-pool-progress/manifest.json)
+contains raw results and the current public-state source cut. It is not a
+completion manifest; this ticket remains Open.
+
+Context registration now validates every ordinary/prepared context against its
+exact owned data source before initialization; callbacks and `OnConfiguring`
+cannot redirect an owned lease to an unmanaged source. Three failing regressions
+preceded the repair; the selected ownership/public-lease/binding gate passes 83
+checks. Additional-context failures remain owned until the lease closes.
+
+Lost Docker-create responses now retain the intended exact name and reservation
+label before sending the request. Cleanup discovers and verifies that identity
+before deleting it. An ambiguous missing resource remains quarantined unless
+the create request is acknowledged; capacity is never released from a null
+response alone. The native lost-response RED left a real container behind; the
+three-test GREEN confirms deletion and zero reservations. The initial GREEN
+compile error is retained separately. Coverage exercises successful discovery,
+identity retention and deletion; ambiguous absence and mismatched ownership are
+conservative error paths pending wider evidence. Refactoring uses the existing
+slot descriptor rather than a separate resource owner.
+
+Ambient transactions formerly made prepared return fail at `BaselineRowReset`
+and prevented compensating database deletion (SQLSTATE 25001). Private admin and
+bootstrap connections now opt out of enlistment; private initialization and
+workload verification suppress the caller's transaction. User workload sources
+retain their transaction behavior. The native return regression checks Ready,
+no retained administrator client sessions while the ambient scope is still
+open, and absence of dirty rows on the next lease. The seven-test connection and
+creation GREEN passes. Coverage includes the repaired success path; failed and
+canceled admin opens remain for direct boundary evidence. Refactoring keeps
+suppression at private operations and the connection setting at admin builders.
+
+Compensating reset cleanup now retains its execution permit through confirmed
+delete or quarantine. The fast RED observed a second reset enter while the
+first deletion was held; all eleven ledger/factory checks now pass. Coverage
+executes that compensation path; canceled permit acquisition and failed cleanup
+retain separate shutdown/failure owners. Refactoring removes the obsolete inner
+permit-release scope. No new test helper is needed.
+
+Preparation compensation now also shares the cleanup limit. Its fast RED
+observed no compensation before failure publication; the new owner holds
+reservation capacity, deletes under the cleanup permit and reports failure only
+after confirmed deletion or retained quarantine. Backends retain safe stage
+information while the common owner performs compensation. The first wider run
+passes 18 checks with one cancellation diagnostic failure: source validation
+initialized an invalid model before honoring a callback-canceled request.
+Registration now owns context disposal first, then checks cancellation before
+validation. That failed result remains retained.
+
+The administrator error-path regression passes against PostgreSQL: failed
+construction, SQLSTATE 28P01 authentication rejection, canceled waiting, subsequent
+valid opens and repeated disposal preserve exactly one permit. The first run's
+missing-password setup is retained and classified as a test setup failure;
+credentials are now explicitly supplied without logging them. Coverage executes
+factory/open failure and queued cancellation. No production refactor is required.
+
+The private bootstrap connection setting was inherited by workload sources.
+A native rollback regression caught committed user data despite an incomplete
+ambient transaction. Workload sources now explicitly retain enlistment; private
+initialization remains suppressed. The combined ownership validation passes all 22 checks without skips. Coverage
+executes successful preparation compensation, held reset compensation, admin
+factory/authentication failures and queued cancellation. Remaining core gaps
+are assessed against the whole-suite gate. Production refactoring consolidates
+compensation under the existing common owner; the independent blocked-work,
+server-authentication and rollback oracles need no extra test helpers.
+
+Remaining work:
+
+The final whole-solution gate passes 164 checks without failures or skips.
+Solution and separate DynamicScalingExample builds pass with zero warnings/errors;
+that example's adaptive runtime remains unsupported until TT-009. The full gate
+leaves no TurboTest containers and preserves the unrelated container. Core line
+coverage includes 272/284 reservation-ledger lines; unmeasured branches and guard
+paths are disclosed in the evidence classification, including preparation cleanup
+failure, canceled return execution and lost-create absence/identity guards.
+[Final candidate evidence](../../evidence/2026-10-14/bounded-pool-final/manifest.json)
+retains raw logs, reports, current source binding and qualifications.
+Fresh independent completion review and its allowed publication envelope remain
+pending. Broader recovery, parking and adaptation retain their existing owners.

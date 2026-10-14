@@ -10,29 +10,48 @@ namespace TurboTest.EFCore.Internal;
 /// </summary>
 internal sealed class TtPool : ITtDatabasePool
 {
+    private sealed class ContainerSlot(Guid id, string name)
+    {
+        internal Guid Id { get; } = id;
+        internal string Name { get; } = name;
+        internal Npgsql.NpgsqlDataSource? Source { get; set; }
+        internal bool CreateIssued { get; set; }
+        internal bool CreationRequestSettled { get; set; }
+        internal TtContainer? Container { get; set; }
+        internal TtContainer Value => Container ?? throw new InvalidOperationException("The container is not prepared.");
+    }
+
     private readonly TtOptions _options;
     private readonly ILogger _logger;
-    private readonly ConcurrentQueue<TtContainer> _availableContainers = new();
-    private readonly ConcurrentDictionary<string, TtContainer> _activeContainers = new();
+    private readonly TtSlotPool<ContainerSlot> _slots;
     private readonly ConcurrentDictionary<string, TtContainer> _ownedContainers = new();
+    private readonly ConcurrentDictionary<string, ContainerSlot> _pendingCreates = new();
     private readonly DockerClient _dockerClient;
     private readonly Func<TtContainer, Task> _deleteResource;
     private readonly Func<string, Task> _prepareImage;
+    private readonly Func<TtContainer, Task>? _beforeStart;
+    private readonly Func<CreateContainerParameters, Task<CreateContainerResponse>> _createResource;
     private readonly string _image;
+    private readonly bool _administratorHost;
     private readonly SemaphoreSlim _initSemaphore = new(1, 1);
     private bool _initialized;
     private bool _disposed;
-    private Timer? _scalingTimer;
-    private readonly object _scalingLock = new();
 
-    internal IReadOnlyList<string> OwnedResourceIds => _ownedContainers.Keys.Order().ToArray();
+    internal IReadOnlyList<string> OwnedResourceIds => _ownedContainers.Keys.Concat(_pendingCreates.Keys).Order().ToArray();
+    public TtPoolSnapshot Snapshot => _slots.Snapshot;
+    public TtResourceBudget Budget { get; }
 
     public TtPool(TtOptions? options = null, Func<TtContainer, Task>? deleteResource = null,
-        Func<string, Task>? prepareImage = null)
+        Func<string, Task>? prepareImage = null, Func<TtContainer, Task>? beforeStart = null,
+        bool administratorHost = false, Func<CreateContainerParameters, Task<CreateContainerResponse>>? createResource = null)
     {
-        _options = options ?? new TtOptions();
+        _options = (options ?? new TtOptions()).Snapshot();
+        _administratorHost = administratorHost;
+        if (_options.EnableDynamicScaling)
+            throw new ArgumentException("Use fixed capacity until the bounded adaptive controller is available.", nameof(TtOptions.EnableDynamicScaling));
         _deleteResource = deleteResource ?? (container => container.DisposeAsync().AsTask());
         _prepareImage = prepareImage ?? EnsureImageAsync;
+        _beforeStart = beforeStart;
         _image = _options.DockerImage ?? "postgres:16-alpine";
         _logger = _options.Logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
 
@@ -41,12 +60,17 @@ internal sealed class TtPool : ITtDatabasePool
         {
             ApplyAutoResourceAllocation();
         }
+        Budget = TtResourceBudget.Create(_options, prepared: false);
 
         var dockerUri = _options.DockerHost ?? (IsWindows()
             ? "npipe://./pipe/docker_engine"
             : "unix:///var/run/docker.sock");
 
         _dockerClient = new DockerClientConfiguration(new Uri(dockerUri)).CreateClient();
+        _createResource = createResource ?? (parameters => _dockerClient.Containers.CreateContainerAsync(parameters));
+        _slots = new TtSlotPool<ContainerSlot>(_options.PoolSize, _options.PreparationConcurrency,
+            id => new ContainerSlot(id, $"{_options.ContainerPrefix}_pool_{id:N}_{Guid.NewGuid():N}"),
+            (slot, _) => CreateContainerAsync(slot), DeleteSlotAsync, _options.ResetConcurrency);
     }
 
     public async Task InitializeAsync()
@@ -65,26 +89,10 @@ internal sealed class TtPool : ITtDatabasePool
             _logger.LogInformation("Initializing TurboTest pool with {PoolSize} containers, {MemoryLimitMb}MB each",
                 _options.PoolSize, _options.MemoryLimitMb);
 
-            var tasks = new List<Task<TtContainer>>();
-            for (int i = 0; i < _options.PoolSize; i++)
-            {
-                tasks.Add(CreateContainerAsync($"pool_{i}"));
-            }
-
-            var containers = await Task.WhenAll(tasks);
-            foreach (var container in containers)
-            {
-                _availableContainers.Enqueue(container);
-            }
+            await _slots.WarmAsync(_options.PoolSize, default);
 
             _logger.LogInformation("TurboTest pool initialized successfully with {ContainerCount} containers",
-                containers.Length);
-
-            // Start dynamic scaling if enabled
-            if (_options.EnableDynamicScaling)
-            {
-                StartDynamicScaling();
-            }
+                _options.PoolSize);
 
             _initialized = true;
         }
@@ -94,59 +102,12 @@ internal sealed class TtPool : ITtDatabasePool
         }
     }
 
-    public async Task<TtDatabase> GetDatabaseAsync()
+    public async Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
     {
-        if (_availableContainers.TryDequeue(out var container))
-        {
-            _activeContainers.TryAdd(container.Id, container);
-            // No reset needed - database should already be clean from previous release
-            return CreateLease(container);
-        }
-
-        // Create overflow container if pool is empty
-        container = await CreateContainerAsync($"overflow_{Guid.NewGuid():N}");
-        _activeContainers.TryAdd(container.Id, container);
-        return CreateLease(container);
-    }
-
-    private TtDatabase CreateLease(TtContainer container) =>
-        new(container.DataSource, () => ReleaseAsync(container), () => DiscardAsync(container));
-
-    internal async Task ReleaseAsync(TtContainer container)
-    {
-        if (!_activeContainers.TryRemove(container.Id, out _))
-            return;
-
-        try
-        {
-            if (_availableContainers.Count < _options.PoolSize)
-            {
-                // Reset the database before returning to pool
-                // EF Core context disposal happens via callback before we get here
-                await container.ResetAsync();
-                _availableContainers.Enqueue(container);
-            }
-            else
-            {
-                // Pool is full, dispose the container
-                await DeleteContainerAsync(container);
-            }
-        }
-        catch (Exception ex)
-        {
-            var failure = ex as TtLifecycleException ?? new TtLifecycleException("Reset", ex);
-            _logger.LogError("Failed to return container {ContainerId} at {Stage}; SQLSTATE {SqlState}",
-                container.Id, failure.Stage, failure.SqlState);
-            try { await DeleteContainerAsync(container); }
-            catch (Exception cleanupError) { failure = failure.WithCleanupFailure(cleanupError); }
-            throw failure;
-        }
-    }
-
-    internal async Task DiscardAsync(TtContainer container)
-    {
-        if (_activeContainers.TryRemove(container.Id, out _))
-            await DeleteContainerAsync(container);
+        var reservation = await _slots.AcquireAsync(cancellationToken);
+        return new TtDatabase(reservation.Value.Value.DataSource,
+            () => _slots.ReturnAsync(reservation, (slot, _) => slot.Value.ResetAsync()),
+            () => _slots.DiscardAsync(reservation));
     }
 
     private async Task DeleteContainerAsync(TtContainer container)
@@ -155,7 +116,33 @@ internal sealed class TtPool : ITtDatabasePool
         _ownedContainers.TryRemove(container.Id, out _);
     }
 
-    private async Task<TtContainer> CreateContainerAsync(string name)
+    private async Task DeleteSlotAsync(ContainerSlot slot)
+    {
+        if (slot.Container is null && slot.CreateIssued)
+        {
+            try
+            {
+                var inspected = await _dockerClient.Containers.InspectContainerAsync(slot.Name);
+                if (inspected.Config.Labels is null ||
+                    !inspected.Config.Labels.TryGetValue("turbotest.reservation", out var reservationId) ||
+                    reservationId != slot.Id.ToString("N"))
+                    throw new TtLifecycleException("ContainerOwnership", new InvalidOperationException("The intended container identity is not owned."));
+                slot.Container = new TtContainer(inspected.ID, slot.Source!, _dockerClient);
+                _ownedContainers.TryAdd(inspected.ID, slot.Container);
+                _pendingCreates.TryRemove(slot.Name, out _);
+            }
+            catch (DockerApiException error) when (error.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                if (!slot.CreationRequestSettled)
+                    throw new TtLifecycleException("ContainerCreateUnconfirmed", error);
+                _pendingCreates.TryRemove(slot.Name, out _);
+            }
+        }
+        if (slot.Container is not null) await DeleteContainerAsync(slot.Container);
+        else if (slot.Source is not null) await slot.Source.DisposeAsync();
+    }
+
+    private async Task CreateContainerAsync(ContainerSlot slot)
     {
         var port = GetAvailablePort();
         var password = _options.Password ?? "test_" + Guid.NewGuid().ToString("N")[..8];
@@ -163,20 +150,32 @@ internal sealed class TtPool : ITtDatabasePool
         var databaseName = $"{_options.DatabaseName}_{Guid.NewGuid():N}"; // Make database name unique
         var image = _image;
 
-        var connectionString = _options.ConnectionStringTemplate != null
-            ? string.Format(_options.ConnectionStringTemplate, "localhost", port, databaseName, username, password)
-            : $"Host=localhost;Port={port};Database={databaseName};Username={username};Password={password};Include Error Detail=true";
+        var connection = _options.ConnectionStringTemplate is not null
+            ? new Npgsql.NpgsqlConnectionStringBuilder(string.Format(_options.ConnectionStringTemplate,
+                "localhost", port, databaseName, username, password))
+            : new Npgsql.NpgsqlConnectionStringBuilder
+            {
+                Host = "localhost", Port = port, Database = databaseName,
+                Username = username, Password = password, IncludeErrorDetail = true
+            };
+        connection.Pooling = !_administratorHost;
+        if (_administratorHost) connection.Enlist = false;
+        connection.MinPoolSize = 0;
+        connection.MaxPoolSize = _options.MaxConnectionsPerDatabase;
         // Validate the source before creating a container, including custom connection templates.
-        var dataSource = Npgsql.NpgsqlDataSource.Create(connectionString);
+        var dataSource = Npgsql.NpgsqlDataSource.Create(connection.ConnectionString);
+        slot.Source = dataSource;
         TtContainer? container = null;
         try
         {
-
-            var createResponse = await _dockerClient.Containers.CreateContainerAsync(
+            slot.CreateIssued = true;
+            _pendingCreates.TryAdd(slot.Name, slot);
+            var createResponse = await _createResource(
                 new CreateContainerParameters
                 {
                     Image = image,
-                    Name = $"{_options.ContainerPrefix}_{name}_{Guid.NewGuid():N}",
+                    Name = slot.Name,
+                    Labels = new Dictionary<string, string> { ["turbotest.reservation"] = slot.Id.ToString("N") },
                     Env = new[]
                     {
                     // These clusters are disposable. Skip initdb's initial disk flush,
@@ -201,19 +200,21 @@ internal sealed class TtPool : ITtDatabasePool
                         RestartPolicy = new RestartPolicy { Name = RestartPolicyKind.No }
                     }
                 });
+            slot.CreationRequestSettled = true;
 
             // Retain ownership before any operation which can fail or await readiness.
             container = new TtContainer(createResponse.ID, dataSource, _dockerClient);
+            slot.Container = container;
             _ownedContainers.TryAdd(container.Id, container);
+            _pendingCreates.TryRemove(slot.Name, out _);
+            if (_beforeStart is not null) await _beforeStart(container);
             await _dockerClient.Containers.StartContainerAsync(createResponse.ID, new ContainerStartParameters());
             await WaitForDatabaseReadyAsync(dataSource);
-            return container;
         }
-        catch
+        catch (Exception error)
         {
-            if (container is not null) await DeleteContainerAsync(container);
-            else await dataSource.DisposeAsync();
-            throw;
+            if (error is DockerApiException) slot.CreationRequestSettled = true;
+            throw new TtLifecycleException("ContainerPrepare", error);
         }
     }
 
@@ -263,9 +264,7 @@ internal sealed class TtPool : ITtDatabasePool
     {
         if (_disposed) return;
 
-        await Task.WhenAll(_ownedContainers.Values.Select(DeleteContainerAsync));
-
-        _scalingTimer?.Dispose();
+        await _slots.RetryCleanupAsync();
         _dockerClient?.Dispose();
         _initSemaphore?.Dispose();
         _disposed = true;
@@ -299,7 +298,8 @@ internal sealed class TtPool : ITtDatabasePool
         var optimalContainers = Math.Min(containersByMemory, containersByCpu);
 
         // Apply bounds
-        optimalContainers = Math.Max(1, Math.Min(optimalContainers, _options.MaxAutoContainers));
+        optimalContainers = Math.Max(1, Math.Min(optimalContainers,
+            Math.Min(_options.MaxAutoContainers, _options.MaxContainers ?? int.MaxValue)));
 
         // Calculate memory per container
         var memoryPerContainer = optimalContainers > 0 ? availableMemoryMb / optimalContainers : 256;
@@ -358,164 +358,6 @@ internal sealed class TtPool : ITtDatabasePool
         return 8192; // Fallback
     }
 
-    private void StartDynamicScaling()
-    {
-        _logger.LogInformation("Starting dynamic resource monitoring with {IntervalSeconds}s intervals",
-            _options.ScalingCheckIntervalSeconds);
-
-        _scalingTimer = new Timer(CheckAndScale, null,
-            TimeSpan.FromSeconds(_options.ScalingCheckIntervalSeconds),
-            TimeSpan.FromSeconds(_options.ScalingCheckIntervalSeconds));
-    }
-
-    private void CheckAndScale(object? state)
-    {
-        if (_disposed) return;
-
-        try
-        {
-            lock (_scalingLock)
-            {
-                if (_disposed) return;
-
-                var currentUsage = GetCurrentResourceUsage();
-                var currentContainerCount = _availableContainers.Count + _activeContainers.Count;
-
-                _logger.LogDebug("Resource check: CPU {CpuUsage}%, Memory {MemoryUsage}%, Containers {ContainerCount}",
-                    currentUsage.CpuUsagePercent, currentUsage.MemoryUsagePercent, currentContainerCount);
-
-                // Check if we need to scale down (high resource usage)
-                if ((currentUsage.CpuUsagePercent > _options.CpuScaleDownThreshold ||
-                     currentUsage.MemoryUsagePercent > _options.MemoryScaleDownThreshold) &&
-                    currentContainerCount > 1) // Keep at least 1 container
-                {
-                    ScaleDown();
-                }
-                // Check if we can scale up (low resource usage and have capacity)
-                else if (currentUsage.CpuUsagePercent < _options.CpuScaleUpThreshold &&
-                         currentUsage.MemoryUsagePercent < _options.MemoryScaleUpThreshold &&
-                         currentContainerCount < _options.MaxAutoContainers)
-                {
-                    _ = Task.Run(ScaleUpAsync); // Run async to avoid blocking timer
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning(ex, "Error during dynamic scaling check");
-        }
-    }
-
-    private void ScaleDown()
-    {
-        if (_availableContainers.TryDequeue(out var container))
-        {
-            _logger.LogInformation("Scaling down: Removing 1 container due to high resource usage");
-            _ = Task.Run(() => DeleteContainerAsync(container));
-        }
-    }
-
-    private async Task ScaleUpAsync()
-    {
-        try
-        {
-            _logger.LogInformation("Scaling up: Adding 1 container due to low resource usage");
-            var newContainer = await CreateContainerAsync($"scaled_{DateTime.UtcNow:HHmmss}");
-            _availableContainers.Enqueue(newContainer);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning(ex, "Failed to scale up container");
-        }
-    }
-
-    private ResourceUsage GetCurrentResourceUsage() =>
-        TryGetValue(() => new ResourceUsage(GetCpuUsagePercent(), GetMemoryUsagePercent()), new ResourceUsage(50, 50));
-
-    private int GetCpuUsagePercent() => TryGetValue(() => IsWindows() ? GetWindowsCpuUsage() : GetLinuxCpuUsage(), 50);
-
-    private int GetWindowsCpuUsage()
-    {
-        using var process = new System.Diagnostics.Process
-        {
-            StartInfo = new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = "wmic",
-                Arguments = "cpu get loadpercentage /value",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                CreateNoWindow = true
-            }
-        };
-
-        process.Start();
-        var output = process.StandardOutput.ReadToEnd();
-        process.WaitForExit();
-
-        var match = System.Text.RegularExpressions.Regex.Match(output, @"LoadPercentage=(\d+)");
-        return match.Success && int.TryParse(match.Groups[1].Value, out var usage) ? usage : 50;
-    }
-
-    private int GetLinuxCpuUsage()
-    {
-        // Simple CPU usage calculation from /proc/loadavg
-        var loadavg = File.ReadAllText("/proc/loadavg").Split(' ')[0];
-        if (double.TryParse(loadavg, out var load))
-        {
-            var cpuCores = Environment.ProcessorCount;
-            var usage = (int)Math.Min(100, (load / cpuCores) * 100);
-            return usage;
-        }
-        return 50;
-    }
-
-    private int GetMemoryUsagePercent() => TryGetValue(() => IsWindows() ? GetWindowsMemoryUsage() : GetLinuxMemoryUsage(), 50);
-
-    private int GetWindowsMemoryUsage()
-    {
-        using var process = new System.Diagnostics.Process
-        {
-            StartInfo = new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = "wmic",
-                Arguments = "OS get TotalVisibleMemorySize,FreePhysicalMemory /value",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                CreateNoWindow = true
-            }
-        };
-
-        process.Start();
-        var output = process.StandardOutput.ReadToEnd();
-        process.WaitForExit();
-
-        var totalMatch = System.Text.RegularExpressions.Regex.Match(output, @"TotalVisibleMemorySize=(\d+)");
-        var freeMatch = System.Text.RegularExpressions.Regex.Match(output, @"FreePhysicalMemory=(\d+)");
-
-        if (totalMatch.Success && freeMatch.Success &&
-            long.TryParse(totalMatch.Groups[1].Value, out var total) &&
-            long.TryParse(freeMatch.Groups[1].Value, out var free))
-        {
-            return (int)((total - free) * 100 / total);
-        }
-        return 50;
-    }
-
-    private int GetLinuxMemoryUsage()
-    {
-        var meminfo = File.ReadAllText("/proc/meminfo");
-        var totalMatch = System.Text.RegularExpressions.Regex.Match(meminfo, @"MemTotal:\s*(\d+)\s*kB");
-        var availableMatch = System.Text.RegularExpressions.Regex.Match(meminfo, @"MemAvailable:\s*(\d+)\s*kB");
-
-        if (totalMatch.Success && availableMatch.Success &&
-            long.TryParse(totalMatch.Groups[1].Value, out var total) &&
-            long.TryParse(availableMatch.Groups[1].Value, out var available))
-        {
-            return (int)((total - available) * 100 / total);
-        }
-        return 50;
-    }
-
     private static bool IsWindows() => Environment.OSVersion.Platform == PlatformID.Win32NT;
 
     private static T TryGetValue<T>(Func<T> getter, T fallback)
@@ -525,5 +367,4 @@ internal sealed class TtPool : ITtDatabasePool
     }
 
     private record SystemInfo(int CpuCores, int TotalMemoryMb);
-    private record ResourceUsage(int CpuUsagePercent, int MemoryUsagePercent);
 }

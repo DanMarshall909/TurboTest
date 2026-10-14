@@ -1,0 +1,3 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs(126,45): error CS0411: The type arguments for method 'CollectionExtensions.GetValueOrDefault<TKey, TValue>(IReadOnlyDictionary<TKey, TValue>, TKey)' cannot be inferred from the usage. Try specifying the type arguments explicitly. [/home/dan/code/TurboTest/src/TurboTest.EFCore/TurboTest.EFCore.csproj]

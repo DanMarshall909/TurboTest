@@ -40,8 +40,10 @@ public class BaselineValidationTests
 
     private sealed class RejectAcquisitionPool : ITtDatabasePool
     {
+        public TtPoolSnapshot Snapshot => throw new InvalidOperationException("The rejected configuration has no pool.");
+        public TtResourceBudget Budget => throw new InvalidOperationException("The rejected configuration has no pool.");
         internal int Acquisitions { get; private set; }
-        public Task<TtDatabase> GetDatabaseAsync()
+        public Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
         {
             Acquisitions++;
             throw new InvalidOperationException("A rejected configuration reached database acquisition.");

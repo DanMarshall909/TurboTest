@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="c7ec54a8-2f3d-4f68-b62a-7548df58cfa0" name="@os-greg 2026-10-14 15:23:32" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T15:23:32.6861388+10:00" queuing="2026-10-14T15:23:32.6861388+10:00" start="2026-10-14T15:23:29.6079652+10:00" finish="2026-10-14T15:23:32.6995850+10:00" />
+  <TestSettings name="default" id="c121bdb6-df8b-423d-9493-e69ab679514e">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_15_23_32" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="b56a6899-0306-4b2b-9eec-13ff8ed66b99" testId="758eb685-0c85-2ce0-26ba-c05612933401" testName="TurboTest.Tests.CreationAccountingTests.Unconfirmed_absence_or_mismatched_ownership_keeps_capacity_until_the_owned_resource_is_discovered(mismatched: True)" computerName="os-greg" duration="00:00:00.3794444" startTime="2026-10-14T15:23:31.9958538+10:00" endTime="2026-10-14T15:23:32.3676994+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b56a6899-0306-4b2b-9eec-13ff8ed66b99" />
+    <UnitTestResult executionId="f2541a9e-d31b-4e9a-a034-62f3fb5577dc" testId="916fbbb6-38f2-8910-9e15-bc15aa51d8b2" testName="TurboTest.Tests.CreationAccountingTests.Unconfirmed_absence_or_mismatched_ownership_keeps_capacity_until_the_owned_resource_is_discovered(mismatched: False)" computerName="os-greg" duration="00:00:00.0624826" startTime="2026-10-14T15:23:32.3691166+10:00" endTime="2026-10-14T15:23:32.4303893+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f2541a9e-d31b-4e9a-a034-62f3fb5577dc" />
+    <UnitTestResult executionId="fe0690d1-0880-4a33-b58e-bf466c4c5f59" testId="993c2883-d647-17ac-3104-55478acbb664" testName="TurboTest.Tests.CreationAccountingTests.A_lost_create_response_does_not_release_a_container_without_confirmed_cleanup" computerName="os-greg" duration="00:00:00.0639750" startTime="2026-10-14T15:23:32.4308472+10:00" endTime="2026-10-14T15:23:32.4946250+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fe0690d1-0880-4a33-b58e-bf466c4c5f59" />
+    <UnitTestResult executionId="c5af33ec-7777-40eb-b7f8-0ac6156b0d30" testId="9305d247-7ff9-63a3-19ee-9ef3bb52c502" testName="TurboTest.Tests.SlotPoolTests.Failed_preparation_and_compensation_keep_capacity_until_confirmed_cleanup" computerName="os-greg" duration="00:00:00.0537478" startTime="2026-10-14T15:23:31.9972354+10:00" endTime="2026-10-14T15:23:32.0463718+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c5af33ec-7777-40eb-b7f8-0ac6156b0d30" />
+    <UnitTestResult executionId="cf4a0f3c-cd87-471a-8411-87491ab95644" testId="cb53ae52-c232-b680-3180-d5721bbd09c2" testName="TurboTest.Tests.CreationAccountingTests.Acknowledged_create_rejection_and_confirmed_absence_release_the_reservation" computerName="os-greg" duration="00:00:00.0062541" startTime="2026-10-14T15:23:32.4950082+10:00" endTime="2026-10-14T15:23:32.5011310+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cf4a0f3c-cd87-471a-8411-87491ab95644" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.CreationAccountingTests.Unconfirmed_absence_or_mismatched_ownership_keeps_capacity_until_the_owned_resource_is_discovered(mismatched: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="916fbbb6-38f2-8910-9e15-bc15aa51d8b2">
+      <Execution id="f2541a9e-d31b-4e9a-a034-62f3fb5577dc" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CreationAccountingTests" name="Unconfirmed_absence_or_mismatched_ownership_keeps_capacity_until_the_owned_resource_is_discovered" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.CreationAccountingTests.A_lost_create_response_does_not_release_a_container_without_confirmed_cleanup" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="993c2883-d647-17ac-3104-55478acbb664">
+      <Execution id="fe0690d1-0880-4a33-b58e-bf466c4c5f59" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CreationAccountingTests" name="A_lost_create_response_does_not_release_a_container_without_confirmed_cleanup" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SlotPoolTests.Failed_preparation_and_compensation_keep_capacity_until_confirmed_cleanup" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="9305d247-7ff9-63a3-19ee-9ef3bb52c502">
+      <Execution id="c5af33ec-7777-40eb-b7f8-0ac6156b0d30" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SlotPoolTests" name="Failed_preparation_and_compensation_keep_capacity_until_confirmed_cleanup" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.CreationAccountingTests.Acknowledged_create_rejection_and_confirmed_absence_release_the_reservation" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="cb53ae52-c232-b680-3180-d5721bbd09c2">
+      <Execution id="cf4a0f3c-cd87-471a-8411-87491ab95644" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CreationAccountingTests" name="Acknowledged_create_rejection_and_confirmed_absence_release_the_reservation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.CreationAccountingTests.Unconfirmed_absence_or_mismatched_ownership_keeps_capacity_until_the_owned_resource_is_discovered(mismatched: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="758eb685-0c85-2ce0-26ba-c05612933401">
+      <Execution id="b56a6899-0306-4b2b-9eec-13ff8ed66b99" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.CreationAccountingTests" name="Unconfirmed_absence_or_mismatched_ownership_keeps_capacity_until_the_owned_resource_is_discovered" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="758eb685-0c85-2ce0-26ba-c05612933401" executionId="b56a6899-0306-4b2b-9eec-13ff8ed66b99" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="916fbbb6-38f2-8910-9e15-bc15aa51d8b2" executionId="f2541a9e-d31b-4e9a-a034-62f3fb5577dc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="993c2883-d647-17ac-3104-55478acbb664" executionId="fe0690d1-0880-4a33-b58e-bf466c4c5f59" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9305d247-7ff9-63a3-19ee-9ef3bb52c502" executionId="c5af33ec-7777-40eb-b7f8-0ac6156b0d30" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cb53ae52-c232-b680-3180-d5721bbd09c2" executionId="cf4a0f3c-cd87-471a-8411-87491ab95644" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.17]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.27]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.30]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.84]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.15_23_32.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

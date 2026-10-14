@@ -63,7 +63,9 @@ public class StartupCleanupTests
         });
         try
         {
-            await Assert.ThrowsAsync<TimeoutException>(() => pool.InitializeAsync());
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => pool.InitializeAsync());
+            Assert.Equal("ContainerPrepare", failure.Stage);
+            Assert.Contains(nameof(TimeoutException), failure.Message);
             await pool.DisposeAsync();
             Assert.Empty(await OwnedContainersAsync());
         }

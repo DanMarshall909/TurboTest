@@ -73,10 +73,13 @@ public static class Tt
     internal static async Task<TtFactory<TContext>> CreatePreparedFactoryAsync<TContext>(
         TtOptions options, TtBaselineDefinition<TContext> baseline, CancellationToken cancellationToken,
         Func<TtContainer, Task>? deleteHost = null, Func<Npgsql.NpgsqlDataSource, Task>? beforeVerification = null,
-        Func<string, Task>? prepareImage = null)
+        Func<string, Task>? prepareImage = null,
+        Func<Npgsql.NpgsqlConnection, Npgsql.NpgsqlTransaction, Task>? afterSequenceRestore = null,
+        Func<Npgsql.NpgsqlConnection, Task>? afterRowCommit = null)
         where TContext : DbContext
     {
-        var pool = new TtPreparedPool<TContext>(options, baseline, beforeVerification, deleteHost, prepareImage);
+        var pool = new TtPreparedPool<TContext>(options, baseline, beforeVerification, deleteHost, prepareImage,
+            afterSequenceRestore, afterRowCommit);
         try
         {
             await pool.InitializeAsync(cancellationToken);

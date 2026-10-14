@@ -1,0 +1,132 @@
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Npgsql;
+using TurboTest.EFCore;
+
+var fault = args.Length == 0 ? "none" : args[0];
+var logger = new ResetLog();
+var samples = new List<Sample>();
+var run = Stopwatch.StartNew();
+try
+{
+    var initialized = 0;
+    var baseline = new TtBaselineDefinition<ProbeContext>("reset-probe-v1", TtSchemaInitialization.EnsureCreated,
+        async (context, cancellation) =>
+        {
+            initialized++;
+            context.Parents.Add(new Parent { Id = 100, Name = "baseline-parent", Priority = 17 });
+            context.Children.Add(new Child { Id = 200, ParentId = 100, Name = "baseline-child", Enabled = true });
+            context.Notes.Add(new Note { Id = 300, ChildId = 200, Body = "baseline-note", Revision = 29 });
+            await context.SaveChangesAsync(cancellation);
+            await context.Database.ExecuteSqlRawAsync("""
+                SELECT setval(pg_get_serial_sequence('"Parents"', 'Id'),100,true);
+                SELECT setval(pg_get_serial_sequence('"Children"', 'Id'),200,true);
+                SELECT setval(pg_get_serial_sequence('"Notes"', 'Id'),300,true);
+                """, cancellation);
+        });
+    var startup = Stopwatch.StartNew();
+    await using var fixture = await Tt.CreateFactoryAsync(baseline, o => { o.PoolSize = 1; o.Logger = logger; o.EnableSensitiveDataLogging = false; });
+    startup.Stop();
+    uint? identity = null;
+    // One unmeasured warmup, followed by six counterbalanced rounds.
+    var order = new List<int> { 130 };
+    for (var round = 0; round < 6; round++)
+    {
+        var values = new[] { 130,1300,13000 };
+        var rotated = values.Skip(round % 3).Concat(values.Take(round % 3)).ToArray();
+        if (round % 2 != 0) Array.Reverse(rotated);
+        order.AddRange(rotated);
+    }
+    foreach (var rows in order)
+    {
+        var cycle = Stopwatch.StartNew();
+        var checkout = Stopwatch.StartNew();
+        var lease = await fixture.CreateLeaseAsync();
+        checkout.Stop();
+        try
+        {
+            var context = lease.Context;
+            await VerifyBaseline(context);
+            await context.Database.OpenConnectionAsync();
+            var connection = (NpgsqlConnection)context.Database.GetDbConnection();
+            await using (var oid = new NpgsqlCommand("SELECT oid FROM pg_database WHERE datname=current_database()", connection))
+            {
+                var observed = (uint)(await oid.ExecuteScalarAsync())!;
+                identity ??= observed;
+                Require(identity == observed, "Database was replaced during an ordinary row reset.");
+            }
+            var parentCount = rows * 10 / 13;
+            var childCount = rows * 2 / 13;
+            var noteCount = rows / 13;
+            await context.Notes.ExecuteDeleteAsync();
+            await context.Children.ExecuteDeleteAsync();
+            await context.Parents.ExecuteUpdateAsync(x => x.SetProperty(p => p.Name,"changed-seed").SetProperty(p => p.Priority,91));
+            if (fault != "zero")
+            {
+                await using var load = new NpgsqlCommand($"""
+                    INSERT INTO "Parents"("Name","Priority") SELECT 'load-parent-'||i,31+i FROM generate_series(1,{parentCount}) i;
+                    INSERT INTO "Children"("ParentId","Name","Enabled") SELECT "Id",'load-child-'||"Id",false FROM "Parents" WHERE "Name" LIKE 'load-parent-%' ORDER BY "Id" LIMIT {childCount};
+                    INSERT INTO "Notes"("ChildId","Body","Revision") SELECT "Id",'load-note-'||"Id",71 FROM "Children" ORDER BY "Id" LIMIT {(fault == "mix" ? 0 : noteCount)};
+                    """, connection);
+                await load.ExecuteNonQueryAsync();
+            }
+            var observedMix = (await context.Parents.CountAsync(p => p.Name.StartsWith("load-parent-")),
+                await context.Children.CountAsync(c => c.Name.StartsWith("load-child-")),await context.Notes.CountAsync(n => n.Body.StartsWith("load-note-")));
+            Require(observedMix == (parentCount,childCount,noteCount), $"Workload distribution mismatch: expected {parentCount}/{childCount}/{noteCount}, observed {observedMix}.");
+            Require(await context.Parents.Where(p => p.Name.StartsWith("load-parent-")).MinAsync(p => p.Id) == 101, "Next parent identity differs.");
+            Require(await context.Children.Where(c => c.Name.StartsWith("load-child-")).MinAsync(c => c.Id) == 201, "Next child identity differs.");
+            Require(await context.Notes.Where(n => n.Body.StartsWith("load-note-")).MinAsync(n => n.Id) == 301, "Next note identity differs.");
+            var reset = Stopwatch.StartNew();
+            await lease.DisposeAsync();
+            reset.Stop();cycle.Stop();
+            Require(logger.Records.TryDequeue(out var record), "Missing completed reset record.");
+            Require((string)record!["Strategy"]! == "Rows" && (bool)record["Succeeded"]!, "Reset did not complete through the verified row path.");
+            samples.Add(new Sample(rows, checkout.Elapsed.TotalMilliseconds,reset.Elapsed.TotalMilliseconds,cycle.Elapsed.TotalMilliseconds,
+                (double)record["ResetPermitWaitMilliseconds"]!, (double)record["ResetExecutionMilliseconds"]!, (double)record["ValidationMilliseconds"]!));
+        }
+        finally { await lease.DisposeAsync(); }
+    }
+    await using (var final = await fixture.CreateLeaseAsync()) await VerifyBaseline(final.Context);
+    Require(initialized == 1,"Initializer was repeated.");
+    var drain = Stopwatch.StartNew();await fixture.DisposeAsync();drain.Stop();run.Stop();
+    var timed = samples.Skip(1).ToArray();
+    var hashes = new Dictionary<string,string>();
+    foreach (var path in new[]{"src/TurboTest.EFCore/Internal/TtPreparedPool.cs","src/TurboTest.EFCore/Internal/TtRowResetPlan.cs","src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs","artifacts/tt-004/perf-probe/Program.cs"})
+        hashes[path] = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)));
+    var groups = timed.GroupBy(x=>x.Rows).Select(g=>new { rows=g.Key, samples=g.Count(), rowMix=new[]{g.Key*10/13,g.Key*2/13,g.Key/13}, reset=Stats(g.Select(x=>x.ResetWallMs)), permitWait=Stats(g.Select(x=>x.PermitWaitMs)), executionIncludingValidation=Stats(g.Select(x=>x.ExecutionMs)), validation=Stats(g.Select(x=>x.ValidationMs)), cycle=Stats(g.Select(x=>x.CycleMs)), checkout=Stats(g.Select(x=>x.CheckoutMs)) });
+    Console.WriteLine(JsonSerializer.Serialize(new { scope="TT-004 local sequential public-API row restoration; not TT-010 integrated benchmark or portable guarantee",sourceHashes=hashes,runtime=System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription,ef=typeof(DbContext).Assembly.GetName().Version?.ToString(),npgsql=typeof(NpgsqlConnection).Assembly.GetName().Version?.ToString(),image="postgres:16-alpine",initialSlots=1,hardCapImplemented=false,concurrency=1,seedIds=new[]{100,200,300},expectedNextIds=new[]{101,201,301},loadMix="10 parents:2 children:1 note; all inserted rows plus one mutated retained seed parent before reset",warmupCycles=1,order=order.Skip(1),percentile="nearest rank ceil(p*N), p50/p95; max; milliseconds",startupMs=startup.Elapsed.TotalMilliseconds,finalDrainMs=drain.Elapsed.TotalMilliseconds,totalRunMs=run.Elapsed.TotalMilliseconds,completeRunCyclesPerSecond=timed.Length/run.Elapsed.TotalSeconds,groups,samples=timed,failures=0,limits=new[]{"One local shared host; small seed; sequential operation only.","Permit wait uses the current shared lifecycle gate. Separate preparation/reset bounds belong to TT-005.","Execution includes cleanup, restoration and validation; public reset also includes context disposal and diagnostic emission.","No universal 50ms target inferred; six samples per workload do not estimate portable tails.","Source is an uncommitted TT-004 candidate; hashes identify working bytes."}},new JsonSerializerOptions{WriteIndented=true}));
+}
+catch (Exception error)
+{
+    Console.Error.WriteLine(error is InvalidDataException ? error.Message : error.GetType().Name);
+    Environment.ExitCode=1;
+}
+static void Require(bool value,string message) { if (!value) throw new InvalidDataException(message); }
+static object Stats(IEnumerable<double> values) { var a=values.Order().ToArray();return new {p50=a[(int)Math.Ceiling(.5*a.Length)-1],p95=a[(int)Math.Ceiling(.95*a.Length)-1],max=a[^1]}; }
+static async Task VerifyBaseline(ProbeContext context)
+{
+    var p=await context.Parents.SingleAsync();var c=await context.Children.SingleAsync();var n=await context.Notes.SingleAsync();
+    Require((p.Id,p.Name,p.Priority)==(100,"baseline-parent",17),"Parent baseline differs.");
+    Require((c.Id,c.ParentId,c.Name,c.Enabled)==(200,100,"baseline-child",true),"Child baseline differs.");
+    Require((n.Id,n.ChildId,n.Body,n.Revision)==(300,200,"baseline-note",29),"Note baseline differs.");
+}
+public sealed record Sample(int Rows,double CheckoutMs,double ResetWallMs,double CycleMs,double PermitWaitMs,double ExecutionMs,double ValidationMs);
+public sealed class ResetLog:ILogger
+{
+    public ConcurrentQueue<Dictionary<string,object?>> Records {get;}=new();
+    public bool IsEnabled(LogLevel level)=>true;
+    public IDisposable? BeginScope<TState>(TState state) where TState:notnull=>null;
+    public void Log<TState>(LogLevel level,EventId id,TState state,Exception? error,Func<TState,Exception?,string> format) { if(id.Id==400 && id.Name=="BaselineReset") Records.Enqueue(((IEnumerable<KeyValuePair<string,object?>>)state!).ToDictionary()); }
+}
+public sealed class ProbeContext(DbContextOptions<ProbeContext> options):DbContext(options)
+{
+    public DbSet<Parent> Parents=>Set<Parent>();public DbSet<Child> Children=>Set<Child>();public DbSet<Note> Notes=>Set<Note>();
+    protected override void OnModelCreating(ModelBuilder model) {model.Entity<Child>().HasOne<Parent>().WithMany().HasForeignKey(c=>c.ParentId);model.Entity<Note>().HasOne<Child>().WithMany().HasForeignKey(n=>n.ChildId);}
+}
+public sealed class Parent {public int Id{get;set;}public string Name{get;set;}="";public int Priority{get;set;}}
+public sealed class Child {public int Id{get;set;}public int ParentId{get;set;}public string Name{get;set;}="";public bool Enabled{get;set;}}
+public sealed class Note {public int Id{get;set;}public int ChildId{get;set;}public string Body{get;set;}="";public int Revision{get;set;}}

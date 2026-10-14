@@ -1,0 +1,10 @@
+{
+  "fault": "Skip required full validation after row restoration/commit.",
+  "exitCode": 1,
+  "failed": 1,
+  "passed": 1,
+  "failure": "Post-commit dirty slot returns success instead of BaselineRowReset failure.",
+  "originalSha256": "5f2cee45ff53a256c19a613046563c4e3c04f3ba43b7e17cc75c6f599c6eeb58",
+  "faultSha256": "f0e8ace727c72a217d1e70cd8f1f26393016191545708f5ee1d4b55722548611",
+  "restoredSha256": "5f2cee45ff53a256c19a613046563c4e3c04f3ba43b7e17cc75c6f599c6eeb58"
+}

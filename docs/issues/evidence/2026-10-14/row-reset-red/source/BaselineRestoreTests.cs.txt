@@ -1,0 +1,74 @@
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using TurboTest.EFCore;
+using static TurboTest.Tests.SeededBaselineTests;
+
+namespace TurboTest.Tests;
+
+public class BaselineRestoreTests
+{
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Row_reset_restores_updated_deleted_and_inserted_seeds_in_the_same_database()
+    {
+        var calls = 0;
+        var baseline = new TtBaselineDefinition<SeedContext>("row-restore-v1",
+            TtSchemaInitialization.EnsureCreated, async (context, cancellation) =>
+            {
+                calls++;
+                context.Parents.Add(new SeedParent { Id = 100, Name = "baseline-parent", Priority = 17 });
+                context.Children.Add(new SeedChild { Id = 200, ParentId = 100, Name = "baseline-child", Enabled = true });
+                context.Notes.Add(new SeedNote { Id = 300, ChildId = 200, Body = "baseline-note", Revision = 29 });
+                await context.SaveChangesAsync(cancellation);
+                await context.Database.ExecuteSqlRawAsync("""
+                    SELECT setval(pg_get_serial_sequence('"Parents"', 'Id'), 100, true);
+                    SELECT setval(pg_get_serial_sequence('"Children"', 'Id'), 200, true);
+                    SELECT setval(pg_get_serial_sequence('"Notes"', 'Id'), 300, true);
+                    """, cancellation);
+            });
+        await using var fixture = await Tt.CreateFactoryAsync(baseline, options => options.PoolSize = 1);
+        uint original;
+        await using (var lease = await fixture.CreateLeaseAsync())
+        {
+            original = await DatabaseOidAsync(lease.Context);
+            await lease.Context.Parents.ExecuteUpdateAsync(update => update.SetProperty(p => p.Name, "changed").SetProperty(p => p.Priority, 91));
+            await lease.Context.Notes.ExecuteDeleteAsync();
+            await lease.Context.Children.ExecuteDeleteAsync();
+            var parent = new SeedParent { Name = "extra-parent", Priority = 43 };
+            lease.Context.Parents.Add(parent);
+            await lease.Context.SaveChangesAsync();
+            var child = new SeedChild { ParentId = parent.Id, Name = "extra-child", Enabled = false };
+            lease.Context.Children.Add(child);
+            await lease.Context.SaveChangesAsync();
+            lease.Context.Notes.Add(new SeedNote { ChildId = child.Id, Body = "extra-note", Revision = 71 });
+            await lease.Context.SaveChangesAsync();
+        }
+        await using var restored = await fixture.CreateLeaseAsync();
+        var parentSeed = await restored.Context.Parents.SingleAsync();
+        var childSeed = await restored.Context.Children.SingleAsync();
+        var noteSeed = await restored.Context.Notes.SingleAsync();
+        Assert.Equal((100, "baseline-parent", 17), (parentSeed.Id, parentSeed.Name, parentSeed.Priority));
+        Assert.Equal((200, 100, "baseline-child", true), (childSeed.Id, childSeed.ParentId, childSeed.Name, childSeed.Enabled));
+        Assert.Equal((300, 200, "baseline-note", 29), (noteSeed.Id, noteSeed.ChildId, noteSeed.Body, noteSeed.Revision));
+        var nextParent = new SeedParent { Name = "next-parent" };
+        restored.Context.Parents.Add(nextParent);
+        await restored.Context.SaveChangesAsync();
+        var nextChild = new SeedChild { ParentId = nextParent.Id, Name = "next-child" };
+        restored.Context.Children.Add(nextChild);
+        await restored.Context.SaveChangesAsync();
+        var nextNote = new SeedNote { ChildId = nextChild.Id, Body = "next-note" };
+        restored.Context.Notes.Add(nextNote);
+        await restored.Context.SaveChangesAsync();
+        Assert.Equal((101, 201, 301), (nextParent.Id, nextChild.Id, nextNote.Id));
+        Assert.Equal(1, calls);
+        Assert.Equal(original, await DatabaseOidAsync(restored.Context));
+    }
+
+    private static async Task<uint> DatabaseOidAsync(DbContext context)
+    {
+        await context.Database.OpenConnectionAsync();
+        await using var command = new NpgsqlCommand("SELECT oid FROM pg_database WHERE datname = current_database()",
+            (NpgsqlConnection)context.Database.GetDbConnection());
+        return (uint)(await command.ExecuteScalarAsync())!;
+    }
+}

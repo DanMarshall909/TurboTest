@@ -1,0 +1,42 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:01:23.89]     TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "CREATE CONVERSION public.unexpected_conversion FOR"···) [FAIL]
+  Failed TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "CREATE CONVERSION public.unexpected_conversion FOR"···) [6 s]
+  Error Message:
+   Assert.NotEqual() Failure: Values are equal
+Expected: Not 16418
+Actual:       16418
+  Stack Trace:
+     at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 40
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:30.36]     TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "DO $$ BEGIN EXECUTE format('COMMENT ON DATABASE %I"···) [FAIL]
+  Failed TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "DO $$ BEGIN EXECUTE format('COMMENT ON DATABASE %I"···) [6 s]
+  Error Message:
+   Assert.NotEqual() Failure: Values are equal
+Expected: Not 16418
+Actual:       16418
+  Stack Trace:
+     at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 40
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:43.85]     TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "CREATE OPERATOR public.## (FUNCTION = pg_catalog.i"···) [FAIL]
+  Failed TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "CREATE OPERATOR public.## (FUNCTION = pg_catalog.i"···) [6 s]
+  Error Message:
+   Assert.NotEqual() Failure: Values are equal
+Expected: Not 16418
+Actual:       16418
+  Stack Trace:
+     at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 40
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-004/catalog-red/catalog-red.trx
+
+Failed!  - Failed:     3, Passed:     7, Skipped:     0, Total:    10, Duration: 1 m 43 s - TurboTest.Tests.dll (net10.0)

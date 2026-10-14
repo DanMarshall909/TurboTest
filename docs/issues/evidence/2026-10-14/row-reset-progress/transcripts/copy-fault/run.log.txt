@@ -1,0 +1,22 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:08.11]     TurboTest.Tests.BaselineRestoreTests.Row_reset_restores_updated_deleted_and_inserted_seeds_in_the_same_database [FAIL]
+  Failed TurboTest.Tests.BaselineRestoreTests.Row_reset_restores_updated_deleted_and_inserted_seeds_in_the_same_database [7 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineRowReset (InvalidOperationException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPreparedPool`1.ReturnAsync(Slot slot) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 295
+   at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs:line 83
+   at TurboTest.EFCore.TtFactory`1.<>c__DisplayClass12_1.<<CreateLeaseAsync>b__2>d.MoveNext() in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 87
+--- End of stack trace from previous location ---
+   at TurboTest.Tests.BaselineRestoreTests.Row_reset_restores_updated_deleted_and_inserted_seeds_in_the_same_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 227
+   at TurboTest.Tests.BaselineRestoreTests.Row_reset_restores_updated_deleted_and_inserted_seeds_in_the_same_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 246
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-004/copy-fault/copy-fault.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 7 s - TurboTest.Tests.dll (net10.0)

@@ -1,0 +1,125 @@
+using System.Data;
+using Npgsql;
+
+namespace TurboTest.EFCore.Internal;
+
+/// <summary>Fixture-owned binary seed streams and dependency-ordered row restoration.</summary>
+internal sealed class TtRowResetPlan
+{
+    private sealed record Table(string Name, byte[] Seed);
+    private sealed record Sequence(string Name, long LastValue, bool IsCalled);
+    private readonly IReadOnlyList<Table> _tables;
+    private readonly IReadOnlyList<Sequence> _sequences;
+
+    private TtRowResetPlan(IReadOnlyList<Table> tables, IReadOnlyList<Sequence> sequences)
+    {
+        _tables = tables;
+        _sequences = sequences;
+    }
+
+    internal static async Task<TtRowResetPlan?> CaptureAsync(NpgsqlConnection connection,
+        CancellationToken cancellationToken = default)
+    {
+        const long seedBudget = 16 * 1024 * 1024;
+        await using var transaction = await connection.BeginTransactionAsync(IsolationLevel.RepeatableRead, cancellationToken);
+        await using (var settings = new NpgsqlCommand("SET TRANSACTION READ ONLY; SET LOCAL search_path = pg_catalog", connection, transaction))
+            await settings.ExecuteNonQueryAsync(cancellationToken);
+        var names = new Dictionary<uint, string>();
+        await using (var command = new NpgsqlCommand("""
+            SELECT c.oid, n.nspname, c.relname FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind = 'r' AND c.relpersistence = 'p' AND n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
+            ORDER BY c.oid
+            """, connection, transaction))
+        await using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+            while (await reader.ReadAsync(cancellationToken))
+                names.Add(reader.GetFieldValue<uint>(0), $"{Quote(reader.GetString(1))}.{Quote(reader.GetString(2))}");
+
+        var dependencies = names.Keys.ToDictionary(oid => oid, _ => new HashSet<uint>());
+        await using (var command = new NpgsqlCommand("SELECT conrelid, confrelid FROM pg_constraint WHERE contype = 'f'", connection, transaction))
+        await using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+            while (await reader.ReadAsync(cancellationToken))
+            {
+                var child = reader.GetFieldValue<uint>(0);
+                var parent = reader.GetFieldValue<uint>(1);
+                if (dependencies.TryGetValue(child, out var parents)) parents.Add(parent);
+            }
+        var order = new List<uint>();
+        while (dependencies.Count > 0)
+        {
+            var roots = dependencies.Where(entry => entry.Value.Count == 0).Select(entry => entry.Key).Order().ToArray();
+            // Cycles or dependencies outside the supported table set use recreation.
+            if (roots.Length == 0) return null;
+            foreach (var root in roots)
+            {
+                order.Add(root);
+                dependencies.Remove(root);
+                foreach (var parents in dependencies.Values) parents.Remove(root);
+            }
+        }
+
+        var tables = new List<Table>();
+        var buffer = new byte[8192];
+        long retained = 0;
+        foreach (var oid in order)
+        {
+            await using var copy = await connection.BeginRawBinaryCopyAsync($"COPY {names[oid]} TO STDOUT (FORMAT BINARY)", cancellationToken);
+            using var seed = new MemoryStream();
+            int read;
+            while ((read = await copy.ReadAsync(buffer, cancellationToken)) > 0)
+            {
+                if (retained + seed.Length + read > seedBudget)
+                {
+                    await copy.CancelAsync();
+                    return null;
+                }
+                await seed.WriteAsync(buffer.AsMemory(0, read), cancellationToken);
+            }
+            retained += seed.Length;
+            tables.Add(new Table(names[oid], seed.ToArray()));
+        }
+
+        var sequenceNames = new List<string>();
+        await using (var command = new NpgsqlCommand("""
+            SELECT n.nspname, c.relname FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind = 'S' AND c.relpersistence = 'p' AND n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
+            ORDER BY c.oid
+            """, connection, transaction))
+        await using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+            while (await reader.ReadAsync(cancellationToken))
+                sequenceNames.Add($"{Quote(reader.GetString(0))}.{Quote(reader.GetString(1))}");
+        var sequences = new List<Sequence>();
+        foreach (var name in sequenceNames)
+        {
+            await using var command = new NpgsqlCommand($"SELECT last_value, is_called FROM {name}", connection, transaction);
+            await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+            await reader.ReadAsync(cancellationToken);
+            sequences.Add(new Sequence(name, reader.GetInt64(0), reader.GetBoolean(1)));
+        }
+        await transaction.CommitAsync(cancellationToken);
+        return new TtRowResetPlan(tables, sequences);
+    }
+
+    internal async Task RestoreAsync(NpgsqlConnection connection)
+    {
+        await using var transaction = await connection.BeginTransactionAsync();
+        await using (var settings = new NpgsqlCommand("SET LOCAL lock_timeout = '5s'; SET LOCAL statement_timeout = '30s'; SET LOCAL search_path = pg_catalog", connection, transaction))
+            await settings.ExecuteNonQueryAsync();
+        foreach (var table in _tables.Reverse())
+        {
+            await using var command = new NpgsqlCommand($"DELETE FROM ONLY {table.Name}", connection, transaction);
+            await command.ExecuteNonQueryAsync();
+        }
+        foreach (var table in _tables) GC.KeepAlive(table);
+        foreach (var sequence in _sequences)
+        {
+            await using var command = new NpgsqlCommand("SELECT setval($1::regclass, $2, $3)", connection, transaction);
+            command.Parameters.Add(new NpgsqlParameter { Value = sequence.Name });
+            command.Parameters.Add(new NpgsqlParameter { Value = sequence.LastValue });
+            command.Parameters.Add(new NpgsqlParameter { Value = sequence.IsCalled });
+            await command.ExecuteScalarAsync();
+        }
+        await transaction.CommitAsync();
+    }
+
+    private static string Quote(string identifier) => new NpgsqlCommandBuilder().QuoteIdentifier(identifier);
+}

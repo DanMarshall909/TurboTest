@@ -1,0 +1,42 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:06.31]     TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: "CREATE CAST (public.\"Users\" AS text) WITH INOUT") [FAIL]
+  Failed TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: "CREATE CAST (public.\"Users\" AS text) WITH INOUT") [6 s]
+  Error Message:
+   Assert.NotEqual() Failure: Values are equal
+Expected: Not 16418
+Actual:       16418
+  Stack Trace:
+     at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 54
+   at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 83
+   at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 83
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:18.93]     TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: "REVOKE USAGE ON TYPE public.\"Users\" FROM PUBLIC") [FAIL]
+  Failed TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: "REVOKE USAGE ON TYPE public.\"Users\" FROM PUBLIC") [12 s]
+  Error Message:
+   Assert.NotEqual() Failure: Values are equal
+Expected: Not 16418
+Actual:       16418
+  Stack Trace:
+     at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 54
+   at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 83
+   at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 83
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:29.48]     TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: "DO $$ BEGIN EXECUTE format('ALTER DATABASE %I IS_T"···) [FAIL]
+  Failed TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: "DO $$ BEGIN EXECUTE format('ALTER DATABASE %I IS_T"···) [10 s]
+  Error Message:
+   Assert.NotEqual() Failure: Values are equal
+Expected: Not 16418
+Actual:       16418
+  Stack Trace:
+     at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 54
+   at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 83
+   at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 83
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-004/type-red/type-red.trx
+
+Failed!  - Failed:     3, Passed:     0, Skipped:     0, Total:     3, Duration: 29 s - TurboTest.Tests.dll (net10.0)

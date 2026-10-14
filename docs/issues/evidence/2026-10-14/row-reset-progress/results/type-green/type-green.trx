@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="61584abd-8a53-4261-8eb7-13548fed84c1" name="@os-greg 2026-10-14 12:19:12" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T12:19:12.4353892+10:00" queuing="2026-10-14T12:19:12.4353893+10:00" start="2026-10-14T12:18:52.0388726+10:00" finish="2026-10-14T12:20:15.7523114+10:00" />
+  <TestSettings name="default" id="5250dca8-e35f-4f5e-9dfd-9a8063d26320">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_12_19_12" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="0f11e734-b4d2-429d-bac6-a9e99c6fadac" testId="062f256a-5fb5-885a-c398-db557c488177" testName="TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: &quot;DO $$ BEGIN EXECUTE format('ALTER DATABASE %I IS_T&quot;···)" computerName="os-greg" duration="00:00:12.9098220" startTime="2026-10-14T12:19:27.0556214+10:00" endTime="2026-10-14T12:19:40.0042451+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0f11e734-b4d2-429d-bac6-a9e99c6fadac">
+      <Output>
+        <ErrorInfo>
+          <Message>Npgsql.PostgresException : 42809: cannot drop a template database</Message>
+          <StackTrace>   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource&lt;TResult&gt;.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteNonQuery(Boolean async, CancellationToken cancellationToken)
+   at TurboTest.EFCore.Internal.NpgsqlExtensions.ExecuteNonQueryAsync(NpgsqlConnection connection, String sql) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/NpgsqlExtensions.cs:line 13
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.DeleteSlotAsync(Slot slot) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 337
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.DeleteSlotAsync(Slot slot) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 338
+   at TurboTest.EFCore.Internal.TtPreparedPool`1.ReturnAsync(Slot slot) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs:line 300
+   at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs:line 83
+   at TurboTest.EFCore.TtFactory`1.&lt;&gt;c__DisplayClass12_1.&lt;&lt;CreateLeaseAsync&gt;b__2&gt;d.MoveNext() in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 87
+--- End of stack trace from previous location ---
+   at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 50
+   at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 83
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4f609262-f16d-478f-8ed6-316ecc9b9eb2" testId="b8336471-3455-454f-a6ad-7662f96e9ff4" testName="TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: &quot;REVOKE USAGE ON TYPE public.\&quot;Users\&quot; FROM PUBLIC&quot;)" computerName="os-greg" duration="00:00:14.6519587" startTime="2026-10-14T12:19:12.4230788+10:00" endTime="2026-10-14T12:19:27.0537377+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4f609262-f16d-478f-8ed6-316ecc9b9eb2" />
+    <UnitTestResult executionId="d83a6e06-8039-4f68-8bb1-128f8aa54961" testId="c4c48f3c-3a0e-08e2-1f31-b869958d6839" testName="TurboTest.Tests.BaselineRestoreTests.Additional_catalog_objects_require_verified_template_recreation(change: &quot;DO $$ BEGIN EXECUTE format('COMMENT ON DATABASE %I&quot;···)" computerName="os-greg" duration="00:00:14.0805301" startTime="2026-10-14T12:19:40.0122917+10:00" endTime="2026-10-14T12:19:54.0854694+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d83a6e06-8039-4f68-8bb1-128f8aa54961" />
+    <UnitTestResult executionId="8bc47228-5b62-40c7-9f33-5eeedb1b1ccb" testId="0567c931-31dc-916f-b749-458ebb8a125b" testName="TurboTest.Tests.BaselineRestoreTests.Additional_catalog_objects_require_verified_template_recreation(change: &quot;CREATE CONVERSION public.unexpected_conversion FOR&quot;···)" computerName="os-greg" duration="00:00:06.6990697" startTime="2026-10-14T12:20:08.8943366+10:00" endTime="2026-10-14T12:20:15.5930700+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8bc47228-5b62-40c7-9f33-5eeedb1b1ccb" />
+    <UnitTestResult executionId="1dc9cba3-6c1c-4092-9096-736d6da373ca" testId="9a96a686-e312-0121-9fd3-f1d7d8cab106" testName="TurboTest.Tests.BaselineRestoreTests.Additional_catalog_objects_require_verified_template_recreation(change: &quot;CREATE OPERATOR public.## (FUNCTION = pg_catalog.i&quot;···)" computerName="os-greg" duration="00:00:14.8077634" startTime="2026-10-14T12:19:54.0862079+10:00" endTime="2026-10-14T12:20:08.8936128+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1dc9cba3-6c1c-4092-9096-736d6da373ca" />
+    <UnitTestResult executionId="799ca49e-63f0-4a04-b0ac-aeb2ca63e0cb" testId="efd2d3a9-b47a-ca91-debf-3654f9541cea" testName="TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: &quot;CREATE CAST (public.\&quot;Users\&quot; AS text) WITH INOUT&quot;)" computerName="os-greg" duration="00:00:17.0684233" startTime="2026-10-14T12:18:55.3350405+10:00" endTime="2026-10-14T12:19:12.4008366+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="799ca49e-63f0-4a04-b0ac-aeb2ca63e0cb" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Additional_catalog_objects_require_verified_template_recreation(change: &quot;DO $$ BEGIN EXECUTE format('COMMENT ON DATABASE %I&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="c4c48f3c-3a0e-08e2-1f31-b869958d6839">
+      <Execution id="d83a6e06-8039-4f68-8bb1-128f8aa54961" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Additional_catalog_objects_require_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Additional_catalog_objects_require_verified_template_recreation(change: &quot;CREATE OPERATOR public.## (FUNCTION = pg_catalog.i&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="9a96a686-e312-0121-9fd3-f1d7d8cab106">
+      <Execution id="1dc9cba3-6c1c-4092-9096-736d6da373ca" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Additional_catalog_objects_require_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: &quot;REVOKE USAGE ON TYPE public.\&quot;Users\&quot; FROM PUBLIC&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b8336471-3455-454f-a6ad-7662f96e9ff4">
+      <Execution id="4f609262-f16d-478f-8ed6-316ecc9b9eb2" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_database_or_row_type_state_requires_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: &quot;CREATE CAST (public.\&quot;Users\&quot; AS text) WITH INOUT&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="efd2d3a9-b47a-ca91-debf-3654f9541cea">
+      <Execution id="799ca49e-63f0-4a04-b0ac-aeb2ca63e0cb" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_database_or_row_type_state_requires_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: &quot;DO $$ BEGIN EXECUTE format('ALTER DATABASE %I IS_T&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="062f256a-5fb5-885a-c398-db557c488177">
+      <Execution id="0f11e734-b4d2-429d-bac6-a9e99c6fadac" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_database_or_row_type_state_requires_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Additional_catalog_objects_require_verified_template_recreation(change: &quot;CREATE CONVERSION public.unexpected_conversion FOR&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="0567c931-31dc-916f-b749-458ebb8a125b">
+      <Execution id="8bc47228-5b62-40c7-9f33-5eeedb1b1ccb" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Additional_catalog_objects_require_verified_template_recreation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="062f256a-5fb5-885a-c398-db557c488177" executionId="0f11e734-b4d2-429d-bac6-a9e99c6fadac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b8336471-3455-454f-a6ad-7662f96e9ff4" executionId="4f609262-f16d-478f-8ed6-316ecc9b9eb2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c4c48f3c-3a0e-08e2-1f31-b869958d6839" executionId="d83a6e06-8039-4f68-8bb1-128f8aa54961" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0567c931-31dc-916f-b749-458ebb8a125b" executionId="8bc47228-5b62-40c7-9f33-5eeedb1b1ccb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9a96a686-e312-0121-9fd3-f1d7d8cab106" executionId="1dc9cba3-6c1c-4092-9096-736d6da373ca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="efd2d3a9-b47a-ca91-debf-3654f9541cea" executionId="799ca49e-63f0-4a04-b0ac-aeb2ca63e0cb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="6" executed="6" passed="5" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.32]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.44]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.48]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:45.18]       Npgsql.PostgresException : 42809: cannot drop a template database
+[xUnit.net 00:00:45.18]       Stack Trace:
+[xUnit.net 00:00:45.18]            at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+[xUnit.net 00:00:45.18]            at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource&lt;TResult&gt;.GetResult(Int16 token)
+[xUnit.net 00:00:45.18]            at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+[xUnit.net 00:00:45.18]            at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+[xUnit.net 00:00:45.18]            at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+[xUnit.net 00:00:45.18]            at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+[xUnit.net 00:00:45.18]            at Npgsql.NpgsqlCommand.ExecuteNonQuery(Boolean async, CancellationToken cancellationToken)
+[xUnit.net 00:00:45.18]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/NpgsqlExtensions.cs(13,0): at TurboTest.EFCore.Internal.NpgsqlExtensions.ExecuteNonQueryAsync(NpgsqlConnection connection, String sql)
+[xUnit.net 00:00:45.18]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs(337,0): at TurboTest.EFCore.Internal.TtPreparedPool`1.DeleteSlotAsync(Slot slot)
+[xUnit.net 00:00:45.18]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs(338,0): at TurboTest.EFCore.Internal.TtPreparedPool`1.DeleteSlotAsync(Slot slot)
+[xUnit.net 00:00:45.18]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs(300,0): at TurboTest.EFCore.Internal.TtPreparedPool`1.ReturnAsync(Slot slot)
+[xUnit.net 00:00:45.18]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs(83,0): at TurboTest.EFCore.Internal.TtDatabase.DisposeCoreAsync(Boolean discard)
+[xUnit.net 00:00:45.19]         /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs(87,0): at TurboTest.EFCore.TtFactory`1.&lt;&gt;c__DisplayClass12_1.&lt;&lt;CreateLeaseAsync&gt;b__2&gt;d.MoveNext()
+[xUnit.net 00:00:45.19]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:45.19]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(50,0): at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change)
+[xUnit.net 00:00:45.19]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(83,0): at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change)
+[xUnit.net 00:00:45.19]         --- End of stack trace from previous location ---
+[xUnit.net 00:01:20.77]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T12:19:40.0074782+10:00">
+        <Text>[xUnit.net 00:00:45.18]     TurboTest.Tests.BaselineRestoreTests.Changed_database_or_row_type_state_requires_template_recreation(change: "DO $$ BEGIN EXECUTE format('ALTER DATABASE %I IS_T"···) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.12_20_15.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

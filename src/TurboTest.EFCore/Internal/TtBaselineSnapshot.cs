@@ -12,6 +12,8 @@ internal sealed class TtBaselineSnapshot
     internal TtBaselineSnapshot(IEnumerable<KeyValuePair<string, string>> signatures) =>
         _signatures = signatures.ToDictionary();
 
+    internal TtBaselineSnapshot Schema => new(_signatures.Where(entry => !entry.Key.StartsWith("content:", StringComparison.Ordinal)));
+
     internal void Verify(TtBaselineSnapshot actual)
     {
         if (_signatures.Count != actual._signatures.Count ||
@@ -19,8 +21,14 @@ internal sealed class TtBaselineSnapshot
             throw new TtLifecycleException("BaselineVerify", new InvalidOperationException("Baseline differs."));
     }
 
-    internal static async Task<TtBaselineSnapshot> CaptureAsync(NpgsqlConnection connection,
-        CancellationToken cancellationToken = default)
+    internal static Task<TtBaselineSnapshot> CaptureAsync(NpgsqlConnection connection,
+        CancellationToken cancellationToken = default) => CaptureAsync(connection, true, cancellationToken);
+
+    internal static Task<TtBaselineSnapshot> CaptureSchemaAsync(NpgsqlConnection connection,
+        CancellationToken cancellationToken = default) => CaptureAsync(connection, false, cancellationToken);
+
+    private static async Task<TtBaselineSnapshot> CaptureAsync(NpgsqlConnection connection,
+        bool includeContents, CancellationToken cancellationToken)
     {
         await using var transaction = await connection.BeginTransactionAsync(IsolationLevel.RepeatableRead, cancellationToken);
         await using (var settings = new NpgsqlCommand(
@@ -52,8 +60,14 @@ internal sealed class TtBaselineSnapshot
               OR EXISTS (SELECT FROM pg_ts_dict d JOIN namespaces n ON n.oid = d.dictnamespace)
               OR EXISTS (SELECT FROM pg_ts_parser p JOIN namespaces n ON n.oid = p.prsnamespace)
               OR EXISTS (SELECT FROM pg_ts_template t JOIN namespaces n ON n.oid = t.tmplnamespace)
+              OR EXISTS (SELECT FROM pg_operator o JOIN namespaces n ON n.oid = o.oprnamespace)
+              OR EXISTS (SELECT FROM pg_conversion c JOIN namespaces n ON n.oid = c.connamespace)
+              OR EXISTS (SELECT FROM pg_cast c JOIN pg_type t ON t.oid IN (c.castsource, c.casttarget)
+                JOIN namespaces n ON n.oid = t.typnamespace)
+              OR EXISTS (SELECT FROM pg_shdescription WHERE classoid = 'pg_database'::regclass AND objoid =
+                (SELECT oid FROM pg_database WHERE datname = current_database()))
               OR EXISTS (SELECT FROM pg_database WHERE datname = current_database()
-                AND (datacl IS NOT NULL OR datconnlimit <> -1))
+                AND (datacl IS NOT NULL OR datconnlimit <> -1 OR datistemplate))
               OR EXISTS (SELECT FROM pg_db_role_setting WHERE setdatabase = 0 OR setdatabase =
                 (SELECT oid FROM pg_database WHERE datname = current_database()))
             """, connection, transaction))
@@ -71,6 +85,10 @@ internal sealed class TtBaselineSnapshot
               SELECT 'namespace:' || n.oid AS key,
                 jsonb_build_array(n.nspname, n.nspowner, n.nspacl)::text AS definition
               FROM pg_namespace n WHERE n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
+              UNION ALL
+              SELECT 'type:' || t.oid, to_jsonb(t)::text
+              FROM pg_type t JOIN pg_namespace n ON n.oid = t.typnamespace
+              WHERE n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
               UNION ALL
               SELECT 'relation:' || c.oid,
                 jsonb_build_array(n.nspname, c.relname, c.relkind, c.relpersistence,
@@ -136,6 +154,12 @@ internal sealed class TtBaselineSnapshot
                 await using var bytes = reader.GetStream(1);
                 signatures.Add(key, Convert.ToHexString(await SHA256.HashDataAsync(bytes, cancellationToken)));
             }
+        }
+
+        if (!includeContents)
+        {
+            await transaction.CommitAsync(cancellationToken);
+            return new TtBaselineSnapshot(signatures);
         }
 
         var relations = new List<(uint Oid, string Schema, string Name, char Kind)>();

@@ -1,0 +1,24 @@
+{
+  "scope": "TT-004 row reset RED",
+  "base": "07d0ed574598a38464b4f64ccab7e28b5c482c7e",
+  "result": "Expected same database OID16423, observed recreated OID16424; all preceding seed and generated-ID assertions pass.",
+  "exitCode": 1,
+  "files": [
+    {
+      "path": "row-red.log.txt",
+      "sha256": "3bb9bf1dcb57f26fd76b3e89a93e49e90c6d3783280b5f5e0bfd45ebc87f1114"
+    },
+    {
+      "path": "row-red.trx",
+      "sha256": "3555e9aecee1650611b797662eb705e02ead59805b03e097499519532d339d7b"
+    },
+    {
+      "path": "source/BaselineRestoreTests.cs.txt",
+      "sha256": "9342642e6f284ce532ea807c45d4c092bbe608959a6742bd52efe3af1be78a10"
+    },
+    {
+      "path": "source/TtPreparedPool.cs.txt",
+      "sha256": "0a5176037ac143e3081efb2fa0e2508d1aa6c29dc27d1eadd95ccbef13959a63"
+    }
+  ]
+}

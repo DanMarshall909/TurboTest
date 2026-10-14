@@ -1,0 +1,21 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:05.36]     TurboTest.Tests.BaselineRestoreTests.Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys [FAIL]
+  Failed TurboTest.Tests.BaselineRestoreTests.Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys [4 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (FormatException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.CreatePreparedFactoryAsync[TContext](TtOptions options, TtBaselineDefinition`1 baseline, CancellationToken cancellationToken, Func`2 deleteHost, Func`2 beforeVerification, Func`2 prepareImage) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 98
+   at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 70
+   at TurboTest.Tests.BaselineRestoreTests.Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 88
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-004/fallback-green/fallback-green.trx
+
+Failed!  - Failed:     1, Passed:     2, Skipped:     0, Total:     3, Duration: 16 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-004/fallback-green/8706d014-9c79-4430-8b0e-4f042d422c1a/dan_os-greg_2026-10-14.12_23_13.cobertura.xml

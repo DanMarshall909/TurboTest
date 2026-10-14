@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6b15f36f-0049-4dc1-a0a2-686e27b10d58" name="@os-greg 2026-10-14 12:23:02" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T12:23:02.6665003+10:00" queuing="2026-10-14T12:23:02.6665003+10:00" start="2026-10-14T12:22:55.2532321+10:00" finish="2026-10-14T12:23:13.9967353+10:00" />
+  <TestSettings name="default" id="7d984719-a28f-4e71-9368-95e0773cd1e1">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_12_23_02" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="fba966b9-a6fb-4a66-9259-e5ea05231dd5" testId="21f30ef5-44b8-6ff6-0244-50f933b108c1" testName="TurboTest.Tests.BaselineRestoreTests.Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys" computerName="os-greg" duration="00:00:04.9904102" startTime="2026-10-14T12:22:57.6016318+10:00" endTime="2026-10-14T12:23:02.6260822+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fba966b9-a6fb-4a66-9259-e5ea05231dd5">
+      <Output>
+        <ErrorInfo>
+          <Message>TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (FormatException). The resource is unavailable for reuse.</Message>
+          <StackTrace>   at TurboTest.EFCore.Tt.CreatePreparedFactoryAsync[TContext](TtOptions options, TtBaselineDefinition`1 baseline, CancellationToken cancellationToken, Func`2 deleteHost, Func`2 beforeVerification, Func`2 prepareImage) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 98
+   at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 70
+   at TurboTest.Tests.BaselineRestoreTests.Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 88
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="115f685b-2c4b-418a-a6d0-efc180e0ea70" testId="012bd129-2e9b-e544-6f26-ed8669b90d44" testName="TurboTest.Tests.BaselineRestoreTests.A_seed_above_the_binary_cache_budget_uses_verified_recreation" computerName="os-greg" duration="00:00:05.9144100" startTime="2026-10-14T12:23:02.6544919+10:00" endTime="2026-10-14T12:23:08.5430503+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="115f685b-2c4b-418a-a6d0-efc180e0ea70" />
+    <UnitTestResult executionId="b369efd9-5e08-4c94-9ceb-6bee7de8fa49" testId="98e07037-4de6-8ac7-0cb7-e0070cd82a58" testName="TurboTest.Tests.BaselineRestoreTests.A_foreign_key_cycle_uses_template_recreation_without_partial_row_cleanup" computerName="os-greg" duration="00:00:05.2929376" startTime="2026-10-14T12:23:08.5451133+10:00" endTime="2026-10-14T12:23:13.8360049+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b369efd9-5e08-4c94-9ceb-6bee7de8fa49" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.A_seed_above_the_binary_cache_budget_uses_verified_recreation" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="012bd129-2e9b-e544-6f26-ed8669b90d44">
+      <Execution id="115f685b-2c4b-418a-a6d0-efc180e0ea70" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="A_seed_above_the_binary_cache_budget_uses_verified_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="21f30ef5-44b8-6ff6-0244-50f933b108c1">
+      <Execution id="fba966b9-a6fb-4a66-9259-e5ea05231dd5" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.A_foreign_key_cycle_uses_template_recreation_without_partial_row_cleanup" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="98e07037-4de6-8ac7-0cb7-e0070cd82a58">
+      <Execution id="b369efd9-5e08-4c94-9ceb-6bee7de8fa49" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="A_foreign_key_cycle_uses_template_recreation_without_partial_row_cleanup" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="21f30ef5-44b8-6ff6-0244-50f933b108c1" executionId="fba966b9-a6fb-4a66-9259-e5ea05231dd5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="012bd129-2e9b-e544-6f26-ed8669b90d44" executionId="115f685b-2c4b-418a-a6d0-efc180e0ea70" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="98e07037-4de6-8ac7-0cb7-e0070cd82a58" executionId="b369efd9-5e08-4c94-9ceb-6bee7de8fa49" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="2" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.18]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.27]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.30]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:05.36]       TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (FormatException). The resource is unavailable for reuse.
+[xUnit.net 00:00:05.36]       Stack Trace:
+[xUnit.net 00:00:05.36]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(98,0): at TurboTest.EFCore.Tt.CreatePreparedFactoryAsync[TContext](TtOptions options, TtBaselineDefinition`1 baseline, CancellationToken cancellationToken, Func`2 deleteHost, Func`2 beforeVerification, Func`2 prepareImage)
+[xUnit.net 00:00:05.36]         /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs(70,0): at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken)
+[xUnit.net 00:00:05.36]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(88,0): at TurboTest.Tests.BaselineRestoreTests.Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys()
+[xUnit.net 00:00:05.36]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:16.57]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T12:23:02.6289554+10:00">
+        <Text>[xUnit.net 00:00:05.36]     TurboTest.Tests.BaselineRestoreTests.Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.12_23_13.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

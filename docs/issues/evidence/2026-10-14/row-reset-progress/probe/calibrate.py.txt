@@ -1,0 +1,22 @@
+from pathlib import Path
+import subprocess,json,hashlib,xml.etree.ElementTree as E
+source=Path('src/TurboTest.EFCore/Internal/TtRowResetPlan.cs');original=source.read_bytes();text=original.decode();ns={'t':'http://microsoft.com/schemas/VisualStudio/TeamTest/2010'}
+copy='''        foreach (var table in _tables)
+        {
+            await using var copy = await connection.BeginRawBinaryCopyAsync($"COPY {table.Name} FROM STDIN (FORMAT BINARY)");
+            await copy.WriteAsync(table.Seed);
+        }'''
+cases=[('delete','await command.ExecuteNonQueryAsync();','await Task.CompletedTask;', 'Row_reset_restores'),('copy',copy,'        foreach (var table in _tables) GC.KeepAlive(table);','Row_reset_restores'),('sequence','await command.ExecuteScalarAsync();','await Task.CompletedTask;','Row_reset_restores'),('cycle','if (roots.Length == 0) return null;','if (roots.Length == 0) return new TtRowResetPlan([], []);','A_foreign_key_cycle'),('budget','const long seedBudget = 16 * 1024 * 1024;','const long seedBudget = 32 * 1024 * 1024;','A_seed_above')]
+for name,old,new,filter in cases:
+ assert text.count(old)==1,(name,text.count(old))
+ run=Path('artifacts/tt-004')/(name+'-fault');run.mkdir(parents=True,exist_ok=True)
+ (run/'original.cs.txt').write_bytes(original);fault=text.replace(old,new).encode();source.write_bytes(fault);(run/'fault.cs.txt').write_bytes(fault)
+ cmd=['dotnet','test','tests/TurboTest.Tests','--filter','FullyQualifiedName~'+filter,'--logger','trx;LogFileName='+name+'-fault.trx','--results-directory',str(run)]
+ try:
+  with (run/'run.log').open('wb') as log:r=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT)
+ finally:source.write_bytes(original)
+ result=run/(name+'-fault.trx');counters=E.parse(result).find('.//t:Counters',ns).attrib if result.exists() else None
+ receipt={'fault':name,'command':cmd,'exitCode':r.returncode,'counters':counters,'originalSha256':hashlib.sha256(original).hexdigest(),'faultSha256':hashlib.sha256(fault).hexdigest(),'restoredSha256':hashlib.sha256(source.read_bytes()).hexdigest()}
+ (run/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
+ assert r.returncode!=0 and counters and counters['failed']=='1',receipt
+ print(name,'rejected; source restored',flush=True)

@@ -1,0 +1,988 @@
+{
+  "scope": "TT-004 progress; Open, uncommitted, independent completion review pending. Seven tickets remain Open.",
+  "base": "07d0ed574598a38464b4f64ccab7e28b5c482c7e",
+  "results": {
+    "budget-fault/budget-fault.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "catalog-green/catalog-green.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "3",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "catalog-red/catalog-red.trx": {
+      "total": "10",
+      "executed": "10",
+      "passed": "7",
+      "failed": "3",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "copy-fault/copy-fault.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "cycle-fault/cycle-fault.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "delete-fault/delete-fault.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures-green/failures-green.trx": {
+      "total": "6",
+      "executed": "6",
+      "passed": "6",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "fallback-green/fallback-green.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "2",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "fallback-green-2/fallback-green-2.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "3",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "full/reset-full.trx": {
+      "total": "128",
+      "executed": "128",
+      "passed": "117",
+      "failed": "11",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "full-bounded/reset-full-bounded.trx": {
+      "total": "128",
+      "executed": "128",
+      "passed": "128",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "reset-validation-fault/reset-validation-fault.trx": {
+      "total": "2",
+      "executed": "2",
+      "passed": "1",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "row-green/row-green.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "row-red/row-red.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "row-refactor/row-refactor.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "3",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "schema-fault/schema-fault.trx": {
+      "total": "7",
+      "executed": "7",
+      "passed": "0",
+      "failed": "7",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "schema-green/schema-green.trx": {
+      "total": "7",
+      "executed": "7",
+      "passed": "7",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "sequence-fault/sequence-fault.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "timing-green/timing-green.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "3",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "timing-red/timing-red.trx": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "type-green/type-green.trx": {
+      "total": "6",
+      "executed": "6",
+      "passed": "5",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "type-green-2/type-green-2.trx": {
+      "total": "6",
+      "executed": "6",
+      "passed": "6",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "type-red/type-red.trx": {
+      "total": "3",
+      "executed": "3",
+      "passed": "0",
+      "failed": "3",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    }
+  },
+  "phaseNotes": {
+    "row-red": "Seed contents/IDs passed but ordinary return replaced database OID16423 with16424.",
+    "schema-fault": "Skipping pre-reset schema gate rejects all seven table/column/namespace/view/routine/type/grant recreation cases.",
+    "catalog-red": "Three operator/conversion/shared-comment additions remain in same DB; seven prior cases pass.",
+    "type-red": "All three IS_TEMPLATE/cast/type-ACL changes remain in same DB.",
+    "type-green": "One failed real DROP on template-marked DB; five pass. Cleared owned slot flag before confirmed drop; six restored cases pass.",
+    "fallback-green": "Two fallback cases pass, generated fixture hits EF raw-SQL JSON formatting FormatException before schema initialization. Not behavioral RED.",
+    "fallback-green-2": "Cycle and cache-budget recreation plus generated/binary/nonpublic FK row restoration all pass.",
+    "delete/copy/sequence/cycle/budget-fault": "Five separate faults each rejected by one owning public regression, source hashes restored; historical before optional failure-injection hooks.",
+    "reset-validation-fault": "One dirty post-commit return incorrectly succeeds without full validation; sequence-failure law still passes. Source restored.",
+    "timing-red": "Two successful returns produce zero timing records before telemetry implementation.",
+    "perf-zero": "Zero distribution rejected before timing; ran before adding generated-ID assertions, same distribution guard.",
+    "perf-mix": "100/20/0 distribution rejected before timing.",
+    "perf-valid": "18 verified counterbalanced sequential samples; local shared-host observations with explicit scope/percentile definitions.",
+    "full": "117pass/11fail/no skips. Ten explicit startup timeouts plus one early stage mismatch; exact cause of stage mismatch not independently captured. Host I/O pressure and default24-thread collection schedule observed; exact timeout phase unavailable after deleted failed containers.",
+    "full-bounded": "128pass/0fail/0skip, 8m20s; deployed maxParallelThreads2/conservative normal runner, no timeout/assertion change."
+  },
+  "commands": {
+    "full": "dotnet test tests/TurboTest.Tests --collect 'Code Coverage;Format=cobertura' --logger 'trx;LogFileName=reset-full-bounded.trx' --results-directory artifacts/tt-004/full-bounded",
+    "probe": "dotnet run --project artifacts/tt-004/perf-probe/Probe.csproj -- none",
+    "faults": "python3 artifacts/tt-004/calibrate.py"
+  },
+  "limits": [
+    "No independent TT-004 completion review or commit yet.",
+    "No whole-package 100% coverage or fresh normal mutation proof; full report retained when available.",
+    "Normal mutation pending final coding-session commit, excludes end-to-end tests.",
+    "Current lifecycle gate serializes preparation/reset; capacity/separate concurrency bounds remain TT-005.",
+    "Telemetry covers prepared returns, not TT-010 comprehensive metrics or maintained benchmark.",
+    "One-off probe: one shared host, small seed, sequential operation, six samples/workload; no portable/universal50ms claim.",
+    "Initial baseline support remains restricted; unsupported runtime catalog additions recreate or fail closed if shared role state prevents verified replacement.",
+    "Historical calibration/source snapshots are labelled; no claim they exactly match later source bytes."
+  ],
+  "finalGate": {
+    "workingDirectory": "/home/dan/code/TurboTest",
+    "testCommand": "dotnet test tests/TurboTest.Tests --collect 'Code Coverage;Format=cobertura' --logger 'trx;LogFileName=reset-full-bounded.trx' --results-directory artifacts/tt-004/full-bounded",
+    "testExitCode": 0,
+    "executed": 128,
+    "passed": 128,
+    "failed": 0,
+    "skipped": 0,
+    "buildCommands": [
+      "dotnet build TurboTest.sln",
+      "dotnet build examples/DynamicScalingExample/DynamicScalingExample.csproj"
+    ],
+    "buildExitCodes": [
+      0,
+      0
+    ],
+    "sourceRevision": "Uncommitted TT-004 candidate at recorded base; library source snapshots identify the bytes tested. No later library source edit.",
+    "cleanup": "No TurboTest containers remain; unrelated prismml container retained."
+  },
+  "files": [
+    {
+      "path": "results/budget-fault/budget-fault.trx",
+      "source": "artifacts/tt-004/budget-fault/budget-fault.trx",
+      "sha256": "beabf0ceaa9d62675c84da7144b5198d52998473105c143e83210ab25abda563"
+    },
+    {
+      "path": "calibration/budget-fault/fault.cs.txt",
+      "source": "artifacts/tt-004/budget-fault/fault.cs.txt",
+      "sha256": "703b1ebf44d499407145c87a60c0f4802a8a96d64e78c7dfc682186627b4593b"
+    },
+    {
+      "path": "calibration/budget-fault/original.cs.txt",
+      "source": "artifacts/tt-004/budget-fault/original.cs.txt",
+      "sha256": "5f65b40030758e3bdf87cc1a0eee6618094111e863f6881b178906e4bdb826c5"
+    },
+    {
+      "path": "calibration/budget-fault/receipt.json",
+      "source": "artifacts/tt-004/budget-fault/receipt.json",
+      "sha256": "b6ad744b0a9fb8aa2a296c0083f9adbb056c4f6b49dee7d8b8831ed912d0236c"
+    },
+    {
+      "path": "transcripts/budget-fault/run.log.txt",
+      "source": "artifacts/tt-004/budget-fault/run.log",
+      "sha256": "e99c8881ed709bf71494a771f0f4222469367c54435ac470d39cad26ef26297a"
+    },
+    {
+      "path": "transcripts/calibration.log.txt",
+      "source": "artifacts/tt-004/calibration.log",
+      "sha256": "c114441529b6e91ad4cc43b2c21f4063b070421c5111150e78ec03049f38cce9"
+    },
+    {
+      "path": "results/catalog-green/catalog-green.trx",
+      "source": "artifacts/tt-004/catalog-green/catalog-green.trx",
+      "sha256": "20eddf8f2b4c9ebb05a533d2d27d38153002d77ec53a6347af9abe95168128d5"
+    },
+    {
+      "path": "transcripts/catalog-green.log.txt",
+      "source": "artifacts/tt-004/catalog-green.log",
+      "sha256": "e397ed73b0c36b8f8a7c3247a11ffba206461867cca97648d07c8f9bd128f5bb"
+    },
+    {
+      "path": "results/catalog-red/catalog-red.trx",
+      "source": "artifacts/tt-004/catalog-red/catalog-red.trx",
+      "sha256": "c3243d24610a734f201ba3df9882d3b437458f719ce2602e31efab7e0fc3f96f"
+    },
+    {
+      "path": "transcripts/catalog-red.log.txt",
+      "source": "artifacts/tt-004/catalog-red.log",
+      "sha256": "83889a7ddfc4d64e07193d2884aa3b4b9f3125bf033236aa365199e96a595a15"
+    },
+    {
+      "path": "results/copy-fault/copy-fault.trx",
+      "source": "artifacts/tt-004/copy-fault/copy-fault.trx",
+      "sha256": "62b3ae98ec6f909450fea029bdb65d9857c22bc0de25e6d4f64b27c4fe5ac9dd"
+    },
+    {
+      "path": "calibration/copy-fault/fault.cs.txt",
+      "source": "artifacts/tt-004/copy-fault/fault.cs.txt",
+      "sha256": "59fa9ee33d9396f0f0dbff1dd05b5f9ccce2cc7b217694243f9c01868bb6adb1"
+    },
+    {
+      "path": "calibration/copy-fault/original.cs.txt",
+      "source": "artifacts/tt-004/copy-fault/original.cs.txt",
+      "sha256": "5f65b40030758e3bdf87cc1a0eee6618094111e863f6881b178906e4bdb826c5"
+    },
+    {
+      "path": "calibration/copy-fault/receipt.json",
+      "source": "artifacts/tt-004/copy-fault/receipt.json",
+      "sha256": "5aae6d4cd70c5d7314d8d4d06d2ef1ba07a3767a9562ef2bbaae46473261433d"
+    },
+    {
+      "path": "transcripts/copy-fault/run.log.txt",
+      "source": "artifacts/tt-004/copy-fault/run.log",
+      "sha256": "639bae629a31f3f8aecf77f2b7f71d757844e0feb29312d7df2486bd9e4d988b"
+    },
+    {
+      "path": "results/cycle-fault/cycle-fault.trx",
+      "source": "artifacts/tt-004/cycle-fault/cycle-fault.trx",
+      "sha256": "ec86015a5a5d61dbc4ae34ed2a39ced6fff3ea5d67f4c8aa9159f439c9f20b87"
+    },
+    {
+      "path": "calibration/cycle-fault/fault.cs.txt",
+      "source": "artifacts/tt-004/cycle-fault/fault.cs.txt",
+      "sha256": "643969fb75c7f87665000580e815b13bf7efdf118bbe08816b734d54a76cec02"
+    },
+    {
+      "path": "calibration/cycle-fault/original.cs.txt",
+      "source": "artifacts/tt-004/cycle-fault/original.cs.txt",
+      "sha256": "5f65b40030758e3bdf87cc1a0eee6618094111e863f6881b178906e4bdb826c5"
+    },
+    {
+      "path": "calibration/cycle-fault/receipt.json",
+      "source": "artifacts/tt-004/cycle-fault/receipt.json",
+      "sha256": "dabd500dbcabd06b9aaa91a3639ceca5859ed6da42b0cd1ea826952b78d70304"
+    },
+    {
+      "path": "transcripts/cycle-fault/run.log.txt",
+      "source": "artifacts/tt-004/cycle-fault/run.log",
+      "sha256": "d9b3901646d109c6340e3fc401c473985bc3b1371c4c6aad5897229e21857316"
+    },
+    {
+      "path": "results/delete-fault/delete-fault.trx",
+      "source": "artifacts/tt-004/delete-fault/delete-fault.trx",
+      "sha256": "5bc9e7ca85cd3522d7d9e9e42c62731e476335321ab16efb7d90bfd48b99580b"
+    },
+    {
+      "path": "calibration/delete-fault/fault.cs.txt",
+      "source": "artifacts/tt-004/delete-fault/fault.cs.txt",
+      "sha256": "1060e8664a16de9c622778447ecfe24a417e014acac12cb6293c9494174e1ce7"
+    },
+    {
+      "path": "calibration/delete-fault/original.cs.txt",
+      "source": "artifacts/tt-004/delete-fault/original.cs.txt",
+      "sha256": "5f65b40030758e3bdf87cc1a0eee6618094111e863f6881b178906e4bdb826c5"
+    },
+    {
+      "path": "calibration/delete-fault/receipt.json",
+      "source": "artifacts/tt-004/delete-fault/receipt.json",
+      "sha256": "257bb618287e023f6c1c44747f0fa2b4dc04504d73cc5c43523602673964afd4"
+    },
+    {
+      "path": "transcripts/delete-fault/run.log.txt",
+      "source": "artifacts/tt-004/delete-fault/run.log",
+      "sha256": "30ca9dbc6aca0893d7018f2791100de11bf533298688f6c32be94e45bfad4702"
+    },
+    {
+      "path": "transcripts/example-build.log.txt",
+      "source": "artifacts/tt-004/example-build.log",
+      "sha256": "e2538c519b85f568afdcb076e41fbcadb739b2ed8701559f5a7250e845594e65"
+    },
+    {
+      "path": "results/failures-green/failures-green.trx",
+      "source": "artifacts/tt-004/failures-green/failures-green.trx",
+      "sha256": "77da94ad5352f08a9fa1d64053d9d931d039a56ff31dd7db83be973209978f20"
+    },
+    {
+      "path": "transcripts/failures-green.log.txt",
+      "source": "artifacts/tt-004/failures-green.log",
+      "sha256": "c007ef4d1723881b24934f280ec62d92898caf059e15f59d6e34f12870d794d1"
+    },
+    {
+      "path": "results/fallback-green/fallback-green.trx",
+      "source": "artifacts/tt-004/fallback-green/fallback-green.trx",
+      "sha256": "d559ab23332db683a777d3c499b439411d057f833a6c1b835bb3f57f74770626"
+    },
+    {
+      "path": "results/fallback-green-2/fallback-green-2.trx",
+      "source": "artifacts/tt-004/fallback-green-2/fallback-green-2.trx",
+      "sha256": "e9bf73933a3e58fec01ce6472eb2934aac858ef7a3f89fdf72b2205b25f01a01"
+    },
+    {
+      "path": "transcripts/fallback-green-2.log.txt",
+      "source": "artifacts/tt-004/fallback-green-2.log",
+      "sha256": "419d3e0634630b8ecede1ce22b3379070b4c080d9c757bfffd5b2aa2adbc9573"
+    },
+    {
+      "path": "transcripts/fallback-green.log.txt",
+      "source": "artifacts/tt-004/fallback-green.log",
+      "sha256": "067fc178f22816d79f8e7d132e3803d2c79aec6d5358a81f01a7a270855755d1"
+    },
+    {
+      "path": "calibration/full/failed-gate.json",
+      "source": "artifacts/tt-004/full/failed-gate.json",
+      "sha256": "cf361e794e25aa8bfb403b0a378a90a18f8248c0138053ba3e4c1a1f16e4954b"
+    },
+    {
+      "path": "results/full/reset-full.trx",
+      "source": "artifacts/tt-004/full/reset-full.trx",
+      "sha256": "8b5166f802b4dcdc863a96ca489c3e90fab8fac1d8e4a280ad960905c23b4c3d"
+    },
+    {
+      "path": "observations/full-bounded/coverage-summary.json",
+      "source": "artifacts/tt-004/full-bounded/coverage-summary.json",
+      "sha256": "f65dda78a8facf9ce65144c5cc9aba631dabd99894be599281aa04fa8cd78da1"
+    },
+    {
+      "path": "results/full-bounded/reset-full-bounded.trx",
+      "source": "artifacts/tt-004/full-bounded/reset-full-bounded.trx",
+      "sha256": "8e1f1369d08b8f84e021e80f0e51477e263878b556dc44f3bf645d398d265c03"
+    },
+    {
+      "path": "transcripts/full-bounded.log.txt",
+      "source": "artifacts/tt-004/full-bounded.log",
+      "sha256": "e4b48a859af039e6b02d838c271b65730068750649280eae5bab437f9c84bec7"
+    },
+    {
+      "path": "transcripts/full.log.txt",
+      "source": "artifacts/tt-004/full.log",
+      "sha256": "ca62f5855954790eea4ac340acb223f551cd7e0ce842aff1b308835127b744d6"
+    },
+    {
+      "path": "transcripts/perf-mix.log.txt",
+      "source": "artifacts/tt-004/perf-mix.log",
+      "sha256": "8346980ee42a45ebb98c23b0b8d371fdf5000df4dfb7ed752cfa4ea4ddadf754"
+    },
+    {
+      "path": "observations/perf-valid.json",
+      "source": "artifacts/tt-004/perf-valid.json",
+      "sha256": "194092a968e98fa2fdeed4720ab137a643040e6dd600cc2b2406ce61c35e3b2c"
+    },
+    {
+      "path": "transcripts/perf-valid.stderr.log.txt",
+      "source": "artifacts/tt-004/perf-valid.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "transcripts/perf-zero.log.txt",
+      "source": "artifacts/tt-004/perf-zero.log",
+      "sha256": "e9872e6fd3439d9525e5243c791a1227c87eb861bbdf8ebb5d1ab091a49bb321"
+    },
+    {
+      "path": "calibration/reset-validation-fault/fault.cs.txt",
+      "source": "artifacts/tt-004/reset-validation-fault/fault.cs.txt",
+      "sha256": "f0e8ace727c72a217d1e70cd8f1f26393016191545708f5ee1d4b55722548611"
+    },
+    {
+      "path": "calibration/reset-validation-fault/original.cs.txt",
+      "source": "artifacts/tt-004/reset-validation-fault/original.cs.txt",
+      "sha256": "5f2cee45ff53a256c19a613046563c4e3c04f3ba43b7e17cc75c6f599c6eeb58"
+    },
+    {
+      "path": "calibration/reset-validation-fault/receipt.json",
+      "source": "artifacts/tt-004/reset-validation-fault/receipt.json",
+      "sha256": "917482bfd26f99893774ad677a2a992db224d8d4c0493847fe4afc89b8a340f0"
+    },
+    {
+      "path": "results/reset-validation-fault/reset-validation-fault.trx",
+      "source": "artifacts/tt-004/reset-validation-fault/reset-validation-fault.trx",
+      "sha256": "efdb9d776d0d9d1c9b93bbe4ff22ab471491684c70bd1add0308207abd223bec"
+    },
+    {
+      "path": "transcripts/reset-validation-fault/run.log.txt",
+      "source": "artifacts/tt-004/reset-validation-fault/run.log",
+      "sha256": "7459b2bc514f15548586ac663ad51e38a05d2cac5c95748ed852307a5e2814f9"
+    },
+    {
+      "path": "results/row-green/row-green.trx",
+      "source": "artifacts/tt-004/row-green/row-green.trx",
+      "sha256": "286f0190febb4e0d4862aeb15c93b434dd57cbfe4a91ac665bd145b73f62b94c"
+    },
+    {
+      "path": "transcripts/row-green.log.txt",
+      "source": "artifacts/tt-004/row-green.log",
+      "sha256": "96fe18708a2222eb2a367ecc8028784f77e367c1f5e8d899110a706e90136e77"
+    },
+    {
+      "path": "results/row-red/row-red.trx",
+      "source": "artifacts/tt-004/row-red/row-red.trx",
+      "sha256": "3555e9aecee1650611b797662eb705e02ead59805b03e097499519532d339d7b"
+    },
+    {
+      "path": "transcripts/row-red.log.txt",
+      "source": "artifacts/tt-004/row-red.log",
+      "sha256": "3bb9bf1dcb57f26fd76b3e89a93e49e90c6d3783280b5f5e0bfd45ebc87f1114"
+    },
+    {
+      "path": "results/row-refactor/row-refactor.trx",
+      "source": "artifacts/tt-004/row-refactor/row-refactor.trx",
+      "sha256": "34d53c7516bfae905030a3edc9c5fd9d5d570736ed9f5bd11576079cdc0c866b"
+    },
+    {
+      "path": "transcripts/row-refactor.log.txt",
+      "source": "artifacts/tt-004/row-refactor.log",
+      "sha256": "5139e7ad58f0f622f770100756cce5a649f1cd64729e81b09e2e088900449118"
+    },
+    {
+      "path": "calibration/schema-fault/fault.cs.txt",
+      "source": "artifacts/tt-004/schema-fault/fault.cs.txt",
+      "sha256": "8be047aa9391fbd029c12627666c7b5c3554e4d73bcdf25af4b088be1ef45bac"
+    },
+    {
+      "path": "calibration/schema-fault/original.cs.txt",
+      "source": "artifacts/tt-004/schema-fault/original.cs.txt",
+      "sha256": "71b2f9a18f5c424daf656efcac4a4c18ac28294e52bf47e871071ea86dffe2e5"
+    },
+    {
+      "path": "calibration/schema-fault/receipt.json",
+      "source": "artifacts/tt-004/schema-fault/receipt.json",
+      "sha256": "73ec2ebe0b3bec729dde4ced704971175b4dd392e88ac847718602a2ca0cec28"
+    },
+    {
+      "path": "transcripts/schema-fault/run.log.txt",
+      "source": "artifacts/tt-004/schema-fault/run.log",
+      "sha256": "01f0d1d6a8491adda92446f18db7f727124e15ccbd6c69451c54733d8ba908ff"
+    },
+    {
+      "path": "results/schema-fault/schema-fault.trx",
+      "source": "artifacts/tt-004/schema-fault/schema-fault.trx",
+      "sha256": "40d705f59d23342b63e7ca02079217246b43d19361420f8c6adb6b73f29ba2c7"
+    },
+    {
+      "path": "results/schema-green/schema-green.trx",
+      "source": "artifacts/tt-004/schema-green/schema-green.trx",
+      "sha256": "67cc053831ed50877419804d4dc24553d4433abedb21dc5564ea64f5dc1c26e2"
+    },
+    {
+      "path": "transcripts/schema-green.log.txt",
+      "source": "artifacts/tt-004/schema-green.log",
+      "sha256": "bb277c6be05ea853050b8e331e79b794f483e27c06f938e80e9f531d501c4f1f"
+    },
+    {
+      "path": "calibration/sequence-fault/fault.cs.txt",
+      "source": "artifacts/tt-004/sequence-fault/fault.cs.txt",
+      "sha256": "6d1d7ceee42dc0d83a371cc9fc0eeaa84e1687ba9d21209a1c51f5b2f99d0a85"
+    },
+    {
+      "path": "calibration/sequence-fault/original.cs.txt",
+      "source": "artifacts/tt-004/sequence-fault/original.cs.txt",
+      "sha256": "5f65b40030758e3bdf87cc1a0eee6618094111e863f6881b178906e4bdb826c5"
+    },
+    {
+      "path": "calibration/sequence-fault/receipt.json",
+      "source": "artifacts/tt-004/sequence-fault/receipt.json",
+      "sha256": "16eb741d2569d1e82bbcf8c4e57826b1547cbdf901d1fd29e9dd98d333d1dc53"
+    },
+    {
+      "path": "transcripts/sequence-fault/run.log.txt",
+      "source": "artifacts/tt-004/sequence-fault/run.log",
+      "sha256": "3f90b9e79a3706d841b8bde5fb8053476368a6307b151bed4a9f65ed68812176"
+    },
+    {
+      "path": "results/sequence-fault/sequence-fault.trx",
+      "source": "artifacts/tt-004/sequence-fault/sequence-fault.trx",
+      "sha256": "d36af0051e595e8d1d23f03efc3980d19bb7c54fc00c3ab3e1df22ad8a40148f"
+    },
+    {
+      "path": "transcripts/solution-build.log.txt",
+      "source": "artifacts/tt-004/solution-build.log",
+      "sha256": "eae13ed37f6bea4db89a36224548afd7b65780724e8d0b9bf06844d9fd6bab1e"
+    },
+    {
+      "path": "observations/startup-diagnostic.json",
+      "source": "artifacts/tt-004/startup-diagnostic.json",
+      "sha256": "574cc95de8f400adc41d22d0b2664ec799a558624bef5ef24ec35c7086620a95"
+    },
+    {
+      "path": "results/timing-green/timing-green.trx",
+      "source": "artifacts/tt-004/timing-green/timing-green.trx",
+      "sha256": "74874d07950d4b5909d84080871253c989e5fa7dd85a7c1c26922a2ccbfc5c6a"
+    },
+    {
+      "path": "transcripts/timing-green.log.txt",
+      "source": "artifacts/tt-004/timing-green.log",
+      "sha256": "c5bd914c6209a3aa6642fe6d7e08b075b33b782bfe91d5444a2d0e47f071d16b"
+    },
+    {
+      "path": "results/timing-red/timing-red.trx",
+      "source": "artifacts/tt-004/timing-red/timing-red.trx",
+      "sha256": "f438cfb9ffcec81d2369a01ce2e122b400668b7858d174a6507964b8a386373a"
+    },
+    {
+      "path": "transcripts/timing-red.log.txt",
+      "source": "artifacts/tt-004/timing-red.log",
+      "sha256": "7e59d5e8beacd29faed53e78fb8b8e7e931c7ac39d11a88e5a980ebf712f8320"
+    },
+    {
+      "path": "results/type-green/type-green.trx",
+      "source": "artifacts/tt-004/type-green/type-green.trx",
+      "sha256": "1b54edc46cb67bf2e5299fb9ecd0983f07c1e3d0c72f6dd6091b506fa5fdc498"
+    },
+    {
+      "path": "results/type-green-2/type-green-2.trx",
+      "source": "artifacts/tt-004/type-green-2/type-green-2.trx",
+      "sha256": "d10ec861325f676d292d52f4d426ec8a31c702a8a94c2808c15578b9c70991e5"
+    },
+    {
+      "path": "transcripts/type-green-2.log.txt",
+      "source": "artifacts/tt-004/type-green-2.log",
+      "sha256": "0494f5271c72cfc11310bbfd7e0c06fb55f21b4ea85b4960f380fe0ed6451e1b"
+    },
+    {
+      "path": "transcripts/type-green.log.txt",
+      "source": "artifacts/tt-004/type-green.log",
+      "sha256": "cdd15bc3024686e44b8202d216d306f15cad8a4a7ba9d5d3143bfde312a9e982"
+    },
+    {
+      "path": "results/type-red/type-red.trx",
+      "source": "artifacts/tt-004/type-red/type-red.trx",
+      "sha256": "bce6d8f11660b565a6358426fc961ec15c9aff9e75b808e05e7983f76caa475b"
+    },
+    {
+      "path": "transcripts/type-red.log.txt",
+      "source": "artifacts/tt-004/type-red.log",
+      "sha256": "ea832350af696f1dc77bdd5ab493caabb0548b1f075af4bed6a3a3d6c9810cc8"
+    },
+    {
+      "path": "coverage/catalog-green.cobertura.xml.gz",
+      "source": "artifacts/tt-004/catalog-green/14f92fd7-6ad1-4da8-ae11-5290d5fb83fa/dan_os-greg_2026-10-14.12_16_40.cobertura.xml",
+      "sha256": "ccf2264b67fab299de0bd0d6964c8bbc6504df731348ff67c06d6e68cf3e943b"
+    },
+    {
+      "path": "coverage/failures-green.cobertura.xml.gz",
+      "source": "artifacts/tt-004/failures-green/d964090a-f7b7-4512-a6b0-50c221beae2c/dan_os-greg_2026-10-14.12_28_37.cobertura.xml",
+      "sha256": "b39d65b5763f3dbc42434d89bd4b0706a5c015d453e65a6c63e64323cac9ce0e"
+    },
+    {
+      "path": "coverage/fallback-green.cobertura.xml.gz",
+      "source": "artifacts/tt-004/fallback-green/8706d014-9c79-4430-8b0e-4f042d422c1a/dan_os-greg_2026-10-14.12_23_13.cobertura.xml",
+      "sha256": "12e95e8cf4f43e210baeee831198618787e9e0ef4dc03fa7de9de3d36a3f54e2"
+    },
+    {
+      "path": "coverage/fallback-green-2.cobertura.xml.gz",
+      "source": "artifacts/tt-004/fallback-green-2/32a83e8c-3d49-4d99-b7b8-4e954d6de2d6/dan_os-greg_2026-10-14.12_24_29.cobertura.xml",
+      "sha256": "214f9353b6ea3025740fc5c80b3f7fe856c34792a6943d3b9443909f23f41b06"
+    },
+    {
+      "path": "coverage/full.cobertura.xml.gz",
+      "source": "artifacts/tt-004/full/ec803557-f912-4537-bd7b-b66209cc335d/dan_os-greg_2026-10-14.12_46_11.cobertura.xml",
+      "sha256": "15c8f80cdbdf85e77cf330f453d1456b5b46c58b6dfa81ee68bf3907ade010e2"
+    },
+    {
+      "path": "coverage/full-bounded.cobertura.xml.gz",
+      "source": "artifacts/tt-004/full-bounded/5d2824e0-dd6b-4dca-970a-27b0419b21fd/dan_os-greg_2026-10-14.12_57_16.cobertura.xml",
+      "sha256": "27d7b96d83341c01768e2ecc07d01a3f8dea4e358c8db23fd1825b86be8403d8"
+    },
+    {
+      "path": "coverage/row-green.cobertura.xml.gz",
+      "source": "artifacts/tt-004/row-green/f1d7cc9e-b68f-42bf-ae4b-42251c976cd9/dan_os-greg_2026-10-14.12_08_13.cobertura.xml",
+      "sha256": "2909de1260979a1865d1cc5bf023b6b88f6fd2db2d0dbcb701fbc6dd98d25680"
+    },
+    {
+      "path": "coverage/row-refactor.cobertura.xml.gz",
+      "source": "artifacts/tt-004/row-refactor/82100f29-19a9-4def-940b-b6dc1ac5cc62/dan_os-greg_2026-10-14.12_09_16.cobertura.xml",
+      "sha256": "c04a5427b375d29928ac6560ec0fe8eeafe414c9b94267e3fe0cb529e6bfb7b1"
+    },
+    {
+      "path": "coverage/schema-green.cobertura.xml.gz",
+      "source": "artifacts/tt-004/schema-green/5253242f-1b64-4474-91a8-e6df1962629e/dan_os-greg_2026-10-14.12_12_30.cobertura.xml",
+      "sha256": "36c7f57ffddc6d622f6d17c10d6245d9045e1ad676aefb74f6d0c1f1677f35d7"
+    },
+    {
+      "path": "coverage/timing-green.cobertura.xml.gz",
+      "source": "artifacts/tt-004/timing-green/b7525fea-627f-42b0-980a-38f78c06b05b/dan_os-greg_2026-10-14.12_34_12.cobertura.xml",
+      "sha256": "8da5509014821e1cafe89ecc567bf8ee54689e090377dc80ef51fbc27acceef0"
+    },
+    {
+      "path": "coverage/type-green.cobertura.xml.gz",
+      "source": "artifacts/tt-004/type-green/76c70fba-d6dc-450e-a7a9-a3025cd47d5a/dan_os-greg_2026-10-14.12_20_15.cobertura.xml",
+      "sha256": "5490548c8f33bebb10b26b00d71f35db25a2f33cd35e31ab9ffa599d004b9e0a"
+    },
+    {
+      "path": "coverage/type-green-2.cobertura.xml.gz",
+      "source": "artifacts/tt-004/type-green-2/21719b2f-92cc-478a-883e-551bce7d3135/dan_os-greg_2026-10-14.12_21_35.cobertura.xml",
+      "sha256": "10b972575f29151456a68e4698c625a16f24c19efb097c3fce9d1b8a87762548"
+    },
+    {
+      "path": "probe/perf-probe/Program.cs.txt",
+      "source": "artifacts/tt-004/perf-probe/Program.cs",
+      "sha256": "65420cb05c8bd1223294ff112d3f5a0e6d6516570ec8a16377a0c462ead8d1c9"
+    },
+    {
+      "path": "probe/perf-probe/Probe.csproj.txt",
+      "source": "artifacts/tt-004/perf-probe/Probe.csproj",
+      "sha256": "ac248bb0be287dd31abf33c56d5d30b668f6dfc3c00658ba37aef3410d433a3e"
+    },
+    {
+      "path": "probe/calibrate.py.txt",
+      "source": "artifacts/tt-004/calibrate.py",
+      "sha256": "cd3dd26f4e638ad09a3a1eab90d6314b0fe5f09afc3959ae5e8653d039279f4b"
+    },
+    {
+      "path": "snapshots/README.md.txt",
+      "source": "README.md",
+      "sha256": "2d7912f265c0897c23170c61da117e9135f4f1f51e8d49d56aa3b9d51b969b6b"
+    },
+    {
+      "path": "snapshots/docs/issues/README.md.txt",
+      "source": "docs/issues/README.md",
+      "sha256": "6fd7a1756211d101046805214761d400dc43e5935d5f4413bc219038f881620f"
+    },
+    {
+      "path": "snapshots/docs/issues/open/database/TT-004-restore-data-and-handle-schema-changes.md.txt",
+      "source": "docs/issues/open/database/TT-004-restore-data-and-handle-schema-changes.md",
+      "sha256": "35b31ecf7a30f6951745489d8cc50f7d43f80bfa706367a0435c9504da6ae39a"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Tt.cs.txt",
+      "source": "src/TurboTest.EFCore/Tt.cs",
+      "sha256": "4b36eb853f3584a9ae2f94a7d74f9a803b392536e822282d8004dcaa165e1cce"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtPreparedPool.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtPreparedPool.cs",
+      "sha256": "952178c1fcbc424cd2fcd19678f8c7a435ab587003e1931dfe1c96a92d65b0d4"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs",
+      "sha256": "5be635195d9d2c5d35c49e8a827feb080b9d5a34ea8ba7a48e454fc9acb68ab7"
+    },
+    {
+      "path": "snapshots/src/TurboTest.EFCore/Internal/TtRowResetPlan.cs.txt",
+      "source": "src/TurboTest.EFCore/Internal/TtRowResetPlan.cs",
+      "sha256": "cbfe2cdeb5349c67f9767f8ff695d37e7f61c152c1de6cd947ca3fe596ca9291"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/BaselineRestoreTests.cs.txt",
+      "source": "tests/TurboTest.Tests/BaselineRestoreTests.cs",
+      "sha256": "a75e2e54dd1c2d21911c6bb67e72a4f73f30dfb1789b0ab02616944d18424ed3"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/ResetTimingTests.cs.txt",
+      "source": "tests/TurboTest.Tests/ResetTimingTests.cs",
+      "sha256": "2a06637fca4a0e203698ae0fe6169240baf5fc7df055e4f408b890721925f4d4"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/TurboTest.Tests.csproj.txt",
+      "source": "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+      "sha256": "5cb085618a968f970d32a1136945c10253f87aecf86e4e8c7c8e44e26b24de08"
+    },
+    {
+      "path": "snapshots/tests/TurboTest.Tests/xunit.runner.json.txt",
+      "source": "tests/TurboTest.Tests/xunit.runner.json",
+      "sha256": "fd188429841d7c54056506774b9a34142953629ff5338774e16dd8ea4308dbfa"
+    }
+  ]
+}

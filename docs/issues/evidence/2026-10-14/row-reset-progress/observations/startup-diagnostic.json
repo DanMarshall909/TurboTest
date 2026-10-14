@@ -1,0 +1,30 @@
+{
+  "process": "dotnet test TT-004 full, session25743",
+  "ioPressure": "some avg10=8.72 avg60=19.77 avg300=16.03 total=22662568021\nfull avg10=8.39 avg60=18.80 avg300=15.18 total=21084397218\n",
+  "availableDisk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/nvme0n1p5  478G  446G  7.8G  99% /\n",
+  "containers": [
+    {
+      "container": "9769f4b7febf",
+      "name": "tt_pool_0_502964294fdd4bcf892a08bf0e5f9e15",
+      "status": "Up 1 second",
+      "logExit": 0,
+      "startupLines": [
+        "2026-10-14T02:44:11.895401014Z performing post-bootstrap initialization ... ok",
+        "2026-10-14T02:44:11.948798824Z waiting for server to start....2026-10-14 02:44:11.948 UTC [41] LOG:  starting PostgreSQL 16.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit",
+        "2026-10-14T02:44:11.992195204Z 2026-10-14 02:44:11.992 UTC [44] LOG:  database system was shut down at 2026-10-14 02:44:11 UTC",
+        "2026-10-14T02:44:12.004986705Z 2026-10-14 02:44:12.004 UTC [41] LOG:  database system is ready to accept connections",
+        "2026-10-14T02:44:12.159751814Z /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*",
+        "2026-10-14T02:44:12.160586758Z waiting for server to shut down....2026-10-14 02:44:12.160 UTC [41] LOG:  received fast shutdown request",
+        "2026-10-14T02:44:11.895402224Z initdb: warning: enabling \"trust\" authentication for local connections",
+        "2026-10-14T02:44:11.895444083Z initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb."
+      ]
+    },
+    {
+      "container": "815f2a072d41",
+      "name": "tt_pool_0_b91b6ee0ebca4a1cad483eb2ba2ef21a",
+      "status": "Up 4 seconds",
+      "logExit": 1,
+      "startupLines": []
+    }
+  ]
+}

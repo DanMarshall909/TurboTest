@@ -1,0 +1,344 @@
+{
+  "scope": "TT-004 local sequential public-API row restoration; not TT-010 integrated benchmark or portable guarantee",
+  "sourceHashes": {
+    "src/TurboTest.EFCore/Internal/TtPreparedPool.cs": "952178C1FCBC424CD2FCD19678F8C7A435AB587003E1931DFE1C96A92D65B0D4",
+    "src/TurboTest.EFCore/Internal/TtRowResetPlan.cs": "CBFE2CDEB5349C67F9767F8FF695D37E7F61C152C1DE6CD947CA3FE596CA9291",
+    "src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs": "5BE635195D9D2C5D35C49E8A827FEB080B9D5A34EA8BA7A48E454FC9ACB68AB7",
+    "artifacts/tt-004/perf-probe/Program.cs": "65420CB05C8BD1223294FF112D3F5A0E6D6516570EC8A16377A0C462EAD8D1C9"
+  },
+  "runtime": ".NET 10.0.9",
+  "ef": "10.0.12.0",
+  "npgsql": "10.0.3.0",
+  "image": "postgres:16-alpine",
+  "initialSlots": 1,
+  "hardCapImplemented": false,
+  "concurrency": 1,
+  "seedIds": [
+    100,
+    200,
+    300
+  ],
+  "expectedNextIds": [
+    101,
+    201,
+    301
+  ],
+  "loadMix": "10 parents:2 children:1 note; all inserted rows plus one mutated retained seed parent before reset",
+  "warmupCycles": 1,
+  "order": [
+    130,
+    1300,
+    13000,
+    130,
+    13000,
+    1300,
+    13000,
+    130,
+    1300,
+    13000,
+    1300,
+    130,
+    1300,
+    13000,
+    130,
+    1300,
+    130,
+    13000
+  ],
+  "percentile": "nearest rank ceil(p*N), p50/p95; max; milliseconds",
+  "startupMs": 4332.3012,
+  "finalDrainMs": 1489.5494,
+  "totalRunMs": 10199.6168,
+  "completeRunCyclesPerSecond": 1.7647721824215985,
+  "groups": [
+    {
+      "rows": 130,
+      "samples": 6,
+      "rowMix": [
+        100,
+        20,
+        10
+      ],
+      "reset": {
+        "p50": 57.2565,
+        "p95": 62.8299,
+        "max": 62.8299
+      },
+      "permitWait": {
+        "p50": 0.0004,
+        "p95": 0.0006,
+        "max": 0.0006
+      },
+      "executionIncludingValidation": {
+        "p50": 57.1658,
+        "p95": 62.7892,
+        "max": 62.7892
+      },
+      "validation": {
+        "p50": 43.3721,
+        "p95": 45.3151,
+        "max": 45.3151
+      },
+      "cycle": {
+        "p50": 78.7477,
+        "p95": 131.1335,
+        "max": 131.1335
+      },
+      "checkout": {
+        "p50": 0.4351,
+        "p95": 34.9846,
+        "max": 34.9846
+      }
+    },
+    {
+      "rows": 1300,
+      "samples": 6,
+      "rowMix": [
+        1000,
+        200,
+        100
+      ],
+      "reset": {
+        "p50": 84.7436,
+        "p95": 102.4813,
+        "max": 102.4813
+      },
+      "permitWait": {
+        "p50": 0.0004,
+        "p95": 0.0007,
+        "max": 0.0007
+      },
+      "executionIncludingValidation": {
+        "p50": 84.6948,
+        "p95": 102.4393,
+        "max": 102.4393
+      },
+      "validation": {
+        "p50": 42.0471,
+        "p95": 50.8696,
+        "max": 50.8696
+      },
+      "cycle": {
+        "p50": 127.0021,
+        "p95": 144.3095,
+        "max": 144.3095
+      },
+      "checkout": {
+        "p50": 0.4347,
+        "p95": 0.5907,
+        "max": 0.5907
+      }
+    },
+    {
+      "rows": 13000,
+      "samples": 6,
+      "rowMix": [
+        10000,
+        2000,
+        1000
+      ],
+      "reset": {
+        "p50": 272.8037,
+        "p95": 305.7442,
+        "max": 305.7442
+      },
+      "permitWait": {
+        "p50": 0.0006,
+        "p95": 0.0018,
+        "max": 0.0018
+      },
+      "executionIncludingValidation": {
+        "p50": 272.7281,
+        "p95": 305.6333,
+        "max": 305.6333
+      },
+      "validation": {
+        "p50": 43.8051,
+        "p95": 46.9835,
+        "max": 46.9835
+      },
+      "cycle": {
+        "p50": 396.8986,
+        "p95": 604.751,
+        "max": 604.751
+      },
+      "checkout": {
+        "p50": 0.4058,
+        "p95": 0.5781,
+        "max": 0.5781
+      }
+    }
+  ],
+  "samples": [
+    {
+      "Rows": 130,
+      "CheckoutMs": 34.9846,
+      "ResetWallMs": 57.2565,
+      "CycleMs": 131.1335,
+      "PermitWaitMs": 0.0006,
+      "ExecutionMs": 57.1658,
+      "ValidationMs": 44.3155
+    },
+    {
+      "Rows": 1300,
+      "CheckoutMs": 0.5907,
+      "ResetWallMs": 68.8205,
+      "CycleMs": 95.6512,
+      "PermitWaitMs": 0.0003,
+      "ExecutionMs": 68.7819,
+      "ValidationMs": 41.9425
+    },
+    {
+      "Rows": 13000,
+      "CheckoutMs": 0.4058,
+      "ResetWallMs": 225.9603,
+      "CycleMs": 329.6103,
+      "PermitWaitMs": 0.0004,
+      "ExecutionMs": 225.902,
+      "ValidationMs": 39.48
+    },
+    {
+      "Rows": 130,
+      "CheckoutMs": 0.7325,
+      "ResetWallMs": 52.4452,
+      "CycleMs": 71.8492,
+      "PermitWaitMs": 0.0004,
+      "ExecutionMs": 52.3788,
+      "ValidationMs": 38.6885
+    },
+    {
+      "Rows": 13000,
+      "CheckoutMs": 0.5781,
+      "ResetWallMs": 284.0815,
+      "CycleMs": 401.5331,
+      "PermitWaitMs": 0.0006,
+      "ExecutionMs": 284.0342,
+      "ValidationMs": 46.7338
+    },
+    {
+      "Rows": 1300,
+      "CheckoutMs": 0.5558,
+      "ResetWallMs": 99.4911,
+      "CycleMs": 144.3095,
+      "PermitWaitMs": 0.0003,
+      "ExecutionMs": 99.4505,
+      "ValidationMs": 50.8696
+    },
+    {
+      "Rows": 13000,
+      "CheckoutMs": 0.4961,
+      "ResetWallMs": 305.7442,
+      "CycleMs": 604.751,
+      "PermitWaitMs": 0.0015,
+      "ExecutionMs": 305.6333,
+      "ValidationMs": 46.9835
+    },
+    {
+      "Rows": 130,
+      "CheckoutMs": 0.7547,
+      "ResetWallMs": 62.8299,
+      "CycleMs": 87.8207,
+      "PermitWaitMs": 0.0005,
+      "ExecutionMs": 62.7892,
+      "ValidationMs": 43.6261
+    },
+    {
+      "Rows": 1300,
+      "CheckoutMs": 0.5416,
+      "ResetWallMs": 84.7436,
+      "CycleMs": 132.9631,
+      "PermitWaitMs": 0.0007,
+      "ExecutionMs": 84.6948,
+      "ValidationMs": 42.0471
+    },
+    {
+      "Rows": 13000,
+      "CheckoutMs": 0.5085,
+      "ResetWallMs": 285.1726,
+      "CycleMs": 580.2507,
+      "PermitWaitMs": 0.0014,
+      "ExecutionMs": 285.1103,
+      "ValidationMs": 43.8051
+    },
+    {
+      "Rows": 1300,
+      "CheckoutMs": 0.4347,
+      "ResetWallMs": 87.2423,
+      "CycleMs": 132.8135,
+      "PermitWaitMs": 0.0005,
+      "ExecutionMs": 87.2012,
+      "ValidationMs": 43.8139
+    },
+    {
+      "Rows": 130,
+      "CheckoutMs": 0.346,
+      "ResetWallMs": 55.2089,
+      "CycleMs": 79.8812,
+      "PermitWaitMs": 0.0005,
+      "ExecutionMs": 55.1671,
+      "ValidationMs": 39.6567
+    },
+    {
+      "Rows": 1300,
+      "CheckoutMs": 0.2784,
+      "ResetWallMs": 102.4813,
+      "CycleMs": 127.0021,
+      "PermitWaitMs": 0.0004,
+      "ExecutionMs": 102.4393,
+      "ValidationMs": 43.7993
+    },
+    {
+      "Rows": 13000,
+      "CheckoutMs": 0.3884,
+      "ResetWallMs": 252.6235,
+      "CycleMs": 388.4142,
+      "PermitWaitMs": 0.0018,
+      "ExecutionMs": 252.5144,
+      "ValidationMs": 41.4106
+    },
+    {
+      "Rows": 130,
+      "CheckoutMs": 0.4351,
+      "ResetWallMs": 61.1513,
+      "CycleMs": 78.7477,
+      "PermitWaitMs": 0.0003,
+      "ExecutionMs": 61.1132,
+      "ValidationMs": 45.3151
+    },
+    {
+      "Rows": 1300,
+      "CheckoutMs": 0.3226,
+      "ResetWallMs": 81.669,
+      "CycleMs": 108.9157,
+      "PermitWaitMs": 0.0004,
+      "ExecutionMs": 81.6298,
+      "ValidationMs": 40.9217
+    },
+    {
+      "Rows": 130,
+      "CheckoutMs": 0.3397,
+      "ResetWallMs": 57.9015,
+      "CycleMs": 75.8909,
+      "PermitWaitMs": 0.0003,
+      "ExecutionMs": 57.8559,
+      "ValidationMs": 43.3721
+    },
+    {
+      "Rows": 13000,
+      "CheckoutMs": 0.3251,
+      "ResetWallMs": 272.8037,
+      "CycleMs": 396.8986,
+      "PermitWaitMs": 0.0003,
+      "ExecutionMs": 272.7281,
+      "ValidationMs": 46.6245
+    }
+  ],
+  "failures": 0,
+  "limits": [
+    "One local shared host; small seed; sequential operation only.",
+    "Permit wait uses the current shared lifecycle gate. Separate preparation/reset bounds belong to TT-005.",
+    "Execution includes cleanup, restoration and validation; public reset also includes context disposal and diagnostic emission.",
+    "No universal 50ms target inferred; six samples per workload do not estimate portable tails.",
+    "Source is an uncommitted TT-004 candidate; hashes identify working bytes."
+  ]
+}

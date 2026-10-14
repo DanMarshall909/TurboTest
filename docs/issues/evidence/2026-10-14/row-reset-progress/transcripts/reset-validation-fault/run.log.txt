@@ -1,0 +1,20 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:14.83]     TurboTest.Tests.BaselineRestoreTests.Failed_sequence_restoration_or_post_commit_validation_cannot_publish_a_dirty_slot(boundary: "validation") [FAIL]
+  Failed TurboTest.Tests.BaselineRestoreTests.Failed_sequence_restoration_or_post_commit_validation_cannot_publish_a_dirty_slot(boundary: "validation") [14 s]
+  Error Message:
+   Assert.IsType() Failure: Value is null
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+Actual:   null
+  Stack Trace:
+     at TurboTest.Tests.BaselineRestoreTests.Failed_sequence_restoration_or_post_commit_validation_cannot_publish_a_dirty_slot(String boundary) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 47
+   at TurboTest.Tests.BaselineRestoreTests.Failed_sequence_restoration_or_post_commit_validation_cannot_publish_a_dirty_slot(String boundary) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 64
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-004/reset-validation-fault/reset-validation-fault.trx
+
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 30 s - TurboTest.Tests.dll (net10.0)

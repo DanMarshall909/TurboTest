@@ -1,0 +1,36 @@
+{
+  "fault": "cycle",
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests",
+    "--filter",
+    "FullyQualifiedName~A_foreign_key_cycle",
+    "--logger",
+    "trx;LogFileName=cycle-fault.trx",
+    "--results-directory",
+    "artifacts/tt-004/cycle-fault"
+  ],
+  "exitCode": 1,
+  "counters": {
+    "total": "1",
+    "executed": "1",
+    "passed": "0",
+    "failed": "1",
+    "error": "0",
+    "timeout": "0",
+    "aborted": "0",
+    "inconclusive": "0",
+    "passedButRunAborted": "0",
+    "notRunnable": "0",
+    "notExecuted": "0",
+    "disconnected": "0",
+    "warning": "0",
+    "completed": "0",
+    "inProgress": "0",
+    "pending": "0"
+  },
+  "originalSha256": "5f65b40030758e3bdf87cc1a0eee6618094111e863f6881b178906e4bdb826c5",
+  "faultSha256": "643969fb75c7f87665000580e815b13bf7efdf118bbe08816b734d54a76cec02",
+  "restoredSha256": "5f65b40030758e3bdf87cc1a0eee6618094111e863f6881b178906e4bdb826c5"
+}

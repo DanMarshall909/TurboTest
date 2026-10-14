@@ -11,7 +11,7 @@ Priority: **P0** repairs broken advertised behavior; **P1** establishes reliable
 | [TT-002](resolved/database/TT-002-reset-with-pooled-connections.md) | Reset safely with pooled PostgreSQL connections | P0 | None |
 | [TT-001](resolved/api/TT-001-own-and-release-database-leases.md) | Own and release public database leases | P0 | TT-002 |
 | [TT-003](resolved/database/TT-003-prepare-immutable-schema-and-seed-baselines.md) | Prepare immutable schema and seed baselines | P1 | TT-001, TT-002 |
-| [TT-004](open/database/TT-004-restore-data-and-handle-schema-changes.md) | Restore data and handle schema changes | P1 | TT-003 |
+| [TT-004](resolved/database/TT-004-restore-data-and-handle-schema-changes.md) | Restore data and handle schema changes | P1 | TT-003 |
 | [TT-005](open/database/TT-005-bound-fixture-owned-prepared-database-pools.md) | Bound fixture-owned prepared database pools | P1 | TT-001, TT-003, TT-004 |
 | [TT-006](open/database/TT-006-quarantine-recover-and-drain-pool-resources.md) | Quarantine, recover, cancel and drain resources | P1 | TT-005 |
 | [TT-007](open/api/TT-007-use-the-configured-owner-in-di-and-static-apis.md) | Fix DI and static lifecycle ownership | P1 | TT-005, TT-006 |
@@ -25,7 +25,7 @@ TT-007 and TT-008 can proceed independently once their prerequisites are complet
 
 [TT-000: completed pool feasibility investigation](resolved/database/TT-000-pool-feasibility-investigation.md) records the source revision, observed bugs, prototype measurements, caveats and retained evidence. It is a completed experiment, not completion of any implementation ticket above.
 
-TT-001, TT-002 and TT-003 are Resolved. The remaining seven implementation tickets are Open. Their acceptance criteria describe future work; the prototypes do not satisfy the production acceptance gates. The 50 ms goal applies to a defined warm operation and workload, with queueing and full lifecycle costs reported separately.
+TT-001 through TT-004 are Resolved. The remaining six implementation tickets are Open. Their acceptance criteria describe future work; the prototypes do not satisfy the production acceptance gates. The 50 ms goal applies to a defined warm operation and workload, with queueing and full lifecycle costs reported separately.
 
 ## Implementation progress
 
@@ -55,8 +55,8 @@ retain their original snapshots and limitations.
 
 Independent completion review passed for TT-001 and TT-002; both are Resolved.
 
-Baseline restoration, bounded capacity, recovery, DI ownership,
-parking and adaptation remain to be delivered in their dependency order.
+The later tickets track restoration, capacity, recovery, DI ownership, parking
+and adaptation in their dependency order.
 
 TT-010's unsupported README/provider/package latency claims have been removed.
 Maintained metrics and integrated benchmarks remain open.
@@ -73,6 +73,19 @@ results are retained in the
 The [repair evidence](evidence/2026-10-14/prepared-baseline-repair/manifest.json)
 records cleanup retry, workload verification, catalog/dependency, configuration
 and context-model repairs. Solution and separate example builds pass.
-Independent completion review passed; TT-003 is Resolved. Row reset, capacity
-limits, recovery, DI, parking, metrics and adaptation remain in the seven open
-tickets.
+Independent completion review passed; TT-003 is Resolved. That review left seven
+open tickets; the subsequent TT-004 progress is recorded below.
+
+TT-004 implements verified row restoration and schema-change recreation. It restores
+updated/deleted seeds, relationships and sequences in the same database; schema
+changes, cycles and oversized seed caches use verified recreation. Named reset
+faults are rejected and timing separates permit wait, execution and validation.
+The local 130/1,300/13,000-row probe reports reset p95 62.83/102.48/305.74 ms,
+including validation; these are scoped observations, not a 50 ms guarantee.
+The first 128-test full gate has 117 passes and 11 failures, mostly startup
+timeouts under default collection parallelism. The bounded normal-runner rerun
+passes all 128 tests with no failures or skips; solution and separate example
+builds pass. [Progress evidence](evidence/2026-10-14/row-reset-progress/manifest.json)
+retains raw results and source/calibration snapshots.
+Independent completion review passed; TT-004 is Resolved. Capacity, recovery, DI,
+parking, comprehensive metrics and adaptation remain in six open tickets.

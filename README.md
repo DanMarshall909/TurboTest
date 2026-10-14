@@ -123,9 +123,10 @@ Hard capacity bounds, row restoration and recovery policy remain work in the
 ## Prepared fixture baselines
 
 The baseline overload prepares schema and seed data once before returning a
-factory. Each lease receives a validated copy; return currently recreates that
-copy from the sealed template. Immutable prepared baselines have passed
-independent completion review under TT-003.
+factory. Each lease receives a validated copy. Ordinary returns now restore
+cached seed rows and sequence state in place; schema changes, foreign-key cycles
+and oversized seed caches use the sealed template. Baselines and row restoration
+have passed independent completion review under TT-003 and TT-004.
 
 ```csharp
 var baseline = new TtBaselineDefinition<MyDbContext>(
@@ -156,12 +157,24 @@ are currently rejected by this path. `PoolSize` is not yet a hard capacity cap.
 Supported baselines contain permanent ordinary tables, namespaces, indexes,
 constraints, their catalog comments and sequences. Views, routines, custom types/extensions, user
 triggers/rules, RLS/policies, partition/inheritance structures, foreign/unlogged
-relations, collations, extended statistics and text-search objects are rejected.
-Custom database grants/settings and role defaults are also rejected. All
+relations, collations, extended statistics, text-search objects, operators,
+conversions and casts involving user types are rejected. Custom database
+grants/settings/comments, `IS_TEMPLATE` and role defaults are also rejected. All
 permanent sequences are checked, including unused and standalone sequences,
 their ownership dependencies, `last_value` and `is_called`. PostgreSQL binary
 row hashes validate seed contents on the owning host/version. No seed payloads
-are retained in diagnostics.
+are retained in diagnostics. Row reset caches at most 16 MiB of raw binary seed
+streams per fixture, including COPY framing; larger seeds use recreation.
+Generated columns are recomputed, and supported non-public schemas participate
+in both cleanup and validation. Reset drains only that slot's cached sessions,
+restores child/parent ordering and checks the complete baseline before reuse.
+
+When a supplied logger enables Debug, event `400` (`BaselineReset`) reports
+`ResetPermitWaitMilliseconds`, `ResetExecutionMilliseconds`,
+`ValidationMilliseconds`, `Strategy` and `Succeeded`, with an opaque owner ID.
+Execution includes restoration and validation; permit wait is separate.
+The current shared lifecycle gate serializes preparation and resets; separate
+concurrency limits remain TT-005. Diagnostic emission is outside measured work.
 
 If startup cleanup fails, `TtLifecycleException.Cleanup` retains an opaque owner
 and resource-ID snapshot. Await `error.Cleanup.RetryCleanupAsync()` to retry;

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="b87bcec8-dbe3-4d92-97d7-7ebc861b4b0d" name="@os-greg 2026-10-14 12:27:58" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T12:27:58.5705447+10:00" queuing="2026-10-14T12:27:58.5705447+10:00" start="2026-10-14T12:27:47.7110943+10:00" finish="2026-10-14T12:28:37.5672254+10:00" />
+  <TestSettings name="default" id="c165f8ff-213b-458b-bbe5-85d878671f07">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_12_27_58" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="967e7033-35c0-4eb9-99ea-c72bf784fc8d" testId="21f30ef5-44b8-6ff6-0244-50f933b108c1" testName="TurboTest.Tests.BaselineRestoreTests.Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys" computerName="os-greg" duration="00:00:08.4638850" startTime="2026-10-14T12:27:50.0759284+10:00" endTime="2026-10-14T12:27:58.5361518+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="967e7033-35c0-4eb9-99ea-c72bf784fc8d" />
+    <UnitTestResult executionId="f9f08235-a1bd-419f-84a2-8ba140eb752f" testId="98e07037-4de6-8ac7-0cb7-e0070cd82a58" testName="TurboTest.Tests.BaselineRestoreTests.A_foreign_key_cycle_uses_template_recreation_without_partial_row_cleanup" computerName="os-greg" duration="00:00:05.6366144" startTime="2026-10-14T12:28:12.0261551+10:00" endTime="2026-10-14T12:28:17.6624942+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f9f08235-a1bd-419f-84a2-8ba140eb752f" />
+    <UnitTestResult executionId="6299129d-2967-4cee-97c1-31d1854b82de" testId="012bd129-2e9b-e544-6f26-ed8669b90d44" testName="TurboTest.Tests.BaselineRestoreTests.A_seed_above_the_binary_cache_budget_uses_verified_recreation" computerName="os-greg" duration="00:00:07.8061602" startTime="2026-10-14T12:27:58.5587344+10:00" endTime="2026-10-14T12:28:06.3445011+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6299129d-2967-4cee-97c1-31d1854b82de" />
+    <UnitTestResult executionId="46590725-ccc9-4caa-86de-2e2dcfd429d5" testId="ce2730dc-4d99-0a34-ab35-9c6535421f26" testName="TurboTest.Tests.BaselineRestoreTests.Failed_sequence_restoration_or_post_commit_validation_cannot_publish_a_dirty_slot(boundary: &quot;validation&quot;)" computerName="os-greg" duration="00:00:06.0684115" startTime="2026-10-14T12:28:17.6638153+10:00" endTime="2026-10-14T12:28:23.7313303+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="46590725-ccc9-4caa-86de-2e2dcfd429d5" />
+    <UnitTestResult executionId="5b370084-3b0b-42f6-967b-ba1880e70791" testId="6a2f8d5b-8ede-3f40-5460-bbf6810c2237" testName="TurboTest.Tests.BaselineRestoreTests.Failed_sequence_restoration_or_post_commit_validation_cannot_publish_a_dirty_slot(boundary: &quot;sequence&quot;)" computerName="os-greg" duration="00:00:13.6051298" startTime="2026-10-14T12:28:23.7320258+10:00" endTime="2026-10-14T12:28:37.3368886+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b370084-3b0b-42f6-967b-ba1880e70791" />
+    <UnitTestResult executionId="a67d3bd6-7a5f-4a90-9d4b-491ed331b2a3" testId="9ac9f212-6789-af04-3362-a8196e108eeb" testName="TurboTest.Tests.BaselineRestoreTests.Row_reset_restores_updated_deleted_and_inserted_seeds_in_the_same_database" computerName="os-greg" duration="00:00:05.6807069" startTime="2026-10-14T12:28:06.3461692+10:00" endTime="2026-10-14T12:28:12.0255300+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a67d3bd6-7a5f-4a90-9d4b-491ed331b2a3" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Failed_sequence_restoration_or_post_commit_validation_cannot_publish_a_dirty_slot(boundary: &quot;sequence&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="6a2f8d5b-8ede-3f40-5460-bbf6810c2237">
+      <Execution id="5b370084-3b0b-42f6-967b-ba1880e70791" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Failed_sequence_restoration_or_post_commit_validation_cannot_publish_a_dirty_slot" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.A_seed_above_the_binary_cache_budget_uses_verified_recreation" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="012bd129-2e9b-e544-6f26-ed8669b90d44">
+      <Execution id="6299129d-2967-4cee-97c1-31d1854b82de" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="A_seed_above_the_binary_cache_budget_uses_verified_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="21f30ef5-44b8-6ff6-0244-50f933b108c1">
+      <Execution id="967e7033-35c0-4eb9-99ea-c72bf784fc8d" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Binary_restore_handles_generated_columns_and_cross_schema_foreign_keys" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.A_foreign_key_cycle_uses_template_recreation_without_partial_row_cleanup" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="98e07037-4de6-8ac7-0cb7-e0070cd82a58">
+      <Execution id="f9f08235-a1bd-419f-84a2-8ba140eb752f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="A_foreign_key_cycle_uses_template_recreation_without_partial_row_cleanup" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Row_reset_restores_updated_deleted_and_inserted_seeds_in_the_same_database" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="9ac9f212-6789-af04-3362-a8196e108eeb">
+      <Execution id="a67d3bd6-7a5f-4a90-9d4b-491ed331b2a3" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Row_reset_restores_updated_deleted_and_inserted_seeds_in_the_same_database" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Failed_sequence_restoration_or_post_commit_validation_cannot_publish_a_dirty_slot(boundary: &quot;validation&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ce2730dc-4d99-0a34-ab35-9c6535421f26">
+      <Execution id="46590725-ccc9-4caa-86de-2e2dcfd429d5" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Failed_sequence_restoration_or_post_commit_validation_cannot_publish_a_dirty_slot" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="21f30ef5-44b8-6ff6-0244-50f933b108c1" executionId="967e7033-35c0-4eb9-99ea-c72bf784fc8d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="98e07037-4de6-8ac7-0cb7-e0070cd82a58" executionId="f9f08235-a1bd-419f-84a2-8ba140eb752f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="012bd129-2e9b-e544-6f26-ed8669b90d44" executionId="6299129d-2967-4cee-97c1-31d1854b82de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ce2730dc-4d99-0a34-ab35-9c6535421f26" executionId="46590725-ccc9-4caa-86de-2e2dcfd429d5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6a2f8d5b-8ede-3f40-5460-bbf6810c2237" executionId="5b370084-3b0b-42f6-967b-ba1880e70791" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9ac9f212-6789-af04-3362-a8196e108eeb" executionId="a67d3bd6-7a5f-4a90-9d4b-491ed331b2a3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.15]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.24]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.28]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:47.57]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-14.12_28_37.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

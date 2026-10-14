@@ -1,0 +1,70 @@
+{
+  "counters": {
+    "total": "128",
+    "executed": "128",
+    "passed": "117",
+    "failed": "11",
+    "error": "0",
+    "timeout": "0",
+    "aborted": "0",
+    "inconclusive": "0",
+    "passedButRunAborted": "0",
+    "notRunnable": "0",
+    "notExecuted": "0",
+    "disconnected": "0",
+    "warning": "0",
+    "completed": "0",
+    "inProgress": "0",
+    "pending": "0"
+  },
+  "failures": [
+    {
+      "test": "TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: \"CREATE SCHEMA unexpected_schema\")",
+      "message": "TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (TimeoutException). The resource is unavailable for reuse."
+    },
+    {
+      "test": "TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership(cancel: False)",
+      "message": "System.TimeoutException : Database failed to start within 30 seconds"
+    },
+    {
+      "test": "TurboTest.Tests.MigratedBaselineTests.Recreation_preserves_migration_only_schema_history_seed_and_generated_identity",
+      "message": "TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (TimeoutException). The resource is unavailable for reuse."
+    },
+    {
+      "test": "TurboTest.Tests.ResetTimingTests.Reset_measurements_distinguish_permit_wait_execution_and_validation_without_payloads",
+      "message": "TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (TimeoutException). The resource is unavailable for reuse."
+    },
+    {
+      "test": "TurboTest.Tests.SeededBaselineTests.Fixture_configuration_cannot_redirect_initialization_to_an_external_database",
+      "message": "Assert.Equal() Failure: Strings differ\n                   \u2193 (pos 8)\nExpected: \"BaselineConfiguration\"\nActual:   \"BaselineInitialize\"\n                   \u2191 (pos 8)"
+    },
+    {
+      "test": "TurboTest.Tests.BasicTests.Should_Create_Context_With_Real_Database",
+      "message": "System.TimeoutException : Database failed to start within 30 seconds"
+    },
+    {
+      "test": "TurboTest.Tests.PreparedContextBindingTests.Late_context_configuration_cannot_publish_an_unowned_source_or_incompatible_model(source: False, additional: True)",
+      "message": "TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (TimeoutException). The resource is unavailable for reuse."
+    },
+    {
+      "test": "TurboTest.Tests.PreparedContextBindingTests.Late_context_configuration_cannot_publish_an_unowned_source_or_incompatible_model(source: True, additional: True)",
+      "message": "TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (TimeoutException). The resource is unavailable for reuse."
+    },
+    {
+      "test": "TurboTest.Tests.ConfigurationTests.Configuration_section_is_consumed_by_the_public_fixture",
+      "message": "System.TimeoutException : Database failed to start within 30 seconds"
+    },
+    {
+      "test": "TurboTest.Tests.PublicLeaseTests.Cancellation_during_context_configuration_cannot_publish_a_lease",
+      "message": "System.TimeoutException : Database failed to start within 30 seconds"
+    },
+    {
+      "test": "TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database",
+      "message": "System.TimeoutException : Database failed to start within 30 seconds"
+    }
+  ],
+  "remainingTaskContainers": [],
+  "unrelatedContainer": "prismml-llamacpp-server-1 preserved",
+  "runnerConfig": "Default max parallel threads, no xunit.runner.json deployed during this run.",
+  "followingChange": "Bound normal test collections to two using conservative scheduler; no assertion or timeout change."
+}

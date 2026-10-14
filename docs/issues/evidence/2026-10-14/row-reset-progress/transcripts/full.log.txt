@@ -1,0 +1,132 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:42.99]     TurboTest.Tests.SeededBaselineTests.Fixture_configuration_cannot_redirect_initialization_to_an_external_database [FAIL]
+  Failed TurboTest.Tests.SeededBaselineTests.Fixture_configuration_cannot_redirect_initialization_to_an_external_database [42 s]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+                   ↓ (pos 8)
+Expected: "BaselineConfiguration"
+Actual:   "BaselineInitialize"
+                   ↑ (pos 8)
+  Stack Trace:
+     at TurboTest.Tests.SeededBaselineTests.Fixture_configuration_cannot_redirect_initialization_to_an_external_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SeededBaselineTests.cs:line 231
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:44.68]     TurboTest.Tests.MigratedBaselineTests.Recreation_preserves_migration_only_schema_history_seed_and_generated_identity [FAIL]
+[xUnit.net 00:00:44.78]     TurboTest.Tests.ConfigurationTests.Configuration_section_is_consumed_by_the_public_fixture [FAIL]
+  Failed TurboTest.Tests.MigratedBaselineTests.Recreation_preserves_migration_only_schema_history_seed_and_generated_identity [44 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (TimeoutException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.CreatePreparedFactoryAsync[TContext](TtOptions options, TtBaselineDefinition`1 baseline, CancellationToken cancellationToken, Func`2 deleteHost, Func`2 beforeVerification, Func`2 prepareImage, Func`3 afterSequenceRestore, Func`2 afterRowCommit) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 101
+   at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 70
+   at TurboTest.Tests.MigratedBaselineTests.Recreation_preserves_migration_only_schema_history_seed_and_generated_identity() in /home/dan/code/TurboTest/tests/TurboTest.Tests/MigratedBaselineTests.cs:line 25
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ConfigurationTests.Configuration_section_is_consumed_by_the_public_fixture [44 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource, Func`2 probe, Int32 maxAttempts) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 238
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 209
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 216
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 74
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 112
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 119
+   at TurboTest.Tests.ConfigurationTests.Configuration_section_is_consumed_by_the_public_fixture() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ConfigurationTests.cs:line 29
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:45.06]     TurboTest.Tests.PublicLeaseTests.Cancellation_during_context_configuration_cannot_publish_a_lease [FAIL]
+[xUnit.net 00:00:45.26]     TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database [FAIL]
+  Failed TurboTest.Tests.PublicLeaseTests.Cancellation_during_context_configuration_cannot_publish_a_lease [44 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource, Func`2 probe, Int32 maxAttempts) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 238
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 209
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 216
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 74
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 112
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 119
+   at TurboTest.Tests.PublicLeaseTests.Cancellation_during_context_configuration_cannot_publish_a_lease() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 101
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database [44 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource, Func`2 probe, Int32 maxAttempts) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 238
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 209
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 216
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 74
+   at TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 59
+   at TurboTest.Tests.PooledResetTests.Failed_reset_reports_its_stage_and_does_not_publish_the_dirty_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PooledResetTests.cs:line 82
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:46.50]     TurboTest.Tests.PreparedContextBindingTests.Late_context_configuration_cannot_publish_an_unowned_source_or_incompatible_model(source: True, additional: True) [FAIL]
+  Failed TurboTest.Tests.PreparedContextBindingTests.Late_context_configuration_cannot_publish_an_unowned_source_or_incompatible_model(source: True, additional: True) [45 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (TimeoutException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.CreatePreparedFactoryAsync[TContext](TtOptions options, TtBaselineDefinition`1 baseline, CancellationToken cancellationToken, Func`2 deleteHost, Func`2 beforeVerification, Func`2 prepareImage, Func`3 afterSequenceRestore, Func`2 afterRowCommit) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 101
+   at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 70
+   at TurboTest.Tests.PreparedContextBindingTests.Late_context_configuration_cannot_publish_an_unowned_source_or_incompatible_model(Boolean source, Boolean additional) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedContextBindingTests.cs:line 70
+   at TurboTest.Tests.PreparedContextBindingTests.Late_context_configuration_cannot_publish_an_unowned_source_or_incompatible_model(Boolean source, Boolean additional) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedContextBindingTests.cs:line 99
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:48.20]     TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership(cancel: False) [FAIL]
+[xUnit.net 00:00:48.58]     TurboTest.Tests.BasicTests.Should_Create_Context_With_Real_Database [FAIL]
+[xUnit.net 00:00:48.92]     TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "CREATE SCHEMA unexpected_schema") [FAIL]
+[xUnit.net 00:00:49.22]     TurboTest.Tests.ResetTimingTests.Reset_measurements_distinguish_permit_wait_execution_and_validation_without_payloads [FAIL]
+  Failed TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership(cancel: False) [47 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource, Func`2 probe, Int32 maxAttempts) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 238
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 209
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 216
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 74
+   at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership(Boolean cancel) in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 72
+   at TurboTest.Tests.CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership(Boolean cancel) in /home/dan/code/TurboTest/tests/TurboTest.Tests/CompensatingCleanupTests.cs:line 91
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.BasicTests.Should_Create_Context_With_Real_Database [48 s]
+  Error Message:
+   System.TimeoutException : Database failed to start within 30 seconds
+  Stack Trace:
+     at TurboTest.EFCore.Internal.TtPool.WaitForDatabaseReadyAsync(NpgsqlDataSource dataSource, Func`2 probe, Int32 maxAttempts) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 238
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 209
+   at TurboTest.EFCore.Internal.TtPool.CreateContainerAsync(String name) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 216
+   at TurboTest.EFCore.Internal.TtPool.InitializeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs:line 74
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 112
+   at TurboTest.EFCore.Tt.CreateOwnedFactoryAsync[TContext](TtOptions options, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 119
+   at TurboTest.Tests.BasicTests.Should_Create_Context_With_Real_Database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/BasicTests.cs:line 12
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "CREATE SCHEMA unexpected_schema") [48 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (TimeoutException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.CreatePreparedFactoryAsync[TContext](TtOptions options, TtBaselineDefinition`1 baseline, CancellationToken cancellationToken, Func`2 deleteHost, Func`2 beforeVerification, Func`2 prepareImage, Func`3 afterSequenceRestore, Func`2 afterRowCommit) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 101
+   at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 70
+   at TurboTest.Tests.BaselineRestoreTests.AssertRecreatedCatalogAsync(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 206
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.ResetTimingTests.Reset_measurements_distinguish_permit_wait_execution_and_validation_without_payloads [48 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (TimeoutException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.CreatePreparedFactoryAsync[TContext](TtOptions options, TtBaselineDefinition`1 baseline, CancellationToken cancellationToken, Func`2 deleteHost, Func`2 beforeVerification, Func`2 prepareImage, Func`3 afterSequenceRestore, Func`2 afterRowCommit) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 101
+   at TurboTest.Tests.ResetTimingTests.Reset_measurements_distinguish_permit_wait_execution_and_validation_without_payloads() in /home/dan/code/TurboTest/tests/TurboTest.Tests/ResetTimingTests.cs:line 24
+--- End of stack trace from previous location ---
+[xUnit.net 00:01:29.03]     TurboTest.Tests.PreparedContextBindingTests.Late_context_configuration_cannot_publish_an_unowned_source_or_incompatible_model(source: False, additional: True) [FAIL]
+  Failed TurboTest.Tests.PreparedContextBindingTests.Late_context_configuration_cannot_publish_an_unowned_source_or_incompatible_model(source: False, additional: True) [42 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at BaselineInitialize (TimeoutException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.CreatePreparedFactoryAsync[TContext](TtOptions options, TtBaselineDefinition`1 baseline, CancellationToken cancellationToken, Func`2 deleteHost, Func`2 beforeVerification, Func`2 prepareImage, Func`3 afterSequenceRestore, Func`2 afterRowCommit) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 101
+   at TurboTest.EFCore.Tt.CreateFactoryAsync[TContext](TtBaselineDefinition`1 baseline, Action`1 configure, CancellationToken cancellationToken) in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 70
+   at TurboTest.Tests.PreparedContextBindingTests.Late_context_configuration_cannot_publish_an_unowned_source_or_incompatible_model(Boolean source, Boolean additional) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedContextBindingTests.cs:line 70
+   at TurboTest.Tests.PreparedContextBindingTests.Late_context_configuration_cannot_publish_an_unowned_source_or_incompatible_model(Boolean source, Boolean additional) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedContextBindingTests.cs:line 99
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-004/full/reset-full.trx
+
+Failed!  - Failed:    11, Passed:   117, Skipped:     0, Total:   128, Duration: 5 m 37 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-004/full/ec803557-f912-4537-bd7b-b66209cc335d/dan_os-greg_2026-10-14.12_46_11.cobertura.xml

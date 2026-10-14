@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="1b14efd4-29c9-4c96-b5f5-93e14cd91e1e" name="@os-greg 2026-10-14 12:13:31" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-14T12:13:31.7496111+10:00" queuing="2026-10-14T12:13:31.7496111+10:00" start="2026-10-14T12:13:13.4748938+10:00" finish="2026-10-14T12:14:57.6882829+10:00" />
+  <TestSettings name="default" id="5b377fce-4cae-4e5c-a6e1-21839705c91e">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-14_12_13_31" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="652b515f-7cac-46c7-8f22-cc3c08c08f13" testId="1bc9f65b-4a37-e40a-55ec-ec886ee4e817" testName="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;DO $$ BEGIN EXECUTE format('COMMENT ON DATABASE %I&quot;···)" computerName="os-greg" duration="00:00:06.4747240" startTime="2026-10-14T12:14:37.6659305+10:00" endTime="2026-10-14T12:14:44.1355030+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="652b515f-7cac-46c7-8f22-cc3c08c08f13">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.NotEqual() Failure: Values are equal
+Expected: Not 16418
+Actual:       16418</Message>
+          <StackTrace>   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 40
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fc51c208-43a0-4cdc-9b6c-80e91e11fc3a" testId="29094dfe-db78-0835-11d1-8a38c7809f38" testName="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE CONVERSION public.unexpected_conversion FOR&quot;···)" computerName="os-greg" duration="00:00:06.5517542" startTime="2026-10-14T12:14:31.1030306+10:00" endTime="2026-10-14T12:14:37.6604559+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fc51c208-43a0-4cdc-9b6c-80e91e11fc3a">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.NotEqual() Failure: Values are equal
+Expected: Not 16418
+Actual:       16418</Message>
+          <StackTrace>   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 40
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d2fbc335-19ce-4e56-bb82-d4cc16089bc9" testId="e77b62c2-1f0c-4f34-dd61-3aad9085e911" testName="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE VIEW unexpected_view AS SELECT 1 AS value&quot;)" computerName="os-greg" duration="00:00:17.0219280" startTime="2026-10-14T12:13:31.7380561+10:00" endTime="2026-10-14T12:13:48.7486954+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d2fbc335-19ce-4e56-bb82-d4cc16089bc9" />
+    <UnitTestResult executionId="9cf2971b-2908-4702-9870-090fe44e00e5" testId="4e74862e-853b-812c-38f4-b850358460ab" testName="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE TYPE unexpected_type AS ENUM ('one', 'two')&quot;)" computerName="os-greg" duration="00:00:06.5012612" startTime="2026-10-14T12:14:16.7930867+10:00" endTime="2026-10-14T12:14:23.2938749+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9cf2971b-2908-4702-9870-090fe44e00e5" />
+    <UnitTestResult executionId="b175050d-eb7d-42db-b490-d08ba53a9a0e" testId="6720190d-a437-8256-e017-49efcc63dbef" testName="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE SCHEMA unexpected_schema&quot;)" computerName="os-greg" duration="00:00:17.7297252" startTime="2026-10-14T12:13:13.9891196+10:00" endTime="2026-10-14T12:13:31.7261674+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b175050d-eb7d-42db-b490-d08ba53a9a0e" />
+    <UnitTestResult executionId="3e3f264c-1a4a-411a-885f-9c207d20e482" testId="8aea7c47-364c-c96b-4626-986dd9019c7c" testName="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE FUNCTION unexpected_function() RETURNS inte&quot;···)" computerName="os-greg" duration="00:00:13.4743559" startTime="2026-10-14T12:14:03.3183313+10:00" endTime="2026-10-14T12:14:16.7923210+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3e3f264c-1a4a-411a-885f-9c207d20e482" />
+    <UnitTestResult executionId="3ae64d42-a7a6-42e6-9c01-f4fcf54a07db" testId="0dacdb47-0e4a-86eb-ee80-4b589f9ce5e3" testName="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;GRANT SELECT ON \&quot;Users\&quot; TO PUBLIC&quot;)" computerName="os-greg" duration="00:00:07.3714558" startTime="2026-10-14T12:14:44.1365371+10:00" endTime="2026-10-14T12:14:51.5072097+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3ae64d42-a7a6-42e6-9c01-f4fcf54a07db" />
+    <UnitTestResult executionId="3454e779-3591-4628-87b1-b3c09367fa23" testId="9d4fd1b4-7fd7-d957-645c-357da715d167" testName="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;ALTER TABLE \&quot;Users\&quot; ADD COLUMN unexpected_column&quot;···)" computerName="os-greg" duration="00:00:14.5686918" startTime="2026-10-14T12:13:48.7499405+10:00" endTime="2026-10-14T12:14:03.3176862+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3454e779-3591-4628-87b1-b3c09367fa23" />
+    <UnitTestResult executionId="fd785996-e2af-49ac-9426-284332e1e755" testId="1ce3b4f5-6a69-c3c8-7397-49702a67baf1" testName="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE OPERATOR public.## (FUNCTION = pg_catalog.i&quot;···)" computerName="os-greg" duration="00:00:06.1153444" startTime="2026-10-14T12:14:51.5078011+10:00" endTime="2026-10-14T12:14:57.6232493+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fd785996-e2af-49ac-9426-284332e1e755">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.NotEqual() Failure: Values are equal
+Expected: Not 16418
+Actual:       16418</Message>
+          <StackTrace>   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 40
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+   at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change) in /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs:line 51
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a0c9a184-3dce-4666-9d12-2679716a79a9" testId="4f18eda5-7fb2-4d33-e0ed-e95ca77c80bf" testName="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE TABLE unexpected_table(id integer)&quot;)" computerName="os-greg" duration="00:00:07.8081482" startTime="2026-10-14T12:14:23.2943018+10:00" endTime="2026-10-14T12:14:31.1024624+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a0c9a184-3dce-4666-9d12-2679716a79a9" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;DO $$ BEGIN EXECUTE format('COMMENT ON DATABASE %I&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="1bc9f65b-4a37-e40a-55ec-ec886ee4e817">
+      <Execution id="652b515f-7cac-46c7-8f22-cc3c08c08f13" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_or_unsupported_catalog_uses_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;ALTER TABLE \&quot;Users\&quot; ADD COLUMN unexpected_column&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="9d4fd1b4-7fd7-d957-645c-357da715d167">
+      <Execution id="3454e779-3591-4628-87b1-b3c09367fa23" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_or_unsupported_catalog_uses_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE VIEW unexpected_view AS SELECT 1 AS value&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="e77b62c2-1f0c-4f34-dd61-3aad9085e911">
+      <Execution id="d2fbc335-19ce-4e56-bb82-d4cc16089bc9" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_or_unsupported_catalog_uses_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE TYPE unexpected_type AS ENUM ('one', 'two')&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4e74862e-853b-812c-38f4-b850358460ab">
+      <Execution id="9cf2971b-2908-4702-9870-090fe44e00e5" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_or_unsupported_catalog_uses_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE OPERATOR public.## (FUNCTION = pg_catalog.i&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="1ce3b4f5-6a69-c3c8-7397-49702a67baf1">
+      <Execution id="fd785996-e2af-49ac-9426-284332e1e755" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_or_unsupported_catalog_uses_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE SCHEMA unexpected_schema&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="6720190d-a437-8256-e017-49efcc63dbef">
+      <Execution id="b175050d-eb7d-42db-b490-d08ba53a9a0e" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_or_unsupported_catalog_uses_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE FUNCTION unexpected_function() RETURNS inte&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="8aea7c47-364c-c96b-4626-986dd9019c7c">
+      <Execution id="3e3f264c-1a4a-411a-885f-9c207d20e482" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_or_unsupported_catalog_uses_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;GRANT SELECT ON \&quot;Users\&quot; TO PUBLIC&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="0dacdb47-0e4a-86eb-ee80-4b589f9ce5e3">
+      <Execution id="3ae64d42-a7a6-42e6-9c01-f4fcf54a07db" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_or_unsupported_catalog_uses_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE TABLE unexpected_table(id integer)&quot;)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4f18eda5-7fb2-4d33-e0ed-e95ca77c80bf">
+      <Execution id="a0c9a184-3dce-4666-9d12-2679716a79a9" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_or_unsupported_catalog_uses_verified_template_recreation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: &quot;CREATE CONVERSION public.unexpected_conversion FOR&quot;···)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="29094dfe-db78-0835-11d1-8a38c7809f38">
+      <Execution id="fc51c208-43a0-4cdc-9b6c-80e91e11fc3a" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.BaselineRestoreTests" name="Changed_or_unsupported_catalog_uses_verified_template_recreation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1bc9f65b-4a37-e40a-55ec-ec886ee4e817" executionId="652b515f-7cac-46c7-8f22-cc3c08c08f13" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="29094dfe-db78-0835-11d1-8a38c7809f38" executionId="fc51c208-43a0-4cdc-9b6c-80e91e11fc3a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e77b62c2-1f0c-4f34-dd61-3aad9085e911" executionId="d2fbc335-19ce-4e56-bb82-d4cc16089bc9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4e74862e-853b-812c-38f4-b850358460ab" executionId="9cf2971b-2908-4702-9870-090fe44e00e5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6720190d-a437-8256-e017-49efcc63dbef" executionId="b175050d-eb7d-42db-b490-d08ba53a9a0e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8aea7c47-364c-c96b-4626-986dd9019c7c" executionId="3e3f264c-1a4a-411a-885f-9c207d20e482" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0dacdb47-0e4a-86eb-ee80-4b589f9ce5e3" executionId="3ae64d42-a7a6-42e6-9c01-f4fcf54a07db" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9d4fd1b4-7fd7-d957-645c-357da715d167" executionId="3454e779-3591-4628-87b1-b3c09367fa23" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ce3b4f5-6a69-c3c8-7397-49702a67baf1" executionId="fd785996-e2af-49ac-9426-284332e1e755" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4f18eda5-7fb2-4d33-e0ed-e95ca77c80bf" executionId="a0c9a184-3dce-4666-9d12-2679716a79a9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="10" executed="10" passed="7" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.20]   Starting:    TurboTest.Tests
+[xUnit.net 00:01:23.89]       Assert.NotEqual() Failure: Values are equal
+[xUnit.net 00:01:23.89]       Expected: Not 16418
+[xUnit.net 00:01:23.89]       Actual:       16418
+[xUnit.net 00:01:23.89]       Stack Trace:
+[xUnit.net 00:01:23.89]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(40,0): at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change)
+[xUnit.net 00:01:23.89]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(51,0): at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change)
+[xUnit.net 00:01:23.89]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(51,0): at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change)
+[xUnit.net 00:01:23.89]         --- End of stack trace from previous location ---
+[xUnit.net 00:01:30.36]       Assert.NotEqual() Failure: Values are equal
+[xUnit.net 00:01:30.36]       Expected: Not 16418
+[xUnit.net 00:01:30.36]       Actual:       16418
+[xUnit.net 00:01:30.36]       Stack Trace:
+[xUnit.net 00:01:30.36]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(40,0): at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change)
+[xUnit.net 00:01:30.36]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(51,0): at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change)
+[xUnit.net 00:01:30.36]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(51,0): at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change)
+[xUnit.net 00:01:30.36]         --- End of stack trace from previous location ---
+[xUnit.net 00:01:43.85]       Assert.NotEqual() Failure: Values are equal
+[xUnit.net 00:01:43.85]       Expected: Not 16418
+[xUnit.net 00:01:43.85]       Actual:       16418
+[xUnit.net 00:01:43.85]       Stack Trace:
+[xUnit.net 00:01:43.85]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(40,0): at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change)
+[xUnit.net 00:01:43.85]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(51,0): at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change)
+[xUnit.net 00:01:43.85]         /home/dan/code/TurboTest/tests/TurboTest.Tests/BaselineRestoreTests.cs(51,0): at TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(String change)
+[xUnit.net 00:01:43.85]         --- End of stack trace from previous location ---
+[xUnit.net 00:01:43.86]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T12:14:37.6631621+10:00">
+        <Text>[xUnit.net 00:01:23.89]     TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "CREATE CONVERSION public.unexpected_conversion FOR"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T12:14:44.1359399+10:00">
+        <Text>[xUnit.net 00:01:30.36]     TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "DO $$ BEGIN EXECUTE format('COMMENT ON DATABASE %I"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-14T12:14:57.6236408+10:00">
+        <Text>[xUnit.net 00:01:43.85]     TurboTest.Tests.BaselineRestoreTests.Changed_or_unsupported_catalog_uses_verified_template_recreation(change: "CREATE OPERATOR public.## (FUNCTION = pg_catalog.i"···) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

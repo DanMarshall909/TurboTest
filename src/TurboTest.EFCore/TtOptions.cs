@@ -27,7 +27,13 @@ public class TtOptions
     /// </summary>
     public int PoolSize { get; set; } = 3;
 
-    /// <summary>Minimum Ready prepared slots retained by explicit idle maintenance. Defaults to 0. Initial warming still uses PoolSize.</summary>
+    /// <summary>Initial prepared warm count. Null uses PoolSize in fixed mode, or the adaptive minimum.</summary>
+    public int? StartupWarmDatabases { get; set; }
+
+    /// <summary>Immutable policy settings captured when a prepared fixture is created.</summary>
+    public TtAdaptiveOptions AdaptivePool { get; set; } = new();
+
+    /// <summary>Minimum Ready prepared slots retained by idle maintenance. Defaults to 0. Adaptive maintenance also preserves its admitted warm target.</summary>
     public int WarmFloor { get; set; }
 
     /// <summary>Maximum parked idle databases; null uses PoolSize. Parked databases still consume physical reservations.</summary>
@@ -148,35 +154,11 @@ public class TtOptions
     public ILogger? Logger { get; set; }
 
     /// <summary>
-    /// Enable dynamic resource monitoring and container scaling based on system load.
-    /// When enabled, TurboTest will monitor CPU and memory usage and scale containers up/down.
+    /// Enable sustained-demand warm database adaptation for prepared baseline factories.
+    /// Captures AdaptivePool and monitors the owned host's memory headroom. Ordinary factories reject this option.
     /// </summary>
     public bool EnableDynamicScaling { get; set; } = false;
 
-    /// <summary>
-    /// Interval in seconds to check system resources for scaling decisions. Defaults to 30 seconds.
-    /// </summary>
-    public int ScalingCheckIntervalSeconds { get; set; } = 30;
-
-    /// <summary>
-    /// CPU usage threshold (0-100) above which to scale down containers. Defaults to 80%.
-    /// </summary>
-    public int CpuScaleDownThreshold { get; set; } = 80;
-
-    /// <summary>
-    /// Memory usage threshold (0-100) above which to scale down containers. Defaults to 85%.
-    /// </summary>
-    public int MemoryScaleDownThreshold { get; set; } = 85;
-
-    /// <summary>
-    /// CPU usage threshold (0-100) below which to scale up containers. Defaults to 30%.
-    /// </summary>
-    public int CpuScaleUpThreshold { get; set; } = 30;
-
-    /// <summary>
-    /// Memory usage threshold (0-100) below which to scale up containers. Defaults to 50%.
-    /// </summary>
-    public int MemoryScaleUpThreshold { get; set; } = 50;
 }
 
 /// <summary>

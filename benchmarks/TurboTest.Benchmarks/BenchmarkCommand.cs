@@ -9,7 +9,7 @@ public static class BenchmarkCommand
     public static async Task<int> RunAsync(string[] arguments, CancellationToken cancellationToken = default)
     {
         var blocks = 2; var samples = 2; var seed = 20261015; var idle = 2000d;
-        var planOnly = false; var smoke = false; string? fault = null;
+        var planOnly = false; var smoke = false; var adaptive = false; var idleSpecified = false; string? fault = null;
         var output = Path.Combine("artifacts", "pool-benchmarks", DateTimeOffset.UtcNow.ToString("yyyyMMdd-HHmmss", CultureInfo.InvariantCulture) + "-" + Guid.NewGuid().ToString("N"));
         BenchmarkCase[] cases;
         try
@@ -18,6 +18,7 @@ public static class BenchmarkCommand
             {
                 if (arguments[i] == "--plan-only") { planOnly = true; continue; }
                 if (arguments[i] == "--smoke") { smoke = true; continue; }
+                if (arguments[i] == "--adaptive") { adaptive = true; continue; }
                 if (i + 1 >= arguments.Length) throw new ArgumentException("Missing option value.");
                 var name = arguments[i]; var value = arguments[++i];
                 switch (name)
@@ -25,14 +26,15 @@ public static class BenchmarkCommand
                     case "--blocks": blocks = int.Parse(value, CultureInfo.InvariantCulture); break;
                     case "--samples": samples = int.Parse(value, CultureInfo.InvariantCulture); break;
                     case "--seed": seed = int.Parse(value, CultureInfo.InvariantCulture); break;
-                    case "--idle-ms": idle = double.Parse(value, CultureInfo.InvariantCulture); break;
+                    case "--idle-ms": idle = double.Parse(value, CultureInfo.InvariantCulture); idleSpecified = true; break;
                     case "--output": output = value; break;
                     case "--fault": fault = value; break;
                     default: throw new ArgumentException("Unsupported option.");
                 }
             }
-            if (fault is not (null or "zero" or "distribution") || planOnly && smoke) throw new ArgumentException("Invalid mode/fault.");
-            cases = BenchmarkSchedule.Create(seed, blocks, samples, idle);
+            if (fault is not (null or "zero" or "distribution") || planOnly && smoke || adaptive && smoke) throw new ArgumentException("Invalid mode/fault.");
+            if (adaptive && !idleSpecified) idle = 15000;
+            cases = BenchmarkSchedule.Create(seed, blocks, samples, idle, adaptive);
             if (smoke)
                 cases = new[] { "fixed", "parking" }.Select(mode => new BenchmarkCase(0, mode, 2,
                 [new("first", 2, [130, 130]), new("idle", 0, [], 1), new("renewed", 2, [1300, 1300])])).ToArray();
@@ -42,12 +44,14 @@ public static class BenchmarkCommand
         }
         catch (Exception error) when (error is ArgumentException or FormatException or OverflowException)
         {
-            Console.Error.WriteLine("BenchmarkArguments: use --output PATH [--blocks N>=2] [--samples N>=1] [--seed N] [--idle-ms N>=0] [--plan-only|--smoke] [--fault zero|distribution]. Output must be empty.");
+            Console.Error.WriteLine("BenchmarkArguments: use --output PATH [--adaptive] [--blocks N>=2] [--samples N>=1] [--seed N] [--idle-ms N>=0, adaptive>=12000] [--plan-only|--smoke] [--fault zero|distribution]. Adaptive excludes smoke. Output must be empty.");
             return 2;
         }
         var modeName = planOnly ? "PlanOnly" : smoke ? "Smoke" : "Experiment";
+        var comparison = adaptive ? "Adaptive" : "FixedParking";
+        var policy = cases.FirstOrDefault(item => item.Mode == "adaptive")?.AdaptivePolicy;
         var json = new JsonSerializerOptions { WriteIndented = true };
-        await File.WriteAllTextAsync(Path.Combine(output, "plan.json"), JsonSerializer.Serialize(new { Mode = modeName, Seed = seed, Blocks = blocks, HomogeneousSamples = samples, IdleMilliseconds = idle, Cases = cases }, json), cancellationToken);
+        await File.WriteAllTextAsync(Path.Combine(output, "plan.json"), JsonSerializer.Serialize(new { Mode = modeName, Comparison = comparison, AdaptivePolicy = policy, Seed = seed, Blocks = blocks, HomogeneousSamples = samples, IdleMilliseconds = idle, Cases = cases }, json), cancellationToken);
         if (planOnly) return 0;
         var started = Stopwatch.GetTimestamp();
         List<BenchmarkCaseReport> reports = [];
@@ -77,16 +81,20 @@ public static class BenchmarkCommand
                 }).ToArray();
             var summary = new
             {
-                Mode = modeName, Succeeded = reports.Count == cases.Length && reports.All(report => report.Succeeded),
+                Mode = modeName, Comparison = comparison, AdaptivePolicy = policy,
+                Succeeded = reports.Count == cases.Length && reports.All(report => report.Succeeded),
                 ExpectedCases = cases.Length, CompletedCycles = completed, TotalMilliseconds = elapsed,
                 FullSuiteCyclesPerSecond = elapsed > 0 ? completed * 1000 / elapsed : 0,
                 Percentiles = "p50 conventional median; p95 nearest rank ceil(.95*n); max/count; milliseconds. Failed/incomplete runs remain rejected.",
                 Timing = "Checkout: public request to lease. Return: dispose request through receipt. Cycle includes baseline checks, load, validation and return. Startup/preflight/idle/monitor stop/drain are retained separately and included in total. Operation validation is a subset, not an additional cost.",
-                Scope = smoke ? "Smoke boundary verification; no representative performance conclusion." : "Local repeated fixed/explicit-parking comparison; no universal50ms guarantee. Source/image/runtime/resource details and raw events reside in each case report.",
+                Scope = smoke ? "Smoke boundary verification; no representative performance conclusion."
+                    : adaptive ? "Local repeated fixed/adaptive comparison: equal startup2 pair and already-warm fixed8 control. Phase-specific first/renewed/repeated/heavy/idle results and actual targets remain in each case; no universal50ms guarantee."
+                    : "Local repeated fixed/explicit-parking comparison; no universal50ms guarantee. Source/image/runtime/resource details and raw events reside in each case report.",
                 Groups = groups,
                 Cases = reports.Select(report => new
                 {
                     report.Plan.Block, report.Plan.Profile, report.Succeeded, report.CleanupCompleted,
+                    report.StartupState, report.PreflightState, report.AdaptivePolicy,
                     report.StartupMilliseconds, report.PreflightMilliseconds, report.MonitorStopMilliseconds, report.FinalDrainMilliseconds, report.TotalMilliseconds,
                     CompletedCycles = report.Samples.Count, report.Failures,
                     PeakProcessWorkingSetBytes = report.Resources.Length == 0 ? (long?)null : report.Resources.Max(resource => resource.ProcessWorkingSetBytes),

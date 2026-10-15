@@ -19,10 +19,12 @@ jobs:
         run: docker pull postgres:16-alpine
       - name: Run repeated public-API experiment
         run: dotnet run -c Release --project benchmarks/TurboTest.Benchmarks -- --output artifacts/pool-benchmarks/experiment --blocks 2 --samples 2 --seed 20261015 --idle-ms 2000
+      - name: Compare adaptive capacity with equivalent startup and a warm fixed control
+        run: dotnet run -c Release --project benchmarks/TurboTest.Benchmarks -- --adaptive --output artifacts/pool-benchmarks/adaptive --blocks 2 --samples 2 --seed 20261015 --idle-ms 15000
       - name: Retain complete and rejected results
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: pool-performance
-          path: artifacts/pool-benchmarks/experiment
+          path: artifacts/pool-benchmarks
           if-no-files-found: error

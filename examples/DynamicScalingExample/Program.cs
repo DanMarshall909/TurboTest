@@ -2,101 +2,46 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TurboTest.EFCore;
 
-Console.WriteLine("TurboTest Dynamic Scaling Example");
-Console.WriteLine("=================================\n");
-
-// Example 1: Enable dynamic scaling with defaults
-Console.WriteLine("1. Dynamic scaling with default settings");
-Console.WriteLine("----------------------------------------");
-
 using var loggerFactory = LoggerFactory.Create(builder =>
-    builder.AddConsole().SetMinimumLevel(LogLevel.Information));
+    builder.AddConsole().SetMinimumLevel(LogLevel.Debug));
 
-var logger = loggerFactory.CreateLogger<Program>();
-
-await using var fixture1 = await Tt.CreateFactoryAsync<BlogContext>(options =>
-{
-    options.AutoAllocateResources = true;
-    options.EnableDynamicScaling = true;  // Enable dynamic scaling
-    options.ScalingCheckIntervalSeconds = 10; // Check every 10 seconds for demo
-    options.ReserveMemoryMb = 1024;
-    options.Logger = logger;
-});
-
-await using var context1Lease = await fixture1.CreateLeaseAsync();
-        var context1 = context1Lease.Context;
-Console.WriteLine("✅ Context created with dynamic scaling enabled");
-Console.WriteLine("   Monitoring system resources every 10 seconds...");
-
-// Example 2: Custom scaling thresholds
-Console.WriteLine("\n2. Custom scaling thresholds");
-Console.WriteLine("----------------------------");
-
-await using var fixture2 = await Tt.CreateFactoryAsync<BlogContext>(options =>
-{
-    options.AutoAllocateResources = true;
-    options.EnableDynamicScaling = true;
-    options.ScalingCheckIntervalSeconds = 15;
-    
-    // More aggressive scaling
-    options.CpuScaleDownThreshold = 70;    // Scale down when CPU > 70%
-    options.MemoryScaleDownThreshold = 75; // Scale down when memory > 75%
-    options.CpuScaleUpThreshold = 20;      // Scale up when CPU < 20%
-    options.MemoryScaleUpThreshold = 40;   // Scale up when memory < 40%
-    
-    options.MaxAutoContainers = 5; // Limit scaling to 5 containers
-    options.Logger = logger;
-});
-
-await using var context2Lease = await fixture2.CreateLeaseAsync();
-        var context2 = context2Lease.Context;
-Console.WriteLine("✅ Context created with aggressive scaling thresholds");
-
-// Example 3: Simulate load and observe scaling
-Console.WriteLine("\n3. Simulating database load");
-Console.WriteLine("---------------------------");
-
-await using var context3Lease = await fixture2.CreateLeaseAsync();
-        var context3 = context3Lease.Context;
-
-// Create some test data and perform operations to potentially trigger scaling
-for (int i = 0; i < 5; i++)
-{
-    Console.WriteLine($"   Creating test data batch {i + 1}...");
-    
-    var blog = new Blog { Title = $"Test Blog {i + 1}" };
-    context3.Blogs.Add(blog);
-    await context3.SaveChangesAsync();
-    
-    // Add some posts
-    for (int j = 0; j < 3; j++)
+// One host, a sealed schema/seed baseline, and at most eight workload databases.
+// Adaptive defaults favor sustained pressure; the first burst may queue while
+// growth verifies new databases. Already-warm fixed capacity can be faster.
+await using var fixture = await Tt.CreateFactoryAsync(
+    new TtBaselineDefinition<BlogContext>("blogs-v1", TtSchemaInitialization.EnsureCreated), options =>
     {
-        context3.Posts.Add(new Post 
-        { 
-            Title = $"Post {j + 1} for Blog {i + 1}", 
-            Content = "Test content",
-            BlogId = blog.Id 
-        });
-    }
-    await context3.SaveChangesAsync();
-    
-    // Wait to allow scaling checks
-    await Task.Delay(2000);
+        options.PoolSize = 8;
+        options.StartupWarmDatabases = 2;
+        options.EnableDynamicScaling = true;
+        options.AdaptivePool = new() { MinimumWarmDatabases = 2, MaximumWarmDatabases = 8 };
+        options.Logger = loggerFactory.CreateLogger("AdaptiveExample");
+        options.LogLevel = LogLevel.Debug;
+    });
+
+using var deadline = new CancellationTokenSource(TimeSpan.FromMinutes(2));
+foreach (var concurrency in new[] { 1, 8, 1 })
+{
+    await Task.WhenAll(Enumerable.Range(0, concurrency).Select(async worker =>
+    {
+        await using var lease = await fixture.CreateLeaseAsync(cancellationToken: deadline.Token);
+        lease.Context.Blogs.Add(new Blog { Title = $"Worker {worker}" });
+        await lease.Context.SaveChangesAsync(deadline.Token);
+        await Task.Delay(TimeSpan.FromSeconds(3), deadline.Token);
+    }));
+    Console.WriteLine($"After {concurrency} workers: target {fixture.PoolState.WarmTarget}, ready {fixture.PoolState.Ready}, parked {fixture.PoolState.Parked}");
 }
 
-Console.WriteLine("✅ Test data created - scaling system is monitoring resource usage");
-
-// Example 4: Manual resource check (demonstration)
-Console.WriteLine("\n4. Resource monitoring continues in background");
-Console.WriteLine("----------------------------------------------");
-Console.WriteLine("The scaling system will continue to monitor resources and adjust container count as needed.");
-Console.WriteLine("Check the logs above for scaling decisions (scale up/down messages).");
-
-// Wait a bit to see scaling in action
-await Task.Delay(TimeSpan.FromSeconds(30));
-
-Console.WriteLine("\n✨ Dynamic scaling example completed!");
-Console.WriteLine("Note: Scaling continues until the application shuts down.");
+// Shrink requires a full spare window per step. Retained databases continue to
+// consume physical reservations; renewed demand verifies them before reuse.
+await Task.Delay(TimeSpan.FromSeconds(15), deadline.Token);
+Console.WriteLine($"After idle: target {fixture.PoolState.WarmTarget}, ready {fixture.PoolState.Ready}, parked {fixture.PoolState.Parked}");
+await Task.WhenAll(Enumerable.Range(0, 8).Select(async _ =>
+{
+    await using var lease = await fixture.CreateLeaseAsync(cancellationToken: deadline.Token);
+    Console.WriteLine($"Restored blogs: {await lease.Context.Blogs.CountAsync(deadline.Token)}");
+}));
+// Awaited fixture disposal stops monitoring and joins admitted work before host deletion.
 
 // Domain model for examples
 public class Blog

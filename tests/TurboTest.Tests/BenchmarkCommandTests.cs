@@ -6,6 +6,29 @@ namespace TurboTest.Tests;
 public class BenchmarkCommandTests
 {
     [Fact]
+    public async Task Adaptive_plan_command_persists_matched_startup_and_default_policy_without_allocating_resources()
+    {
+        var directory = Path.Combine(Path.GetTempPath(), "tt-adaptive-plan-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            Assert.Equal(0, await BenchmarkCommand.RunAsync(["--adaptive", "--plan-only", "--output", directory]));
+            using var plan = JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(directory, "plan.json")));
+            Assert.Equal("Adaptive", plan.RootElement.GetProperty("Comparison").GetString());
+            Assert.Equal(15000, plan.RootElement.GetProperty("IdleMilliseconds").GetDouble());
+            var cases = plan.RootElement.GetProperty("Cases").EnumerateArray().ToArray();
+            Assert.Equal(6, cases.Length);
+            Assert.Equal(new[] { 2, 2, 8 }, cases.Take(3).Select(item => item.GetProperty("Startup").GetInt32()).Order());
+            var policy = plan.RootElement.GetProperty("AdaptivePolicy");
+            Assert.Equal(2, policy.GetProperty("MinimumWarmDatabases").GetInt32());
+            Assert.Equal(8, policy.GetProperty("MaximumWarmDatabases").GetInt32());
+            Assert.Equal("00:00:01", policy.GetProperty("GrowthStabilization").GetString());
+            Assert.Equal("00:00:10", policy.GetProperty("ShrinkStabilization").GetString());
+            Assert.False(File.Exists(Path.Combine(directory, "summary.json")));
+        }
+        finally { if (Directory.Exists(directory)) Directory.Delete(directory, recursive: true); }
+    }
+
+    [Fact]
     [Trait("Category", "PostgreSQL")]
     public async Task Supported_smoke_invocation_runs_both_public_modes_and_persists_cleanup_and_latency_results()
     {
@@ -46,6 +69,8 @@ public class BenchmarkCommandTests
     [InlineData("--samples", "0")]
     [InlineData("--blocks", "1")]
     [InlineData("--seed", "bad")]
+    [InlineData("--adaptive", "--idle-ms", "11999")]
+    [InlineData("--adaptive", "--smoke")]
     public async Task Unsupported_or_invalid_cli_cannot_start_an_experiment(params string[] arguments)
     {
         Assert.Equal(2, await BenchmarkCommand.RunAsync(arguments));

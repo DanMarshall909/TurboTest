@@ -101,7 +101,7 @@ public static class Tt
         return new TtFactory<TContext>(pool, options, ownsPool: true);
     }
 
-    private static async Task InitializeOwnedPoolAsync(ITtDatabasePool pool, TtOptions options,
+    internal static async Task InitializeOwnedPoolAsync(ITtDatabasePool pool, TtOptions options,
         Func<CancellationToken, Task> initialize, string stage, CancellationToken cancellationToken)
     {
         var initializationCancellation = new CancellationTokenSource();
@@ -129,18 +129,34 @@ public static class Tt
                 finally { initializationCancellation.Dispose(); }
             }
             var drain = DrainAsync();
-            TtCleanup RetainCleanup()
+            TtCleanup RetainCleanup(bool drainFailureReported = false)
             {
                 var cancellationFailureReported = false;
                 var cleanup = TtCleanupRegistry.Retain(pool.Snapshot.OwnerId, async () =>
                 {
+                    var failures = new List<Exception>();
                     try { await drain; }
-                    catch { await pool.RetryCleanupAsync(); }
+                    catch (Exception drainError)
+                    {
+                        if (!drainFailureReported)
+                        {
+                            failures.Add(drainError);
+                            drainFailureReported = true;
+                        }
+                        try { await pool.RetryCleanupAsync(); }
+                        catch (Exception retryError)
+                        {
+                            if (failures.Count == 0) throw;
+                            throw new AggregateException(failures.Append(retryError));
+                        }
+                    }
                     if (cancellationFailure is not null && !cancellationFailureReported)
                     {
                         cancellationFailureReported = true;
-                        throw new TtLifecycleException("StartupCancellation", cancellationFailure);
+                        failures.Add(new TtLifecycleException("StartupCancellation", cancellationFailure));
                     }
+                    if (failures.Count == 1) throw failures[0];
+                    if (failures.Count > 1) throw new AggregateException(failures);
                 }, () => pool.OwnedResourceIds);
                 return cleanup;
             }
@@ -153,7 +169,8 @@ public static class Tt
             try { await drain.WaitAsync(options.DrainTimeout); }
             catch (Exception cleanupError)
             {
-                failure = new TtLifecycleException(failure.Stage, failure, cleanupError, RetainCleanup());
+                failure = new TtLifecycleException(failure.Stage, failure, cleanupError,
+                    RetainCleanup(ReferenceEquals(drain.Exception?.InnerException, cleanupError)));
             }
             if (cancellationFailure is not null && failure.Cleanup is null)
                 failure = failure.WithCleanupFailure(cancellationFailure);

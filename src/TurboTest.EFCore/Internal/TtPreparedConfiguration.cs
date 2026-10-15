@@ -10,6 +10,8 @@ internal static class TtPreparedConfiguration
             throw new ArgumentOutOfRangeException(nameof(TtOptions.Provider), "Prepared fixtures require PostgreSQL.");
         if (options.PoolSize <= 0)
             throw new ArgumentOutOfRangeException(nameof(TtOptions.PoolSize), "The prepared slot count must be positive.");
+        if (options.StartupWarmDatabases is { } startup && (startup < 1 || startup > options.PoolSize))
+            throw new ArgumentOutOfRangeException(nameof(TtOptions.StartupWarmDatabases));
         if (options.WarmFloor < 0 || options.WarmFloor > options.PoolSize)
             throw new ArgumentOutOfRangeException(nameof(TtOptions.WarmFloor), "The Ready floor must be between zero and the physical slot cap.");
         if (options.MaxParkedDatabases is { } parked && (parked < 0 || parked > options.PoolSize))
@@ -20,8 +22,6 @@ internal static class TtPreparedConfiguration
             throw new ArgumentOutOfRangeException(nameof(TtOptions.MemoryLimitMb), "The host memory limit must be positive.");
         if (options.AutoAllocateResources)
             throw new ArgumentException("Automatic allocation is not supported by prepared fixtures.", nameof(TtOptions.AutoAllocateResources));
-        if (options.EnableDynamicScaling)
-            throw new ArgumentException("Dynamic scaling is not supported by prepared fixtures.", nameof(TtOptions.EnableDynamicScaling));
         if (options.ConnectionStringTemplate is not null)
             throw new ArgumentException("Prepared fixtures construct their owned connection sources.", nameof(TtOptions.ConnectionStringTemplate));
         if (options.DockerImage is not null)

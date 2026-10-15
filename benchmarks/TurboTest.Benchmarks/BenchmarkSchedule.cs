@@ -1,9 +1,14 @@
+using TurboTest.EFCore;
+
 namespace TurboTest.Benchmarks;
 
 public sealed record BenchmarkPhase(string Name, int Concurrency, int[] Rows, double IdleMilliseconds = 0);
-public sealed record BenchmarkCase(int Block, string Mode, int Capacity, BenchmarkPhase[] Phases)
+public sealed record BenchmarkCase(int Block, string Mode, int Capacity, BenchmarkPhase[] Phases, int? StartupWarmDatabases = null)
 {
-    public string Profile => $"{Mode}-{Capacity}";
+    public int Startup => StartupWarmDatabases ?? Capacity;
+    public TtAdaptiveOptions? AdaptivePolicy => Mode == "adaptive"
+        ? new() { MinimumWarmDatabases = Startup, MaximumWarmDatabases = Capacity } : null;
+    public string Profile => $"{Mode}-{Capacity}" + (StartupWarmDatabases is null ? "" : $"-startup-{Startup}");
 }
 
 public static class BenchmarkSchedule
@@ -15,13 +20,17 @@ public static class BenchmarkSchedule
         ("sustained-heavy", 8, 3), ("single-final", 1, 1)
     ];
 
-    public static BenchmarkCase[] Create(int seed, int blocks, int samples, double idleMilliseconds)
+    public static BenchmarkCase[] Create(int seed, int blocks, int samples, double idleMilliseconds, bool adaptiveComparison = false)
     {
         if (blocks < 2) throw new ArgumentOutOfRangeException(nameof(blocks), "Comparisons require repeated blocks.");
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(samples);
         if (!double.IsFinite(idleMilliseconds) || idleMilliseconds < 0 || idleMilliseconds > uint.MaxValue - 1)
             throw new ArgumentOutOfRangeException(nameof(idleMilliseconds));
-        var profiles = (from mode in new[] { "fixed", "parking" } from cap in new[] { 1, 2, 4, 8 } select (mode, cap)).ToArray();
+        if (adaptiveComparison && idleMilliseconds < 12000)
+            throw new ArgumentOutOfRangeException(nameof(idleMilliseconds), "Adaptive comparisons require at least one full spare window plus checks.");
+        (string Mode, int Capacity, int? Startup)[] profiles = adaptiveComparison
+            ? [("fixed", 8, 2), ("adaptive", 8, 2), ("fixed", 8, 8)]
+            : (from mode in new[] { "fixed", "parking" } from cap in new[] { 1, 2, 4, 8 } select (mode, cap, (int?)null)).ToArray();
         Shuffle(profiles, new Random(seed));
         List<BenchmarkCase> plan = [];
         for (var block = 0; block < blocks; block++)
@@ -38,27 +47,32 @@ public static class BenchmarkSchedule
             }
             var order = profiles.Skip((block / 2) % profiles.Length).Concat(profiles.Take((block / 2) % profiles.Length)).ToArray();
             if (block % 2 != 0) Array.Reverse(order);
-            foreach (var (mode, cap) in order)
-                plan.Add(new(block, mode, cap, phases.Select(phase => phase with { Rows = (int[])phase.Rows.Clone() }).ToArray()));
+            foreach (var (mode, cap, startup) in order)
+                plan.Add(new(block, mode, cap, phases.Select(phase => phase with { Rows = (int[])phase.Rows.Clone() }).ToArray(), startup));
         }
         var result = plan.ToArray();
-        RequireValid(result, blocks, samples);
+        RequireValid(result, blocks, samples, adaptiveComparison);
         return result;
     }
 
-    public static void RequireValid(BenchmarkCase[] cases, int blocks, int samples)
+    public static void RequireValid(BenchmarkCase[] cases, int blocks, int samples, bool adaptiveComparison = false)
     {
-        if (blocks < 2 || samples < 1 || cases.Length != blocks * 8)
+        var expectedProfiles = adaptiveComparison
+            ? new[] { "adaptive-8-startup-2", "fixed-8-startup-2", "fixed-8-startup-8" }
+            : new[] { "fixed-1", "fixed-2", "fixed-4", "fixed-8", "parking-1", "parking-2", "parking-4", "parking-8" };
+        if (blocks < 2 || samples < 1 || cases.Length != blocks * expectedProfiles.Length)
             throw new InvalidDataException("ScheduleShape: repeated comparison cases are missing.");
         for (var block = 0; block < blocks; block++)
         {
             var peers = cases.Where(item => item.Block == block).ToArray();
             var profiles = peers.Select(item => item.Profile).Order().ToArray();
-            if (!profiles.SequenceEqual(new[] { "fixed-1", "fixed-2", "fixed-4", "fixed-8", "parking-1", "parking-2", "parking-4", "parking-8" }))
-                throw new InvalidDataException("ScheduleShape: fixed/parking capacities differ.");
+            if (!profiles.SequenceEqual(expectedProfiles))
+                throw new InvalidDataException("ScheduleShape: comparison capacity/startup profiles differ.");
             foreach (var item in peers)
             {
                 if (item.Phases.Length != 11) throw new InvalidDataException("ScheduleShape: required phases differ.");
+                if (adaptiveComparison && item.Phases[6].IdleMilliseconds < 12000)
+                    throw new InvalidDataException("ScheduleTiming: adaptive comparison idle is shorter than stabilization.");
                 if (item.Phases.Any(phase => !double.IsFinite(phase.IdleMilliseconds) || phase.IdleMilliseconds < 0 ||
                         phase.IdleMilliseconds > uint.MaxValue - 1 || phase.Concurrency > 0 && phase.IdleMilliseconds != 0) ||
                     !item.Phases.Select(phase => phase.IdleMilliseconds).SequenceEqual(peers[0].Phases.Select(phase => phase.IdleMilliseconds)))

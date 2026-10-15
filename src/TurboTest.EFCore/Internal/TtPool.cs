@@ -40,6 +40,45 @@ internal sealed class TtPool : ITtDatabasePool
     public TtPoolSnapshot Snapshot => _slots.Snapshot;
     public TtResourceBudget Budget { get; }
 
+    internal async Task<TtMemoryReading?> ReadOwnedHostMemoryAsync(TimeProvider clock, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var hosts = _ownedContainers.Keys.ToArray();
+        if (!_administratorHost || hosts.Length != 1) return Unavailable("HostUnavailable");
+        var id = hosts[0];
+        var observedAt = clock.GetTimestamp();
+        ContainerStatsResponse? response = null;
+        try
+        {
+            await _dockerClient.Containers.GetContainerStatsAsync(id,
+                new ContainerStatsParameters { Stream = false, OneShot = true },
+                new StatsProgress(value => response = value), cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
+        catch (Exception) { return Unavailable("ProbeFailed"); }
+        if (response is null || response.ID != id || !_ownedContainers.ContainsKey(id))
+            return Unavailable("HostIdentity");
+        return TtHostMemory.Read(response, observedAt) ?? Unavailable("StatisticsUnavailable");
+    }
+
+    private TtMemoryReading? Unavailable(string reason)
+    {
+        try
+        {
+            _logger.LogDebug(new EventId(404, "PoolResource"),
+                "Pool {OwnerId} memory unavailable: {Reason}", Snapshot.OwnerId, reason);
+        }
+        catch (Exception) { /* Resource observers cannot change availability. */ }
+        return null;
+    }
+
+    // SDK completion follows synchronous Report and stream disposal; no callback task is orphaned.
+    private sealed class StatsProgress(Action<ContainerStatsResponse> report) : IProgress<ContainerStatsResponse>
+    {
+        public void Report(ContainerStatsResponse value) => report(value);
+    }
+
     public TtPool(TtOptions? options = null, Func<TtContainer, Task>? deleteResource = null,
         Func<string, Task>? prepareImage = null, Func<TtContainer, Task>? beforeStart = null,
         bool administratorHost = false, Func<CreateContainerParameters, Task<CreateContainerResponse>>? createResource = null)
@@ -47,7 +86,7 @@ internal sealed class TtPool : ITtDatabasePool
         _options = (options ?? new TtOptions()).Snapshot();
         _administratorHost = administratorHost;
         if (_options.EnableDynamicScaling)
-            throw new ArgumentException("Use fixed capacity until the bounded adaptive controller is available.", nameof(TtOptions.EnableDynamicScaling));
+            throw new ArgumentException("Adaptive warm databases require a prepared baseline factory.", nameof(TtOptions.EnableDynamicScaling));
         _deleteResource = deleteResource ?? (container => container.DisposeAsync().AsTask());
         _prepareImage = prepareImage is null ? EnsureImageAsync : (image, _) => prepareImage(image);
         _beforeStart = beforeStart;

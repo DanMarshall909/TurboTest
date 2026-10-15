@@ -15,7 +15,11 @@ public sealed record BenchmarkSample(int Ordinal, string Phase, int Rows, Databa
     double CheckoutMilliseconds, double ReturnMilliseconds, double CycleMilliseconds);
 public sealed record BenchmarkFailure(string Category, string Diagnostic, string ExceptionType);
 public sealed record PhaseReport(string Name, int Concurrency, double WallMilliseconds, int CompletedCycles,
-    double ThroughputPerSecond, DurationSummary Checkout, DurationSummary Return, DurationSummary Cycle);
+    double ThroughputPerSecond, DurationSummary Checkout, DurationSummary Return, DurationSummary Cycle)
+{
+    public TtPoolSnapshot? StartState { get; init; }
+    public TtPoolSnapshot? EndState { get; init; }
+}
 public sealed record BenchmarkEvent(double ElapsedMilliseconds, string Phase, int EventId, string? Name,
     Dictionary<string, object?> Fields);
 public sealed record ResourceSample(double ElapsedMilliseconds, string Phase, long ProcessWorkingSetBytes,
@@ -35,6 +39,10 @@ public sealed class BenchmarkCaseReport
     public double MonitorStopMilliseconds { get; set; }
     public TtResourceBudget? Budget { get; set; }
     public DatabaseIdentity[] InitialDatabases { get; set; } = [];
+    public DatabaseIdentity[] KnownDatabases { get; set; } = [];
+    public TtPoolSnapshot? StartupState { get; set; }
+    public TtPoolSnapshot? PreflightState { get; set; }
+    public TtAdaptiveOptions? AdaptivePolicy { get; set; }
     public List<BenchmarkSample> Samples { get; } = [];
     public List<BenchmarkFailure> Failures { get; } = [];
     public List<PhaseReport> Phases { get; } = [];
@@ -55,6 +63,7 @@ public static class BenchmarkRunner
     {
         Directory.CreateDirectory(outputDirectory);
         var report = new BenchmarkCaseReport { Plan = plan };
+        var identities = new BenchmarkDatabaseRegistry(plan.Capacity);
         var total = Stopwatch.GetTimestamp();
         var logger = new EventLogger(total);
         var failures = new ConcurrentQueue<BenchmarkFailure>();
@@ -68,7 +77,8 @@ public static class BenchmarkRunner
         var stage = "Configuration";
         try
         {
-            if (plan.Mode is not ("fixed" or "parking") || plan.Capacity is not (1 or 2 or 4 or 8) ||
+            if (plan.Mode is not ("fixed" or "parking" or "adaptive") || plan.Capacity is not (1 or 2 or 4 or 8) ||
+                plan.Startup < 1 || plan.Startup > plan.Capacity ||
                 plan.Phases.Any(phase => phase.Concurrency < 0 || phase.Concurrency > 8 ||
                     phase.Concurrency == 0 && phase.Rows.Length != 0 || phase.Concurrency > 0 && phase.Rows.Length == 0 ||
                     !double.IsFinite(phase.IdleMilliseconds) || phase.IdleMilliseconds < 0))
@@ -85,11 +95,15 @@ public static class BenchmarkRunner
             report.Image = new("postgres:16-alpine", image.ID, image.RepoDigests?.ToArray() ?? [], true);
             stage = "Startup";
             var startup = Stopwatch.GetTimestamp();
+            report.AdaptivePolicy = plan.AdaptivePolicy;
             try
             {
                 fixture = await Tt.CreateFactoryAsync(BenchmarkWorkload.Baseline, options =>
                 {
                     options.PoolSize = plan.Capacity; options.WarmFloor = 0;
+                    options.StartupWarmDatabases = plan.Startup;
+                    options.EnableDynamicScaling = plan.Mode == "adaptive";
+                    options.AdaptivePool = report.AdaptivePolicy ?? new();
                     options.MaxParkedDatabases = plan.Capacity;
                     options.PreparationConcurrency = 1; options.ResetConcurrency = 1;
                     options.MaxConnectionsPerDatabase = 4; options.MaxAdministratorConnections = 2;
@@ -101,6 +115,7 @@ public static class BenchmarkRunner
             }
             finally { report.StartupMilliseconds = Stopwatch.GetElapsedTime(startup).TotalMilliseconds; }
             report.Budget = fixture.ResourceBudget;
+            report.StartupState = fixture.PoolState;
             stage = "Resources";
             var owned = await OwnedContainersAsync(docker, prefix, cancellationToken);
             if (owned.Length != 1 || owned[0].ImageID != image.ID)
@@ -111,12 +126,13 @@ public static class BenchmarkRunner
             var preflight = Stopwatch.GetTimestamp();
             try
             {
-                var leases = await Task.WhenAll(Enumerable.Range(0, plan.Capacity).Select(_ => fixture.CreateLeaseAsync(cancellationToken: cancellationToken)));
+                var leases = await Task.WhenAll(Enumerable.Range(0, plan.Startup).Select(_ => fixture.CreateLeaseAsync(cancellationToken: cancellationToken)));
                 try
                 {
                     report.InitialDatabases = await Task.WhenAll(leases.Select(lease => ReadIdentityAsync(lease.Context, cancellationToken)));
-                    if (report.InitialDatabases.Distinct().Count() != plan.Capacity)
+                    if (report.InitialDatabases.Distinct().Count() != plan.Startup)
                         throw new InvalidDataException("DatabaseIdentity: simultaneously leased databases are not distinct.");
+                    foreach (var identity in report.InitialDatabases) identities.Observe(identity);
                     var checkpoint = Path.Combine(outputDirectory, "progress.json");
                     await File.WriteAllTextAsync(checkpoint + ".tmp", JsonSerializer.Serialize(new
                     {
@@ -148,10 +164,12 @@ public static class BenchmarkRunner
                 }
             }
             finally { report.PreflightMilliseconds = Stopwatch.GetElapsedTime(preflight).TotalMilliseconds; }
+            report.PreflightState = fixture.PoolState;
             var ordinal = 0;
             foreach (var phase in plan.Phases)
             {
                 stage = logger.Phase = phase.Name;
+                var phaseState = fixture.PoolState;
                 var phaseStarted = Stopwatch.GetTimestamp();
                 var samples = new ConcurrentQueue<BenchmarkSample>();
                 if (phase.Concurrency == 0)
@@ -176,8 +194,8 @@ public static class BenchmarkRunner
                                 var checkout = Stopwatch.GetElapsedTime(cycle).TotalMilliseconds;
                                 category = "Workload";
                                 var identity = await ReadIdentityAsync(lease.Context, cancellationToken);
-                                if (!report.InitialDatabases.Contains(identity)) throw new InvalidDataException("DatabaseReuse: a timed operation received an unknown database/OID.");
                                 await BenchmarkWorkload.VerifyBaselineAsync(lease.Context, cancellationToken);
+                                identities.Observe(identity);
                                 var mix = WorkloadMix.ForTotal(phase.Rows[index]);
                                 var marker = "load-" + Guid.NewGuid().ToString("N");
                                 if (fault != "zero") await BenchmarkWorkload.LoadAsync(lease.Context, mix, marker, cancellationToken);
@@ -206,7 +224,8 @@ public static class BenchmarkRunner
                     elapsed > 0 ? completed.Length * 1000 / elapsed : 0,
                     DurationSummary.FromMilliseconds(completed.Select(sample => sample.CheckoutMilliseconds)),
                     DurationSummary.FromMilliseconds(completed.Select(sample => sample.ReturnMilliseconds)),
-                    DurationSummary.FromMilliseconds(completed.Select(sample => sample.CycleMilliseconds))));
+                    DurationSummary.FromMilliseconds(completed.Select(sample => sample.CycleMilliseconds)))
+                    { StartState = phaseState, EndState = fixture.PoolState });
                 if (!failures.IsEmpty) break;
             }
             stage = logger.Phase = "FinalValidation";
@@ -254,6 +273,7 @@ public static class BenchmarkRunner
                 catch (Exception error) { failures.Enqueue(Failure("Binding", error)); }
             report.Resources = resources.OrderBy(resource => resource.ElapsedMilliseconds).ToArray();
             report.Events = logger.Events.OrderBy(record => record.ElapsedMilliseconds).ToArray();
+            report.KnownDatabases = identities.Snapshot;
             report.Failures.AddRange(failures);
             report.Succeeded = failures.IsEmpty && report.CleanupCompleted;
             report.TotalMilliseconds = Stopwatch.GetElapsedTime(total).TotalMilliseconds;
@@ -342,7 +362,7 @@ public static class BenchmarkRunner
         public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
         {
-            if (eventId.Id is not (400 or 401 or 402)) return;
+            if (eventId.Id is not (400 or 401 or 402 or 403 or 404)) return;
             var fields = ((IEnumerable<KeyValuePair<string, object?>>)state!).Where(pair => pair.Key != "{OriginalFormat}").ToDictionary();
             Events.Enqueue(new(Stopwatch.GetElapsedTime(started).TotalMilliseconds, Phase, eventId.Id, eventId.Name, fields));
         }

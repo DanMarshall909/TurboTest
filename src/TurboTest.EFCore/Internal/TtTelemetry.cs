@@ -34,6 +34,23 @@ internal sealed class TtTelemetry(ILogger? logger, LogLevel minimum, Func<TtPool
     internal Task MeasureAsync(string operation, Func<Task> action) =>
         MeasureAsync(operation, async () => { await action(); return true; });
 
+    internal void RecordCapacity(TtCapacityDecision decision, TtMemoryReading? memory, TimeSpan duration, string outcome)
+    {
+        try
+        {
+            var state = snapshot();
+            double? age = memory is null ? null : Clock.GetElapsedTime(memory.ObservedAt).TotalMilliseconds;
+            _logger.LogDebug(new EventId(403, "PoolCapacity"),
+                "Pool capacity {OwnerId}: reason {Reason}, previous {PreviousTarget}, target {Target}, duration {DurationMilliseconds} ms, outcome {Outcome}, warm target {WarmTarget}, limit {SlotLimit}, reserved {Reserved}, ready {Ready}, leased {Leased}, preparing {Preparing}, rewarming {Rewarming}, parking {Parking}, parked {Parked}, quarantined {Quarantined}, retiring {Retiring}, queued {QueuedAcquisitions}, waiting resets {WaitingResets}, executing resets {ExecutingResets}, executing cleanup {ExecutingCleanup}, working set {MemoryWorkingSetBytes}, memory limit {MemoryLimitBytes}, resource age {ResourceAgeMilliseconds} ms",
+                state.OwnerId, decision.Reason, decision.PreviousTarget, decision.Target, duration.TotalMilliseconds, outcome,
+                state.WarmTarget, state.SlotLimit, state.Reserved, state.Ready, state.Leased, state.Preparing, state.Rewarming,
+                state.Parking, state.Parked, state.Quarantined, state.Retiring, state.QueuedAcquisitions,
+                state.WaitingResets, state.ExecutingResets, state.ExecutingCleanup,
+                memory?.WorkingSetBytes, memory?.LimitBytes, age);
+        }
+        catch (Exception) { /* Observers cannot replace a capacity decision or its actual work. */ }
+    }
+
     internal async Task<TResult> MeasureAsync<TResult>(string operation, Func<Task<TResult>> action)
     {
         var started = Clock.GetTimestamp();

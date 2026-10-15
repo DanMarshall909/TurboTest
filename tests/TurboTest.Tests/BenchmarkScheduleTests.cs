@@ -5,6 +5,44 @@ namespace TurboTest.Tests;
 public class BenchmarkScheduleTests
 {
     [Fact]
+    public void Adaptive_comparison_pairs_equal_startup_with_an_already_warm_fixed_control()
+    {
+        var plan = BenchmarkSchedule.Create(17, 2, 2, 15000, adaptiveComparison: true);
+        Assert.Equal(6, plan.Length);
+        var first = plan.Take(3).ToArray();
+        Assert.Equal(new[] { "adaptive-8-startup-2", "fixed-8-startup-2", "fixed-8-startup-8" }, first.Select(item => item.Profile).Order());
+        Assert.Equal(first.Select(item => item.Profile).Reverse(), plan.Skip(3).Select(item => item.Profile));
+        Assert.All(plan, item => Assert.Equal(8, item.Capacity));
+        Assert.Equal(new[] { 2, 2, 8 }, first.Select(item => item.Startup).Order());
+        Assert.Equal(954, plan.Sum(item => item.Phases.Sum(phase => phase.Rows.Length)));
+        foreach (var block in plan.GroupBy(item => item.Block))
+        {
+            var peer = block.First();
+            foreach (var item in block)
+            {
+                Assert.Equal(11, item.Phases.Length);
+                Assert.Equal(peer.Phases.SelectMany(phase => phase.Rows), item.Phases.SelectMany(phase => phase.Rows));
+                Assert.Equal(15000, item.Phases.Single(phase => phase.Name == "idle").IdleMilliseconds);
+            }
+        }
+        BenchmarkSchedule.RequireValid(plan, 2, 2, adaptiveComparison: true);
+    }
+
+    [Fact]
+    public void Adaptive_comparison_requires_a_real_stabilization_idle_and_preserves_matched_startup()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => BenchmarkSchedule.Create(17, 2, 2, 11999, adaptiveComparison: true));
+        var plan = BenchmarkSchedule.Create(17, 2, 2, 15000, adaptiveComparison: true);
+        plan[0] = plan[0] with { StartupWarmDatabases = 1 };
+        var failure = Assert.Throws<InvalidDataException>(() => BenchmarkSchedule.RequireValid(plan, 2, 2, adaptiveComparison: true));
+        Assert.Contains("ScheduleShape", failure.Message);
+        plan = BenchmarkSchedule.Create(17, 2, 2, 15000, adaptiveComparison: true);
+        plan[0].Phases[6] = plan[0].Phases[6] with { IdleMilliseconds = 11999 };
+        var timing = Assert.Throws<InvalidDataException>(() => BenchmarkSchedule.RequireValid(plan, 2, 2, adaptiveComparison: true));
+        Assert.Contains("ScheduleTiming", timing.Message);
+    }
+
+    [Fact]
     public void Repeated_configs_have_counterbalanced_order_and_equivalent_real_workloads()
     {
         var plan = BenchmarkSchedule.Create(17, 2, 2, 1234);

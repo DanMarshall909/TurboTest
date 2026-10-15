@@ -68,7 +68,8 @@ public class PreparedConfigurationTests
     [InlineData("MemoryLimitMb", -1)]
     [InlineData("Provider", 987)]
     [InlineData("AutoAllocateResources", 1)]
-    [InlineData("EnableDynamicScaling", 1)]
+    [InlineData("StartupWarmDatabases", 0)]
+    [InlineData("StartupWarmDatabases", 2)]
     [InlineData("ConnectionStringTemplate", 1)]
     [InlineData("DockerImage", 0)]
     [InlineData("DockerImage", 1)]
@@ -92,7 +93,7 @@ public class PreparedConfigurationTests
             case "MemoryLimitMb": options.MemoryLimitMb = value; break;
             case "Provider": options.Provider = (TtDatabaseProvider)value; break;
             case "AutoAllocateResources": options.AutoAllocateResources = true; break;
-            case "EnableDynamicScaling": options.EnableDynamicScaling = true; break;
+            case "StartupWarmDatabases": options.StartupWarmDatabases = value; break;
             case "ConnectionStringTemplate": options.ConnectionStringTemplate = "custom-template"; break;
             case "DockerImage": options.DockerImage = value == 0 ? "" : " "; break;
             case "DatabaseName": options.DatabaseName = value switch { 0 => "", 1 => " ", 2 => new string('x', 22), _ => new string('é', 11) }; break;

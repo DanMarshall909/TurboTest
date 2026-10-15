@@ -6,6 +6,45 @@ namespace TurboTest.Tests;
 public class BenchmarkRunnerTests
 {
     [Theory]
+    [InlineData("fixed", 2)]
+    [InlineData("adaptive", 2)]
+    [InlineData("fixed", 8)]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Comparison_preflight_preserves_startup_and_verified_growth_is_retained_with_scale_events(string mode, int startup)
+    {
+        var directory = Path.Combine(Path.GetTempPath(), "tt-adaptive-benchmark-" + Guid.NewGuid().ToString("N"));
+        var plan = new BenchmarkCase(0, mode, 8, [new("burst", 8, Enumerable.Repeat(130, 8).ToArray())], startup);
+        try
+        {
+            var report = await BenchmarkRunner.RunCaseAsync(plan, directory);
+            Assert.True(report.Succeeded, string.Join(", ", report.Failures.Select(failure => failure.Diagnostic)));
+            Assert.Equal(startup, report.InitialDatabases.Length);
+            Assert.NotNull(report.StartupState);
+            Assert.NotNull(report.PreflightState);
+            Assert.Equal(startup, report.StartupState!.Reserved);
+            Assert.Equal(startup, report.PreflightState!.Reserved);
+            Assert.Equal(8, report.Samples.Count);
+            Assert.All(report.Samples, sample => Assert.Contains(sample.Database, report.KnownDatabases));
+            Assert.InRange(report.KnownDatabases.Length, startup, 8);
+            if (mode == "fixed" && startup == 2) Assert.True(report.KnownDatabases.Length > startup);
+            if (mode == "adaptive")
+            {
+                Assert.Equal((2, 8), (report.AdaptivePolicy!.MinimumWarmDatabases, report.AdaptivePolicy.MaximumWarmDatabases));
+                Assert.Contains(report.Events, record => record.EventId == 403 && record.Fields.ContainsKey("Reason") &&
+                    record.Fields.ContainsKey("WarmTarget") && record.Fields.ContainsKey("ResourceAgeMilliseconds"));
+            }
+            else
+            {
+                Assert.Null(report.AdaptivePolicy);
+                Assert.DoesNotContain(report.Events, record => record.EventId == 403);
+            }
+            Assert.True(report.CleanupCompleted);
+            Assert.Equal(0, report.RemainingOwnedContainers);
+        }
+        finally { if (Directory.Exists(directory)) Directory.Delete(directory, recursive: true); }
+    }
+
+    [Theory]
     [InlineData(false)]
     [InlineData(true)]
     [Trait("Category", "PostgreSQL")]

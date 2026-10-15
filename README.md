@@ -79,10 +79,11 @@ observations, not a production latency guarantee; see the
 
 The maintained [pool benchmark](benchmarks/TurboTest.Benchmarks/README.md) runs
 the public lease API with verified workloads, source/runtime/image bindings,
-counterbalanced fixed/parking profiles and complete cleanup. It reports checkout,
+counterbalanced fixed/parking/adaptive profiles and complete cleanup. It reports checkout,
 return, cycle, startup and drain separately. Its explicit performance workflow
 retains failures and raw measurements; correctness CI has no universal latency
-threshold. Adaptive capacity remains tracked in TT-009.
+threshold. The adaptive comparison includes matched startup and an already-warm
+fixed control, with fixed-mode wins retained in its reports.
 
 ## Lease lifetime and alpha.2 migration
 
@@ -264,7 +265,8 @@ host; a ceiling too small for the configured fixed capacity is rejected.
 `Username` may occupy at most 63 UTF-8 bytes. Options are copied before use.
 Automatic allocation and custom connection-string templates are rejected by
 the prepared path. Ordinary startup allocation respects `MaxContainers`.
-Dynamic scaling is rejected until the bounded adaptive controller is available.
+Adaptive warm databases are available for prepared baseline factories as described
+below. Ordinary factories reject `EnableDynamicScaling`.
 
 Failed reset or validation quarantines the slot. Confirmed deletion starts a
 replacement even without queued demand; schema, seed, sequences and identity
@@ -315,8 +317,8 @@ including the test body. `Shutdown` measures actual factory closure through
 cleanup of leases, jobs and the owned pool; a caller deadline can expire while
 that measurement remains pending. These overlapping durations must not be added
 together. Events contain no credentials or test payloads, and a throwing logger
-cannot change an operation result. Integrated benchmark reports and scale reasons
-remain under implementation in TT-010/TT-009.
+cannot change an operation result. The maintained benchmark retains raw reports;
+event `403` adds adaptive decisions and their actual maintenance latency below.
 
 Prepared fixtures support explicit idle maintenance:
 
@@ -333,7 +335,8 @@ await fixture.MaintainIdleAsync();
 ```
 
 Maintenance preserves at least `WarmFloor` verified Ready slots and claims only
-idle Ready/parked databases. Initial warming still prepares `PoolSize` slots.
+idle Ready/parked databases. Initial warming prepares `StartupWarmDatabases` when
+specified; fixed mode otherwise prepares `PoolSize` slots.
 Parking closes the owned connection pool while retaining the database files and
 physical reservation. It does not promise to free all PostgreSQL server memory.
 Renewed demand prefers a parked slot, opens a new source and verifies schema,
@@ -346,7 +349,7 @@ Both range from zero through `PoolSize`. Optional positive
 publication; parking preserves age and a verified return resets it. Maintenance
 protects the Ready floor from expiry. Null disables expiry. Exceeding retention
 or reaching expiry retires eligible idle slots; reservations are released only
-after confirmed deletion. There is no automatic maintenance timer. Ordinary
+after confirmed deletion. Fixed mode has no automatic maintenance timer. Ordinary
 fixtures reject this prepared-only operation.
 
 Cancellation ends the caller's maintenance wait while actual owned work remains
@@ -363,6 +366,56 @@ cleanup is outside that measurement. These operation
 durations do not measure whole-burst checkout latency; parking defers deletion
 cost until retirement or final drain. See the
 [reviewed parking/rewarm evidence](docs/issues/evidence/2026-10-15/prepared-parking-final/manifest.json).
+
+Prepared fixtures can adapt their warm target to sustained demand:
+
+```csharp
+await using var fixture = await Tt.CreateFactoryAsync(baseline, options =>
+{
+    options.PoolSize = 8;                 // Physical reservation/connection cap.
+    options.StartupWarmDatabases = 2;
+    options.EnableDynamicScaling = true;
+    options.AdaptivePool = new()
+    {
+        MinimumWarmDatabases = 2,
+        MaximumWarmDatabases = 8
+    };
+});
+```
+
+The captured immutable policy defaults to a one-second growth window, ten-second
+spare window, two-second cooldown and one-second check interval. Each admitted
+change is one database; the next step starts a fresh stabilization window.
+`StartupWarmDatabases` defaults to the adaptive minimum (one), and the maximum
+defaults to `PoolSize`. `WarmFloor` must not exceed the adaptive minimum. Explicit
+maintenance preserves the current adaptive target as well as the Ready floor.
+The [local fixed/adaptive comparison](docs/issues/evidence/2026-10-15/adaptive-pool-final/results.md)
+documents these conservative choices and their costs. Fixed capacity wins burst
+latency in both measured blocks; no window sweep establishes optimal settings.
+These defaults are not portable latency guarantees.
+
+Only continuous queued demand can grow the target. Pending preparation/rewarm,
+unavailable reservations and a backlog behind occupied reset/cleanup permits
+veto growth. Replacement and retry keep their warm commitments throughout
+deletion. Shrink requires continuous eligible Ready spare capacity and respects
+the cooldown. Parked databases consume reservations and are preferred on renewed
+demand; they must verify before publication. With a ten-second spare window,
+shrinking from eight to two requires at least six windows, plus checks and work.
+
+The monitor reads only its owned host. Working-set memory subtracts Docker's
+inactive-file cache counter from cgroup usage; the default growth ceiling is
+80 percent of that host's limit. Missing, invalid, future or stale readings block
+growth while preserving the current target; they do not block eligible shrink.
+Readings older than `ResourceMaximumAge` (three seconds by default) are stale.
+CPU utilization is not used. Debug event `404` reports unavailable sampling;
+event `403` (`PoolCapacity`) reports decision reason, previous/target capacity,
+state, resource age, actual maintenance duration and outcome. Observer errors
+cannot replace lifecycle results. Awaited disposal stops admission and sampling,
+joins admitted work, and retains unseen material failures through cleanup.
+
+`EnableDynamicScaling` defaults to false. Fixed mode ignores unused adaptive
+settings and permits demand-driven warming up to its physical cap. An already
+warm fixed pool can avoid adaptive ramp-up and be faster on short bursts.
 
 If startup or drain cleanup fails, `TtLifecycleException.Cleanup` retains an opaque owner
 and resource-ID snapshot. Await `error.Cleanup.RetryCleanupAsync()` to retry;

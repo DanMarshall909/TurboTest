@@ -30,10 +30,12 @@ public class SlotParkingTests
             await owner.ParkIdleAsync(0, Park);
             Assert.False(pending.IsCompleted);
             Assert.Equal((2, 2, 1), (owner.Snapshot.Reserved, owner.Snapshot.Parking, callbacks));
+            Assert.Equal((1, 0), (owner.Snapshot.ExecutingCleanup, owner.Snapshot.ExecutingResets));
             release.TrySetResult();
             await pending.WaitAsync(TimeSpan.FromSeconds(2));
             await owner.ParkIdleAsync(0, Park);
             Assert.Equal((2, 2, 0), (callbacks, owner.Snapshot.Parked, owner.Snapshot.Parking));
+            Assert.Equal(0, owner.Snapshot.ExecutingCleanup);
             await owner.DisposeAsync();
             Assert.Equal(new[] { first.Value.Id, second.Value.Id }.Order(), deleted.Order());
         }

@@ -15,8 +15,10 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         internal bool Recovering { get; } = recovering;
         internal int PreparationAttempts { get; } = preparationAttempts;
         internal T? Resource { get; set; }
+        // Replacement/retry retains its promise even while deletion owns the resource.
+        internal bool WarmCommitted { get; set; } = true;
         internal long? IdleSince { get; set; }
-        internal TtLifecycleException? UnseenRewarmFailure { get; set; }
+        internal TtLifecycleException? UnseenPreparationFailure { get; set; }
         internal T Value => Resource ?? throw new InvalidOperationException("The reservation has no prepared resource.");
         internal TaskCompletionSource Settled { get; set; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
     }
@@ -41,12 +43,14 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
     private readonly Func<T, CancellationToken, Task>? _rewarm;
     private readonly TimeProvider _clock;
     private readonly TtTelemetry _telemetry;
+    private readonly TtCapacityPolicy? _capacityPolicy;
     private readonly Dictionary<Reservation, State> _owned = new();
     private readonly Queue<Reservation> _ready = new();
     private readonly LinkedList<Waiter> _waiters = new();
     private readonly List<TtLifecycleException> _lateFailures = [];
     private readonly SemaphoreSlim _preparationLimit;
     private readonly SemaphoreSlim _resetLimit;
+    private readonly int _resetConcurrency;
     private readonly CancellationTokenSource _closing = new();
     private bool _closed;
     private bool _stopping;
@@ -56,7 +60,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
     internal TtSlotPool(int capacity, int preparationConcurrency,
         Func<Guid, T> reserve, Func<T, CancellationToken, Task> prepare, Func<T, Task> delete,
         int resetConcurrency = 1, Func<T, CancellationToken, Task>? rewarm = null, TimeProvider? timeProvider = null,
-        ILogger? logger = null, LogLevel logLevel = LogLevel.Debug)
+        ILogger? logger = null, LogLevel logLevel = LogLevel.Debug, TtCapacityPolicy? capacityPolicy = null)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(capacity);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(preparationConcurrency);
@@ -67,9 +71,11 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         _delete = delete;
         _rewarm = rewarm;
         _clock = timeProvider ?? TimeProvider.System;
+        _capacityPolicy = capacityPolicy;
         _telemetry = new TtTelemetry(logger, logLevel, () => Snapshot, _clock);
         _preparationLimit = new SemaphoreSlim(preparationConcurrency, preparationConcurrency);
         _resetLimit = new SemaphoreSlim(resetConcurrency, resetConcurrency);
+        _resetConcurrency = resetConcurrency;
     }
 
     internal TtPoolSnapshot Snapshot
@@ -80,11 +86,58 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                 return new TtPoolSnapshot(_owner, _capacity, Count(State.Preparing), Count(State.Ready),
                     Count(State.Leased), Count(State.WaitingReset), Count(State.ExecutingReset),
                     Count(State.Quarantined), Count(State.Parked), Count(State.Retiring), _waiters.Count)
-                { Parking = Count(State.Parking), Rewarming = Count(State.Rewarming) };
+                { Parking = Count(State.Parking), Rewarming = Count(State.Rewarming),
+                    ExecutingCleanup = _resetConcurrency - _resetLimit.CurrentCount,
+                    WarmTarget = _capacityPolicy?.Target ?? _capacity };
         }
     }
 
     private int Count(State state) => _owned.Values.Count(value => value == state);
+
+    internal async Task<TtCapacityDecision> TickCapacityAsync(TtMemoryReading? memory,
+        Func<T, CancellationToken, Task>? park = null, int warmFloor = 0, int? maxParked = null,
+        TimeSpan? idleLifetime = null)
+    {
+        var started = _clock.GetTimestamp();
+        Reservation? rewarming = null;
+        Reservation? preparation = null;
+        List<(Reservation Reservation, TaskCompletionSource Settled, bool Retire)> idle = [];
+        TtCapacityDecision decision;
+        lock (_gate)
+        {
+            ObjectDisposedException.ThrowIf(_closed || _stopping, this);
+            if (_capacityPolicy is null) return new(_capacity, _capacity, "Fixed");
+            decision = _failure is null ? _capacityPolicy.Evaluate(Snapshot, memory)
+                : new(_capacityPolicy.Target, _capacityPolicy.Target, "Unavailable");
+            if (decision.Target > decision.PreviousTarget)
+            {
+                rewarming = ClaimParked(replenish: true);
+                if (rewarming is null) preparation = ReservePending(replenish: true);
+            }
+            else if (decision.Target < decision.PreviousTarget && park is not null)
+            {
+                var surplus = WarmCount() - decision.Target;
+                idle = ClaimIdle(Math.Max(warmFloor, _ready.Count - surplus), maxParked ?? _capacity, idleLifetime);
+            }
+        }
+        var outcome = "Succeeded";
+        try
+        {
+            if (rewarming is not null) await RewarmAsync(rewarming);
+            if (preparation is not null) await PrepareAsync(preparation);
+            if (park is not null) await RunIdleClaimsAsync(idle, park);
+            lock (_gate) if (_failure is not null) outcome = "Failed";
+            return decision;
+        }
+        catch (Exception error) { outcome = TtTelemetry.Outcome(error); throw; }
+        finally { _telemetry.RecordCapacity(decision, memory, _clock.GetElapsedTime(started), outcome); }
+    }
+
+    // Caller holds the ledger lock; promised preparation/rewarm is warm capacity.
+    private int WarmCount() => _owned.Keys.Count(reservation => reservation.WarmCommitted);
+    private bool CanWarm() => _capacityPolicy is null || WarmCount() < _capacityPolicy.Target;
+
+    private void ObserveDemand() => _capacityPolicy?.ObserveDemand(Snapshot);
 
     internal Task ParkIdleAsync(int warmFloor, Func<T, CancellationToken, Task> park, int? maxParked = null,
         TimeSpan? idleLifetime = null)
@@ -94,36 +147,52 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         var retainedLimit = maxParked ?? _capacity;
         if (retainedLimit < 0 || retainedLimit > _capacity) throw new ArgumentOutOfRangeException(nameof(maxParked));
         if (idleLifetime is { } lifetime && lifetime <= TimeSpan.Zero) throw new ArgumentOutOfRangeException(nameof(idleLifetime));
-        List<(Reservation Reservation, TaskCompletionSource Settled, bool Retire)> selected = [];
+        List<(Reservation Reservation, TaskCompletionSource Settled, bool Retire)> selected;
         lock (_gate)
         {
             ObjectDisposedException.ThrowIf(_closed || _stopping, this);
             if (_failure is not null) throw _failure;
-            var now = _clock.GetTimestamp();
-            var retained = Count(State.Parked) + Count(State.Parking);
-            foreach (var reservation in _owned.Where(item => item.Value == State.Parked).Select(item => item.Key).ToArray())
-            {
-                if (retained <= retainedLimit && !Expired(reservation)) continue;
-                Claim(reservation, retire: true);
-                retained--;
-            }
-            while (_ready.Count > warmFloor)
-            {
-                var reservation = _ready.Dequeue();
-                var retire = Expired(reservation) || retained >= retainedLimit;
-                Claim(reservation, retire);
-                if (!retire) retained++;
-            }
-
-            bool Expired(Reservation reservation) => idleLifetime is { } duration &&
-                reservation.IdleSince is { } since && _clock.GetElapsedTime(since, now) >= duration;
+            if (_capacityPolicy is not null)
+                warmFloor = Math.Max(warmFloor, _capacityPolicy.Target - (WarmCount() - _ready.Count));
+            selected = ClaimIdle(warmFloor, retainedLimit, idleLifetime);
         }
-        return Task.WhenAll(selected.Select(item => item.Retire
+        return RunIdleClaimsAsync(selected, park);
+    }
+
+    private Task RunIdleClaimsAsync(List<(Reservation Reservation, TaskCompletionSource Settled, bool Retire)> selected,
+        Func<T, CancellationToken, Task> park) => Task.WhenAll(selected.Select(item => item.Retire
             ? RetireIdleAsync(item.Reservation, item.Settled)
             : ParkAsync(item.Reservation, item.Settled, park)));
 
+    // Caller holds the ledger lock, including when a policy decision selects Ready capacity.
+    private List<(Reservation Reservation, TaskCompletionSource Settled, bool Retire)> ClaimIdle(int warmFloor,
+        int retainedLimit, TimeSpan? idleLifetime)
+    {
+        List<(Reservation Reservation, TaskCompletionSource Settled, bool Retire)> selected = [];
+        var now = _clock.GetTimestamp();
+        var retained = Count(State.Parked) + Count(State.Parking);
+        foreach (var reservation in _owned.Where(item => item.Value == State.Parked).Select(item => item.Key).ToArray())
+        {
+            if (retained <= retainedLimit && !Expired(reservation)) continue;
+            Claim(reservation, retire: true);
+            retained--;
+        }
+        while (_ready.Count > warmFloor)
+        {
+            var reservation = _ready.Dequeue();
+            var retire = Expired(reservation) || retained >= retainedLimit;
+            Claim(reservation, retire);
+            if (!retire) retained++;
+        }
+        ObserveDemand();
+        return selected;
+
+        bool Expired(Reservation reservation) => idleLifetime is { } duration &&
+            reservation.IdleSince is { } since && _clock.GetElapsedTime(since, now) >= duration;
+
         void Claim(Reservation reservation, bool retire)
         {
+            reservation.WarmCommitted = false;
             _owned[reservation] = retire ? State.Retiring : State.Parking;
             var settled = reservation.Settled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
             selected.Add((reservation, settled, retire));
@@ -203,11 +272,13 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
             {
                 _owned[ready] = State.Leased;
                 ready.IdleSince = null;
+                ObserveDemand();
                 return Task.FromResult(ready);
             }
             waiter = new Waiter(cancellationToken, _clock.GetTimestamp());
             waiter.Node = _waiters.AddLast(waiter);
             waiter.Cancellation = cancellationToken.Register(() => Cancel(waiter));
+            ObserveDemand();
             rewarming = ClaimParked();
             if (rewarming is null) preparation = ReservePending();
         }
@@ -226,11 +297,12 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
     }
 
     // Caller holds the ledger lock. Reuse is claimed before considering fresh capacity.
-    private Reservation? ClaimParked()
+    private Reservation? ClaimParked(bool replenish = false)
     {
-        if (_rewarm is null || _closed || _stopping || _failure is not null || _waiters.Count == 0) return null;
+        if (_rewarm is null || _closed || _stopping || _failure is not null || (!replenish && _waiters.Count == 0) || !CanWarm()) return null;
         var reservation = _owned.FirstOrDefault(item => item.Value == State.Parked).Key;
         if (reservation is null) return null;
+        reservation.WarmCommitted = true;
         _owned[reservation] = State.Rewarming;
         reservation.Settled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         return reservation;
@@ -251,7 +323,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         {
             var failure = error as TtLifecycleException ?? new TtLifecycleException("SlotRewarm", error);
             if (error is not OperationCanceledException)
-                lock (_gate) reservation.UnseenRewarmFailure = failure;
+                lock (_gate) reservation.UnseenPreparationFailure = failure;
             // Replacement preparation may already hold the cleanup permit.
             // Release preparation before joining that permit to avoid inversion.
             if (permitHeld) { _preparationLimit.Release(); permitHeld = false; }
@@ -272,7 +344,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
     // Caller holds the ledger lock. The placeholder exists before backend work.
     private Reservation? ReservePending(bool replenish = false, int preparationAttempts = RecoveryAttempts)
     {
-        if (_closed || _stopping || _failure is not null || (!replenish && _waiters.Count == 0) || _owned.Count >= _capacity) return null;
+        if (_closed || _stopping || _failure is not null || (!replenish && _waiters.Count == 0) || _owned.Count >= _capacity || !CanWarm()) return null;
         var reservation = new Reservation(Guid.NewGuid(), replenish, replenish ? preparationAttempts : 1);
         _owned.Add(reservation, State.Preparing);
         return reservation;
@@ -289,6 +361,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
             waiter.Outcome = "Canceled";
             waiter.Completion.TrySetCanceled(waiter.Token);
             waiter.Cancellation.Unregister();
+            ObserveDemand();
         }
     }
 
@@ -320,6 +393,8 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                 catch (Exception error)
                 {
                     var failure = error as TtLifecycleException ?? new TtLifecycleException("SlotPrepare", error);
+                    if (_capacityPolicy is not null && reservation.Recovering && error is not OperationCanceledException)
+                        lock (_gate) reservation.UnseenPreparationFailure = failure;
                     await _resetLimit.WaitAsync();
                     try
                     {
@@ -375,6 +450,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
             if (node.Value.Completion.TrySetException(error) && error is TtLifecycleException failure)
                 MarkFailureDelivered(failure);
         }
+        ObserveDemand();
     }
 
     // Caller holds the ledger lock. A fault handed to an acquisition is no
@@ -382,15 +458,15 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
     private void MarkFailureDelivered(TtLifecycleException failure)
     {
         foreach (var reservation in _owned.Keys)
-            if (ReferenceEquals(reservation.UnseenRewarmFailure, failure)) reservation.UnseenRewarmFailure = null;
+            if (ReferenceEquals(reservation.UnseenPreparationFailure, failure)) reservation.UnseenPreparationFailure = null;
         _lateFailures.RemoveAll(recorded => ReferenceEquals(recorded, failure));
     }
 
     private void RetainUnseenFailure(Reservation reservation)
     {
-        if (reservation.UnseenRewarmFailure is not { } failure) return;
+        if (reservation.UnseenPreparationFailure is not { } failure) return;
         _lateFailures.Add(failure);
-        reservation.UnseenRewarmFailure = null;
+        reservation.UnseenPreparationFailure = null;
     }
 
     internal Task ReturnAsync(Reservation reservation, Func<T, CancellationToken, Task> reset)
@@ -515,7 +591,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         {
             failure = failure.WithCleanupFailure(cleanupError);
             lock (_gate)
-                if (reservation.UnseenRewarmFailure is not null) reservation.UnseenRewarmFailure = failure;
+                if (reservation.UnseenPreparationFailure is not null) reservation.UnseenPreparationFailure = failure;
             ScheduleCleanupRecovery(reservation, failure);
         }
         return failure;
@@ -539,8 +615,8 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
             replacement = ReservePending(replenish, preparationAttempts);
             if (replacement is not null)
             {
-                replacement.UnseenRewarmFailure = reservation.UnseenRewarmFailure;
-                reservation.UnseenRewarmFailure = null;
+                replacement.UnseenPreparationFailure = reservation.UnseenPreparationFailure;
+                reservation.UnseenPreparationFailure = null;
             }
             else RetainUnseenFailure(reservation);
         }
@@ -588,7 +664,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                 {
                     failure = failure.WithCleanupFailure(error);
                     lock (_gate)
-                        if (reservation.UnseenRewarmFailure is not null) reservation.UnseenRewarmFailure = failure;
+                        if (reservation.UnseenPreparationFailure is not null) reservation.UnseenPreparationFailure = failure;
                     if (attempt == RecoveryAttempts)
                     {
                         Quarantine(reservation, failure, "SlotRecovery");
@@ -628,7 +704,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                 return;
             }
             // Only a fully verified publication completes transparent recovery.
-            reservation.UnseenRewarmFailure = null;
+            reservation.UnseenPreparationFailure = null;
             while (_waiters.First is { } node)
             {
                 var waiter = node.Value;
@@ -645,11 +721,13 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                 _owned[reservation] = State.Leased;
                 reservation.IdleSince = null;
                 waiter.Completion.TrySetResult(reservation);
+                ObserveDemand();
                 return;
             }
             _owned[reservation] = State.Ready;
             reservation.IdleSince = _clock.GetTimestamp();
             _ready.Enqueue(reservation);
+            ObserveDemand();
         }
     }
 

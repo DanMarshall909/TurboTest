@@ -1,159 +1,59 @@
 # TurboTest tickets
 
-Repository Markdown is the authoritative tracker. No GitHub remote or external tracker is configured. Ticket status and dependencies live in each ticket's frontmatter; this index provides navigation and the proposed implementation sequence.
+Repository Markdown is the authoritative tracker. No GitHub remote or external
+tracker is configured. This checkout uses local commits.
 
-Priority: **P0** repairs broken advertised behavior; **P1** establishes reliable pooling; **P2** adds adaptive management after those foundations.
+## Current status — 2026-10-15
 
-## Implementation sequence
+All ten implementation tickets, TT-001 through TT-010, are Resolved. Independent
+completion review passed for the final adaptive controller and performance work.
+The table preserves implementation order and prerequisite identities.
 
-| Ticket | Work | Priority | Prerequisites |
-| --- | --- | --- | --- |
-| [TT-002](resolved/database/TT-002-reset-with-pooled-connections.md) | Reset safely with pooled PostgreSQL connections | P0 | None |
-| [TT-001](resolved/api/TT-001-own-and-release-database-leases.md) | Own and release public database leases | P0 | TT-002 |
-| [TT-003](resolved/database/TT-003-prepare-immutable-schema-and-seed-baselines.md) | Prepare immutable schema and seed baselines | P1 | TT-001, TT-002 |
-| [TT-004](resolved/database/TT-004-restore-data-and-handle-schema-changes.md) | Restore data and handle schema changes | P1 | TT-003 |
-| [TT-005](resolved/database/TT-005-bound-fixture-owned-prepared-database-pools.md) | Bound fixture-owned prepared database pools | P1 | TT-001, TT-003, TT-004 |
-| [TT-006](resolved/database/TT-006-quarantine-recover-and-drain-pool-resources.md) | Quarantine, recover, cancel and drain resources | P1 | TT-005 |
-| [TT-007](resolved/api/TT-007-use-the-configured-owner-in-di-and-static-apis.md) | Fix DI and static lifecycle ownership | P1 | TT-005, TT-006 |
-| [TT-008](resolved/database/TT-008-park-and-rewarm-prepared-databases.md) | Park and rewarm prepared databases | P2 | TT-005, TT-006 |
-| [TT-010](open/database/TT-010-measure-pool-latency-and-correct-performance-claims.md) | Measure latency and correct performance claims | P1 | TT-005, TT-006 for integrated benchmarks |
-| [TT-009](open/database/TT-009-adapt-warm-capacity-to-sustained-demand.md) | Adapt warm capacity to sustained demand | P2 | TT-008, TT-010 |
+| Ticket | Work | Status | Priority | Prerequisites | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [TT-002](resolved/database/TT-002-reset-with-pooled-connections.md) | Reset safely with pooled PostgreSQL connections | Resolved | P0 | None | [Reset](evidence/2026-10-14/pooled-reset/manifest.json) |
+| [TT-001](resolved/api/TT-001-own-and-release-database-leases.md) | Own and release public database leases | Resolved | P0 | TT-002 | [Public leases](evidence/2026-10-14/public-leases-repair/manifest.json) |
+| [TT-003](resolved/database/TT-003-prepare-immutable-schema-and-seed-baselines.md) | Prepare immutable schema and seed baselines | Resolved | P1 | TT-001, TT-002 | [Baselines](evidence/2026-10-14/prepared-baseline-repair/manifest.json) |
+| [TT-004](resolved/database/TT-004-restore-data-and-handle-schema-changes.md) | Restore data and handle schema changes | Resolved | P1 | TT-003 | [Restoration](evidence/2026-10-14/row-reset-progress/manifest.json) |
+| [TT-005](resolved/database/TT-005-bound-fixture-owned-prepared-database-pools.md) | Bound fixture-owned prepared database pools | Resolved | P1 | TT-001, TT-003, TT-004 | [Capacity](evidence/2026-10-14/bounded-pool-final/manifest.json) |
+| [TT-006](resolved/database/TT-006-quarantine-recover-and-drain-pool-resources.md) | Quarantine, recover, cancel and drain resources | Resolved | P1 | TT-005 | [Recovery](evidence/2026-10-14/resource-recovery-final/manifest.json) |
+| [TT-007](resolved/api/TT-007-use-the-configured-owner-in-di-and-static-apis.md) | Fix DI and static lifecycle ownership | Resolved | P1 | TT-005, TT-006 | [DI ownership](evidence/2026-10-15/di-ownership-final/manifest.json) |
+| [TT-008](resolved/database/TT-008-park-and-rewarm-prepared-databases.md) | Park and rewarm prepared databases | Resolved | P2 | TT-005, TT-006 | [Parking](evidence/2026-10-15/prepared-parking-final/manifest.json) |
+| [TT-010](resolved/database/TT-010-measure-pool-latency-and-correct-performance-claims.md) | Measure latency and correct performance claims | Resolved | P1 | TT-005, TT-006 | [Metrics/fixed slice](evidence/2026-10-15/pool-metrics-fixed-benchmark/manifest.json), [final adaptive evidence](evidence/2026-10-15/adaptive-pool-final/manifest.json) |
+| [TT-009](resolved/database/TT-009-adapt-warm-capacity-to-sustained-demand.md) | Adapt warm capacity to sustained demand | Resolved | P2 | TT-008, TT-010 | [Final adaptive evidence](evidence/2026-10-15/adaptive-pool-final/manifest.json) |
 
-TT-007 and TT-008 can proceed independently once their prerequisites are complete. TT-010's metrics and fixed-pool benchmark land before the adaptive controller; its adaptive comparison completes alongside TT-009. The README claim correction in TT-010 can be made immediately using the existing evidence.
+## Verification and performance
 
-## Investigation and evidence
+The current candidate passes all **434 tests**, including **267 fast checks**,
+without failures or skips. Solution and separate DynamicScalingExample builds
+pass without warnings/errors. Final receipts bind identical compiler/test inputs;
+independent completion review passed. Earlier ticket evidence retains
+its original source cut rather than being relabelled as current verification.
 
-[TT-000: completed pool feasibility investigation](resolved/database/TT-000-pool-feasibility-investigation.md) records the source revision, observed bugs, prototype measurements, caveats and retained evidence. It is a completed experiment, not completion of any implementation ticket above.
+The maintained Release experiments retain 16 fixed/parking cases and 2,544 cycles,
+plus six fixed/adaptive cases and 954 cycles with equivalent startup conditions.
+The [adaptive results and default rationale](evidence/2026-10-15/adaptive-pool-final/results.md)
+retain fixed-mode wins, actual scale reasons, idle parking, resource observations
+and limitations. The 50 ms aspiration concerns verified warm restoration of a
+named workload; queueing, test body, startup and final drain are separate costs.
+There is no universal latency threshold or optimal-window claim.
 
-TT-001 through TT-008 are Resolved. The remaining two implementation tickets are Open. Their acceptance criteria describe future work; the prototypes do not satisfy the production acceptance gates. The 50 ms goal applies to a defined warm operation and workload, with queueing and full lifecycle costs reported separately.
+Whole-session mutation follows the final immutable committed snapshot and remains
+pending at ticket publication. Its receipt is recorded in the final completion
+record; no pending result is passing evidence.
+It is a separate follow-up to ordinary ticket completion and publication, with
+fast-only mutation selection, calibrated slow-only exclusions, isolated writable
+attempts and durable report handling required. Earlier scoped mutation evidence
+is not proof of the final combined implementation.
 
-## Implementation progress
-
-The P0 candidate implements explicit public leases and pooled PostgreSQL reset.
-Factory and static callers and all maintained examples use `CreateLeaseAsync`
-and `lease.Context`; source version `1.0.0-alpha.2` removes the raw-context APIs
-and implicit conversion. Lease return closes contexts/readers/transactions before
-reset and retains one completion result. Ordinary row reset preserves database
-and session identity and leaves failures unavailable for reuse.
-
-The full suite passes all 38 checks without skips. Ten fast ownership checks
-execute the lease, return and diagnostic classes at 100% line and branch
-coverage. Stryker rejects all 28 executable mutants in those classes, with ten
-source-resolvable participating tests and no survivors, timeouts or uncovered
-mutants. This is scoped evidence, not whole-package coverage or mutation proof.
-The [current evidence manifest](evidence/2026-10-14/public-leases-repair/manifest.json)
-retains RED/GREEN results, deliberate missing/double-return faults, coverage,
-mutation reports, source snapshots and the earlier failed full-suite runs.
-
-Startup investigation reproduced failures while empty clusters were still in
-`initdb`. Disposable cluster creation now skips its initial disk flush while
-retaining server `fsync`; a separate query-failure regression protects readiness
-connection cleanup. The passing full suite left no TurboTest containers.
-[Earlier reset evidence](evidence/2026-10-14/pooled-reset/manifest.json) and
-[internal protocol evidence](evidence/2026-10-14/ownership-protocol/manifest.json)
-retain their original snapshots and limitations.
-
-Independent completion review passed for TT-001 and TT-002; both are Resolved.
-
-The later tickets track restoration, capacity, recovery, DI ownership, parking
-and adaptation in their dependency order.
-
-TT-010's unsupported README/provider/package latency claims have been removed.
-Maintained metrics and integrated benchmarks remain open.
+[TT-000](resolved/database/TT-000-pool-feasibility-investigation.md) preserves the
+completed feasibility investigation. Its prototypes are exploratory evidence,
+not substitutes for the production acceptance gates above.
 
 ## Status changes
 
-When a ticket is implemented and verified, update its `status` to `Resolved`, add a dated decision-log entry with verification evidence, move it to `resolved/<area>/`, and update links in this index and dependent tickets. Keep its ticket ID. Use a linked GitHub issue only if an external tracker is subsequently configured; reconcile ownership rather than maintaining competing statuses.
-
-TT-003 implements immutable prepared schema and seed baselines.
-Its latest full suite passes 108 checks without failures or skips; seed,
-migration/history, sequence, template isolation and failed-startup ownership
-results are retained in the
-[progress evidence](evidence/2026-10-14/prepared-baseline-progress/manifest.json).
-The [repair evidence](evidence/2026-10-14/prepared-baseline-repair/manifest.json)
-records cleanup retry, workload verification, catalog/dependency, configuration
-and context-model repairs. Solution and separate example builds pass.
-Independent completion review passed; TT-003 is Resolved. That review left seven
-open tickets; the subsequent TT-004 progress is recorded below.
-
-TT-004 implements verified row restoration and schema-change recreation. It restores
-updated/deleted seeds, relationships and sequences in the same database; schema
-changes, cycles and oversized seed caches use verified recreation. Named reset
-faults are rejected and timing separates permit wait, execution and validation.
-The local 130/1,300/13,000-row probe reports reset p95 62.83/102.48/305.74 ms,
-including validation; these are scoped observations, not a 50 ms guarantee.
-The first 128-test full gate has 117 passes and 11 failures, mostly startup
-timeouts under default collection parallelism. The bounded normal-runner rerun
-passes all 128 tests with no failures or skips; solution and separate example
-builds pass. [Progress evidence](evidence/2026-10-14/row-reset-progress/manifest.json)
-retains raw results and source/calibration snapshots.
-Independent completion review passed; TT-004 is Resolved. Capacity, recovery, DI,
-parking, comprehensive metrics and adaptation remain in six open tickets.
-
-TT-005 implements fixed ordinary/prepared
-reservation caps, cancelable capacity waiting, captured resource budgets,
-independent preparation/reset limits and public pool state. The final full gate
-passes 168 checks without failures or skips; solution and separate example builds
-pass. Lost-create response cleanup and private ambient-transaction isolation have
-native regressions. [Final candidate evidence](evidence/2026-10-14/bounded-pool-final/manifest.json)
-retains current source, raw results, earlier failed attempts and coverage limits.
-Independent completion review passed; TT-005 is Resolved. Recovery, DI, parking,
-comprehensive metrics and adaptation remain in five open tickets.
-The [earlier progress manifest](evidence/2026-10-14/bounded-pool-progress/manifest.json)
-remains an unchanged historical public-state checkpoint.
-
-TT-006 implements bounded verified recovery, startup cancellation and owned
-drain. Uncertain resources retain capacity, terminal exhaustion settles waiters,
-and caller deadlines preserve actual jobs through cleanup capabilities. Blocking
-and throwing callbacks remain tracked; failed prepared workload cleanup retains
-its host. The whole-suite gate passes216 checks without failures/skips. Exact source bindings and final solution/separate
-example builds pass. [Final evidence](evidence/2026-10-14/resource-recovery-final/manifest.json)
-retains raw results, source cuts and earlier failed attempts. Independent
-completion review passed; TT-006 is Resolved. DI, parking, metrics and adaptation
-remain in four Open tickets. The [earlier progress archive](evidence/2026-10-14/resource-recovery-progress/manifest.json)
-remains an unchanged historical90-check checkpoint.
-
-TT-007 routes DI leases/factories and explicitly initialized scopes through one
-configured fixture per context type. Independent providers preserve their own
-options/baselines. Provider closure rejects work through returned handles, shares
-disposal outcomes and retains all cleanup owners and material failure diagnostics.
-Static initialization/disposal/reconfiguration is verified against actual resource
-identities. The final whole-suite gate and source bindings pass; both final builds
-pass without warnings/errors. [Final evidence](evidence/2026-10-15/di-ownership-final/manifest.json)
-retains REDs, audit repairs, corrected oracles and interrupted runs separately.
-Independent completion review passed; TT-007 is Resolved. Parking, metrics and
-adaptation remain in TT-008, TT-010 and TT-009.
-
-TT-008 implements explicit parking, identity-verified rewarm, a protected Ready
-floor, bounded retained capacity and monotonic idle expiry. Confirmed deletion
-conserves reservations; renewed demand prefers retained compatibility. Shutdown
-stops admission/recovery before context cleanup and preserves actual maintenance
-jobs and unseen material diagnostics. Structured operation timings keep deletion
-and teardown costs visible. The whole-suite gate passes 299 checks without
-failures/skips; final solution and separate example builds pass.
-[Final evidence](evidence/2026-10-15/prepared-parking-final/manifest.json) retains
-REDs, corrected setup/oracles, native calibration, source cuts and coverage.
-Independent completion review passed; TT-008 is Resolved. Comprehensive metrics
-and adaptive capacity remain in TT-010 and TT-009.
-
-TT-010 is in progress. Monotonic timings now distinguish admitted checkout,
-queue residence, preparation/rewarm wait and execution, reset wait/execution,
-validation, recreation/recovery, shared return, full cycle and actual factory
-shutdown. Observer failures preserve lifecycle results, including synchronous
-cancellation. A maintained benchmark project supplies the three named row mixes,
-actual seed/sequence/reuse/isolation validation and explicit percentile rules.
-The current fast gate passes 198 checks without failures/skips. Earlier scoped
-native timing/workload/recovery gates remain retained at their own source cuts.
-The maintained runner and supported command now provide source/runtime/image
-bindings, raw lifecycle events, sampled memory/state, complete cleanup and
-counterbalanced fixed/parking comparisons. The first frozen Release experiment
-passes all 16 cases and 2,544 timed cycles, with 53 samples per row size per case,
-no failures and no remaining owned containers. Its raw source cut is retained
-under `artifacts/tt-010/fixed-parking-experiment-r1`; subsequent audit guards
-reject empty timed plans and unequal/invalid phase delays. The current whole suite
-passes 356 tests without failures/skips; solution and separate-example builds pass
-without warnings/errors. The [slice evidence](evidence/2026-10-15/pool-metrics-fixed-benchmark/manifest.json)
-retains commands, raw results, snapshots and independent checks.
-Independent review passed for the metrics/fixed-benchmark slice. Its local
-commit precedes TT-009; TT-010 remains Open for adaptive comparison and scale reasons.
-Adaptive implementation and comparisons remain; TT-010 and TT-009 are still Open.
+When implementation and verification earn resolution, update the ticket's
+`status` to `Resolved`, add a dated decision-log entry, move it to
+`resolved/<area>/`, and update dependent links. Keep the ticket identity. A linked
+GitHub tracker should be used only if one is subsequently configured; do not
+maintain competing authoritative statuses.

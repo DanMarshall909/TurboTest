@@ -1,7 +1,7 @@
 ---
 id: TT-010
 title: Measure pool latency and correct performance claims
-status: Open
+status: Resolved
 priority: P1
 type: Feature
 created: 2026-10-14
@@ -22,13 +22,13 @@ Add maintained metrics and a reproducible public-API benchmark. Define the warm 
 
 ## Acceptance criteria
 
-- [ ] Metrics distinguish queue wait, checkout/preparation/rewarm, executing reset, reset-permit wait, validation, cycle and final shutdown, plus state/capacity counts and scale reasons. They omit credentials and test payloads.
-- [ ] A workload check independently rejects zero rows or an incorrect distribution before timing. Capture source revision/hashes, runtime/image identity, fixture schema/seed, row mix, concurrency, sample counts and timing/percentile definitions.
-- [ ] Maintained cases include nonempty mutated/deleted seeds, 130/1,300/13,000-row loads, fixed capacities and 1→8→1 plus repeated bursts. Assert actual database reuse and cross-database marker absence.
-- [ ] Order is randomized/counterbalanced and repeated as appropriate; startup warmth and resource budgets are explicit. All deferred cleanup and teardown are awaited and reported.
-- [ ] Reports show p50/p95/max, throughput, resource footprint and failures, including fixed-mode results that beat adaptation. Per-slot rewarm latency cannot substitute for request checkout or full-cycle latency.
-- [ ] Fast controller/workload tests and targeted PostgreSQL correctness regressions run in CI. Slow performance experiments have an explicit supported invocation/job; do not install a universal flaky 50 ms CI threshold.
-- [ ] README/API docs define supported providers and lifecycle, scope the performance target to named workloads, and remove unconditional reset guarantees unsupported by measurements.
+- [x] Metrics distinguish queue wait, checkout/preparation/rewarm, executing reset, reset-permit wait, validation, cycle and final shutdown, plus state/capacity counts and scale reasons. They omit credentials and test payloads.
+- [x] A workload check independently rejects zero rows or an incorrect distribution before timing. Capture source revision/hashes, runtime/image identity, fixture schema/seed, row mix, concurrency, sample counts and timing/percentile definitions.
+- [x] Maintained cases include nonempty mutated/deleted seeds, 130/1,300/13,000-row loads, fixed capacities and 1→8→1 plus repeated bursts. Assert actual database reuse and cross-database marker absence.
+- [x] Order is randomized/counterbalanced and repeated as appropriate; startup warmth and resource budgets are explicit. All deferred cleanup and teardown are awaited and reported.
+- [x] Reports show p50/p95/max, throughput, resource footprint and failures, including fixed-mode results that beat adaptation. Per-slot rewarm latency cannot substitute for request checkout or full-cycle latency.
+- [x] Fast controller/workload tests and targeted PostgreSQL correctness regressions run in CI. Slow performance experiments have an explicit supported invocation/job; do not install a universal flaky 50 ms CI threshold.
+- [x] README/API docs define supported providers and lifecycle, scope the performance target to named workloads, and remove unconditional reset guarantees unsupported by measurements.
 
 ## Verification
 
@@ -129,3 +129,36 @@ Land metrics and a fixed-pool benchmark before TT-009 consumes them. Add adaptiv
   in Verification, not resolution of TT-010. Scale reasons, TT-009 implementation,
   evidence-qualified defaults and equivalent adaptive comparisons remain. Whole
   coding-session mutation remains pending its final immutable committed snapshot.
+
+## Final adaptive comparison candidate
+
+- **2026-10-15:** Event 403 now exposes safe scale reasons, target/state, memory age
+  and actual maintenance latency/outcome. The public prepared controller owns
+  sampling and admitted work through final drain. The supported `--adaptive`
+  command and manual workflow compare matched fixed/adaptive startup two with an
+  already-warm fixed eight control over two counterbalanced blocks. Preflight leases
+  only the startup count; verified new identities are bounded by the physical
+  cap and known OIDs must remain stable. Reports retain phase states and raw
+  first/renewed/repeated/heavy/idle results, failures and resource samples.
+- The Release experiment passes all six cases and 954 timed cycles. Fixed capacity
+  wins burst latency in both blocks; adaptive heavy throughput is mixed. Raw
+  cgroup peaks include cache and do not prove resident-memory savings. Defaults
+  are conservative choices rather than an optimal-window claim. See the
+  [comparison and rationale](../../evidence/2026-10-15/adaptive-pool-final/results.md).
+- The current candidate passes all 267 fast and 434 whole-suite checks without
+  failures/skips. Both final builds and durable archive verification pass. Exact independent
+  completion review passed for the candidate and resolution envelope. The prior metrics/fixed-parking
+  slice archive remains unchanged; the new archive binds its own source cut.
+
+## Final decision log
+
+- **2026-10-15 — Resolved:** Independent completion review passed for the exact
+  implementation candidate and finite administrative envelope. All 434 current
+  tests pass, including 267 fast checks, without failures/skips; both builds pass
+  without warnings/errors. The six-case 954-cycle adaptive comparison and earlier
+  fixed/parking evidence retain actual reuse/isolation checks, fixed wins,
+  resource limitations and qualified defaults. The
+  [final evidence](../../evidence/2026-10-15/adaptive-pool-final/manifest.json)
+  binds raw commands/results, source cuts, coverage and reconstruction checks.
+  Whole-session mutation remains a post-commit follow-up against the final
+  immutable source snapshot; it is pending, not passing evidence.

@@ -15,7 +15,7 @@ Priority: **P0** repairs broken advertised behavior; **P1** establishes reliable
 | [TT-005](resolved/database/TT-005-bound-fixture-owned-prepared-database-pools.md) | Bound fixture-owned prepared database pools | P1 | TT-001, TT-003, TT-004 |
 | [TT-006](resolved/database/TT-006-quarantine-recover-and-drain-pool-resources.md) | Quarantine, recover, cancel and drain resources | P1 | TT-005 |
 | [TT-007](resolved/api/TT-007-use-the-configured-owner-in-di-and-static-apis.md) | Fix DI and static lifecycle ownership | P1 | TT-005, TT-006 |
-| [TT-008](open/database/TT-008-park-and-rewarm-prepared-databases.md) | Park and rewarm prepared databases | P2 | TT-005, TT-006 |
+| [TT-008](resolved/database/TT-008-park-and-rewarm-prepared-databases.md) | Park and rewarm prepared databases | P2 | TT-005, TT-006 |
 | [TT-010](open/database/TT-010-measure-pool-latency-and-correct-performance-claims.md) | Measure latency and correct performance claims | P1 | TT-005, TT-006 for integrated benchmarks |
 | [TT-009](open/database/TT-009-adapt-warm-capacity-to-sustained-demand.md) | Adapt warm capacity to sustained demand | P2 | TT-008, TT-010 |
 
@@ -25,7 +25,7 @@ TT-007 and TT-008 can proceed independently once their prerequisites are complet
 
 [TT-000: completed pool feasibility investigation](resolved/database/TT-000-pool-feasibility-investigation.md) records the source revision, observed bugs, prototype measurements, caveats and retained evidence. It is a completed experiment, not completion of any implementation ticket above.
 
-TT-001 through TT-007 are Resolved. The remaining three implementation tickets are Open. Their acceptance criteria describe future work; the prototypes do not satisfy the production acceptance gates. The 50 ms goal applies to a defined warm operation and workload, with queueing and full lifecycle costs reported separately.
+TT-001 through TT-008 are Resolved. The remaining two implementation tickets are Open. Their acceptance criteria describe future work; the prototypes do not satisfy the production acceptance gates. The 50 ms goal applies to a defined warm operation and workload, with queueing and full lifecycle costs reported separately.
 
 ## Implementation progress
 
@@ -123,3 +123,15 @@ pass without warnings/errors. [Final evidence](evidence/2026-10-15/di-ownership-
 retains REDs, audit repairs, corrected oracles and interrupted runs separately.
 Independent completion review passed; TT-007 is Resolved. Parking, metrics and
 adaptation remain in TT-008, TT-010 and TT-009.
+
+TT-008 implements explicit parking, identity-verified rewarm, a protected Ready
+floor, bounded retained capacity and monotonic idle expiry. Confirmed deletion
+conserves reservations; renewed demand prefers retained compatibility. Shutdown
+stops admission/recovery before context cleanup and preserves actual maintenance
+jobs and unseen material diagnostics. Structured operation timings keep deletion
+and teardown costs visible. The whole-suite gate passes 299 checks without
+failures/skips; final solution and separate example builds pass.
+[Final evidence](evidence/2026-10-15/prepared-parking-final/manifest.json) retains
+REDs, corrected setup/oracles, native calibration, source cuts and coverage.
+Independent completion review passed; TT-008 is Resolved. Comprehensive metrics
+and adaptive capacity remain in TT-010 and TT-009.

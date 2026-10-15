@@ -1,0 +1,23 @@
+from pathlib import Path
+import json,subprocess,sys,time,hashlib,datetime
+name=sys.argv[1];command=sys.argv[2:]
+out=Path('artifacts/tt-008');run=out/name;run.mkdir(parents=True,exist_ok=True)
+files=[]
+for root in ['src','tests','examples']:
+ for p in Path(root).rglob('*'):
+  if p.is_file() and p.suffix in ['.cs','.csproj'] and not {'bin','obj'}.intersection(p.parts):files.append(p)
+for namepart in ['Directory.Build.props','global.json','TurboTest.sln','tests/TurboTest.Tests/xunit.runner.json']:
+ p=Path(namepart)
+ if p.exists():files.append(p)
+records=[]
+for p in sorted(files,key=lambda p:str(p).encode()):
+ b=p.read_bytes();copy=run/'source-binding'/str(p);copy=Path(str(copy)+'.txt');copy.parent.mkdir(parents=True,exist_ok=True);copy.write_bytes(b)
+ records.append({'path':str(p),'sha256':hashlib.sha256(b).hexdigest(),'snapshot':str(copy)})
+(run/'source-binding.json').write_text(json.dumps({'command':command,'cwd':str(Path.cwd()),'date':datetime.datetime.now(datetime.timezone.utc).isoformat(),'files':records},indent=2)+'\n')
+start=time.monotonic()
+with (out/(name+'.log')).open('w') as log:
+ result=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT)
+receipt={'command':command,'cwd':str(Path.cwd()),'exitCode':result.returncode,'elapsedSeconds':time.monotonic()-start,'log':str(out/(name+'.log')),'sourceBinding':str(run/'source-binding.json')}
+(out/(name+'-receipt.json')).write_text(json.dumps(receipt,indent=2)+'\n')
+print(json.dumps(receipt))
+sys.exit(result.returncode)

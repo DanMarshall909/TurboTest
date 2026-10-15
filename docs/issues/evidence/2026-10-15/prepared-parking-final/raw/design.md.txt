@@ -1,0 +1,26 @@
+# TT-008 read-only design preparation
+
+The independent read-only investigation /root/tt008_design recommends extending
+TtSlotPool's existing ledger, not adding another owner. No code or tests changed.
+
+Routine policy selected for implementation consideration: explicit async
+MaintainIdleAsync on prepared fixtures, no background timer. PoolSize remains the
+physical reservation cap. A warm floor and MaxParkedDatabases bound warm and
+retained idle capacity separately; configured idle expiry is optional and measured
+from the latest verified return. Preserve initial warming until explicit maintenance.
+Ordinary fixtures reject unsupported maintenance clearly. Final public names and
+validation defaults must be tested before being treated as implemented policy.
+
+Sequence: configuration validation; Ready-only park with settlement published
+before source closure; parked-first acquisition at the hard cap; full baseline,
+schema and identity revalidation; TT-006 recovery on failed rewarm; monotonic-clock
+expiry with confirmed deletion; bounded operation races; parked/transitional drain
+and visible lifecycle timing. One behavior-first TDD cycle per criterion.
+
+Fast oracles: held closure/validation/deletion, identity, capacity conservation,
+queue outcomes, finite retries, cancellation retaining actual work and deterministic
+clock advancement. Native oracles: stable database OID/name, old backend PIDs gone
+through an independent observer, seed/schema/sequence identity intact, no new clone,
+corruption/opening failure non-publication and real DROP failure retaining the host.
+
+Do not start implementation until TT-007 is independently reviewed and committed.

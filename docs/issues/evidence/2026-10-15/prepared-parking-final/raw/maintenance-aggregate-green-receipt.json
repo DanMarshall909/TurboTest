@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~FactoryMaintenanceTests|FullyQualifiedName~FactoryBackpressureTests|FullyQualifiedName~SlotRetentionTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=maintenance-aggregate-green.trx",
+    "--results-directory",
+    "artifacts/tt-008/maintenance-aggregate-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 6.731996167000034,
+  "log": "artifacts/tt-008/maintenance-aggregate-green.log",
+  "sourceBinding": "artifacts/tt-008/maintenance-aggregate-green/source-binding.json"
+}

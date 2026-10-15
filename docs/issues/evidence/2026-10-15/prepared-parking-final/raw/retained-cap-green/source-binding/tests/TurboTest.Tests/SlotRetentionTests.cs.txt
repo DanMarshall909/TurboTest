@@ -1,0 +1,51 @@
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class SlotRetentionTests
+{
+    private sealed record Resource(Guid Id);
+
+    [Fact]
+    public async Task Retained_limit_parks_one_surplus_and_holds_the_other_reservation_until_confirmed_deletion()
+    {
+        var deleting = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var confirm = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var parked = new List<Guid>();
+        var deleted = new List<Guid>();
+        await using var owner = new TtSlotPool<Resource>(3, 1, id => new Resource(id),
+            (_, _) => Task.CompletedTask, async resource =>
+            {
+                deleting.TrySetResult();
+                await confirm.Task;
+                deleted.Add(resource.Id);
+            });
+        await owner.WarmAsync(3, default);
+        var maintenance = owner.ParkIdleAsync(1, (resource, _) =>
+        {
+            parked.Add(resource.Id);
+            return Task.CompletedTask;
+        }, maxParked: 1);
+        try
+        {
+            Assert.False(maintenance.IsCompleted);
+            await deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((3, 1, 1, 1), (owner.Snapshot.Reserved, owner.Snapshot.Ready, owner.Snapshot.Parked, owner.Snapshot.Retiring));
+            Assert.Single(parked);
+            Assert.Empty(deleted);
+            confirm.TrySetResult();
+            await maintenance.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((2, 1, 1, 0), (owner.Snapshot.Reserved, owner.Snapshot.Ready, owner.Snapshot.Parked, owner.Snapshot.Retiring));
+            Assert.Single(deleted);
+            Assert.DoesNotContain(deleted[0], parked);
+        }
+        finally
+        {
+            confirm.TrySetResult();
+            await maintenance;
+        }
+        await owner.DisposeAsync();
+        Assert.Equal(3, deleted.Distinct().Count());
+        Assert.Equal(0, owner.Snapshot.Reserved);
+    }
+}

@@ -1,0 +1,5 @@
+{
+  "outcome": "Cleanup-masked RED; not accepted behavior evidence",
+  "cause": "On the old terminal-quarantine path no deletion had run. Test teardown triggered its first injected failure and masked the missing-retry timeout.",
+  "correction": "Disable test injection only in final cleanup, while retaining all pre-cleanup attempt/capacity/replacement assertions. Numbered RED required."
+}

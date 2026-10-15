@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~PreparedMaintenanceDrainTests|FullyQualifiedName~SlotRewarmDrainTests|FullyQualifiedName~PreparedRewarmRecoveryTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=rewarm-cancellation-green.trx",
+    "--results-directory",
+    "artifacts/tt-008/rewarm-cancellation-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 30.52452792400436,
+  "log": "artifacts/tt-008/rewarm-cancellation-green.log",
+  "sourceBinding": "artifacts/tt-008/rewarm-cancellation-green/source-binding.json"
+}

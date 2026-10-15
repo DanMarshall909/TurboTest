@@ -1,0 +1,20 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.26]     TurboTest.Tests.FactoryMaintenanceTests.Bulk_maintenance_reports_all_safe_failures_and_does_not_repeat_delivered_faults_on_drain [FAIL]
+  Failed TurboTest.Tests.FactoryMaintenanceTests.Bulk_maintenance_reports_all_safe_failures_and_does_not_repeat_delivered_faults_on_drain [36 ms]
+  Error Message:
+   Assert.Contains() Failure: Sub-string not found
+String:    "TurboTest lifecycle failed at SlotIdleRet"···
+Not found: "UnauthorizedAccessException"
+  Stack Trace:
+     at TurboTest.Tests.FactoryMaintenanceTests.Bulk_maintenance_reports_all_safe_failures_and_does_not_repeat_delivered_faults_on_drain() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryMaintenanceTests.cs:line 22
+   at TurboTest.Tests.FactoryMaintenanceTests.Bulk_maintenance_reports_all_safe_failures_and_does_not_repeat_delivered_faults_on_drain() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryMaintenanceTests.cs:line 34
+   at TurboTest.Tests.FactoryMaintenanceTests.Bulk_maintenance_reports_all_safe_failures_and_does_not_repeat_delivered_faults_on_drain() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryMaintenanceTests.cs:line 34
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/maintenance-aggregate-red/maintenance-aggregate-red.trx
+
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 172 ms - TurboTest.Tests.dll (net10.0)

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~FactoryMaintenanceTests.Unseen_maintenance",
+    "--logger",
+    "trx;LogFileName=maintenance-drain-aggregate-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/maintenance-drain-aggregate-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 4.194315685999754,
+  "log": "artifacts/tt-008/maintenance-drain-aggregate-red.log",
+  "sourceBinding": "artifacts/tt-008/maintenance-drain-aggregate-red/source-binding.json"
+}

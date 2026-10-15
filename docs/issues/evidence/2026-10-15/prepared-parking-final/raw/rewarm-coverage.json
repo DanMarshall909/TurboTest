@@ -1,0 +1,10 @@
+{
+  "gate": "25 component checks pass with coverage",
+  "sourceInputs": 92,
+  "assertions": "Retained identity reused at physical cap; no reserve/prepare call; validation gates publication; canceled waiter preserves job; demand during parking resumes; concurrent rewarms share preparation permit.",
+  "refactor": {
+    "production": "One ClaimParked transition under the existing lock is reused for acquisition and closure completion. Each new operation retains its own settlement task.",
+    "tests": "Two race scenarios retain distinct oracles; a single release gate is enough for bounded concurrent rewarm."
+  },
+  "limits": "Backend reopen/real baseline verification not yet wired; failed park/rewarm recovery and shutdown/cancellation failures, parked cap and expiry still require evidence."
+}

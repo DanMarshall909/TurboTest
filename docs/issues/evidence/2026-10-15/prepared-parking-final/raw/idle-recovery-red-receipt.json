@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotIdleRecoveryTests",
+    "--logger",
+    "trx;LogFileName=idle-recovery-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/idle-recovery-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 8.045786324000801,
+  "log": "artifacts/tt-008/idle-recovery-red.log",
+  "sourceBinding": "artifacts/tt-008/idle-recovery-red/source-binding.json"
+}

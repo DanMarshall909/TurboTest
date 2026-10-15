@@ -1,0 +1,29 @@
+{
+  "counters": {
+    "total": "290",
+    "executed": "290",
+    "passed": "289",
+    "failed": "1",
+    "error": "0",
+    "timeout": "0",
+    "aborted": "0",
+    "inconclusive": "0",
+    "passedButRunAborted": "0",
+    "notRunnable": "0",
+    "notExecuted": "0",
+    "disconnected": "0",
+    "warning": "0",
+    "completed": "0",
+    "inProgress": "0",
+    "pending": "0"
+  },
+  "failures": [
+    {
+      "name": "TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database",
+      "start": "2026-10-15T10:03:29.0725021+10:00",
+      "end": "2026-10-15T10:03:45.1687851+10:00"
+    }
+  ],
+  "diagnosis": "PublicLeaseTests global Tt.DisposeAsync observes intentional SlotIdleRetire55006 from another concurrently running prepared cleanup test. Cleanup registry is global. New timeout/failure-injection fixtures and existing FactoryBackpressure now use the existing Static lifecycle collection, preserving all tests.",
+  "limits": "Failed full run is not passing evidence; corrected-source gate required."
+}

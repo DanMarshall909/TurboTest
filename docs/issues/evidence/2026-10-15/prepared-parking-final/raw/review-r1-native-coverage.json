@@ -1,0 +1,6 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:    19, Skipped:     0, Total:    19, Duration: 47 s - TurboTest.Tests.dll (net10.0)",
+  "assertions": "Prepared direct-deletion and actual55006 retry-deletion hold physical database/host through closure. Original IOException and secondary55006 survive until finite complete cleanup, no replacement or extra verification/deletion. Live corruption and cooperative cancellation controls remain passing.",
+  "qualification": "Earlier native15/16 failure is a real secondary diagnostic propagation gap, separately reproduced by fast missing-kind RED and fixed at the existing safe formatter. It is not an oracle/setup correction.",
+  "refactor": "Reservation-owned unseen failure carries through retry and descendants; verified publication/delivery clears it. Whole source/test count103; current scoped19-check result, not a full gate."
+}

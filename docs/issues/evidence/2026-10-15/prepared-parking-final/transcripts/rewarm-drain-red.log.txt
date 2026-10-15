@@ -1,0 +1,18 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.24]     TurboTest.Tests.SlotRewarmDrainTests.Closure_joins_rewarm_and_reports_material_late_failure_once_without_replacement(outcome: 2) [FAIL]
+  Failed TurboTest.Tests.SlotRewarmDrainTests.Closure_joins_rewarm_and_reports_material_late_failure_once_without_replacement(outcome: 2) [3 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+  Stack Trace:
+     at TurboTest.Tests.SlotRewarmDrainTests.Closure_joins_rewarm_and_reports_material_late_failure_once_without_replacement(Int32 outcome) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRewarmDrainTests.cs:line 47
+   at TurboTest.Tests.SlotRewarmDrainTests.Closure_joins_rewarm_and_reports_material_late_failure_once_without_replacement(Int32 outcome) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRewarmDrainTests.cs:line 63
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/rewarm-drain-red/rewarm-drain-red.trx
+
+Failed!  - Failed:     1, Passed:     2, Skipped:     0, Total:     3, Duration: 50 ms - TurboTest.Tests.dll (net10.0)

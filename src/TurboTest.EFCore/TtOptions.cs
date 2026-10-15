@@ -27,6 +27,15 @@ public class TtOptions
     /// </summary>
     public int PoolSize { get; set; } = 3;
 
+    /// <summary>Minimum Ready prepared slots retained by explicit idle maintenance. Defaults to 0. Initial warming still uses PoolSize.</summary>
+    public int WarmFloor { get; set; }
+
+    /// <summary>Maximum parked idle databases; null uses PoolSize. Parked databases still consume physical reservations.</summary>
+    public int? MaxParkedDatabases { get; set; }
+
+    /// <summary>Optional monotonic age since verified Ready publication before idle maintenance deletes a database. Parking preserves age; the Ready floor is protected. Null disables expiry.</summary>
+    public TimeSpan? IdleDatabaseLifetime { get; set; }
+
     /// <summary>Maximum pooled connections in each owned workload data source. Defaults to 4.</summary>
     public int MaxConnectionsPerDatabase { get; set; } = 4;
 

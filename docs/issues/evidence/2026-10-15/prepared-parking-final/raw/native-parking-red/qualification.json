@@ -1,0 +1,5 @@
+{
+  "outcome": "Invalid observer setup, not behavioral RED",
+  "cause": "Npgsql intentionally strips the password from an opened connection string. The independently created observer lacked a password and never reached parking assertions.",
+  "correction": "The test sets an ephemeral fixture password up front and supplies it privately to its independent observer; no secret value is emitted or persisted. native-parking-red-r2 required."
+}

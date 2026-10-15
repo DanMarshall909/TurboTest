@@ -1,0 +1,6 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:     3, Skipped:     0, Total:     3, Duration: 7 s - TurboTest.Tests.dll (net10.0)",
+  "assertions": "Held actual DROP retains owned host/reservation through cancellation/deadline; real PostgreSQL 55006 is reported once after confirmed deletion and complete host removal. Exactly two DROP attempts; shared cleanup remains retryable.",
+  "refactor": "Native calibration uses a rejected DROP of the administrative connection database, never an unrelated host; finite callback guards plus Docker owner identity assert cleanup.",
+  "limits": "Selected gate only; raw coverage and exact source bindings retained beside its receipt."
+}

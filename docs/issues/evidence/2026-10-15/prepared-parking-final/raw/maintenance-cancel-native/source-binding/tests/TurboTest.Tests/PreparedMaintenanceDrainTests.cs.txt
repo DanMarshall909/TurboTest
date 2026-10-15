@@ -1,0 +1,92 @@
+using Docker.DotNet;
+using Docker.DotNet.Models;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using TurboTest.EFCore;
+
+namespace TurboTest.Tests;
+
+public class PreparedMaintenanceDrainTests
+{
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Canceled_retirement_reports_a_late_real_drop_failure_after_owned_cleanup()
+    {
+        var prefix = $"tt-maintenance-drain-{Guid.NewGuid():N}";
+        var deleting = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var attempts = 0;
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        var fixture = await Tt.CreatePreparedFactoryAsync(
+            new TtOptions { PoolSize = 1, MaxParkedDatabases = 0, ContainerPrefix = prefix, DrainTimeout = TimeSpan.FromMilliseconds(100) },
+            new TtBaselineDefinition<TestDbContext>("maintenance-drain-v1", TtSchemaInitialization.EnsureCreated), default,
+            dropDatabase: async (connection, name) =>
+            {
+                var attempt = Interlocked.Increment(ref attempts);
+                if (attempt > 2) throw new InvalidOperationException("Deletion exceeded its finite oracle.");
+                if (attempt == 1)
+                {
+                    deleting.TrySetResult();
+                    await release.Task;
+                }
+                // The first actual DROP is rejected by PostgreSQL because it targets
+                // this administrative connection's own database (55006).
+                var target = attempt == 1 ? connection.Database : name;
+                await using var command = new NpgsqlCommand($"DROP DATABASE IF EXISTS {new NpgsqlCommandBuilder().QuoteIdentifier(target)} WITH (FORCE)", connection);
+                await command.ExecuteNonQueryAsync();
+            });
+        using var cancel = new CancellationTokenSource();
+        TtCleanup? cleanup = null;
+        Task? maintenance = null;
+        try
+        {
+            var lease = await fixture.CreateLeaseAsync();
+            await lease.Context.Database.OpenConnectionAsync();
+            await lease.DisposeAsync();
+            var host = Assert.Single(await OwnedAsync()).ID;
+            maintenance = fixture.MaintainIdleAsync(cancel.Token);
+            await deleting.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            cancel.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => maintenance);
+            var timeout = await Assert.ThrowsAsync<TtLifecycleException>(() => fixture.DisposeAsync().AsTask());
+            Assert.Equal("DrainTimeout", timeout.Stage);
+            cleanup = Assert.IsType<TtCleanup>(timeout.Cleanup);
+            Assert.Equal(host, Assert.Single(await OwnedAsync()).ID);
+            Assert.Equal((1, 1), (fixture.PoolState.Reserved, attempts));
+            Assert.Contains(host, cleanup.OwnedResourceIds);
+            var pending = cleanup.RetryCleanupAsync();
+            Assert.Same(pending, cleanup.RetryCleanupAsync());
+            Assert.False(pending.IsCompleted);
+            release.TrySetResult();
+            var late = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(20)));
+            Assert.Equal("55006", late.SqlState);
+            Assert.DoesNotContain("DROP DATABASE", late.ToString());
+            Assert.Equal((0, 2), (fixture.PoolState.Reserved, attempts));
+            Assert.Empty(await OwnedAsync());
+            await cleanup.RetryCleanupAsync();
+            Assert.Empty(cleanup.OwnedResourceIds);
+            Assert.Equal(2, attempts);
+        }
+        finally
+        {
+            release.TrySetResult();
+            if (maintenance is not null) await Record.ExceptionAsync(() => maintenance);
+            var failure = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+        }
+
+        Task<IList<ContainerListResponse>> OwnedAsync() => docker.Containers.ListContainersAsync(new ContainersListParameters
+        {
+            All = true,
+            Filters = new Dictionary<string, IDictionary<string, bool>>
+            {
+                ["name"] = new Dictionary<string, bool> { [prefix] = true }
+            }
+        });
+    }
+}

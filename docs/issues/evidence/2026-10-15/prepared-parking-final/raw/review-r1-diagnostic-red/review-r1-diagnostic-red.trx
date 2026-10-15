@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="df7c49d3-8aa5-4fe9-96a4-12556a500ccc" name="@os-greg 2026-10-15 10:41:25" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-15T10:41:25.8588872+10:00" queuing="2026-10-15T10:41:25.8588872+10:00" start="2026-10-15T10:41:25.2495844+10:00" finish="2026-10-15T10:41:25.8648487+10:00" />
+  <TestSettings name="default" id="f53309a2-dbaa-425c-b2d3-8bc6df3f9b54">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-15_10_41_25" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="97d4cde8-3042-44d8-b3fd-36c331e1b321" testId="b307203e-526c-cd9c-531e-c9d4a4de17a1" testName="TurboTest.Tests.LifecycleDiagnosticRetentionTests.Wrapping_a_recovery_failure_retains_all_safe_diagnostics_without_private_payloads" computerName="os-greg" duration="00:00:00.0039518" startTime="2026-10-15T10:41:25.7453293+10:00" endTime="2026-10-15T10:41:25.7592959+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="97d4cde8-3042-44d8-b3fd-36c331e1b321">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Contains() Failure: Sub-string not found
+String:    "TurboTest lifecycle failed at PoolDrain ("···
+Not found: "UnauthorizedAccessException"</Message>
+          <StackTrace>   at TurboTest.Tests.LifecycleDiagnosticRetentionTests.Wrapping_a_recovery_failure_retains_all_safe_diagnostics_without_private_payloads() in /home/dan/code/TurboTest/tests/TurboTest.Tests/LifecycleDiagnosticRetentionTests.cs:line 14
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.LifecycleDiagnosticRetentionTests.Wrapping_a_recovery_failure_retains_all_safe_diagnostics_without_private_payloads" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="b307203e-526c-cd9c-531e-c9d4a4de17a1">
+      <Execution id="97d4cde8-3042-44d8-b3fd-36c331e1b321" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.LifecycleDiagnosticRetentionTests" name="Wrapping_a_recovery_failure_retains_all_safe_diagnostics_without_private_payloads" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b307203e-526c-cd9c-531e-c9d4a4de17a1" executionId="97d4cde8-3042-44d8-b3fd-36c331e1b321" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.18]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.21]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.24]       Assert.Contains() Failure: Sub-string not found
+[xUnit.net 00:00:00.24]       String:    "TurboTest lifecycle failed at PoolDrain ("···
+[xUnit.net 00:00:00.24]       Not found: "UnauthorizedAccessException"
+[xUnit.net 00:00:00.24]       Stack Trace:
+[xUnit.net 00:00:00.24]         /home/dan/code/TurboTest/tests/TurboTest.Tests/LifecycleDiagnosticRetentionTests.cs(14,0): at TurboTest.Tests.LifecycleDiagnosticRetentionTests.Wrapping_a_recovery_failure_retains_all_safe_diagnostics_without_private_payloads()
+[xUnit.net 00:00:00.24]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.24]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.25]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-15T10:41:25.7618917+10:00">
+        <Text>[xUnit.net 00:00:00.24]     TurboTest.Tests.LifecycleDiagnosticRetentionTests.Wrapping_a_recovery_failure_retains_all_safe_diagnostics_without_private_payloads [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

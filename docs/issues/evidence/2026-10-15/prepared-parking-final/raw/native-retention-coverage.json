@@ -1,0 +1,10 @@
+{
+  "gate": "6 native/component checks pass with coverage",
+  "sourceInputs": 96,
+  "assertions": "Captured WarmFloor1/MaxParked0 survives caller options mutation. Real DROP held while original database remains; Ready slot queryable and reserved2. Renewed request queues until DROP succeeds; new OID/name, old absent, seed correct. Native parking/reopen and component retirement retry also pass.",
+  "refactor": {
+    "production": "Existing owned DROP and reservation ledger provide the real retention boundary; no extra retirement owner.",
+    "tests": "One held-DROP scenario combines retained floor and renewal while retaining independent catalog/identity assertions."
+  },
+  "limits": "No expiry execution or completed whole-suite claim yet."
+}

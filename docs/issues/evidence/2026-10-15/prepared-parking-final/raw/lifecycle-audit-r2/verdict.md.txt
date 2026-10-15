@@ -1,0 +1,9 @@
+# Bounded repair audit R2
+
+Reviewer /root/tt008_lifecycle_audit verified all three frozen snapshot hashes in source-binding.json. No edits/builds/tests. Preliminary investigation, not completion approval.
+
+1. Factory closure precedes pool closure while public lease cleanup may block. Slot-only closed classification therefore loses late rewarm fault and may prepare a replacement. Separate admission/recovery stopping from physical teardown; test two slots with held lease cleanup and held rewarm failure.
+2. Prepared verifier wraps cooperative cancellation as TtLifecycleException. Raw-OCE ledger control does not calibrate that native boundary. Preserve cancellation classification and test held verification released successfully into canceled administration.
+3. Factory retains unseen maintenance errors but first-only teardown catches can hide another material failure from lease/database/pool drain. Aggregate safe outcomes across the new composition and assert finite cleanup.
+
+Maintenance actual task is now recorded before execution; canceled observation preserves it. Bulk task diagnostics are retained. Successful live recovery remains intentionally transparent.

@@ -1,0 +1,136 @@
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+[Collection("Static lifecycle")]
+public class FactoryRewarmDrainTests
+{
+    [Fact]
+    public async Task Factory_closure_stops_rewarm_replacement_before_a_different_lease_finishes_cleanup()
+    {
+        await using var pool = new RewarmPool();
+        var factory = new TtFactory<HeldContext>(pool,
+            new TtOptions { AutoMigrate = false, DrainTimeout = TimeSpan.FromMilliseconds(100) }, ownsPool: true);
+        var held = await factory.CreateLeaseAsync();
+        var context = held.Context;
+        context.Hold = true;
+        pool.HeldSource = pool.LastSource;
+        var idle = await factory.CreateLeaseAsync();
+        await idle.DisposeAsync();
+        await factory.MaintainIdleAsync();
+        var waiting = factory.CreateLeaseAsync();
+        await pool.Rewarming.Task.WaitAsync(TimeSpan.FromSeconds(2));
+        TtCleanup? cleanup = null;
+        try
+        {
+            var closing = factory.DisposeAsync().AsTask();
+            await context.Closing.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => waiting);
+            var timeout = await Assert.ThrowsAsync<TtLifecycleException>(() => closing);
+            cleanup = Assert.IsType<TtCleanup>(timeout.Cleanup);
+            pool.Release.TrySetResult();
+            await pool.LateDeleted.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            using var deadline = new CancellationTokenSource(TimeSpan.FromSeconds(2));
+            while (pool.Snapshot.Rewarming + pool.Snapshot.Retiring > 0)
+            {
+                deadline.Token.ThrowIfCancellationRequested();
+                await Task.Yield();
+            }
+            Assert.Equal(2, pool.Created);
+            Assert.False(pool.HeldDeleted);
+            Assert.Equal((1, 1), (context.Attempts, pool.Snapshot.Reserved));
+            var pending = cleanup.RetryCleanupAsync();
+            Assert.False(pending.IsCompleted);
+            context.Release.TrySetResult();
+            var late = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Contains("IOException", late.Message);
+            Assert.DoesNotContain("private-rewarm-payload", late.ToString());
+            await cleanup.RetryCleanupAsync();
+            Assert.True(pool.HeldDeleted);
+            Assert.Equal((0, 2, 2, 1), (pool.Snapshot.Reserved, pool.Created, pool.Deleted, context.Attempts));
+        }
+        finally
+        {
+            pool.Release.TrySetResult();
+            context.Release.TrySetResult();
+            await Record.ExceptionAsync(() => waiting);
+            var failure = await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+        }
+    }
+
+    public sealed class HeldContext(DbContextOptions<HeldContext> options) : DbContext(options)
+    {
+        public DbSet<User> Users => Set<User>();
+        internal bool Hold { get; set; }
+        internal int Attempts { get; private set; }
+        internal TaskCompletionSource Closing { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal TaskCompletionSource Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        public override async ValueTask DisposeAsync()
+        {
+            Attempts++;
+            if (Hold)
+            {
+                Closing.TrySetResult();
+                await Release.Task;
+            }
+            await base.DisposeAsync();
+        }
+    }
+
+    private sealed class RewarmPool : ITtDatabasePool
+    {
+        private readonly TtSlotPool<NpgsqlDataSource> _slots;
+        internal TaskCompletionSource Rewarming { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal TaskCompletionSource Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal TaskCompletionSource LateDeleted { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal NpgsqlDataSource? LastSource { get; private set; }
+        internal NpgsqlDataSource? HeldSource { get; set; }
+        internal int Created { get; private set; }
+        internal int Deleted { get; private set; }
+        internal bool HeldDeleted { get; private set; }
+        public TtPoolSnapshot Snapshot => _slots.Snapshot;
+        public TtResourceBudget Budget => TtResourceBudget.Create(new TtOptions { PoolSize = 2 }, true);
+        public IReadOnlyList<string> OwnedResourceIds => Snapshot.Reserved == 0 ? [] : [Snapshot.OwnerId.ToString("N")];
+
+        internal RewarmPool() => _slots = new TtSlotPool<NpgsqlDataSource>(2, 1, _ =>
+        {
+            if (++Created > 3) throw new InvalidOperationException("Replacement exceeded the finite oracle.");
+            return NpgsqlDataSource.Create("Host=unused;Database=unused;Username=unused");
+        }, (_, _) => Task.CompletedTask, async source =>
+        {
+            await source.DisposeAsync();
+            Deleted++;
+            if (ReferenceEquals(source, HeldSource)) HeldDeleted = true;
+            else LateDeleted.TrySetResult();
+        }, rewarm: async (_, _) =>
+        {
+            Rewarming.TrySetResult();
+            await Release.Task;
+            throw new IOException("private-rewarm-payload");
+        });
+
+        public async Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
+        {
+            var reservation = await _slots.AcquireAsync(cancellationToken);
+            LastSource = reservation.Value;
+            return new TtDatabase(reservation.Value,
+                () => _slots.ReturnAsync(reservation, (_, _) => Task.CompletedTask),
+                () => _slots.DiscardAsync(reservation));
+        }
+
+        public Task MaintainIdleAsync(CancellationToken cancellationToken = default) =>
+            _slots.ParkIdleAsync(0, (_, _) => Task.CompletedTask).WaitAsync(cancellationToken);
+        public ValueTask DisposeAsync() => _slots.DisposeAsync();
+        public void StopAcceptingWork() => _slots.StopAcceptingWork();
+        public Task RetryCleanupAsync() => _slots.RetryCleanupAsync();
+    }
+}

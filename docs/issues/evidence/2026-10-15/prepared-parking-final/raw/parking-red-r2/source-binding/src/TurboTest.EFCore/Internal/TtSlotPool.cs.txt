@@ -1,0 +1,469 @@
+namespace TurboTest.EFCore.Internal;
+
+/// <summary>Reserves workload capacity before backend work and atomically assigns verified results.</summary>
+internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
+{
+    private const int RecoveryAttempts = 3;
+    private static readonly TimeSpan RecoveryDelay = TimeSpan.FromMilliseconds(100);
+    private enum State { Preparing, Ready, Leased, WaitingReset, ExecutingReset, Quarantined, Retiring }
+
+    internal sealed class Reservation(Guid id, bool recovering = false, int preparationAttempts = 1)
+    {
+        internal Guid Id { get; } = id;
+        internal bool Recovering { get; } = recovering;
+        internal int PreparationAttempts { get; } = preparationAttempts;
+        internal T? Resource { get; set; }
+        internal T Value => Resource ?? throw new InvalidOperationException("The reservation has no prepared resource.");
+        internal TaskCompletionSource Settled { get; set; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+    }
+
+    private sealed class Waiter(CancellationToken token)
+    {
+        internal CancellationToken Token { get; } = token;
+        internal TaskCompletionSource<Reservation> Completion { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal LinkedListNode<Waiter>? Node { get; set; }
+        internal CancellationTokenRegistration Cancellation { get; set; }
+    }
+
+    private readonly object _gate = new();
+    private readonly Guid _owner = Guid.NewGuid();
+    private readonly int _capacity;
+    private readonly Func<Guid, T> _reserve;
+    private readonly Func<T, CancellationToken, Task> _prepare;
+    private readonly Func<T, Task> _delete;
+    private readonly Dictionary<Reservation, State> _owned = new();
+    private readonly Queue<Reservation> _ready = new();
+    private readonly LinkedList<Waiter> _waiters = new();
+    private readonly SemaphoreSlim _preparationLimit;
+    private readonly SemaphoreSlim _resetLimit;
+    private readonly CancellationTokenSource _closing = new();
+    private bool _closed;
+    private TtLifecycleException? _failure;
+    private Task? _disposal;
+
+    internal TtSlotPool(int capacity, int preparationConcurrency,
+        Func<Guid, T> reserve, Func<T, CancellationToken, Task> prepare, Func<T, Task> delete,
+        int resetConcurrency = 1)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(capacity);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(preparationConcurrency);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(resetConcurrency);
+        _capacity = capacity;
+        _reserve = reserve;
+        _prepare = prepare;
+        _delete = delete;
+        _preparationLimit = new SemaphoreSlim(preparationConcurrency, preparationConcurrency);
+        _resetLimit = new SemaphoreSlim(resetConcurrency, resetConcurrency);
+    }
+
+    internal TtPoolSnapshot Snapshot
+    {
+        get
+        {
+            lock (_gate)
+                return new TtPoolSnapshot(_owner, _capacity, Count(State.Preparing), Count(State.Ready),
+                    Count(State.Leased), Count(State.WaitingReset), Count(State.ExecutingReset),
+                    Count(State.Quarantined), 0, Count(State.Retiring), _waiters.Count);
+        }
+    }
+
+    private int Count(State state) => _owned.Values.Count(value => value == state);
+
+    internal Task ParkIdleAsync(int warmFloor, Func<T, CancellationToken, Task> park) => Task.CompletedTask;
+
+    internal Task<Reservation> AcquireAsync(CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        Reservation? preparation = null;
+        Task<Reservation> result;
+        lock (_gate)
+        {
+            ObjectDisposedException.ThrowIf(_closed, this);
+            if (_failure is not null) throw _failure;
+            if (_ready.TryDequeue(out var ready))
+            {
+                _owned[ready] = State.Leased;
+                return Task.FromResult(ready);
+            }
+            var waiter = new Waiter(cancellationToken);
+            waiter.Node = _waiters.AddLast(waiter);
+            waiter.Cancellation = cancellationToken.Register(() => Cancel(waiter));
+            result = waiter.Completion.Task;
+            preparation = ReservePending();
+        }
+        if (preparation is not null) _ = PrepareAsync(preparation);
+        return result;
+    }
+
+    // Caller holds the ledger lock. The placeholder exists before backend work.
+    private Reservation? ReservePending(bool replenish = false, int preparationAttempts = RecoveryAttempts)
+    {
+        if (_closed || _failure is not null || (!replenish && _waiters.Count == 0) || _owned.Count >= _capacity) return null;
+        var reservation = new Reservation(Guid.NewGuid(), replenish, replenish ? preparationAttempts : 1);
+        _owned.Add(reservation, State.Preparing);
+        return reservation;
+    }
+
+    private void Cancel(Waiter waiter)
+    {
+        lock (_gate)
+        {
+            if (waiter.Node is null) return;
+            _waiters.Remove(waiter.Node);
+            waiter.Node = null;
+            waiter.Completion.TrySetCanceled(waiter.Token);
+            waiter.Cancellation.Unregister();
+        }
+    }
+
+    private async Task PrepareAsync(Reservation reservation)
+    {
+        var settled = reservation.Settled;
+        var attempts = reservation.PreparationAttempts;
+        try
+        {
+            for (var attempt = 1; attempt <= attempts; attempt++)
+            {
+                try
+                {
+                    _closing.Token.ThrowIfCancellationRequested();
+                    lock (_gate) _owned[reservation] = State.Preparing;
+                    reservation.Resource = _reserve(reservation.Id);
+                    await _preparationLimit.WaitAsync(_closing.Token);
+                    try { await _prepare(reservation.Value, _closing.Token); }
+                    finally { _preparationLimit.Release(); }
+                    PublishReady(reservation);
+                    return;
+                }
+                catch (Exception error)
+                {
+                    var failure = error as TtLifecycleException ?? new TtLifecycleException("SlotPrepare", error);
+                    await _resetLimit.WaitAsync();
+                    try
+                    {
+                        lock (_gate) _owned[reservation] = State.Retiring;
+                        if (reservation.Resource is not null) await _delete(reservation.Value);
+                        reservation.Resource = null;
+                        lock (_gate)
+                        {
+                            if (attempt == attempts || _closed)
+                            {
+                                FailAfterConfirmedDeletion(reservation, failure);
+                                return;
+                            }
+                            _owned[reservation] = State.Quarantined;
+                        }
+                    }
+                    catch (Exception cleanupError)
+                    {
+                        if (reservation.Recovering)
+                            ScheduleCleanupRecovery(reservation, failure.WithCleanupFailure(cleanupError), attempts - attempt);
+                        else
+                            Quarantine(reservation, failure.WithCleanupFailure(cleanupError), "SlotPrepare");
+                        return;
+                    }
+                    finally { _resetLimit.Release(); }
+                    await Task.Delay(RecoveryDelay, _closing.Token);
+                }
+            }
+        }
+        catch (OperationCanceledException) when (_closing.IsCancellationRequested)
+        {
+            lock (_gate) _owned[reservation] = State.Retiring;
+        }
+        finally { settled.TrySetResult(); }
+    }
+
+    private void FailWaiters(Exception error)
+    {
+        while (_waiters.First is { } node)
+        {
+            _waiters.Remove(node);
+            node.Value.Node = null;
+            node.Value.Cancellation.Unregister();
+            node.Value.Completion.TrySetException(error);
+        }
+    }
+
+    internal Task ReturnAsync(Reservation reservation, Func<T, CancellationToken, Task> reset)
+        => ReturnAsync(reservation, async (resource, token) => { await reset(resource, token); return true; });
+
+    internal Task ReturnAsync(Reservation reservation, Func<T, CancellationToken, Task<bool>> reset,
+        Action<TimeSpan>? observeWait = null, Func<T, CancellationToken, Task>? prepareReplacement = null)
+        => ResetAsync(reservation, reset, BeginReturn(reservation), observeWait, prepareReplacement);
+
+    internal async Task WarmAsync(int count, CancellationToken cancellationToken)
+    {
+        var reservations = await Task.WhenAll(Enumerable.Range(0, count).Select(_ => AcquireAsync(cancellationToken)));
+        await Task.WhenAll(reservations.Select(reservation => ReturnAsync(reservation, (_, _) => Task.CompletedTask)));
+    }
+
+    internal Task DiscardAsync(Reservation reservation)
+        => DiscardCoreAsync(reservation, BeginReturn(reservation));
+
+    private TaskCompletionSource BeginReturn(Reservation reservation)
+    {
+        lock (_gate)
+        {
+            ObjectDisposedException.ThrowIf(_closed, this);
+            if (!_owned.TryGetValue(reservation, out var state) || state != State.Leased)
+                throw new InvalidOperationException("The reservation is not leased by this pool.");
+            _owned[reservation] = State.WaitingReset;
+            return reservation.Settled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        }
+    }
+
+    private async Task DiscardCoreAsync(Reservation reservation, TaskCompletionSource settled)
+    {
+        try
+        {
+            await _resetLimit.WaitAsync(_closing.Token);
+            try
+            {
+                lock (_gate) _owned[reservation] = State.Retiring;
+                await _delete(reservation.Value);
+                ReplenishAfterDeletion(reservation, replenish: false);
+            }
+            finally { _resetLimit.Release(); }
+        }
+        catch (Exception error)
+        {
+            throw Quarantine(reservation, error, "SlotDiscard");
+        }
+        finally { settled.TrySetResult(); }
+    }
+
+    private async Task ResetAsync(Reservation reservation, Func<T, CancellationToken, Task<bool>> reset,
+        TaskCompletionSource settled, Action<TimeSpan>? observeWait, Func<T, CancellationToken, Task>? prepareReplacement)
+    {
+        var permitHeld = false;
+        try
+        {
+            var requested = System.Diagnostics.Stopwatch.GetTimestamp();
+            await _resetLimit.WaitAsync(_closing.Token);
+            permitHeld = true;
+            observeWait?.Invoke(System.Diagnostics.Stopwatch.GetElapsedTime(requested));
+            lock (_gate) _owned[reservation] = State.ExecutingReset;
+            if (!await reset(reservation.Value, _closing.Token))
+            {
+                lock (_gate) _owned[reservation] = State.Retiring;
+                await _delete(reservation.Value);
+                reservation.Resource = _reserve(reservation.Id);
+                lock (_gate) _owned[reservation] = State.Preparing;
+                await _preparationLimit.WaitAsync(_closing.Token);
+                try { await (prepareReplacement ?? _prepare)(reservation.Value, _closing.Token); }
+                finally { _preparationLimit.Release(); }
+            }
+            PublishReady(reservation);
+        }
+        catch (Exception error)
+        {
+            if (!permitHeld)
+            {
+                await _resetLimit.WaitAsync();
+                permitHeld = true;
+            }
+            var failure = error as TtLifecycleException ?? new TtLifecycleException("SlotReset", error);
+            try
+            {
+                lock (_gate) _owned[reservation] = State.Retiring;
+                await _delete(reservation.Value);
+                ReplenishAfterDeletion(reservation, replenish: true);
+            }
+            catch (Exception cleanupError)
+            {
+                failure = failure.WithCleanupFailure(cleanupError);
+                ScheduleCleanupRecovery(reservation, failure);
+            }
+            throw failure;
+        }
+        finally
+        {
+            if (permitHeld) _resetLimit.Release();
+            settled.TrySetResult();
+        }
+    }
+
+    // The caller holds the ledger lock and has confirmed that no resource remains.
+    private void FailAfterConfirmedDeletion(Reservation reservation, TtLifecycleException failure)
+    {
+        _owned.Remove(reservation);
+        _failure ??= failure;
+        FailWaiters(_failure);
+    }
+
+    private void ReplenishAfterDeletion(Reservation reservation, bool replenish, int preparationAttempts = RecoveryAttempts)
+    {
+        Reservation? replacement;
+        lock (_gate)
+        {
+            _owned.Remove(reservation);
+            replacement = ReservePending(replenish, preparationAttempts);
+        }
+        if (replacement is not null) _ = PrepareAsync(replacement);
+    }
+
+    private void ScheduleCleanupRecovery(Reservation reservation, TtLifecycleException failure,
+        int preparationAttempts = RecoveryAttempts)
+    {
+        var settled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        lock (_gate)
+        {
+            _owned[reservation] = State.Quarantined;
+            if (_closed) return;
+            reservation.Settled = settled;
+        }
+        _ = RecoverCleanupAsync(reservation, failure, settled, preparationAttempts);
+    }
+
+    private async Task RecoverCleanupAsync(Reservation reservation, TtLifecycleException failure, TaskCompletionSource settled,
+        int preparationAttempts)
+    {
+        try
+        {
+            for (var attempt = 2; attempt <= RecoveryAttempts; attempt++)
+            {
+                await Task.Delay(RecoveryDelay, _closing.Token);
+                await _resetLimit.WaitAsync(_closing.Token);
+                try
+                {
+                    lock (_gate) _owned[reservation] = State.Retiring;
+                    await _delete(reservation.Value);
+                    if (preparationAttempts == 0)
+                    {
+                        lock (_gate)
+                        {
+                            FailAfterConfirmedDeletion(reservation, failure);
+                        }
+                    }
+                    else ReplenishAfterDeletion(reservation, replenish: true, preparationAttempts);
+                    return;
+                }
+                catch (Exception error)
+                {
+                    failure = failure.WithCleanupFailure(error);
+                    if (attempt == RecoveryAttempts)
+                    {
+                        Quarantine(reservation, failure, "SlotRecovery");
+                        return;
+                    }
+                    lock (_gate) _owned[reservation] = State.Quarantined;
+                }
+                finally { _resetLimit.Release(); }
+            }
+        }
+        catch (OperationCanceledException) when (_closing.IsCancellationRequested)
+        {
+            lock (_gate) _owned[reservation] = State.Quarantined;
+        }
+        finally { settled.TrySetResult(); }
+    }
+
+    private TtLifecycleException Quarantine(Reservation reservation, Exception error, string stage)
+    {
+        var failure = error as TtLifecycleException ?? new TtLifecycleException(stage, error);
+        lock (_gate)
+        {
+            _owned[reservation] = State.Quarantined;
+            _failure ??= failure;
+            FailWaiters(_failure);
+        }
+        return failure;
+    }
+
+    private void PublishReady(Reservation reservation)
+    {
+        lock (_gate)
+        {
+            if (_closed)
+            {
+                _owned[reservation] = State.Retiring;
+                return;
+            }
+            while (_waiters.First is { } node)
+            {
+                var waiter = node.Value;
+                _waiters.Remove(node);
+                waiter.Node = null;
+                waiter.Cancellation.Unregister();
+                if (waiter.Token.IsCancellationRequested)
+                {
+                    waiter.Completion.TrySetCanceled(waiter.Token);
+                    continue;
+                }
+                _owned[reservation] = State.Leased;
+                waiter.Completion.TrySetResult(reservation);
+                return;
+            }
+            _owned[reservation] = State.Ready;
+            _ready.Enqueue(reservation);
+        }
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        Task disposal;
+        var cancel = false;
+        lock (_gate)
+        {
+            if (_disposal is null)
+            {
+                _closed = true;
+                FailWaiters(new ObjectDisposedException(nameof(TtSlotPool<T>)));
+                var start = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                _disposal = DisposeCoreAsync(start.Task);
+                disposal = _disposal;
+                cancel = true;
+                start.TrySetResult();
+            }
+            else disposal = _disposal;
+        }
+        if (cancel) _closing.Cancel();
+        return new ValueTask(disposal);
+    }
+
+    internal Task RetryCleanupAsync()
+    {
+        lock (_gate)
+        {
+            if (_disposal is not null)
+            {
+                if (_disposal.IsFaulted)
+                {
+                    var start = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                    _disposal = DisposeCoreAsync(start.Task);
+                    start.TrySetResult();
+                }
+                return _disposal;
+            }
+        }
+        return DisposeAsync().AsTask();
+    }
+
+    private async Task DisposeCoreAsync(Task start)
+    {
+        await start;
+        Reservation[] reservations;
+        lock (_gate) reservations = _owned.Keys.ToArray();
+        await Task.WhenAll(reservations.Select(reservation => reservation.Settled.Task));
+        // A recorded discard can finish while drain waits for its settlement.
+        lock (_gate) reservations = _owned.Keys.ToArray();
+        Exception? first = null;
+        foreach (var reservation in reservations)
+        {
+            lock (_gate) _owned[reservation] = State.Retiring;
+            try
+            {
+                if (reservation.Resource is not null) await _delete(reservation.Value);
+                lock (_gate) _owned.Remove(reservation);
+            }
+            catch (Exception error)
+            {
+                lock (_gate) _owned[reservation] = State.Quarantined;
+                first ??= error;
+            }
+        }
+        lock (_gate) _ready.Clear();
+        if (first is not null) throw new TtLifecycleException("SlotDispose", first);
+    }
+}

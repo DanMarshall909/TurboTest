@@ -1,0 +1,6 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:    12, Skipped:     0, Total:    12, Duration: 835 ms - TurboTest.Tests.dll (net10.0)",
+  "assertions": "Bulk retirement returns both safe IOException/UnauthorizedAccessException diagnostics, no private payload/inner exception. Delivered failures do not repeat on successful physical drain.",
+  "refactor": "Factory retains Task.WhenAll aggregate before await unwraps it. Existing safe lifecycle diagnostic formatting is reused; no extra failure format.",
+  "limits": "Selected gate only; raw coverage and exact source bindings retained beside its receipt."
+}

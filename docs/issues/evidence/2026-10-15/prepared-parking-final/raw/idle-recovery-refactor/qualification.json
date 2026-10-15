@@ -1,0 +1,5 @@
+{
+  "outcome": "27 passed, one invalid mutable-expected oracle",
+  "cause": "Schema replacement correctly updates the retained Reservation.Resource. The new race assertion reread that mutable output instead of retaining the original input resource.",
+  "correction": "Capture the original changed resource before replacement; numbered rerun required. No production change."
+}

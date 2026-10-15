@@ -1,0 +1,178 @@
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class FactoryMaintenanceTests
+{
+    [Fact]
+    public async Task Unseen_maintenance_failure_does_not_hide_a_distinct_first_pool_drain_failure()
+    {
+        await using var pool = new MaintenancePool(failFirstDrain: true);
+        await pool.WarmAsync();
+        var factory = new TtFactory<TestDbContext>(pool,
+            new TtOptions { DrainTimeout = TimeSpan.FromMilliseconds(100) }, ownsPool: true);
+        using var cancel = new CancellationTokenSource();
+        var maintenance = factory.MaintainIdleAsync(cancel.Token);
+        TtCleanup? cleanup = null;
+        try
+        {
+            await pool.Deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            cancel.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => maintenance);
+            var timeout = await Assert.ThrowsAsync<TtLifecycleException>(() => factory.DisposeAsync().AsTask());
+            cleanup = Assert.IsType<TtCleanup>(timeout.Cleanup);
+            var pending = cleanup.RetryCleanupAsync();
+            pool.Release.TrySetResult();
+            var late = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Contains("IOException", late.Message);
+            Assert.Contains("UnauthorizedAccessException", late.Message);
+            Assert.DoesNotContain("private-retirement-payload", late.ToString());
+            Assert.DoesNotContain("private-drain-payload", late.ToString());
+            Assert.Null(late.InnerException);
+            await cleanup.RetryCleanupAsync();
+            Assert.Equal((0, 2, 1), (pool.Snapshot.Reserved, pool.DeleteAttempts, pool.DrainAttempts));
+        }
+        finally
+        {
+            pool.Release.TrySetResult();
+            await Record.ExceptionAsync(() => maintenance);
+            var failure = await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+        }
+    }
+
+    [Fact]
+    public async Task Bulk_maintenance_reports_all_safe_failures_and_does_not_repeat_delivered_faults_on_drain()
+    {
+        await using var pool = new MaintenancePool(capacity: 2);
+        await pool.WarmAsync();
+        var factory = new TtFactory<TestDbContext>(pool, new TtOptions(), ownsPool: true);
+        var maintenance = factory.MaintainIdleAsync();
+        try
+        {
+            await pool.Deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((2, 2), (pool.Snapshot.Retiring, pool.DeleteAttempts));
+            pool.Release.TrySetResult();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => maintenance);
+            Assert.Contains("IOException", failure.Message);
+            Assert.Contains("UnauthorizedAccessException", failure.Message);
+            Assert.DoesNotContain("private-retirement-payload", failure.ToString());
+            Assert.Null(failure.InnerException);
+            await factory.DisposeAsync();
+            Assert.Equal((0, 4), (pool.Snapshot.Reserved, pool.DeleteAttempts));
+        }
+        finally
+        {
+            pool.Release.TrySetResult();
+            await Record.ExceptionAsync(() => maintenance);
+            var failure = await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask());
+            if (failure is TtLifecycleException { Cleanup: { } cleanup }) await cleanup.RetryCleanupAsync();
+        }
+    }
+
+    [Fact]
+    public async Task Canceled_maintenance_preserves_its_actual_work_and_late_failure_through_cleanup()
+    {
+        await using var pool = new MaintenancePool();
+        await pool.WarmAsync();
+        var factory = new TtFactory<TestDbContext>(pool,
+            new TtOptions { DrainTimeout = TimeSpan.FromMilliseconds(100) }, ownsPool: true);
+        using var cancel = new CancellationTokenSource();
+        var maintenance = factory.MaintainIdleAsync(cancel.Token);
+        TtCleanup? cleanup = null;
+        try
+        {
+            await pool.Deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            cancel.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => maintenance);
+            var timeout = await Assert.ThrowsAsync<TtLifecycleException>(() => factory.DisposeAsync().AsTask());
+            Assert.Equal("DrainTimeout", timeout.Stage);
+            cleanup = Assert.IsType<TtCleanup>(timeout.Cleanup);
+            Assert.Equal((1, 1), (factory.PoolState.Reserved, pool.DeleteAttempts));
+            Assert.Single(cleanup.OwnedResourceIds);
+            var pending = cleanup.RetryCleanupAsync();
+            Assert.Same(pending, cleanup.RetryCleanupAsync());
+            Assert.False(pending.IsCompleted);
+            pool.Release.TrySetResult();
+            var late = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Contains("IOException", late.Message);
+            Assert.DoesNotContain("private-retirement-payload", late.ToString());
+            Assert.Equal((0, 2), (factory.PoolState.Reserved, pool.DeleteAttempts));
+            await cleanup.RetryCleanupAsync();
+            Assert.Empty(cleanup.OwnedResourceIds);
+            Assert.Equal(2, pool.DeleteAttempts);
+            Assert.Same(timeout, await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask()));
+        }
+        finally
+        {
+            pool.Release.TrySetResult();
+            await Record.ExceptionAsync(() => maintenance);
+            var failure = await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+        }
+    }
+
+    private sealed class MaintenancePool : ITtDatabasePool
+    {
+        private readonly TtSlotPool<object> _slots;
+        private readonly int _capacity;
+        private readonly bool _failFirstDrain;
+        internal TaskCompletionSource Deleting { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal TaskCompletionSource Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        private int _deleteAttempts;
+        internal int DeleteAttempts => Volatile.Read(ref _deleteAttempts);
+        internal int DrainAttempts { get; private set; }
+        public TtPoolSnapshot Snapshot => _slots.Snapshot;
+        public TtResourceBudget Budget => TtResourceBudget.Create(new TtOptions { PoolSize = 1 }, true);
+        public IReadOnlyList<string> OwnedResourceIds => Snapshot.Reserved == 0 ? [] : [Snapshot.OwnerId.ToString("N")];
+
+        internal MaintenancePool(int capacity = 1, bool failFirstDrain = false)
+        {
+            _capacity = capacity;
+            _failFirstDrain = failFirstDrain;
+            _slots = new TtSlotPool<object>(capacity, 1, _ => new object(),
+            (_, _) => Task.CompletedTask, async _ =>
+            {
+                var attempt = Interlocked.Increment(ref _deleteAttempts);
+                if (attempt > capacity * 2) throw new InvalidOperationException("Deletion exceeded its finite oracle.");
+                if (attempt > capacity) return;
+                if (attempt == capacity) Deleting.TrySetResult();
+                await Release.Task;
+                if (attempt == 2) throw new UnauthorizedAccessException("private-retirement-payload");
+                throw new IOException("private-retirement-payload");
+            }, resetConcurrency: capacity);
+        }
+
+        internal async Task WarmAsync()
+        {
+            var reservations = new List<TtSlotPool<object>.Reservation>();
+            for (var i = 0; i < _capacity; i++) reservations.Add(await _slots.AcquireAsync());
+            foreach (var reservation in reservations) await _slots.ReturnAsync(reservation, (_, _) => Task.CompletedTask);
+        }
+
+        public Task MaintainIdleAsync(CancellationToken cancellationToken = default) =>
+            _slots.ParkIdleAsync(0, (_, _) => Task.CompletedTask, maxParked: 0).WaitAsync(cancellationToken);
+
+        public Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default) =>
+            throw new NotSupportedException("This oracle acquires no contexts.");
+
+        public async ValueTask DisposeAsync()
+        {
+            var attempt = ++DrainAttempts;
+            await _slots.DisposeAsync();
+            if (_failFirstDrain && attempt == 1) throw new UnauthorizedAccessException("private-drain-payload");
+        }
+        public Task RetryCleanupAsync() => _slots.RetryCleanupAsync();
+    }
+}

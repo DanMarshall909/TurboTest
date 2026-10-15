@@ -1,0 +1,84 @@
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class SlotIdleRecoveryTests
+{
+    private sealed record Resource(Guid Id);
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(bool rewarm)
+    {
+        var parkStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var failPark = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var retryStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var confirmDeletion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var created = 0;
+        var attempts = 0;
+        var injectFailure = true;
+        Resource? originalResource = null;
+        var deleted = new List<Guid>();
+        await using var owner = new TtSlotPool<Resource>(1, 1, _ =>
+        {
+            if (Interlocked.Increment(ref created) > 2) throw new InvalidOperationException("Idle recovery exceeded one replacement.");
+            return new Resource(Guid.NewGuid());
+        }, (_, _) => Task.CompletedTask, async resource =>
+        {
+            if (injectFailure && ReferenceEquals(resource, originalResource))
+            {
+                var attempt = Interlocked.Increment(ref attempts);
+                if (attempt > 2) throw new InvalidOperationException("Confirmed idle deletion was retried.");
+                if (attempt == 1) throw new IOException("Deletion has not been confirmed.");
+                retryStarted.TrySetResult();
+                await confirmDeletion.Task;
+            }
+            deleted.Add(resource.Id);
+        }, rewarm: (_, _) => Task.FromException(new IOException("Retained validation failed.")));
+        var original = await owner.AcquireAsync();
+        originalResource = original.Value;
+        await owner.ReturnAsync(original, (_, _) => Task.CompletedTask);
+        var maintenance = owner.ParkIdleAsync(0, async (_, _) =>
+        {
+            if (rewarm) return;
+            parkStarted.TrySetResult();
+            await failPark.Task;
+            throw new IOException("Pool closure failed.");
+        });
+        using var cancel = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+        Task<TtSlotPool<Resource>.Reservation>? waiting = null;
+        try
+        {
+            if (rewarm) await maintenance;
+            else await parkStarted.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            waiting = owner.AcquireAsync(cancel.Token);
+            if (!rewarm)
+            {
+                failPark.TrySetResult();
+                var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => maintenance);
+                Assert.Equal("SlotPark", failure.Stage);
+            }
+            await retryStarted.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.False(waiting.IsCompleted);
+            Assert.Equal((1, 1, 1, 0), (created, owner.Snapshot.Reserved, owner.Snapshot.Retiring, owner.Snapshot.Ready));
+            Assert.Empty(deleted);
+            confirmDeletion.TrySetResult();
+            var replacement = await waiting.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.NotSame(originalResource, replacement.Value);
+            Assert.NotEqual(original.Id, replacement.Id);
+            Assert.Equal(new[] { originalResource.Id }, deleted);
+            Assert.Equal((2, 2, 1, 1), (created, attempts, owner.Snapshot.Reserved, owner.Snapshot.Leased));
+        }
+        finally
+        {
+            injectFailure = false;
+            cancel.Cancel();
+            failPark.TrySetResult();
+            confirmDeletion.TrySetResult();
+            await Record.ExceptionAsync(() => maintenance);
+            if (waiting is not null) await Record.ExceptionAsync(() => waiting);
+        }
+    }
+}

@@ -1,0 +1,26 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:06.19]     TurboTest.Tests.PreparedParkingTests.Rewarm_reuses_the_database_and_waits_for_full_seed_schema_and_workload_validation(throwingLogger: True) [FAIL]
+[xUnit.net 00:00:06.34]     TurboTest.Tests.PreparedMaintenanceDrainTests.Canceled_retirement_reports_a_late_real_drop_failure_after_owned_cleanup(throwingLogger: True) [FAIL]
+  Failed TurboTest.Tests.PreparedParkingTests.Rewarm_reuses_the_database_and_waits_for_full_seed_schema_and_workload_validation(throwingLogger: True) [5 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at FactoryDrain (InvalidOperationException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.TtFactory`1.ObserveDrainAsync(Task drain) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs:line 243
+   at TurboTest.Tests.PreparedParkingTests.Rewarm_reuses_the_database_and_waits_for_full_seed_schema_and_workload_validation(Boolean throwingLogger) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedParkingTests.cs:line 83
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.PreparedMaintenanceDrainTests.Canceled_retirement_reports_a_late_real_drop_failure_after_owned_cleanup(throwingLogger: True) [6 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at FailedStartupCleanup (InvalidOperationException). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.TtCleanup.RunAsync(Task start) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtCleanup.cs:line 55
+   at TurboTest.Tests.PreparedMaintenanceDrainTests.Canceled_retirement_reports_a_late_real_drop_failure_after_owned_cleanup(Boolean throwingLogger) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedMaintenanceDrainTests.cs:line 257
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/lifecycle-logger-red/lifecycle-logger-red.trx
+
+Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 6 s - TurboTest.Tests.dll (net10.0)

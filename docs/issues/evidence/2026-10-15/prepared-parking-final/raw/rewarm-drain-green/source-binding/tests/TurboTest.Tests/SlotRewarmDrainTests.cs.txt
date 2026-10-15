@@ -1,0 +1,65 @@
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class SlotRewarmDrainTests
+{
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+    public async Task Closure_joins_rewarm_and_reports_material_late_failure_once_without_replacement(int outcome)
+    {
+        var verifying = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var creates = 0;
+        var deletes = 0;
+        var owner = new TtSlotPool<object>(1, 1, _ =>
+        {
+            if (++creates > 1) throw new InvalidOperationException("Closure created a replacement.");
+            return new object();
+        }, (_, _) => Task.CompletedTask, _ =>
+        {
+            if (++deletes > 1) throw new InvalidOperationException("Closure deleted the resource twice.");
+            return Task.CompletedTask;
+        }, rewarm: async (_, token) =>
+        {
+            verifying.TrySetResult();
+            await release.Task;
+            if (outcome == 1) token.ThrowIfCancellationRequested();
+            if (outcome == 2) throw new IOException("private-late-rewarm-payload");
+        });
+        var initial = await owner.AcquireAsync();
+        await owner.ReturnAsync(initial, (_, _) => Task.CompletedTask);
+        await owner.ParkIdleAsync(0, (_, _) => Task.CompletedTask);
+        var acquisition = owner.AcquireAsync();
+        await verifying.Task.WaitAsync(TimeSpan.FromSeconds(2));
+        var closing = owner.DisposeAsync().AsTask();
+        try
+        {
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => acquisition);
+            Assert.False(closing.IsCompleted);
+            Assert.Equal((1, 1, 1, 0), (owner.Snapshot.Reserved, owner.Snapshot.Rewarming, creates, deletes));
+            release.TrySetResult();
+            if (outcome == 2)
+            {
+                var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => closing.WaitAsync(TimeSpan.FromSeconds(2)));
+                Assert.Contains("IOException", failure.Message);
+                Assert.DoesNotContain("private-late-rewarm-payload", failure.ToString());
+                await owner.RetryCleanupAsync();
+            }
+            else await closing.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((0, 1, 1), (owner.Snapshot.Reserved, creates, deletes));
+            await owner.RetryCleanupAsync();
+            Assert.Equal(1, deletes);
+        }
+        finally
+        {
+            release.TrySetResult();
+            await Record.ExceptionAsync(() => acquisition);
+            await Record.ExceptionAsync(() => closing);
+            await owner.RetryCleanupAsync();
+        }
+    }
+}

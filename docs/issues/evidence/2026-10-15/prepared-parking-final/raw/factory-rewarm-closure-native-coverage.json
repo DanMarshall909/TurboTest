@@ -1,0 +1,7 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:    11, Skipped:     0, Total:    11, Duration: 34 s - TurboTest.Tests.dll (net10.0)",
+  "assertions": "Real two-slot prepared factory stops replacement when held rewarm fails after factory closure while another context still blocks. Held database survives, host identity persists, no extra verification; final cleanup deletes both targets once and removes host. Native cancellation/material controls, live corruption recovery and lifecycle timings also pass.",
+  "refactor": "Admission/recovery stop is separate from physical teardown. Existing ledger retains every actual job and source; no new owner/cache/controller. Preparation and recovery also consult the stopping flag before another candidate claim.",
+  "runtimeCleanup": "Only preserved unrelated prismml container remains after the gate.",
+  "limits": "Selected source-bound11-check gate; whole suite/build/review outstanding."
+}

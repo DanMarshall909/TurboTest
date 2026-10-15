@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="8fb3732a-0eec-474e-b2d5-e327e28da87d" name="@os-greg 2026-10-15 09:54:34" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-15T09:54:34.1548172+10:00" queuing="2026-10-15T09:54:34.1548172+10:00" start="2026-10-15T09:54:25.6118026+10:00" finish="2026-10-15T09:54:34.1587328+10:00" />
+  <TestSettings name="default" id="7744d00d-81c1-4597-af97-aaa89719ff5b">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-15_09_54_34" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="73f9f02c-adc2-4854-9e1e-d95233a0efe0" testId="27357ed6-8cdb-2506-ea30-e3ef77334f81" testName="TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure(materialFailure: False)" computerName="os-greg" duration="00:00:07.9713995" startTime="2026-10-15T09:54:26.0961232+10:00" endTime="2026-10-15T09:54:34.0777725+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="73f9f02c-adc2-4854-9e1e-d95233a0efe0">
+      <Output>
+        <ErrorInfo>
+          <Message>TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at PreparedPoolDispose (TaskCanceledException). The resource is unavailable for reuse.</Message>
+          <StackTrace>   at TurboTest.EFCore.TtCleanup.RunAsync(Task start) in /home/dan/code/TurboTest/src/TurboTest.EFCore/TtCleanup.cs:line 55
+   at TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure(Boolean materialFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedMaintenanceDrainTests.cs:line 66
+   at TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure(Boolean materialFailure) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedMaintenanceDrainTests.cs:line 83
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure(materialFailure: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="27357ed6-8cdb-2506-ea30-e3ef77334f81">
+      <Execution id="73f9f02c-adc2-4854-9e1e-d95233a0efe0" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedMaintenanceDrainTests" name="Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="27357ed6-8cdb-2506-ea30-e3ef77334f81" executionId="73f9f02c-adc2-4854-9e1e-d95233a0efe0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.09]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.17]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.20]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:08.20]       TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at PreparedPoolDispose (TaskCanceledException). The resource is unavailable for reuse.
+[xUnit.net 00:00:08.20]       Stack Trace:
+[xUnit.net 00:00:08.20]         /home/dan/code/TurboTest/src/TurboTest.EFCore/TtCleanup.cs(55,0): at TurboTest.EFCore.TtCleanup.RunAsync(Task start)
+[xUnit.net 00:00:08.20]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedMaintenanceDrainTests.cs(66,0): at TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure(Boolean materialFailure)
+[xUnit.net 00:00:08.20]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedMaintenanceDrainTests.cs(83,0): at TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure(Boolean materialFailure)
+[xUnit.net 00:00:08.20]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:08.21]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-15T09:54:34.0802173+10:00">
+        <Text>[xUnit.net 00:00:08.20]     TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure(materialFailure: False) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

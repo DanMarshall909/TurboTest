@@ -1,0 +1,527 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~FactoryRewarmDrainTests",
+    "--logger",
+    "trx;LogFileName=factory-rewarm-closure-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/factory-rewarm-closure-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "date": "2026-10-14T23:55:44.684648+00:00",
+  "files": [
+    {
+      "path": "Directory.Build.props",
+      "sha256": "4b0a2360e652a335ab9f31ca8a4f34283bb569683443f2e728308c09e4634302",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/Directory.Build.props.txt"
+    },
+    {
+      "path": "TurboTest.sln",
+      "sha256": "e74f578df3bcb5977229221f229c1622745c95b56b6a9814a3b09288c983872c",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/TurboTest.sln.txt"
+    },
+    {
+      "path": "examples/AutoAllocationExample/AutoAllocationExample.csproj",
+      "sha256": "3164886ce597d38786a15c391543a46239daba1fb5c5ed3ddf773ae2fdb2880c",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/examples/AutoAllocationExample/AutoAllocationExample.csproj.txt"
+    },
+    {
+      "path": "examples/AutoAllocationExample/Program.cs",
+      "sha256": "f7ce335714e02c5bd7ead6e1dbf0cd031722ec60c153d997069b9044dab382bd",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/examples/AutoAllocationExample/Program.cs.txt"
+    },
+    {
+      "path": "examples/ConfigurationExamples/ConfigurationExamples.csproj",
+      "sha256": "420953a032cf03ddd3e1aa1211367cc2cb5e3abf0806d3552590dda7d4a8e43b",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/examples/ConfigurationExamples/ConfigurationExamples.csproj.txt"
+    },
+    {
+      "path": "examples/ConfigurationExamples/Program.cs",
+      "sha256": "c20fcd0b1bc5e394dc9e889dfd269bdec4531de8b9658d8df138bed7d9d97d61",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/examples/ConfigurationExamples/Program.cs.txt"
+    },
+    {
+      "path": "examples/DynamicScalingExample/DynamicScalingExample.csproj",
+      "sha256": "0428640cd64bf317fc8eda37800f64568ae42670b22627a864db2a7784a3c4b6",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/examples/DynamicScalingExample/DynamicScalingExample.csproj.txt"
+    },
+    {
+      "path": "examples/DynamicScalingExample/Program.cs",
+      "sha256": "606d2bf6a798eb79820bac79a67a621ef7066360b7314a4f672dd2eb24377c27",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/examples/DynamicScalingExample/Program.cs.txt"
+    },
+    {
+      "path": "examples/LoggingExample/LoggingExample.csproj",
+      "sha256": "0428640cd64bf317fc8eda37800f64568ae42670b22627a864db2a7784a3c4b6",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/examples/LoggingExample/LoggingExample.csproj.txt"
+    },
+    {
+      "path": "examples/LoggingExample/Program.cs",
+      "sha256": "1360cf0561b2d43d9659e0f6c9a21e0308e1b7f77c1a6c29b13f04a5d0256be5",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/examples/LoggingExample/Program.cs.txt"
+    },
+    {
+      "path": "examples/MinimalExample/MinimalExample.csproj",
+      "sha256": "254485f6ba1db8c0b83d4403cd1bd8dcdf29b8634cf329bdbaaedb255478761f",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/examples/MinimalExample/MinimalExample.csproj.txt"
+    },
+    {
+      "path": "examples/MinimalExample/Program.cs",
+      "sha256": "6e8632060b197fcf4d77e5a3a33fca221e174d1c9966d0503585663c8f32aed2",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/examples/MinimalExample/Program.cs.txt"
+    },
+    {
+      "path": "global.json",
+      "sha256": "20c93ca7812d0a9825eef71217156f95ab2f4fe5aadfeb22ebc1c24b630018d3",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/global.json.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Extensions/ServiceCollectionExtensions.cs",
+      "sha256": "172da9567d35a47595d4c8877f54c0c3356b39419e64411579cbefdf402e363e",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Extensions/ServiceCollectionExtensions.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/ITtServiceFactory.cs",
+      "sha256": "e011cf4249fe157c3c959a44301eba3aad3f37e49033973f5d5aea7c9c4a54f0",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/ITtServiceFactory.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/ITtDatabasePool.cs",
+      "sha256": "511c3255da12acbe6205b0cffc4bcf9b290ba475badda8e0b669e3122fd394b9",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/ITtDatabasePool.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/NpgsqlExtensions.cs",
+      "sha256": "300fb6581eadba8b221d8fae1c785d9ad0cddae96a0f9e132d9c38b47887653e",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/NpgsqlExtensions.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtAdministratorConnections.cs",
+      "sha256": "0edcc7d3e8f9928ef5f9ff8babd4bfac44d58e3393521ae8c98f1edc29ee41a1",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtAdministratorConnections.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs",
+      "sha256": "5be635195d9d2c5d35c49e8a827feb080b9d5a34ea8ba7a48e454fc9acb68ab7",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtCleanupRegistry.cs",
+      "sha256": "79f6f0d35df77dcf630d0301b58667170f8d0dc9d86020ef15d25dd7b89709e8",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtCleanupRegistry.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtContainer.cs",
+      "sha256": "d2f7d1c97281eb6c13a628a49ba562151c4c38eeba7d5fa8c125840f1678123a",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtContainer.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtDatabase.cs",
+      "sha256": "42cfe0587de50fa5492b6e249452540bb21e8b5d993fce4c9c49627b1a11181a",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtDatabase.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtLogger.cs",
+      "sha256": "6e24d7e24be8df26502441f5ed398090230b0f9081bbed8ac02fe47e456fb19f",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtLogger.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtOwnedContextOptions.cs",
+      "sha256": "af16cc9590861f1dc03bcc7b3fe9461a7fe6fce1f71b6905bea940711d041dd4",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtOwnedContextOptions.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtPool.cs",
+      "sha256": "9fd7c541cbbb096f6eeab43d70696d1c8d8e5fabf93a0891b5bc16ce5a92902f",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtPool.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtPreparedConfiguration.cs",
+      "sha256": "d7fb262b2dc8a33c66e9101d6071b398617b39dc3f300460a178851838efc730",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtPreparedConfiguration.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtPreparedPool.cs",
+      "sha256": "7537329c6a6165732a36ae19a739bb03d3f8be16e552c52c1cec641458324521",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtPreparedPool.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtRowResetPlan.cs",
+      "sha256": "cbfe2cdeb5349c67f9767f8ff695d37e7f61c152c1de6cd947ca3fe596ca9291",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtRowResetPlan.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtScopedLease.cs",
+      "sha256": "dab6daa4e2eca3b7d01ba69f0e12f4cb3175bb2bd84c8b27c24e9c0b2bbe048d",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtScopedLease.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+      "sha256": "e4d9f8f11ffdde605c202b117e6a20f11334a69a7fe3bf1d1d025502c0815990",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Internal/TtSlotPool.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Properties/AssemblyInfo.cs",
+      "sha256": "99b77a3d9691cddb8cbb8bf1c97d9116ea8a994e07d6e0535c1043c2edba44f4",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Properties/AssemblyInfo.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/Tt.cs",
+      "sha256": "02d85e2a08130e8e926c18214490f2237b711b14758ca494689f4cde2e678594",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/Tt.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/TtBaselineDefinition.cs",
+      "sha256": "61a7d2273af39aeac83df24282afe35553b41088692e4da7fc0d6d4d9b80230f",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/TtBaselineDefinition.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/TtCleanup.cs",
+      "sha256": "972bd020db88bb591c235479b0280930223828b556c717abe7756aa1e8831746",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/TtCleanup.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/TtFactory.cs",
+      "sha256": "5e9455c92d9bf9cca61932960a88e3b7a37ac8948d74d2f04c231e4b1eaae1fd",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/TtFactory.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/TtLease.cs",
+      "sha256": "335dfc27258d032ff2ede46f6d60842d7409b46a9ac32aa6a75484617753baf0",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/TtLease.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/TtLifecycleException.cs",
+      "sha256": "73c85c5e0211f8c9d317c875ccd2aff3a71f83f52ada22443dd25e027890fa3b",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/TtLifecycleException.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/TtOptions.cs",
+      "sha256": "a8f70e04bb9d63d26669d680182f6e84ada0f945f2d422db526d33b87ef3deae",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/TtOptions.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/TtPoolSnapshot.cs",
+      "sha256": "d2e9a64ed15e0b864e6d0c298fcd5e1be9ff209837c8c94e6d59ee55d48ece5e",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/TtPoolSnapshot.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/TtResourceBudget.cs",
+      "sha256": "cf8ecda8670bd75f1c885b2066c2d09b3beecb1cc17185e835beb1cf49e96073",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/TtResourceBudget.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/TtServiceFactory.cs",
+      "sha256": "20422c0f0815123cb9b3e9cfa736a372f52102104c7d918ded6a2fde2b43e276",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/TtServiceFactory.cs.txt"
+    },
+    {
+      "path": "src/TurboTest.EFCore/TurboTest.EFCore.csproj",
+      "sha256": "253a7b415aea24a7c827835e5c111068f9e8209295ec0229f2c400beedfb0116",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/src/TurboTest.EFCore/TurboTest.EFCore.csproj.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/AutoAllocationTests.cs",
+      "sha256": "40c03f7c916e73f213cd8d5abbb350080d3774c0f7f7a1e0a53bd87e31249dbb",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/AutoAllocationTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/BaselineRestoreTests.cs",
+      "sha256": "a75e2e54dd1c2d21911c6bb67e72a4f73f30dfb1789b0ab02616944d18424ed3",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/BaselineRestoreTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/BaselineValidationTests.cs",
+      "sha256": "070d1748b61fb84557fb11d0b391534466ae0a40b97013f2dcf9f2fd9fc12ff2",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/BaselineValidationTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/BasicTests.cs",
+      "sha256": "35cc2d622a0a2c113c50b944774301d295101580192709a711c7f44d4339f251",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/BasicTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/CleanupOwnershipTests.cs",
+      "sha256": "eb9790496954512fd6c5494b086365e13b6cc2cbff1c74e09adb730b04a4db0f",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/CleanupOwnershipTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/CompensatingCleanupTests.cs",
+      "sha256": "c43e210ba21159e6837b9cd8051687492d19d826bf17b00eaea9ea82b2715d6b",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/CompensatingCleanupTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/ConfigurationTests.cs",
+      "sha256": "2bc553b5399d386140fb90e353892a5c1c4b23d9d7b34417855f7e8e0936aec8",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/ConfigurationTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/ConnectionBudgetTests.cs",
+      "sha256": "aaa005ce654ff7efa28cc53ba76a9fef553c4488fc59efecb35cff61217ca1ec",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/ConnectionBudgetTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/ContainerPortTests.cs",
+      "sha256": "e60b0813c3227b6b9a29ee7c4888f70cd322fa328e3c8813874ec14b8ebddaed",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/ContainerPortTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/CreationAccountingTests.cs",
+      "sha256": "50b0566c3b647a9349942b4ba7fc0a4eb3c790e7584236354af71a356f37bb0a",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/CreationAccountingTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/DatabaseOwnershipTests.cs",
+      "sha256": "80eb07c94d81e9415aea3d805824fe21d2efed744fc374a9cecb1db56f218ef0",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/DatabaseOwnershipTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/DiImmediateClosureTests.cs",
+      "sha256": "98a61a240936b34afc811363905fbb7148f4de01a152231f30df58806a03ced6",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/DiImmediateClosureTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/DiLateCleanupTests.cs",
+      "sha256": "3d9d289833f419679459cbdd413f52d8201f7f0aa4c52a48b534228ca3fd7d32",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/DiLateCleanupTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/DiMultipleFailureTests.cs",
+      "sha256": "830f77193a58d6e1f3da8fb2e12f318be8f931e7e7f2c213c05a9d74d1ecaa59",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/DiMultipleFailureTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/DiOwnershipTests.cs",
+      "sha256": "691fad8b5832a2cccd914a878ae05af683dc6b4f371507b97d22914b44a98af9",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/DiOwnershipTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/DiScopeLifetimeTests.cs",
+      "sha256": "cb449f344f48138ac96191097c5580dcaee6293eb8b48aecf878be521a3d054e",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/DiScopeLifetimeTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/DiStartupDrainTests.cs",
+      "sha256": "55cb762419ea5ac9741437e1bd4b9c3b5c66af1e867fddb504c9a5b3c6b5421f",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/DiStartupDrainTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/DrainDeadlineTests.cs",
+      "sha256": "daa4e1f1e175c8ba994db78854e9c8cd1397fb473a24e267875c65e590d6b2b3",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/DrainDeadlineTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/FactoryBackpressureTests.cs",
+      "sha256": "43f0bbfe75d0b184145031e6d15440826aed7f48d14a8e712b4ae27fd47da6bc",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/FactoryBackpressureTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/FactoryMaintenanceTests.cs",
+      "sha256": "ee3942667a5d22dcbc72583b3d241ee14760641d0620e981e55ada2665521fd6",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/FactoryMaintenanceTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/FactoryRewarmDrainTests.cs",
+      "sha256": "994801c5d9768c36eba5cd73425e6849ade35d7ccd9f81f5d692e219bf9164d3",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/FactoryRewarmDrainTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/FailedStartupCleanupTests.cs",
+      "sha256": "60ca5333678cc28a42309c6b3fd74d1b3d85b0ab440ea37eb6d61c798c1b29e3",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/FailedStartupCleanupTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/LeaseOwnershipTests.cs",
+      "sha256": "9cb4a0d8c2ae2816fe3276ed57b6ab3931e18ab394ab0af1c06ba86ae77af30b",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/LeaseOwnershipTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/LoggingConfigurationTests.cs",
+      "sha256": "88b26a2223d2862803f0139e60f9884fd0a6231f8dad08b39d0779043eebdaca",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/LoggingConfigurationTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/ManualPoolClock.cs",
+      "sha256": "40b2721865b9f930fb29dfe1b010136ca360f98e39e3d00f0dddcc067b8da6a6",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/ManualPoolClock.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/MigratedBaselineTests.cs",
+      "sha256": "a9cfa3f8df5fbeb04968f7fe0cfb71f99b035aa3de7db77498fb5b225c76e967",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/MigratedBaselineTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/OrdinaryCapacityTests.cs",
+      "sha256": "f8af0c036dbb057cf3e864e3e7840bcb23e21f123a152909acfdda5ddad8a7af",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/OrdinaryCapacityTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/OrdinaryRecoveryTests.cs",
+      "sha256": "4b7ea9714327b3021d2a45ecca7695f95d77c766744762a805c8b195a38a6848",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/OrdinaryRecoveryTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PooledResetTests.cs",
+      "sha256": "caf60d3c4ca6f162f653f6bab864ab533f6ed4dd1c29914385c840b77ad89ad1",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PooledResetTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PreparationBudgetTests.cs",
+      "sha256": "6c7d6758a90e7ff4511dae2c69668e6568bf5ce38436ce9616d78dd855faab80",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PreparationBudgetTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PreparedCapacityTests.cs",
+      "sha256": "910317a25612d9e36a0182e697ed1ce8b03f3ace78629daf5dcac03ad963e5be",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PreparedCapacityTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PreparedConfigurationTests.cs",
+      "sha256": "04ed8a9f1cda0d73b4ca2212b0073fa46f14e0a22ce422f922ff4438fa5b07a7",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PreparedConfigurationTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PreparedContextBindingTests.cs",
+      "sha256": "36e0763991152fb9ec2ff49e4aa5b8b5ca2753fcc1d320b2abcac97a0f1dc896",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PreparedContextBindingTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PreparedDrainRetryTests.cs",
+      "sha256": "206d2180930a6a27fb4f5ee60115a324844220b395ed560e6a8584e9f5c2f6a2",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PreparedDrainRetryTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PreparedMaintenanceDrainTests.cs",
+      "sha256": "08235abcc03b21653f72b8cd6ebdf527792968d2ced1184ef9cfdd6414da8353",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PreparedMaintenanceDrainTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PreparedParkingTests.cs",
+      "sha256": "ae57d35aabac3616aa84a3d67cbe100cc685b33f5054189dae3157a26939dfbe",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PreparedParkingTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PreparedRecoveryTests.cs",
+      "sha256": "286ebc270447226810e6d310027713ebcea1e9958648c026b21f222bf4219cf5",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PreparedRecoveryTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PreparedRetentionTests.cs",
+      "sha256": "738da425d2eff45b1746e56dfd7e1f4d5054d95dd562ddffb2bc9646acf28721",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PreparedRetentionTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PreparedRewarmRecoveryTests.cs",
+      "sha256": "6e06d335a5d1f65f5594353e18b741e3efddd0e6d3f9dbc5fd8dbdf70ecdeced",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PreparedRewarmRecoveryTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/PublicLeaseTests.cs",
+      "sha256": "12b90f3dbbfdc8593f4bc37d327fff1b999e2e1e88b17827a8fe2f454f1a9ed8",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/PublicLeaseTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/ReadinessCancellationTests.cs",
+      "sha256": "4ce0cd6f65641c727573ef35df4589ef793f5092fab37520e9a8182fbfaac56c",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/ReadinessCancellationTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/ResetTimingTests.cs",
+      "sha256": "f4b4f33481b6c796416b0c49ca76fb1df178b52d3883d5b1d9fc9d0db5e132b1",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/ResetTimingTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/ResourceBudgetValidationTests.cs",
+      "sha256": "a7da471bb867be23149f50d2eee1ec6d191787bc9c0dab551e9c6307a585b136",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/ResourceBudgetValidationTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/SeededBaselineTests.cs",
+      "sha256": "76760d19fe78185d3b1b7dd7203a4a1a8ddb26129c7ce5308be27ea072e9456d",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/SeededBaselineTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/SlotExpiryTests.cs",
+      "sha256": "2356876ea35d366da0578ec6b9554ee67f315301b84f43f0b7e8759f1862b264",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/SlotExpiryTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/SlotIdleRecoveryTests.cs",
+      "sha256": "4f279340e5ca8eb7faedbecf4f1da9a04d8ad8314f8fd4620b100672a5dbc3e0",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/SlotIdleRecoveryTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/SlotParkingTests.cs",
+      "sha256": "23253b8b90636931f95289fe952a98fcabe6697779d0728bd30a46049524c348",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/SlotParkingTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/SlotPoolTests.cs",
+      "sha256": "9dc551465d2e8575ee0a83cb6170ceaaa19085d80edfd494252cfc832ac26e1e",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/SlotPoolTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/SlotRecoveryTests.cs",
+      "sha256": "86c1a7d48a0d19c84d14e230cdd8ae1c389d4060d802dd75765e2a5ffbeb14be",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/SlotRecoveryTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/SlotRetentionTests.cs",
+      "sha256": "9d174d66090d57bdb33d4e2202508adeb6081f6e092d27ae7f767c144edd9c15",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/SlotRetentionTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/SlotRewarmDrainTests.cs",
+      "sha256": "fd50fc2106b6d1c767ee670cbf290bba2655f472ac7ff8a490fa7f2e088aefa8",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/SlotRewarmDrainTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs",
+      "sha256": "714acec907549afd039fb1a0f481fcb61afc05fcfd261acf5ec27847809fef5c",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/StartupCleanupTests.cs",
+      "sha256": "3b698a9cd1bf574bd515261ac2cf54db139980fee9346429723c1e084946d9f5",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/StartupCleanupTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/StartupDeadlineTests.cs",
+      "sha256": "5847a0c6b835ae4e0d95ec44fcaf708afe1ceea1129e66a2e0b98517d9851feb",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/StartupDeadlineTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/StaticFailedDrainTests.cs",
+      "sha256": "f81f7b002b7eb97f0a69f52be9c39efafa9b57e21e48a64131aabb92056e6025",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/StaticFailedDrainTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/StaticInitializationTests.cs",
+      "sha256": "d6dac20714892f1ca65e8d5f238e45b49d2d1b003c97e78a8d085a9cd99d7fd8",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/StaticInitializationTests.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/StaticLifecycleCollection.cs",
+      "sha256": "e9e198e47c4c408f19caae71563c9e15b41f039c11a43f45c7560b60a066263c",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/StaticLifecycleCollection.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/TestDbContext.cs",
+      "sha256": "7f25edac4ede337f61e0827279152e76fd31422a95ae921617692b3581b7dec5",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/TestDbContext.cs.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+      "sha256": "5cb085618a968f970d32a1136945c10253f87aecf86e4e8c7c8e44e26b24de08",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/TurboTest.Tests.csproj.txt"
+    },
+    {
+      "path": "tests/TurboTest.Tests/xunit.runner.json",
+      "sha256": "fd188429841d7c54056506774b9a34142953629ff5338774e16dd8ea4308dbfa",
+      "snapshot": "artifacts/tt-008/factory-rewarm-closure-red/source-binding/tests/TurboTest.Tests/xunit.runner.json.txt"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# Bounded read-only lifecycle audit
+
+Reviewer: /root/tt008_lifecycle_audit. Exact scope: source-binding.json beside this record; all three hashes matched. No edits/tests/builds. Preliminary investigation, not completion approval.
+
+1. Canceled public maintenance tracked observation rather than actual task; late material retirement failure could be forgotten after physical cleanup succeeded.
+2. Material rewarm verification failure after owner closure was success-settled and discarded. This does not apply to successful live recovery, which stays transparent.
+3. Task.WhenAll maintenance can carry multiple material diagnostics, while await unwraps only one. Additional safe kinds were forgotten.
+
+No supported early physical deletion or double-ownership defect in the audited cut. Slot closure joins owned jobs, blocks new claims and conserves capacity until confirmed deletion.
+
+Proposed minimal repair: retain actual maintenance task/outcome and whether delivered, aggregate unseen diagnostics at drain, consume diagnostic obligation once while keeping physical cleanup retryable. Keep live recovered rewarm faults transparent.
+
+Root evidence follows separately: fast canceled-maintenance RED, bulk aggregate RED, late-rewarm-closure RED, native calibration and qualified native oracle correction. The original snapshots remain immutable historical audit inputs.

@@ -10,6 +10,12 @@ internal static class TtPreparedConfiguration
             throw new ArgumentOutOfRangeException(nameof(TtOptions.Provider), "Prepared fixtures require PostgreSQL.");
         if (options.PoolSize <= 0)
             throw new ArgumentOutOfRangeException(nameof(TtOptions.PoolSize), "The prepared slot count must be positive.");
+        if (options.WarmFloor < 0 || options.WarmFloor > options.PoolSize)
+            throw new ArgumentOutOfRangeException(nameof(TtOptions.WarmFloor), "The Ready floor must be between zero and the physical slot cap.");
+        if (options.MaxParkedDatabases is { } parked && (parked < 0 || parked > options.PoolSize))
+            throw new ArgumentOutOfRangeException(nameof(TtOptions.MaxParkedDatabases), "The parked idle limit must be between zero and the physical slot cap.");
+        if (options.IdleDatabaseLifetime is { } lifetime && lifetime <= TimeSpan.Zero)
+            throw new ArgumentOutOfRangeException(nameof(TtOptions.IdleDatabaseLifetime), "Idle expiry must be positive, or null to disable it.");
         if (options.MemoryLimitMb <= 0)
             throw new ArgumentOutOfRangeException(nameof(TtOptions.MemoryLimitMb), "The host memory limit must be positive.");
         if (options.AutoAllocateResources)

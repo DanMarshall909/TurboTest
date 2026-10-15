@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~PreparedMaintenanceDrainTests.Closure_retains&DisplayName~False",
+    "--logger",
+    "trx;LogFileName=rewarm-cancellation-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/rewarm-cancellation-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 13.291021761004231,
+  "log": "artifacts/tt-008/rewarm-cancellation-red.log",
+  "sourceBinding": "artifacts/tt-008/rewarm-cancellation-red/source-binding.json"
+}

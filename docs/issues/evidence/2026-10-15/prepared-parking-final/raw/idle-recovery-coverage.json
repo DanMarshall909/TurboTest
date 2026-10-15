@@ -1,0 +1,10 @@
+{
+  "gate": "28 component checks pass with coverage",
+  "sourceInputs": 93,
+  "assertions": "Parking/rewarm failures retain cap during unconfirmed deletion, retry old identity twice then publish one replacement; pending caller does not fail early. Rewarm failure releases preparation before cleanup to permit simultaneous replacement. Adjacent three-candidate/repeated-drop limits remain green.",
+  "refactor": {
+    "production": "RecoverFailedOperationAsync is the one cleanup/replacement episode for reset, parking and rewarm; existing bounded retry budget remains authoritative.",
+    "tests": "Two idle operation cases use one theory. Permit-inversion race retains original resource input before mutation; numbered correction rejects a mutable-expected oracle."
+  },
+  "limits": "Native seed/schema/opening failure calibration next. No PostgreSQL same-name replacement identity claim or late maintenance-failure/drain claim yet."
+}

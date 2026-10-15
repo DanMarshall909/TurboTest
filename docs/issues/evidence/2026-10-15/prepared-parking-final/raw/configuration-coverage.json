@@ -1,0 +1,14 @@
+{
+  "file": "src/TurboTest.EFCore/Internal/TtPreparedConfiguration.cs",
+  "executed": 32,
+  "instrumented": 33,
+  "unexecuted": [
+    38
+  ],
+  "assertions": "Invalid range/expiry cases reject before image preparation with matching ParamName; valid zero/full-capacity/null-expiry cases reach preparation exactly once. Adjacent resource-budget cases remain green.",
+  "refactor": {
+    "production": "Three direct range guards fit the existing validation boundary; an additional policy abstraction would duplicate option ownership.",
+    "tests": "Existing invalid-configuration table absorbs six new cases. Three legal configurations use one theory and the existing image-preparation seam. No Docker setup or getters-only coverage."
+  },
+  "limit": "Policy validation only; no parking, expiry, rewarm or snapshot behavior yet. Whole core branch/mutation evidence not claimed."
+}

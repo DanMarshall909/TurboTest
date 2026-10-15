@@ -1,0 +1,7 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:    10, Skipped:     0, Total:    10, Duration: 24 s - TurboTest.Tests.dll (net10.0)",
+  "red": "Native cooperative completion of held verification reaches canceled administration and wrongly reports PreparedPoolDispose TaskCanceledException.",
+  "assertions": "Native cooperative cancellation drains successfully, while late IOException still reports once. Both confirm one deletion/no replacement and complete owned host removal. Adjacent live corruption and fast closure controls pass.",
+  "refactor": "Preserve cooperative OperationCanceledException at the existing prepared verification wrapping boundary; no type-name guessing or new cancellation classifier.",
+  "limits": "Selected gate; factory closure preceding held lease cleanup is still under repair."
+}

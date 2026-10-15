@@ -1,0 +1,20 @@
+{
+  "runs": [
+    {
+      "run": "final-fast-gate-r2",
+      "inputs": 103,
+      "currentCompilerInputsMatch": true
+    },
+    {
+      "run": "review-r1-recovery-close-native-r2",
+      "inputs": 103,
+      "currentCompilerInputsMatch": true
+    },
+    {
+      "run": "full-gate-r3",
+      "inputs": 103,
+      "currentCompilerInputsMatch": true
+    }
+  ],
+  "qualification": "Current89/19 gates terminal pass; full-r3 active, not passing evidence yet. Rejected candidate/post envelope remains immutable under review-r1."
+}

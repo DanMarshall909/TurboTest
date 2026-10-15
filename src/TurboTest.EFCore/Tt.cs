@@ -81,11 +81,11 @@ public static class Tt
         Func<string, Task>? prepareImage = null,
         Func<Npgsql.NpgsqlConnection, Npgsql.NpgsqlTransaction, Task>? afterSequenceRestore = null,
         Func<Npgsql.NpgsqlConnection, Task>? afterRowCommit = null,
-        Func<Npgsql.NpgsqlConnection, string, Task>? dropDatabase = null)
+        Func<Npgsql.NpgsqlConnection, string, Task>? dropDatabase = null, TimeProvider? timeProvider = null)
         where TContext : DbContext
     {
         var pool = new TtPreparedPool<TContext>(options, baseline, beforeVerification, deleteHost, prepareImage,
-            afterSequenceRestore, afterRowCommit, dropDatabase);
+            afterSequenceRestore, afterRowCommit, dropDatabase, timeProvider);
         await InitializeOwnedPoolAsync(pool, options, pool.InitializeAsync, "BaselineInitialize", cancellationToken);
         return new TtFactory<TContext>(pool, options, ownsPool: true,
             preparedOptions: pool.BuildOptions, validateContext: pool.ValidateContext);

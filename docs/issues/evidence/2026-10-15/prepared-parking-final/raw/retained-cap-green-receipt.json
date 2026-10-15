@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotRetentionTests|FullyQualifiedName~SlotIdleRecoveryTests|FullyQualifiedName~SlotRecoveryTests|FullyQualifiedName~SlotParkingTests|FullyQualifiedName~SlotPoolTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=retained-cap-green.trx",
+    "--results-directory",
+    "artifacts/tt-008/retained-cap-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 8.863286783998774,
+  "log": "artifacts/tt-008/retained-cap-green.log",
+  "sourceBinding": "artifacts/tt-008/retained-cap-green/source-binding.json"
+}

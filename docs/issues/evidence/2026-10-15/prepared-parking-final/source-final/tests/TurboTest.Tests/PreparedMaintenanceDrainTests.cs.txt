@@ -1,0 +1,357 @@
+using Docker.DotNet;
+using Docker.DotNet.Models;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using TurboTest.EFCore;
+using System.Collections.Concurrent;
+using HeldContext = TurboTest.Tests.FactoryRewarmDrainTests.HeldContext;
+using Microsoft.Extensions.Logging;
+
+namespace TurboTest.Tests;
+
+[Collection("Static lifecycle")]
+public class PreparedMaintenanceDrainTests
+{
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Shutdown_during_native_rewarm_recovery_retains_the_original_failure_until_confirmed_cleanup(bool retry)
+    {
+        var prefix = $"tt-recovery-close-{Guid.NewGuid():N}";
+        var deleting = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var verifications = 0;
+        var attempts = 0;
+        var observedDatabase = false;
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        var fixture = await Tt.CreatePreparedFactoryAsync(
+            new TtOptions { PoolSize = 1, ContainerPrefix = prefix, DrainTimeout = TimeSpan.FromMilliseconds(100) },
+            new TtBaselineDefinition<TestDbContext>("recovery-close-v1", TtSchemaInitialization.EnsureCreated), default,
+            beforeVerification: _ =>
+            {
+                var attempt = Interlocked.Increment(ref verifications);
+                if (attempt > 2) throw new InvalidOperationException("Shutdown prepared a replacement.");
+                return attempt == 1 ? Task.CompletedTask : Task.FromException(new IOException("private-live-verification-failure"));
+            }, dropDatabase: async (connection, name) =>
+            {
+                var attempt = Interlocked.Increment(ref attempts);
+                if (attempt > (retry ? 2 : 1)) throw new InvalidOperationException("Confirmed deletion was repeated.");
+                if (!retry || attempt == 2)
+                {
+                    await using var exists = new NpgsqlCommand("SELECT count(*) FROM pg_database WHERE datname=$1", connection);
+                    exists.Parameters.Add(new NpgsqlParameter { Value = name });
+                    observedDatabase = Equals(1L, await exists.ExecuteScalarAsync());
+                    deleting.TrySetResult();
+                    await release.Task;
+                }
+                var target = retry && attempt == 1 ? connection.Database : name;
+                await using var command = new NpgsqlCommand($"DROP DATABASE IF EXISTS {new NpgsqlCommandBuilder().QuoteIdentifier(target)} WITH (FORCE)", connection);
+                await command.ExecuteNonQueryAsync();
+            });
+        var initial = await fixture.CreateLeaseAsync();
+        await initial.DisposeAsync();
+        await fixture.MaintainIdleAsync();
+        var waiting = fixture.CreateLeaseAsync();
+        TtCleanup? cleanup = null;
+        try
+        {
+            await deleting.Task.WaitAsync(TimeSpan.FromSeconds(10));
+            Assert.True(observedDatabase);
+            Assert.False(waiting.IsCompleted);
+            var host = Assert.Single(await OwnedAsync()).ID;
+            var timeout = await Assert.ThrowsAsync<TtLifecycleException>(() => fixture.DisposeAsync().AsTask());
+            Assert.Equal("DrainTimeout", timeout.Stage);
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => waiting);
+            cleanup = Assert.IsType<TtCleanup>(timeout.Cleanup);
+            Assert.Equal(host, Assert.Single(await OwnedAsync()).ID);
+            Assert.Equal((1, 2), (fixture.PoolState.Reserved, verifications));
+            var pending = cleanup.RetryCleanupAsync();
+            Assert.Same(pending, cleanup.RetryCleanupAsync());
+            Assert.False(pending.IsCompleted);
+            release.TrySetResult();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(20)));
+            Assert.Contains("IOException", failure.Message);
+            if (retry) Assert.Contains("55006", failure.Message);
+            Assert.DoesNotContain("private-live-verification-failure", failure.ToString());
+            await cleanup.RetryCleanupAsync();
+            Assert.Equal((0, 2, retry ? 2 : 1), (fixture.PoolState.Reserved, verifications, attempts));
+            Assert.Empty(await OwnedAsync());
+            Assert.Empty(cleanup.OwnedResourceIds);
+        }
+        finally
+        {
+            release.TrySetResult();
+            await Record.ExceptionAsync(() => waiting);
+            var failure = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+        }
+
+        Task<IList<ContainerListResponse>> OwnedAsync() => docker.Containers.ListContainersAsync(new ContainersListParameters
+        {
+            All = true,
+            Filters = new Dictionary<string, IDictionary<string, bool>> { ["name"] = new Dictionary<string, bool> { [prefix] = true } }
+        });
+    }
+
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Factory_shutdown_stops_native_rewarm_replacement_while_another_context_still_owns_its_database()
+    {
+        var prefix = $"tt-rewarm-stop-{Guid.NewGuid():N}";
+        var verifying = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var deleted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var names = new ConcurrentQueue<string>();
+        var verifications = 0;
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        var fixture = await Tt.CreatePreparedFactoryAsync(
+            new TtOptions { PoolSize = 2, ContainerPrefix = prefix, DrainTimeout = TimeSpan.FromMilliseconds(100) },
+            new TtBaselineDefinition<HeldContext>("rewarm-stop-v1", TtSchemaInitialization.EnsureCreated), default,
+            beforeVerification: async _ =>
+            {
+                var attempt = Interlocked.Increment(ref verifications);
+                if (attempt > 3) throw new InvalidOperationException("Closure created a replacement.");
+                if (attempt < 3) return;
+                verifying.TrySetResult();
+                await release.Task;
+                throw new IOException("private-closed-rewarm-payload");
+            }, dropDatabase: async (connection, name) =>
+            {
+                if (names.Count >= 2) throw new InvalidOperationException("Closure repeated deletion.");
+                await using var command = new NpgsqlCommand($"DROP DATABASE IF EXISTS {new NpgsqlCommandBuilder().QuoteIdentifier(name)} WITH (FORCE)", connection);
+                await command.ExecuteNonQueryAsync();
+                names.Enqueue(name);
+                deleted.TrySetResult();
+            });
+        var lease = await fixture.CreateLeaseAsync();
+        var context = lease.Context;
+        context.Hold = true;
+        var heldIdentity = await PooledResetTests.ReadIdentityAsync(context);
+        var idle = await fixture.CreateLeaseAsync();
+        await idle.DisposeAsync();
+        await fixture.MaintainIdleAsync();
+        var waiting = fixture.CreateLeaseAsync();
+        await verifying.Task.WaitAsync(TimeSpan.FromSeconds(5));
+        TtCleanup? cleanup = null;
+        try
+        {
+            var closing = fixture.DisposeAsync().AsTask();
+            await context.Closing.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => waiting);
+            var timeout = await Assert.ThrowsAsync<TtLifecycleException>(() => closing);
+            cleanup = Assert.IsType<TtCleanup>(timeout.Cleanup);
+            var host = Assert.Single(await OwnedAsync()).ID;
+            release.TrySetResult();
+            await deleted.Task.WaitAsync(TimeSpan.FromSeconds(10));
+            Assert.DoesNotContain(heldIdentity.Database, names);
+            Assert.Equal(3, verifications);
+            Assert.Equal(host, Assert.Single(await OwnedAsync()).ID);
+            Assert.False(context.Release.Task.IsCompleted);
+            var pending = cleanup.RetryCleanupAsync();
+            Assert.False(pending.IsCompleted);
+            context.Release.TrySetResult();
+            var late = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(20)));
+            Assert.Contains("IOException", late.Message);
+            Assert.DoesNotContain("private-closed-rewarm-payload", late.ToString());
+            await cleanup.RetryCleanupAsync();
+            Assert.Contains(heldIdentity.Database, names);
+            Assert.Equal((0, 2, 3, 1), (fixture.PoolState.Reserved, names.Count, verifications, context.Attempts));
+            Assert.Empty(await OwnedAsync());
+        }
+        finally
+        {
+            release.TrySetResult();
+            context.Release.TrySetResult();
+            await Record.ExceptionAsync(() => waiting);
+            var failure = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+        }
+
+        Task<IList<ContainerListResponse>> OwnedAsync() => docker.Containers.ListContainersAsync(new ContainersListParameters
+        {
+            All = true,
+            Filters = new Dictionary<string, IDictionary<string, bool>> { ["name"] = new Dictionary<string, bool> { [prefix] = true } }
+        });
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure(bool materialFailure)
+    {
+        var prefix = $"tt-rewarm-drain-{Guid.NewGuid():N}";
+        var verifying = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var verifications = 0;
+        var drops = 0;
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        var fixture = await Tt.CreatePreparedFactoryAsync(
+            new TtOptions { PoolSize = 1, ContainerPrefix = prefix, DrainTimeout = TimeSpan.FromMilliseconds(100) },
+            new TtBaselineDefinition<TestDbContext>("rewarm-drain-v1", TtSchemaInitialization.EnsureCreated), default,
+            beforeVerification: async _ =>
+            {
+                var attempt = Interlocked.Increment(ref verifications);
+                if (attempt > 2) throw new InvalidOperationException("Closure created a replacement.");
+                if (attempt == 1) return;
+                verifying.TrySetResult();
+                await release.Task;
+                if (materialFailure) throw new IOException("private-late-verification-payload");
+            }, dropDatabase: async (connection, name) =>
+            {
+                if (Interlocked.Increment(ref drops) > 1) throw new InvalidOperationException("Closure repeated deletion.");
+                await using var command = new NpgsqlCommand($"DROP DATABASE IF EXISTS {new NpgsqlCommandBuilder().QuoteIdentifier(name)} WITH (FORCE)", connection);
+                await command.ExecuteNonQueryAsync();
+            });
+        TtCleanup? cleanup = null;
+        Task<TtLease<TestDbContext>>? waiting = null;
+        try
+        {
+            var lease = await fixture.CreateLeaseAsync();
+            await lease.DisposeAsync();
+            await fixture.MaintainIdleAsync();
+            waiting = fixture.CreateLeaseAsync();
+            await verifying.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            var host = Assert.Single(await OwnedAsync()).ID;
+            var timeout = await Assert.ThrowsAsync<TtLifecycleException>(() => fixture.DisposeAsync().AsTask());
+            Assert.Equal("DrainTimeout", timeout.Stage);
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => waiting);
+            cleanup = Assert.IsType<TtCleanup>(timeout.Cleanup);
+            Assert.Equal(host, Assert.Single(await OwnedAsync()).ID);
+            Assert.Equal((1, 1, 0), (fixture.PoolState.Reserved, fixture.PoolState.Rewarming, drops));
+            var pending = cleanup.RetryCleanupAsync();
+            Assert.False(pending.IsCompleted);
+            release.TrySetResult();
+            if (materialFailure)
+            {
+                var late = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(20)));
+                Assert.Equal("PreparedPoolDispose", late.Stage);
+                Assert.Contains("IOException", late.Message);
+                Assert.DoesNotContain("private-late-verification-payload", late.ToString());
+            }
+            else await pending.WaitAsync(TimeSpan.FromSeconds(20));
+            Assert.Equal((0, 2, 1), (fixture.PoolState.Reserved, verifications, drops));
+            await cleanup.RetryCleanupAsync();
+            Assert.Empty(await OwnedAsync());
+            Assert.Empty(cleanup.OwnedResourceIds);
+        }
+        finally
+        {
+            release.TrySetResult();
+            if (waiting is not null) await Record.ExceptionAsync(() => waiting);
+            var failure = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+        }
+
+        Task<IList<ContainerListResponse>> OwnedAsync() => docker.Containers.ListContainersAsync(new ContainersListParameters
+        {
+            All = true,
+            Filters = new Dictionary<string, IDictionary<string, bool>>
+            {
+                ["name"] = new Dictionary<string, bool> { [prefix] = true }
+            }
+        });
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Canceled_retirement_reports_a_late_real_drop_failure_after_owned_cleanup(bool throwingLogger)
+    {
+        var prefix = $"tt-maintenance-drain-{Guid.NewGuid():N}";
+        var deleting = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var attempts = 0;
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        var fixture = await Tt.CreatePreparedFactoryAsync(
+            new TtOptions { PoolSize = 1, MaxParkedDatabases = 0, ContainerPrefix = prefix,
+                DrainTimeout = TimeSpan.FromMilliseconds(100), LogLevel = LogLevel.Debug,
+                Logger = new PreparedParkingTests.LifecycleLogger(throwingLogger) },
+            new TtBaselineDefinition<TestDbContext>("maintenance-drain-v1", TtSchemaInitialization.EnsureCreated), default,
+            dropDatabase: async (connection, name) =>
+            {
+                var attempt = Interlocked.Increment(ref attempts);
+                if (attempt > 2) throw new InvalidOperationException("Deletion exceeded its finite oracle.");
+                if (attempt == 1)
+                {
+                    deleting.TrySetResult();
+                    await release.Task;
+                }
+                // The first actual DROP is rejected by PostgreSQL because it targets
+                // this administrative connection's own database (55006).
+                var target = attempt == 1 ? connection.Database : name;
+                await using var command = new NpgsqlCommand($"DROP DATABASE IF EXISTS {new NpgsqlCommandBuilder().QuoteIdentifier(target)} WITH (FORCE)", connection);
+                await command.ExecuteNonQueryAsync();
+            });
+        using var cancel = new CancellationTokenSource();
+        TtCleanup? cleanup = null;
+        Task? maintenance = null;
+        try
+        {
+            var lease = await fixture.CreateLeaseAsync();
+            await lease.Context.Database.OpenConnectionAsync();
+            await lease.DisposeAsync();
+            var host = Assert.Single(await OwnedAsync()).ID;
+            maintenance = fixture.MaintainIdleAsync(cancel.Token);
+            await deleting.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            cancel.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => maintenance);
+            var timeout = await Assert.ThrowsAsync<TtLifecycleException>(() => fixture.DisposeAsync().AsTask());
+            Assert.Equal("DrainTimeout", timeout.Stage);
+            cleanup = Assert.IsType<TtCleanup>(timeout.Cleanup);
+            Assert.Equal(host, Assert.Single(await OwnedAsync()).ID);
+            Assert.Equal((1, 1), (fixture.PoolState.Reserved, attempts));
+            Assert.Contains(host, cleanup.OwnedResourceIds);
+            var pending = cleanup.RetryCleanupAsync();
+            Assert.Same(pending, cleanup.RetryCleanupAsync());
+            Assert.False(pending.IsCompleted);
+            release.TrySetResult();
+            var late = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(20)));
+            Assert.Equal("55006", late.SqlState);
+            Assert.DoesNotContain("DROP DATABASE", late.ToString());
+            Assert.Equal((0, 2), (fixture.PoolState.Reserved, attempts));
+            Assert.Empty(await OwnedAsync());
+            await cleanup.RetryCleanupAsync();
+            Assert.Empty(cleanup.OwnedResourceIds);
+            Assert.Equal(2, attempts);
+        }
+        finally
+        {
+            release.TrySetResult();
+            if (maintenance is not null) await Record.ExceptionAsync(() => maintenance);
+            var failure = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+        }
+
+        Task<IList<ContainerListResponse>> OwnedAsync() => docker.Containers.ListContainersAsync(new ContainersListParameters
+        {
+            All = true,
+            Filters = new Dictionary<string, IDictionary<string, bool>>
+            {
+                ["name"] = new Dictionary<string, bool> { [prefix] = true }
+            }
+        });
+    }
+}

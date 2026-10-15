@@ -1,0 +1,110 @@
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class SlotParkingTests
+{
+    private sealed record Resource(Guid Id);
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(3)]
+    public async Task Parking_preserves_the_configured_ready_floor(int floor)
+    {
+        var parked = new List<Guid>();
+        await using var owner = new TtSlotPool<Resource>(3, 1, id => new Resource(id),
+            (_, _) => Task.CompletedTask, _ => Task.CompletedTask);
+        await owner.WarmAsync(3, default);
+        await owner.ParkIdleAsync(floor, (resource, _) =>
+        {
+            parked.Add(resource.Id);
+            return Task.CompletedTask;
+        });
+        Assert.Equal((3, floor, 3 - floor), (owner.Snapshot.Reserved, owner.Snapshot.Ready, owner.Snapshot.Parked));
+        Assert.Equal(3 - floor, parked.Distinct().Count());
+        if (floor > 0)
+        {
+            var acquired = await owner.AcquireAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.DoesNotContain(acquired.Value.Id, parked);
+            Assert.Equal(floor - 1, owner.Snapshot.Ready);
+        }
+    }
+
+    [Fact]
+    public async Task Parking_claims_only_idle_ready_slots_and_retains_capacity_until_shutdown()
+    {
+        var preparing = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var releasePreparation = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var resetting = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var releaseReset = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var parking = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var releasePark = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var created = 0;
+        var parked = new List<Guid>();
+        var deleted = new List<Guid>();
+        await using var owner = new TtSlotPool<Resource>(4, 4, id => new Resource(id), async (_, _) =>
+        {
+            if (Interlocked.Increment(ref created) == 4)
+            {
+                preparing.TrySetResult();
+                await releasePreparation.Task;
+            }
+        }, resource => { deleted.Add(resource.Id); return Task.CompletedTask; });
+        var leased = await owner.AcquireAsync();
+        var returning = await owner.AcquireAsync();
+        var idle = await owner.AcquireAsync();
+        using var cancel = new CancellationTokenSource();
+        var pending = owner.AcquireAsync(cancel.Token);
+        Task? returned = null;
+        Task? maintained = null;
+        try
+        {
+            await preparing.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            cancel.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => pending);
+            await owner.ReturnAsync(idle, (_, _) => Task.CompletedTask).WaitAsync(TimeSpan.FromSeconds(2));
+            returned = owner.ReturnAsync(returning, async (_, _) =>
+            {
+                resetting.TrySetResult();
+                await releaseReset.Task;
+            });
+            await resetting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((4, 1, 1, 1, 1), (owner.Snapshot.Reserved, owner.Snapshot.Preparing,
+                owner.Snapshot.Leased, owner.Snapshot.ExecutingResets, owner.Snapshot.Ready));
+            maintained = owner.ParkIdleAsync(0, async (resource, _) =>
+            {
+                parked.Add(resource.Id);
+                parking.TrySetResult();
+                await releasePark.Task;
+            });
+            // Parking uses the reset/cleanup limit and cannot bypass held reset.
+            Assert.False(maintained.IsCompleted);
+            Assert.Empty(parked);
+            Assert.Equal((4, 0, 0, 1), (owner.Snapshot.Reserved, owner.Snapshot.Ready, owner.Snapshot.Parked, owner.Snapshot.Parking));
+            releaseReset.TrySetResult();
+            await returned;
+            await parking.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(new[] { idle.Value.Id }, parked);
+            Assert.DoesNotContain(leased.Value.Id, parked);
+            Assert.False(maintained.IsCompleted);
+            releasePark.TrySetResult();
+            await maintained.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((4, 1), (owner.Snapshot.Reserved, owner.Snapshot.Parked));
+            Assert.Empty(deleted);
+        }
+        finally
+        {
+            cancel.Cancel();
+            releaseReset.TrySetResult();
+            releasePark.TrySetResult();
+            releasePreparation.TrySetResult();
+            if (returned is not null) await returned;
+            if (maintained is not null) await maintained;
+            await Record.ExceptionAsync(() => pending);
+        }
+        await owner.DisposeAsync();
+        Assert.Equal(4, deleted.Distinct().Count());
+        Assert.Equal(0, owner.Snapshot.Reserved);
+    }
+}

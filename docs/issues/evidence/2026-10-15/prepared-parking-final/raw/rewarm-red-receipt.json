@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Acquisition_rewarms_the_retained_reservation_at_capacity_and_waits_for_validation",
+    "--logger",
+    "trx;LogFileName=rewarm-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/rewarm-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 7.107769520000147,
+  "log": "artifacts/tt-008/rewarm-red.log",
+  "sourceBinding": "artifacts/tt-008/rewarm-red/source-binding.json"
+}

@@ -14,6 +14,74 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
     public TtResourceBudget ResourceBudget => _pool.Budget;
     internal IReadOnlyList<string> OwnedResourceIds => _pool.OwnedResourceIds;
 
+    /// <summary>Applies this prepared fixture's explicit idle parking and retention policy.
+    /// Cancellation ends observation; owned jobs and unseen failures remain tracked through drain.</summary>
+    public async Task MaintainIdleAsync(CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var settled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var work = new MaintenanceWork();
+        lock (_disposeGate)
+        {
+            ObjectDisposedException.ThrowIf(_closing, this);
+            _acquisitions.Add(settled);
+            _maintenance.Add(work);
+        }
+        _ = RunMaintenanceAsync(work, settled);
+        try
+        {
+            using var linked = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _shutdown.Token);
+            var failure = await work.Completion.Task.WaitAsync(linked.Token);
+            if (failure is not null)
+            {
+                lock (_disposeGate) work.Delivered = true;
+                throw failure;
+            }
+        }
+        catch (OperationCanceledException) when (_shutdown.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
+        {
+            throw new ObjectDisposedException(nameof(TtFactory<TContext>));
+        }
+        finally
+        {
+            lock (_disposeGate)
+            {
+                _acquisitions.Remove(settled);
+                if (work.Completion.Task.IsCompletedSuccessfully &&
+                    (work.Completion.Task.Result is null || work.Delivered)) _maintenance.Remove(work);
+            }
+            settled.TrySetResult();
+        }
+    }
+
+    private sealed class MaintenanceWork
+    {
+        internal TaskCompletionSource<Exception?> Completion { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal bool Delivered { get; set; }
+    }
+
+    private async Task RunMaintenanceAsync(MaintenanceWork work, TaskCompletionSource observer)
+    {
+        Exception? failure = null;
+        Task? operation = null;
+        try
+        {
+            operation = _pool.MaintainIdleAsync();
+            await operation;
+        }
+        catch (Exception error)
+        {
+            failure = operation?.Exception is { InnerExceptions.Count: > 1 } aggregate
+                ? new TtLifecycleException("IdleMaintenance", aggregate)
+                : error;
+        }
+        lock (_disposeGate)
+        {
+            work.Completion.TrySetResult(failure);
+            if (!_acquisitions.Contains(observer) && (failure is null || work.Delivered)) _maintenance.Remove(work);
+        }
+    }
+
     private readonly ITtDatabasePool _pool;
     private readonly TtOptions _options;
     private readonly bool _ownsPool;
@@ -22,6 +90,7 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
     private readonly object _disposeGate = new();
     private readonly CancellationTokenSource _shutdown = new();
     private readonly HashSet<TaskCompletionSource> _acquisitions = new();
+    private readonly HashSet<MaintenanceWork> _maintenance = new();
     private readonly ConcurrentDictionary<TtLease<TContext>, byte> _leases = new();
     private readonly ConcurrentDictionary<TtDatabase, byte> _databases = new();
     private bool _closing;
@@ -133,6 +202,7 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
         {
             if (_disposal is not null) return new ValueTask(_disposal);
             _closing = true;
+            if (_ownsPool) _pool.StopAcceptingWork();
             start = new TaskCompletionSource<Exception?>(TaskCreationOptions.RunContinuationsAsynchronously);
             var drain = DisposeCoreAsync(start.Task);
             disposal = _disposal = ObserveDrainAsync(drain);
@@ -180,20 +250,35 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
         Task[] acquisitions;
         lock (_disposeGate) acquisitions = _acquisitions.Select(acquisition => acquisition.Task).ToArray();
         await Task.WhenAll(acquisitions);
+        MaintenanceWork[] maintenance;
+        lock (_disposeGate) maintenance = _maintenance.ToArray();
+        await Task.WhenAll(maintenance.Select(work => work.Completion.Task));
+        lock (_disposeGate)
+        {
+            foreach (var work in maintenance)
+            {
+                if (!work.Delivered && work.Completion.Task.Result is { } failure)
+                {
+                    first = first is null ? failure : new AggregateException(first, failure);
+                    work.Delivered = true;
+                }
+                _maintenance.Remove(work);
+            }
+        }
         foreach (var lease in _leases.Keys)
         {
             try { await lease.DisposeAsync(); }
-            catch (Exception error) { first ??= error; }
+            catch (Exception error) { first = first is null ? error : new AggregateException(first, error); }
         }
         foreach (var database in _databases.Keys)
         {
             try { await database.DisposeAsync(); }
-            catch (Exception error) { first ??= error; }
+            catch (Exception error) { first = first is null ? error : new AggregateException(first, error); }
         }
         if (_ownsPool)
         {
             try { await _pool.DisposeAsync(); }
-            catch (Exception error) { first ??= error; }
+            catch (Exception error) { first = first is null ? error : new AggregateException(first, error); }
         }
         if (first is not null) throw first;
     }

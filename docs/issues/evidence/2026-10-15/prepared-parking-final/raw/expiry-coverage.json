@@ -1,0 +1,10 @@
+{
+  "gate": "35 component checks pass with coverage",
+  "sourceInputs": 98,
+  "assertions": "Expiry at exact monotonic boundary, no wall-clock expiry, age preserved through parking, reserved until confirmed drop, no demand refill, verified return renews age, leased slot untouched, expired Ready surplus removed above protected floor.",
+  "refactor": {
+    "production": "One nullable idle timestamp on each reservation; existing atomic claim and retirement/retry paths reused. No timer or separate expiry ledger.",
+    "tests": "One manual clock separates monotonic and UTC movement. Boundary, renewed return and Ready-floor cases retain distinct protection."
+  },
+  "limits": "Native expiry configuration/clock wiring next; no complete lifecycle failure or whole-suite claim."
+}

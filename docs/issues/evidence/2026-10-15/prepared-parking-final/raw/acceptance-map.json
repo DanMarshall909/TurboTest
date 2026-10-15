@@ -1,0 +1,139 @@
+{
+  "scope": "TT-008",
+  "authority": "docs/issues/open/database/TT-008-park-and-rewarm-prepared-databases.md",
+  "criteria": [
+    {
+      "criterion": 1,
+      "outcome": "Only idle verified Ready slots park",
+      "implementation": [
+        "TtSlotPool.ParkIdleAsync atomic Ready dequeue/parking claims"
+      ],
+      "tests": [
+        "SlotParkingTests membership and held concurrent work",
+        "SlotParkingTests repeated maintenance",
+        "SlotExpiryTests floor/lease protection"
+      ],
+      "red": "parking-red-r2"
+    },
+    {
+      "criterion": 2,
+      "outcome": "Close owned pool, retain database/files/reservation",
+      "implementation": [
+        "TtPreparedPool maintenance Source.DisposeAsync",
+        "TtSlotPool Parking\u2192Parked retains ledger ownership"
+      ],
+      "tests": [
+        "PreparedParkingTests independent session count0, unchanged OID, database size>0, reservation1"
+      ],
+      "red": "native-parking-red-r2",
+      "limit": "No all-server-memory-freed claim"
+    },
+    {
+      "criterion": 3,
+      "outcome": "Prefer compatible parked reuse, including hard cap",
+      "implementation": [
+        "AcquireAsync/ClaimParked before ReservePending",
+        "RewarmSlotCoreAsync new source on retained slot"
+      ],
+      "tests": [
+        "SlotParkingTests cap/canceled observation/demand during parking/preparation bound",
+        "PreparedParkingTests same name/OID, new PID, held publication, seeds/sequences"
+      ],
+      "red": [
+        "rewarm-red",
+        "native-rewarm-red"
+      ]
+    },
+    {
+      "criterion": 4,
+      "outcome": "Full validation and identity, quarantine/recovery on bad rewarm",
+      "implementation": [
+        "VerifySlotAsync shared snapshot/schema/workload verifier plus stored database OID",
+        "RecoverFailedOperationAsync shares bounded confirmed deletion/replacement episode"
+      ],
+      "tests": [
+        "PreparedRewarmRecoveryTests seed/schema/disposed-opening/same-name replacement",
+        "SlotIdleRecoveryTests held deletion retry and permit inversion"
+      ],
+      "red": [
+        "idle-recovery-red-r2",
+        "retained-identity-red"
+      ],
+      "limit": "Opening fault is owned source disposed before reopening; no blanket network/auth guarantee"
+    },
+    {
+      "criterion": 5,
+      "outcome": "Validated floor/retained cap and monotonic idle deletion",
+      "implementation": [
+        "TtPreparedConfiguration range/lifetime guards",
+        "TtSlotPool ParkIdleAsync monotonic idle age, retained count and Retiring claims"
+      ],
+      "tests": [
+        "PreparedConfigurationTests invalid before image hook/legal boundaries",
+        "SlotRetentionTests confirmed delete/renewal/no speculative fill",
+        "SlotExpiryTests boundary/wall-time/age/floor/leased protection",
+        "PreparedRetentionTests held real DROP with captured policy/OID/seed checks"
+      ],
+      "red": [
+        "configuration-red",
+        "retained-cap-red",
+        "expiry-red",
+        "native-expiry-red"
+      ]
+    },
+    {
+      "criterion": 6,
+      "outcome": "Bounded rewarm/retirement and no doubled ownership during renewal",
+      "implementation": [
+        "Existing preparation/reset permits and atomic claims",
+        "Reservation released only after confirmed physical deletion"
+      ],
+      "tests": [
+        "SlotParkingTests bounded preparation concurrency",
+        "SlotRetentionTests held retire/cap",
+        "PreparedRetentionTests queued renewal until confirmed DROP",
+        "SlotIdleRecoveryTests preparation/cleanup inversion"
+      ],
+      "red": [
+        "rewarm-red",
+        "retained-cap-red"
+      ]
+    },
+    {
+      "criterion": 7,
+      "outcome": "Drain parked/active/actual jobs, retain diagnostics and expose deferred costs",
+      "implementation": [
+        "Factory actual MaintenanceWork records and unseen error aggregation",
+        "StopAcceptingWork separates admission/recovery from physical teardown",
+        "Ledger late material rewarm drain obligations, safe cancellation classification",
+        "PreparedLifecycle Debug event401 Park/Rewarm/Delete/Teardown actual completion duration",
+        "Reservation-owned unseen rewarm diagnostic through recovery/replacement, safe secondary diagnostic propagation"
+      ],
+      "tests": [
+        "FactoryMaintenanceTests canceled wait/bulk errors/distinct pool failure/ordinary rejection",
+        "FactoryRewarmDrainTests held different lease prevents replacement/early delete",
+        "SlotRewarmDrainTests material/success/cooperative controls",
+        "PreparedMaintenanceDrainTests actual55006/native held two-slot closure/native cancellation",
+        "PreparedParkingTests operation durations and throwing-logger controls",
+        "SlotRewarmDrainTests closure during direct/retry cleanup and held timer cancellation",
+        "SlotRewarmDrainTests terminal delivery does not repeat at drain",
+        "PreparedMaintenanceDrainTests native recovery interrupted by closure",
+        "LifecycleDiagnosticRetentionTests safe nested cleanup diagnostics"
+      ],
+      "red": [
+        "maintenance-cancel-red",
+        "maintenance-aggregate-red",
+        "rewarm-drain-red",
+        "rewarm-cancellation-red",
+        "factory-rewarm-closure-red",
+        "maintenance-drain-aggregate-red",
+        "lifecycle-timing-red",
+        "lifecycle-logger-red-r2",
+        "review-r1-recovery-close-red",
+        "review-r1-diagnostic-red"
+      ],
+      "limit": "Prepared-pool teardown metric excludes earlier factory context cleanup; full factory shutdown metrics/benchmarks remain TT010."
+    }
+  ],
+  "status": "Revised implementation and current89/19/299 plus both build-r2 gates pass; independent re-review pending."
+}

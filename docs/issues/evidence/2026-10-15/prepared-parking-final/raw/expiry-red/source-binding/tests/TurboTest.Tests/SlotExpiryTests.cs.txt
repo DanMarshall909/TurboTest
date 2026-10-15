@@ -1,0 +1,54 @@
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class SlotExpiryTests
+{
+    private sealed record Resource(Guid Id);
+
+    [Fact]
+    public async Task Expiry_uses_monotonic_idle_age_preserved_through_parking_and_releases_only_confirmed_deletions()
+    {
+        var clock = new ManualPoolClock();
+        var deleting = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var confirm = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var created = 0;
+        var deleted = new List<Guid>();
+        var lifetime = TimeSpan.FromSeconds(10);
+        await using var owner = new TtSlotPool<Resource>(2, 1, id =>
+        {
+            if (Interlocked.Increment(ref created) > 2) throw new InvalidOperationException("Idle expiry refilled without demand.");
+            return new Resource(id);
+        }, (_, _) => Task.CompletedTask, async resource =>
+        {
+            deleting.TrySetResult();
+            await confirm.Task;
+            deleted.Add(resource.Id);
+        }, timeProvider: clock);
+        await owner.WarmAsync(2, default);
+        clock.Advance(lifetime - TimeSpan.FromTicks(1));
+        await owner.ParkIdleAsync(0, (_, _) => Task.CompletedTask, idleLifetime: lifetime);
+        Assert.Equal((2, 2), (owner.Snapshot.Reserved, owner.Snapshot.Parked));
+        clock.JumpWallClock(TimeSpan.FromDays(100));
+        await owner.ParkIdleAsync(0, (_, _) => Task.CompletedTask, idleLifetime: lifetime);
+        Assert.Empty(deleted);
+        clock.Advance(TimeSpan.FromTicks(1));
+        var maintenance = owner.ParkIdleAsync(0, (_, _) => Task.CompletedTask, idleLifetime: lifetime);
+        try
+        {
+            Assert.False(maintenance.IsCompleted);
+            await deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((2, 0, 2), (owner.Snapshot.Reserved, owner.Snapshot.Parked, owner.Snapshot.Retiring));
+            Assert.Empty(deleted);
+            confirm.TrySetResult();
+            await maintenance.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(2, deleted.Distinct().Count());
+            Assert.Equal((0, 0, 2), (owner.Snapshot.Reserved, owner.Snapshot.Ready, created));
+        }
+        finally
+        {
+            confirm.TrySetResult();
+            await maintenance;
+        }
+    }
+}

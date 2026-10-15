@@ -6,5 +6,9 @@ public sealed record TtPoolSnapshot(Guid OwnerId, int SlotLimit, int Preparing, 
 {
     public int WaitingAdministratorConnections { get; init; }
     public int ExecutingAdministratorConnections { get; init; }
-    public int Reserved => Preparing + Ready + Leased + WaitingResets + ExecutingResets + Quarantined + Parked + Retiring;
+    /// <summary>Idle reservations claimed for bounded connection-pool closure.</summary>
+    public int Parking { get; init; }
+    /// <summary>Retained reservations waiting for bounded reopening and validation.</summary>
+    public int Rewarming { get; init; }
+    public int Reserved => Preparing + Ready + Leased + WaitingResets + ExecutingResets + Quarantined + Parking + Parked + Rewarming + Retiring;
 }

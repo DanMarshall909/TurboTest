@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotIdleRecoveryTests|FullyQualifiedName~SlotRecoveryTests|FullyQualifiedName~SlotParkingTests|FullyQualifiedName~SlotPoolTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=idle-recovery-refactor.trx",
+    "--results-directory",
+    "artifacts/tt-008/idle-recovery-refactor"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 7.377762274998531,
+  "log": "artifacts/tt-008/idle-recovery-refactor.log",
+  "sourceBinding": "artifacts/tt-008/idle-recovery-refactor/source-binding.json"
+}

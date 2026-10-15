@@ -1,0 +1,27 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:02.24]     TurboTest.Tests.SlotIdleRecoveryTests.Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(rewarm: True) [FAIL]
+  Failed TurboTest.Tests.SlotIdleRecoveryTests.Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(rewarm: True) [2 s]
+  Error Message:
+   System.TimeoutException : The operation has timed out.
+  Stack Trace:
+     at TurboTest.Tests.SlotIdleRecoveryTests.Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(Boolean rewarm) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotIdleRecoveryTests.cs:line 63
+   at TurboTest.Tests.SlotIdleRecoveryTests.Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(Boolean rewarm) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotIdleRecoveryTests.cs:line 82
+   at TurboTest.Tests.SlotIdleRecoveryTests.Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(Boolean rewarm) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotIdleRecoveryTests.cs:line 82
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:04.24]     TurboTest.Tests.SlotIdleRecoveryTests.Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(rewarm: False) [FAIL]
+  Failed TurboTest.Tests.SlotIdleRecoveryTests.Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(rewarm: False) [2 s]
+  Error Message:
+   System.TimeoutException : The operation has timed out.
+  Stack Trace:
+     at TurboTest.Tests.SlotIdleRecoveryTests.Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(Boolean rewarm) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotIdleRecoveryTests.cs:line 63
+   at TurboTest.Tests.SlotIdleRecoveryTests.Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(Boolean rewarm) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotIdleRecoveryTests.cs:line 82
+   at TurboTest.Tests.SlotIdleRecoveryTests.Failed_idle_work_keeps_capacity_through_unconfirmed_deletion_then_publishes_one_verified_replacement(Boolean rewarm) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotIdleRecoveryTests.cs:line 82
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/idle-recovery-red-r2/idle-recovery-red-r2.trx
+
+Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 4 s - TurboTest.Tests.dll (net10.0)

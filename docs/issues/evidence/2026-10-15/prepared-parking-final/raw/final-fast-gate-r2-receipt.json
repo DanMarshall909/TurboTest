@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~LifecycleDiagnosticRetentionTests|FullyQualifiedName~FactoryMaintenanceTests|FullyQualifiedName~FactoryRewarmDrainTests|FullyQualifiedName~FactoryBackpressureTests|FullyQualifiedName~Slot|FullyQualifiedName~PreparedConfigurationTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=final-fast-gate-r2.trx",
+    "--results-directory",
+    "artifacts/tt-008/final-fast-gate-r2"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 22.325233818002744,
+  "log": "artifacts/tt-008/final-fast-gate-r2.log",
+  "sourceBinding": "artifacts/tt-008/final-fast-gate-r2/source-binding.json"
+}

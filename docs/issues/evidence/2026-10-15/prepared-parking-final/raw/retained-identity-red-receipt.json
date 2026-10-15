@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~PreparedRewarmRecoveryTests&DisplayName~identity",
+    "--logger",
+    "trx;LogFileName=retained-identity-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/retained-identity-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 9.316778571999748,
+  "log": "artifacts/tt-008/retained-identity-red.log",
+  "sourceBinding": "artifacts/tt-008/retained-identity-red/source-binding.json"
+}

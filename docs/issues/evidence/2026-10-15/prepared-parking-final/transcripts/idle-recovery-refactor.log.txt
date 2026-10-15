@@ -1,0 +1,21 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.49]     TurboTest.Tests.SlotIdleRecoveryTests.Failed_rewarm_releases_preparation_before_waiting_for_cleanup_held_by_replacement [FAIL]
+  Failed TurboTest.Tests.SlotIdleRecoveryTests.Failed_rewarm_releases_preparation_before_waiting_for_cleanup_held_by_replacement [5 ms]
+  Error Message:
+   Assert.NotSame() Failure: Values are the same instance
+  Stack Trace:
+     at TurboTest.Tests.SlotIdleRecoveryTests.Failed_rewarm_releases_preparation_before_waiting_for_cleanup_held_by_replacement() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotIdleRecoveryTests.cs:line 54
+   at TurboTest.Tests.SlotIdleRecoveryTests.Failed_rewarm_releases_preparation_before_waiting_for_cleanup_held_by_replacement() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotIdleRecoveryTests.cs:line 65
+   at TurboTest.Tests.SlotIdleRecoveryTests.Failed_rewarm_releases_preparation_before_waiting_for_cleanup_held_by_replacement() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotIdleRecoveryTests.cs:line 65
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/idle-recovery-refactor/idle-recovery-refactor.trx
+
+Failed!  - Failed:     1, Passed:    27, Skipped:     0, Total:    28, Duration: 1 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-008/idle-recovery-refactor/ba6fb6e5-db94-4ef1-b790-57fb51869a34/dan_os-greg_2026-10-15.09_23_41.cobertura.xml

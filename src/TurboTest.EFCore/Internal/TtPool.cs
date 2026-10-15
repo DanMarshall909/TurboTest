@@ -270,6 +270,8 @@ internal sealed class TtPool : ITtDatabasePool
         }
     }
 
+    public void StopAcceptingWork() => _slots.StopAcceptingWork();
+
     public async ValueTask DisposeAsync()
     {
         if (_disposed) return;

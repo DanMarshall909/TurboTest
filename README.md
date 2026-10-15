@@ -115,6 +115,8 @@ continues under its owner and can serve another caller.
 `DrainTimeout` bounds the factory caller's drain wait (default 30 seconds).
 Shutdown rejects new acquisitions, cancels queued requests, and awaits active
 acquisition, context cleanup, return and lifecycle jobs before deleting resources.
+Owned pools stop admission and recovery claims as soon as factory closure begins;
+physical teardown still waits for lease/context cleanup.
 A timeout reports `DrainTimeout` with `TtLifecycleException.Cleanup`; it leaves
 actual work running under that owner. Repeated disposal shares its original
 result. Await `error.Cleanup.RetryCleanupAsync()` to join unfinished work or retry
@@ -230,7 +232,8 @@ must retain their fixture's source and frozen model, including in
 the design-time schema model for `EnsureCreated` or migrations.
 
 `PoolSize` is the fixed workload database cap. Preparing, leased, resetting,
-quarantined and retiring slots retain capacity until cleanup is confirmed.
+parking, parked, rewarming, quarantined and retiring slots retain capacity until
+cleanup is confirmed.
 Prepared fixtures use one host; ordinary fixtures use one container per slot.
 At capacity, `CreateLeaseAsync(cancellationToken: token)` waits for a verified
 Ready slot. Supply a deadline with `CancellationTokenSource(TimeSpan)`; there
@@ -287,6 +290,52 @@ When a supplied logger enables Debug, event `400` (`BaselineReset`) reports
 Execution includes restoration and validation; permit wait is separate.
 Preparation and reset use their independent configured concurrency limits.
 Diagnostic emission is outside measured work.
+
+Prepared fixtures support explicit idle maintenance:
+
+```csharp
+await using var fixture = await Tt.CreateFactoryAsync(baseline, options =>
+{
+    options.PoolSize = 3;
+    options.WarmFloor = 1;
+    options.MaxParkedDatabases = 2;
+    options.IdleDatabaseLifetime = TimeSpan.FromMinutes(5);
+});
+// Call after a burst, or from your fixture's own maintenance schedule.
+await fixture.MaintainIdleAsync();
+```
+
+Maintenance preserves at least `WarmFloor` verified Ready slots and claims only
+idle Ready/parked databases. Initial warming still prepares `PoolSize` slots.
+Parking closes the owned connection pool while retaining the database files and
+physical reservation. It does not promise to free all PostgreSQL server memory.
+Renewed demand prefers a parked slot, opens a new source and verifies schema,
+seed/sequence state and PostgreSQL database identity before handing out a lease.
+Incompatible resources follow bounded quarantine/deletion/replacement recovery.
+
+`WarmFloor` defaults to zero; `MaxParkedDatabases` defaults to the physical cap.
+Both range from zero through `PoolSize`. Optional positive
+`IdleDatabaseLifetime` measures monotonic idle age since verified Ready
+publication; parking preserves age and a verified return resets it. Maintenance
+protects the Ready floor from expiry. Null disables expiry. Exceeding retention
+or reaching expiry retires eligible idle slots; reservations are released only
+after confirmed deletion. There is no automatic maintenance timer. Ordinary
+fixtures reject this prepared-only operation.
+
+Cancellation ends the caller's maintenance wait while actual owned work remains
+tracked. Shutdown joins it and deletes parked databases as well as active ones.
+Material failures whose observation was canceled remain visible through drain
+or its retained cleanup capability. Successful live rewarm recovery is
+transparent. Debug event `401` (`PreparedLifecycle`) reports `Operation`
+(`Park`, `Rewarm`, `Delete`, `Teardown`), `DurationMilliseconds`, `Succeeded` and
+opaque `OwnerId`. Rewarm includes verification; deletion includes source closure,
+administrator wait and physical DROP. Teardown starts when the prepared pool's
+drain begins and includes ledger work still pending and final host deletion,
+including failed attempts and explicit retries. Earlier factory lease/context
+cleanup is outside that measurement. These operation
+durations do not measure whole-burst checkout latency; parking defers deletion
+cost until retirement or final drain. See the
+[reviewed parking/rewarm evidence](docs/issues/evidence/2026-10-15/prepared-parking-final/manifest.json).
 
 If startup or drain cleanup fails, `TtLifecycleException.Cleanup` retains an opaque owner
 and resource-ID snapshot. Await `error.Cleanup.RetryCleanupAsync()` to retry;

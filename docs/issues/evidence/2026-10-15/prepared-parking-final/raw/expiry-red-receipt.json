@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotExpiryTests",
+    "--logger",
+    "trx;LogFileName=expiry-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/expiry-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 5.283345718999044,
+  "log": "artifacts/tt-008/expiry-red.log",
+  "sourceBinding": "artifacts/tt-008/expiry-red/source-binding.json"
+}

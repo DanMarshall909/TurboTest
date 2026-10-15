@@ -5,6 +5,7 @@ using TurboTest.EFCore.Internal;
 
 namespace TurboTest.Tests;
 
+[Collection("Static lifecycle")]
 public class FactoryBackpressureTests
 {
     [Theory]

@@ -1,0 +1,158 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using TurboTest.EFCore;
+using TurboTest.EFCore.Extensions;
+
+namespace TurboTest.Tests;
+
+[Collection("Static lifecycle")]
+public class DiMultipleFailureTests
+{
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Provider_disposal_reports_both_prompt_context_cleanup_failures()
+    {
+        var services = new ServiceCollection();
+        services.AddTurboTest(options =>
+        {
+            options.PoolSize = 1;
+            options.AutoMigrate = false;
+            options.DrainTimeout = TimeSpan.FromSeconds(5);
+            options.ContainerPrefix = $"tt-di-prompt-fail-{Guid.NewGuid():N}";
+        });
+        var provider = services.BuildServiceProvider();
+        var service = provider.GetRequiredService<ITtServiceFactory>();
+        var first = await service.CreateFactoryAsync<PromptFailureContext>();
+        var other = await service.CreateFactoryAsync<PromptIoFailureContext>();
+        await first.CreateLeaseAsync();
+        await other.CreateLeaseAsync();
+        TtCleanup? cleanup = null;
+        try
+        {
+            var error = await Assert.ThrowsAsync<TtLifecycleException>(() => provider.DisposeAsync().AsTask());
+            cleanup = Assert.IsType<TtCleanup>(error.Cleanup);
+            Assert.NotEqual("DrainTimeout", error.Stage);
+            Assert.Contains("InvalidOperationException", error.Message);
+            Assert.Contains("IOException", error.Message);
+            Assert.DoesNotContain("private-owner-detail", error.ToString());
+            await cleanup.RetryCleanupAsync();
+            Assert.Empty(cleanup.OwnedResourceIds);
+        }
+        finally
+        {
+            var error = await Record.ExceptionAsync(() => service.DisposeAsync().AsTask());
+            cleanup ??= (error as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null) await cleanup.RetryCleanupAsync();
+            await Tt.DisposeAsync();
+            await provider.DisposeAsync();
+        }
+    }
+
+    [Fact]
+    public void Aggregate_lifecycle_diagnostics_preserve_each_failure_kind_without_private_payloads()
+    {
+        var error = new TtLifecycleException("ProviderDrain", new AggregateException(
+            new TtLifecycleException("LeaseCleanup", new IOException("private-owner-detail-a")),
+            new TtLifecycleException("LeaseCleanup", new InvalidOperationException("private-owner-detail-b"))));
+        Assert.Contains("IOException", error.Message);
+        Assert.Contains("InvalidOperationException", error.Message);
+        Assert.DoesNotContain("private-owner-detail", error.ToString());
+        Assert.Null(error.InnerException);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Provider_recovery_reports_material_owner_failures_even_when_the_first_owner_timed_out(bool bothFail)
+    {
+        var services = new ServiceCollection();
+        services.AddTurboTest(options =>
+        {
+            options.PoolSize = 1;
+            options.ContainerPrefix = $"tt-di-mixed-fail-{Guid.NewGuid():N}";
+            options.AutoMigrate = false;
+            options.DrainTimeout = TimeSpan.FromSeconds(5);
+        });
+        var provider = services.BuildServiceProvider();
+        var service = provider.GetRequiredService<ITtServiceFactory>();
+        var first = await service.CreateFactoryAsync<HeldFailureContext>();
+        var other = await service.CreateFactoryAsync<PromptFailureContext>();
+        var a = await first.CreateLeaseAsync();
+        var b = await other.CreateLeaseAsync();
+        var held = a.Context;
+        held.ThrowAfterRelease = bothFail;
+        Task? closing = null;
+        TtCleanup? cleanup = null;
+        try
+        {
+            closing = provider.DisposeAsync().AsTask();
+            await held.Closing.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            // Calibrate that the second owner has a real completed failure,
+            // rather than a second deadline observer hiding unfinished deletion.
+            var prompt = await Assert.ThrowsAsync<TtLifecycleException>(() => other.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(6)));
+            Assert.NotEqual("DrainTimeout", prompt.Stage);
+            var initial = await Assert.ThrowsAsync<TtLifecycleException>(() => closing.WaitAsync(TimeSpan.FromSeconds(6)));
+            cleanup = Assert.IsType<TtCleanup>(initial.Cleanup);
+            var recovering = cleanup.RetryCleanupAsync();
+            Assert.False(recovering.IsCompleted);
+            held.Release.TrySetResult();
+            var recoveredFailure = await Record.ExceptionAsync(() => recovering.WaitAsync(TimeSpan.FromSeconds(15)));
+            // Distinct late errors may need distinct observations. Completion
+            // must follow observation of both, never replace either with success.
+            // A material error can win the observer deadline race. Count that
+            // initial observation too, without requiring it to be repeated.
+            var errors = new List<TtLifecycleException> { initial };
+            if (recoveredFailure is not null) errors.Add(Assert.IsType<TtLifecycleException>(recoveredFailure));
+            for (var attempt = 0; attempt < 2; attempt++)
+            {
+                var error = await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                if (error is null) break;
+                errors.Add(Assert.IsType<TtLifecycleException>(error));
+            }
+            Assert.Contains(errors, error => error.Message.Contains("InvalidOperationException", StringComparison.Ordinal));
+            if (bothFail) Assert.Contains(errors, error => error.Message.Contains("IOException", StringComparison.Ordinal));
+            Assert.All(errors, error => Assert.DoesNotContain("private-owner-detail", error.ToString()));
+            await cleanup.RetryCleanupAsync();
+            Assert.Empty(cleanup.OwnedResourceIds);
+        }
+        finally
+        {
+            held.Release.TrySetResult();
+            if (closing is not null) await Record.ExceptionAsync(() => closing);
+            var failure = await Record.ExceptionAsync(() => service.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+            await Tt.DisposeAsync();
+            await provider.DisposeAsync();
+        }
+    }
+
+    public sealed class HeldFailureContext(DbContextOptions<HeldFailureContext> options) : DbContext(options)
+    {
+        internal TaskCompletionSource Closing { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal TaskCompletionSource Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal bool ThrowAfterRelease { get; set; }
+        public override async ValueTask DisposeAsync()
+        {
+            Closing.TrySetResult();
+            await Release.Task;
+            if (ThrowAfterRelease) throw new IOException("private-owner-detail-a");
+            await base.DisposeAsync();
+        }
+    }
+
+    public sealed class PromptFailureContext(DbContextOptions<PromptFailureContext> options) : DbContext(options)
+    {
+        public override ValueTask DisposeAsync() => ValueTask.FromException(new InvalidOperationException("private-owner-detail-b"));
+    }
+
+    public sealed class PromptIoFailureContext(DbContextOptions<PromptIoFailureContext> options) : DbContext(options)
+    {
+        public override ValueTask DisposeAsync() => ValueTask.FromException(new IOException("private-owner-detail-c"));
+    }
+}

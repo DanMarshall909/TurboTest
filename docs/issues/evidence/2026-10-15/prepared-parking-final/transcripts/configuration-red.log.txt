@@ -1,0 +1,64 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.26]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "MaxParkedDatabases", value: -1) [FAIL]
+[xUnit.net 00:00:00.27]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "MaxParkedDatabases", value: 2) [FAIL]
+[xUnit.net 00:00:00.27]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "IdleDatabaseLifetime", value: -1) [FAIL]
+  Failed TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "MaxParkedDatabases", value: -1) [32 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1
+  Stack Trace:
+     at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "MaxParkedDatabases", value: 2) [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1
+  Stack Trace:
+     at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "IdleDatabaseLifetime", value: -1) [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1
+  Stack Trace:
+     at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:00.28]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "WarmFloor", value: 2) [FAIL]
+  Failed TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "WarmFloor", value: 2) [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1
+  Stack Trace:
+     at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---
+[xUnit.net 00:00:00.28]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "WarmFloor", value: -1) [FAIL]
+[xUnit.net 00:00:00.28]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "IdleDatabaseLifetime", value: 0) [FAIL]
+  Failed TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "WarmFloor", value: -1) [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1
+  Stack Trace:
+     at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "IdleDatabaseLifetime", value: 0) [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1
+  Stack Trace:
+     at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/configuration-red/configuration-red.trx
+
+Failed!  - Failed:     6, Passed:    18, Skipped:     0, Total:    24, Duration: 69 ms - TurboTest.Tests.dll (net10.0)

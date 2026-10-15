@@ -58,6 +58,12 @@ public class PreparedConfigurationTests
     [Theory]
     [InlineData("PoolSize", 0)]
     [InlineData("PoolSize", -1)]
+    [InlineData("WarmFloor", -1)]
+    [InlineData("WarmFloor", 2)]
+    [InlineData("MaxParkedDatabases", -1)]
+    [InlineData("MaxParkedDatabases", 2)]
+    [InlineData("IdleDatabaseLifetime", 0)]
+    [InlineData("IdleDatabaseLifetime", -1)]
     [InlineData("MemoryLimitMb", 0)]
     [InlineData("MemoryLimitMb", -1)]
     [InlineData("Provider", 987)]
@@ -80,6 +86,9 @@ public class PreparedConfigurationTests
         switch (property)
         {
             case "PoolSize": options.PoolSize = value; break;
+            case "WarmFloor": options.WarmFloor = value; break;
+            case "MaxParkedDatabases": options.MaxParkedDatabases = value; break;
+            case "IdleDatabaseLifetime": options.IdleDatabaseLifetime = TimeSpan.FromMilliseconds(value); break;
             case "MemoryLimitMb": options.MemoryLimitMb = value; break;
             case "Provider": options.Provider = (TtDatabaseProvider)value; break;
             case "AutoAllocateResources": options.AutoAllocateResources = true; break;
@@ -101,6 +110,29 @@ public class PreparedConfigurationTests
         Assert.Equal(0, images);
         var argument = Assert.IsAssignableFrom<ArgumentException>(error);
         Assert.Equal(property, argument.ParamName);
+    }
+
+    [Theory]
+    [InlineData(0, null, null)]
+    [InlineData(0, 0, null)]
+    [InlineData(1, 1, 1)]
+    public async Task A_valid_idle_policy_reaches_image_preparation(int floor, int? parked, int? lifetimeMilliseconds)
+    {
+        var images = 0;
+        var options = new TtOptions
+        {
+            PoolSize = 1, WarmFloor = floor, MaxParkedDatabases = parked,
+            IdleDatabaseLifetime = lifetimeMilliseconds is { } value ? TimeSpan.FromMilliseconds(value) : null
+        };
+        var failure = await Record.ExceptionAsync(() => Tt.CreatePreparedFactoryAsync(options,
+            new TtBaselineDefinition<TestDbContext>("idle-options-v1", TtSchemaInitialization.EnsureCreated), default,
+            prepareImage: _ =>
+            {
+                images++;
+                throw new IOException("Stop after accepted configuration, before allocation.");
+            }));
+        Assert.Equal(1, images);
+        Assert.IsType<TtLifecycleException>(failure);
     }
 
     [Fact]

@@ -1,0 +1,10 @@
+{
+  "gate": "7 native checks pass with coverage",
+  "sourceInputs": 94,
+  "assertions": "Real seed/schema corruption and disposed Npgsql source prevent retained publication. Callback gates verified replacement; name/OID change, seed1/next sequence2 restored, old database absent. Existing nominal parking/reopen, corruption recovery and real DROP rejection remain green.",
+  "refactor": {
+    "production": "Shared VerifySlotAsync and RecoverFailedOperationAsync already own verification and bounded repair; no second validation/repair path needed.",
+    "tests": "Three fault variants share one lifecycle/oracle. Literal data/sequence and independent pg_database identity observations prevent round-trip-only proof."
+  },
+  "limits": "Disposed-source failure calibrates Npgsql reopening rejection; no blanket network/authentication failure claim. Same-name replacement OID validation and lifecycle/retention policy remain pending."
+}

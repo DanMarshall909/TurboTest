@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~FactoryMaintenanceTests|FullyQualifiedName~FactoryBackpressureTests|FullyQualifiedName~DrainDeadlineTests.Drain_timeout_retains",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=maintenance-cancel-green.trx",
+    "--results-directory",
+    "artifacts/tt-008/maintenance-cancel-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 9.378475465004158,
+  "log": "artifacts/tt-008/maintenance-cancel-green.log",
+  "sourceBinding": "artifacts/tt-008/maintenance-cancel-green/source-binding.json"
+}

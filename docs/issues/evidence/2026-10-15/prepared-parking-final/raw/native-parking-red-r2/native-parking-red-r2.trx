@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="b612e964-5ddd-4f70-859a-e9ca8d12e48a" name="@os-greg 2026-10-15 09:11:15" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-15T09:11:15.5085416+10:00" queuing="2026-10-15T09:11:15.5085416+10:00" start="2026-10-15T09:11:07.0567135+10:00" finish="2026-10-15T09:11:15.5124823+10:00" />
+  <TestSettings name="default" id="d4f19b65-d08c-46a3-bd7e-b8d58743f172">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-15_09_11_15" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="3b331d41-abf9-4add-ae0e-6a723615d472" testId="3eaf3ea6-19b1-68a2-91c8-d80ab5bae724" testName="TurboTest.Tests.PreparedParkingTests.Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation" computerName="os-greg" duration="00:00:07.9129626" startTime="2026-10-15T09:11:07.5060389+10:00" endTime="2026-10-15T09:11:15.4290350+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3b331d41-abf9-4add-ae0e-6a723615d472">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1</Message>
+          <StackTrace>   at TurboTest.Tests.PreparedParkingTests.Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedParkingTests.cs:line 33
+   at TurboTest.Tests.PreparedParkingTests.Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedParkingTests.cs:line 40
+   at TurboTest.Tests.PreparedParkingTests.Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedParkingTests.cs:line 40
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.PreparedParkingTests.Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="3eaf3ea6-19b1-68a2-91c8-d80ab5bae724">
+      <Execution id="3b331d41-abf9-4add-ae0e-6a723615d472" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedParkingTests" name="Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="3eaf3ea6-19b1-68a2-91c8-d80ab5bae724" executionId="3b331d41-abf9-4add-ae0e-6a723615d472" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.16]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.18]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:08.12]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:08.12]       Expected: 0
+[xUnit.net 00:00:08.12]       Actual:   1
+[xUnit.net 00:00:08.12]       Stack Trace:
+[xUnit.net 00:00:08.12]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedParkingTests.cs(33,0): at TurboTest.Tests.PreparedParkingTests.Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation()
+[xUnit.net 00:00:08.12]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedParkingTests.cs(40,0): at TurboTest.Tests.PreparedParkingTests.Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation()
+[xUnit.net 00:00:08.12]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedParkingTests.cs(40,0): at TurboTest.Tests.PreparedParkingTests.Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation()
+[xUnit.net 00:00:08.12]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:08.13]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-15T09:11:15.4314927+10:00">
+        <Text>[xUnit.net 00:00:08.12]     TurboTest.Tests.PreparedParkingTests.Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

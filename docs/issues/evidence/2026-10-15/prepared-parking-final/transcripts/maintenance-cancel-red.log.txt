@@ -1,0 +1,19 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.35]     TurboTest.Tests.FactoryMaintenanceTests.Canceled_maintenance_preserves_its_actual_work_and_late_failure_through_cleanup [FAIL]
+  Failed TurboTest.Tests.FactoryMaintenanceTests.Canceled_maintenance_preserves_its_actual_work_and_late_failure_through_cleanup [136 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+  Stack Trace:
+     at TurboTest.Tests.FactoryMaintenanceTests.Canceled_maintenance_preserves_its_actual_work_and_late_failure_through_cleanup() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryMaintenanceTests.cs:line 32
+   at TurboTest.Tests.FactoryMaintenanceTests.Canceled_maintenance_preserves_its_actual_work_and_late_failure_through_cleanup() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryMaintenanceTests.cs:line 52
+   at TurboTest.Tests.FactoryMaintenanceTests.Canceled_maintenance_preserves_its_actual_work_and_late_failure_through_cleanup() in /home/dan/code/TurboTest/tests/TurboTest.Tests/FactoryMaintenanceTests.cs:line 52
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/maintenance-cancel-red/maintenance-cancel-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 149 ms - TurboTest.Tests.dll (net10.0)

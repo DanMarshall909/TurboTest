@@ -1,0 +1,180 @@
+{
+  "passed": 84,
+  "failed": 0,
+  "skipped": 0,
+  "sourceBinding": "final-fast-gate/source-binding.json",
+  "coverage": [
+    {
+      "name": "TurboTest.EFCore.TtFactory<TContext>",
+      "lineRate": "0.96875",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedConfiguration",
+      "lineRate": "0.9696969696969697",
+      "branchRate": "0.9722222222222222"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool<T>",
+      "lineRate": "0.9827586206896551",
+      "branchRate": "0.8818181818181818"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.MaintenanceWork<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass23_1<TContext>",
+      "lineRate": "1",
+      "branchRate": "0.9"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass23_2<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass26_0<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<CancelShutdownAsync>d__25<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<CreateLeaseAsync>d__23<TContext>",
+      "lineRate": "0.9230769230769231",
+      "branchRate": "0.5416666666666666"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<DisposeCoreAsync>d__27<TContext>",
+      "lineRate": "0.8571428571428571",
+      "branchRate": "0.7307692307692307"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<MaintainIdleAsync>d__6<TContext>",
+      "lineRate": "0.9375",
+      "branchRate": "0.9"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<ObserveDrainAsync>d__26<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<RunMaintenanceAsync>d__8<TContext>",
+      "lineRate": "1",
+      "branchRate": "0.8571428571428571"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.Reservation<T>",
+      "lineRate": "1",
+      "branchRate": "0.5"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.Waiter<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass27_0<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass28_0<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass31_0<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass40_0<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<DiscardCoreAsync>d__43<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<DisposeCoreAsync>d__55<T>",
+      "lineRate": "0.8064516129032258",
+      "branchRate": "0.7857142857142857"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<ParkAsync>d__30<T>",
+      "lineRate": "0.8461538461538461",
+      "branchRate": "0.75"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<PrepareAsync>d__36<T>",
+      "lineRate": "0.8571428571428571",
+      "branchRate": "0.875"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<RecoverCleanupAsync>d__49<T>",
+      "lineRate": "0.972972972972973",
+      "branchRate": "0.75"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<RecoverFailedOperationAsync>d__45<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<ResetAsync>d__44<T>",
+      "lineRate": "0.851063829787234",
+      "branchRate": "0.7857142857142857"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<RetireIdleAsync>d__29<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<RewarmAsync>d__33<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<WarmAsync>d__40<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass23_3.<<CreateLeaseAsync>b__4>d<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass26_1.<<ObserveDrainAsync>b__0>d<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass38_0.<<ReturnAsync>b__0>d<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    }
+  ],
+  "refactor": "Same84 behavior assertions pass after global-registry fixture serialization and safe timing emission. Core ledger remains sole capacity owner; no tests skipped and no test mirrors added.",
+  "limits": "This scoped current fast gate does not replace final full integration verification."
+}

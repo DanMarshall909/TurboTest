@@ -1,0 +1,89 @@
+{
+  "runs": [
+    {
+      "run": "final-fast-gate-r2",
+      "exitCode": 0,
+      "inputs": 103,
+      "elapsedSeconds": 22.325233818002744,
+      "counters": {
+        "total": "89",
+        "executed": "89",
+        "passed": "89",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "run": "review-r1-recovery-close-native-r2",
+      "exitCode": 0,
+      "inputs": 103,
+      "elapsedSeconds": 52.72882308400585,
+      "counters": {
+        "total": "19",
+        "executed": "19",
+        "passed": "19",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "run": "full-gate-r3",
+      "exitCode": 0,
+      "inputs": 103,
+      "elapsedSeconds": 683.9186894759987,
+      "counters": {
+        "total": "299",
+        "executed": "299",
+        "passed": "299",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "run": "solution-build-r2",
+      "exitCode": 0,
+      "inputs": 103,
+      "elapsedSeconds": 2.991147788001399
+    },
+    {
+      "run": "separate-example-build-r2",
+      "exitCode": 0,
+      "inputs": 103,
+      "elapsedSeconds": 2.5664944520030986
+    }
+  ],
+  "qualification": "All current terminal passing gates bind the same revised compiler inputs. Earlier source cuts and rejected candidate remain historical."
+}

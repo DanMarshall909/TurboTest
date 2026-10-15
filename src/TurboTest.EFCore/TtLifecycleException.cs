@@ -15,7 +15,8 @@ public sealed class TtLifecycleException : InvalidOperationException
     {
         Stage = stage;
         SqlState = cause is TtLifecycleException lifecycle ? lifecycle.SqlState : (cause as PostgresException)?.SqlState;
-        _diagnostic = Diagnostic(cause);
+        _diagnostic = cleanupFailure is null ? Diagnostic(cause)
+            : $"{Diagnostic(cause)}; {(cleanupFailure as TtLifecycleException)?.Stage ?? "Discard"}:{Diagnostic(cleanupFailure)}";
         Cleanup = cleanup ?? (cause as TtLifecycleException)?.Cleanup ?? (cleanupFailure as TtLifecycleException)?.Cleanup;
     }
 

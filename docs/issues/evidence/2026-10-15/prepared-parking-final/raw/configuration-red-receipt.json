@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation",
+    "--logger",
+    "trx;LogFileName=configuration-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/configuration-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 5.1388653260000865,
+  "log": "artifacts/tt-008/configuration-red.log",
+  "sourceBinding": "artifacts/tt-008/configuration-red/source-binding.json"
+}

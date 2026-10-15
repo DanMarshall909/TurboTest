@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotParkingTests|FullyQualifiedName~SlotPoolTests|FullyQualifiedName~SlotRecoveryTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=parking-refactor.trx",
+    "--results-directory",
+    "artifacts/tt-008/parking-refactor"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 7.319951702003891,
+  "log": "artifacts/tt-008/parking-refactor.log",
+  "sourceBinding": "artifacts/tt-008/parking-refactor/source-binding.json"
+}

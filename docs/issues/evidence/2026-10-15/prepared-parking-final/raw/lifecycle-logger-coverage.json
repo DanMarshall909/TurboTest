@@ -1,0 +1,130 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:     8, Skipped:     0, Total:     8, Duration: 29 s - TurboTest.Tests.dll (net10.0)",
+  "red": "Corrected two-test RED: a one-shot logger exception fails successful park at SlotPark, and replaces real55006 with null SQLSTATE.",
+  "qualification": "Initial permanently throwing logger also poisoned teardown and masked first oracles. Both raw failures/source cuts remain. Exactly two terminal task-owned repro hosts were removed after corrected workspace/process checks; unrelated Docker/job/cache state preserved.",
+  "assertions": "Nominal park/reopen preserves same database identity/seed/sequence even when logger throws; four structured records remain independently checked. Material late55006 remains visible with throwing logger, finite deletion and complete host removal.",
+  "coverage": [
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool<TContext>",
+      "lineRate": "0.9819819819819819",
+      "branchRate": "0.9285714285714286"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.Slot<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.BaselineIdentity<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.Login<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass37_0<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass38_0<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass39_0<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass43_0<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass50_0<TContext>",
+      "lineRate": "0.6666666666666666",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass52_0<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<DeleteSlotCoreAsync>d__53<TContext>",
+      "lineRate": "0.9285714285714286",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<DrainCoreAsync>d__58<TContext>",
+      "lineRate": "0.7727272727272727",
+      "branchRate": "0.7"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<GetDatabaseAsync>d__38<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<InitializeAsync>d__33<TContext>",
+      "lineRate": "0.8928571428571429",
+      "branchRate": "0.5625"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<MeasureLifecycleAsync>d__57<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<PrepareSlotAsync>d__42<TContext>",
+      "lineRate": "0.8888888888888888",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<ReturnAsync>d__50<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<RewarmSlotCoreAsync>d__44<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<TryResetRowsAsync>d__51<TContext>",
+      "lineRate": "0.8695652173913043",
+      "branchRate": "0.5"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<VerifySlotAsync>d__45<TContext>",
+      "lineRate": "0.967741935483871",
+      "branchRate": "0.8571428571428571"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<VerifyWorkloadAsync>d__47<TContext>",
+      "lineRate": "0.875",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.Login.<CreateWorkloadRoleAsync>d__6<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtPreparedPool.<>c__DisplayClass50_0.<<ReturnAsync>b__1>d<TContext>",
+      "lineRate": "0.8571428571428571",
+      "branchRate": "0.5"
+    }
+  ],
+  "refactor": "One prepared lifecycle timing wrapper contains diagnostic-consumer failures after measuring actual operation. No backend/recovery outcome is altered.",
+  "limits": "Prepared-pool teardown boundary is explicit and excludes earlier factory context cleanup. Comprehensive final shutdown metrics remain TT010."
+}

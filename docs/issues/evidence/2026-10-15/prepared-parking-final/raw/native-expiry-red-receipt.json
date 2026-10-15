@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Expired_parked_database_retires_at_monotonic_boundary_before_renewal_can_use_its_capacity",
+    "--logger",
+    "trx;LogFileName=native-expiry-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/native-expiry-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 11.322227152995765,
+  "log": "artifacts/tt-008/native-expiry-red.log",
+  "sourceBinding": "artifacts/tt-008/native-expiry-red/source-binding.json"
+}

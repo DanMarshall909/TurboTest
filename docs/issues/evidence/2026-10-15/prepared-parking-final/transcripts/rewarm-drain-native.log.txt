@@ -1,0 +1,22 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:09.49]     TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_reports_its_late_verification_failure_after_host_deletion [FAIL]
+  Failed TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_reports_its_late_verification_failure_after_host_deletion [9 s]
+  Error Message:
+   Assert.Contains() Failure: Sub-string not found
+String:    "TurboTest lifecycle failed at PreparedPoo"···
+Not found: "BaselineRewarmOpen"
+  Stack Trace:
+     at TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_reports_its_late_verification_failure_after_host_deletion() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedMaintenanceDrainTests.cs:line 58
+   at TurboTest.Tests.PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_reports_its_late_verification_failure_after_host_deletion() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedMaintenanceDrainTests.cs:line 77
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/rewarm-drain-native/rewarm-drain-native.trx
+
+Failed!  - Failed:     1, Passed:    10, Skipped:     0, Total:    11, Duration: 26 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-008/rewarm-drain-native/8eb2f9ba-addd-4666-a3a5-150cd230d1f1/dan_os-greg_2026-10-15.09_51_06.cobertura.xml

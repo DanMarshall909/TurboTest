@@ -1,0 +1,12 @@
+namespace TurboTest.EFCore.Internal;
+
+internal interface ITtDatabasePool : IAsyncDisposable
+{
+    TtPoolSnapshot Snapshot { get; }
+    TtResourceBudget Budget { get; }
+    IReadOnlyList<string> OwnedResourceIds { get; }
+    Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default);
+    Task MaintainIdleAsync(CancellationToken cancellationToken = default)
+        => throw new NotSupportedException("Idle parking requires a prepared baseline fixture.");
+    Task RetryCleanupAsync() => DisposeAsync().AsTask();
+}

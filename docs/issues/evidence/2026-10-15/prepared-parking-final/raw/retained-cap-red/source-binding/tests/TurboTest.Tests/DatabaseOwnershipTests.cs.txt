@@ -1,0 +1,186 @@
+using Npgsql;
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.Tests;
+
+public class DatabaseOwnershipTests
+{
+    [Fact]
+    public async Task Secondary_sqlstate_does_not_replace_a_non_database_cleanup_failure()
+    {
+        await using var source = NpgsqlDataSource.Create("Host=unused;Username=test");
+        var database = new TtDatabase(source,
+            () => throw new InvalidOperationException("Dirty resource published"),
+            () => throw new TtLifecycleException("DropOwned",
+                new PostgresException("drop-secret", "ERROR", "ERROR", "55000")));
+        database.OnDispose(() => Task.FromException(new IOException("close-secret")));
+
+        var error = await Assert.ThrowsAsync<TtLifecycleException>(() => database.DisposeAsync().AsTask());
+        Assert.Equal("LeaseCleanup", error.Stage);
+        Assert.Null(error.SqlState);
+        Assert.Contains(nameof(IOException), error.Message);
+        Assert.Contains("DropOwned", error.Message);
+        Assert.Contains("55000", error.Message);
+        Assert.DoesNotContain("secret", error.ToString());
+    }
+
+    [Fact]
+    public async Task Failed_discard_preserves_the_first_cleanup_stage_and_sqlstate()
+    {
+        await using var source = NpgsqlDataSource.Create("Host=unused;Username=test");
+        var closed = false;
+        var attempts = 0;
+        var database = new TtDatabase(source,
+            () => throw new InvalidOperationException("Dirty resource published"),
+            () =>
+            {
+                Assert.True(closed);
+                attempts++;
+                throw new IOException("discard-secret");
+            });
+        database.OnDispose(() => Task.FromException(new PostgresException("cleanup-secret", "ERROR", "ERROR", "08006")));
+        database.OnDispose(() => { closed = true; return Task.CompletedTask; });
+
+        var error = await Assert.ThrowsAsync<TtLifecycleException>(() => database.DisposeAsync().AsTask());
+        Assert.Equal("LeaseCleanup", error.Stage);
+        Assert.Equal("08006", error.SqlState);
+        Assert.Contains("08006", error.Message);
+        Assert.Contains("Discard", error.Message);
+        Assert.Contains(nameof(IOException), error.Message);
+        Assert.DoesNotContain("secret", error.ToString());
+        Assert.Same(error, await Assert.ThrowsAsync<TtLifecycleException>(() => database.DisposeAsync().AsTask()));
+        Assert.Equal(1, attempts);
+    }
+
+    [Fact]
+    public async Task Abandoned_reservation_closes_resources_and_discards_without_reset_publication()
+    {
+        await using var source = NpgsqlDataSource.Create("Host=unused;Username=test");
+        var events = new List<string>();
+        var database = new TtDatabase(source,
+            () => { events.Add("ready"); return Task.CompletedTask; },
+            () => { events.Add("discard"); return Task.CompletedTask; });
+        database.OnDispose(() => { events.Add("closed"); return Task.CompletedTask; });
+        await database.DiscardAsync();
+        await database.DisposeAsync();
+        Assert.Equal(["closed", "discard"], events);
+    }
+    [Fact]
+    public async Task Cleanup_finishes_before_return_and_repeat_disposal_returns_only_once()
+    {
+        await using var source = NpgsqlDataSource.Create("Host=unused;Username=test");
+        var closed = false;
+        var ready = new List<string>();
+        var database = new TtDatabase(source, () =>
+        {
+            Assert.True(closed);
+            ready.Add("verified-resource");
+            return Task.CompletedTask;
+        }, () => throw new InvalidOperationException("Unexpected discard"));
+        database.OnDispose(() => { closed = true; return Task.CompletedTask; });
+
+        await database.DisposeAsync();
+        await database.DisposeAsync();
+        Assert.Equal(["verified-resource"], ready);
+    }
+
+    [Fact]
+    public async Task Failed_cleanup_closes_remaining_resources_then_discards_without_publication()
+    {
+        await using var source = NpgsqlDataSource.Create("Host=unused;Username=test");
+        var ready = new List<string>();
+        var discarded = new List<string>();
+        var remainingClosed = false;
+        var database = new TtDatabase(source,
+            () => { ready.Add("dirty-resource"); return Task.CompletedTask; },
+            () => { Assert.True(remainingClosed); discarded.Add("failed-resource"); return Task.CompletedTask; });
+        database.OnDispose(() => Task.FromException(new IOException("secret-test-payload")));
+        database.OnDispose(() => { remainingClosed = true; return Task.CompletedTask; });
+
+        var error = await Assert.ThrowsAsync<TtLifecycleException>(() => database.DisposeAsync().AsTask());
+        Assert.Equal("LeaseCleanup", error.Stage);
+        Assert.Contains("LeaseCleanup", error.Message);
+        Assert.Contains(nameof(IOException), error.Message);
+        Assert.DoesNotContain("secret-test-payload", error.ToString());
+        var repeated = await Assert.ThrowsAsync<TtLifecycleException>(() => database.DisposeAsync().AsTask());
+        Assert.Equal("LeaseCleanup", repeated.Stage);
+        Assert.Empty(ready);
+        Assert.Equal(["failed-resource"], discarded);
+    }
+
+    [Fact]
+    public async Task Concurrent_disposals_wait_for_the_same_pending_return()
+    {
+        await using var source = NpgsqlDataSource.Create("Host=unused;Username=test");
+        var returning = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var permit = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var ready = new List<string>();
+        var database = new TtDatabase(source, async () =>
+        {
+            returning.SetResult();
+            await permit.Task;
+            ready.Add("verified-resource");
+        }, () => throw new InvalidOperationException("Unexpected discard"));
+
+        var first = database.DisposeAsync().AsTask();
+        await returning.Task;
+        var concurrent = database.DisposeAsync().AsTask();
+        try
+        {
+            Assert.False(first.IsCompleted);
+            Assert.False(concurrent.IsCompleted);
+            Assert.Empty(ready);
+        }
+        finally
+        {
+            permit.TrySetResult();
+        }
+        await Task.WhenAll(first, concurrent).WaitAsync(TimeSpan.FromSeconds(2));
+        Assert.Equal(["verified-resource"], ready);
+    }
+
+    [Fact]
+    public async Task New_resources_cannot_be_registered_after_cleanup_begins()
+    {
+        await using var source = NpgsqlDataSource.Create("Host=unused;Username=test");
+        var cleanupStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var permit = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var database = new TtDatabase(source, () => Task.CompletedTask,
+            () => throw new InvalidOperationException("Unexpected discard"));
+        database.OnDispose(async () => { cleanupStarted.SetResult(); await permit.Task; });
+        var disposal = database.DisposeAsync().AsTask();
+        await cleanupStarted.Task;
+        try
+        {
+            Assert.Throws<ObjectDisposedException>(() => database.OnDispose(() => Task.CompletedTask));
+        }
+        finally
+        {
+            permit.TrySetResult();
+            await disposal.WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
+    [Fact]
+    public async Task Later_cleanup_failures_do_not_hide_the_original_failure_diagnostic()
+    {
+        await using var source = NpgsqlDataSource.Create("Host=unused;Username=test");
+        var closed = false;
+        var discarded = false;
+        var database = new TtDatabase(source,
+            () => throw new InvalidOperationException("Dirty resource became Ready"),
+            () => { Assert.True(closed); discarded = true; return Task.CompletedTask; });
+        database.OnDispose(() => Task.FromException(new PostgresException("first-secret", "ERROR", "ERROR", "08006")));
+        database.OnDispose(() => Task.FromException(new IOException("later-secret")));
+        database.OnDispose(() => { closed = true; return Task.CompletedTask; });
+
+        var error = await Assert.ThrowsAsync<TtLifecycleException>(() => database.DisposeAsync().AsTask());
+        Assert.Equal("LeaseCleanup", error.Stage);
+        Assert.Equal("08006", error.SqlState);
+        Assert.Contains("08006", error.Message);
+        Assert.Contains("LeaseCleanup", error.Message);
+        Assert.DoesNotContain("secret", error.ToString());
+        Assert.True(discarded);
+    }
+}

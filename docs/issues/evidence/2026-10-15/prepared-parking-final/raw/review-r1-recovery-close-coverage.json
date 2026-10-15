@@ -1,0 +1,7 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:    22, Skipped:     0, Total:    22, Duration: 1 s - TurboTest.Tests.dll (net10.0)",
+  "red": "Both held direct deletion and held retry deletion after live rewarm failure return successful drain instead of material diagnostic. No setup/timeouts; two genuine missing-error assertions.",
+  "assertions": "Closure rejects acquisition, retains resource while held, suppresses replacement and reports original IOException once after confirmed deletion. Subsequent cleanup succeeds without repeated deletion. Existing live recovery/cooperative controls pass.",
+  "refactor": "Pending unseen diagnostic lives on the existing reservation, transfers to replacement, clears only at verified publication or delivery, and moves to final drain when no recovery can complete. Retry carries and updates the same obligation. No pre-await closure snapshot or second owner/controller.",
+  "limits": "Selected22-check gate; native calibration/new full/build/final complete review still required."
+}

@@ -1,0 +1,258 @@
+{
+  "run": "full-gate-r3",
+  "sources": [
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Extensions/ServiceCollectionExtensions.cs",
+      "executed": 24,
+      "instrumented": 30,
+      "unexecutedLines": [
+        40,
+        41,
+        42,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/ITtDatabasePool.cs",
+      "executed": 3,
+      "instrumented": 3,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/NpgsqlExtensions.cs",
+      "executed": 4,
+      "instrumented": 8,
+      "unexecutedLines": [
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtAdministratorConnections.cs",
+      "executed": 34,
+      "instrumented": 35,
+      "unexecutedLines": [
+        54
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtBaselineSnapshot.cs",
+      "executed": 172,
+      "instrumented": 174,
+      "unexecutedLines": [
+        152,
+        178
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtCleanupRegistry.cs",
+      "executed": 20,
+      "instrumented": 21,
+      "unexecutedLines": [
+        14
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtContainer.cs",
+      "executed": 45,
+      "instrumented": 48,
+      "unexecutedLines": [
+        75,
+        76,
+        78
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtDatabase.cs",
+      "executed": 57,
+      "instrumented": 57,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtLogger.cs",
+      "executed": 5,
+      "instrumented": 6,
+      "unexecutedLines": [
+        8
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtOwnedContextOptions.cs",
+      "executed": 9,
+      "instrumented": 9,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPool.cs",
+      "executed": 230,
+      "instrumented": 260,
+      "unexecutedLines": [
+        250,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        347,
+        348,
+        349,
+        351,
+        352,
+        353,
+        354,
+        357,
+        358,
+        370,
+        378
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedConfiguration.cs",
+      "executed": 33,
+      "instrumented": 33,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtPreparedPool.cs",
+      "executed": 358,
+      "instrumented": 361,
+      "unexecutedLines": [
+        171,
+        329,
+        479
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtRowResetPlan.cs",
+      "executed": 105,
+      "instrumented": 105,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtScopedLease.cs",
+      "executed": 34,
+      "instrumented": 34,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+      "executed": 524,
+      "instrumented": 549,
+      "unexecutedLines": [
+        167,
+        168,
+        169,
+        170,
+        291,
+        292,
+        293,
+        335,
+        336,
+        337,
+        338,
+        339,
+        393,
+        445,
+        446,
+        447,
+        461,
+        462,
+        463,
+        464,
+        572,
+        610,
+        611,
+        612,
+        690
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs",
+      "executed": 125,
+      "instrumented": 126,
+      "unexecutedLines": [
+        18
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtBaselineDefinition.cs",
+      "executed": 11,
+      "instrumented": 11,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtCleanup.cs",
+      "executed": 39,
+      "instrumented": 39,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtFactory.cs",
+      "executed": 214,
+      "instrumented": 221,
+      "unexecutedLines": [
+        42,
+        43,
+        185,
+        274,
+        275,
+        276,
+        277
+      ]
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtLease.cs",
+      "executed": 42,
+      "instrumented": 42,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtLifecycleException.cs",
+      "executed": 31,
+      "instrumented": 31,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtOptions.cs",
+      "executed": 25,
+      "instrumented": 25,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtPoolSnapshot.cs",
+      "executed": 3,
+      "instrumented": 3,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtResourceBudget.cs",
+      "executed": 25,
+      "instrumented": 25,
+      "unexecutedLines": []
+    },
+    {
+      "path": "/home/dan/code/TurboTest/src/TurboTest.EFCore/TtServiceFactory.cs",
+      "executed": 129,
+      "instrumented": 129,
+      "unexecutedLines": []
+    }
+  ],
+  "qualification": "Executed-line evidence is separate from assertion protection; no whole-package100% or passing final mutation claim."
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotRetentionTests",
+    "--logger",
+    "trx;LogFileName=retained-cap-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/retained-cap-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 5.232648256001994,
+  "log": "artifacts/tt-008/retained-cap-red.log",
+  "sourceBinding": "artifacts/tt-008/retained-cap-red/source-binding.json"
+}

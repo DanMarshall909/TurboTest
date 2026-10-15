@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~PreparedParkingTests",
+    "--logger",
+    "trx;LogFileName=native-parking-red-r2.trx",
+    "--results-directory",
+    "artifacts/tt-008/native-parking-red-r2"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 11.92377757000213,
+  "log": "artifacts/tt-008/native-parking-red-r2.log",
+  "sourceBinding": "artifacts/tt-008/native-parking-red-r2/source-binding.json"
+}

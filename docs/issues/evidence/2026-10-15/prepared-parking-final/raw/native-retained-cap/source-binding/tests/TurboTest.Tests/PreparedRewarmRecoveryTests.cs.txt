@@ -1,0 +1,112 @@
+using Microsoft.EntityFrameworkCore;
+using Docker.DotNet;
+using Npgsql;
+using TurboTest.EFCore;
+
+namespace TurboTest.Tests;
+
+public class PreparedRewarmRecoveryTests
+{
+    [Theory]
+    [InlineData("seed")]
+    [InlineData("schema")]
+    [InlineData("opening")]
+    [InlineData("identity")]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Invalid_retained_databases_are_deleted_before_a_verified_replacement_is_published(string fault)
+    {
+        var replacementStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var verifyReplacement = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var validations = 0;
+        string? hostIdentity = null;
+        var definition = new TtBaselineDefinition<TestDbContext>("rewarm-recovery-v1", TtSchemaInitialization.EnsureCreated,
+            async (context, token) =>
+            {
+                context.Users.Add(new User { Email = "verified-rewarm@example.test" });
+                await context.SaveChangesAsync(token);
+            });
+        await using var fixture = await Tt.CreatePreparedFactoryAsync(new TtOptions { PoolSize = 1 }, definition, default,
+            beforeVerification: async source =>
+            {
+                var attempt = Interlocked.Increment(ref validations);
+                if (attempt > 3) throw new InvalidOperationException("A single bad rewarm required more than one replacement.");
+                if (attempt == 2)
+                {
+                    if (fault == "identity") await ReplaceWithSameNameAsync(hostIdentity!, source);
+                    else if (fault == "opening") await source.DisposeAsync();
+                    else
+                    {
+                        await using var session = await source.OpenConnectionAsync();
+                        await using var change = new NpgsqlCommand(fault == "seed"
+                            ? "DELETE FROM \"Users\""
+                            : "ALTER TABLE \"Users\" ADD COLUMN corrupt_rewarm integer", session);
+                        await change.ExecuteNonQueryAsync();
+                    }
+                }
+                if (attempt == 3)
+                {
+                    replacementStarted.TrySetResult();
+                    await verifyReplacement.Task;
+                }
+            });
+        hostIdentity = Assert.Single(fixture.OwnedResourceIds);
+        var original = await fixture.CreateLeaseAsync();
+        var identity = await PooledResetTests.ReadIdentityAsync(original.Context);
+        await original.DisposeAsync();
+        await fixture.MaintainIdleAsync();
+        using var cancel = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+        var waiting = fixture.CreateLeaseAsync(cancellationToken: cancel.Token);
+        try
+        {
+            await Task.WhenAny(waiting, replacementStarted.Task).WaitAsync(TimeSpan.FromSeconds(15));
+            Assert.False(waiting.IsCompleted);
+            await replacementStarted.Task.WaitAsync(TimeSpan.FromSeconds(15));
+            Assert.Equal((1, 1, 0), (fixture.PoolState.Reserved, fixture.PoolState.Preparing, fixture.PoolState.Ready));
+            verifyReplacement.TrySetResult();
+            await using var recovered = await waiting.WaitAsync(TimeSpan.FromSeconds(5));
+            var clean = await PooledResetTests.ReadIdentityAsync(recovered.Context);
+            Assert.NotEqual(identity.Database, clean.Database);
+            Assert.NotEqual(identity.Oid, clean.Oid);
+            var seed = await recovered.Context.Users.SingleAsync();
+            Assert.Equal((1, "verified-rewarm@example.test"), (seed.Id, seed.Email));
+            recovered.Context.Users.Add(new User { Email = "after-clean-rewarm@example.test" });
+            await recovered.Context.SaveChangesAsync();
+            Assert.Equal(2, await recovered.Context.Users.MaxAsync(user => user.Id));
+            await recovered.Context.Database.OpenConnectionAsync();
+            await using var missing = new NpgsqlCommand("SELECT count(*) FROM pg_database WHERE datname = $1",
+                (NpgsqlConnection)recovered.Context.Database.GetDbConnection());
+            missing.Parameters.Add(new NpgsqlParameter { Value = identity.Database });
+            Assert.Equal(0L, await missing.ExecuteScalarAsync());
+            Assert.Equal(3, validations);
+        }
+        finally
+        {
+            cancel.Cancel();
+            verifyReplacement.TrySetResult();
+            await Record.ExceptionAsync(async () => { await using var lease = await waiting; });
+        }
+    }
+
+    private static async Task ReplaceWithSameNameAsync(string containerId, NpgsqlDataSource workload)
+    {
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        var host = await docker.Containers.InspectContainerAsync(containerId);
+        var intended = new NpgsqlConnectionStringBuilder(workload.ConnectionString);
+        var settings = new NpgsqlConnectionStringBuilder(workload.ConnectionString)
+        {
+            Database = "postgres", Pooling = false, Enlist = false,
+            Username = host.Config.Env.Single(value => value.StartsWith("POSTGRES_USER=", StringComparison.Ordinal)).Split('=', 2)[1],
+            Password = host.Config.Env.Single(value => value.StartsWith("POSTGRES_PASSWORD=", StringComparison.Ordinal)).Split('=', 2)[1]
+        };
+        // Test-owned host administration stays private; credentials are never emitted.
+        await using var administrator = new NpgsqlConnection(settings.ConnectionString);
+        await administrator.OpenAsync();
+        await using var findTemplate = new NpgsqlCommand("SELECT datname FROM pg_database WHERE NOT datallowconn AND datname LIKE '%_baseline_%'", administrator);
+        var template = (string)(await findTemplate.ExecuteScalarAsync())!;
+        var quote = new NpgsqlCommandBuilder();
+        await using (var drop = new NpgsqlCommand($"DROP DATABASE {quote.QuoteIdentifier(intended.Database!)} WITH (FORCE)", administrator))
+            await drop.ExecuteNonQueryAsync();
+        await using var recreate = new NpgsqlCommand($"CREATE DATABASE {quote.QuoteIdentifier(intended.Database!)} TEMPLATE {quote.QuoteIdentifier(template)} OWNER {quote.QuoteIdentifier(intended.Username!)}", administrator);
+        await recreate.ExecuteNonQueryAsync();
+    }
+}

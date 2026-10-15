@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "(FullyQualifiedName~PreparedParkingTests.Rewarm_reuses|FullyQualifiedName~PreparedMaintenanceDrainTests.Canceled_retirement)&DisplayName~True",
+    "--logger",
+    "trx;LogFileName=lifecycle-logger-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/lifecycle-logger-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 10.198744346998865,
+  "log": "artifacts/tt-008/lifecycle-logger-red.log",
+  "sourceBinding": "artifacts/tt-008/lifecycle-logger-red/source-binding.json"
+}

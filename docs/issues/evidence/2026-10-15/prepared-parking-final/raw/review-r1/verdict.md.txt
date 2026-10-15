@@ -1,0 +1,95 @@
+FAIL
+
+TT-008 has one required correction: a rewarm failure can disappear when shutdown begins during its recovery cleanup. The candidate and evidence are otherwise reproducible. Review was read-only; I ran no builds, tests, benchmarks, Docker mutations, or publication operations.
+
+**Required finding R1 — retain an unobserved rewarm failure when closure interrupts recovery**
+
+Requirement: TT-008 acceptance criteria 4 and 7, including TT-006’s inherited requirements to track lifecycle work and avoid reporting callback failures as successful cleanup.
+
+Location: `src/TurboTest.EFCore/Internal/TtSlotPool.cs`, `RewarmAsync` lines 229–240, `RecoverFailedOperationAsync` lines 454–468, and `ReplenishAfterDeletion` lines 479–487.
+
+`RewarmAsync` computes `reportAtDrain` once, before waiting for the cleanup permit and physical deletion. That value becomes stale across those awaits.
+
+A deterministic ordering exposes the defect:
+
+1. Rewarm verification throws a material error while the pool is live. `reportAtDrain` becomes `false`.
+2. Recovery enters `_delete` and waits for confirmation.
+3. Factory closure calls `StopAcceptingWork`, or pool disposal sets `_closed`. Pending acquisition is rejected.
+4. Deletion completes. `ReplenishAfterDeletion` removes the reservation, while `ReservePending` correctly refuses replacement because closure has started.
+5. The original material failure is discarded because `reportAtDrain` remains `false`. Drain finds no retained error and can complete successfully.
+
+No verified replacement restored service, and no caller received the material error. This is therefore different from the intended transparent, successful live recovery. The cleanup-retry path also needs consideration: it carries the failure while retrying, but stopping/cancellation can end that episode without transferring the unobserved failure to drain.
+
+Existing `SlotRewarmDrainTests`, `FactoryRewarmDrainTests`, and native closure tests begin closure before releasing verification. They protect the opposite ordering and do not detect this case.
+
+Required outcome: retain the error obligation through the recovery episode until recovery succeeds or the material diagnostic is delivered. Closure decisions and diagnostic transfer must account for closure during cleanup/retry, rather than relying on the earlier Boolean snapshot. Preserve transparent successful live recovery, cooperative cancellation, bounded retries, single deletion ownership, and delivery once.
+
+Add deterministic component RED evidence that holds recovery deletion after a live verification failure, starts closure, then releases deletion. Assert the material diagnostic, no replacement, confirmed resource release, and successful subsequent cleanup without repeated delivery. Calibrate the supported ordering through the prepared fixture boundary. This finding is based on the actual control flow; I did not execute a reproduction under the read-only review restriction.
+
+**Task-to-implementation matrix**
+
+| Accepted task | Actual implementation | Assessment |
+|---|---|---|
+| Configure explicit fixed idle policy | `TtOptions`, `TtPreparedConfiguration.Validate`, captured prepared options, public `TtFactory.MaintainIdleAsync` | Implemented; invalid values rejected before image preparation; ordinary factories reject maintenance |
+| Select and park idle verified capacity | `TtSlotPool.ParkIdleAsync` claims Ready entries under the ledger lock; `ParkAsync` uses the cleanup permit; prepared callback disposes the owned source | Implemented; active and transitional slots remain excluded |
+| Prefer retained capacity and validate reopening | `AcquireAsync`/`ClaimParked`, preparation semaphore, `RewarmSlotCoreAsync`, shared `VerifySlotAsync`, retained PostgreSQL OID | Implemented; retained ownership works at the physical cap and publication follows verification |
+| Recover invalid retained databases | `RecoverFailedOperationAsync`, confirmed deletion, bounded cleanup/preparation recovery | Live recovery implemented; closure during recovery loses an unobserved diagnostic, R1 |
+| Bound retained capacity and idle lifetime | Ready floor, parked/parking retention accounting, monotonic `IdleSince`, Retiring claims | Implemented; deletion confirmation controls capacity release |
+| Drain actual work and retained resources | Factory `MaintenanceWork`, observer tracking, `StopAcceptingWork`, ledger settlement tasks, late-failure collection | Substantially implemented; R1 leaves one lifecycle ordering incomplete |
+| Expose deferred costs and document boundaries | Structured Debug event 401 for Park/Rewarm/Delete/Teardown; logger exceptions isolated; README policy and timing boundaries | Implemented within TT-008 scope; comprehensive metrics/benchmarks and adaptation remain TT-010/TT-009 |
+
+**Criterion-to-test matrix**
+
+| Criterion | Executable evidence and independently inspected oracle | RED evidence | Assessment |
+|---|---|---|---|
+| 1. Only idle verified Ready slots park | `SlotParkingTests.Parking_claims_only_idle_ready_slots_and_retains_capacity_until_shutdown` holds Preparing, Leased, Resetting and Ready identities simultaneously; repeated-maintenance test rejects duplicate claims; floor theory covers 0/1/3 | `parking-red-r2`: missing pending closure | Satisfied |
+| 2. Close owned sessions while retaining files, identity and reservation | `PreparedParkingTests.Parking_closes_owned_sessions_and_retains_the_database_oid_files_and_reservation` independently observes session count changing to zero, unchanged OID, positive database size, reservation retained, and final owner drain | `native-parking-red-r2`: one session remained | Satisfied |
+| 3. Prefer retained rewarm, including at hard cap | `SlotParkingTests.Acquisition_rewarms_the_retained_reservation_at_capacity_and_waits_for_validation`, demand-during-parking and canceled-observer tests; native rewarm test asserts same name/OID, changed session, literal seed and sequence outcomes | `rewarm-red`, `native-rewarm-red`: required rewarm callback never arrived | Satisfied |
+| 4. Validate baseline/schema/identity and recover failures | `PreparedRewarmRecoveryTests` covers seed, schema, disposed-source opening, and same-name/new-OID replacement; acquisition stays pending until replacement verification; old database absence and fresh seed/sequence state asserted. `SlotIdleRecoveryTests` checks retained capacity and permit ordering | `idle-recovery-red-r2`, `retained-identity-red` | Live paths satisfied; closure-interrupted recovery needs R1 |
+| 5. Validated floor/cap/expiry with confirmed deletion | Configuration invalid/legal boundary tests; `SlotRetentionTests`, `SlotExpiryTests`, `PreparedRetentionTests` assert exact monotonic boundary, wall-clock immunity, renewed age, lease/floor protection, captured policy and held real DROP | `configuration-red`, `retained-cap-red`, `expiry-red`, `native-expiry-red` | Satisfied |
+| 6. Bounded concurrency and no doubled ownership during renewal | Concurrent rewarm test independently counts active callbacks; parking waits behind held cleanup; retirement/retry tests forbid premature creation; native retained-cap test observes the old database while renewal remains queued; permit-inversion regression | Rewarm/retention REDs and retained permit-ordering evidence | Satisfied |
+| 7. Drain active/parked work and expose deletion/teardown costs | Factory maintenance cancellation, aggregation and distinct-drain-error tests; component/native held-rewarm and held-context shutdown tests; structured timing and throwing-logger controls | Maintenance cancellation/aggregation, rewarm drain/cancellation, factory closure, timing and corrected logger REDs | Incomplete: R1 ordering is unprotected and incorrect; remaining drain/timing evidence is meaningful |
+
+**Evidence and publication checks**
+
+I independently reconstructed all 6,028 changed/untracked paths from Git and the worktree, checking status, canonical mode, staged object identity and content digest. The manifest matches:
+
+`514793004911e60c52787525e34715cc2fdccc85f333a6ce31a923d56aa10014`
+
+HEAD, base and integration identity are `5b8336ab852119ce80cab77b63e31339b3f15665` on `master`. No remote is configured, consistent with the declared local-only publication authority. Candidate content remained unchanged at the end of review.
+
+All 6,001 archived files match their stored and decoded raw digests, totaling 40,647,787 stored bytes. All 55 TRX summaries match the actual XML counters and outcomes. All 23 `source-final` snapshots match current files.
+
+The five final gate bindings each match the same 102 current compiler inputs and archived snapshots:
+
+| Gate | Verified terminal result |
+|---|---|
+| Final fast | 84 passed, zero failures/skips; exit 0 |
+| Selected native logger/lifecycle | 8 passed, zero failures/skips; exit 0 |
+| Full suite | 292 passed, zero failures/skips; exit 0; 605.804204091 seconds |
+| Solution build | Exit 0; zero warnings/errors |
+| Separate DynamicScaling example build | Exit 0; zero warnings/errors |
+
+Earlier failures and invalid setup/oracle attempts remain accurately qualified. The 289-pass/one-failure full run is retained rather than represented as success. Preliminary lifecycle audits are not treated as approval.
+
+I verified all five proposed envelope operations, their resulting hashes, relative Markdown links, and the complete resulting 10,260-entry tree. The envelope is mechanically reproducible, but its resolution and completion assertions cannot be applied while R1 remains. Repair requires refreshed evidence, manifest and whole-candidate review.
+
+**Test effectiveness, architecture and alternatives**
+
+The tests generally assert observable behavior: independent PostgreSQL identity/session/data queries, finite allocation/deletion guards, held asynchronous boundaries, and literal expected seed/sequence values. Component tests provide fast rule feedback; native tests calibrate real external boundaries. Corrected REDs distinguish missing behavior from setup failures.
+
+Coverage demonstrates substantial execution, not complete assertion protection. The current full report executes 496/521 instrumented lines in `TtSlotPool`, 358/361 in `TtPreparedPool`, 214/221 in `TtFactory`, and 33/33 in `TtPreparedConfiguration`. R1 illustrates why executed branches do not establish all relevant asynchronous orderings. Full mutation remains correctly pending the final immutable committed coding-session snapshot.
+
+One ownership ledger, existing preparation/cleanup permits, shared verification and explicit maintenance are proportionate choices. A separate parking controller or timer would add unnecessary ownership complexity. Releasing preparation before recovery cleanup avoids the tested permit inversion; separating admission closure from physical teardown protects held contexts.
+
+For R1, the clearer alternative is to represent the pending diagnostic as part of the owned recovery episode and settle it with recovery, rather than infer its disposition from a pre-await closure snapshot. The repair should remain within the existing owner.
+
+**Reusable lesson candidate**
+
+Owner: the project’s lifecycle review/test practice.
+
+Evidence: R1 remains possible despite covered rewarm failure branches and multiple passing closure tests.
+
+Proposed guidance: when shutdown can interrupt recovery, test closure before failure, during cleanup, and during retry; retain material diagnostics until the episode’s outcome is known.
+
+Downside: additional interleaving tests can become costly and brittle, so use deterministic component gates and limited native calibration. Disposition: proposed in this review only; no standing guidance or memory was changed.

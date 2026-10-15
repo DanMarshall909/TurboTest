@@ -1,0 +1,6 @@
+{
+  "outcome": "Interrupted invalid setup, not behavioral RED",
+  "cause": "The test returned its intended Ready slot while another reset held the only cleanup permit. Setup never reached parking assertions.",
+  "termination": "SIGINT to exact owned dotnet test PID244294; wrapper exited1 and session25377 is terminal. No native boundary or container involved.",
+  "correction": "Return the idle slot before holding reset; bound its setup return. Corrected parking-red-r2 required."
+}

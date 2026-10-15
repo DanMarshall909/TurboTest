@@ -12,7 +12,12 @@ namespace TurboTest.EFCore.Internal;
 /// <summary>One fixture host, one sealed baseline, and independently owned workload databases.</summary>
 internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext : DbContext
 {
-    private sealed record Slot(string Name, NpgsqlDataSource Source);
+    private sealed class Slot(string name, NpgsqlDataSource source)
+    {
+        internal string Name { get; } = name;
+        internal NpgsqlDataSource Source { get; set; } = source;
+        internal uint? DatabaseOid { get; set; }
+    }
     private sealed record BaselineIdentity(Guid Owner, Type ContextType, TtSchemaInitialization Schema,
         string InitializerVersion, DbContextOptions<TContext> Configuration, Microsoft.EntityFrameworkCore.Metadata.IModel Model);
 
@@ -91,7 +96,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         Func<string, Task>? prepareImage = null,
         Func<NpgsqlConnection, NpgsqlTransaction, Task>? afterSequenceRestore = null,
         Func<NpgsqlConnection, Task>? afterRowCommit = null,
-        Func<NpgsqlConnection, string, Task>? dropDatabase = null)
+        Func<NpgsqlConnection, string, Task>? dropDatabase = null, TimeProvider? timeProvider = null)
     {
         options = options.Snapshot();
         TtPreparedConfiguration.Validate(options);
@@ -119,7 +124,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         _host = new TtPool(hostOptions, deleteHost, prepareImage, administratorHost: true);
         _administrators = new TtAdministratorConnections(options.MaxAdministratorConnections, CreateAdministratorConnection);
         _slots = new TtSlotPool<Slot>(options.PoolSize, options.PreparationConcurrency, ReserveSlot,
-            (slot, token) => PrepareSlotAsync(slot, token), DeleteSlotAsync, options.ResetConcurrency);
+            (slot, token) => PrepareSlotAsync(slot, token), DeleteSlotAsync, options.ResetConcurrency, RewarmSlotAsync, timeProvider);
     }
 
     internal async Task InitializeAsync(CancellationToken cancellationToken)
@@ -219,6 +224,19 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         return new TtDatabase(reservation.Value.Source, () => ReturnAsync(reservation), () => _slots.DiscardAsync(reservation));
     }
 
+    public Task MaintainIdleAsync(CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        // Cancellation ends only caller observation. Every claimed closure is
+        // retained by the slot ledger's settlement task until it actually ends.
+        return _slots.ParkIdleAsync(_options.WarmFloor,
+                (slot, _) => MeasureLifecycleAsync("Park", () => slot.Source.DisposeAsync().AsTask()),
+                _options.MaxParkedDatabases, _options.IdleDatabaseLifetime)
+            .WaitAsync(cancellationToken);
+    }
+
+    public void StopAcceptingWork() => _slots.StopAcceptingWork();
+
     private Slot ReserveSlot(Guid _)
     {
         var name = $"{_options.DatabaseName}_slot_{Guid.NewGuid():N}";
@@ -229,25 +247,57 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
 
     private async Task PrepareSlotAsync(Slot slot, CancellationToken cancellationToken, Action<TimeSpan>? observeValidation = null)
     {
-        var name = slot.Name;
-        var stage = "BaselineClone";
         try
         {
             await using (var administrative = await OpenAdministratorAsync(cancellationToken: cancellationToken))
                 await administrative.Connection.ExecuteNonQueryAsync(
-                    $"CREATE DATABASE {Quote(name)} TEMPLATE {Quote(_template)} OWNER {Quote(_workload.Name)}");
+                    $"CREATE DATABASE {Quote(slot.Name)} TEMPLATE {Quote(_template)} OWNER {Quote(_workload.Name)}");
+        }
+        catch (Exception error) { throw new TtLifecycleException("BaselineClone", error); }
+        await VerifySlotAsync(slot, cancellationToken, observeValidation);
+    }
+
+    private Task RewarmSlotAsync(Slot slot, CancellationToken cancellationToken) =>
+        MeasureLifecycleAsync("Rewarm", () => RewarmSlotCoreAsync(slot, cancellationToken));
+
+    private async Task RewarmSlotCoreAsync(Slot slot, CancellationToken cancellationToken)
+    {
+        using var privateWork = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
+        slot.Source = CreateWorkloadSource(slot.Name);
+        await VerifySlotAsync(slot, cancellationToken, rewarming: true);
+    }
+
+    private async Task VerifySlotAsync(Slot slot, CancellationToken cancellationToken,
+        Action<TimeSpan>? observeValidation = null, bool rewarming = false)
+    {
+        var stage = rewarming ? "BaselineRewarmOpen" : "BaselineClone";
+        try
+        {
             if (_beforeVerification is not null) await _beforeVerification(slot.Source);
-            stage = "BaselineVerify";
+            stage = rewarming ? "BaselineRewarmVerify" : "BaselineVerify";
             var validation = Stopwatch.GetTimestamp();
             try
             {
-                await using var probe = await OpenAdministratorAsync(name, cancellationToken);
+                await using var probe = await OpenAdministratorAsync(slot.Name, cancellationToken);
                 _snapshot!.Verify(await TtBaselineSnapshot.CaptureAsync(probe.Connection, cancellationToken));
-                stage = "BaselineWorkloadVerify";
+                await using (var identity = new NpgsqlCommand("SELECT oid FROM pg_database WHERE datname = $1", probe.Connection))
+                {
+                    identity.Parameters.Add(new NpgsqlParameter { Value = slot.Name });
+                    var oid = (uint)(await identity.ExecuteScalarAsync(cancellationToken))!;
+                    if (rewarming)
+                    {
+                        stage = "BaselineRewarmIdentity";
+                        if (slot.DatabaseOid != oid)
+                            throw new InvalidOperationException("The retained database identity has changed.");
+                    }
+                    else slot.DatabaseOid = oid;
+                }
+                stage = rewarming ? "BaselineRewarmWorkloadVerify" : "BaselineWorkloadVerify";
                 await VerifyWorkloadAsync(slot);
             }
             finally { observeValidation?.Invoke(Stopwatch.GetElapsedTime(validation)); }
         }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
         catch (Exception error)
         {
             throw new TtLifecycleException(stage, error);
@@ -354,7 +404,9 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         return true;
     }
 
-    private async Task DeleteSlotAsync(Slot slot)
+    private Task DeleteSlotAsync(Slot slot) => MeasureLifecycleAsync("Delete", () => DeleteSlotCoreAsync(slot));
+
+    private async Task DeleteSlotCoreAsync(Slot slot)
     {
         await slot.Source.DisposeAsync();
         await using var administrative = await OpenAdministratorAsync();
@@ -389,7 +441,31 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         }
     }
 
-    private async Task DisposeCoreAsync()
+    private Task DisposeCoreAsync() => MeasureLifecycleAsync("Teardown", DrainCoreAsync);
+
+    private async Task MeasureLifecycleAsync(string operation, Func<Task> action)
+    {
+        var started = Stopwatch.GetTimestamp();
+        var succeeded = false;
+        try
+        {
+            await action();
+            succeeded = true;
+        }
+        finally
+        {
+            var elapsed = Stopwatch.GetElapsedTime(started);
+            try
+            {
+                _logger.LogDebug(new EventId(401, "PreparedLifecycle"),
+                    "Prepared lifecycle {OwnerId} {Operation}: duration {DurationMilliseconds} ms, success {Succeeded}",
+                    Snapshot.OwnerId, operation, elapsed.TotalMilliseconds, succeeded);
+            }
+            catch (Exception) { /* Diagnostic consumers cannot replace the lifecycle result. */ }
+        }
+    }
+
+    private async Task DrainCoreAsync()
     {
         await _gate.WaitAsync();
         try

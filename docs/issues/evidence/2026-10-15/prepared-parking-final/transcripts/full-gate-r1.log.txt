@@ -1,0 +1,20 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:01:59.36]     TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database [FAIL]
+  Failed TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database [16 s]
+  Error Message:
+   TurboTest.EFCore.TtLifecycleException : TurboTest lifecycle failed at SlotIdleRetire (55006). The resource is unavailable for reuse.
+  Stack Trace:
+     at TurboTest.EFCore.Tt.DisposeAsync() in /home/dan/code/TurboTest/src/TurboTest.EFCore/Tt.cs:line 186
+   at TurboTest.Tests.PublicLeaseTests.Three_sequential_public_leases_return_and_reuse_one_database() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PublicLeaseTests.cs:line 34
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/full-gate-r1/full-gate-r1.trx
+
+Failed!  - Failed:     1, Passed:   289, Skipped:     0, Total:   290, Duration: 8 m 28 s - TurboTest.Tests.dll (net10.0)
+
+Attachments:
+  /home/dan/code/TurboTest/artifacts/tt-008/full-gate-r1/e87a85bb-5f27-4335-bc84-3d2dc1324bf3/dan_os-greg_2026-10-15.10_10_15.cobertura.xml

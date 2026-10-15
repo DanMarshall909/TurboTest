@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotRewarmDrainTests|FullyQualifiedName~SlotIdleRecoveryTests|FullyQualifiedName~SlotParkingTests|FullyQualifiedName~SlotRetentionTests|FullyQualifiedName~FactoryMaintenanceTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=rewarm-drain-green.trx",
+    "--results-directory",
+    "artifacts/tt-008/rewarm-drain-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 8.676965671998914,
+  "log": "artifacts/tt-008/rewarm-drain-green.log",
+  "sourceBinding": "artifacts/tt-008/rewarm-drain-green/source-binding.json"
+}

@@ -1,0 +1,33 @@
+{
+  "reviewer": "/root/tt008_completion_review",
+  "verdict": "FAIL",
+  "candidateManifestSha256": "514793004911e60c52787525e34715cc2fdccc85f333a6ce31a923d56aa10014",
+  "frozenPacket": "review-r1/candidate.tar.gz; review-r1/manifest.json; review-r1/verdict.md",
+  "requiredFinding": "R1: live material rewarm failure followed by held recovery deletion/retry then closure loses its unseen diagnostic. Pre-await reportAtDrain boolean is stale.",
+  "nextCriterion": "Fast held-deletion and held-retry REDs; retain diagnostic obligation through owned recovery episode until verified recovery/delivery, transfer at closure, deliver once without replacement/double deletion. Native calibration of supported ordering, preserved live/cooperative controls.",
+  "verificationToRefresh": "Fast/full/build/source coverage, archive, manifest/envelope and entire candidate returned to retained reviewer. Existing292-pass full run is historical pre-repair evidence, not completion.",
+  "publication": "No envelope applied, no commit; TT008 Open. TT010/TT009 also Open. Goal remains full ten-ticket scope.",
+  "standingGuidance": "Reviewer lesson is proposed only; no memory or rule edit authorized.",
+  "progress": {
+    "directAndRetryRed": "Both fail at missing expected material diagnostic",
+    "fastRefactor": "25 pass/0fail/0skip",
+    "nativeRefactor": "19 pass/0fail/0skip",
+    "secondaryDiagnostic": "Real native gap with fast RED; safe wrapper retention repaired",
+    "timerControl": "Held TimeProvider timer removes100ms test race",
+    "next": "All revised gates89/19/299 and both build-r2 receipts pass at103 current inputs. Refresh archive/whole packet and re-review with retained reviewer."
+  },
+  "liveFullGate": {
+    "name": "full-gate-r3",
+    "execSessionId": 9736,
+    "command": "python3 artifacts/tt-008/run-receipt.py full-gate-r3 dotnet test tests/TurboTest.Tests/TurboTest.Tests.csproj --collect Code Coverage;Format=cobertura --logger trx;LogFileName=full-gate-r3.trx --results-directory artifacts/tt-008/full-gate-r3",
+    "status": "Terminal exit0:299passed/0failed/0skipped; elapsed683.9186894759987seconds."
+  },
+  "nextAfterPass": [
+    "Build receipts solution-build-r2 and separate-example-build-r2 serially.",
+    "Refresh current source/coverage evidence and raw archive, avoiding overwriting prior gate identities.",
+    "Rebuild/verify complete manifest/envelope/final-tree and packet with current terminal results.",
+    "Followup retained tt008_completion_review with whole fresh candidate and repair evidence; no self approval.",
+    "After PASS exact envelope/final-tree validation and quiet normal local commit, preserve unrelated resources/stash/caches.",
+    "Continue TT010 fixed metrics/benchmark then TT009 plus adaptive comparisons; resolve only fulfilled criteria."
+  ]
+}

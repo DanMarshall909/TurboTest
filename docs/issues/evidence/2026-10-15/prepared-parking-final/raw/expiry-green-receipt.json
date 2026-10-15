@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotExpiryTests|FullyQualifiedName~SlotRetentionTests|FullyQualifiedName~SlotIdleRecoveryTests|FullyQualifiedName~SlotRecoveryTests|FullyQualifiedName~SlotParkingTests|FullyQualifiedName~SlotPoolTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=expiry-green.trx",
+    "--results-directory",
+    "artifacts/tt-008/expiry-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 8.77140044800035,
+  "log": "artifacts/tt-008/expiry-green.log",
+  "sourceBinding": "artifacts/tt-008/expiry-green/source-binding.json"
+}

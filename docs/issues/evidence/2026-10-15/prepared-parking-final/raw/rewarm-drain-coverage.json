@@ -1,0 +1,104 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:    18, Skipped:     0, Total:    18, Duration: 421 ms - TurboTest.Tests.dll (net10.0)",
+  "red": "Material late IOException expected at drain but no exception thrown; successful and cooperative cancellation controls pass.",
+  "coverage": [
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool<T>",
+      "lineRate": "0.88",
+      "branchRate": "0.7448979591836735"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.Reservation<T>",
+      "lineRate": "1",
+      "branchRate": "0.5"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.Waiter<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass26_0<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass27_0<T>",
+      "lineRate": "1",
+      "branchRate": "0.625"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass30_0<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass39_0<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<DiscardCoreAsync>d__42<T>",
+      "lineRate": "0",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<DisposeCoreAsync>d__53<T>",
+      "lineRate": "0.8064516129032258",
+      "branchRate": "0.7857142857142857"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<ParkAsync>d__29<T>",
+      "lineRate": "0.8461538461538461",
+      "branchRate": "0.75"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<PrepareAsync>d__35<T>",
+      "lineRate": "0.3469387755102041",
+      "branchRate": "0.08333333333333333"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<RecoverCleanupAsync>d__48<T>",
+      "lineRate": "0.5277777777777778",
+      "branchRate": "0.3333333333333333"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<RecoverFailedOperationAsync>d__44<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<ResetAsync>d__43<T>",
+      "lineRate": "0.7575757575757576",
+      "branchRate": "0.625"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<RetireIdleAsync>d__28<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<RewarmAsync>d__32<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<WarmAsync>d__39<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.Internal.TtSlotPool.<>c__DisplayClass37_0.<<ReturnAsync>b__0>d<T>",
+      "lineRate": "1",
+      "branchRate": "1"
+    }
+  ],
+  "assertions": "Closure retains held rewarm and rejects pending publication. One resource deletion, no replacement; late material diagnostic delivered once, retry succeeds. Live recovery and existing parking/retention tests remain passing.",
+  "refactor": "Existing ledger owns a short list of late material outcomes. Only failed rewarm observed after closure adds an obligation; recovered live faults and cooperative cancellation stay transparent. Retry consumes diagnostic obligation while preserving resource cleanup.",
+  "limits": "Scoped component evidence; native calibration pending."
+}

@@ -1,0 +1,7 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:    15, Skipped:     0, Total:    15, Duration: 26 s - TurboTest.Tests.dll (net10.0)",
+  "red": "Unseen maintenance IOException hides distinct first pool drain UnauthorizedAccessException; safe message lacks second kind.",
+  "assertions": "Both safe diagnostic kinds survive a canceled observation plus initial pool drain failure. Cleanup finite, original physical targets deleted twice total, first pool disposal only once, retry confirms no remaining resources. Native provider multiple-failure tests remain passing.",
+  "refactor": "Existing factory drain accumulates subsequent lease/database/pool failures in AggregateException instead of first-only catches; existing safe lifecycle formatter handles it.",
+  "limits": "Fast stand-in uses real slot ledger but injects pool drain failure after confirmed deletion; provider/native failed DROP evidence separately retained. Final full suite remains."
+}

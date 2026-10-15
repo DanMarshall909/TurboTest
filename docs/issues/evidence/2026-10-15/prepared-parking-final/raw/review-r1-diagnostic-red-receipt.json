@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~LifecycleDiagnosticRetentionTests",
+    "--logger",
+    "trx;LogFileName=review-r1-diagnostic-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/review-r1-diagnostic-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 4.469184202003817,
+  "log": "artifacts/tt-008/review-r1-diagnostic-red.log",
+  "sourceBinding": "artifacts/tt-008/review-r1-diagnostic-red/source-binding.json"
+}

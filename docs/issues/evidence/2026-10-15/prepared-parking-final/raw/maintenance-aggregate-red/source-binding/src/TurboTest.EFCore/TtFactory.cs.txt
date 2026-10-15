@@ -1,0 +1,273 @@
+using System.Collections.Concurrent;
+using Microsoft.EntityFrameworkCore;
+using TurboTest.EFCore.Internal;
+
+namespace TurboTest.EFCore;
+
+/// <summary>Owns a fixture's database leases. Dispose asynchronously after the tests finish.</summary>
+public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbContext
+{
+    /// <summary>Current owned workload reservations and queued acquisition/reset work.</summary>
+    public TtPoolSnapshot PoolState => _pool.Snapshot;
+
+    /// <summary>Captured ceilings for this owner's containers, databases, connections and executing work.</summary>
+    public TtResourceBudget ResourceBudget => _pool.Budget;
+    internal IReadOnlyList<string> OwnedResourceIds => _pool.OwnedResourceIds;
+
+    /// <summary>Applies this prepared fixture's explicit idle parking and retention policy.</summary>
+    public async Task MaintainIdleAsync(CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var settled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var work = new MaintenanceWork();
+        lock (_disposeGate)
+        {
+            ObjectDisposedException.ThrowIf(_closing, this);
+            _acquisitions.Add(settled);
+            _maintenance.Add(work);
+        }
+        _ = RunMaintenanceAsync(work, settled);
+        try
+        {
+            using var linked = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _shutdown.Token);
+            var failure = await work.Completion.Task.WaitAsync(linked.Token);
+            if (failure is not null)
+            {
+                lock (_disposeGate) work.Delivered = true;
+                throw failure;
+            }
+        }
+        catch (OperationCanceledException) when (_shutdown.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
+        {
+            throw new ObjectDisposedException(nameof(TtFactory<TContext>));
+        }
+        finally
+        {
+            lock (_disposeGate)
+            {
+                _acquisitions.Remove(settled);
+                if (work.Completion.Task.IsCompletedSuccessfully &&
+                    (work.Completion.Task.Result is null || work.Delivered)) _maintenance.Remove(work);
+            }
+            settled.TrySetResult();
+        }
+    }
+
+    private sealed class MaintenanceWork
+    {
+        internal TaskCompletionSource<Exception?> Completion { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal bool Delivered { get; set; }
+    }
+
+    private async Task RunMaintenanceAsync(MaintenanceWork work, TaskCompletionSource observer)
+    {
+        Exception? failure = null;
+        try { await _pool.MaintainIdleAsync(); }
+        catch (Exception error) { failure = error; }
+        lock (_disposeGate)
+        {
+            work.Completion.TrySetResult(failure);
+            if (!_acquisitions.Contains(observer) && (failure is null || work.Delivered)) _maintenance.Remove(work);
+        }
+    }
+
+    private readonly ITtDatabasePool _pool;
+    private readonly TtOptions _options;
+    private readonly bool _ownsPool;
+    private readonly Func<Npgsql.NpgsqlDataSource, DbContextOptions<TContext>>? _preparedOptions;
+    private readonly Action<TContext, Npgsql.NpgsqlDataSource>? _validateContext;
+    private readonly object _disposeGate = new();
+    private readonly CancellationTokenSource _shutdown = new();
+    private readonly HashSet<TaskCompletionSource> _acquisitions = new();
+    private readonly HashSet<MaintenanceWork> _maintenance = new();
+    private readonly ConcurrentDictionary<TtLease<TContext>, byte> _leases = new();
+    private readonly ConcurrentDictionary<TtDatabase, byte> _databases = new();
+    private bool _closing;
+    private Task? _disposal;
+
+    internal TtFactory(ITtDatabasePool pool, TtOptions options, bool ownsPool = false,
+        Func<Npgsql.NpgsqlDataSource, DbContextOptions<TContext>>? preparedOptions = null,
+        Action<TContext, Npgsql.NpgsqlDataSource>? validateContext = null)
+    {
+        _pool = pool;
+        _options = options;
+        _ownsPool = ownsPool;
+        _preparedOptions = preparedOptions;
+        _validateContext = validateContext;
+    }
+
+    /// <summary>Acquires one test database. Lease disposal awaits context cleanup and reset.</summary>
+    public async Task<TtLease<TContext>> CreateLeaseAsync(
+        Action<DbContextOptionsBuilder>? configure = null, CancellationToken cancellationToken = default)
+    {
+        if (_preparedOptions is not null && configure is not null)
+            throw new ArgumentException("Configure the model in the fixture baseline before preparation.", nameof(configure));
+        var settled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        lock (_disposeGate)
+        {
+            ObjectDisposedException.ThrowIf(_closing, this);
+            _acquisitions.Add(settled);
+        }
+        try
+        {
+            using var linked = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _shutdown.Token);
+            var acquisitionToken = linked.Token;
+            var database = await _pool.GetDatabaseAsync(acquisitionToken);
+            _databases.TryAdd(database, 0);
+            TContext BuildContext()
+            {
+                var builder = _preparedOptions is null
+                    ? new DbContextOptionsBuilder<TContext>().UseNpgsql(database.DataSource)
+                    : new DbContextOptionsBuilder<TContext>(_preparedOptions(database.DataSource));
+                if (_options.EnableSensitiveDataLogging) builder.EnableSensitiveDataLogging();
+                configure?.Invoke(builder);
+                return (TContext)(Activator.CreateInstance(typeof(TContext), builder.Options)
+                    ?? throw new InvalidOperationException($"Could not create {typeof(TContext).Name}"));
+            }
+            void Register(TContext context, CancellationToken validationToken = default)
+            {
+                database.OnDispose(() => context.DisposeAsync().AsTask());
+                validationToken.ThrowIfCancellationRequested();
+                TtOwnedContextOptions.Read(context, database.DataSource, "ContextConfiguration");
+                _validateContext?.Invoke(context, database.DataSource);
+            }
+            TContext context;
+            var stage = "ContextCreate";
+            try
+            {
+                acquisitionToken.ThrowIfCancellationRequested();
+                context = BuildContext();
+                stage = "ContextInitialize";
+                Register(context, acquisitionToken);
+                acquisitionToken.ThrowIfCancellationRequested();
+                if (_preparedOptions is null && _options.AutoMigrate)
+                    await context.Database.EnsureCreatedAsync(acquisitionToken);
+                acquisitionToken.ThrowIfCancellationRequested();
+                TtLease<TContext>? lease = null;
+                lease = new TtLease<TContext>(context, BuildContext, context => Register(context), async () =>
+                {
+                    try { await database.DisposeAsync(); }
+                    finally
+                    {
+                        _databases.TryRemove(database, out _);
+                        if (lease is not null) _leases.TryRemove(lease, out _);
+                    }
+                });
+                lock (_disposeGate)
+                {
+                    ObjectDisposedException.ThrowIf(_closing, this);
+                    _leases.TryAdd(lease, 0);
+                }
+                return lease;
+            }
+            catch (Exception error)
+            {
+                Exception? discardFailure = null;
+                try { await database.DiscardAsync(); }
+                catch (Exception cleanupError) { discardFailure = cleanupError; }
+                finally { _databases.TryRemove(database, out _); }
+                if (error is OperationCanceledException or ObjectDisposedException && discardFailure is null) throw;
+                var failure = error as TtLifecycleException ?? new TtLifecycleException(stage, error);
+                if (discardFailure is not null) failure = failure.WithCleanupFailure(discardFailure);
+                throw failure;
+            }
+        }
+        catch (OperationCanceledException) when (_shutdown.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
+        {
+            throw new ObjectDisposedException(nameof(TtFactory<TContext>));
+        }
+        finally
+        {
+            lock (_disposeGate) _acquisitions.Remove(settled);
+            settled.TrySetResult();
+        }
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        Task disposal;
+        TaskCompletionSource<Exception?> start;
+        lock (_disposeGate)
+        {
+            if (_disposal is not null) return new ValueTask(_disposal);
+            _closing = true;
+            start = new TaskCompletionSource<Exception?>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var drain = DisposeCoreAsync(start.Task);
+            disposal = _disposal = ObserveDrainAsync(drain);
+        }
+        _ = CancelShutdownAsync(start);
+        return new ValueTask(disposal);
+    }
+
+    private async Task CancelShutdownAsync(TaskCompletionSource<Exception?> start)
+    {
+        Exception? cancellationFailure = null;
+        try { await _shutdown.CancelAsync(); }
+        catch (Exception error) { cancellationFailure = error; }
+        finally { start.TrySetResult(cancellationFailure); }
+    }
+
+    private async Task ObserveDrainAsync(Task drain)
+    {
+        try { await drain.WaitAsync(_options.DrainTimeout); }
+        catch (Exception error)
+        {
+            var drainFailureReported = ReferenceEquals(drain.Exception?.InnerException, error);
+            var cleanup = TtCleanupRegistry.Retain(_pool.Snapshot.OwnerId, async () =>
+            {
+                try { await drain; }
+                catch (Exception cleanupError)
+                {
+                    if (_ownsPool) await _pool.RetryCleanupAsync();
+                    if (!drainFailureReported)
+                    {
+                        drainFailureReported = true;
+                        throw cleanupError as TtLifecycleException ?? new TtLifecycleException("FactoryDrain", cleanupError);
+                    }
+                }
+            }, () => _pool.OwnedResourceIds);
+            var stage = drainFailureReported ? "FactoryDrain" : "DrainTimeout";
+            var failure = error as TtLifecycleException ?? new TtLifecycleException(stage, error);
+            throw failure.WithCleanup(cleanup);
+        }
+    }
+
+    private async Task DisposeCoreAsync(Task<Exception?> start)
+    {
+        Exception? first = await start;
+        Task[] acquisitions;
+        lock (_disposeGate) acquisitions = _acquisitions.Select(acquisition => acquisition.Task).ToArray();
+        await Task.WhenAll(acquisitions);
+        MaintenanceWork[] maintenance;
+        lock (_disposeGate) maintenance = _maintenance.ToArray();
+        await Task.WhenAll(maintenance.Select(work => work.Completion.Task));
+        lock (_disposeGate)
+        {
+            foreach (var work in maintenance)
+            {
+                if (!work.Delivered && work.Completion.Task.Result is { } failure)
+                {
+                    first = first is null ? failure : new AggregateException(first, failure);
+                    work.Delivered = true;
+                }
+                _maintenance.Remove(work);
+            }
+        }
+        foreach (var lease in _leases.Keys)
+        {
+            try { await lease.DisposeAsync(); }
+            catch (Exception error) { first ??= error; }
+        }
+        foreach (var database in _databases.Keys)
+        {
+            try { await database.DisposeAsync(); }
+            catch (Exception error) { first ??= error; }
+        }
+        if (_ownsPool)
+        {
+            try { await _pool.DisposeAsync(); }
+            catch (Exception error) { first ??= error; }
+        }
+        if (first is not null) throw first;
+    }
+}

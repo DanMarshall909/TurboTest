@@ -1,0 +1,82 @@
+{
+  "gate": "9 scoped checks pass, no failures/skips",
+  "red": "maintenance-cancel-red fails at expected missing late diagnostic, not timeout/setup",
+  "coverage": [
+    {
+      "name": "TurboTest.EFCore.TtFactory<TContext>",
+      "lineRate": "0.9354838709677419",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.MaintenanceWork<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass23_1<TContext>",
+      "lineRate": "1",
+      "branchRate": "0.7"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass23_2<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass26_0<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<CancelShutdownAsync>d__25<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<CreateLeaseAsync>d__23<TContext>",
+      "lineRate": "0.9230769230769231",
+      "branchRate": "0.4583333333333333"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<DisposeCoreAsync>d__27<TContext>",
+      "lineRate": "0.8285714285714286",
+      "branchRate": "0.6538461538461539"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<MaintainIdleAsync>d__6<TContext>",
+      "lineRate": "0.71875",
+      "branchRate": "0.3"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<ObserveDrainAsync>d__26<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<RunMaintenanceAsync>d__8<TContext>",
+      "lineRate": "1",
+      "branchRate": "0.5"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass23_3.<<CreateLeaseAsync>b__4>d<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    },
+    {
+      "name": "TurboTest.EFCore.TtFactory.<>c__DisplayClass26_1.<<ObserveDrainAsync>b__0>d<TContext>",
+      "lineRate": "1",
+      "branchRate": "1"
+    }
+  ],
+  "assertions": "Canceled observation retains actual retirement through drain deadline; concurrent cleanup shares pending job; late safe IOException delivered once after two bounded deletions and no remaining resources. Adjacent factory closure and drain callback controls pass.",
+  "refactor": {
+    "production": "Small per-maintenance work record uses the existing factory gate. Observation cancellation does not end actual task ownership. Delivered faults are separated from unseen faults.",
+    "tests": "Backend stand-in uses actual TtSlotPool reservation/deletion rules; native calibration pending."
+  },
+  "limits": "Scoped factory coverage includes preexisting code, not a whole-package coverage claim."
+}

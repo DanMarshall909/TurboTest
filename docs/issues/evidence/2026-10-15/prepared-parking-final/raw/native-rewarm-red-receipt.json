@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Rewarm_reuses_the_database_and_waits_for_full_seed_schema_and_workload_validation",
+    "--logger",
+    "trx;LogFileName=native-rewarm-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/native-rewarm-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 14.002725001999352,
+  "log": "artifacts/tt-008/native-rewarm-red.log",
+  "sourceBinding": "artifacts/tt-008/native-rewarm-red/source-binding.json"
+}

@@ -1,0 +1,27 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.38]     TurboTest.Tests.SlotRewarmDrainTests.Closure_during_recovery_retains_the_live_rewarm_failure_through_confirmed_deletion(retry: True) [FAIL]
+[xUnit.net 00:00:00.39]     TurboTest.Tests.SlotRewarmDrainTests.Closure_during_recovery_retains_the_live_rewarm_failure_through_confirmed_deletion(retry: False) [FAIL]
+  Failed TurboTest.Tests.SlotRewarmDrainTests.Closure_during_recovery_retains_the_live_rewarm_failure_through_confirmed_deletion(retry: True) [135 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+  Stack Trace:
+     at TurboTest.Tests.SlotRewarmDrainTests.Closure_during_recovery_retains_the_live_rewarm_failure_through_confirmed_deletion(Boolean retry) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRewarmDrainTests.cs:line 43
+   at TurboTest.Tests.SlotRewarmDrainTests.Closure_during_recovery_retains_the_live_rewarm_failure_through_confirmed_deletion(Boolean retry) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRewarmDrainTests.cs:line 58
+--- End of stack trace from previous location ---
+  Failed TurboTest.Tests.SlotRewarmDrainTests.Closure_during_recovery_retains_the_live_rewarm_failure_through_confirmed_deletion(retry: False) [1 ms]
+  Error Message:
+   Assert.Throws() Failure: No exception was thrown
+Expected: typeof(TurboTest.EFCore.TtLifecycleException)
+  Stack Trace:
+     at TurboTest.Tests.SlotRewarmDrainTests.Closure_during_recovery_retains_the_live_rewarm_failure_through_confirmed_deletion(Boolean retry) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRewarmDrainTests.cs:line 43
+   at TurboTest.Tests.SlotRewarmDrainTests.Closure_during_recovery_retains_the_live_rewarm_failure_through_confirmed_deletion(Boolean retry) in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRewarmDrainTests.cs:line 58
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/review-r1-recovery-close-red/review-r1-recovery-close-red.trx
+
+Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 159 ms - TurboTest.Tests.dll (net10.0)

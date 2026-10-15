@@ -1,0 +1,7 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:    16, Skipped:     0, Total:    16, Duration: 922 ms - TurboTest.Tests.dll (net10.0)",
+  "red": "Two-slot public factory with held context cleanup creates a third resource after rewarm fails following factory closure; independent create-count expected2 actual3.",
+  "assertions": "Stopping admission/recovery precedes lease cleanup. Rewarm still settles under owner, late error survives, held lease database is not deleted early, final two resources deleted once with one context callback.",
+  "refactor": "Separate StopAcceptingWork from physical disposal at existing pool/ledger. Owned factories stop admission only; BeginReturn stays available until context cleanup finishes, with no reset/replacement after stop.",
+  "limits": "Scoped fast gate; native calibration follows, final broad suite required for ordinary/prepared closure paths."
+}

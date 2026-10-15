@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~PreparedRewarmRecoveryTests|FullyQualifiedName~PreparedParkingTests|FullyQualifiedName~PreparedRecoveryTests|FullyQualifiedName~PreparedDrainRetryTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=native-rewarm-recovery.trx",
+    "--results-directory",
+    "artifacts/tt-008/native-rewarm-recovery"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 31.928451364001376,
+  "log": "artifacts/tt-008/native-rewarm-recovery.log",
+  "sourceBinding": "artifacts/tt-008/native-rewarm-recovery/source-binding.json"
+}

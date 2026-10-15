@@ -1,0 +1,355 @@
+using Microsoft.EntityFrameworkCore;
+using TurboTest.EFCore;
+using TurboTest.EFCore.Internal;
+using Npgsql;
+using Docker.DotNet;
+using Docker.DotNet.Models;
+
+namespace TurboTest.Tests;
+
+public class SeededBaselineTests
+{
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Prepared_names_and_quoted_credentials_use_the_validated_fixture_configuration_snapshot()
+    {
+        var prefix = new string('é', 10) + "x"; // Exactly 21 UTF-8 identifier bytes.
+        const string username = "fixture'quoted";
+        TtOptions? supplied = null;
+        var definition = new TtBaselineDefinition<SeedContext>("named-v1", TtSchemaInitialization.EnsureCreated);
+        await using var fixture = await Tt.CreateFactoryAsync(definition, options =>
+        {
+            supplied = options;
+            options.PoolSize = 1;
+            options.DatabaseName = prefix;
+            options.Username = username;
+            options.Password = "fixture;quo'ted=password";
+            options.EnableSensitiveDataLogging = false;
+        });
+        supplied!.DatabaseName = "changed-after-initialization";
+        supplied.Username = "changed-after-initialization";
+        for (var i = 0; i < 2; i++)
+        {
+            await using var lease = await fixture.CreateLeaseAsync();
+            var connection = (NpgsqlConnection)lease.Context.Database.GetDbConnection();
+            await connection.OpenAsync();
+            await using var command = new NpgsqlCommand("SELECT current_database(), current_user", connection);
+            await using var reader = await command.ExecuteReaderAsync();
+            Assert.True(await reader.ReadAsync());
+            Assert.StartsWith(prefix + "_slot_", reader.GetString(0));
+            Assert.Equal(username, reader.GetString(1));
+        }
+    }
+
+    [Theory]
+    [InlineData("DO $$ BEGIN EXECUTE format('ALTER ROLE %I PASSWORD %L', current_user, 'changed-test-password'); END $$", "BaselineWorkloadVerify", "28P01")]
+    [InlineData("ALTER ROLE CURRENT_USER SET timezone TO 'Pacific/Auckland'", "BaselineUnsupportedCatalog", null)]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Initialization_cannot_publish_an_unusable_login_or_unsupported_role_defaults(string sql, string stage, string? sqlState)
+    {
+        var definition = new TtBaselineDefinition<SeedContext>("role-state-v1", TtSchemaInitialization.EnsureCreated,
+            (context, cancellation) => context.Database.ExecuteSqlRawAsync(sql, cancellation));
+        var error = await RejectFactoryAsync(() => Tt.CreateFactoryAsync(definition, o => o.PoolSize = 1));
+        Assert.Equal(stage, error.Stage);
+        Assert.Equal(sqlState, error.SqlState);
+        Assert.DoesNotContain("changed-test-password", error.ToString());
+    }
+
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task A_live_initializer_connection_prevents_clone_publication_and_the_failed_factory_removes_its_host()
+    {
+        NpgsqlConnection? retained = null;
+        var prefix = $"tt-busy-baseline-{Guid.NewGuid():N}";
+        var baseline = new TtBaselineDefinition<SeedContext>("busy-v1", TtSchemaInitialization.EnsureCreated,
+            async (context, cancellation) =>
+            {
+                var connection = new NpgsqlConnectionStringBuilder(context.Database.GetDbConnection().ConnectionString)
+                {
+                    Password = "held-connection-test-password",
+                    Pooling = false
+                };
+                retained = new NpgsqlConnection(connection.ConnectionString);
+                await retained.OpenAsync(cancellation);
+            });
+        try
+        {
+            var failure = await RejectFactoryAsync(() => Tt.CreateFactoryAsync(baseline, options =>
+            {
+                options.PoolSize = 1;
+                options.ContainerPrefix = prefix;
+                options.Password = "held-connection-test-password";
+            }));
+            Assert.Equal("BaselineClone", failure.Stage);
+            Assert.Equal("55006", failure.SqlState);
+            using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+            var owned = await docker.Containers.ListContainersAsync(new ContainersListParameters
+            {
+                All = true,
+                Filters = new Dictionary<string, IDictionary<string, bool>>
+                {
+                    ["name"] = new Dictionary<string, bool> { [prefix] = true }
+                }
+            });
+            Assert.Empty(owned);
+        }
+        finally { if (retained is not null) await retained.DisposeAsync(); }
+    }
+
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Caller_initialization_preserves_unused_and_advanced_standalone_sequences_with_cached_values()
+    {
+        var calls = 0;
+        var baseline = new TtBaselineDefinition<SeedContext>("caller-sequences-v1", TtSchemaInitialization.Caller,
+            async (context, cancellation) =>
+            {
+                calls++;
+                var tables = await context.Database.SqlQueryRaw<int>("""
+                    SELECT count(*)::integer AS "Value" FROM pg_class c
+                    JOIN pg_namespace n ON n.oid = c.relnamespace
+                    WHERE c.relkind = 'r' AND n.nspname = 'public'
+                    """).SingleAsync(cancellation);
+                Assert.Equal(0, tables);
+                await context.Database.ExecuteSqlRawAsync("""
+                    CREATE SEQUENCE "Unused" START WITH 700 INCREMENT BY 3 CACHE 5;
+                    CREATE SEQUENCE "Advanced" START WITH 40 INCREMENT BY 7 CACHE 5;
+                    SELECT setval('"Advanced"', 87, true);
+                    CREATE TABLE "SequenceRows" ("Id" integer DEFAULT nextval('"Unused"'), "Label" text);
+                    """, cancellation);
+            });
+        await using var fixture = await Tt.CreateFactoryAsync(baseline, o => o.PoolSize = 1);
+        for (var i = 0; i < 2; i++)
+        {
+            await using var lease = await fixture.CreateLeaseAsync();
+            Assert.Equal(1, calls);
+            var connection = (NpgsqlConnection)lease.Context.Database.GetDbConnection();
+            await connection.OpenAsync();
+            await using var insert = new NpgsqlCommand("""
+                INSERT INTO "SequenceRows" ("Label") VALUES ('generated') RETURNING "Id"
+                """, connection);
+            Assert.Equal(700, await insert.ExecuteScalarAsync());
+            await using var sequences = new NpgsqlCommand("SELECT nextval('\"Unused\"'), nextval('\"Advanced\"')", connection);
+            await using var reader = await sequences.ExecuteReaderAsync();
+            Assert.True(await reader.ReadAsync());
+            Assert.Equal((703L, 94L), (reader.GetInt64(0), reader.GetInt64(1)));
+        }
+    }
+
+    [Theory]
+    [InlineData("CREATE VIEW unsupported_view AS SELECT 1 AS value")]
+    [InlineData("CREATE FUNCTION unsupported_function() RETURNS integer LANGUAGE sql AS 'SELECT 1'")]
+    [InlineData("CREATE TYPE unsupported_type AS ENUM ('one', 'two')")]
+    [InlineData("ALTER TABLE \"Parents\" ENABLE ROW LEVEL SECURITY")]
+    [InlineData("DO $$ BEGIN EXECUTE format('ALTER DATABASE %I SET timezone TO %L', current_database(), 'Pacific/Auckland'); END $$")]
+    [InlineData("DO $$ BEGIN EXECUTE format('REVOKE CONNECT ON DATABASE %I FROM PUBLIC', current_database()); END $$")]
+    [InlineData("CREATE COLLATION unsupported_collation (locale = 'C')")]
+    [InlineData("CREATE POLICY dormant_policy ON \"Parents\" USING (false)")]
+    [InlineData("CREATE STATISTICS unsupported_statistics ON \"Name\", \"Priority\" FROM \"Parents\"")]
+    [InlineData("CREATE TEXT SEARCH CONFIGURATION unsupported_search (COPY = pg_catalog.simple)")]
+    [Trait("Category", "PostgreSQL")]
+    public async Task A_baseline_rejects_catalog_or_database_settings_outside_its_supported_capture_contract(string sql)
+    {
+        var baseline = new TtBaselineDefinition<SeedContext>("unsupported-v1", TtSchemaInitialization.EnsureCreated,
+            (context, cancellation) => context.Database.ExecuteSqlRawAsync(sql, cancellation));
+        var error = await RejectFactoryAsync(() => Tt.CreateFactoryAsync(baseline, o => o.PoolSize = 1));
+        Assert.Equal("BaselineUnsupportedCatalog", error.Stage);
+    }
+
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Workloads_cannot_reopen_the_connection_free_administrator_owned_template()
+    {
+        var baseline = new TtBaselineDefinition<SeedContext>("sealed-v1", TtSchemaInitialization.EnsureCreated);
+        await using var fixture = await Tt.CreateFactoryAsync(baseline, o => o.PoolSize = 1);
+        await using var lease = await fixture.CreateLeaseAsync();
+        var connection = (NpgsqlConnection)lease.Context.Database.GetDbConnection();
+        await connection.OpenAsync();
+        string template;
+        await using (var command = new NpgsqlCommand("""
+            SELECT datname, datallowconn, pg_get_userbyid(datdba), current_user,
+              (SELECT count(*) FROM pg_stat_activity a WHERE a.datname = d.datname)
+            FROM pg_database d WHERE NOT datallowconn AND datname NOT IN ('template0', 'template1')
+            """, connection))
+        await using (var reader = await command.ExecuteReaderAsync())
+        {
+            Assert.True(await reader.ReadAsync());
+            template = reader.GetString(0);
+            Assert.False(reader.GetBoolean(1));
+            Assert.NotEqual(reader.GetString(2), reader.GetString(3));
+            Assert.Equal(0L, reader.GetInt64(4));
+            Assert.False(await reader.ReadAsync());
+        }
+        await using (var command = new NpgsqlCommand("""
+            SELECT rolsuper, rolcreatedb, rolcreaterole, rolreplication, rolbypassrls
+            FROM pg_roles WHERE rolname = current_user
+            """, connection))
+        await using (var reader = await command.ExecuteReaderAsync())
+        {
+            Assert.True(await reader.ReadAsync());
+            for (var i = 0; i < 5; i++) Assert.False(reader.GetBoolean(i));
+        }
+        await using var reopen = new NpgsqlCommand(
+            $"ALTER DATABASE {new NpgsqlCommandBuilder().QuoteIdentifier(template)} ALLOW_CONNECTIONS true", connection);
+        var denied = await Assert.ThrowsAsync<PostgresException>(() => reopen.ExecuteNonQueryAsync());
+        Assert.Equal("42501", denied.SqlState);
+    }
+
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task A_failed_initializer_returns_no_factory_and_removes_its_owned_host_without_exposing_seed_errors()
+    {
+        var prefix = $"tt-seed-failure-{Guid.NewGuid():N}";
+        var baseline = new TtBaselineDefinition<SeedContext>("failure-v1", TtSchemaInitialization.EnsureCreated,
+            (_, _) => throw new InvalidOperationException("seed-secret-payload"));
+        var error = await RejectFactoryAsync(() => Tt.CreateFactoryAsync(baseline, options =>
+        {
+            options.PoolSize = 1;
+            options.ContainerPrefix = prefix;
+        }));
+        Assert.Equal("BaselineInitialize", error.Stage);
+        Assert.DoesNotContain("seed-secret-payload", error.ToString());
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        var owned = await docker.Containers.ListContainersAsync(new ContainersListParameters
+        {
+            All = true,
+            Filters = new Dictionary<string, IDictionary<string, bool>>
+            {
+                ["name"] = new Dictionary<string, bool> { [prefix] = true }
+            }
+        });
+        Assert.Empty(owned);
+    }
+
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Fixture_configuration_cannot_redirect_initialization_to_an_external_database()
+    {
+        var baseline = new TtBaselineDefinition<SeedContext>("redirect-v1", TtSchemaInitialization.EnsureCreated,
+            configureContext: builder => builder.UseNpgsql("Host=localhost;Port=1;Database=external;Username=external;Timeout=1"));
+        var error = await RejectFactoryAsync(() => Tt.CreateFactoryAsync(baseline, o => o.PoolSize = 1));
+        Assert.Equal("BaselineConfiguration", error.Stage);
+    }
+
+    [Theory]
+    [InlineData("UPDATE \"Parents\" SET \"Priority\" = 999")]
+    [InlineData("ALTER TABLE \"Parents\" ADD COLUMN unexpected integer")]
+    [InlineData("SELECT setval(pg_get_serial_sequence('\"Parents\"', 'Id'), 999, true)")]
+    [InlineData("ALTER SEQUENCE \"Standalone\" OWNED BY NONE")]
+    [InlineData("COMMENT ON COLUMN \"Parents\".\"Name\" IS 'changed-metadata'")]
+    [Trait("Category", "PostgreSQL")]
+    public async Task A_corrupted_clone_is_rejected_before_it_can_be_leased(string corruption)
+    {
+        var baseline = new TtBaselineDefinition<SeedContext>("verify-v1", TtSchemaInitialization.EnsureCreated,
+            async (context, cancellation) =>
+            {
+                context.Parents.Add(new SeedParent { Id = 100, Name = "verified-parent", Priority = 17 });
+                await context.SaveChangesAsync(cancellation);
+                await context.Database.ExecuteSqlRawAsync("CREATE SEQUENCE \"Standalone\" OWNED BY \"Parents\".\"Id\"", cancellation);
+            });
+        await using var pool = new TtPreparedPool<SeedContext>(new TtOptions { PoolSize = 1 }, baseline,
+            async source =>
+            {
+                await using var connection = await source.OpenConnectionAsync();
+                await using var command = new NpgsqlCommand(corruption, connection);
+                await command.ExecuteNonQueryAsync();
+            });
+        var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => pool.InitializeAsync(default));
+        Assert.Equal("BaselineVerify", failure.Stage);
+    }
+
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task A_fixture_initializes_once_and_leases_the_schema_seed_relationships_and_sequence_state()
+    {
+        var initializations = 0;
+        var configurations = 0;
+        var baseline = new TtBaselineDefinition<SeedContext>("three-table-v1",
+            TtSchemaInitialization.EnsureCreated, async (context, cancellation) =>
+            {
+                initializations++;
+                context.Parents.Add(new SeedParent { Id = 100, Name = "baseline-parent", Priority = 17 });
+                context.Children.Add(new SeedChild { Id = 200, ParentId = 100, Name = "baseline-child", Enabled = true });
+                context.Notes.Add(new SeedNote { Id = 300, ChildId = 200, Body = "baseline-note", Revision = 29 });
+                await context.SaveChangesAsync(cancellation);
+                await context.Database.ExecuteSqlRawAsync("""
+                    SELECT setval(pg_get_serial_sequence('"Parents"', 'Id'), 100, true);
+                    SELECT setval(pg_get_serial_sequence('"Children"', 'Id'), 200, true);
+                    SELECT setval(pg_get_serial_sequence('"Notes"', 'Id'), 300, true);
+                    """, cancellation);
+            }, configureContext: _ => configurations++);
+
+        await using var fixture = await Tt.CreateFactoryAsync(baseline, o => o.PoolSize = 1);
+        for (var leaseNumber = 0; leaseNumber < 2; leaseNumber++)
+        {
+            await using var lease = await fixture.CreateLeaseAsync();
+            Assert.Equal(1, initializations);
+            Assert.Equal(1, configurations);
+            var context = lease.Context;
+            var parent = await context.Parents.SingleAsync();
+            var child = await context.Children.SingleAsync();
+            var note = await context.Notes.SingleAsync();
+            Assert.Equal((100, "baseline-parent", 17), (parent.Id, parent.Name, parent.Priority));
+            Assert.Equal((200, 100, "baseline-child", true), (child.Id, child.ParentId, child.Name, child.Enabled));
+            Assert.Equal((300, 200, "baseline-note", 29), (note.Id, note.ChildId, note.Body, note.Revision));
+
+            var addedParent = new SeedParent { Name = "ordinary-parent", Priority = 43 };
+            context.Parents.Add(addedParent);
+            await context.SaveChangesAsync();
+            var addedChild = new SeedChild { ParentId = addedParent.Id, Name = "ordinary-child" };
+            context.Children.Add(addedChild);
+            await context.SaveChangesAsync();
+            var addedNote = new SeedNote { ChildId = addedChild.Id, Body = "ordinary-note", Revision = 71 };
+            context.Notes.Add(addedNote);
+            await context.SaveChangesAsync();
+            Assert.Equal((101, 201, 301), (addedParent.Id, addedChild.Id, addedNote.Id));
+        }
+    }
+
+    private static async Task<TtLifecycleException> RejectFactoryAsync(Func<Task<TtFactory<SeedContext>>> create)
+    {
+        TtFactory<SeedContext>? published = null;
+        try
+        {
+            var error = await Record.ExceptionAsync(async () => { published = await create(); });
+            Assert.Null(published);
+            return Assert.IsType<TtLifecycleException>(error);
+        }
+        finally { if (published is not null) await published.DisposeAsync(); }
+    }
+
+    public sealed class SeedContext(DbContextOptions<SeedContext> options) : DbContext(options)
+    {
+        public DbSet<SeedParent> Parents => Set<SeedParent>();
+        public DbSet<SeedChild> Children => Set<SeedChild>();
+        public DbSet<SeedNote> Notes => Set<SeedNote>();
+        protected override void OnModelCreating(ModelBuilder model)
+        {
+            model.Entity<SeedChild>().HasOne<SeedParent>().WithMany().HasForeignKey(c => c.ParentId);
+            model.Entity<SeedNote>().HasOne<SeedChild>().WithMany().HasForeignKey(n => n.ChildId);
+        }
+    }
+
+    public sealed class SeedParent
+    {
+        public int Id { get; set; }
+        public required string Name { get; set; }
+        public int Priority { get; set; }
+    }
+
+    public sealed class SeedChild
+    {
+        public int Id { get; set; }
+        public int ParentId { get; set; }
+        public required string Name { get; set; }
+        public bool Enabled { get; set; }
+    }
+
+    public sealed class SeedNote
+    {
+        public int Id { get; set; }
+        public int ChildId { get; set; }
+        public required string Body { get; set; }
+        public int Revision { get; set; }
+    }
+}

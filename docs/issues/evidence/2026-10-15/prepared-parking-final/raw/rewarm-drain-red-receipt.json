@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotRewarmDrainTests",
+    "--logger",
+    "trx;LogFileName=rewarm-drain-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/rewarm-drain-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 4.017839088999608,
+  "log": "artifacts/tt-008/rewarm-drain-red.log",
+  "sourceBinding": "artifacts/tt-008/rewarm-drain-red/source-binding.json"
+}

@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation|FullyQualifiedName~A_valid_idle_policy_reaches_image_preparation|FullyQualifiedName~ResourceBudgetValidationTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=configuration-green.trx",
+    "--results-directory",
+    "artifacts/tt-008/configuration-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 7.394699989003129,
+  "log": "artifacts/tt-008/configuration-green.log",
+  "sourceBinding": "artifacts/tt-008/configuration-green/source-binding.json"
+}

@@ -1,0 +1,22 @@
+{
+  "run": "lifecycle-logger-red",
+  "beforeInventory": "Only unrelated 0a95e88a68d8 existed immediately before this exact two-test owned run.",
+  "resources": [
+    {
+      "id": "cecbf1bc732ffd3faf4205f1fa1585ad6de399a7435afc2770f74a5b40642a53",
+      "name": "/tt_pool_1c36ec2099104252ba53a2bced2253e2_8d8845b988714d5cba57e3923721036c",
+      "created": "2026-10-15T00:11:45.701156469Z",
+      "imageId": "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b72e7aa1abd43cce9887542",
+      "status": "running"
+    },
+    {
+      "id": "c61c3c2abaa1fdd019fcbfafb8bebb92aa75021fda9104d25cf868fc22fe50f2",
+      "name": "/tt-maintenance-drain-4bdee90e4d8e4278a97c39dd9f9f2536_pool_f579be3340e44b98a6f786bec0d9b1b0_6646e2dff95449778bf9ab95b723667e",
+      "created": "2026-10-15T00:11:45.70107358Z",
+      "imageId": "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b72e7aa1abd43cce9887542",
+      "status": "running"
+    }
+  ],
+  "qualification": "Persistent diagnostic injection also failed teardown, masking the first oracle. Corrected RED throws once and observes SlotPark failure plus missing55006; no project .NET test work remains. Initial cleanup process search matched its own shell command; no removal occurred until corrected executable/workspace-specific check.",
+  "action": "Remove these exact disposable owned failed-repro hosts; preserve unrelated container/caches and other project jobs."
+}

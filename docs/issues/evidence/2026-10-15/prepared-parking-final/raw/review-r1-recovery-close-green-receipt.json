@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotRewarmDrainTests|FullyQualifiedName~SlotIdleRecoveryTests|FullyQualifiedName~SlotRecoveryTests|FullyQualifiedName~FactoryRewarmDrainTests|FullyQualifiedName~FactoryMaintenanceTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=review-r1-recovery-close-green.trx",
+    "--results-directory",
+    "artifacts/tt-008/review-r1-recovery-close-green"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 10.811169305998192,
+  "log": "artifacts/tt-008/review-r1-recovery-close-green.log",
+  "sourceBinding": "artifacts/tt-008/review-r1-recovery-close-green/source-binding.json"
+}

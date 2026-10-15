@@ -1,0 +1,7 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:    25, Skipped:     0, Total:    25, Duration: 1 s - TurboTest.Tests.dll (net10.0)",
+  "assertions": "Direct/retry closure retains original error; successful live publication clears it; terminal cleanup fault actually delivered to acquisition does not repeat on drain. Retry-delay cancellation is gated by held TimeProvider timer rather than a100ms scheduling race. Finite cleanup/create assertions remain.",
+  "productionRefactor": "Unseen failure is a reservation/descendant obligation; verified publication or exact delivered fault clears it, final drain consumes it once. Existing clock also supplies retry delays; System behavior unchanged. Safe lifecycle formatter now carries sanitized secondary diagnostic through outer wrappers.",
+  "qualification": "First native repair calibration passes15/16: original IOException retained, but secondary real55006 disappears through outer lifecycle wrapping. Separate fast diagnostic RED misses UnauthorizedAccessException, and safe formatter repair passes. Initial delay control passed but was tightened to deterministic timer hold.",
+  "limits": "Native refreshed calibration running; no new full/build/current completion claim."
+}

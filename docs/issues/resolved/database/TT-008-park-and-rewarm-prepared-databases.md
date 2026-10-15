@@ -1,0 +1,235 @@
+---
+id: TT-008
+title: Park and rewarm prepared databases
+status: Resolved
+priority: P2
+type: Feature
+created: 2026-10-14
+depends_on: [TT-005, TT-006]
+---
+
+# TT-008: Park and rewarm prepared databases
+
+## Problem
+
+Dropping an idle database took roughly 4–5 seconds in several probes. Parking a verified database by closing its data source took a median 8.53 ms; recreating the source and validating it took 36.37 ms. Parking retains files and defers deletion cost: it did not improve total runtime in the measured short workload.
+
+Evidence: [TT-000](../../resolved/database/TT-000-pool-feasibility-investigation.md).
+
+## Scope
+
+Separate active warm capacity from retained prepared capacity. Provide a parking/rewarm lifecycle plus configurable extended idle deletion/fixture shutdown. Initially use explicit/fixed policy so correctness can be verified independently of TT-009.
+
+## Acceptance criteria
+
+- [x] Only an idle verified Ready slot can be parked; no leased/resetting/preparing slot can be selected.
+- [x] Parking closes that slot's owned connection pool while retaining its known baseline database and physical reservation. Closing sessions does not imply database files or all server memory were freed.
+- [x] Rewarm prefers a retained compatible slot over a fresh clone, including when reservations already equal the hard cap.
+- [x] Rewarm validates baseline, schema and identity before Ready publication. Corrupt seed/schema and failed connection opening remain quarantined and follow TT-006 recovery.
+- [x] A bounded warm floor, retained-database cap and idle deletion policy are configurable and validated. Expiry removes only idle slots and releases reservations only after confirmed deletion.
+- [x] Rewarm/retirement concurrency is bounded; a renewed request cannot race a physical deletion into double ownership.
+- [x] Fixture shutdown drains and deletes parked as well as active databases. Deletion/teardown costs remain visible in metrics.
+
+## Verification
+
+Test park → idle → renewed burst with actual resource identity reuse and closed-session observations. Use a controllable clock for expiry/races and real PostgreSQL checks for seed/schema corruption and failed rewarm. Do not treat per-database rewarm time as whole-burst checkout latency.
+
+## Implementation progress
+
+- **2026-10-15 — explicit idle policy validation:** `PoolSize` remains the total
+  physical cap. `WarmFloor` bounds Ready slots retained by explicit maintenance;
+  `MaxParkedDatabases` bounds retained idle databases separately (null uses the
+  physical cap). Optional `IdleDatabaseLifetime` measures expiry after verified
+  return; null disables expiry. Initial warming stays unchanged until maintenance
+  is explicitly requested. The configuration RED shows six invalid cases reaching
+  image preparation. Validation now rejects negative/over-cap floor and retention
+  values and nonpositive expiry before side effects. The targeted coverage gate
+  passes52 checks, including legal zero/full-capacity/disabled-expiry boundaries
+  and adjacent resource budgets. Raw commands, exact source bindings, RED/GREEN
+  results and coverage/refactor findings remain under `artifacts/tt-008`.
+  Production uses direct guards at the existing validation boundary; tests extend
+  the existing invalid-configuration table and use one legal-boundary theory.
+  Parking, rewarm, expiry execution, real identity/session checks, race/drain
+  evidence and independent completion review remain. This is uncommitted progress;
+  no acceptance box is marked complete.
+- **Ready parking:** The corrected component RED observes no pending closure.
+  Its first setup was interrupted because it held the reset permit before
+  returning the intended idle slot; this is retained as invalid setup. Parking
+  now claims only Ready entries under the existing ledger lock, publishes a
+  settlement task, uses the cleanup limit and retains the reservation. Preparing,
+  leased and resetting identities remain untouched. Floor0/1/3 and shutdown
+  deletion checks pass in22 selected component cases with coverage. The Ready
+  queue claim and existing permits need no second owner or new semaphore.
+- **Native session/files calibration:** A first observer setup lacked credentials
+  because Npgsql strips the opened connection's password; it is not behavioral
+  RED. The corrected test privately configures an ephemeral password and sees
+  one session remain after no-op maintenance. Explicit `MaintainIdleAsync` now
+  closes prepared sources through the owned ledger. An independent unpooled
+  observer sees zero target sessions afterward, unchanged database OID, retained
+  files and reservation1; shutdown confirms complete drain. The combined gate
+  passes23 checks. Parking does not claim to free database files or all server
+  memory. The source's existing idempotent disposal supports later deletion.
+- **Retained rewarm:** Component RED times out because capacity is fully occupied
+  by a parked reservation and no rewarm starts. Acquisition now atomically claims
+  retained capacity before considering a fresh reservation, executes under the
+  preparation limit and publishes only after verification. Canceled caller
+  observation preserves work; demand during parking resumes after closure;
+  concurrent rewarms respect the same preparation bound. Twenty-five component
+  checks pass with coverage. One shared claim transition serves request and
+  closure-completion paths; race oracles remain separate.
+- **Native reopen/verification:** The native RED finds no reopening callback.
+  A claimed prepared slot now receives a new source and invokes the shared full
+  baseline/schema/workload verification before publication. The database name/OID
+  stay unchanged, session PID changes, seed row1 and inserted sequence2 remain
+  correct, and a held verification callback keeps acquisition pending. Eleven
+  selected native/component checks pass with exact92-input bindings and coverage,
+  including existing corruption recovery and failed workload-drain evidence.
+  Refactoring shares verification with cloning while preserving clone diagnostic
+  stages; the test observes actual identity/data independently. This is nominal
+  reopen evidence, not complete failure-path proof. Failed park/rewarm recovery,
+  foreign replacement identity rejection, maintenance/drain races, retained-cap
+  and expiry execution, metrics/docs and final completion gates remain.
+- **Bounded idle recovery:** The corrected component RED finds no cleanup retry
+  after failed parking/rewarm. Its first result was masked by the test's teardown
+  deletion injection, and remains qualified separately. Idle failure now shares
+  the existing reset cleanup/replacement episode, including confirmed deletion
+  and the finite retry budget. Two operation variants retain capacity while a
+  second deletion is held, then publish one verified replacement. Rewarm releases
+  preparation before waiting for cleanup, preventing inversion with a concurrent
+  schema replacement. The first race oracle reread a mutable reservation output;
+  the correction captures the original input resource. Twenty-eight component
+  checks pass with coverage. Production consolidates one recovery episode;
+  tests retain a separate deterministic permit-ordering oracle.
+- **Native failure calibration and retained identity:** Seed corruption, changed
+  schema and a disposed source that cannot reopen remain unavailable, are deleted
+  and yield verified seed/sequence state in a new database. Seven selected native
+  checks pass. A stronger RED then replaces the parked database with an identical
+  baseline under the same name; the old implementation publishes it. Fresh
+  preparation now captures PostgreSQL OID and rewarm requires that identity before
+  Ready. Eight selected native checks pass with exact94-input source bindings and
+  coverage, including nominal reopen and real DROP failure. One OID stored beside
+  the immutable slot name extends the existing verifier. The test's administration
+  is confined to its owned host; credentials stay private. Forbidden publication
+  fails promptly through the pending-acquisition oracle. These are scoped gates,
+  not final completion. Retained-cap/expiry execution, cancellation/drain/material
+  failure handling, lifecycle timing, maintained docs and final review remain.
+- **Retained cap and monotonic expiry:** Genuine REDs rejected missing retirement
+  and expiry execution. Maintenance protects the configured Ready floor, bounds
+  parked retention and measures idle age since verified Ready publication using
+  a monotonic clock. Parking preserves age; renewal resets it. Component31/35 and
+  selected native6/11 gates pass at separate source cuts with coverage. Wall-clock
+  jumps cannot expire a slot. Held real DROP preserves database/reservation
+  ownership, and renewed demand waits until confirmed deletion before receiving
+  a new identity and verified seeds. Captured policy survives caller mutation.
+  These are selected gates, not whole-suite completion.
+- **Lifecycle audit:** Read-only investigation found no supported early physical
+  deletion or double ownership at its bound source cut. It did find lost material
+  diagnostics after canceled maintenance observation, late rewarm failure after
+  closure, and multiple selected maintenance failures. Successful live corruption
+  recovery remains transparent. The canceled-maintenance RED confirms cleanup
+  incorrectly returns success after a late IOException; repair and native
+  calibration are in progress. Acceptance remains open pending final gates.
+- **Lifecycle repair and timing:** Canceled maintenance now retains actual work
+  and unseen outcomes; bulk selected failures retain both safe diagnostic kinds.
+  Fast REDs and real PostgreSQL55006 calibration protect those behaviors. Late
+  material rewarm failures survive closure without poisoning successful live
+  recovery. The latest selected lifecycle gate passes11 checks at its source cut;
+  one earlier native failure was an over-specific wrapper-stage oracle, corrected
+  without a production change. A follow-up audit identified the interval between
+  factory closure and physical pool closure while a lease callback blocks, plus
+  wrapped cooperative cancellation and cross-boundary error aggregation.
+  The two-slot factory RED creates an unwanted third resource. Admission/recovery
+  now stops separately from physical teardown; lease return remains available.
+  Sixteen selected fast checks pass, with native calibration in progress.
+  A native cancellation RED rejects treating TaskCanceledException as material;
+  preserving it at the verifier boundary passes the selected control gate.
+  Structured Debug event401 records actual Park/Rewarm/Delete/Teardown duration,
+  success and opaque owner identity. Its RED finds no records; five selected
+  timing/lifecycle checks pass with coverage. README describes explicit policy,
+  monotonic age, retained costs and cancellation ownership. Final gates/review
+  and remaining aggregation/closure controls are still outstanding.
+- **Current refactor gate:** All84 selected fast checks pass at the current source
+  cut with coverage. Ordinary fixtures reject prepared maintenance before
+  allocation; repeated maintenance does not duplicate an already-claimed job.
+  A further RED shows unseen maintenance IOException hiding a distinct pool
+  drain UnauthorizedAccessException. Factory drain now retains subsequent safe
+  diagnostics; the selected factory/provider cohort passes. Native two-slot
+  shutdown calibration passes11 selected checks: admission/recovery stops while
+  held context cleanup retains its database, and both targets/host are finally
+  deleted once with no replacement. The whole-suite gate is now running.
+  No whole-suite/build/completion claim is made yet; TT-008 remains Open.
+- **Broad-gate correction:** The first full run finishes289 passes/one failure
+  without skips. Static cleanup observes another fixture's deliberate55006 through
+  the global cleanup registry. New timeout/failure fixtures and the existing fast
+  factory cleanup fixture now use the existing serial lifecycle collection;
+  no test is disabled. The failed run remains raw evidence. A further native
+  RED proves a throwing timing logger can fail successful parking and replace
+  a real SQLSTATE. Its first persistent injection also poisoned teardown, masking
+  the first oracle; corrected one-shot injection isolates both failures. The
+  timing wrapper now preserves original lifecycle outcomes. All8 selected native
+  checks pass with coverage, including throwing-logger controls and complete
+  physical cleanup. The earlier two terminal repro hosts were removed explicitly;
+  unrelated jobs/resources and caches remain. Final fast/full gates are rerunning.
+- **Final verification candidate:** The corrected full gate passes all 292 tests
+  with no failures/skips; the current fast gate passes 84 and selected native
+  logger/lifecycle gate passes eight. Final solution and separate DynamicScaling
+  example builds pass without warnings/errors. All current gate snapshots match
+  the same 102 compiler inputs. Docker retains only the unrelated prismml
+  container. Source coverage and observable acceptance oracles are retained
+  separately; no whole-package100% or passing mutation claim is made. Exact
+  evidence archive, independent completion review and commit are still pending.
+- **Independent review — FAIL, R1:** Review independently verifies the complete
+  candidate manifest, archive, all terminal gates and exact proposed final tree,
+  but identifies an unprotected recovery ordering. Verification can fail while
+  live, cleanup can remain held, and closure then suppresses replacement without
+  retaining the unobserved failure. The pre-await closure snapshot is stale;
+  cleanup retry can likewise lose the error obligation. The frozen candidate,
+  verbatim verdict and repair capsule remain under `artifacts/tt-008/review-r1`.
+  Deterministic direct-deletion and retry-deletion REDs are now running. Repair
+  must preserve diagnostics through the owned episode until verified recovery
+  or delivery, with native calibration and refreshed whole-candidate review.
+  No status envelope is applied and no completion commit is made. TT-008 is Open.
+- **R1 repair progress:** Both direct-deletion and retry-deletion REDs fail with
+  missing material diagnostic. The existing reservation now retains the unseen
+  failure through cleanup and replacement until verified publication or delivery;
+  stopped/terminal episodes transfer it to final drain once. Twenty-five selected
+  fast checks pass, including exhausted cleanup delivery, successful live recovery
+  and cancellation controls. Retry-delay cancellation uses a held clock timer,
+  avoiding a wall-time scheduling race. The first native calibration passes15/16:
+  the original IOException survives, while secondary55006 is lost through an outer
+  diagnostic wrapper. A separate fast RED reproduces lost secondary failure kind.
+  The safe formatter now preserves sanitized cleanup diagnostics through wrapping;
+  refreshed native calibration is running. All earlier successful full/build
+  gates remain historical pre-repair evidence; fresh completion review is required.
+- **R1 native calibration:** All19 selected native/component checks now pass.
+  Direct cleanup and actual55006 retry remain held through closure; physical
+  ownership is retained, original and secondary safe diagnostics survive, and
+  finite cleanup removes the intended database/host without replacement or
+  repeated deletion. Live recovery and cooperative cancellation controls stay
+  passing. The secondary diagnostic failure was a real propagation defect,
+  separately reproduced in a fast RED. Current fast/full/build evidence and the
+  complete review packet are being refreshed; TT-008 remains Open.
+- **Revised final gates:** Current fast89, selected native19 and whole-suite299
+  checks pass without failures/skips. Both refreshed solution and separate example
+  builds pass with zero warnings/errors; all gates match103 current compiler
+  inputs. The whole run completes in683.918689476 seconds. No TurboTest container
+  remains; unrelated state/caches are preserved. The complete revised candidate
+  will return to the retained independent reviewer before resolution or commit.
+
+## Decision log
+
+- **2026-10-15 — Resolved:** The exact parking/rewarm candidate and finite
+  administrative envelope passed independent completion review. Explicit idle
+  maintenance preserves the Ready floor, bounds retained parked databases and
+  applies monotonic expiry. Compatible retained identity is verified before reuse;
+  confirmed deletion conserves the physical cap. Owned shutdown stops admission
+  and recovery before lease cleanup, joins actual lifecycle work and retains
+  unseen material failures. Structured Debug operation durations report parking,
+  rewarm, deletion and final teardown without payloads. The full gate passes 299
+  checks without failures/skips; final solution and separate example builds pass.
+  [Final evidence](../../evidence/2026-10-15/prepared-parking-final/manifest.json)
+  preserves raw REDs, qualified setup/oracle corrections, source bindings and
+  coverage. The [completion receipt](../../evidence/2026-10-15/prepared-parking-final/completion.json)
+  binds review identity. TT-010 and TT-009 remain Open; comprehensive metrics and
+  adaptive comparisons are still future work. Full mutation remains pending the
+  final whole coding-session committed snapshot.

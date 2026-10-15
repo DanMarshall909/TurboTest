@@ -1,0 +1,7 @@
+{
+  "gate": "Passed!  - Failed:     0, Passed:     5, Skipped:     0, Total:     5, Duration: 22 s - TurboTest.Tests.dll (net10.0)",
+  "red": "Independent nominal database reuse succeeds, then expected Park/Rewarm/Delete/Teardown records differ from empty actual collection.",
+  "assertions": "All four operation records have opaque fixture identity, positive duration and success, no seed payload/credentials. Final teardown duration includes physical deletion; identity/session/seed/sequence reuse remains independently asserted. Adjacent failed lifecycle and reset timings pass.",
+  "refactor": "One timing wrapper at prepared owner emits consistent structured Debug event401. Wrappers retain existing physical ownership methods and measure actual completion, including failed attempts; diagnostic emission follows measurement.",
+  "limits": "Operation timings do not prove whole-burst checkout latency or universal reset targets. Comprehensive metrics/benchmark remain TT010."
+}

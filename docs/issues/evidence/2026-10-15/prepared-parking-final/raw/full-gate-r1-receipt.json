@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=full-gate-r1.trx",
+    "--results-directory",
+    "artifacts/tt-008/full-gate-r1"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 513.9826274619991,
+  "log": "artifacts/tt-008/full-gate-r1.log",
+  "sourceBinding": "artifacts/tt-008/full-gate-r1/source-binding.json"
+}

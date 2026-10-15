@@ -1,0 +1,10 @@
+{
+  "gate": "31 component checks pass with coverage",
+  "sourceInputs": 95,
+  "assertions": "Ready floor and parked cap enforced; in-flight parking counts against retained limit. Surplus reservation remains until confirmed deletion. Deletion retry does not refill absent demand; renewed demand waits until old resource is physically gone. Existing recovery/parking/permit oracles remain green.",
+  "refactor": {
+    "production": "The same atomic claim selects parking or retirement; cleanup retries carry a replenish flag instead of creating a second retry driver.",
+    "tests": "Renewed/absent demand use one theory with finite creation/deletion guards. Held confirmation proves capacity conservation independently of the snapshot alone."
+  },
+  "limits": "Native retention calibration is pending, expiry not implemented. Concurrent changing policy is not promised; public options are captured per fixture."
+}

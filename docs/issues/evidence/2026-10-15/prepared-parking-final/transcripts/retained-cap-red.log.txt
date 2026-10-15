@@ -1,0 +1,21 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.24]     TurboTest.Tests.SlotRetentionTests.Retained_limit_parks_one_surplus_and_holds_the_other_reservation_until_confirmed_deletion [FAIL]
+  Failed TurboTest.Tests.SlotRetentionTests.Retained_limit_parks_one_surplus_and_holds_the_other_reservation_until_confirmed_deletion [19 ms]
+  Error Message:
+   Assert.False() Failure
+Expected: False
+Actual:   True
+  Stack Trace:
+     at TurboTest.Tests.SlotRetentionTests.Retained_limit_parks_one_surplus_and_holds_the_other_reservation_until_confirmed_deletion() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRetentionTests.cs:line 31
+   at TurboTest.Tests.SlotRetentionTests.Retained_limit_parks_one_surplus_and_holds_the_other_reservation_until_confirmed_deletion() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRetentionTests.cs:line 46
+   at TurboTest.Tests.SlotRetentionTests.Retained_limit_parks_one_surplus_and_holds_the_other_reservation_until_confirmed_deletion() in /home/dan/code/TurboTest/tests/TurboTest.Tests/SlotRetentionTests.cs:line 49
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/retained-cap-red/retained-cap-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 32 ms - TurboTest.Tests.dll (net10.0)

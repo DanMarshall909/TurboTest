@@ -1,0 +1,84 @@
+{
+  "sourceBase": "5b8336ab852119ce80cab77b63e31339b3f15665",
+  "sdk": "10.0.301",
+  "runtimes": [
+    "Microsoft.AspNetCore.App 10.0.9 [/home/dan/.dotnet/shared/Microsoft.AspNetCore.App]",
+    "Microsoft.AspNetCore.App 11.0.0-preview.7.26381.103 [/home/dan/.dotnet/shared/Microsoft.AspNetCore.App]",
+    "Microsoft.NETCore.App 10.0.3 [/home/dan/.dotnet/shared/Microsoft.NETCore.App]",
+    "Microsoft.NETCore.App 10.0.9 [/home/dan/.dotnet/shared/Microsoft.NETCore.App]",
+    "Microsoft.NETCore.App 11.0.0-preview.7.26381.103 [/home/dan/.dotnet/shared/Microsoft.NETCore.App]"
+  ],
+  "image": "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b72e7aa1abd43cce9887542",
+  "dockerVersion": {
+    "Client": {
+      "Platform": {
+        "Name": "Docker Engine - Community"
+      },
+      "Version": "29.7.2",
+      "ApiVersion": "1.55",
+      "DefaultAPIVersion": "1.55",
+      "GitCommit": "a7dcaa6",
+      "GoVersion": "go1.26.5",
+      "Os": "linux",
+      "Arch": "amd64",
+      "BuildTime": "Wed Aug  5 18:28:48 2026",
+      "Context": "default"
+    },
+    "Server": {
+      "Platform": {
+        "Name": "Docker Engine - Community"
+      },
+      "Version": "29.7.2",
+      "ApiVersion": "1.55",
+      "MinAPIVersion": "1.40",
+      "Os": "linux",
+      "Arch": "amd64",
+      "Components": [
+        {
+          "Name": "Engine",
+          "Version": "29.7.2",
+          "Details": {
+            "ApiVersion": "1.55",
+            "Arch": "amd64",
+            "BuildTime": "Wed Aug  5 18:28:48 2026",
+            "Experimental": "false",
+            "GitCommit": "6a43e3d",
+            "GoVersion": "go1.26.5",
+            "KernelVersion": "7.0.11-76070011-generic",
+            "MinAPIVersion": "1.40",
+            "Module": "github.com/moby/moby/v2",
+            "ModuleVersion": "v2.0.0+unknown",
+            "Os": "linux"
+          }
+        },
+        {
+          "Name": "containerd",
+          "Version": "v2.3.3",
+          "Details": {
+            "GitCommit": "aad11006b869517fcd3009450b6f82da282e1a9b"
+          }
+        },
+        {
+          "Name": "runc",
+          "Version": "1.4.3",
+          "Details": {
+            "GitCommit": "v1.4.3-0-gbb14dabe"
+          }
+        },
+        {
+          "Name": "docker-init",
+          "Version": "0.19.0",
+          "Details": {
+            "GitCommit": "de40ad0"
+          }
+        }
+      ],
+      "GitCommit": "6a43e3d",
+      "GoVersion": "go1.26.5",
+      "KernelVersion": "7.0.11-76070011-generic",
+      "BuildTime": "2026-08-05T18:28:48.000000000+00:00"
+    }
+  },
+  "localOnly": "No remote/upstream; tracker declares repository Markdown authoritative.",
+  "preservedUnrelatedContainer": "0a95e88a68d8 prismml-llamacpp-server-1"
+}

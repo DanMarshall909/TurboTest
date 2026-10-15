@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="2d307081-f08b-469c-b784-667a30a4a505" name="@os-greg 2026-10-15 09:49:24" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-15T09:49:24.4818959+10:00" queuing="2026-10-15T09:49:24.4818959+10:00" start="2026-10-15T09:49:21.1298222+10:00" finish="2026-10-15T09:49:24.7582805+10:00" />
+  <TestSettings name="default" id="0075d0c3-aef0-47fa-ba50-59d3a4f55ef9">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-15_09_49_24" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="6d6bf714-d858-4e0c-a312-e16e1140dfe4" testId="063cce1f-9812-a013-3844-7a831771fcb4" testName="TurboTest.Tests.FactoryMaintenanceTests.Bulk_maintenance_reports_all_safe_failures_and_does_not_repeat_delivered_faults_on_drain" computerName="os-greg" duration="00:00:00.0690726" startTime="2026-10-15T09:49:23.7360550+10:00" endTime="2026-10-15T09:49:23.8029925+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6d6bf714-d858-4e0c-a312-e16e1140dfe4" />
+    <UnitTestResult executionId="4f5160a2-8247-4177-bd38-c8ed55ad21be" testId="4df8d352-6f52-541d-9e73-7de2c63dadf8" testName="TurboTest.Tests.FactoryBackpressureTests.Ordinary_contexts_cannot_replace_their_fixture_owned_source(onConfiguring: True)" computerName="os-greg" duration="00:00:00.0159985" startTime="2026-10-15T09:49:24.0673800+10:00" endTime="2026-10-15T09:49:24.0833474+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4f5160a2-8247-4177-bd38-c8ed55ad21be" />
+    <UnitTestResult executionId="455fc93f-fd16-40e3-8d03-dcc81979322c" testId="6c13686d-478a-c43e-2f03-e1a981a8c82d" testName="TurboTest.Tests.FactoryMaintenanceTests.Canceled_maintenance_preserves_its_actual_work_and_late_failure_through_cleanup" computerName="os-greg" duration="00:00:00.1150975" startTime="2026-10-15T09:49:23.8185989+10:00" endTime="2026-10-15T09:49:23.9200423+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="455fc93f-fd16-40e3-8d03-dcc81979322c" />
+    <UnitTestResult executionId="ace4ca99-c2bb-42e9-8dd5-fd1873d7e160" testId="77873537-a02b-5726-23f0-772dc5b1ff29" testName="TurboTest.Tests.SlotRetentionTests.Retained_limit_parks_one_surplus_and_holds_the_other_reservation_until_confirmed_deletion" computerName="os-greg" duration="00:00:00.0185473" startTime="2026-10-15T09:49:24.1346311+10:00" endTime="2026-10-15T09:49:24.1532067+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ace4ca99-c2bb-42e9-8dd5-fd1873d7e160" />
+    <UnitTestResult executionId="9422da3a-c248-4372-9cd1-8d7efd88e9e1" testId="a1244eda-be4f-d5c6-3c08-9945857c512e" testName="TurboTest.Tests.FactoryBackpressureTests.Ordinary_contexts_cannot_replace_their_fixture_owned_source(onConfiguring: False)" computerName="os-greg" duration="00:00:00.3372632" startTime="2026-10-15T09:49:23.7371865+10:00" endTime="2026-10-15T09:49:24.0670911+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9422da3a-c248-4372-9cd1-8d7efd88e9e1" />
+    <UnitTestResult executionId="d7fa0227-4e0e-4c3f-86a3-2ba4a15ef959" testId="99ee8ce0-752f-798f-660a-4a732c8666f1" testName="TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: True)" computerName="os-greg" duration="00:00:00.1057111" startTime="2026-10-15T09:49:24.3485439+10:00" endTime="2026-10-15T09:49:24.4540391+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d7fa0227-4e0e-4c3f-86a3-2ba4a15ef959" />
+    <UnitTestResult executionId="49f4ac65-ed9b-4bde-8416-257c7ce6d2e7" testId="4f1ad525-a531-2559-cade-5d6492df2012" testName="TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources" computerName="os-greg" duration="00:00:00.0045094" startTime="2026-10-15T09:49:24.5575333+10:00" endTime="2026-10-15T09:49:24.5618205+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="49f4ac65-ed9b-4bde-8416-257c7ce6d2e7" />
+    <UnitTestResult executionId="41c608a0-fe29-4c03-8731-1fd386bce8d8" testId="e53510e5-fd88-f598-62ac-6bf9c497f88e" testName="TurboTest.Tests.SlotRetentionTests.Retirement_retry_preserves_capacity_and_replaces_only_for_renewed_demand(renewed: False)" computerName="os-greg" duration="00:00:00.1027404" startTime="2026-10-15T09:49:24.0317082+10:00" endTime="2026-10-15T09:49:24.1343208+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="41c608a0-fe29-4c03-8731-1fd386bce8d8" />
+    <UnitTestResult executionId="45a23c9e-3d3a-4dfc-b63c-82353ba5e55f" testId="a60dad35-150c-04b5-97c0-9bfad6f69678" testName="TurboTest.Tests.FactoryBackpressureTests.Closing_a_factory_cancels_capacity_waiters_before_draining_live_leases" computerName="os-greg" duration="00:00:00.2643731" startTime="2026-10-15T09:49:24.0836204+10:00" endTime="2026-10-15T09:49:24.3480351+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="45a23c9e-3d3a-4dfc-b63c-82353ba5e55f" />
+    <UnitTestResult executionId="2ee21165-bd94-4658-8818-f3ac94f2930b" testId="4e6e7ed6-466a-c8f2-aefc-d870d46c1a0d" testName="TurboTest.Tests.FactoryBackpressureTests.An_additional_context_is_validated_before_it_can_escape_its_lease" computerName="os-greg" duration="00:00:00.0029054" startTime="2026-10-15T09:49:24.5621283+10:00" endTime="2026-10-15T09:49:24.5649692+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2ee21165-bd94-4658-8818-f3ac94f2930b" />
+    <UnitTestResult executionId="6872c5d3-3e30-452b-931f-dea12d812dcb" testId="cb06c72f-d5cb-cb27-80e7-45152b4acf10" testName="TurboTest.Tests.SlotRetentionTests.Retirement_retry_preserves_capacity_and_replaces_only_for_renewed_demand(renewed: True)" computerName="os-greg" duration="00:00:00.1076643" startTime="2026-10-15T09:49:23.9236450+10:00" endTime="2026-10-15T09:49:24.0312955+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6872c5d3-3e30-452b-931f-dea12d812dcb" />
+    <UnitTestResult executionId="3ff3f1a6-d500-4b42-ab51-bfe3a7cbdae2" testId="d25ea06a-491a-7a74-a8d8-5914504733de" testName="TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: False)" computerName="os-greg" duration="00:00:00.1027334" startTime="2026-10-15T09:49:24.4609501+10:00" endTime="2026-10-15T09:49:24.5570694+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3ff3f1a6-d500-4b42-ab51-bfe3a7cbdae2" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.SlotRetentionTests.Retirement_retry_preserves_capacity_and_replaces_only_for_renewed_demand(renewed: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="e53510e5-fd88-f598-62ac-6bf9c497f88e">
+      <Execution id="41c608a0-fe29-4c03-8731-1fd386bce8d8" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SlotRetentionTests" name="Retirement_retry_preserves_capacity_and_replaces_only_for_renewed_demand" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FactoryBackpressureTests.Ordinary_contexts_cannot_replace_their_fixture_owned_source(onConfiguring: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="a1244eda-be4f-d5c6-3c08-9945857c512e">
+      <Execution id="9422da3a-c248-4372-9cd1-8d7efd88e9e1" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryBackpressureTests" name="Ordinary_contexts_cannot_replace_their_fixture_owned_source" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FactoryMaintenanceTests.Canceled_maintenance_preserves_its_actual_work_and_late_failure_through_cleanup" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="6c13686d-478a-c43e-2f03-e1a981a8c82d">
+      <Execution id="455fc93f-fd16-40e3-8d03-dcc81979322c" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryMaintenanceTests" name="Canceled_maintenance_preserves_its_actual_work_and_late_failure_through_cleanup" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: False)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="d25ea06a-491a-7a74-a8d8-5914504733de">
+      <Execution id="3ff3f1a6-d500-4b42-ab51-bfe3a7cbdae2" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryBackpressureTests" name="A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FactoryMaintenanceTests.Bulk_maintenance_reports_all_safe_failures_and_does_not_repeat_delivered_faults_on_drain" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="063cce1f-9812-a013-3844-7a831771fcb4">
+      <Execution id="6d6bf714-d858-4e0c-a312-e16e1140dfe4" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryMaintenanceTests" name="Bulk_maintenance_reports_all_safe_failures_and_does_not_repeat_delivered_faults_on_drain" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SlotRetentionTests.Retained_limit_parks_one_surplus_and_holds_the_other_reservation_until_confirmed_deletion" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="77873537-a02b-5726-23f0-772dc5b1ff29">
+      <Execution id="ace4ca99-c2bb-42e9-8dd5-fd1873d7e160" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SlotRetentionTests" name="Retained_limit_parks_one_surplus_and_holds_the_other_reservation_until_confirmed_deletion" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FactoryBackpressureTests.A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure(lateFailure: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="99ee8ce0-752f-798f-660a-4a732c8666f1">
+      <Execution id="d7fa0227-4e0e-4c3f-86a3-2ba4a15ef959" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryBackpressureTests" name="A_blocking_cancellation_callback_cannot_hide_the_drain_deadline_or_its_later_failure" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FactoryBackpressureTests.Closing_a_factory_cancels_capacity_waiters_before_draining_live_leases" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="a60dad35-150c-04b5-97c0-9bfad6f69678">
+      <Execution id="45a23c9e-3d3a-4dfc-b63c-82353ba5e55f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryBackpressureTests" name="Closing_a_factory_cancels_capacity_waiters_before_draining_live_leases" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FactoryBackpressureTests.An_additional_context_is_validated_before_it_can_escape_its_lease" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4e6e7ed6-466a-c8f2-aefc-d870d46c1a0d">
+      <Execution id="2ee21165-bd94-4658-8818-f3ac94f2930b" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryBackpressureTests" name="An_additional_context_is_validated_before_it_can_escape_its_lease" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FactoryBackpressureTests.Ordinary_contexts_cannot_replace_their_fixture_owned_source(onConfiguring: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4df8d352-6f52-541d-9e73-7de2c63dadf8">
+      <Execution id="4f5160a2-8247-4177-bd38-c8ed55ad21be" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryBackpressureTests" name="Ordinary_contexts_cannot_replace_their_fixture_owned_source" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.FactoryBackpressureTests.A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4f1ad525-a531-2559-cade-5d6492df2012">
+      <Execution id="49f4ac65-ed9b-4bde-8416-257c7ce6d2e7" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.FactoryBackpressureTests" name="A_throwing_shutdown_callback_reports_one_failure_after_draining_owned_resources" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.SlotRetentionTests.Retirement_retry_preserves_capacity_and_replaces_only_for_renewed_demand(renewed: True)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="cb06c72f-d5cb-cb27-80e7-45152b4acf10">
+      <Execution id="6872c5d3-3e30-452b-931f-dea12d812dcb" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.SlotRetentionTests" name="Retirement_retry_preserves_capacity_and_replaces_only_for_renewed_demand" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="063cce1f-9812-a013-3844-7a831771fcb4" executionId="6d6bf714-d858-4e0c-a312-e16e1140dfe4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4df8d352-6f52-541d-9e73-7de2c63dadf8" executionId="4f5160a2-8247-4177-bd38-c8ed55ad21be" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c13686d-478a-c43e-2f03-e1a981a8c82d" executionId="455fc93f-fd16-40e3-8d03-dcc81979322c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="77873537-a02b-5726-23f0-772dc5b1ff29" executionId="ace4ca99-c2bb-42e9-8dd5-fd1873d7e160" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a1244eda-be4f-d5c6-3c08-9945857c512e" executionId="9422da3a-c248-4372-9cd1-8d7efd88e9e1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="99ee8ce0-752f-798f-660a-4a732c8666f1" executionId="d7fa0227-4e0e-4c3f-86a3-2ba4a15ef959" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4f1ad525-a531-2559-cade-5d6492df2012" executionId="49f4ac65-ed9b-4bde-8416-257c7ce6d2e7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e53510e5-fd88-f598-62ac-6bf9c497f88e" executionId="41c608a0-fe29-4c03-8731-1fd386bce8d8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a60dad35-150c-04b5-97c0-9bfad6f69678" executionId="45a23c9e-3d3a-4dfc-b63c-82353ba5e55f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4e6e7ed6-466a-c8f2-aefc-d870d46c1a0d" executionId="2ee21165-bd94-4658-8818-f3ac94f2930b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cb06c72f-d5cb-cb27-80e7-45152b4acf10" executionId="6872c5d3-3e30-452b-931f-dea12d812dcb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d25ea06a-491a-7a74-a8d8-5914504733de" executionId="3ff3f1a6-d500-4b42-ab51-bfe3a7cbdae2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="12" executed="12" passed="12" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.18]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.28]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.31]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:01.18]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="os-greg" uri="datacollector://microsoft/CodeCoverage/2.0" collectorDisplayName="Code Coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="os-greg/dan_os-greg_2026-10-15.09_49_24.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,43 @@
+{
+  "operations": [
+    {
+      "operation": "delete",
+      "path": "docs/issues/open/database/TT-008-park-and-rewarm-prepared-databases.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/resolved/database/TT-008-park-and-rewarm-prepared-databases.md",
+      "mode": "100644",
+      "sha256": "29ed870aa77025d1d1d4626f102004ee025f506e7219250ffa6a7504ccc1eda8",
+      "contentPath": "artifacts/tt-008/review/post/docs/issues/resolved/database/TT-008-park-and-rewarm-prepared-databases.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/README.md",
+      "mode": "100644",
+      "sha256": "5a2799573414863d9eada65760ba99a9035be26e6158f950a7237c3e56afb7c7",
+      "contentPath": "artifacts/tt-008/review/post/docs/issues/README.md"
+    },
+    {
+      "operation": "write",
+      "path": "README.md",
+      "mode": "100644",
+      "sha256": "e1eac4238a48b0c4cbdbd839db9dc694c2fd6daeb975745d19c1cc2f9c25695b",
+      "contentPath": "artifacts/tt-008/review/post/README.md"
+    },
+    {
+      "operation": "write",
+      "path": "docs/issues/evidence/2026-10-15/prepared-parking-final/completion.json",
+      "mode": "100644",
+      "sha256": "143a9e0ed2e4eaab803f5142ea808edf94ae928d3690311d97d1f487e51612c8",
+      "contentPath": "artifacts/tt-008/review/post/docs/issues/evidence/2026-10-15/prepared-parking-final/completion.json"
+    }
+  ],
+  "validation": [
+    "git diff --cached --check",
+    "Verify archive/raw/source binding digests and final relative Markdown links",
+    "Compare complete final tree with exact candidate plus envelope"
+  ],
+  "commitMessage": "Park and rewarm verified prepared databases with bounded idle retention",
+  "publication": "Normal local completion commit under tracker no-remote policy; no reusable cache/build deletion. Inspect processes/containers after commit and preserve unknown state."
+}

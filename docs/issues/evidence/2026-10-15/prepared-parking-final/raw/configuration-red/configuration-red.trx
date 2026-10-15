@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="7c75f141-b3da-4266-8ee7-93a38c43c321" name="@os-greg 2026-10-15 09:04:16" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-15T09:04:16.4300740+10:00" queuing="2026-10-15T09:04:16.4300740+10:00" start="2026-10-15T09:04:15.8471461+10:00" finish="2026-10-15T09:04:16.4629460+10:00" />
+  <TestSettings name="default" id="e30707d2-fafd-45bd-ab73-9a2199e7b82a">
+    <Deployment runDeploymentRoot="_os-greg_2026-10-15_09_04_16" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="8ce445c0-c310-427f-945f-45a8b1c074c2" testId="7d3c3f97-f49a-d5b1-d240-8642b765fb21" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DatabaseName&quot;, value: 2)" computerName="os-greg" duration="00:00:00.0000249" startTime="2026-10-15T09:04:16.4050544+10:00" endTime="2026-10-15T09:04:16.4050889+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8ce445c0-c310-427f-945f-45a8b1c074c2" />
+    <UnitTestResult executionId="798fb1d7-48aa-4ca9-aa8a-6017512d6f2f" testId="9df47784-92cd-c27b-9af7-1b8b363f696f" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;PoolSize&quot;, value: -1)" computerName="os-greg" duration="00:00:00.0008115" startTime="2026-10-15T09:04:16.3933261+10:00" endTime="2026-10-15T09:04:16.3937075+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="798fb1d7-48aa-4ca9-aa8a-6017512d6f2f" />
+    <UnitTestResult executionId="4e52822c-d1e8-40c7-a4b9-ab47a2406d3d" testId="7358c78b-0f33-e88e-e545-08302b215485" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;WarmFloor&quot;, value: -1)" computerName="os-greg" duration="00:00:00.0010680" startTime="2026-10-15T09:04:16.4066216+10:00" endTime="2026-10-15T09:04:16.4066549+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4e52822c-d1e8-40c7-a4b9-ab47a2406d3d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1</Message>
+          <StackTrace>   at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9d6ba825-21f2-431c-87d8-2e891b51092a" testId="60904592-89b4-8d6f-05d2-050bd66fc2b4" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DockerImage&quot;, value: 0)" computerName="os-greg" duration="00:00:00.0001286" startTime="2026-10-15T09:04:16.3946468+10:00" endTime="2026-10-15T09:04:16.3946933+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9d6ba825-21f2-431c-87d8-2e891b51092a" />
+    <UnitTestResult executionId="3d07bd6f-fe34-49c2-b6b6-09870b2ea3e0" testId="34bc7152-36ec-3e8e-4254-ca12fd8ea708" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;Provider&quot;, value: 987)" computerName="os-greg" duration="00:00:00.0000656" startTime="2026-10-15T09:04:16.3948512+10:00" endTime="2026-10-15T09:04:16.3948881+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3d07bd6f-fe34-49c2-b6b6-09870b2ea3e0" />
+    <UnitTestResult executionId="b268c5fa-57bf-4072-9b0f-dc5d6120704f" testId="d5ffd4b2-21d9-89e7-9cea-ceee428a5d1c" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;Username&quot;, value: 0)" computerName="os-greg" duration="00:00:00.0000202" startTime="2026-10-15T09:04:16.4065148+10:00" endTime="2026-10-15T09:04:16.4065520+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b268c5fa-57bf-4072-9b0f-dc5d6120704f" />
+    <UnitTestResult executionId="6ce8ea9b-bd57-4df7-9ea1-c1200db11f3b" testId="243b6604-45e4-e123-9b9f-21c510b90524" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DatabaseName&quot;, value: 3)" computerName="os-greg" duration="00:00:00.0000173" startTime="2026-10-15T09:04:16.4052451+10:00" endTime="2026-10-15T09:04:16.4052777+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6ce8ea9b-bd57-4df7-9ea1-c1200db11f3b" />
+    <UnitTestResult executionId="bc74e464-f457-4755-8768-b250f97d6757" testId="0135fbdc-6778-1050-2b0b-fe0765a1619d" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DatabaseName&quot;, value: 0)" computerName="os-greg" duration="00:00:00.0000187" startTime="2026-10-15T09:04:16.4049520+10:00" endTime="2026-10-15T09:04:16.4049866+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bc74e464-f457-4755-8768-b250f97d6757" />
+    <UnitTestResult executionId="15f86284-3420-44eb-8619-c41afb721900" testId="50a4b3d3-5cb9-9094-07da-af5e8ca45403" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DatabaseName&quot;, value: 1)" computerName="os-greg" duration="00:00:00.0000386" startTime="2026-10-15T09:04:16.4046473+10:00" endTime="2026-10-15T09:04:16.4046933+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="15f86284-3420-44eb-8619-c41afb721900" />
+    <UnitTestResult executionId="15e5fbb8-b379-4256-ab6b-e366dfcdeb3a" testId="626dc9ca-22b9-2adf-fdec-37ee50002454" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;ConnectionStringTemplate&quot;, value: 1)" computerName="os-greg" duration="00:00:00.0000178" startTime="2026-10-15T09:04:16.4069909+10:00" endTime="2026-10-15T09:04:16.4070237+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="15e5fbb8-b379-4256-ab6b-e366dfcdeb3a" />
+    <UnitTestResult executionId="a88e4f01-d989-4661-b39b-cf5c5337b3d6" testId="4aad44e1-0c0a-360e-094a-1f2c999e2c7f" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;EnableDynamicScaling&quot;, value: 1)" computerName="os-greg" duration="00:00:00.0000371" startTime="2026-10-15T09:04:16.4068953+10:00" endTime="2026-10-15T09:04:16.4069298+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a88e4f01-d989-4661-b39b-cf5c5337b3d6" />
+    <UnitTestResult executionId="bd00ce21-2ba9-47d5-a7b8-941f3dfa635a" testId="ee9ce909-577a-1941-8f70-89f69bf9e406" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;IdleDatabaseLifetime&quot;, value: 0)" computerName="os-greg" duration="00:00:00.0010809" startTime="2026-10-15T09:04:16.4070821+10:00" endTime="2026-10-15T09:04:16.4071151+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bd00ce21-2ba9-47d5-a7b8-941f3dfa635a">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1</Message>
+          <StackTrace>   at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6e202208-0759-417a-aa1f-afacf36db8f4" testId="e4ec3b8f-2cc0-2af3-1290-fe1a00425fbd" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;WarmFloor&quot;, value: 2)" computerName="os-greg" duration="00:00:00.0011065" startTime="2026-10-15T09:04:16.4053473+10:00" endTime="2026-10-15T09:04:16.4053806+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6e202208-0759-417a-aa1f-afacf36db8f4">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1</Message>
+          <StackTrace>   at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e54f64d7-72fc-44ea-a44f-7b6c2c63f326" testId="5abf0062-adc8-b6ec-ab19-7f7d4ee9d1a9" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;MaxParkedDatabases&quot;, value: 2)" computerName="os-greg" duration="00:00:00.0014551" startTime="2026-10-15T09:04:16.3951524+10:00" endTime="2026-10-15T09:04:16.3952038+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e54f64d7-72fc-44ea-a44f-7b6c2c63f326">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1</Message>
+          <StackTrace>   at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ce9f0203-ab72-43fe-9128-09a648e26d72" testId="2e64c862-e3d4-4734-bd3e-f72657561b68" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;PoolSize&quot;, value: 0)" computerName="os-greg" duration="00:00:00.0000190" startTime="2026-10-15T09:04:16.4048432+10:00" endTime="2026-10-15T09:04:16.4048818+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ce9f0203-ab72-43fe-9128-09a648e26d72" />
+    <UnitTestResult executionId="b53c2847-0e92-4e70-8d05-f2964de0110f" testId="fc3a1329-5c58-5ac6-8670-4f72aba6935a" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;IdleDatabaseLifetime&quot;, value: -1)" computerName="os-greg" duration="00:00:00.0011362" startTime="2026-10-15T09:04:16.3958282+10:00" endTime="2026-10-15T09:04:16.3958621+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b53c2847-0e92-4e70-8d05-f2964de0110f">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1</Message>
+          <StackTrace>   at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="31a03f31-5ef1-4dd9-83f6-44334614e1f0" testId="fa0a1802-3813-55d4-e89c-73ec61ec3a61" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;Username&quot;, value: 1)" computerName="os-greg" duration="00:00:00.0000381" startTime="2026-10-15T09:04:16.4056928+10:00" endTime="2026-10-15T09:04:16.4057282+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="31a03f31-5ef1-4dd9-83f6-44334614e1f0" />
+    <UnitTestResult executionId="9e1cd377-3ba3-4c7f-bd38-7ae08f0559c9" testId="ef786ede-f33a-0cba-9d53-37718161e324" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;AutoAllocateResources&quot;, value: 1)" computerName="os-greg" duration="00:00:00.0000427" startTime="2026-10-15T09:04:16.3957222+10:00" endTime="2026-10-15T09:04:16.3957591+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9e1cd377-3ba3-4c7f-bd38-7ae08f0559c9" />
+    <UnitTestResult executionId="b84123da-c87e-42b0-8895-83a7f34b26fb" testId="73cc100a-bd11-fdf8-140b-dee0c91ba6af" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;MaxParkedDatabases&quot;, value: -1)" computerName="os-greg" duration="00:00:00.0327670" startTime="2026-10-15T09:04:16.3377686+10:00" endTime="2026-10-15T09:04:16.3821805+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b84123da-c87e-42b0-8895-83a7f34b26fb">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: 0
+Actual:   1</Message>
+          <StackTrace>   at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value) in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs:line 110
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="23a0c6f6-d19d-4913-b563-f868ccecff79" testId="c0023781-8a4a-7c07-3d1c-2a728a6c0797" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;MemoryLimitMb&quot;, value: 0)" computerName="os-greg" duration="00:00:00.0000599" startTime="2026-10-15T09:04:16.3949587+10:00" endTime="2026-10-15T09:04:16.3949934+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="23a0c6f6-d19d-4913-b563-f868ccecff79" />
+    <UnitTestResult executionId="6a36ed98-eea4-4025-a500-f3c08e481c12" testId="bbe6dad4-f33d-c0b0-113e-84a806bfd7ad" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;MemoryLimitMb&quot;, value: -1)" computerName="os-greg" duration="00:00:00.0000180" startTime="2026-10-15T09:04:16.4051504+10:00" endTime="2026-10-15T09:04:16.4051847+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6a36ed98-eea4-4025-a500-f3c08e481c12" />
+    <UnitTestResult executionId="9d7f4343-e968-4046-ab62-4d3d76c9e258" testId="23827ed9-b3a4-b348-209f-a6f4f3eebcce" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;Username&quot;, value: 2)" computerName="os-greg" duration="00:00:00.0000181" startTime="2026-10-15T09:04:16.4057987+10:00" endTime="2026-10-15T09:04:16.4058317+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9d7f4343-e968-4046-ab62-4d3d76c9e258" />
+    <UnitTestResult executionId="98778dc7-ba69-4a09-b4fc-609a39b3fea7" testId="ad5b588d-a035-dd27-70df-30c93b7f6dbb" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DockerImage&quot;, value: 1)" computerName="os-greg" duration="00:00:00.0000224" startTime="2026-10-15T09:04:16.3950550+10:00" endTime="2026-10-15T09:04:16.3950886+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="98778dc7-ba69-4a09-b4fc-609a39b3fea7" />
+    <UnitTestResult executionId="a3373865-2a7e-4070-b21b-24c6dad02312" testId="9411b1b4-9a34-4768-9d9f-ac78f6586659" testName="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;Password&quot;, value: 0)" computerName="os-greg" duration="00:00:00.0001009" startTime="2026-10-15T09:04:16.4073160+10:00" endTime="2026-10-15T09:04:16.4073508+10:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a3373865-2a7e-4070-b21b-24c6dad02312" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;IdleDatabaseLifetime&quot;, value: -1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="fc3a1329-5c58-5ac6-8670-4f72aba6935a">
+      <Execution id="b53c2847-0e92-4e70-8d05-f2964de0110f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DatabaseName&quot;, value: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="0135fbdc-6778-1050-2b0b-fe0765a1619d">
+      <Execution id="bc74e464-f457-4755-8768-b250f97d6757" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;PoolSize&quot;, value: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="2e64c862-e3d4-4734-bd3e-f72657561b68">
+      <Execution id="ce9f0203-ab72-43fe-9128-09a648e26d72" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;Username&quot;, value: 2)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="23827ed9-b3a4-b348-209f-a6f4f3eebcce">
+      <Execution id="9d7f4343-e968-4046-ab62-4d3d76c9e258" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DatabaseName&quot;, value: 2)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="7d3c3f97-f49a-d5b1-d240-8642b765fb21">
+      <Execution id="8ce445c0-c310-427f-945f-45a8b1c074c2" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;AutoAllocateResources&quot;, value: 1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ef786ede-f33a-0cba-9d53-37718161e324">
+      <Execution id="9e1cd377-3ba3-4c7f-bd38-7ae08f0559c9" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;PoolSize&quot;, value: -1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="9df47784-92cd-c27b-9af7-1b8b363f696f">
+      <Execution id="798fb1d7-48aa-4ca9-aa8a-6017512d6f2f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;ConnectionStringTemplate&quot;, value: 1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="626dc9ca-22b9-2adf-fdec-37ee50002454">
+      <Execution id="15e5fbb8-b379-4256-ab6b-e366dfcdeb3a" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;Username&quot;, value: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="d5ffd4b2-21d9-89e7-9cea-ceee428a5d1c">
+      <Execution id="b268c5fa-57bf-4072-9b0f-dc5d6120704f" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;MemoryLimitMb&quot;, value: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="c0023781-8a4a-7c07-3d1c-2a728a6c0797">
+      <Execution id="23a0c6f6-d19d-4913-b563-f868ccecff79" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;Provider&quot;, value: 987)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="34bc7152-36ec-3e8e-4254-ca12fd8ea708">
+      <Execution id="3d07bd6f-fe34-49c2-b6b6-09870b2ea3e0" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;MemoryLimitMb&quot;, value: -1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="bbe6dad4-f33d-c0b0-113e-84a806bfd7ad">
+      <Execution id="6a36ed98-eea4-4025-a500-f3c08e481c12" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DockerImage&quot;, value: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="60904592-89b4-8d6f-05d2-050bd66fc2b4">
+      <Execution id="9d6ba825-21f2-431c-87d8-2e891b51092a" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;Username&quot;, value: 1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="fa0a1802-3813-55d4-e89c-73ec61ec3a61">
+      <Execution id="31a03f31-5ef1-4dd9-83f6-44334614e1f0" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DatabaseName&quot;, value: 1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="50a4b3d3-5cb9-9094-07da-af5e8ca45403">
+      <Execution id="15f86284-3420-44eb-8619-c41afb721900" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;Password&quot;, value: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="9411b1b4-9a34-4768-9d9f-ac78f6586659">
+      <Execution id="a3373865-2a7e-4070-b21b-24c6dad02312" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;WarmFloor&quot;, value: 2)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="e4ec3b8f-2cc0-2af3-1290-fe1a00425fbd">
+      <Execution id="6e202208-0759-417a-aa1f-afacf36db8f4" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;WarmFloor&quot;, value: -1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="7358c78b-0f33-e88e-e545-08302b215485">
+      <Execution id="4e52822c-d1e8-40c7-a4b9-ab47a2406d3d" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DatabaseName&quot;, value: 3)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="243b6604-45e4-e123-9b9f-21c510b90524">
+      <Execution id="6ce8ea9b-bd57-4df7-9ea1-c1200db11f3b" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;DockerImage&quot;, value: 1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ad5b588d-a035-dd27-70df-30c93b7f6dbb">
+      <Execution id="98778dc7-ba69-4a09-b4fc-609a39b3fea7" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;MaxParkedDatabases&quot;, value: -1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="73cc100a-bd11-fdf8-140b-dee0c91ba6af">
+      <Execution id="b84123da-c87e-42b0-8895-83a7f34b26fb" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;MaxParkedDatabases&quot;, value: 2)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="5abf0062-adc8-b6ec-ab19-7f7d4ee9d1a9">
+      <Execution id="e54f64d7-72fc-44ea-a44f-7b6c2c63f326" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;IdleDatabaseLifetime&quot;, value: 0)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="ee9ce909-577a-1941-8f70-89f69bf9e406">
+      <Execution id="bd00ce21-2ba9-47d5-a7b8-941f3dfa635a" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+    <UnitTest name="TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: &quot;EnableDynamicScaling&quot;, value: 1)" storage="/home/dan/code/turbotest/tests/turbotest.tests/bin/debug/net10.0/turbotest.tests.dll" id="4aad44e1-0c0a-360e-094a-1f2c999e2c7f">
+      <Execution id="a88e4f01-d989-4661-b39b-cf5c5337b3d6" />
+      <TestMethod codeBase="/home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="TurboTest.Tests.PreparedConfigurationTests" name="Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="7d3c3f97-f49a-d5b1-d240-8642b765fb21" executionId="8ce445c0-c310-427f-945f-45a8b1c074c2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9df47784-92cd-c27b-9af7-1b8b363f696f" executionId="798fb1d7-48aa-4ca9-aa8a-6017512d6f2f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7358c78b-0f33-e88e-e545-08302b215485" executionId="4e52822c-d1e8-40c7-a4b9-ab47a2406d3d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="60904592-89b4-8d6f-05d2-050bd66fc2b4" executionId="9d6ba825-21f2-431c-87d8-2e891b51092a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="34bc7152-36ec-3e8e-4254-ca12fd8ea708" executionId="3d07bd6f-fe34-49c2-b6b6-09870b2ea3e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d5ffd4b2-21d9-89e7-9cea-ceee428a5d1c" executionId="b268c5fa-57bf-4072-9b0f-dc5d6120704f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="243b6604-45e4-e123-9b9f-21c510b90524" executionId="6ce8ea9b-bd57-4df7-9ea1-c1200db11f3b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0135fbdc-6778-1050-2b0b-fe0765a1619d" executionId="bc74e464-f457-4755-8768-b250f97d6757" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="50a4b3d3-5cb9-9094-07da-af5e8ca45403" executionId="15f86284-3420-44eb-8619-c41afb721900" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="626dc9ca-22b9-2adf-fdec-37ee50002454" executionId="15e5fbb8-b379-4256-ab6b-e366dfcdeb3a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4aad44e1-0c0a-360e-094a-1f2c999e2c7f" executionId="a88e4f01-d989-4661-b39b-cf5c5337b3d6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ee9ce909-577a-1941-8f70-89f69bf9e406" executionId="bd00ce21-2ba9-47d5-a7b8-941f3dfa635a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e4ec3b8f-2cc0-2af3-1290-fe1a00425fbd" executionId="6e202208-0759-417a-aa1f-afacf36db8f4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5abf0062-adc8-b6ec-ab19-7f7d4ee9d1a9" executionId="e54f64d7-72fc-44ea-a44f-7b6c2c63f326" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2e64c862-e3d4-4734-bd3e-f72657561b68" executionId="ce9f0203-ab72-43fe-9128-09a648e26d72" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fc3a1329-5c58-5ac6-8670-4f72aba6935a" executionId="b53c2847-0e92-4e70-8d05-f2964de0110f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fa0a1802-3813-55d4-e89c-73ec61ec3a61" executionId="31a03f31-5ef1-4dd9-83f6-44334614e1f0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ef786ede-f33a-0cba-9d53-37718161e324" executionId="9e1cd377-3ba3-4c7f-bd38-7ae08f0559c9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="73cc100a-bd11-fdf8-140b-dee0c91ba6af" executionId="b84123da-c87e-42b0-8895-83a7f34b26fb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c0023781-8a4a-7c07-3d1c-2a728a6c0797" executionId="23a0c6f6-d19d-4913-b563-f868ccecff79" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bbe6dad4-f33d-c0b0-113e-84a806bfd7ad" executionId="6a36ed98-eea4-4025-a500-f3c08e481c12" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="23827ed9-b3a4-b348-209f-a6f4f3eebcce" executionId="9d7f4343-e968-4046-ab62-4d3d76c9e258" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ad5b588d-a035-dd27-70df-30c93b7f6dbb" executionId="98778dc7-ba69-4a09-b4fc-609a39b3fea7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9411b1b4-9a34-4768-9d9f-ac78f6586659" executionId="a3373865-2a7e-4070-b21b-24c6dad02312" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="24" executed="24" passed="18" failed="6" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.9)
+[xUnit.net 00:00:00.08]   Discovering: TurboTest.Tests
+[xUnit.net 00:00:00.17]   Discovered:  TurboTest.Tests
+[xUnit.net 00:00:00.20]   Starting:    TurboTest.Tests
+[xUnit.net 00:00:00.26]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:00.26]       Expected: 0
+[xUnit.net 00:00:00.26]       Actual:   1
+[xUnit.net 00:00:00.26]       Stack Trace:
+[xUnit.net 00:00:00.26]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs(110,0): at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value)
+[xUnit.net 00:00:00.26]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:00.27]       Expected: 0
+[xUnit.net 00:00:00.27]       Actual:   1
+[xUnit.net 00:00:00.27]       Stack Trace:
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs(110,0): at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value)
+[xUnit.net 00:00:00.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.27]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:00.27]       Expected: 0
+[xUnit.net 00:00:00.27]       Actual:   1
+[xUnit.net 00:00:00.27]       Stack Trace:
+[xUnit.net 00:00:00.27]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs(110,0): at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value)
+[xUnit.net 00:00:00.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.28]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:00.28]       Expected: 0
+[xUnit.net 00:00:00.28]       Actual:   1
+[xUnit.net 00:00:00.28]       Stack Trace:
+[xUnit.net 00:00:00.28]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs(110,0): at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value)
+[xUnit.net 00:00:00.28]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.28]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:00.28]       Expected: 0
+[xUnit.net 00:00:00.28]       Actual:   1
+[xUnit.net 00:00:00.28]       Stack Trace:
+[xUnit.net 00:00:00.28]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs(110,0): at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value)
+[xUnit.net 00:00:00.28]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.28]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:00.28]       Expected: 0
+[xUnit.net 00:00:00.28]       Actual:   1
+[xUnit.net 00:00:00.28]       Stack Trace:
+[xUnit.net 00:00:00.28]         /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedConfigurationTests.cs(110,0): at TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(String property, Int32 value)
+[xUnit.net 00:00:00.28]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.29]   Finished:    TurboTest.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-15T09:04:16.3847886+10:00">
+        <Text>[xUnit.net 00:00:00.26]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "MaxParkedDatabases", value: -1) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-15T09:04:16.3954538+10:00">
+        <Text>[xUnit.net 00:00:00.27]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "MaxParkedDatabases", value: 2) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-15T09:04:16.3959971+10:00">
+        <Text>[xUnit.net 00:00:00.27]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "IdleDatabaseLifetime", value: -1) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-15T09:04:16.4351780+10:00">
+        <Text>[xUnit.net 00:00:00.28]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "WarmFloor", value: 2) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-15T09:04:16.4354826+10:00">
+        <Text>[xUnit.net 00:00:00.28]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "WarmFloor", value: -1) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="os-greg" outcome="Error" timestamp="2026-10-15T09:04:16.4355231+10:00">
+        <Text>[xUnit.net 00:00:00.28]     TurboTest.Tests.PreparedConfigurationTests.Invalid_or_unsupported_prepared_configuration_is_rejected_before_image_preparation(property: "IdleDatabaseLifetime", value: 0) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

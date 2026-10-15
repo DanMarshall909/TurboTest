@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~SlotRewarmDrainTests.Closure_during_recovery",
+    "--logger",
+    "trx;LogFileName=review-r1-recovery-close-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/review-r1-recovery-close-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 4.369153004998225,
+  "log": "artifacts/tt-008/review-r1-recovery-close-red.log",
+  "sourceBinding": "artifacts/tt-008/review-r1-recovery-close-red/source-binding.json"
+}

@@ -1,0 +1,20 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~PreparedRetentionTests|FullyQualifiedName~PreparedParkingTests|FullyQualifiedName~SlotRetentionTests",
+    "--collect",
+    "Code Coverage;Format=cobertura",
+    "--logger",
+    "trx;LogFileName=native-retained-cap.trx",
+    "--results-directory",
+    "artifacts/tt-008/native-retained-cap"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 0,
+  "elapsedSeconds": 18.765655969000363,
+  "log": "artifacts/tt-008/native-retained-cap.log",
+  "sourceBinding": "artifacts/tt-008/native-retained-cap/source-binding.json"
+}

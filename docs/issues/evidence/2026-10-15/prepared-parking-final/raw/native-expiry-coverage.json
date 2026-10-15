@@ -1,0 +1,10 @@
+{
+  "gate": "11 native/component checks pass with coverage",
+  "sourceInputs": 98,
+  "assertions": "Monotonic expiry preserves parking age across wall-clock jumps; exact-boundary expiry starts held real DROP. Database and reservation survive while deletion is held. Renewed demand waits, then receives a new identity and verified seeds only after confirmed deletion. Native retained cap/floor, parking and component expiry/recovery also pass.",
+  "refactor": {
+    "production": "Prepared maintenance forwards captured expiry to the existing ledger. TimeProvider is an internal test seam; no background timer or extra ownership mechanism.",
+    "tests": "Reusable manual clock changes wall time independently of monotonic age; real catalog queries and held deletion provide independent physical oracles."
+  },
+  "limits": "Selected gate at its recorded source cut, not whole-suite completion; lifecycle failure audit repairs and timing/docs remain."
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~FactoryMaintenanceTests",
+    "--logger",
+    "trx;LogFileName=maintenance-cancel-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/maintenance-cancel-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 4.077352316999168,
+  "log": "artifacts/tt-008/maintenance-cancel-red.log",
+  "sourceBinding": "artifacts/tt-008/maintenance-cancel-red/source-binding.json"
+}

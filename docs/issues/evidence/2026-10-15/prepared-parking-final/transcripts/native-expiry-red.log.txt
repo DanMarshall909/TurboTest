@@ -1,0 +1,21 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TurboTest.EFCore -> /home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/net10.0/TurboTest.EFCore.dll
+  Successfully created package '/home/dan/code/TurboTest/src/TurboTest.EFCore/bin/Debug/TurboTest.EFCore.1.0.0-alpha.2.nupkg'.
+  TurboTest.Tests -> /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll
+Test run for /home/dan/code/TurboTest/tests/TurboTest.Tests/bin/Debug/net10.0/TurboTest.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:06.37]     TurboTest.Tests.PreparedRetentionTests.Expired_parked_database_retires_at_monotonic_boundary_before_renewal_can_use_its_capacity [FAIL]
+  Failed TurboTest.Tests.PreparedRetentionTests.Expired_parked_database_retires_at_monotonic_boundary_before_renewal_can_use_its_capacity [6 s]
+  Error Message:
+   Assert.False() Failure
+Expected: False
+Actual:   True
+  Stack Trace:
+     at TurboTest.Tests.PreparedRetentionTests.Expired_parked_database_retires_at_monotonic_boundary_before_renewal_can_use_its_capacity() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedRetentionTests.cs:line 50
+   at TurboTest.Tests.PreparedRetentionTests.Expired_parked_database_retires_at_monotonic_boundary_before_renewal_can_use_its_capacity() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedRetentionTests.cs:line 71
+   at TurboTest.Tests.PreparedRetentionTests.Expired_parked_database_retires_at_monotonic_boundary_before_renewal_can_use_its_capacity() in /home/dan/code/TurboTest/tests/TurboTest.Tests/PreparedRetentionTests.cs:line 71
+--- End of stack trace from previous location ---
+Results File: /home/dan/code/TurboTest/artifacts/tt-008/native-expiry-red/native-expiry-red.trx
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 6 s - TurboTest.Tests.dll (net10.0)

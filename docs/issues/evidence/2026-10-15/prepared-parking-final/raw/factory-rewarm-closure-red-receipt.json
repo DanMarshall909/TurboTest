@@ -1,0 +1,18 @@
+{
+  "command": [
+    "dotnet",
+    "test",
+    "tests/TurboTest.Tests/TurboTest.Tests.csproj",
+    "--filter",
+    "FullyQualifiedName~FactoryRewarmDrainTests",
+    "--logger",
+    "trx;LogFileName=factory-rewarm-closure-red.trx",
+    "--results-directory",
+    "artifacts/tt-008/factory-rewarm-closure-red"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "exitCode": 1,
+  "elapsedSeconds": 4.3636794019985246,
+  "log": "artifacts/tt-008/factory-rewarm-closure-red.log",
+  "sourceBinding": "artifacts/tt-008/factory-rewarm-closure-red/source-binding.json"
+}

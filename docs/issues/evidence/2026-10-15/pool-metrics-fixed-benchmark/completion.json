@@ -1,0 +1,16 @@
+{
+  "scope": "TT-010 metrics and maintained fixed/parking benchmark dependency slice",
+  "ticketStatus": "Open",
+  "date": "2026-10-15",
+  "verdict": "PASS",
+  "reviewedManifestSha256": "ae1d5f7582a4d18c605f15f00b7b78ba8647245c0f05a88707516edec5d5f651",
+  "baseObject": "78cb0fdf300e6d6f0e4c35294915840740e4ea20",
+  "publication": "Local only; no remote configured.",
+  "rawVerdict": "artifacts/tt-010/review/verdict.md",
+  "remaining": [
+    "TT-009 adaptive implementation/defaults",
+    "TT-010 scale reasons and equivalent adaptive comparisons",
+    "Whole-session final snapshot mutation"
+  ],
+  "mutation": "Pending final immutable committed coding-session snapshot; not passing evidence."
+}

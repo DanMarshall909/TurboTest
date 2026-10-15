@@ -71,7 +71,8 @@ internal sealed class TtPool : ITtDatabasePool
         _createResource = createResource ?? (parameters => _dockerClient.Containers.CreateContainerAsync(parameters));
         _slots = new TtSlotPool<ContainerSlot>(_options.PoolSize, _options.PreparationConcurrency,
             id => new ContainerSlot(id, $"{_options.ContainerPrefix}_pool_{id:N}_{Guid.NewGuid():N}"),
-            CreateContainerAsync, DeleteSlotAsync, _options.ResetConcurrency);
+            CreateContainerAsync, DeleteSlotAsync, _options.ResetConcurrency,
+            logger: _options.Logger, logLevel: _options.LogLevel);
     }
 
     public async Task InitializeAsync(CancellationToken cancellationToken = default)

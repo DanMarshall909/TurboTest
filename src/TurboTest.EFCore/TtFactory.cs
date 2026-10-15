@@ -84,6 +84,7 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
 
     private readonly ITtDatabasePool _pool;
     private readonly TtOptions _options;
+    private readonly TtTelemetry _telemetry;
     private readonly bool _ownsPool;
     private readonly Func<Npgsql.NpgsqlDataSource, DbContextOptions<TContext>>? _preparedOptions;
     private readonly Action<TContext, Npgsql.NpgsqlDataSource>? _validateContext;
@@ -98,10 +99,11 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
 
     internal TtFactory(ITtDatabasePool pool, TtOptions options, bool ownsPool = false,
         Func<Npgsql.NpgsqlDataSource, DbContextOptions<TContext>>? preparedOptions = null,
-        Action<TContext, Npgsql.NpgsqlDataSource>? validateContext = null)
+        Action<TContext, Npgsql.NpgsqlDataSource>? validateContext = null, TimeProvider? timeProvider = null)
     {
         _pool = pool;
         _options = options;
+        _telemetry = new TtTelemetry(options.Logger, options.LogLevel, () => _pool.Snapshot, timeProvider);
         _ownsPool = ownsPool;
         _preparedOptions = preparedOptions;
         _validateContext = validateContext;
@@ -111,6 +113,8 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
     public async Task<TtLease<TContext>> CreateLeaseAsync(
         Action<DbContextOptionsBuilder>? configure = null, CancellationToken cancellationToken = default)
     {
+        var requested = _telemetry.Clock.GetTimestamp();
+        var outcome = "Succeeded";
         if (_preparedOptions is not null && configure is not null)
             throw new ArgumentException("Configure the model in the fixture baseline before preparation.", nameof(configure));
         var settled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -163,6 +167,10 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
                         _databases.TryRemove(database, out _);
                         if (lease is not null) _leases.TryRemove(lease, out _);
                     }
+                }, _telemetry.Clock, (duration, returnOutcome) =>
+                {
+                    _telemetry.Record("Return", duration, returnOutcome);
+                    _telemetry.Record("Cycle", _telemetry.Clock.GetElapsedTime(requested), returnOutcome);
                 });
                 lock (_disposeGate)
                 {
@@ -185,12 +193,15 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
         }
         catch (OperationCanceledException) when (_shutdown.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
         {
+            outcome = "Closed";
             throw new ObjectDisposedException(nameof(TtFactory<TContext>));
         }
+        catch (Exception error) { outcome = TtTelemetry.Outcome(error); throw; }
         finally
         {
             lock (_disposeGate) _acquisitions.Remove(settled);
             settled.TrySetResult();
+            _telemetry.Record("Checkout", _telemetry.Clock.GetElapsedTime(requested), outcome);
         }
     }
 
@@ -204,7 +215,7 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
             _closing = true;
             if (_ownsPool) _pool.StopAcceptingWork();
             start = new TaskCompletionSource<Exception?>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var drain = DisposeCoreAsync(start.Task);
+            var drain = _telemetry.MeasureAsync("Shutdown", () => DisposeCoreAsync(start.Task));
             disposal = _disposal = ObserveDrainAsync(drain);
         }
         _ = CancelShutdownAsync(start);

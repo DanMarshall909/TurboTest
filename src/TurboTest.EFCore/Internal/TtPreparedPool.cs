@@ -1,6 +1,5 @@
 using System.Security.Cryptography;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Transactions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -55,6 +54,8 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
 
     private readonly TtOptions _options;
     private readonly ILogger _logger;
+    private readonly TimeProvider _clock;
+    private readonly TtTelemetry _telemetry;
     private readonly TtBaselineDefinition<TContext> _definition;
     private readonly TtPool _host;
     private readonly Func<NpgsqlDataSource, Task>? _beforeVerification;
@@ -99,11 +100,13 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         Func<NpgsqlConnection, string, Task>? dropDatabase = null, TimeProvider? timeProvider = null)
     {
         options = options.Snapshot();
+        _clock = timeProvider ?? TimeProvider.System;
         TtPreparedConfiguration.Validate(options);
         Budget = TtResourceBudget.Create(options, prepared: true);
         ArgumentNullException.ThrowIfNull(definition);
         _options = options;
         _logger = new TtLogger(options.Logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance, options.LogLevel);
+        _telemetry = new TtTelemetry(options.Logger, options.LogLevel, () => Snapshot, _clock);
         _definition = definition;
         _template = $"{options.DatabaseName}_baseline_{_owner:N}";
         _beforeVerification = beforeVerification;
@@ -124,7 +127,8 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         _host = new TtPool(hostOptions, deleteHost, prepareImage, administratorHost: true);
         _administrators = new TtAdministratorConnections(options.MaxAdministratorConnections, CreateAdministratorConnection);
         _slots = new TtSlotPool<Slot>(options.PoolSize, options.PreparationConcurrency, ReserveSlot,
-            (slot, token) => PrepareSlotAsync(slot, token), DeleteSlotAsync, options.ResetConcurrency, RewarmSlotAsync, timeProvider);
+            (slot, token) => PrepareSlotAsync(slot, token), DeleteSlotAsync, options.ResetConcurrency, RewarmSlotAsync, timeProvider,
+            options.Logger, options.LogLevel);
     }
 
     internal async Task InitializeAsync(CancellationToken cancellationToken)
@@ -275,7 +279,8 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         {
             if (_beforeVerification is not null) await _beforeVerification(slot.Source);
             stage = rewarming ? "BaselineRewarmVerify" : "BaselineVerify";
-            var validation = Stopwatch.GetTimestamp();
+            var validation = _clock.GetTimestamp();
+            var validationOutcome = "Succeeded";
             try
             {
                 await using var probe = await OpenAdministratorAsync(slot.Name, cancellationToken);
@@ -295,7 +300,13 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
                 stage = rewarming ? "BaselineRewarmWorkloadVerify" : "BaselineWorkloadVerify";
                 await VerifyWorkloadAsync(slot);
             }
-            finally { observeValidation?.Invoke(Stopwatch.GetElapsedTime(validation)); }
+            catch (Exception error) { validationOutcome = TtTelemetry.Outcome(error); throw; }
+            finally
+            {
+                var duration = _clock.GetElapsedTime(validation);
+                observeValidation?.Invoke(duration);
+                _telemetry.Record(rewarming ? "RewarmValidation" : "PreparationValidation", duration, validationOutcome);
+            }
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
         catch (Exception error)
@@ -346,34 +357,50 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
 
     private async Task ReturnAsync(TtSlotPool<Slot>.Reservation reservation)
     {
-        var acquired = Stopwatch.GetTimestamp();
+        var execution = TimeSpan.Zero;
         var wait = TimeSpan.Zero;
         var validation = TimeSpan.Zero;
-        var strategy = "Rows";
+        var recreationValidation = TimeSpan.Zero;
+        var strategy = "Skipped";
         var succeeded = false;
         void ObserveValidation(TimeSpan duration) => validation += duration;
         try
         {
             await _slots.ReturnAsync(reservation, async (slot, _) =>
             {
+                var executing = _clock.GetTimestamp();
+                strategy = "Rows";
+                var validationOutcome = "Succeeded";
                 try
                 {
                     var reusable = await TryResetRowsAsync(slot, ObserveValidation);
-                    if (!reusable) strategy = "Recreate";
+                    if (!reusable) { strategy = "Recreate"; validationOutcome = "Incompatible"; }
                     return reusable;
                 }
-                catch (Exception error) { throw new TtLifecycleException("BaselineRowReset", error); }
-            }, duration => { wait = duration; acquired = Stopwatch.GetTimestamp(); },
-                (slot, token) => PrepareSlotAsync(slot, token, ObserveValidation));
+                catch (Exception error)
+                {
+                    validationOutcome = TtTelemetry.Outcome(error);
+                    throw new TtLifecycleException("BaselineRowReset", error);
+                }
+                finally
+                {
+                    execution = _clock.GetElapsedTime(executing);
+                    _telemetry.Record("ResetValidation", validation, validationOutcome);
+                }
+            }, duration => wait = duration,
+                (slot, token) => PrepareSlotAsync(slot, token, duration => recreationValidation += duration));
             succeeded = true;
         }
         finally
         {
-            var execution = Stopwatch.GetElapsedTime(acquired);
-            _logger.LogDebug(new EventId(400, "BaselineReset"),
-                    "Baseline reset {OwnerId} {Strategy}: wait {ResetPermitWaitMilliseconds} ms, execution {ResetExecutionMilliseconds} ms, validation {ValidationMilliseconds} ms, success {Succeeded}",
+            try
+            {
+                _logger.LogDebug(new EventId(400, "BaselineReset"),
+                    "Baseline reset {OwnerId} {Strategy}: wait {ResetPermitWaitMilliseconds} ms, execution {ResetExecutionMilliseconds} ms, validation {ValidationMilliseconds} ms, recreation validation {RecreationValidationMilliseconds} ms, success {Succeeded}",
                     Snapshot.OwnerId, strategy, wait.TotalMilliseconds,
-                    execution.TotalMilliseconds, validation.TotalMilliseconds, succeeded);
+                    execution.TotalMilliseconds, validation.TotalMilliseconds, recreationValidation.TotalMilliseconds, succeeded);
+            }
+            catch (Exception) { /* Diagnostic consumers cannot replace the reset result. */ }
         }
     }
 
@@ -384,23 +411,23 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         await using (var administrative = await OpenAdministratorAsync(slot.Name))
         {
             var connection = administrative.Connection;
-            var validation = Stopwatch.GetTimestamp();
+            var validation = _clock.GetTimestamp();
             try { _schemaSnapshot!.Verify(await TtBaselineSnapshot.CaptureSchemaAsync(connection)); }
             catch (TtLifecycleException error) when (error.Stage is "BaselineVerify" or "BaselineUnsupportedCatalog")
             {
                 // Changed/unsupported catalog requires whole-template recreation.
                 return false;
             }
-            finally { observeValidation(Stopwatch.GetElapsedTime(validation)); }
+            finally { observeValidation(_clock.GetElapsedTime(validation)); }
             await _rowReset.RestoreAsync(connection, _afterSequenceRestore);
             if (_afterRowCommit is not null) await _afterRowCommit(connection);
-            validation = Stopwatch.GetTimestamp();
+            validation = _clock.GetTimestamp();
             try { _snapshot!.Verify(await TtBaselineSnapshot.CaptureAsync(connection)); }
-            finally { observeValidation(Stopwatch.GetElapsedTime(validation)); }
+            finally { observeValidation(_clock.GetElapsedTime(validation)); }
         }
-        var workloadValidation = Stopwatch.GetTimestamp();
+        var workloadValidation = _clock.GetTimestamp();
         try { await VerifyWorkloadAsync(slot); }
-        finally { observeValidation(Stopwatch.GetElapsedTime(workloadValidation)); }
+        finally { observeValidation(_clock.GetElapsedTime(workloadValidation)); }
         return true;
     }
 
@@ -445,7 +472,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
 
     private async Task MeasureLifecycleAsync(string operation, Func<Task> action)
     {
-        var started = Stopwatch.GetTimestamp();
+        var started = _clock.GetTimestamp();
         var succeeded = false;
         try
         {
@@ -454,7 +481,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         }
         finally
         {
-            var elapsed = Stopwatch.GetElapsedTime(started);
+            var elapsed = _clock.GetElapsedTime(started);
             try
             {
                 _logger.LogDebug(new EventId(401, "PreparedLifecycle"),

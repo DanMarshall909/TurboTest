@@ -88,7 +88,7 @@ public static class Tt
             afterSequenceRestore, afterRowCommit, dropDatabase, timeProvider);
         await InitializeOwnedPoolAsync(pool, options, pool.InitializeAsync, "BaselineInitialize", cancellationToken);
         return new TtFactory<TContext>(pool, options, ownsPool: true,
-            preparedOptions: pool.BuildOptions, validateContext: pool.ValidateContext);
+            preparedOptions: pool.BuildOptions, validateContext: pool.ValidateContext, timeProvider: timeProvider);
     }
 
     internal static async Task<TtFactory<TContext>> CreateOwnedFactoryAsync<TContext>(

@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+
 namespace TurboTest.EFCore.Internal;
 
 /// <summary>Reserves workload capacity before backend work and atomically assigns verified results.</summary>
@@ -19,9 +21,12 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         internal TaskCompletionSource Settled { get; set; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
     }
 
-    private sealed class Waiter(CancellationToken token)
+    private sealed class Waiter(CancellationToken token, long requested)
     {
         internal CancellationToken Token { get; } = token;
+        internal long Requested { get; } = requested;
+        internal long CompletedAt { get; set; }
+        internal string Outcome { get; set; } = "Succeeded";
         internal TaskCompletionSource<Reservation> Completion { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         internal LinkedListNode<Waiter>? Node { get; set; }
         internal CancellationTokenRegistration Cancellation { get; set; }
@@ -35,6 +40,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
     private readonly Func<T, Task> _delete;
     private readonly Func<T, CancellationToken, Task>? _rewarm;
     private readonly TimeProvider _clock;
+    private readonly TtTelemetry _telemetry;
     private readonly Dictionary<Reservation, State> _owned = new();
     private readonly Queue<Reservation> _ready = new();
     private readonly LinkedList<Waiter> _waiters = new();
@@ -49,7 +55,8 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
 
     internal TtSlotPool(int capacity, int preparationConcurrency,
         Func<Guid, T> reserve, Func<T, CancellationToken, Task> prepare, Func<T, Task> delete,
-        int resetConcurrency = 1, Func<T, CancellationToken, Task>? rewarm = null, TimeProvider? timeProvider = null)
+        int resetConcurrency = 1, Func<T, CancellationToken, Task>? rewarm = null, TimeProvider? timeProvider = null,
+        ILogger? logger = null, LogLevel logLevel = LogLevel.Debug)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(capacity);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(preparationConcurrency);
@@ -60,6 +67,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         _delete = delete;
         _rewarm = rewarm;
         _clock = timeProvider ?? TimeProvider.System;
+        _telemetry = new TtTelemetry(logger, logLevel, () => Snapshot, _clock);
         _preparationLimit = new SemaphoreSlim(preparationConcurrency, preparationConcurrency);
         _resetLimit = new SemaphoreSlim(resetConcurrency, resetConcurrency);
     }
@@ -182,7 +190,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         cancellationToken.ThrowIfCancellationRequested();
         Reservation? preparation = null;
         Reservation? rewarming = null;
-        Task<Reservation> result;
+        Waiter waiter;
         lock (_gate)
         {
             ObjectDisposedException.ThrowIf(_closed || _stopping, this);
@@ -197,16 +205,24 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                 ready.IdleSince = null;
                 return Task.FromResult(ready);
             }
-            var waiter = new Waiter(cancellationToken);
+            waiter = new Waiter(cancellationToken, _clock.GetTimestamp());
             waiter.Node = _waiters.AddLast(waiter);
             waiter.Cancellation = cancellationToken.Register(() => Cancel(waiter));
-            result = waiter.Completion.Task;
             rewarming = ClaimParked();
             if (rewarming is null) preparation = ReservePending();
         }
         if (rewarming is not null) _ = RewarmAsync(rewarming);
         if (preparation is not null) _ = PrepareAsync(preparation);
-        return result;
+        return ObserveQueueAsync(waiter);
+    }
+
+    private async Task<Reservation> ObserveQueueAsync(Waiter waiter)
+    {
+        try { return await waiter.Completion.Task; }
+        finally
+        {
+            _telemetry.Record("QueueWait", _clock.GetElapsedTime(waiter.Requested, waiter.CompletedAt), waiter.Outcome);
+        }
     }
 
     // Caller holds the ledger lock. Reuse is claimed before considering fresh capacity.
@@ -226,9 +242,9 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         var permitHeld = false;
         try
         {
-            await _preparationLimit.WaitAsync(_closing.Token);
+            await _telemetry.MeasureAsync("RewarmPermitWait", () => _preparationLimit.WaitAsync(_closing.Token));
             permitHeld = true;
-            await _rewarm!(reservation.Value, _closing.Token);
+            await _telemetry.MeasureAsync("RewarmExecution", () => _rewarm!(reservation.Value, _closing.Token));
             PublishReady(reservation);
         }
         catch (Exception error)
@@ -269,6 +285,8 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
             if (waiter.Node is null) return;
             _waiters.Remove(waiter.Node);
             waiter.Node = null;
+            waiter.CompletedAt = _clock.GetTimestamp();
+            waiter.Outcome = "Canceled";
             waiter.Completion.TrySetCanceled(waiter.Token);
             waiter.Cancellation.Unregister();
         }
@@ -295,9 +313,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                         _owned[reservation] = State.Preparing;
                         reservation.Resource = _reserve(reservation.Id);
                     }
-                    await _preparationLimit.WaitAsync(_closing.Token);
-                    try { await _prepare(reservation.Value, _closing.Token); }
-                    finally { _preparationLimit.Release(); }
+                    await PrepareResourceAsync(reservation);
                     PublishReady(reservation);
                     return;
                 }
@@ -340,6 +356,13 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         finally { settled.TrySetResult(); }
     }
 
+    private async Task PrepareResourceAsync(Reservation reservation, Func<T, CancellationToken, Task>? prepareReplacement = null)
+    {
+        await _telemetry.MeasureAsync("PreparationPermitWait", () => _preparationLimit.WaitAsync(_closing.Token));
+        try { await _telemetry.MeasureAsync("Preparation", () => (prepareReplacement ?? _prepare)(reservation.Value, _closing.Token)); }
+        finally { _preparationLimit.Release(); }
+    }
+
     private void FailWaiters(Exception error)
     {
         while (_waiters.First is { } node)
@@ -347,6 +370,8 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
             _waiters.Remove(node);
             node.Value.Node = null;
             node.Value.Cancellation.Unregister();
+            node.Value.CompletedAt = _clock.GetTimestamp();
+            node.Value.Outcome = TtTelemetry.Outcome(error);
             if (node.Value.Completion.TrySetException(error) && error is TtLifecycleException failure)
                 MarkFailureDelivered(failure);
         }
@@ -430,28 +455,14 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                     return;
                 }
             }
-            var requested = System.Diagnostics.Stopwatch.GetTimestamp();
-            await _resetLimit.WaitAsync(_closing.Token);
+            var requested = _clock.GetTimestamp();
+            try { await _telemetry.MeasureAsync("ResetPermitWait", () => _resetLimit.WaitAsync(_closing.Token)); }
+            finally { observeWait?.Invoke(_clock.GetElapsedTime(requested)); }
             permitHeld = true;
-            observeWait?.Invoke(System.Diagnostics.Stopwatch.GetElapsedTime(requested));
             lock (_gate) _owned[reservation] = State.ExecutingReset;
-            if (!await reset(reservation.Value, _closing.Token))
+            if (!await _telemetry.MeasureAsync("ResetExecution", () => reset(reservation.Value, _closing.Token)))
             {
-                lock (_gate) _owned[reservation] = State.Retiring;
-                await _delete(reservation.Value);
-                lock (_gate)
-                {
-                    if (_closed || _stopping)
-                    {
-                        _owned.Remove(reservation);
-                        return;
-                    }
-                    reservation.Resource = _reserve(reservation.Id);
-                    _owned[reservation] = State.Preparing;
-                }
-                await _preparationLimit.WaitAsync(_closing.Token);
-                try { await (prepareReplacement ?? _prepare)(reservation.Value, _closing.Token); }
-                finally { _preparationLimit.Release(); }
+                if (!await _telemetry.MeasureAsync("Recreation", () => RecreateAsync(reservation, prepareReplacement))) return;
             }
             PublishReady(reservation);
         }
@@ -471,6 +482,24 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         }
     }
 
+    private async Task<bool> RecreateAsync(Reservation reservation, Func<T, CancellationToken, Task>? prepareReplacement)
+    {
+        lock (_gate) _owned[reservation] = State.Retiring;
+        await _delete(reservation.Value);
+        lock (_gate)
+        {
+            if (_closed || _stopping)
+            {
+                _owned.Remove(reservation);
+                return false;
+            }
+            reservation.Resource = _reserve(reservation.Id);
+            _owned[reservation] = State.Preparing;
+        }
+        await PrepareResourceAsync(reservation, prepareReplacement);
+        return true;
+    }
+
     // Caller owns the cleanup permit. Every operation uses the same bounded
     // recovery episode and releases capacity only after confirmed deletion.
     private async Task<TtLifecycleException> RecoverFailedOperationAsync(Reservation reservation, Exception error, string stage)
@@ -479,7 +508,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         try
         {
             lock (_gate) _owned[reservation] = State.Retiring;
-            await _delete(reservation.Value);
+            await _telemetry.MeasureAsync("RecoveryDeletion", () => _delete(reservation.Value));
             ReplenishAfterDeletion(reservation, replenish: true);
         }
         catch (Exception cleanupError)
@@ -606,8 +635,10 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                 _waiters.Remove(node);
                 waiter.Node = null;
                 waiter.Cancellation.Unregister();
+                waiter.CompletedAt = _clock.GetTimestamp();
                 if (waiter.Token.IsCancellationRequested)
                 {
+                    waiter.Outcome = "Canceled";
                     waiter.Completion.TrySetCanceled(waiter.Token);
                     continue;
                 }

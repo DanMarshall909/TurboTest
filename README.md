@@ -77,6 +77,13 @@ some 130/1,300-row cases and exceeded it at 13,000 rows. These are experimental
 observations, not a production latency guarantee; see the
 [investigation and raw evidence](docs/issues/resolved/database/TT-000-pool-feasibility-investigation.md).
 
+The maintained [pool benchmark](benchmarks/TurboTest.Benchmarks/README.md) runs
+the public lease API with verified workloads, source/runtime/image bindings,
+counterbalanced fixed/parking profiles and complete cleanup. It reports checkout,
+return, cycle, startup and drain separately. Its explicit performance workflow
+retains failures and raw measurements; correctness CI has no universal latency
+threshold. Adaptive capacity remains tracked in TT-009.
+
 ## Lease lifetime and alpha.2 migration
 
 The `1.0.0-alpha.2` source removes raw `CreateContextAsync` methods and implicit
@@ -290,6 +297,26 @@ When a supplied logger enables Debug, event `400` (`BaselineReset`) reports
 Execution includes restoration and validation; permit wait is separate.
 Preparation and reset use their independent configured concurrency limits.
 Diagnostic emission is outside measured work.
+
+Debug event `402` (`PoolTiming`) adds monotonic operation durations and outcomes,
+with an opaque `OwnerId` and current capacity/state counts. `QueueWait` measures
+enqueue through verified assignment, cancellation or rejection. `Checkout`
+measures the admitted public request through context and lease publication.
+Preparation and rewarm each report permit wait and execution through verification;
+their validation records are subsets of execution. `ResetExecution` measures
+the row-restoration callback and its validation, while `Recreation` and
+`RecoveryDeletion` report separate work. Event `400` now reports row execution
+and row validation separately from `RecreationValidationMilliseconds`.
+
+`Return` starts at the first lease disposal request and ends at the shared
+receipt, including context cleanup and the return outcome. It can end in
+retirement during shutdown. `Cycle` starts at checkout and ends at that receipt,
+including the test body. `Shutdown` measures actual factory closure through
+cleanup of leases, jobs and the owned pool; a caller deadline can expire while
+that measurement remains pending. These overlapping durations must not be added
+together. Events contain no credentials or test payloads, and a throwing logger
+cannot change an operation result. Integrated benchmark reports and scale reasons
+remain under implementation in TT-010/TT-009.
 
 Prepared fixtures support explicit idle maintenance:
 

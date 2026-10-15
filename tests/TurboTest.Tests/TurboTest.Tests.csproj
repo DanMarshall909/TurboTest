@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\TurboTest.EFCore\TurboTest.EFCore.csproj" />
+    <ProjectReference Include="../../benchmarks/TurboTest.Benchmarks/TurboTest.Benchmarks.csproj" />
   </ItemGroup>
 
   <ItemGroup>

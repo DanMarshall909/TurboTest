@@ -44,3 +44,88 @@ Land metrics and a fixed-pool benchmark before TT-009 consumes them. Add adaptiv
   documentation, maintained metrics and reproducible integrated benchmarks
   remain open. No production performance claim is earned by TT-002's current
   correctness checks.
+- **2026-10-15 — metrics implementation in progress:** Payload-free structured
+  event 402 distinguishes admitted public checkout, the shared return receipt,
+  full cycle and actual factory shutdown. The existing ledger records queue
+  residence through assignment/cancellation/rejection, preparation and rewarm
+  permit wait/execution, row reset permit wait/execution, recreation and recovery
+  deletion. Prepared validation is a subset of execution, with recreation
+  validation separate from row validation. Snapshots accompany event 402.
+  Diagnostic observers cannot change outcomes. Native REDs exposed event 400
+  logger exceptions replacing success/material failure and execution including
+  recovery; both are repaired. Deterministic component checks and PostgreSQL
+  seed/session/identity controls pass. The complete fast lane passes 163 checks
+  without failures/skips; the selected native/timing gate passes 16 at its source
+  cut. A held context confirms full shutdown of 5s cleanup + 7s pool = 12s.
+  Raw RED/GREEN/coverage commands, TRX and source bindings are retained under
+  `artifacts/tt-010`. Scale reasons await TT-009; whole-suite validation, review
+  and publication remain pending.
+- **Maintained workload in progress:** A solution-owned benchmark project now
+  defines literal 100/20/10,1000/200/100 and 10000/2000/1000 inserted row mixes,
+  separately from the mutated retained parent seed. Fast checks reject empty,
+  missing, misdistributed and unsupported loads. A native RED rejects a no-op
+  loader as `WorkloadEmpty`; the implemented public-lease workload verifies
+  actual counts, mutated/deleted seeds, next identities 101/201/301, unchanged
+  database/OID reuse and marker absence in the simultaneous second database.
+  Empty/wrong-mix rejection controls use actual queries, with further seed/foreign
+  marker controls under validation. The runner entry point explicitly reports
+  that it is unfinished; no performance result is claimed. Scheduling, reporting,
+  source/runtime/image/resource bindings, deferred cleanup, supported invocation
+  and fixed/adaptive comparison evidence remain. TT-010 is Open.
+- **Current checkpoint:** All 181 fast checks and 19 selected native
+  timing/workload/recovery checks pass without failures/skips. Statistics use
+  conventional median p50 and nearest-rank `ceil(.95*n)` p95, retain zero-count
+  results with unavailable percentiles, and reject negative/nonfinite samples.
+  Seed and foreign-marker rejection controls pass against real PostgreSQL.
+  A further genuine RED found synchronous cancellation could emit a queue
+  diagnostic under the ledger lock; observation now begins outside that lock,
+  with assignment/cancellation timestamps still captured atomically. Full
+  lifecycle/benchmark completion, review and commit remain pending.
+- **Maintained runner and fixed/parking experiment:** The supported Release
+  command and manual performance workflow run counterbalanced capacities 1/2/4/8
+  across two blocks. Each case independently verifies seeds, sequences, actual
+  row counts, baseline restoration and known database/OID reuse; simultaneous
+  multi-slot leases verify marker isolation. Source snapshots/hashes, loaded
+  assembly/runtime/SDK identities, cached/actual image ID, PostgreSQL version,
+  resource budgets, raw timings/events and sampled memory/state are retained.
+  Workers, lease returns, monitor stop and fixture cleanup are awaited. The first
+  frozen experiment (`artifacts/tt-010/fixed-parking-experiment-r1`) exits zero
+  after about 706 seconds: all 16 cases and 2,544 cycles pass, with 53 samples per
+  row size per case, no failures and complete owned cleanup. All 4,000 copied
+  source hashes and counterbalanced equivalent plans verify independently.
+  Sampled cgroup memory includes cache and is a lower bound on peak usage; it
+  does not establish worktree/build memory requirements. These local observations
+  are not portable latency guarantees or adaptive comparisons.
+- **Audit repairs:** Two real native REDs reproduced empty/idle-only cases
+  incorrectly reporting success; they now persist `CaseWorkload` rejection
+  before fixture startup. Six fast REDs reproduced acceptance of unequal,
+  negative, nonfinite, oversized or timed-phase idle delays; the comparison
+  validator now rejects them as `ScheduleTiming`. The generated frozen experiment
+  avoided both faults; its source cut remains historical rather than being
+  relabelled as the repaired source. Both criterion GREEN/coverage/refactor
+  records are retained. Current fast/whole-suite verification, independent slice
+  review and local commit remain pending. TT-009 and the adaptive comparison
+  continue after the metrics/fixed-benchmark slice; TT-010 remains Open.
+- **Current slice verification:** The repaired candidate passes all 198 fast
+  checks and all 356 whole-suite checks without failures/skips. Solution and
+  separate `DynamicScalingExample` builds pass with zero warnings/errors. Both
+  builds and the whole suite bind the same compiler inputs. Independent
+  reconstruction of all 72 saved benchmark timing summaries from raw samples
+  matches count, median p50, nearest-rank p95 and maximum. The
+  [slice archive](../../evidence/2026-10-15/pool-metrics-fixed-benchmark/manifest.json)
+  retains terminal commands, raw logs/TRX/coverage, historical source bindings,
+  rejected runs and current qualifications. Independent slice review and commit
+  remain pending; adaptive implementation/comparisons and scale reasons remain.
+
+## Slice decision log
+
+- **2026-10-15 — Metrics and fixed/parking benchmark slice accepted:** Independent
+  completion review passed for the exact candidate and finite administrative
+  envelope. The current whole suite and both builds pass; the frozen repeated
+  Release comparison retains all16 successful cases and2544 measured cycles.
+  [Slice evidence](../../evidence/2026-10-15/pool-metrics-fixed-benchmark/manifest.json)
+  preserves raw RED/GREEN/coverage, source cuts, rejected-run diagnostics and
+  independent statistics checks. This is the accepted dependency slice described
+  in Verification, not resolution of TT-010. Scale reasons, TT-009 implementation,
+  evidence-qualified defaults and equivalent adaptive comparisons remain. Whole
+  coding-session mutation remains pending its final immutable committed snapshot.

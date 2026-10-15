@@ -135,3 +135,25 @@ failures/skips; final solution and separate example builds pass.
 REDs, corrected setup/oracles, native calibration, source cuts and coverage.
 Independent completion review passed; TT-008 is Resolved. Comprehensive metrics
 and adaptive capacity remain in TT-010 and TT-009.
+
+TT-010 is in progress. Monotonic timings now distinguish admitted checkout,
+queue residence, preparation/rewarm wait and execution, reset wait/execution,
+validation, recreation/recovery, shared return, full cycle and actual factory
+shutdown. Observer failures preserve lifecycle results, including synchronous
+cancellation. A maintained benchmark project supplies the three named row mixes,
+actual seed/sequence/reuse/isolation validation and explicit percentile rules.
+The current fast gate passes 198 checks without failures/skips. Earlier scoped
+native timing/workload/recovery gates remain retained at their own source cuts.
+The maintained runner and supported command now provide source/runtime/image
+bindings, raw lifecycle events, sampled memory/state, complete cleanup and
+counterbalanced fixed/parking comparisons. The first frozen Release experiment
+passes all 16 cases and 2,544 timed cycles, with 53 samples per row size per case,
+no failures and no remaining owned containers. Its raw source cut is retained
+under `artifacts/tt-010/fixed-parking-experiment-r1`; subsequent audit guards
+reject empty timed plans and unequal/invalid phase delays. The current whole suite
+passes 356 tests without failures/skips; solution and separate-example builds pass
+without warnings/errors. The [slice evidence](evidence/2026-10-15/pool-metrics-fixed-benchmark/manifest.json)
+retains commands, raw results, snapshots and independent checks.
+Independent review passed for the metrics/fixed-benchmark slice. Its local
+commit precedes TT-009; TT-010 remains Open for adaptive comparison and scale reasons.
+Adaptive implementation and comparisons remain; TT-010 and TT-009 are still Open.

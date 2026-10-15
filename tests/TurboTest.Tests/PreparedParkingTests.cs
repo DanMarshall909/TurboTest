@@ -60,6 +60,11 @@ public class PreparedParkingTests
                 fixture.PoolState.Rewarming, validations));
             await renewed.DisposeAsync();
             await fixture.DisposeAsync();
+            var rewarm = Assert.Single(logger.Timings, record => Equals(record["Operation"], "RewarmExecution"));
+            var validation = Assert.Single(logger.Timings, record => Equals(record["Operation"], "RewarmValidation"));
+            Assert.True(Assert.IsType<double>(validation["DurationMilliseconds"]) > 0);
+            Assert.True(Assert.IsType<double>(rewarm["DurationMilliseconds"]) >= (double)validation["DurationMilliseconds"]!);
+            Assert.Equal("Succeeded", validation["Outcome"]);
             var records = logger.Records.ToArray();
             Assert.Equal(new[] { "Delete", "Park", "Rewarm", "Teardown" },
                 records.Select(record => Assert.IsType<string>(record["Operation"])).Order().ToArray());
@@ -128,11 +133,13 @@ public class PreparedParkingTests
     {
         private int _emissions;
         internal ConcurrentQueue<Dictionary<string, object?>> Records { get; } = new();
+        internal ConcurrentQueue<Dictionary<string, object?>> Timings { get; } = new();
         public bool IsEnabled(LogLevel logLevel) => true;
         public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception,
             Func<TState, Exception?, string> formatter)
         {
+            if (eventId.Id == 402) Timings.Enqueue(((IEnumerable<KeyValuePair<string, object?>>)state!).ToDictionary());
             if (eventId.Id == 401 && eventId.Name == "PreparedLifecycle")
             {
                 Records.Enqueue(((IEnumerable<KeyValuePair<string, object?>>)state!).ToDictionary());

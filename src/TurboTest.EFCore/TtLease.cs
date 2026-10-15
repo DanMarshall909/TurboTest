@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TurboTest.EFCore.Internal;
 
 namespace TurboTest.EFCore;
 
@@ -10,16 +11,21 @@ public sealed class TtLease<TContext> : IAsyncDisposable where TContext : DbCont
     private readonly Func<Task> _return;
     private readonly Action<TContext> _register;
     private readonly TContext _context;
+    private readonly TimeProvider _clock;
+    private readonly Action<TimeSpan, string>? _observeReturn;
     private Task? _disposal;
     private bool _closing;
 
     internal TtLease(TContext context, Func<TContext> createContext,
-        Action<TContext> register, Func<Task> returnDatabase)
+        Action<TContext> register, Func<Task> returnDatabase, TimeProvider? timeProvider = null,
+        Action<TimeSpan, string>? observeReturn = null)
     {
         _context = context;
         _createContext = createContext;
         _register = register;
         _return = returnDatabase;
+        _clock = timeProvider ?? TimeProvider.System;
+        _observeReturn = observeReturn;
     }
 
     public TContext Context
@@ -56,7 +62,7 @@ public sealed class TtLease<TContext> : IAsyncDisposable where TContext : DbCont
             if (_disposal is null)
             {
                 start = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-                _disposal = ReturnAsync(start.Task);
+                _disposal = ReturnAsync(start.Task, _clock.GetTimestamp());
             }
             disposal = _disposal;
         }
@@ -64,9 +70,16 @@ public sealed class TtLease<TContext> : IAsyncDisposable where TContext : DbCont
         return new ValueTask(disposal);
     }
 
-    private async Task ReturnAsync(Task start)
+    private async Task ReturnAsync(Task start, long requested)
     {
         await start;
-        await _return();
+        var outcome = "Succeeded";
+        try { await _return(); }
+        catch (Exception error) { outcome = TtTelemetry.Outcome(error); throw; }
+        finally
+        {
+            try { _observeReturn?.Invoke(_clock.GetElapsedTime(requested), outcome); }
+            catch (Exception) { /* Observers cannot replace the shared return result. */ }
+        }
     }
 }

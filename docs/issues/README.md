@@ -38,18 +38,41 @@ and limitations. The 50 ms aspiration concerns verified warm restoration of a
 named workload; queueing, test body, startup and final drain are separate costs.
 There is no universal latency threshold or optimal-window claim.
 
-Whole-session mutation follows the final immutable committed snapshot and remains
-pending at ticket publication. Its receipt is recorded in the final completion
-record; no pending result is passing evidence.
-The [post-session follow-up record](evidence/2026-10-15/post-session-mutation/follow-up.json)
-retains the calibrated launch, completed EFCore execution, running benchmark
-snapshot and explicit ownership of the pending report review. Local controllers
-preserve results and clean owned layers; automatic semantic review and agent
-wake-up are unavailable. A subsequent Codex follow-up must review both reports.
-It is a separate follow-up to ordinary ticket completion and publication, with
-fast-only mutation selection, calibrated slow-only exclusions, isolated writable
-attempts and durable report handling required. Earlier scoped mutation evidence
-is not proof of the final combined implementation.
+Whole-session mutation against committed production snapshot `29e974a` has now
+completed and been reviewed. Both runs used fast tests only and calibrated
+slow-only source exclusions. [The review](evidence/2026-10-15/mutation-review/review.md)
+classifies all 403 survivors, 167 uncovered mutants, 111 timeouts and 265 compiler
+errors. These are generated faults, not confirmed bug counts or a clean mutation
+adequacy claim. The original [launch snapshot](evidence/2026-10-15/post-session-mutation/follow-up.json)
+remains historical; the reviewed outcomes and new work below supersede its
+pending action. Full raw reports and bounded direct checks are retained.
+
+## Mutation review follow-ups
+
+The original ten implementation tickets are Resolved. These 18 quality and
+bounded-investigation items are Open; their individual criteria distinguish
+confirmed gaps from questions that need a contract or reachability proof.
+
+| Ticket | Follow-up | Status |
+| --- | --- | --- |
+| [TT-011](open/testing/TT-011-recover-mutation-coverage-lost-to-compiler-rollback.md) | Recover mutation coverage lost to compiler rollback | Open |
+| [TT-012](open/testing/TT-012-bound-mutation-liveness-diagnosis-and-failed-test-cleanup.md) | Bound mutation liveness diagnosis and failed-test cleanup | Open |
+| [TT-013](open/benchmarks/TT-013-assert-complete-schedule-generation-and-validation-domains.md) | Assert complete schedule generation and validation domains | Open |
+| [TT-014](open/benchmarks/TT-014-verify-the-complete-benchmark-input-and-identity-manifest.md) | Verify the complete benchmark input and identity manifest | Open |
+| [TT-015](open/benchmarks/TT-015-cover-benchmark-command-options-and-workload-diagnostics.md) | Cover benchmark command options and workload diagnostics | Open |
+| [TT-016](open/benchmarks/TT-016-exercise-benchmark-failure-reports-monitoring-and-cleanup.md) | Exercise benchmark failure reports monitoring and cleanup | Open |
+| [TT-017](open/benchmarks/TT-017-verify-metadata-command-cancellation-and-process-cleanup.md) | Verify metadata command cancellation and process cleanup | Open |
+| [TT-018](open/benchmarks/TT-018-verify-executable-signal-cancellation-and-final-cleanup.md) | Verify executable signal cancellation and final cleanup | Open |
+| [TT-019](open/database/TT-019-assert-allocation-policy-and-platform-memory-inputs.md) | Assert allocation policy and platform memory inputs | Open |
+| [TT-020](open/api/TT-020-assert-default-di-registration-and-observable-options.md) | Assert default DI registration and observable options | Open |
+| [TT-021](open/database/TT-021-close-docker-adapter-cancellation-and-permit-gaps.md) | Close Docker adapter cancellation and permit gaps | Open |
+| [TT-022](open/api/TT-022-assert-lifecycle-admission-publication-and-drain-races.md) | Assert lifecycle admission publication and drain races | Open |
+| [TT-023](open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md) | Assert late failure ordering and safe diagnostic identity | Open |
+| [TT-024](open/api/TT-024-resolve-retained-state-cleanup-and-reentrancy-invariants.md) | Resolve retained-state cleanup and reentrancy invariants | Open |
+| [TT-025](open/database/TT-025-establish-uncovered-boundary-reachability-and-limits.md) | Establish uncovered boundary reachability and limits | Open |
+| [TT-026](open/database/TT-026-assert-adaptive-prepared-and-budget-equality-boundaries.md) | Assert adaptive prepared and budget equality boundaries | Open |
+| [TT-027](open/database/TT-027-assert-atomic-slot-claims-and-shutdown-transitions.md) | Assert atomic slot claims and shutdown transitions | Open |
+| [TT-028](open/database/TT-028-review-prepared-adapter-diagnostic-and-observer-coverage.md) | Review prepared adapter diagnostic and observer coverage | Open |
 
 [TT-000](resolved/database/TT-000-pool-feasibility-investigation.md) preserves the
 completed feasibility investigation. Its prototypes are exploratory evidence,

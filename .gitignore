@@ -87,3 +87,6 @@ artifacts/
 
 # macOS
 .DS_Store
+# Python verification driver bytecode
+__pycache__/
+*.pyc

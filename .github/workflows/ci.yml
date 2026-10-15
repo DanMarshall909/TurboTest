@@ -9,18 +9,15 @@ on:
     types: [ published ]
 
 env:
-  DOTNET_VERSION: '10.0.x'
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-    services:
-      docker:
-        image: docker:dind
-        options: --privileged
+    timeout-minutes: 30
+    env:
+      DOCKER_HOST: unix:///var/run/docker.sock
     
     steps:
     - uses: actions/checkout@v7
@@ -28,23 +25,25 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v6
       with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        global-json-file: global.json
     
-    - name: Restore dependencies
-      run: dotnet restore
-    
-    - name: Build
-      run: dotnet build --no-restore --configuration Release
+    - name: Verify correctness driver contracts
+      run: python3 -m unittest discover -s scripts -p test_verify.py
 
-    - name: Prepare PostgreSQL image for native correctness checks
-      run: docker pull postgres:16-alpine
-    
-    - name: Test
-      run: dotnet test --no-build --configuration Release --verbosity normal
-      env:
-        DOCKER_HOST: tcp://docker:2376
-        DOCKER_TLS_VERIFY: 1
-    
+    - name: Prepare PostgreSQL image on the native contract daemon
+      run: docker --host "$DOCKER_HOST" pull postgres:16-alpine
+
+    - name: Verify fast and native correctness lanes
+      run: python3 scripts/verify.py all --output artifacts/verification/ci
+
+    - name: Retain correctness results and stalled-phase diagnostics
+      if: always()
+      uses: actions/upload-artifact@v7
+      with:
+        name: correctness-evidence
+        path: artifacts/verification
+        if-no-files-found: error
+
     - name: Pack
       run: dotnet pack --no-build --configuration Release --output nupkgs
     
@@ -60,6 +59,8 @@ jobs:
     if: github.event_name == 'release'
     
     steps:
+    - uses: actions/checkout@v7
+
     - name: Download artifacts
       uses: actions/download-artifact@v8
       with:
@@ -69,7 +70,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v6
       with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        global-json-file: global.json
     
     - name: Publish to NuGet
       run: dotnet nuget push "nupkgs/*.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate

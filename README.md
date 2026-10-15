@@ -439,3 +439,8 @@ Issues and contributions are welcome.
 
 The current implementation backlog and investigation evidence are in the
 [repository ticket tracker](docs/issues/README.md).
+
+## Correctness verification
+
+Run the maintained [fast, native and combined verification commands](docs/verification.md)
+for bounded execution, exact test catalogs, TRX timings and cleanup diagnostics.

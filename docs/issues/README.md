@@ -1,7 +1,13 @@
 # TurboTest tickets
 
-Repository Markdown is the authoritative tracker. No GitHub remote or external
-tracker is configured. This checkout uses local commits.
+GitHub Issues is the authoritative tracker for remaining work in
+[DanMarshall909/TurboTest](https://github.com/DanMarshall909/TurboTest/issues).
+The [TurboTest robustness Kanban](https://github.com/users/DanMarshall909/projects/15/views/2) owns live priority,
+sequencing and workflow status. Repository documents retain historical
+investigations and evidence; completed tickets remain in their existing form.
+Source code and historical evidence remain in this local checkout; the GitHub
+repository currently hosts the issues and linked project. This checkout still
+uses local commits and has no configured code remote.
 
 ## Current status — 2026-10-15
 
@@ -47,41 +53,57 @@ adequacy claim. The original [launch snapshot](evidence/2026-10-15/post-session-
 remains historical; the reviewed outcomes and new work below supersede its
 pending action. Full raw reports and bounded direct checks are retained.
 
-## Mutation review follow-ups
+## Remaining work on GitHub
 
-The original ten implementation tickets are Resolved. These 18 quality and
-bounded-investigation items are Open; their individual criteria distinguish
-confirmed gaps from questions that need a contract or reachability proof.
+The original ten implementation tickets are Resolved. All remaining work is now
+organized as **20 GitHub issues**: TT-011 through TT-028 retain their identities,
+TT-029 adds reproducible verification, and TT-030 defines the final robustness
+gate. The issue bodies include the subsequent lifecycle, platform-probe,
+experiment-wide identity and reporting findings. A finding is not automatically
+a reproduced production defect.
 
-| Ticket | Follow-up | Status |
+GitHub owns acceptance checklists, dependencies, priority, assignment and live
+status. The project groups work into reliable verification, lifecycle ownership,
+resource contracts, trustworthy benchmarks and final robustness evidence. Its
+Order field gives recommended sequencing; native issue dependencies represent
+whole-issue prerequisites. The final verification issue depends on every other
+remaining item.
+
+| Ticket | GitHub work item | Local investigation |
 | --- | --- | --- |
-| [TT-011](open/testing/TT-011-recover-mutation-coverage-lost-to-compiler-rollback.md) | Recover mutation coverage lost to compiler rollback | Open |
-| [TT-012](open/testing/TT-012-bound-mutation-liveness-diagnosis-and-failed-test-cleanup.md) | Bound mutation liveness diagnosis and failed-test cleanup | Open |
-| [TT-013](open/benchmarks/TT-013-assert-complete-schedule-generation-and-validation-domains.md) | Assert complete schedule generation and validation domains | Open |
-| [TT-014](open/benchmarks/TT-014-verify-the-complete-benchmark-input-and-identity-manifest.md) | Verify the complete benchmark input and identity manifest | Open |
-| [TT-015](open/benchmarks/TT-015-cover-benchmark-command-options-and-workload-diagnostics.md) | Cover benchmark command options and workload diagnostics | Open |
-| [TT-016](open/benchmarks/TT-016-exercise-benchmark-failure-reports-monitoring-and-cleanup.md) | Exercise benchmark failure reports monitoring and cleanup | Open |
-| [TT-017](open/benchmarks/TT-017-verify-metadata-command-cancellation-and-process-cleanup.md) | Verify metadata command cancellation and process cleanup | Open |
-| [TT-018](open/benchmarks/TT-018-verify-executable-signal-cancellation-and-final-cleanup.md) | Verify executable signal cancellation and final cleanup | Open |
-| [TT-019](open/database/TT-019-assert-allocation-policy-and-platform-memory-inputs.md) | Assert allocation policy and platform memory inputs | Open |
-| [TT-020](open/api/TT-020-assert-default-di-registration-and-observable-options.md) | Assert default DI registration and observable options | Open |
-| [TT-021](open/database/TT-021-close-docker-adapter-cancellation-and-permit-gaps.md) | Close Docker adapter cancellation and permit gaps | Open |
-| [TT-022](open/api/TT-022-assert-lifecycle-admission-publication-and-drain-races.md) | Assert lifecycle admission publication and drain races | Open |
-| [TT-023](open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md) | Assert late failure ordering and safe diagnostic identity | Open |
-| [TT-024](open/api/TT-024-resolve-retained-state-cleanup-and-reentrancy-invariants.md) | Resolve retained-state cleanup and reentrancy invariants | Open |
-| [TT-025](open/database/TT-025-establish-uncovered-boundary-reachability-and-limits.md) | Establish uncovered boundary reachability and limits | Open |
-| [TT-026](open/database/TT-026-assert-adaptive-prepared-and-budget-equality-boundaries.md) | Assert adaptive prepared and budget equality boundaries | Open |
-| [TT-027](open/database/TT-027-assert-atomic-slot-claims-and-shutdown-transitions.md) | Assert atomic slot claims and shutdown transitions | Open |
-| [TT-028](open/database/TT-028-review-prepared-adapter-diagnostic-and-observer-coverage.md) | Review prepared adapter diagnostic and observer coverage | Open |
+| [TT-011](https://github.com/DanMarshall909/TurboTest/issues/1) | Recover mutation coverage lost to compiler rollback | [Evidence](open/testing/TT-011-recover-mutation-coverage-lost-to-compiler-rollback.md) |
+| [TT-012](https://github.com/DanMarshall909/TurboTest/issues/2) | Bound mutation liveness diagnosis and failed-test cleanup | [Evidence](open/testing/TT-012-bound-mutation-liveness-diagnosis-and-failed-test-cleanup.md) |
+| [TT-013](https://github.com/DanMarshall909/TurboTest/issues/3) | Assert complete schedule generation and validation domains | [Evidence](open/benchmarks/TT-013-assert-complete-schedule-generation-and-validation-domains.md) |
+| [TT-014](https://github.com/DanMarshall909/TurboTest/issues/4) | Verify the complete benchmark input and identity manifest | [Evidence](open/benchmarks/TT-014-verify-the-complete-benchmark-input-and-identity-manifest.md) |
+| [TT-015](https://github.com/DanMarshall909/TurboTest/issues/5) | Cover benchmark command options and workload diagnostics | [Evidence](open/benchmarks/TT-015-cover-benchmark-command-options-and-workload-diagnostics.md) |
+| [TT-016](https://github.com/DanMarshall909/TurboTest/issues/6) | Exercise benchmark failure reports monitoring and cleanup | [Evidence](open/benchmarks/TT-016-exercise-benchmark-failure-reports-monitoring-and-cleanup.md) |
+| [TT-017](https://github.com/DanMarshall909/TurboTest/issues/7) | Verify metadata command cancellation and process cleanup | [Evidence](open/benchmarks/TT-017-verify-metadata-command-cancellation-and-process-cleanup.md) |
+| [TT-018](https://github.com/DanMarshall909/TurboTest/issues/8) | Verify executable signal cancellation and final cleanup | [Evidence](open/benchmarks/TT-018-verify-executable-signal-cancellation-and-final-cleanup.md) |
+| [TT-019](https://github.com/DanMarshall909/TurboTest/issues/9) | Assert allocation policy and platform memory inputs | [Evidence](open/database/TT-019-assert-allocation-policy-and-platform-memory-inputs.md) |
+| [TT-020](https://github.com/DanMarshall909/TurboTest/issues/10) | Assert default DI registration and observable options | [Evidence](open/api/TT-020-assert-default-di-registration-and-observable-options.md) |
+| [TT-021](https://github.com/DanMarshall909/TurboTest/issues/11) | Close Docker adapter cancellation and permit gaps | [Evidence](open/database/TT-021-close-docker-adapter-cancellation-and-permit-gaps.md) |
+| [TT-022](https://github.com/DanMarshall909/TurboTest/issues/12) | Assert lifecycle admission publication and drain races | [Evidence](open/api/TT-022-assert-lifecycle-admission-publication-and-drain-races.md) |
+| [TT-023](https://github.com/DanMarshall909/TurboTest/issues/13) | Assert late failure ordering and safe diagnostic identity | [Evidence](open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md) |
+| [TT-024](https://github.com/DanMarshall909/TurboTest/issues/14) | Resolve retained-state cleanup and reentrancy invariants | [Evidence](open/api/TT-024-resolve-retained-state-cleanup-and-reentrancy-invariants.md) |
+| [TT-025](https://github.com/DanMarshall909/TurboTest/issues/15) | Establish uncovered boundary reachability and limits | [Evidence](open/database/TT-025-establish-uncovered-boundary-reachability-and-limits.md) |
+| [TT-026](https://github.com/DanMarshall909/TurboTest/issues/16) | Assert adaptive prepared and budget equality boundaries | [Evidence](open/database/TT-026-assert-adaptive-prepared-and-budget-equality-boundaries.md) |
+| [TT-027](https://github.com/DanMarshall909/TurboTest/issues/17) | Assert atomic slot claims and shutdown transitions | [Evidence](open/database/TT-027-assert-atomic-slot-claims-and-shutdown-transitions.md) |
+| [TT-028](https://github.com/DanMarshall909/TurboTest/issues/18) | Review prepared adapter diagnostic and observer coverage | [Evidence](open/database/TT-028-review-prepared-adapter-diagnostic-and-observer-coverage.md) |
+| [TT-029](https://github.com/DanMarshall909/TurboTest/issues/19) | Make correctness verification reproducible and bounded in CI | Defined on GitHub |
+| [TT-030](https://github.com/DanMarshall909/TurboTest/issues/20) | Verify final robustness across repeated lifecycles and failure recovery | Defined on GitHub |
+
+[Migration mapping](evidence/2026-10-15/github-migration.json) retains stable issue and project identities.
 
 [TT-000](resolved/database/TT-000-pool-feasibility-investigation.md) preserves the
 completed feasibility investigation. Its prototypes are exploratory evidence,
 not substitutes for the production acceptance gates above.
 
-## Status changes
+## Tracking and archival
 
-When implementation and verification earn resolution, update the ticket's
-`status` to `Resolved`, add a dated decision-log entry, move it to
-`resolved/<area>/`, and update dependent links. Keep the ticket identity. A linked
-GitHub tracker should be used only if one is subsequently configured; do not
-maintain competing authoritative statuses.
+Update live issue state, acceptance criteria and project fields on GitHub; do not
+maintain competing status or priority fields in repository investigation records.
+When an issue is resolved, link its evidence and record the investigation's
+archive decision locally. Move a retained investigation from `open/<area>/` to
+`resolved/<area>/` when that investigation is archived, preserving its TT identity
+and GitHub URL. The folder is an evidence lifecycle, not a duplicate task board.
+Completed TT-000 through TT-010 records remain unchanged.

@@ -1,11 +1,9 @@
 ---
 id: TT-011
 title: Recover mutation coverage lost to compiler rollback
-status: Open
-priority: P1
 type: Quality
 created: 2026-10-15
-depends_on: []
+github_issue: https://github.com/DanMarshall909/TurboTest/issues/1
 ---
 
 # TT-011: Recover mutation coverage lost to compiler rollback
@@ -24,17 +22,14 @@ Source snapshot: `29e974adc59e36ef8622f5f2c176ddb563f8c6d4`; Stryker.NET5.0.0, f
 
 Related groups: C-TurboTest.EFCore-clean, C-TurboTest.Benchmarks-clean, C-TurboTest.EFCore-warning, C-TurboTest.Benchmarks-warning (128 reported entries; classifications distinguish gaps, boundary evidence and investigation questions).
 
-## Acceptance criteria
+## Live work
 
-- [ ] Preserve genuine invalid mutants as compiler rejections and document pinned compiler/warning-policy identity.
-- [ ] Reproduce CE223 with the named monitor test; recover executable candidates using a bounded supported Stryker configuration, targeted upstream fix or calibrated adapter without weakening source scope or assertions.
-- [ ] For all106 clean and22 warning-sensitive candidates, record recovered actual outcomes or exact diagnosed tool limitations; never relabel diagnostic-only results as executed.
-- [ ] Retain full eligible fast-only runs, source/test attribution and owned CoW cleanup; no broad exclusion or threshold reduction.
+[TT-011 on GitHub](https://github.com/DanMarshall909/TurboTest/issues/1) owns the current acceptance criteria, priority, assignment and workflow status. The [robustness project](https://github.com/users/DanMarshall909/projects/15/views/2) owns sequencing and Kanban status.
 
-## Verification
-
-Use the smallest observable contract and preserve genuine one-fault rejection evidence. Keep existing ordinary fast/slow lanes, source identities and assertions. A future repair follows normal behavior-first TDD and proportionate regression gates; diagnostic probes and mutation scores are not a whole-suite pass.
+This file retains the original investigation and evidence provenance. Its `open/` location means the investigation has not been archived; it does not mirror GitHub issue status. The original acceptance checklist is preserved in Git history at `0f0ca8f` and was migrated to GitHub with the subsequent robustness-review refinements.
 
 ## Decision log
 
 - **2026-10-15 — Opened:** Classified post-session evidence; accepted follow-up is a focused repair or bounded investigation under the criteria above. No production change is made by this review.
+
+- **2026-10-15 — Migrated:** The user requested GitHub Issues and a Kanban project for all remaining work. GitHub now owns live planning and completion; this record retains durable investigation evidence. Completed repository tickets were left unchanged.

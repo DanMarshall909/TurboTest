@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "purpose": "Durable migration identity mapping; GitHub owns live work state.",
+  "repository": "https://github.com/DanMarshall909/TurboTest",
+  "project": "https://github.com/users/DanMarshall909/projects/15",
+  "kanban": "https://github.com/users/DanMarshall909/projects/15/views/2",
+  "sourcePublication": "Source and historical evidence remain local; no code remote was configured or source history pushed by this migration.",
+  "previousTrackerCommit": "0f0ca8f6a9baaf60255d6e50b39f39c2550a3e70",
+  "issues": [
+    {
+      "ticket": "TT-011",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/1",
+      "githubNumber": 1,
+      "originalInvestigation": "docs/issues/open/testing/TT-011-recover-mutation-coverage-lost-to-compiler-rollback.md",
+      "originalSha256": "c28c448e481e899bbbd3af1eeec54064e5501d96148338de8e11cfcf825e5ed3"
+    },
+    {
+      "ticket": "TT-012",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/2",
+      "githubNumber": 2,
+      "originalInvestigation": "docs/issues/open/testing/TT-012-bound-mutation-liveness-diagnosis-and-failed-test-cleanup.md",
+      "originalSha256": "67f824a082325542d017a735c2517eb63f989bcb4305d08fb04e2c03cb3c534d"
+    },
+    {
+      "ticket": "TT-013",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/3",
+      "githubNumber": 3,
+      "originalInvestigation": "docs/issues/open/benchmarks/TT-013-assert-complete-schedule-generation-and-validation-domains.md",
+      "originalSha256": "0ef03f452539077d33d5930e24046a6c5b4cff14d00543cf4027ab1bc06de52f"
+    },
+    {
+      "ticket": "TT-014",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/4",
+      "githubNumber": 4,
+      "originalInvestigation": "docs/issues/open/benchmarks/TT-014-verify-the-complete-benchmark-input-and-identity-manifest.md",
+      "originalSha256": "1998997fc33ea965ea7a8c6865b9f23f9aaa2ff41154ea95632b99b2afc37e48"
+    },
+    {
+      "ticket": "TT-015",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/5",
+      "githubNumber": 5,
+      "originalInvestigation": "docs/issues/open/benchmarks/TT-015-cover-benchmark-command-options-and-workload-diagnostics.md",
+      "originalSha256": "5179d9ad7a54f5e076bc36fe845ff33ddbd79914d5836a78e3ab440b1be1cdee"
+    },
+    {
+      "ticket": "TT-016",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/6",
+      "githubNumber": 6,
+      "originalInvestigation": "docs/issues/open/benchmarks/TT-016-exercise-benchmark-failure-reports-monitoring-and-cleanup.md",
+      "originalSha256": "0668b4ee71fb20e494fa842e18ddc5afc7b941deeae3b7550f118d3b96cdf353"
+    },
+    {
+      "ticket": "TT-017",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/7",
+      "githubNumber": 7,
+      "originalInvestigation": "docs/issues/open/benchmarks/TT-017-verify-metadata-command-cancellation-and-process-cleanup.md",
+      "originalSha256": "dbc9475130602a215b4145bc8e1b8a06cd537b9a8c2a491f235ec43a734b6205"
+    },
+    {
+      "ticket": "TT-018",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/8",
+      "githubNumber": 8,
+      "originalInvestigation": "docs/issues/open/benchmarks/TT-018-verify-executable-signal-cancellation-and-final-cleanup.md",
+      "originalSha256": "fbe9454a713832eb5fd669625eb1a5cd4292acb064b4019de3ec0d4ad51f7f59"
+    },
+    {
+      "ticket": "TT-019",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/9",
+      "githubNumber": 9,
+      "originalInvestigation": "docs/issues/open/database/TT-019-assert-allocation-policy-and-platform-memory-inputs.md",
+      "originalSha256": "dc97595e42b81acb3e9cb73e5a94720699fdd32af2493a53cc429a39d2e20eb6"
+    },
+    {
+      "ticket": "TT-020",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/10",
+      "githubNumber": 10,
+      "originalInvestigation": "docs/issues/open/api/TT-020-assert-default-di-registration-and-observable-options.md",
+      "originalSha256": "683f551b812b791548621c30d154279e6efe59133460e11f3b489b612a92b53f"
+    },
+    {
+      "ticket": "TT-021",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/11",
+      "githubNumber": 11,
+      "originalInvestigation": "docs/issues/open/database/TT-021-close-docker-adapter-cancellation-and-permit-gaps.md",
+      "originalSha256": "a30ab8cef3fe3687e690d250c9d635a276234bb02b419146e465440ea1e95744"
+    },
+    {
+      "ticket": "TT-022",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/12",
+      "githubNumber": 12,
+      "originalInvestigation": "docs/issues/open/api/TT-022-assert-lifecycle-admission-publication-and-drain-races.md",
+      "originalSha256": "c2b8bb6e7e67647643fa9873558df0ec11dc381031f3b6cd97b0a0f537ec7c58"
+    },
+    {
+      "ticket": "TT-023",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/13",
+      "githubNumber": 13,
+      "originalInvestigation": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+      "originalSha256": "7f86c1ebe28f903725a4b2c68fdbda5300aeab61a3f62b65d6b952c7b1fdb0b8"
+    },
+    {
+      "ticket": "TT-024",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/14",
+      "githubNumber": 14,
+      "originalInvestigation": "docs/issues/open/api/TT-024-resolve-retained-state-cleanup-and-reentrancy-invariants.md",
+      "originalSha256": "89161bb035213e2994c6c4b0f161bae0a9ae530a2d7d8c5fffd569e764fd2b36"
+    },
+    {
+      "ticket": "TT-025",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/15",
+      "githubNumber": 15,
+      "originalInvestigation": "docs/issues/open/database/TT-025-establish-uncovered-boundary-reachability-and-limits.md",
+      "originalSha256": "b3cbb2ea0a4133d07cb2624916b8eed0215c2ad3eb19834396cc6368dd3711ff"
+    },
+    {
+      "ticket": "TT-026",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/16",
+      "githubNumber": 16,
+      "originalInvestigation": "docs/issues/open/database/TT-026-assert-adaptive-prepared-and-budget-equality-boundaries.md",
+      "originalSha256": "aef22724b93025f0efc97eb9c1a1f2aefd874e883d762b3b89909d43f52d645e"
+    },
+    {
+      "ticket": "TT-027",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/17",
+      "githubNumber": 17,
+      "originalInvestigation": "docs/issues/open/database/TT-027-assert-atomic-slot-claims-and-shutdown-transitions.md",
+      "originalSha256": "1879016a89af2da9afc619365d91323ca6bc11fe5caa1c31bd17ac8a9ab4df43"
+    },
+    {
+      "ticket": "TT-028",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/18",
+      "githubNumber": 18,
+      "originalInvestigation": "docs/issues/open/database/TT-028-review-prepared-adapter-diagnostic-and-observer-coverage.md",
+      "originalSha256": "cb1fe6d8cfa6f96a8158d0d6e8075839c862a36f8b3dc94d61f251b259b2297a"
+    },
+    {
+      "ticket": "TT-029",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/19",
+      "githubNumber": 19,
+      "originalInvestigation": null,
+      "originalSha256": null
+    },
+    {
+      "ticket": "TT-030",
+      "url": "https://github.com/DanMarshall909/TurboTest/issues/20",
+      "githubNumber": 20,
+      "originalInvestigation": null,
+      "originalSha256": null
+    }
+  ],
+  "completedTickets": "TT-000 through TT-010 left byte-for-byte unchanged."
+}

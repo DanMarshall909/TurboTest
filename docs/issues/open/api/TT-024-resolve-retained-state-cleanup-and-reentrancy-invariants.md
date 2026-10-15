@@ -1,11 +1,9 @@
 ---
 id: TT-024
 title: Resolve retained-state cleanup and reentrancy invariants
-status: Open
-priority: P2
 type: Quality
 created: 2026-10-15
-depends_on: []
+github_issue: https://github.com/DanMarshall909/TurboTest/issues/14
 ---
 
 # TT-024: Resolve retained-state cleanup and reentrancy invariants
@@ -24,18 +22,14 @@ Source snapshot: `29e974adc59e36ef8622f5f2c176ddb563f8c6d4`; Stryker.NET5.0.0, f
 
 Related groups: A15, L21, L22, L23 (48 reported entries; classifications distinguish gaps, boundary evidence and investigation questions).
 
-## Acceptance criteria
+## Live work
 
-- [ ] Establish externally observable bounded retained-state/resource lifetime contracts for CTS, registrations and completed work entries.
-- [ ] Prove or disprove dominated database fallback and optional warm-target/demand-observation invariants; simplify only where supported contracts permit.
-- [ ] Define and reproduce cleanup-capability ownership/precedence when explicit, causal and secondary handles differ.
-- [ ] Use gated callbacks and strict external deadlines for reentrant drain and late-cancellation ordering; avoid reflection-only private collection assertions.
-- [ ] Resolve each linked question with evidence, an accepted contract decision or a narrower tracked item before removing useful code.
+[TT-024 on GitHub](https://github.com/DanMarshall909/TurboTest/issues/14) owns the current acceptance criteria, priority, assignment and workflow status. The [robustness project](https://github.com/users/DanMarshall909/projects/15/views/2) owns sequencing and Kanban status.
 
-## Verification
-
-Use the smallest observable contract and preserve genuine one-fault rejection evidence. Keep existing ordinary fast/slow lanes, source identities and assertions. A future repair follows normal behavior-first TDD and proportionate regression gates; diagnostic probes and mutation scores are not a whole-suite pass.
+This file retains the original investigation and evidence provenance. Its `open/` location means the investigation has not been archived; it does not mirror GitHub issue status. The original acceptance checklist is preserved in Git history at `0f0ca8f` and was migrated to GitHub with the subsequent robustness-review refinements.
 
 ## Decision log
 
 - **2026-10-15 — Opened:** Classified post-session evidence; accepted follow-up is a focused repair or bounded investigation under the criteria above. No production change is made by this review.
+
+- **2026-10-15 — Migrated:** The user requested GitHub Issues and a Kanban project for all remaining work. GitHub now owns live planning and completion; this record retains durable investigation evidence. Completed repository tickets were left unchanged.

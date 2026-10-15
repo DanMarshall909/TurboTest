@@ -41,6 +41,11 @@ There is no universal latency threshold or optimal-window claim.
 Whole-session mutation follows the final immutable committed snapshot and remains
 pending at ticket publication. Its receipt is recorded in the final completion
 record; no pending result is passing evidence.
+The [post-session follow-up record](evidence/2026-10-15/post-session-mutation/follow-up.json)
+retains the calibrated launch, completed EFCore execution, running benchmark
+snapshot and explicit ownership of the pending report review. Local controllers
+preserve results and clean owned layers; automatic semantic review and agent
+wake-up are unavailable. A subsequent Codex follow-up must review both reports.
 It is a separate follow-up to ordinary ticket completion and publication, with
 fast-only mutation selection, calibrated slow-only exclusions, isolated writable
 attempts and durable report handling required. Earlier scoped mutation evidence

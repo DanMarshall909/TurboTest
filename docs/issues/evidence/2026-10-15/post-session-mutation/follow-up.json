@@ -1,0 +1,52 @@
+{
+  "recordedUtc": "2026-10-15T05:02:11.268099+00:00",
+  "sourceCommit": "29e974adc59e36ef8622f5f2c176ddb563f8c6d4",
+  "sourceTree": "e8e8d2cd55b49bb16b39820ffd14b3b3eb1e1595",
+  "sourceImage": "sha256:e94d23c107a5c2d67313207fa184cf1b1a6cabe67dd18fb62f5f5e687aa65ddb",
+  "originalGoal": "All ten implementation tickets completed, independently reviewed and committed; post-session mutation is a separate follow-up.",
+  "mutationStatus": "EFCore execution complete and cleaned; benchmark running at this snapshot; semantic report review pending.",
+  "admission": {
+    "fastTests": 267,
+    "slowTestsExcluded": 167,
+    "slowOnlyRanges": 228,
+    "independentMembershipAndRanges": "PASS",
+    "utf16RangeCalibration": "PASS",
+    "realProductionFaultAndFreshCoWRecovery": "PASS"
+  },
+  "efcore": {
+    "exitCode": 0,
+    "elapsedSeconds": 2016.5094255329968,
+    "outcomes": {
+      "Ignored": 873,
+      "Survived": 306,
+      "NoCoverage": 107,
+      "Killed": 659,
+      "CompileError": 219,
+      "Timeout": 108
+    },
+    "catalogTests": 267,
+    "sourceResolvableLinkedTestIds": 224,
+    "unlistedLinkIds": 0,
+    "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+    "report": "artifacts/tt-009/mutation/attempts/efcore-full/stryker/reports/mutation-report.json",
+    "ownedLayerRemoved": true,
+    "qualification": "Exit zero and killed counts do not approve survivors, uncovered mutants, timeouts or compile errors. No passing mutation adequacy claim."
+  },
+  "benchmark": {
+    "statusAtSnapshot": "Running",
+    "ownedContainer": "ce2e2e8e5767d4fb8086981e05f6936df75d35d823db3427d0b07d4b25c1261c",
+    "output": "artifacts/tt-009/mutation/attempts/benchmarks-full"
+  },
+  "owners": {
+    "executionAndCleanup": "Task-owned local supervisors and sequential OS controller; preserve logs, reports, immutable base and exact terminal/cleanup receipts.",
+    "mechanicalCollection": "Task-owned collector analyzes completed JSON reports and writes artifacts/tt-009/mutation/collection-status.json. This is deterministic aggregation, not semantic review.",
+    "semanticReview": "Codex follow-up: inspect both actual reports, resolve source/test attribution, classify every survivor cluster, uncovered scope, timeout and compile error, then perform scoped verified repairs or create tracked follow-up where warranted.",
+    "automationGap": "No automatic semantic review or agent wake-up is installed. A subsequent Codex follow-up must consume the retained reports; collection completion alone is not review."
+  },
+  "recovery": {
+    "status": "artifacts/tt-009/mutation/collection-status.json",
+    "sequenceEvents": "artifacts/tt-009/mutation/sequence-events.jsonl",
+    "ownership": "Each attempts/<name>/owner.json binds exact container/image/source/output. Inspect live Docker state before recovery; never restart or delete a layer based on a stale status file."
+  },
+  "retention": "Keep local raw mutation reports/logs/receipts and pinned reusable images until semantic review and evidence extraction. Remove only exact task-owned disposable writable layers; supervisors do so on every terminal path. Preserve unrelated container, stash and shared caches."
+}

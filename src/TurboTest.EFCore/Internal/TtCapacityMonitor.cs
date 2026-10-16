@@ -67,7 +67,9 @@ internal sealed class TtCapacityMonitor
 
     private async Task RunAsync(Task start)
     {
-        await start;
+        // Stopping can cancel startup admission; already claimed callbacks below
+        // remain owned until their actual completion.
+        await start.WaitAsync(_stop.Token);
         var token = _stop.Token;
         while (!token.IsCancellationRequested)
         {

@@ -26,10 +26,12 @@ Related groups: T01, T02, T03, T04, T05, T06, T07-TtCapacityMonitor, T07-TtSlotP
 
 [TT-012 on GitHub](https://github.com/DanMarshall909/TurboTest/issues/2) owns the current acceptance criteria, priority, assignment and workflow status. The [robustness project](https://github.com/users/DanMarshall909/projects/15/views/2) owns sequencing and Kanban status.
 
-This file retains the original investigation and evidence provenance. Its `open/` location means the investigation has not been archived; it does not mirror GitHub issue status. The original acceptance checklist is preserved in Git history at `0f0ca8f` and was migrated to GitHub with the subsequent robustness-review refinements.
+This archived file retains the original investigation and evidence provenance. Its `resolved/` location records the archive decision below; GitHub owns live issue status and follow-up work. The original acceptance checklist is preserved in Git history at `0f0ca8f` and was migrated to GitHub with the subsequent robustness-review refinements.
 
 ## Decision log
 
 - **2026-10-15 — Opened:** Classified post-session evidence; accepted follow-up is a focused repair or bounded investigation under the criteria above. No production change is made by this review.
 
 - **2026-10-15 — Migrated:** The user requested GitHub Issues and a Kanban project for all remaining work. GitHub now owns live planning and completion; this record retains durable investigation evidence. Completed repository tickets were left unchanged.
+
+- **2026-10-16 — Archive decision:** Independent completion review accepted the bounded diagnosis and initial cleanup/finite-retry repair. All111 historical timeouts retain their original status. [Evidence](../../evidence/2026-10-16/liveness-diagnosis/manifest.json) binds exact faults, limitations, actual representative settlement and the435-row final ordinary gate. This archives the investigation; GitHub owns live status and later lifecycle work.

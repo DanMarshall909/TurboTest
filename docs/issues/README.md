@@ -9,7 +9,7 @@ Source code and historical evidence remain in this local checkout; the GitHub
 repository currently hosts the issues and linked project. This checkout still
 uses local commits and has no configured code remote.
 
-## Current status — 2026-10-15
+## Current status — 2026-10-16
 
 All ten implementation tickets, TT-001 through TT-010, are Resolved. Independent
 completion review passed for the final adaptive controller and performance work.
@@ -30,7 +30,7 @@ The table preserves implementation order and prerequisite identities.
 
 ## Verification and performance
 
-The current candidate passes all **434 tests**, including **267 fast checks**,
+The current candidate passes all **435 tests**, including **268 fast checks**,
 without failures or skips. Solution and separate DynamicScalingExample builds
 pass without warnings/errors. Final receipts bind identical compiler/test inputs;
 independent completion review passed. Earlier ticket evidence retains
@@ -72,7 +72,7 @@ remaining item.
 | Ticket | GitHub work item | Local investigation |
 | --- | --- | --- |
 | [TT-011](https://github.com/DanMarshall909/TurboTest/issues/1) | Recover mutation coverage lost to compiler rollback | [Evidence](open/testing/TT-011-recover-mutation-coverage-lost-to-compiler-rollback.md) |
-| [TT-012](https://github.com/DanMarshall909/TurboTest/issues/2) | Bound mutation liveness diagnosis and failed-test cleanup | [Evidence](open/testing/TT-012-bound-mutation-liveness-diagnosis-and-failed-test-cleanup.md) |
+| [TT-012](https://github.com/DanMarshall909/TurboTest/issues/2) | Bound mutation liveness diagnosis and failed-test cleanup | [Evidence](resolved/testing/TT-012-bound-mutation-liveness-diagnosis-and-failed-test-cleanup.md) |
 | [TT-013](https://github.com/DanMarshall909/TurboTest/issues/3) | Assert complete schedule generation and validation domains | [Evidence](open/benchmarks/TT-013-assert-complete-schedule-generation-and-validation-domains.md) |
 | [TT-014](https://github.com/DanMarshall909/TurboTest/issues/4) | Verify the complete benchmark input and identity manifest | [Evidence](open/benchmarks/TT-014-verify-the-complete-benchmark-input-and-identity-manifest.md) |
 | [TT-015](https://github.com/DanMarshall909/TurboTest/issues/5) | Cover benchmark command options and workload diagnostics | [Evidence](open/benchmarks/TT-015-cover-benchmark-command-options-and-workload-diagnostics.md) |

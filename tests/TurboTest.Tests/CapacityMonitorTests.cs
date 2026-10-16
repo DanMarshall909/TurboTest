@@ -18,8 +18,10 @@ public class CapacityMonitorTests
         monitor.Start();
         try
         {
+            Phase("observation.wait");
             Assert.False(monitor.Completion.IsCompleted);
             await entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Phase("observation.satisfied");
             monitor.Stop();
             await monitor.JoinAsync().WaitAsync(TimeSpan.FromSeconds(2));
             Assert.True(monitor.Completion.IsCompleted);
@@ -27,7 +29,64 @@ public class CapacityMonitorTests
             Assert.Empty(monitor.TakeFailures());
             Assert.Throws<ObjectDisposedException>(monitor.Start);
         }
-        finally { monitor.Stop(); await monitor.JoinAsync(); }
+        catch (Exception error)
+        {
+            Phase("assertion.failed", error.GetType().Name);
+            throw;
+        }
+        finally
+        {
+            Phase("cleanup.join.started");
+            monitor.Stop();
+            await monitor.JoinAsync();
+            Phase("cleanup.join.settled");
+        }
+    }
+
+    [Fact]
+    public async Task Stop_keeps_a_reader_that_ignores_cancellation_owned_until_it_actually_returns()
+    {
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var ticks = 0;
+        var monitor = new TtCapacityMonitor(TimeSpan.FromHours(1), TimeProvider.System, async _ =>
+        {
+            entered.TrySetResult();
+            await release.Task;
+            return null;
+        }, _ => { ticks++; return Task.CompletedTask; });
+        monitor.Start();
+        try
+        {
+            Phase("reader.wait");
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Phase("reader.claimed");
+            monitor.Stop();
+            var joining = monitor.JoinAsync();
+            Assert.False(joining.IsCompleted);
+            Assert.False(monitor.Completion.IsCompleted);
+            release.TrySetResult();
+            await joining.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.True(monitor.Completion.IsCompleted);
+            Assert.Equal(0, ticks);
+            Assert.Empty(monitor.TakeFailures());
+        }
+        catch (Exception error)
+        {
+            Phase("assertion.failed", error.GetType().Name);
+            throw;
+        }
+        finally
+        {
+            release.TrySetResult();
+            monitor.Stop();
+            Phase("cleanup.join.started");
+            await monitor.JoinAsync();
+            // Preserve the assertion failure, while still joining the actual
+            // callback even if a diagnostic fault makes JoinAsync return early.
+            await Record.ExceptionAsync(async () => await monitor.Completion);
+            Phase("cleanup.join.settled");
+        }
     }
 
     [Fact]
@@ -81,5 +140,15 @@ public class CapacityMonitorTests
         }
         finally { monitor.Stop(); await monitor.JoinAsync(); }
         Assert.Empty(monitor.TakeFailures());
+    }
+
+    private static void Phase(string phase, string? exceptionType = null,
+        [System.Runtime.CompilerServices.CallerMemberName] string test = "")
+    {
+        var path = Environment.GetEnvironmentVariable("TURBOTEST_MONITOR_PHASE_LOG");
+        if (string.IsNullOrEmpty(path)) return;
+        // Closing each append preserves the observation failure even if teardown
+        // stalls and the diagnostic process is terminated by its external guard.
+        File.AppendAllText(path, System.Text.Json.JsonSerializer.Serialize(new { test, phase, exceptionType }) + "\n");
     }
 }

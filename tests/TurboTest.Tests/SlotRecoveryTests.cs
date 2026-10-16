@@ -227,7 +227,9 @@ public class SlotRecoveryTests
             async (_, token) =>
             {
                 var attempt = Interlocked.Increment(ref preparations);
-                if (attempt > 4) throw new InvalidOperationException("Recovery exceeded three preparation attempts.");
+                // The owner catches preparation exceptions; success lets a broken retry loop
+                // settle so the independent attempt-count assertion can reject it.
+                if (attempt > 4) return;
                 if (attempt == 1) return;
                 recoveryStarted.TrySetResult();
                 await failRecovery.Task.WaitAsync(token);
@@ -243,10 +245,11 @@ public class SlotRecoveryTests
             await recoveryStarted.Task.WaitAsync(TimeSpan.FromSeconds(2));
             waiting = owner.AcquireAsync(deadline.Token);
             failRecovery.TrySetResult();
-            var terminal = await Assert.ThrowsAsync<TtLifecycleException>(() => waiting);
+            var terminalError = await Record.ExceptionAsync(async () => await waiting);
+            Assert.Equal(4, preparations);
+            var terminal = Assert.IsType<TtLifecycleException>(terminalError);
             Assert.Equal("SlotPrepare", terminal.Stage);
             Assert.Contains(nameof(IOException), terminal.Message);
-            Assert.Equal(4, preparations);
             Assert.Equal(4, deleted.Count);
             Assert.Equal(4, deleted.Distinct().Count());
             Assert.Equal((0, 0, 0), (owner.Snapshot.Reserved, owner.Snapshot.Ready, owner.Snapshot.QueuedAcquisitions));
@@ -258,7 +261,12 @@ public class SlotRecoveryTests
         {
             deadline.Cancel();
             failRecovery.TrySetResult();
-            if (waiting is not null) await Record.ExceptionAsync(async () => await waiting);
+            if (waiting is not null)
+            {
+                var waitingError = await Record.ExceptionAsync(async () => await waiting);
+                if (waitingError is null)
+                    await owner.ReturnAsync(await waiting, (_, _) => Task.CompletedTask);
+            }
         }
     }
 

@@ -7,6 +7,190 @@ namespace TurboTest.Tests;
 public class CleanupOwnershipTests
 {
     [Fact]
+    public async Task Composed_cleanup_shares_reentrant_work_and_retries_only_the_failed_child_even_when_resource_labels_match()
+    {
+        var entered = new[] { new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously), new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously) };
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var resources = new[] { new List<string> { "same-resource-label" }, new List<string> { "same-resource-label" } };
+        var calls = new int[2];
+        TtCleanup? combined = null;
+        Task? reentrant = null;
+        var children = Enumerable.Range(0, 2).Select(index => new TtCleanup(Guid.NewGuid(), async () =>
+        {
+            var attempt = ++calls[index];
+            if (attempt > (index == 0 ? 1 : 2)) throw new InvalidOperationException("Child recovery exceeded its finite oracle.");
+            reentrant = combined!.RetryCleanupAsync();
+            entered[index].TrySetResult();
+            await release.Task;
+            if (index == 1 && attempt == 1)
+                throw new TtLifecycleException("RemainingChildDelete",
+                    new Npgsql.PostgresException("private-child-delete", "ERROR", "ERROR", "53100"));
+            resources[index].Clear();
+        }, () => resources[index])).ToArray();
+        var causal = new TtLifecycleException("FirstChild", new IOException("private-first"), cleanup: children[0]);
+        var secondary = new TtLifecycleException("SecondChild", new IOException("private-second"), cleanup: children[1]);
+        combined = Assert.IsType<TtCleanup>(new TtLifecycleException("Outer",
+            new AggregateException(causal, new AggregateException(secondary, causal))).Cleanup);
+        var pending = combined.RetryCleanupAsync();
+        try
+        {
+            await Task.WhenAll(entered.Select(signal => signal.Task)).WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Same(pending, combined.RetryCleanupAsync());
+            Assert.Same(pending, reentrant);
+            Assert.False(pending.IsCompleted);
+            Assert.Equal(new[] { 1, 1 }, calls);
+            Assert.Equal(["same-resource-label"], combined.OwnedResourceIds);
+            release.TrySetResult();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Contains("RemainingChildDelete", failure.Message);
+            Assert.Contains("53100", failure.Message);
+            Assert.DoesNotContain("private-", failure.ToString());
+            Assert.NotNull(failure.Cleanup);
+            Assert.Empty(children[0].OwnedResourceIds);
+            Assert.Single(children[1].OwnedResourceIds);
+            await combined.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            await combined.RetryCleanupAsync();
+            Assert.Equal(new[] { 1, 2 }, calls);
+            Assert.Empty(combined.OwnedResourceIds);
+        }
+        finally
+        {
+            release.TrySetResult();
+            await Record.ExceptionAsync(() => pending);
+            await combined.RetryCleanupAsync();
+        }
+    }
+
+    [Fact]
+    public async Task Completed_child_ownership_does_not_displace_the_remaining_recovery_capability()
+    {
+        var childCalls = 0;
+        var child = new TtCleanup(Guid.NewGuid(), () => { childCalls++; return Task.CompletedTask; }, () => ["child-resource"]);
+        var cause = new TtLifecycleException("ChildCleanup", new IOException("private-child-failure"), cleanup: child);
+        await child.RetryCleanupAsync();
+        var calls = 0;
+        var owner = new TtCleanup(Guid.NewGuid(), () =>
+        {
+            if (++calls == 1) throw cause;
+            if (calls > 2) throw new InvalidOperationException("Recovery exceeded its finite oracle.");
+            return Task.CompletedTask;
+        }, () => ["remaining-resource"]);
+        try
+        {
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => owner.RetryCleanupAsync());
+            var remaining = Assert.IsType<TtCleanup>(failure.Cleanup);
+            Assert.Same(owner, remaining);
+            Assert.Equal(["remaining-resource"], remaining.OwnedResourceIds);
+            Assert.Equal("ChildCleanup", failure.Stage);
+            Assert.DoesNotContain("private-", failure.ToString());
+            await remaining.RetryCleanupAsync();
+            Assert.Empty(owner.OwnedResourceIds);
+            Assert.Equal((1, 2), (childCalls, calls));
+        }
+        finally { await owner.RetryCleanupAsync(); }
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Distinct_explicit_causal_and_secondary_cleanup_owners_remain_recoverable_without_registering_a_new_owner(bool explicitOwner)
+    {
+        await Tt.DisposeAsync();
+        var resources = new[] { new List<string> { "explicit-resource" }, new List<string> { "causal-resource" }, new List<string> { "secondary-resource" } };
+        var calls = new int[3];
+        var owners = Enumerable.Range(0, 3).Select(index => new TtCleanup(Guid.NewGuid(), () =>
+        {
+            calls[index]++;
+            resources[index].Clear();
+            return Task.CompletedTask;
+        }, () => resources[index])).ToArray();
+        try
+        {
+            var cause = new TtLifecycleException("CausalStage", new IOException("private-cause"), cleanup: owners[1]);
+            var secondary = new TtLifecycleException("SecondaryStage", new InvalidOperationException("private-secondary"), cleanup: owners[2]);
+            var failure = new TtLifecycleException("OuterStage", cause, secondary, explicitOwner ? owners[0] : null);
+            var capability = Assert.IsType<TtCleanup>(failure.Cleanup);
+            var expected = explicitOwner ? new[] { "causal-resource", "explicit-resource", "secondary-resource" } : new[] { "causal-resource", "secondary-resource" };
+            Assert.Equal(expected, capability.OwnedResourceIds.Order(StringComparer.Ordinal));
+            var supplemented = failure.WithCleanupFailure(secondary);
+            Assert.Same(capability, supplemented.Cleanup);
+            Assert.Same(capability, supplemented.WithCleanup(owners[explicitOwner ? 0 : 1]).Cleanup);
+            Assert.DoesNotContain("private-", supplemented.ToString());
+            await Tt.DisposeAsync();
+            Assert.Equal(new[] { 0, 0, 0 }, calls);
+            await capability.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(new[] { explicitOwner ? 1 : 0, 1, 1 }, calls);
+            Assert.Empty(capability.OwnedResourceIds);
+        }
+        finally
+        {
+            foreach (var owner in owners) await owner.RetryCleanupAsync();
+        }
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Global_cleanup_reports_each_failed_owner_and_returns_a_capability_that_retries_them_all(bool reverse)
+    {
+        await Tt.DisposeAsync();
+        var firstResources = new List<string> { "first-retained-resource" };
+        var secondResources = new List<string> { "second-retained-resource" };
+        var firstCalls = 0;
+        var secondCalls = 0;
+        var finish = false;
+        TtCleanup RetainFirst() => TtCleanupRegistry.Retain(Guid.NewGuid(), () =>
+        {
+            firstCalls++;
+            if (!finish && firstCalls == 1)
+                throw new TtLifecycleException("FirstOwnerDelete",
+                    new Npgsql.PostgresException("private-first-delete", "ERROR", "ERROR", "53100"));
+            firstResources.Clear();
+            return Task.CompletedTask;
+        }, () => firstResources);
+        TtCleanup RetainSecond() => TtCleanupRegistry.Retain(Guid.NewGuid(), () =>
+        {
+            secondCalls++;
+            if (!finish && secondCalls == 1)
+                throw new TtLifecycleException("SecondOwnerDelete", new IOException("private-second-delete"));
+            secondResources.Clear();
+            return Task.CompletedTask;
+        }, () => secondResources);
+        var second = reverse ? RetainSecond() : null;
+        var first = RetainFirst();
+        second ??= RetainSecond();
+        try
+        {
+            var error = await Assert.ThrowsAsync<TtLifecycleException>(() => Tt.DisposeAsync().WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal((1, 1), (firstCalls, secondCalls));
+            Assert.Contains("FirstOwnerDelete", error.Message);
+            Assert.Contains("SecondOwnerDelete", error.Message);
+            Assert.Contains("53100", error.Message);
+            Assert.Contains(nameof(IOException), error.Message);
+            Assert.DoesNotContain("private-", error.ToString());
+            Assert.Null(error.InnerException);
+            var cleanup = Assert.IsType<TtCleanup>(error.Cleanup);
+            Assert.Equal(new[] { "first-retained-resource", "second-retained-resource" },
+                cleanup.OwnedResourceIds.Order(StringComparer.Ordinal));
+            await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((2, 2), (firstCalls, secondCalls));
+            Assert.Empty(firstResources);
+            Assert.Empty(secondResources);
+            Assert.Empty(cleanup.OwnedResourceIds);
+            await cleanup.RetryCleanupAsync();
+            await Tt.DisposeAsync();
+            Assert.Equal((2, 2), (firstCalls, secondCalls));
+        }
+        finally
+        {
+            finish = true;
+            await first.RetryCleanupAsync();
+            await second.RetryCleanupAsync();
+            await Tt.DisposeAsync();
+        }
+    }
+
+    [Fact]
     public async Task Global_cleanup_bounds_its_wait_and_keeps_pending_work_for_a_later_drain()
     {
         await Tt.DisposeAsync();

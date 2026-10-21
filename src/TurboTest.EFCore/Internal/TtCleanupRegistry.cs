@@ -31,7 +31,6 @@ internal static class TtCleanupRegistry
             catch (Exception error) { return error; }
         }
         var errors = await Task.WhenAll(FailedOwners.Values.Select(ObserveAsync));
-        var first = errors.FirstOrDefault(error => error is not null);
-        if (first is not null) throw first;
+        TtLifecycleException.ThrowIfAny("RetainedCleanup", errors);
     }
 }

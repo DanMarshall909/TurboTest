@@ -9,6 +9,7 @@ public sealed class TtCleanup
     private Func<Task>? _cleanup;
     private Func<IReadOnlyList<string>>? _resources;
     private Task? _attempt;
+    private TtCleanup[]? _members;
 
     public Guid OwnerId { get; }
     public IReadOnlyList<string> OwnedResourceIds
@@ -25,6 +26,38 @@ public sealed class TtCleanup
         OwnerId = ownerId;
         _cleanup = cleanup;
         _resources = resources;
+    }
+
+    internal static TtCleanup? Combine(IEnumerable<TtCleanup?> cleanups)
+    {
+        var supplied = cleanups.OfType<TtCleanup>().ToArray();
+        var owners = supplied.SelectMany(owner => owner.Members()).Where(owner => owner.HasWork).Distinct().ToArray();
+        if (owners.Length == 0) return null;
+        if (owners.Length == 1) return owners[0];
+        var covered = owners.ToHashSet();
+        foreach (var owner in supplied)
+            if (owner.HasWork && covered.SetEquals(owner.Members().Where(member => member.HasWork))) return owner;
+        // A group forwards recovery; only the actual owners retain registry entries.
+        return new TtCleanup(Guid.NewGuid(), async () =>
+        {
+            var pending = Task.WhenAll(owners.Select(owner => owner.RetryCleanupAsync()));
+            try { await pending; }
+            catch when (pending.Exception is not null)
+            {
+                throw new TtLifecycleException("RetainedCleanup", pending.Exception);
+            }
+        }, () => owners.SelectMany(owner => owner.OwnedResourceIds).Distinct(StringComparer.Ordinal).ToArray())
+        { _members = owners };
+    }
+
+    private TtCleanup[] Members()
+    {
+        lock (_gate) return _members ?? [this];
+    }
+
+    private bool HasWork
+    {
+        get { lock (_gate) return _cleanup is not null; }
     }
 
     /// <summary>Shares a pending attempt; a completed failure can be explicitly retried.</summary>
@@ -58,6 +91,7 @@ public sealed class TtCleanup
         {
             _cleanup = null;
             _resources = null;
+            _members = null;
         }
         TtCleanupRegistry.Release(this);
     }

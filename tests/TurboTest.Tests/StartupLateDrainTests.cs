@@ -6,6 +6,54 @@ namespace TurboTest.Tests;
 [Collection("Static lifecycle")]
 public class StartupLateDrainTests
 {
+    [Fact]
+    public async Task Startup_recovery_reports_cancellation_drain_and_retry_failures_together_before_successful_recovery()
+    {
+        var pool = new StartupPool { FailedDeleteAttempts = 2, ThrowCancellationCallback = true };
+        using var cancellation = new CancellationTokenSource();
+        var startup = Tt.InitializeOwnedPoolAsync(pool, new TtOptions(), pool.InitializeAsync,
+            "TestInitialize", cancellation.Token);
+        TtCleanup? cleanup = null;
+        try
+        {
+            await pool.Initialized.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            cancellation.Cancel();
+            var interrupted = await Assert.ThrowsAsync<TtLifecycleException>(() => startup);
+            Assert.Equal("StartupCanceled", interrupted.Stage);
+            cleanup = Assert.IsType<TtCleanup>(interrupted.Cleanup);
+            var retry = cleanup.RetryCleanupAsync();
+            pool.ReleaseInitialization.TrySetResult();
+            await pool.Deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            pool.ReleaseDeletion.TrySetResult();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => retry.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Contains(nameof(IOException), failure.Message);
+            Assert.Contains("RetryHostDelete", failure.Message);
+            Assert.Contains("53100", failure.Message);
+            Assert.Contains("StartupCancellation", failure.Message);
+            Assert.Contains(nameof(NotSupportedException), failure.Message);
+            Assert.DoesNotContain("private-", failure.ToString());
+            Assert.Null(failure.InnerException);
+            Assert.Same(cleanup, failure.Cleanup);
+            Assert.Single(cleanup.OwnedResourceIds);
+            Assert.Equal(2, pool.DeleteAttempts);
+            await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Empty(cleanup.OwnedResourceIds);
+            Assert.Equal((0, 3), (pool.Snapshot.Reserved, pool.DeleteAttempts));
+            await cleanup.RetryCleanupAsync();
+            Assert.Equal(3, pool.DeleteAttempts);
+        }
+        finally
+        {
+            pool.ReleaseInitialization.TrySetResult();
+            pool.ReleaseDeletion.TrySetResult();
+            await Record.ExceptionAsync(() => startup);
+            if (cleanup is not null)
+                for (var attempt = 0; attempt < 3; attempt++)
+                    await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+            await pool.RetryCleanupAsync();
+        }
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
@@ -104,6 +152,8 @@ public class StartupLateDrainTests
         internal TaskCompletionSource ReleaseDeletion { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         internal int DeleteAttempts { get; private set; }
         internal bool FailInitialization { get; init; }
+        internal int FailedDeleteAttempts { get; init; } = 1;
+        internal bool ThrowCancellationCallback { get; init; }
         public TtPoolSnapshot Snapshot => _slots.Snapshot;
         public TtResourceBudget Budget => TtResourceBudget.Create(new TtOptions { PoolSize = 1 }, true);
         public IReadOnlyList<string> OwnedResourceIds => Snapshot.Reserved == 0 ? [] : [Snapshot.OwnerId.ToString("N")];
@@ -114,16 +164,21 @@ public class StartupLateDrainTests
                 async _ =>
                 {
                     var attempt = ++DeleteAttempts;
-                    if (attempt == 2) return;
-                    if (attempt > 2) throw new InvalidOperationException("Deletion exceeded its finite oracle.");
+                    if (attempt > FailedDeleteAttempts + 1) throw new InvalidOperationException("Deletion exceeded its finite oracle.");
+                    if (attempt > FailedDeleteAttempts) return;
+                    if (attempt > 1)
+                        throw new TtLifecycleException("RetryHostDelete",
+                            new Npgsql.PostgresException("private-retry-detail", "ERROR", "ERROR", "53100"));
                     Deleting.TrySetResult();
                     await ReleaseDeletion.Task;
                     throw new IOException("private-drain-detail");
                 });
         }
 
-        internal async Task InitializeAsync(CancellationToken _)
+        internal async Task InitializeAsync(CancellationToken token)
         {
+            using var registration = ThrowCancellationCallback
+                ? token.Register(() => throw new NotSupportedException("private-cancel-detail")) : default;
             await _slots.WarmAsync(1, default);
             Initialized.TrySetResult();
             await ReleaseInitialization.Task;

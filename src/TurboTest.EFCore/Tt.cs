@@ -146,8 +146,7 @@ public static class Tt
                         try { await pool.RetryCleanupAsync(); }
                         catch (Exception retryError)
                         {
-                            if (failures.Count == 0) throw;
-                            throw new AggregateException(failures.Append(retryError));
+                            failures.Add(retryError);
                         }
                     }
                     if (cancellationFailure is not null && !cancellationFailureReported)
@@ -188,19 +187,19 @@ public static class Tt
         await OwnerGate.WaitAsync();
         try
         {
-            Exception? first = null;
+            var failures = new List<Exception>();
             foreach (var owner in Owners.Values)
             {
                 try { await owner.DisposeAsync(); }
-                catch (Exception error) { first ??= error; }
+                catch (Exception error) { failures.Add(error); }
             }
             Owners.Clear();
             TimeSpan timeout;
             lock (ConfigurationGate) timeout = _options.DrainTimeout;
             try { await TtCleanupRegistry.DrainAsync(timeout); }
-            catch (Exception error) { first ??= error; }
+            catch (Exception error) { failures.Add(error); }
             lock (ConfigurationGate) _started = false;
-            if (first is not null) throw first;
+            TtLifecycleException.ThrowIfAny("StaticDrain", failures);
         }
         finally { OwnerGate.Release(); }
     }

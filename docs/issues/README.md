@@ -9,7 +9,7 @@ Source code and historical evidence remain in this local checkout; the GitHub
 repository currently hosts the issues and linked project. This checkout still
 uses local commits and has no configured code remote.
 
-## Current status — 2026-10-16
+## Current status — 2026-10-22
 
 All ten implementation tickets, TT-001 through TT-010, are Resolved. Independent
 completion review passed for the final adaptive controller and performance work.
@@ -30,7 +30,7 @@ The table preserves implementation order and prerequisite identities.
 
 ## Verification and performance
 
-The current candidate passes all **435 tests**, including **268 fast checks**,
+The current candidate passes all **443 tests**, including **275 fast checks**,
 without failures or skips. Solution and separate DynamicScalingExample builds
 pass without warnings/errors. Final receipts bind identical compiler/test inputs;
 independent completion review passed. Earlier ticket evidence retains

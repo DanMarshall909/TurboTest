@@ -17,26 +17,42 @@ public sealed class TtLifecycleException : InvalidOperationException
         SqlState = cause is TtLifecycleException lifecycle ? lifecycle.SqlState : (cause as PostgresException)?.SqlState;
         _diagnostic = cleanupFailure is null ? Diagnostic(cause)
             : $"{Diagnostic(cause)}; {(cleanupFailure as TtLifecycleException)?.Stage ?? "Discard"}:{Diagnostic(cleanupFailure)}";
-        Cleanup = cleanup ?? (cause as TtLifecycleException)?.Cleanup ?? (cleanupFailure as TtLifecycleException)?.Cleanup;
+        Cleanup = TtCleanup.Combine(new[] { cleanup }.Concat(Cleanups(cause)).Concat(Cleanups(cleanupFailure)));
     }
 
     internal TtLifecycleException WithCleanupFailure(Exception error) => new(Stage, this, error);
 
     internal TtLifecycleException WithCleanup(TtCleanup cleanup) => new(this, cleanup);
 
+    internal static void ThrowIfAny(string stage, IEnumerable<Exception?> errors)
+    {
+        var failures = errors.OfType<Exception>().ToArray();
+        if (failures.Length == 1)
+            System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(failures[0]).Throw();
+        if (failures.Length > 1)
+            throw new TtLifecycleException(stage, new AggregateException(failures));
+    }
+
     private TtLifecycleException(TtLifecycleException cause, TtCleanup cleanup) : base(cause.Message)
     {
         Stage = cause.Stage;
         SqlState = cause.SqlState;
         _diagnostic = cause._diagnostic;
-        Cleanup = cleanup;
+        Cleanup = TtCleanup.Combine([cleanup, cause.Cleanup]);
+    }
+
+    private static IEnumerable<TtCleanup> Cleanups(Exception? error)
+    {
+        if (error is TtLifecycleException { Cleanup: { } cleanup }) yield return cleanup;
+        if (error is AggregateException aggregate)
+            foreach (var inner in aggregate.InnerExceptions)
+                foreach (var owner in Cleanups(inner)) yield return owner;
     }
 
     private static string Diagnostic(Exception error) => error switch
     {
-        TtLifecycleException lifecycle => lifecycle._diagnostic,
-        AggregateException aggregate => $"AggregateException[{string.Join(", ", aggregate.InnerExceptions.Select(error =>
-            error is TtLifecycleException failure ? $"{failure.Stage}:{failure._diagnostic}" : Diagnostic(error)))}]",
+        TtLifecycleException lifecycle => $"{lifecycle.Stage}:{lifecycle._diagnostic}",
+        AggregateException aggregate => $"AggregateException[{string.Join(", ", aggregate.InnerExceptions.Select(Diagnostic))}]",
         PostgresException postgres => postgres.SqlState,
         _ => error.GetType().Name
     };

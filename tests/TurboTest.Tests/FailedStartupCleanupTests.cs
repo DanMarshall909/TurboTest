@@ -85,10 +85,15 @@ public class FailedStartupCleanupTests
     {
         var prefix = $"tt-startup-callback-{Guid.NewGuid():N}";
         CancellationTokenRegistration registration = default;
+        var callbacks = 0;
         var definition = new TtBaselineDefinition<TestDbContext>("callback-failure-v1", TtSchemaInitialization.EnsureCreated,
             (_, token) =>
             {
-                registration = token.Register(() => throw new IOException("private-cancellation-detail"));
+                registration = token.Register(() =>
+                {
+                    Interlocked.Increment(ref callbacks);
+                    throw new IOException("private-cancellation-detail");
+                });
                 throw new InvalidOperationException("private-seed-detail");
             });
         using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
@@ -111,10 +116,15 @@ public class FailedStartupCleanupTests
                 cleanup = Assert.IsType<TtCleanup>(lifecycle.Cleanup);
                 var original = Assert.Single(await OwnedAsync()).ID;
                 Assert.Equal(new[] { original }, cleanup.OwnedResourceIds);
-                await Assert.ThrowsAsync<TtLifecycleException>(() => cleanup.RetryCleanupAsync());
+                var retryFailure = await Assert.ThrowsAsync<TtLifecycleException>(() => cleanup.RetryCleanupAsync());
+                Assert.Contains("SlotDispose", retryFailure.Message);
+                Assert.Contains("StartupCancellation", retryFailure.Message);
+                Assert.Contains(nameof(IOException), retryFailure.Message);
+                Assert.DoesNotContain("private-", retryFailure.ToString());
+                Assert.Null(retryFailure.InnerException);
+                Assert.Same(cleanup, retryFailure.Cleanup);
+                Assert.Equal(new[] { original }, cleanup.OwnedResourceIds);
                 failDelete = false;
-                var cancellationFailure = await Assert.ThrowsAsync<TtLifecycleException>(() => cleanup.RetryCleanupAsync());
-                Assert.Equal("StartupCancellation", cancellationFailure.Stage);
                 await cleanup.RetryCleanupAsync();
                 Assert.Empty(cleanup.OwnedResourceIds);
             }
@@ -123,6 +133,7 @@ public class FailedStartupCleanupTests
                 Assert.Null(lifecycle.Cleanup);
                 Assert.Contains(nameof(AggregateException), lifecycle.Message);
             }
+            Assert.Equal(1, callbacks);
             Assert.Empty(await OwnedAsync());
         }
         finally

@@ -33,3 +33,5 @@ This file retains the original investigation and evidence provenance. Its `open/
 - **2026-10-15 — Opened:** Classified post-session evidence; accepted follow-up is a focused repair or bounded investigation under the criteria above. No production change is made by this review.
 
 - **2026-10-15 — Migrated:** The user requested GitHub Issues and a Kanban project for all remaining work. GitHub now owns live planning and completion; this record retains durable investigation evidence. Completed repository tickets were left unchanged.
+
+- **2026-10-22 — Ownership slice:** [Source-bound evidence](../../evidence/2026-10-22/cleanup-ownership/manifest.json) records multi-owner recovery, explicit/causal/secondary composition, nested safe stage preservation and concurrent startup cancellation/drain/retry failures. The bounded slice has its independent verdict in `completion.json`. This investigation remains open for the remaining acceptance criteria and linked questions; GitHub owns live status.

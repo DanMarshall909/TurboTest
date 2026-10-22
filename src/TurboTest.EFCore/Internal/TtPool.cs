@@ -34,7 +34,6 @@ internal sealed class TtPool : ITtDatabasePool
     private readonly bool _administratorHost;
     private readonly SemaphoreSlim _initSemaphore = new(1, 1);
     private bool _initialized;
-    private bool _disposed;
 
     public IReadOnlyList<string> OwnedResourceIds => _ownedContainers.Keys.Concat(_pendingCreates.Keys).Order().ToArray();
     public TtPoolSnapshot Snapshot => _slots.Snapshot;
@@ -315,12 +314,9 @@ internal sealed class TtPool : ITtDatabasePool
 
     public async ValueTask DisposeAsync()
     {
-        if (_disposed) return;
-
         await _slots.RetryCleanupAsync();
         _dockerClient?.Dispose();
         _initSemaphore?.Dispose();
-        _disposed = true;
     }
 
     private void ApplyAutoResourceAllocation()

@@ -1,5 +1,4 @@
 using System.Security.Cryptography;
-using System.Collections.Concurrent;
 using System.Transactions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -71,7 +70,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     private readonly TtAdaptiveConfiguration? _adaptive;
     private readonly TtCapacityMonitor? _monitor;
     private readonly TtAdministratorConnections _administrators;
-    private readonly ConcurrentDictionary<string, Slot> _owned = new();
+    private readonly object _lifecycleGate = new();
     private NpgsqlDataSource? _administrator;
     private BaselineIdentity? _identity;
     private TtBaselineSnapshot? _snapshot;
@@ -205,7 +204,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
             await administrative.Connection.ExecuteNonQueryAsync($"ALTER DATABASE {Quote(_template)} ALLOW_CONNECTIONS false");
         await _slots.WarmAsync(_adaptive?.Startup ?? _options.StartupWarmDatabases ?? _options.PoolSize, cancellationToken);
         cancellationToken.ThrowIfCancellationRequested();
-        lock (_owned)
+        lock (_lifecycleGate)
         {
             ObjectDisposedException.ThrowIf(_stopping, this);
             _monitor?.Start();
@@ -258,7 +257,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
 
     public void StopAcceptingWork()
     {
-        lock (_owned)
+        lock (_lifecycleGate)
         {
             _stopping = true;
             _slots.StopAcceptingWork();
@@ -269,9 +268,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     private Slot ReserveSlot(Guid _)
     {
         var name = $"{_options.DatabaseName}_slot_{Guid.NewGuid():N}";
-        var slot = new Slot(name, CreateWorkloadSource(name));
-        _owned.TryAdd(name, slot);
-        return slot;
+        return new Slot(name, CreateWorkloadSource(name));
     }
 
     private async Task PrepareSlotAsync(Slot slot, CancellationToken cancellationToken, Action<TimeSpan>? observeValidation = null)
@@ -472,12 +469,11 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         }
         if (_dropDatabase is not null) await _dropDatabase(connection, slot.Name);
         else await connection.ExecuteNonQueryAsync($"DROP DATABASE IF EXISTS {Quote(slot.Name)} WITH (FORCE)");
-        _owned.TryRemove(slot.Name, out _);
     }
 
     public ValueTask DisposeAsync()
     {
-        lock (_owned)
+        lock (_lifecycleGate)
         {
             _disposal ??= DisposeCoreAsync();
             return new ValueTask(_disposal);
@@ -486,7 +482,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
 
     public Task RetryCleanupAsync()
     {
-        lock (_owned)
+        lock (_lifecycleGate)
         {
             if (_disposal is null || _disposal.IsFaulted)
                 _disposal = DisposeCoreAsync();
@@ -529,21 +525,13 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
             catch (Exception error) { first ??= error; }
             // Slot drain cancels admitted lifecycle work before the monitor joins it.
             if (_monitor is not null) await _monitor.JoinAsync();
-            foreach (var slot in _owned.Values)
-            {
-                try { await slot.Source.DisposeAsync(); }
-                catch (Exception error) { first ??= error; }
-            }
             if (first is null)
             {
                 try { await _host.DisposeAsync(); }
                 catch (Exception error) { first = error; }
             }
             if (first is null)
-            {
-                _owned.Clear();
                 _rowReset = null;
-            }
             var failures = _monitor?.TakeFailures().ToList() ?? [];
             if (first is not null) failures.Insert(0, first);
             if (failures.Count > 0)

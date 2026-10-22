@@ -1,5 +1,6 @@
 using Npgsql;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Runtime.CompilerServices;
 using TurboTest.EFCore;
 using TurboTest.EFCore.Internal;
@@ -10,6 +11,79 @@ namespace TurboTest.Tests;
 public class FactoryBackpressureTests
 {
     private static CleanupLifetimeProbe? NextProbe;
+    private static ConfigurationCancellationProbe? NextConfigurationProbe;
+
+    [Fact]
+    public async Task Cancellation_from_context_configuration_prevents_schema_initialization_and_discards_the_resource()
+    {
+        using var caller = new CancellationTokenSource();
+        var probe = new ConfigurationCancellationProbe(caller);
+        await using var pool = new BoundedPool();
+        await using var factory = new TtFactory<CancelingConfigurationContext>(pool,
+            new TtOptions { AutoMigrate = true }, ownsPool: true);
+        NextConfigurationProbe = probe;
+        try
+        {
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => factory.CreateLeaseAsync(
+                cancellationToken: caller.Token).WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.True(caller.IsCancellationRequested);
+            Assert.Equal(1, probe.Configurations);
+            Assert.True(probe.SchemaInitializations == 0, "Schema initialization ran after configuration canceled acquisition.");
+            Assert.Equal((1, 1, 0), (probe.Disposals, pool.Deleted, pool.Snapshot.Reserved));
+            Assert.Empty(pool.OwnedResourceIds);
+            await factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((1, 1), (probe.Disposals, pool.Deleted));
+        }
+        finally { NextConfigurationProbe = null; }
+    }
+
+    private sealed class ConfigurationCancellationProbe(CancellationTokenSource caller)
+    {
+        internal CancellationTokenSource Caller { get; } = caller;
+        internal int Configurations;
+        internal int SchemaInitializations;
+        internal int Disposals;
+    }
+
+    public sealed class CancelingConfigurationContext : DbContext
+    {
+        private readonly ConfigurationCancellationProbe _probe;
+        private DatabaseFacade? _database;
+
+        public CancelingConfigurationContext(DbContextOptions<CancelingConfigurationContext> options) : base(options)
+        {
+            _probe = NextConfigurationProbe ?? throw new InvalidOperationException("Missing configuration cancellation probe.");
+            NextConfigurationProbe = null;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        {
+            if (++_probe.Configurations > 1) throw new InvalidOperationException("Configuration was repeated.");
+            _probe.Caller.Cancel();
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>().HasKey(user => user.Id);
+        }
+
+        public override DatabaseFacade Database => _database ??= new ObservingDatabaseFacade(this, _probe);
+
+        private sealed class ObservingDatabaseFacade(DbContext context, ConfigurationCancellationProbe probe) : DatabaseFacade(context)
+        {
+            public override Task<bool> EnsureCreatedAsync(CancellationToken cancellationToken = default)
+            {
+                probe.SchemaInitializations++;
+                return base.EnsureCreatedAsync(cancellationToken);
+            }
+        }
+
+        public override ValueTask DisposeAsync()
+        {
+            if (++_probe.Disposals > 1) throw new InvalidOperationException("Canceled context cleanup was repeated.");
+            return base.DisposeAsync();
+        }
+    }
 
     [Fact]
     public async Task Repeated_successful_leases_release_completed_contexts_and_work_while_the_factory_remains_usable()

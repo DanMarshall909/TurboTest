@@ -137,6 +137,18 @@ public class PreparedConfigurationTests
     }
 
     [Fact]
+    public async Task Zero_slot_capacity_is_reported_before_default_adaptive_constraints()
+    {
+        var definition = new TtBaselineDefinition<TestDbContext>("zero-adaptive-v1", TtSchemaInitialization.EnsureCreated);
+        var failure = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => Tt.CreateFactoryAsync(definition, options =>
+        {
+            options.PoolSize = 0;
+            options.EnableDynamicScaling = true;
+        }));
+        Assert.Equal(nameof(TtOptions.PoolSize), failure.ParamName);
+    }
+
+    [Fact]
     public async Task Image_preparation_receives_the_configured_image()
     {
         var requested = new List<string>();

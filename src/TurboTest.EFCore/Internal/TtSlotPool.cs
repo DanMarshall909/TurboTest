@@ -360,7 +360,6 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
             waiter.CompletedAt = _clock.GetTimestamp();
             waiter.Outcome = "Canceled";
             waiter.Completion.TrySetCanceled(waiter.Token);
-            waiter.Cancellation.Unregister();
             ObserveDemand();
         }
     }

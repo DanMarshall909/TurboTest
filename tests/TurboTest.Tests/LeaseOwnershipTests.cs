@@ -7,6 +7,59 @@ namespace TurboTest.Tests;
 
 public class LeaseOwnershipTests
 {
+    [Fact]
+    public async Task Reentrant_return_observer_sees_the_published_pending_lease_drain_even_when_return_completes_inline()
+    {
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        using var release = new ManualResetEventSlim();
+        var context = new RecordingContext(new(), "primary");
+        var returns = 0;
+        var observations = 0;
+        Task? nested = null;
+        var nestedWasPending = false;
+        TtLease<RecordingContext>? lease = null;
+        lease = new TtLease<RecordingContext>(context, () => throw new InvalidOperationException(),
+            _ => throw new InvalidOperationException(), () =>
+            {
+                if (Interlocked.Increment(ref returns) > 2)
+                    throw new InvalidOperationException("Lease return exceeded the finite reentry oracle.");
+                return Task.CompletedTask;
+            }, observeReturn: (_, _) =>
+            {
+                if (Interlocked.Increment(ref observations) != 1) return;
+                nested = lease!.DisposeAsync().AsTask();
+                nestedWasPending = !nested.IsCompleted;
+                entered.TrySetResult();
+                release.Wait();
+            });
+        Task<Task> request = Task.Run(async () =>
+        {
+            var attempt = lease.DisposeAsync().AsTask();
+            await attempt;
+            return attempt;
+        });
+        try
+        {
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((1, 1), (returns, observations));
+            Assert.True(nestedWasPending);
+            Assert.False(nested!.IsCompleted);
+            Assert.Throws<ObjectDisposedException>(() => _ = lease.Context);
+            release.Set();
+            var outer = await request.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Same(outer, nested);
+            Assert.Same(outer, lease.DisposeAsync().AsTask());
+            Assert.Equal((1, 1), (returns, observations));
+        }
+        finally
+        {
+            release.Set();
+            await Record.ExceptionAsync(async () => { await request; });
+            if (nested is not null) await Record.ExceptionAsync(() => nested);
+            await context.DisposeAsync();
+        }
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]

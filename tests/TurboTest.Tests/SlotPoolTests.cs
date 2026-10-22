@@ -6,6 +6,51 @@ namespace TurboTest.Tests;
 public class SlotPoolTests
 {
     [Fact]
+    public async Task Reentrant_deletion_observes_one_published_pending_drain_and_preserves_its_reservation()
+    {
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var attempts = 0;
+        var confirmed = 0;
+        Task? nested = null;
+        TtSlotPool<object>? owner = null;
+        owner = new TtSlotPool<object>(1, 1, _ => new object(), (_, _) => Task.CompletedTask, async _ =>
+        {
+            var attempt = Interlocked.Increment(ref attempts);
+            if (attempt > 2) throw new InvalidOperationException("Deletion exceeded the finite reentry oracle.");
+            if (attempt == 1)
+            {
+                nested = owner!.DisposeAsync().AsTask();
+                entered.TrySetResult();
+            }
+            await release.Task;
+            Interlocked.Increment(ref confirmed);
+        });
+        var reservation = await owner.AcquireAsync();
+        await owner.ReturnAsync(reservation, (_, _) => Task.CompletedTask);
+        Assert.Equal(1, owner.Snapshot.Ready);
+        var outer = owner.DisposeAsync().AsTask();
+        try
+        {
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((1, 0, 1), (attempts, confirmed, owner.Snapshot.Reserved));
+            Assert.Same(outer, nested);
+            Assert.Same(outer, owner.DisposeAsync().AsTask());
+            Assert.False(outer.IsCompleted);
+            release.TrySetResult();
+            await outer.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((1, 1, 0), (attempts, confirmed, owner.Snapshot.Reserved));
+        }
+        finally
+        {
+            release.TrySetResult();
+            await Record.ExceptionAsync(() => outer);
+            if (nested is not null) await Record.ExceptionAsync(() => nested);
+            await owner.DisposeAsync();
+        }
+    }
+
+    [Fact]
     public async Task Four_blocked_preparations_reserve_capacity_before_creation_and_the_fifth_request_waits()
     {
         var begun = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);

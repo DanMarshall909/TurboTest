@@ -4,6 +4,84 @@ namespace TurboTest.Tests;
 
 public class CapacityMonitorTests
 {
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Repeated_stop_and_join_keep_cancellation_alive_until_reader_and_callbacks_settle_then_release_it(
+        bool throwingCallback)
+    {
+        var readerEntered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var releaseReader = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var callbackEntered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        using var releaseCallback = new ManualResetEventSlim();
+        var callbackFailure = new IOException("Private reader cancellation failure.");
+        CancellationToken owned = default;
+        CancellationTokenRegistration registration = default;
+        WaitHandle? handle = null;
+        var ticks = 0;
+        var callbackCalls = 0;
+        var monitor = new TtCapacityMonitor(TimeSpan.FromHours(1), TimeProvider.System, async token =>
+        {
+            owned = token;
+            handle = token.WaitHandle;
+            registration = token.Register(() =>
+            {
+                Interlocked.Increment(ref callbackCalls);
+                callbackEntered.TrySetResult();
+                releaseCallback.Wait();
+                if (throwingCallback) throw callbackFailure;
+            });
+            readerEntered.TrySetResult();
+            await releaseReader.Task;
+            return null;
+        }, _ => { ticks++; return Task.CompletedTask; });
+        monitor.Start();
+        try
+        {
+            await readerEntered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            AssertSourceAlive();
+            monitor.Stop();
+            var firstJoin = monitor.JoinAsync();
+            monitor.Stop();
+            var secondJoin = monitor.JoinAsync();
+            await callbackEntered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            AssertSourceAlive();
+            Assert.False(monitor.Completion.IsCompleted);
+            releaseReader.TrySetResult();
+            await monitor.Completion.WaitAsync(TimeSpan.FromSeconds(2));
+            AssertSourceAlive();
+            Assert.False(firstJoin.IsCompleted);
+            Assert.False(secondJoin.IsCompleted);
+            releaseCallback.Set();
+            await Task.WhenAll(firstJoin, secondJoin).WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.True(handle!.SafeWaitHandle.IsClosed);
+            Assert.Throws<ObjectDisposedException>(() => owned.WaitHandle);
+            Assert.Equal((0, 1), (ticks, callbackCalls));
+            var failures = new AggregateException(monitor.TakeFailures()).Flatten().InnerExceptions;
+            if (throwingCallback) Assert.Same(callbackFailure, Assert.Single(failures));
+            else Assert.Empty(failures);
+            monitor.Stop();
+            await monitor.JoinAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Empty(monitor.TakeFailures());
+            Assert.Equal(1, callbackCalls);
+        }
+        finally
+        {
+            releaseReader.TrySetResult();
+            releaseCallback.Set();
+            monitor.Stop();
+            await monitor.JoinAsync();
+            await Record.ExceptionAsync(() => monitor.Completion);
+            registration.Dispose();
+        }
+
+        void AssertSourceAlive()
+        {
+            Assert.Same(handle, owned.WaitHandle);
+            Assert.False(handle!.SafeWaitHandle.IsClosed);
+        }
+    }
+
     [Fact]
     public async Task Stop_cancels_the_owned_reader_and_joins_it_without_creating_new_tick_work()
     {

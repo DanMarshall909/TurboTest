@@ -7,6 +7,131 @@ namespace TurboTest.Tests;
 public class StartupLateDrainTests
 {
     [Fact]
+    public async Task Successful_initialization_releases_its_cancellation_handle_when_actual_work_finishes()
+    {
+        var pool = new StartupPool { FailedDeleteAttempts = 0 };
+        using var caller = new CancellationTokenSource();
+        CancellationToken owned = default;
+        WaitHandle? handle = null;
+        var startup = Tt.InitializeOwnedPoolAsync(pool, new TtOptions(), token =>
+        {
+            owned = token;
+            handle = token.WaitHandle;
+            return pool.InitializeAsync(token);
+        }, "TestInitialize", caller.Token);
+        try
+        {
+            await pool.Initialized.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Same(handle, owned.WaitHandle);
+            Assert.False(handle!.SafeWaitHandle.IsClosed);
+            Assert.False(startup.IsCompleted);
+            pool.ReleaseInitialization.TrySetResult();
+            await startup.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.True(handle.SafeWaitHandle.IsClosed);
+            Assert.Throws<ObjectDisposedException>(() => owned.WaitHandle);
+            Assert.False(caller.IsCancellationRequested);
+            Assert.False(caller.Token.WaitHandle.SafeWaitHandle.IsClosed);
+        }
+        finally
+        {
+            pool.ReleaseInitialization.TrySetResult();
+            await Record.ExceptionAsync(() => startup);
+            await pool.DisposeAsync();
+        }
+    }
+
+    [Theory]
+    [InlineData(false, false)]
+    [InlineData(false, true)]
+    [InlineData(true, false)]
+    [InlineData(true, true)]
+    public async Task Interrupted_initialization_keeps_cancellation_alive_for_owned_work_and_releases_it_after_drain(
+        bool callerCancellation, bool failedDeletion)
+    {
+        var pool = new StartupPool { GateDeletion = true, FailedDeleteAttempts = failedDeletion ? 1 : 0 };
+        using var caller = new CancellationTokenSource();
+        using var releaseCallback = new ManualResetEventSlim();
+        var callbackEntered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var initializationFinished = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        CancellationToken owned = default;
+        CancellationTokenRegistration registration = default;
+        WaitHandle? handle = null;
+        var callbackCalls = 0;
+        var startup = Tt.InitializeOwnedPoolAsync(pool, new TtOptions
+        {
+            StartupTimeout = callerCancellation ? TimeSpan.FromSeconds(10) : TimeSpan.FromMilliseconds(100)
+        }, async token =>
+        {
+            owned = token;
+            handle = token.WaitHandle;
+            registration = token.Register(() =>
+            {
+                Interlocked.Increment(ref callbackCalls);
+                callbackEntered.TrySetResult();
+                releaseCallback.Wait();
+            });
+            await pool.InitializeAsync(token);
+            initializationFinished.TrySetResult();
+        }, "TestInitialize", caller.Token);
+        TtCleanup? cleanup = null;
+        try
+        {
+            await pool.Initialized.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            if (callerCancellation) caller.Cancel();
+            var interrupted = await Assert.ThrowsAsync<TtLifecycleException>(() => startup.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal(callerCancellation ? "StartupCanceled" : "StartupTimeout", interrupted.Stage);
+            cleanup = Assert.IsType<TtCleanup>(interrupted.Cleanup);
+            await callbackEntered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            AssertSourceAlive();
+            var pending = cleanup.RetryCleanupAsync();
+            pool.ReleaseInitialization.TrySetResult();
+            await initializationFinished.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            AssertSourceAlive();
+            Assert.False(pending.IsCompleted);
+            Assert.False(pool.Deleting.Task.IsCompleted);
+            releaseCallback.Set();
+            await pool.Deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.False(pending.IsCompleted);
+            Assert.Single(cleanup.OwnedResourceIds);
+            pool.ReleaseDeletion.TrySetResult();
+            if (failedDeletion)
+            {
+                var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(2)));
+                Assert.Contains(nameof(IOException), failure.Message);
+                Assert.Same(cleanup, failure.Cleanup);
+                await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            }
+            else await pending.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.True(handle!.SafeWaitHandle.IsClosed);
+            Assert.Throws<ObjectDisposedException>(() => owned.WaitHandle);
+            Assert.Equal((1, failedDeletion ? 2 : 1, 0), (callbackCalls, pool.DeleteAttempts, pool.Snapshot.Reserved));
+            Assert.Empty(cleanup.OwnedResourceIds);
+            Assert.False(caller.Token.WaitHandle.SafeWaitHandle.IsClosed);
+        }
+        finally
+        {
+            pool.ReleaseInitialization.TrySetResult();
+            releaseCallback.Set();
+            pool.ReleaseDeletion.TrySetResult();
+            var failure = await Record.ExceptionAsync(() => startup);
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+            registration.Dispose();
+            await pool.RetryCleanupAsync();
+        }
+
+        void AssertSourceAlive()
+        {
+            Assert.Same(handle, owned.WaitHandle);
+            Assert.False(handle!.SafeWaitHandle.IsClosed);
+        }
+    }
+
+    [Fact]
     public async Task Startup_recovery_reports_cancellation_drain_and_retry_failures_together_before_successful_recovery()
     {
         var pool = new StartupPool { FailedDeleteAttempts = 2, ThrowCancellationCallback = true };
@@ -154,6 +279,7 @@ public class StartupLateDrainTests
         internal bool FailInitialization { get; init; }
         internal int FailedDeleteAttempts { get; init; } = 1;
         internal bool ThrowCancellationCallback { get; init; }
+        internal bool GateDeletion { get; init; }
         public TtPoolSnapshot Snapshot => _slots.Snapshot;
         public TtResourceBudget Budget => TtResourceBudget.Create(new TtOptions { PoolSize = 1 }, true);
         public IReadOnlyList<string> OwnedResourceIds => Snapshot.Reserved == 0 ? [] : [Snapshot.OwnerId.ToString("N")];
@@ -165,12 +291,15 @@ public class StartupLateDrainTests
                 {
                     var attempt = ++DeleteAttempts;
                     if (attempt > FailedDeleteAttempts + 1) throw new InvalidOperationException("Deletion exceeded its finite oracle.");
+                    if (attempt == 1 && (GateDeletion || FailedDeleteAttempts > 0))
+                    {
+                        Deleting.TrySetResult();
+                        await ReleaseDeletion.Task;
+                    }
                     if (attempt > FailedDeleteAttempts) return;
                     if (attempt > 1)
                         throw new TtLifecycleException("RetryHostDelete",
                             new Npgsql.PostgresException("private-retry-detail", "ERROR", "ERROR", "53100"));
-                    Deleting.TrySetResult();
-                    await ReleaseDeletion.Task;
                     throw new IOException("private-drain-detail");
                 });
         }

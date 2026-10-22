@@ -6,6 +6,18 @@ namespace TurboTest.Tests;
 public class CapacityPolicyTests
 {
     [Fact]
+    public void Evaluation_starts_the_pressure_window_from_its_current_snapshot()
+    {
+        var clock = new ManualPoolClock();
+        var policy = new TtCapacityPolicy(2, 4, TimeSpan.FromSeconds(5), clock);
+        var first = Decide(policy, clock, Busy());
+        Assert.Equal((2, "GrowthStabilizing"), (first.Target, first.Reason));
+        clock.Advance(TimeSpan.FromSeconds(5));
+        var next = Decide(policy, clock, Busy());
+        Assert.Equal((2, 3, "QueuePressure"), (next.PreviousTarget, next.Target, next.Reason));
+    }
+
+    [Fact]
     public void Shared_maintenance_permits_veto_growth_when_returns_wait_for_the_same_cleanup_budget()
     {
         var clock = new ManualPoolClock();

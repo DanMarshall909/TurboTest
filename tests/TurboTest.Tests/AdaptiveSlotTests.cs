@@ -8,6 +8,36 @@ public class AdaptiveSlotTests
     private sealed record Resource(Guid Id, int Number);
 
     [Fact]
+    public async Task Deferred_shrink_maintenance_counts_leased_commitments_toward_the_remaining_warm_target()
+    {
+        var clock = new ManualPoolClock();
+        var policy = new TtCapacityPolicy(3, 3, TimeSpan.FromSeconds(5), clock,
+            shrinkWindow: TimeSpan.FromSeconds(5), cooldown: TimeSpan.Zero);
+        var parked = new List<Guid>();
+        await using var owner = new TtSlotPool<Resource>(3, 1, id => new Resource(id, 0),
+            (_, _) => Task.CompletedTask, _ => Task.CompletedTask,
+            rewarm: (_, _) => Task.CompletedTask, timeProvider: clock, capacityPolicy: policy);
+        await owner.WarmAsync(3, default);
+        var leased = await owner.AcquireAsync();
+        clock.Advance(TimeSpan.FromSeconds(5));
+
+        // A policy-only tick can defer physical parking to explicit maintenance.
+        var shrink = await owner.TickCapacityAsync(null);
+        Assert.Equal((3, 2, "SpareCapacity"), (shrink.PreviousTarget, shrink.Target, shrink.Reason));
+        Assert.Equal((2, 1, 0), (owner.Snapshot.Ready, owner.Snapshot.Leased, owner.Snapshot.Parked));
+        await owner.ParkIdleAsync(0, (resource, _) =>
+        {
+            parked.Add(resource.Id);
+            return Task.CompletedTask;
+        });
+
+        Assert.Single(parked);
+        Assert.DoesNotContain(leased.Value.Id, parked);
+        Assert.Equal((2, 1, 1, 1), (owner.Snapshot.WarmTarget, owner.Snapshot.Ready,
+            owner.Snapshot.Leased, owner.Snapshot.Parked));
+    }
+
+    [Fact]
     public async Task Failed_background_growth_retains_its_terminal_error_when_the_queued_caller_cancels()
     {
         var clock = new ManualPoolClock();

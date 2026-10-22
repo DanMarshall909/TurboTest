@@ -296,10 +296,12 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         }
     }
 
-    // Caller holds the ledger lock. Reuse is claimed before considering fresh capacity.
+    // Caller holds the ledger lock and rejects terminal state before admission.
+    // Parking completion has no waiters after terminal state clears the queue.
+    // Reuse is claimed before considering fresh capacity.
     private Reservation? ClaimParked(bool replenish = false)
     {
-        if (_rewarm is null || _closed || _stopping || _failure is not null || (!replenish && _waiters.Count == 0) || !CanWarm()) return null;
+        if (_rewarm is null || (!replenish && _waiters.Count == 0) || !CanWarm()) return null;
         var reservation = _owned.FirstOrDefault(item => item.Value == State.Parked).Key;
         if (reservation is null) return null;
         reservation.WarmCommitted = true;

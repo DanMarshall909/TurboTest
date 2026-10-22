@@ -7,6 +7,93 @@ namespace TurboTest.Tests;
 public class SlotPreparationDrainTests
 {
     [Fact]
+    public async Task A_retry_queued_before_shutdown_cannot_create_another_resource_after_closure()
+    {
+        var clock = new HeldRetryClock();
+        var created = new ConcurrentQueue<Guid>();
+        var deleted = new ConcurrentQueue<Guid>();
+        var reservations = 0;
+        var preparations = 0;
+        var owner = new TtSlotPool<Resource>(1, 1, _ =>
+        {
+            if (Interlocked.Increment(ref reservations) > 2)
+                throw new InvalidOperationException("Closed preparation invoked the resource factory again.");
+            var resource = new Resource(Guid.NewGuid());
+            created.Enqueue(resource.Id);
+            return resource;
+        }, (_, _) => Interlocked.Increment(ref preparations) == 1 ? Task.CompletedTask
+            : Task.FromException(new IOException("private-replacement-preparation")), resource =>
+        {
+            if (deleted.Contains(resource.Id)) throw new InvalidOperationException("Confirmed deletion was repeated.");
+            deleted.Enqueue(resource.Id);
+            return Task.CompletedTask;
+        }, timeProvider: clock);
+        Task<TtSlotPool<Resource>.Reservation>? waiting = null;
+        Task? closing = null;
+        try
+        {
+            await Task.Run(() =>
+            {
+                var previous = SynchronizationContext.Current;
+                var continuations = new QueuedSynchronizationContext();
+                Action? retry = null;
+                SynchronizationContext.SetSynchronizationContext(continuations);
+                try
+                {
+                    var acquiring = owner.AcquireAsync();
+                    continuations.RunUntil(acquiring);
+                    var original = acquiring.GetAwaiter().GetResult();
+                    waiting = owner.AcquireAsync();
+                    var returning = owner.ReturnAsync(original, (_, _) =>
+                        Task.FromException(new NotSupportedException("private-reset")));
+                    continuations.RunUntil(returning);
+                    var reset = Assert.Throws<TtLifecycleException>(() => returning.GetAwaiter().GetResult());
+                    Assert.Equal("SlotReset", reset.Stage);
+                    // Recovery must reacquire the permit released by return.
+                    continuations.RunUntil(clock.Requested.Task);
+                    Assert.True(clock.Requested.Task.IsCompletedSuccessfully);
+                    Assert.Equal((2, 2, 2), (reservations, preparations, deleted.Count));
+                    Assert.False(waiting.IsCompleted);
+
+                    // Complete the timer away from its captured context. Hold
+                    // the posted retry until actual owner cancellation settles.
+                    Task.Run(clock.Release).WaitAsync(TimeSpan.FromSeconds(2)).GetAwaiter().GetResult();
+                    retry = continuations.TakeNext();
+                    closing = owner.DisposeAsync().AsTask();
+                    Assert.False(closing.IsCompleted);
+                    retry();
+                    retry = null;
+                    Assert.Equal(2, reservations);
+                    Assert.Equal(2, preparations);
+                }
+                finally
+                {
+                    SynchronizationContext.SetSynchronizationContext(previous);
+                    if (retry is { } pending) ThreadPool.QueueUserWorkItem(_ => pending());
+                    continuations.ReleaseToThreadPool();
+                }
+            });
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => waiting!);
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => closing!.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("SlotDispose", failure.Stage);
+            Assert.Contains(nameof(IOException), failure.Message);
+            Assert.DoesNotContain("private-", failure.ToString());
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(created.ToArray(), deleted.ToArray());
+            Assert.Equal((2, 2, 0), (reservations, preparations, owner.Snapshot.Reserved));
+        }
+        finally
+        {
+            clock.Release();
+            closing ??= owner.DisposeAsync().AsTask();
+            if (waiting is not null) await Record.ExceptionAsync(() => waiting);
+            if (closing is not null) await Record.ExceptionAsync(() => closing);
+            await Record.ExceptionAsync(() => owner.DisposeAsync().AsTask());
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
+    [Fact]
     public async Task Stopping_admission_leaves_failed_idle_cleanup_owned_without_scheduling_background_retries()
     {
         var clock = new HeldRetryClock();

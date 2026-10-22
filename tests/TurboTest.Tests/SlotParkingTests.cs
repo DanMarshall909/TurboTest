@@ -5,6 +5,37 @@ namespace TurboTest.Tests;
 public class SlotParkingTests
 {
     [Fact]
+    public async Task Parking_without_a_rewarm_capability_retains_the_parked_resource_and_prepares_spare_capacity()
+    {
+        var created = new List<Guid>();
+        var deleted = new List<Guid>();
+        await using var owner = new TtSlotPool<Resource>(2, 1, _ =>
+        {
+            if (created.Count >= 2) throw new InvalidOperationException("Acquisition exceeded its two-resource oracle.");
+            var resource = new Resource(Guid.NewGuid());
+            created.Add(resource.Id);
+            return resource;
+        }, (_, _) => Task.CompletedTask, resource =>
+        {
+            Assert.DoesNotContain(resource.Id, deleted);
+            deleted.Add(resource.Id);
+            return Task.CompletedTask;
+        });
+        var first = await owner.AcquireAsync();
+        await owner.ReturnAsync(first, (_, _) => Task.CompletedTask);
+        await owner.ParkIdleAsync(0, (_, _) => Task.CompletedTask);
+        Assert.Equal((1, 1), (owner.Snapshot.Reserved, owner.Snapshot.Parked));
+
+        var next = await owner.AcquireAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        Assert.NotEqual(first.Value.Id, next.Value.Id);
+        Assert.Empty(deleted);
+        Assert.Equal((2, 1, 1), (owner.Snapshot.Reserved, owner.Snapshot.Parked, owner.Snapshot.Leased));
+        await owner.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2));
+        Assert.Equal(created.Order(), deleted.Order());
+        Assert.Equal(0, owner.Snapshot.Reserved);
+    }
+
+    [Fact]
     public async Task Repeated_maintenance_does_not_select_or_repeat_an_already_claimed_parking_job()
     {
         var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);

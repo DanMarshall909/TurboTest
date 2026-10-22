@@ -30,7 +30,7 @@ The table preserves implementation order and prerequisite identities.
 
 ## Verification and performance
 
-The current candidate passes all **462 tests**, including **294 fast checks**,
+The current candidate passes all **463 tests**, including **295 fast checks**,
 without failures or skips. Solution and separate DynamicScalingExample builds
 pass without warnings/errors. Final receipts bind identical compiler/test inputs;
 independent completion review passed. Earlier ticket evidence retains

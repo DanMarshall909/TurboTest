@@ -6,6 +6,82 @@ namespace TurboTest.Tests;
 [Collection("Static lifecycle")]
 public class FactoryMaintenanceTests
 {
+    [Fact]
+    public async Task A_failure_recorded_before_canceled_observer_finally_remains_available_to_drain()
+    {
+        await using var pool = new MaintenancePool();
+        await pool.WarmAsync();
+        var factory = new TtFactory<TestDbContext>(pool, new TtOptions(), ownsPool: true);
+        using var cancel = new CancellationTokenSource();
+        Task? observation = null;
+        TtCleanup? cleanup = null;
+        try
+        {
+            await Task.Run(() =>
+            {
+                var previous = SynchronizationContext.Current;
+                var continuations = new QueuedSynchronizationContext();
+                Action? canceledObserver = null;
+                SynchronizationContext.SetSynchronizationContext(continuations);
+                try
+                {
+                    observation = factory.MaintainIdleAsync(cancel.Token);
+                    Assert.True(pool.Deleting.Task.IsCompleted);
+                    // Cancel outside the captured context so observation posts
+                    // its continuation instead of running its finally inline.
+                    Task.Run(() => cancel.Cancel()).WaitAsync(TimeSpan.FromSeconds(2)).GetAwaiter().GetResult();
+                    // Actual deletion is still held: this first post belongs to
+                    // the canceled observer. Keep its finally from running yet.
+                    canceledObserver = continuations.TakeNext();
+                    pool.Release.TrySetResult();
+                    var actual = Assert.IsAssignableFrom<Task>(pool.ActualMaintenance);
+                    continuations.RunUntil(actual);
+                    Assert.True(actual.IsFaulted);
+                    // Finish callbacks already posted by actual completion. A
+                    // test-owned FIFO fence avoids guessing callback identity.
+                    continuations.RunPostedCallbacks();
+                    Assert.False(observation.IsCompleted);
+                    canceledObserver();
+                    canceledObserver = null;
+                    Assert.True(observation.IsCanceled);
+                }
+                finally
+                {
+                    SynchronizationContext.SetSynchronizationContext(previous);
+                    if (canceledObserver is { } pending)
+                        ThreadPool.QueueUserWorkItem(_ => pending());
+                    continuations.ReleaseToThreadPool();
+                }
+            });
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => observation!);
+            Assert.Equal(0, pool.DrainAttempts);
+            var retirement = await Assert.ThrowsAsync<TtLifecycleException>(() => pool.ActualMaintenance!);
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() =>
+                factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("SlotIdleRetire", failure.Stage);
+            Assert.Equal(retirement.Message, failure.Message);
+            Assert.DoesNotContain("private-retirement-payload", failure.ToString());
+            Assert.Null(failure.InnerException);
+            cleanup = Assert.IsType<TtCleanup>(failure.Cleanup);
+            Assert.Equal((0, 2, 1), (pool.Snapshot.Reserved, pool.DeleteAttempts, pool.DrainAttempts));
+            await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Empty(cleanup.OwnedResourceIds);
+            Assert.Same(failure, await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask()));
+        }
+        finally
+        {
+            pool.Release.TrySetResult();
+            if (observation is not null) await Record.ExceptionAsync(() => observation);
+            var failure = await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+        }
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]

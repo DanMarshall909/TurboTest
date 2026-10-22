@@ -96,7 +96,7 @@ public class FactoryBackpressureTests
     {
         using var caller = new CancellationTokenSource();
         var previous = SynchronizationContext.Current;
-        var pump = new CleanupPump();
+        var pump = new QueuedSynchronizationContext();
         SynchronizationContext.SetSynchronizationContext(pump);
         NextProbe = probe;
         try
@@ -126,59 +126,6 @@ public class FactoryBackpressureTests
         internal HeldCleanupContext? Rescued;
         internal int Disposals;
         internal int Abort;
-    }
-
-    private sealed class CleanupPump : SynchronizationContext
-    {
-        private readonly Queue<(SendOrPostCallback Callback, object? State)> _work = new();
-        private bool _released;
-
-        public override void Post(SendOrPostCallback callback, object? state)
-        {
-            lock (_work)
-            {
-                if (!_released)
-                {
-                    _work.Enqueue((callback, state));
-                    Monitor.Pulse(_work);
-                    return;
-                }
-            }
-            ThreadPool.QueueUserWorkItem(_ => callback(state));
-        }
-
-        internal void RunUntil(Task entered)
-        {
-            var timer = System.Diagnostics.Stopwatch.StartNew();
-            while (!entered.IsCompleted)
-            {
-                (SendOrPostCallback Callback, object? State) item;
-                lock (_work)
-                {
-                    while (_work.Count == 0)
-                    {
-                        var remaining = TimeSpan.FromSeconds(2) - timer.Elapsed;
-                        if (remaining <= TimeSpan.Zero || !Monitor.Wait(_work, remaining))
-                            throw new TimeoutException("Context cleanup did not enter its held await.");
-                    }
-                    item = _work.Dequeue();
-                }
-                item.Callback(item.State);
-            }
-        }
-
-        internal void ReleaseToThreadPool()
-        {
-            lock (_work)
-            {
-                _released = true;
-                while (_work.TryDequeue(out var item))
-                {
-                    var pending = item;
-                    ThreadPool.QueueUserWorkItem(_ => pending.Callback(pending.State));
-                }
-            }
-        }
     }
 
     public sealed class HeldCleanupContext : DbContext

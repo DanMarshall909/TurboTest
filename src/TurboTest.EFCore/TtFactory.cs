@@ -93,6 +93,8 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
     private readonly HashSet<TaskCompletionSource> _acquisitions = new();
     private readonly HashSet<MaintenanceWork> _maintenance = new();
     private readonly ConcurrentDictionary<TtLease<TContext>, byte> _leases = new();
+    // Root unpublished context cleanup until acquisition settlement. Published
+    // leases own their return and remove the database before removing the lease.
     private readonly ConcurrentDictionary<TtDatabase, byte> _databases = new();
     private bool _closing;
     private Task? _disposal;
@@ -279,11 +281,6 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
         foreach (var lease in _leases.Keys)
         {
             try { await lease.DisposeAsync(); }
-            catch (Exception error) { first = first is null ? error : new AggregateException(first, error); }
-        }
-        foreach (var database in _databases.Keys)
-        {
-            try { await database.DisposeAsync(); }
             catch (Exception error) { first = first is null ? error : new AggregateException(first, error); }
         }
         if (_ownsPool)

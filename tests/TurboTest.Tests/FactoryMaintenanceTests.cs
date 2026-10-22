@@ -6,6 +6,62 @@ namespace TurboTest.Tests;
 [Collection("Static lifecycle")]
 public class FactoryMaintenanceTests
 {
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Canceled_observation_retains_an_already_completed_maintenance_failure_until_drain(bool failDrain)
+    {
+        await using var pool = new MaintenancePool(failFirstDrain: failDrain);
+        await pool.WarmAsync();
+        var factory = new TtFactory<TestDbContext>(pool, new TtOptions(), ownsPool: true);
+        using var cancel = new CancellationTokenSource();
+        var observation = factory.MaintainIdleAsync(cancel.Token);
+        TtCleanup? cleanup = null;
+        try
+        {
+            await pool.Deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            cancel.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => observation);
+            Assert.Equal((1, 1, 0), (pool.Snapshot.Reserved, pool.DeleteAttempts, pool.DrainAttempts));
+
+            var actual = Assert.IsAssignableFrom<Task>(pool.ActualMaintenance);
+            pool.Release.TrySetResult();
+            var retirement = await Assert.ThrowsAsync<TtLifecycleException>(() => actual.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("SlotIdleRetire", retirement.Stage);
+            Assert.True(actual.IsCompleted);
+            Assert.Equal(0, pool.DrainAttempts);
+
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() =>
+                factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal(failDrain ? "FactoryDrain" : "SlotIdleRetire", failure.Stage);
+            Assert.Contains("IOException", failure.Message);
+            Assert.Equal(failDrain, failure.Message.Contains("UnauthorizedAccessException", StringComparison.Ordinal));
+            if (!failDrain) Assert.Equal(retirement.Message, failure.Message);
+            Assert.DoesNotContain("private-retirement-payload", failure.ToString());
+            Assert.DoesNotContain("private-drain-payload", failure.ToString());
+            Assert.Null(failure.InnerException);
+            cleanup = Assert.IsType<TtCleanup>(failure.Cleanup);
+            Assert.Equal((0, 2, 1), (pool.Snapshot.Reserved, pool.DeleteAttempts, pool.DrainAttempts));
+            await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Empty(cleanup.OwnedResourceIds);
+            Assert.Equal((2, 1), (pool.DeleteAttempts, pool.DrainAttempts));
+            Assert.Same(failure, await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask()));
+        }
+        finally
+        {
+            pool.Release.TrySetResult();
+            await Record.ExceptionAsync(() => observation);
+            var failure = await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask());
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
+                await cleanup.RetryCleanupAsync();
+            }
+        }
+    }
+
     [Fact]
     public async Task Ordinary_factory_rejects_prepared_maintenance_without_allocation_and_can_still_drain()
     {
@@ -147,6 +203,7 @@ public class FactoryMaintenanceTests
         private int _deleteAttempts;
         internal int DeleteAttempts => Volatile.Read(ref _deleteAttempts);
         internal int DrainAttempts { get; private set; }
+        internal Task? ActualMaintenance { get; private set; }
         public TtPoolSnapshot Snapshot => _slots.Snapshot;
         public TtResourceBudget Budget => TtResourceBudget.Create(new TtOptions { PoolSize = 1 }, true);
         public IReadOnlyList<string> OwnedResourceIds => Snapshot.Reserved == 0 ? [] : [Snapshot.OwnerId.ToString("N")];
@@ -175,8 +232,11 @@ public class FactoryMaintenanceTests
             foreach (var reservation in reservations) await _slots.ReturnAsync(reservation, (_, _) => Task.CompletedTask);
         }
 
-        public Task MaintainIdleAsync(CancellationToken cancellationToken = default) =>
-            _slots.ParkIdleAsync(0, (_, _) => Task.CompletedTask, maxParked: 0).WaitAsync(cancellationToken);
+        public Task MaintainIdleAsync(CancellationToken cancellationToken = default)
+        {
+            ActualMaintenance = _slots.ParkIdleAsync(0, (_, _) => Task.CompletedTask, maxParked: 0);
+            return ActualMaintenance.WaitAsync(cancellationToken);
+        }
 
         public Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default) =>
             throw new NotSupportedException("This oracle acquires no contexts.");

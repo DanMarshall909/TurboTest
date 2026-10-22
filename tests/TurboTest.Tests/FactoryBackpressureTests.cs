@@ -1,5 +1,6 @@
 using Npgsql;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 using TurboTest.EFCore;
 using TurboTest.EFCore.Internal;
 
@@ -8,6 +9,210 @@ namespace TurboTest.Tests;
 [Collection("Static lifecycle")]
 public class FactoryBackpressureTests
 {
+    private static CleanupLifetimeProbe? NextProbe;
+
+    [Fact]
+    public async Task Repeated_successful_leases_release_completed_contexts_and_work_while_the_factory_remains_usable()
+    {
+        await using var pool = new BoundedPool();
+        var factory = new TtFactory<TestDbContext>(pool, new TtOptions { AutoMigrate = false }, ownsPool: true);
+        try
+        {
+            var completed = await Task.Run(() => CompleteLeases(factory));
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+            GC.WaitForPendingFinalizers();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+            Assert.All(completed, entry =>
+            {
+                Assert.False(entry.Context.IsAlive);
+                Assert.False(entry.Lease.IsAlive);
+                Assert.False(entry.Acquisition.IsAlive);
+            });
+            Assert.Equal((1, 1, 0), (factory.PoolState.Reserved, factory.PoolState.Ready, factory.PoolState.Leased));
+            await using var next = await factory.CreateLeaseAsync();
+            Assert.NotNull(next.Context);
+            GC.KeepAlive(factory);
+        }
+        finally { await factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)); }
+        Assert.Equal((0, 1), (factory.PoolState.Reserved, pool.Deleted));
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static (WeakReference Context, WeakReference Lease, WeakReference Acquisition)[] CompleteLeases(
+        TtFactory<TestDbContext> factory)
+    {
+        var completed = new List<(WeakReference, WeakReference, WeakReference)>();
+        for (var i = 0; i < 16; i++)
+        {
+            var acquiring = factory.CreateLeaseAsync();
+            var lease = acquiring.WaitAsync(TimeSpan.FromSeconds(2)).GetAwaiter().GetResult();
+            try
+            {
+                completed.Add((new WeakReference(lease.Context), new WeakReference(lease), new WeakReference(acquiring)));
+            }
+            finally { lease.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)).GetAwaiter().GetResult(); }
+        }
+        return completed.ToArray();
+    }
+
+    [Fact]
+    public async Task An_abandoned_acquisition_keeps_its_pending_context_cleanup_rooted_until_it_settles()
+    {
+        await using var pool = new BoundedPool();
+        var factory = new TtFactory<HeldCleanupContext>(pool,
+            new TtOptions { AutoMigrate = false }, ownsPool: true);
+        var probe = new CleanupLifetimeProbe();
+        try
+        {
+            await Task.Run(() => StartAbandonedAcquisition(factory, probe));
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+            GC.WaitForPendingFinalizers();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+            Assert.Null(Volatile.Read(ref probe.Rescued));
+            Assert.True(probe.Acquisition!.IsAlive);
+            Assert.True(probe.Context!.IsAlive);
+            Assert.Equal((1, 1, 0), (probe.Disposals, pool.Snapshot.Reserved, pool.Deleted));
+            GC.KeepAlive(factory);
+        }
+        finally
+        {
+            Volatile.Write(ref probe.Abort, 1);
+            var actual = probe.Acquisition?.Target as Task<TtLease<HeldCleanupContext>>;
+            var context = Volatile.Read(ref probe.Rescued) ?? probe.Context?.Target as HeldCleanupContext;
+            context?.Release.TrySetResult();
+            try
+            {
+                if (actual is not null)
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(() => actual.WaitAsync(TimeSpan.FromSeconds(2)));
+            }
+            finally { await factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)); }
+        }
+        Assert.Equal((1, 0, 1), (probe.Disposals, pool.Snapshot.Reserved, pool.Deleted));
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static void StartAbandonedAcquisition(TtFactory<HeldCleanupContext> factory,
+        CleanupLifetimeProbe probe)
+    {
+        using var caller = new CancellationTokenSource();
+        var previous = SynchronizationContext.Current;
+        var pump = new CleanupPump();
+        SynchronizationContext.SetSynchronizationContext(pump);
+        NextProbe = probe;
+        try
+        {
+            var acquiring = factory.CreateLeaseAsync(_ => caller.Cancel(), caller.Token);
+            probe.Acquisition = new WeakReference(acquiring, trackResurrection: true);
+            // Pumping returns only after the callback that entered disposal has
+            // returned to its await. This producer leaves the queue empty, so
+            // neither queued work nor a worker stack roots cleanup during GC.
+            pump.RunUntil(probe.Entered.Task);
+            Assert.False(acquiring.IsCompleted);
+        }
+        finally
+        {
+            NextProbe = null;
+            caller.Cancel();
+            SynchronizationContext.SetSynchronizationContext(previous);
+            pump.ReleaseToThreadPool();
+        }
+    }
+
+    private sealed class CleanupLifetimeProbe
+    {
+        internal TaskCompletionSource Entered { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal WeakReference? Context;
+        internal WeakReference? Acquisition;
+        internal HeldCleanupContext? Rescued;
+        internal int Disposals;
+        internal int Abort;
+    }
+
+    private sealed class CleanupPump : SynchronizationContext
+    {
+        private readonly Queue<(SendOrPostCallback Callback, object? State)> _work = new();
+        private bool _released;
+
+        public override void Post(SendOrPostCallback callback, object? state)
+        {
+            lock (_work)
+            {
+                if (!_released)
+                {
+                    _work.Enqueue((callback, state));
+                    Monitor.Pulse(_work);
+                    return;
+                }
+            }
+            ThreadPool.QueueUserWorkItem(_ => callback(state));
+        }
+
+        internal void RunUntil(Task entered)
+        {
+            var timer = System.Diagnostics.Stopwatch.StartNew();
+            while (!entered.IsCompleted)
+            {
+                (SendOrPostCallback Callback, object? State) item;
+                lock (_work)
+                {
+                    while (_work.Count == 0)
+                    {
+                        var remaining = TimeSpan.FromSeconds(2) - timer.Elapsed;
+                        if (remaining <= TimeSpan.Zero || !Monitor.Wait(_work, remaining))
+                            throw new TimeoutException("Context cleanup did not enter its held await.");
+                    }
+                    item = _work.Dequeue();
+                }
+                item.Callback(item.State);
+            }
+        }
+
+        internal void ReleaseToThreadPool()
+        {
+            lock (_work)
+            {
+                _released = true;
+                while (_work.TryDequeue(out var item))
+                {
+                    var pending = item;
+                    ThreadPool.QueueUserWorkItem(_ => pending.Callback(pending.State));
+                }
+            }
+        }
+    }
+
+    public sealed class HeldCleanupContext : DbContext
+    {
+        private readonly CleanupLifetimeProbe? _probe;
+        internal TaskCompletionSource Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+        public HeldCleanupContext(DbContextOptions<HeldCleanupContext> options) : base(options)
+        {
+            _probe = NextProbe ?? throw new InvalidOperationException("Missing cleanup lifetime probe.");
+            NextProbe = null;
+            _probe.Context = new WeakReference(this, trackResurrection: true);
+        }
+
+        // Rescue a prematurely collected context so the fault case can still release
+        // and join actual cleanup. Correct factory ownership prevents this finalizer.
+        ~HeldCleanupContext()
+        {
+            if (_probe is not null) Volatile.Write(ref _probe.Rescued, this);
+        }
+
+        public override async ValueTask DisposeAsync()
+        {
+            var probe = _probe!;
+            if (Interlocked.Increment(ref probe.Disposals) > 1)
+                throw new InvalidOperationException("Context cleanup was repeated.");
+            probe.Entered.TrySetResult();
+            if (Volatile.Read(ref probe.Abort) != 0) Release.TrySetResult();
+            await Release.Task;
+            await base.DisposeAsync();
+            GC.SuppressFinalize(this);
+        }
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]

@@ -1,0 +1,15 @@
+{
+  "slice": "TT024 final bounded investigation and closure",
+  "independentVerdict": "PASS",
+  "reviewer": "/root/tt024_closure_review",
+  "reviewedCandidateSha256": "740c561bbf6c023efc3fa29d661049a4bab1d0fb9c1e5a552f1eefbb2ad76571",
+  "baseCommit": "5f827c3de97b5979eb57cf7a36bed350ee8b3a3b",
+  "ordinaryTests": 487,
+  "owningCoverageRows": 338,
+  "boundedQuestionDispositions": 48,
+  "issueClosure": [
+    14
+  ],
+  "wholeSessionMutation": "pending after final coding-session snapshot",
+  "publication": "local source commit only; native Project fields unverified/unmodified"
+}

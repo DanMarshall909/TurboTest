@@ -39,7 +39,7 @@ public class TtOptions
     /// <summary>Maximum parked idle databases; null uses PoolSize. Parked databases still consume physical reservations.</summary>
     public int? MaxParkedDatabases { get; set; }
 
-    /// <summary>Optional monotonic age since verified Ready publication before idle maintenance deletes a database. Parking preserves age; the Ready floor is protected. Null disables expiry.</summary>
+    /// <summary>Optional monotonic age since verified Ready publication before explicit idle maintenance or capacity shrink deletes a database. Unchanged-target monitor ticks do not apply expiry. Parking preserves age; the Ready floor is protected. Null disables expiry.</summary>
     public TimeSpan? IdleDatabaseLifetime { get; set; }
 
     /// <summary>Maximum pooled connections in each owned workload data source. Defaults to 4.</summary>

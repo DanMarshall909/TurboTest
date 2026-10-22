@@ -12,6 +12,62 @@ public class FactoryBackpressureTests
 {
     private static CleanupLifetimeProbe? NextProbe;
     private static ConfigurationCancellationProbe? NextConfigurationProbe;
+    private static Action? NextAlternateProviderDisposal;
+
+    [Fact]
+    public async Task A_valid_alternate_provider_is_rejected_as_context_configuration_and_discarded_once()
+    {
+        // Establish a functioning provider/model independently of owned-source validation.
+        await using (var valid = new AlternateProviderContext(new DbContextOptions<AlternateProviderContext>()))
+        {
+            Assert.Equal("Microsoft.EntityFrameworkCore.InMemory", valid.Database.ProviderName);
+            valid.Set<User>().Add(new User { Email = "alternate@example.test" });
+            Assert.Equal(1, await valid.SaveChangesAsync());
+            Assert.Equal("alternate@example.test", (await valid.Set<User>().SingleAsync()).Email);
+        }
+
+        var disposals = 0;
+        await using var pool = new BoundedPool();
+        await using var factory = new TtFactory<AlternateProviderContext>(pool,
+            new TtOptions { AutoMigrate = false }, ownsPool: true);
+        NextAlternateProviderDisposal = () =>
+        {
+            if (++disposals > 1) throw new InvalidOperationException("Alternate context cleanup was repeated.");
+        };
+        try
+        {
+            var error = await Assert.ThrowsAsync<TtLifecycleException>(() =>
+                factory.CreateLeaseAsync().WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("ContextConfiguration", error.Stage);
+            Assert.Null(error.InnerException);
+            Assert.Equal((1, 1, 0), (disposals, pool.Deleted, pool.Snapshot.Reserved));
+            Assert.Empty(pool.OwnedResourceIds);
+            await factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((1, 1), (disposals, pool.Deleted));
+        }
+        finally { NextAlternateProviderDisposal = null; }
+    }
+
+    public sealed class AlternateProviderContext : DbContext
+    {
+        private readonly Action? _onDispose;
+
+        public AlternateProviderContext(DbContextOptions<AlternateProviderContext> options)
+            : base(new DbContextOptionsBuilder<AlternateProviderContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString("N")).Options)
+        {
+            _onDispose = NextAlternateProviderDisposal;
+            NextAlternateProviderDisposal = null;
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder) => builder.Entity<User>().HasKey(user => user.Id);
+
+        public override ValueTask DisposeAsync()
+        {
+            _onDispose?.Invoke();
+            return base.DisposeAsync();
+        }
+    }
 
     [Fact]
     public async Task Cancellation_from_context_configuration_prevents_schema_initialization_and_discards_the_resource()

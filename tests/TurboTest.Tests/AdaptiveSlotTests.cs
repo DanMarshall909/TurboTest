@@ -8,6 +8,116 @@ public class AdaptiveSlotTests
     private sealed record Resource(Guid Id, int Number);
 
     [Fact]
+    public async Task Unchanged_capacity_monitoring_leaves_expiry_to_idle_maintenance_and_confirmed_deletion()
+    {
+        var clock = new ManualPoolClock();
+        var policy = new TtCapacityPolicy(3, 3, TimeSpan.FromSeconds(5), clock, minimum: 2,
+            shrinkWindow: TimeSpan.FromSeconds(5), cooldown: TimeSpan.Zero);
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var created = new List<Guid>();
+        var deleted = new List<Guid>();
+        var holdRetirement = false;
+        Guid parked = default;
+        var retirementAttempts = 0;
+        var owner = new TtSlotPool<Resource>(3, 1, id =>
+        {
+            if (created.Count >= 3) throw new InvalidOperationException("Idle maintenance created extra capacity.");
+            created.Add(id);
+            return new Resource(id, created.Count);
+        }, (_, _) => Task.CompletedTask, async resource =>
+        {
+            if (resource.Id == parked && holdRetirement)
+            {
+                if (++retirementAttempts > 1) throw new InvalidOperationException("Confirmed retirement was repeated.");
+                entered.TrySetResult();
+                await release.Task;
+            }
+            Assert.DoesNotContain(resource.Id, deleted);
+            deleted.Add(resource.Id);
+        }, rewarm: (_, _) => Task.CompletedTask, timeProvider: clock, capacityPolicy: policy);
+        Task? maintenance = null;
+        Task Park(Resource resource, CancellationToken _)
+        {
+            Assert.Equal(Guid.Empty, parked);
+            parked = resource.Id;
+            return Task.CompletedTask;
+        }
+        try
+        {
+            await owner.WarmAsync(3, default);
+            clock.Advance(TimeSpan.FromSeconds(5));
+            var shrink = await owner.TickCapacityAsync(null, Park, idleLifetime: TimeSpan.FromSeconds(10));
+            Assert.Equal((3, 2, "SpareCapacity"), (shrink.PreviousTarget, shrink.Target, shrink.Reason));
+            Assert.NotEqual(Guid.Empty, parked);
+            Assert.Equal((3, 2, 1), (owner.Snapshot.Reserved, owner.Snapshot.Ready, owner.Snapshot.Parked));
+
+            clock.Advance(TimeSpan.FromSeconds(5));
+            var held = await owner.TickCapacityAsync(null, Park, idleLifetime: TimeSpan.FromSeconds(10));
+            Assert.Equal((2, 2, "AtMinimum"), (held.PreviousTarget, held.Target, held.Reason));
+            Assert.Empty(deleted);
+            Assert.Equal((3, 2, 1), (owner.Snapshot.Reserved, owner.Snapshot.Ready, owner.Snapshot.Parked));
+
+            holdRetirement = true;
+            maintenance = owner.ParkIdleAsync(0, Park, idleLifetime: TimeSpan.FromSeconds(10));
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.False(maintenance.IsCompleted);
+            Assert.Empty(deleted);
+            Assert.Equal((3, 2, 1), (owner.Snapshot.Reserved, owner.Snapshot.Ready, owner.Snapshot.Retiring));
+            release.TrySetResult();
+            await maintenance.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(new[] { parked }, deleted);
+            Assert.Equal((2, 2, 0), (owner.Snapshot.Reserved, owner.Snapshot.Ready, owner.Snapshot.Parked));
+        }
+        finally
+        {
+            release.TrySetResult();
+            if (maintenance is not null)
+                await Record.ExceptionAsync(() => maintenance.WaitAsync(TimeSpan.FromSeconds(2)));
+            await owner.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+        Assert.Equal(created.Order(), deleted.Order());
+        Assert.Equal((1, 0), (retirementAttempts, owner.Snapshot.Reserved));
+    }
+
+    [Fact]
+    public async Task An_unchanged_warm_target_defers_discarded_capacity_replacement_until_demand_returns()
+    {
+        var clock = new ManualPoolClock();
+        var policy = new TtCapacityPolicy(1, 1, TimeSpan.FromSeconds(5), clock);
+        var created = new List<Guid>();
+        var deleted = new List<Guid>();
+        await using var owner = new TtSlotPool<Resource>(1, 1, id =>
+        {
+            if (created.Count >= 2) throw new InvalidOperationException("Discard recovery exceeded its two-resource oracle.");
+            created.Add(id);
+            return new Resource(id, created.Count);
+        }, (_, _) => Task.CompletedTask, resource =>
+        {
+            Assert.DoesNotContain(resource.Id, deleted);
+            deleted.Add(resource.Id);
+            return Task.CompletedTask;
+        }, timeProvider: clock, capacityPolicy: policy);
+        await owner.WarmAsync(1, default);
+        var discarded = await owner.AcquireAsync();
+        await owner.DiscardAsync(discarded);
+        Assert.Equal((1, 0), (owner.Snapshot.WarmTarget, owner.Snapshot.Reserved));
+
+        var held = await owner.TickCapacityAsync(null, (_, _) => Task.CompletedTask);
+        Assert.Equal((1, 1, "AtMinimum"), (held.PreviousTarget, held.Target, held.Reason));
+        Assert.Single(created);
+        Assert.Equal(0, owner.Snapshot.Reserved);
+
+        var replacement = await owner.AcquireAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        Assert.NotEqual(discarded.Value.Id, replacement.Value.Id);
+        Assert.Equal((2, 1, 1), (created.Count, owner.Snapshot.Reserved, owner.Snapshot.Leased));
+        await owner.ReturnAsync(replacement, (_, _) => Task.CompletedTask);
+        await owner.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2));
+        Assert.Equal(created.Order(), deleted.Order());
+        Assert.Equal(0, owner.Snapshot.Reserved);
+    }
+
+    [Fact]
     public async Task Deferred_shrink_maintenance_counts_leased_commitments_toward_the_remaining_warm_target()
     {
         var clock = new ManualPoolClock();

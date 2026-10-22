@@ -30,7 +30,7 @@ The table preserves implementation order and prerequisite identities.
 
 ## Verification and performance
 
-The current candidate passes all **484 tests**, including **314 fast checks**,
+The current candidate passes all **487 tests**, including **317 fast checks**,
 without failures or skips. Solution and separate DynamicScalingExample builds
 pass without warnings/errors. Final receipts bind identical compiler/test inputs;
 independent completion review passed. Earlier ticket evidence retains
@@ -84,7 +84,7 @@ remaining item.
 | [TT-021](https://github.com/DanMarshall909/TurboTest/issues/11) | Close Docker adapter cancellation and permit gaps | [Evidence](open/database/TT-021-close-docker-adapter-cancellation-and-permit-gaps.md) |
 | [TT-022](https://github.com/DanMarshall909/TurboTest/issues/12) | Assert lifecycle admission publication and drain races | [Evidence](open/api/TT-022-assert-lifecycle-admission-publication-and-drain-races.md) |
 | [TT-023](https://github.com/DanMarshall909/TurboTest/issues/13) | Assert late failure ordering and safe diagnostic identity | [Evidence](open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md) |
-| [TT-024](https://github.com/DanMarshall909/TurboTest/issues/14) | Resolve retained-state cleanup and reentrancy invariants | [Evidence](open/api/TT-024-resolve-retained-state-cleanup-and-reentrancy-invariants.md) |
+| [TT-024](https://github.com/DanMarshall909/TurboTest/issues/14) | Resolve retained-state cleanup and reentrancy invariants | [Evidence](resolved/api/TT-024-resolve-retained-state-cleanup-and-reentrancy-invariants.md) |
 | [TT-025](https://github.com/DanMarshall909/TurboTest/issues/15) | Establish uncovered boundary reachability and limits | [Evidence](open/database/TT-025-establish-uncovered-boundary-reachability-and-limits.md) |
 | [TT-026](https://github.com/DanMarshall909/TurboTest/issues/16) | Assert adaptive prepared and budget equality boundaries | [Evidence](open/database/TT-026-assert-adaptive-prepared-and-budget-equality-boundaries.md) |
 | [TT-027](https://github.com/DanMarshall909/TurboTest/issues/17) | Assert atomic slot claims and shutdown transitions | [Evidence](open/database/TT-027-assert-atomic-slot-claims-and-shutdown-transitions.md) |

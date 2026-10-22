@@ -109,6 +109,7 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
             if (_capacityPolicy is null) return new(_capacity, _capacity, "Fixed");
             decision = _failure is null ? _capacityPolicy.Evaluate(Snapshot, memory)
                 : new(_capacityPolicy.Target, _capacityPolicy.Target, "Unavailable");
+            // Held decisions admit no new physical work; explicit maintenance remains available.
             if (decision.Target > decision.PreviousTarget)
             {
                 rewarming = ClaimParked(replenish: true);

@@ -389,6 +389,11 @@ change is one database; the next step starts a fresh stabilization window.
 `StartupWarmDatabases` defaults to the adaptive minimum (one), and the maximum
 defaults to `PoolSize`. `WarmFloor` must not exceed the adaptive minimum. Explicit
 maintenance preserves the current adaptive target as well as the Ready floor.
+Adaptive ticks that hold the target do not start preparation or idle retirement.
+After a rejected context discards a slot, subsequent demand can refill capacity
+within that target. To expire retained databases while the target is unchanged,
+call `MaintainIdleAsync` on your maintenance schedule; a shrinking tick also
+applies idle retention and expiry.
 The [local fixed/adaptive comparison](docs/issues/evidence/2026-10-15/adaptive-pool-final/results.md)
 documents these conservative choices and their costs. Fixed capacity wins burst
 latency in both measured blocks; no window sweep establishes optimal settings.

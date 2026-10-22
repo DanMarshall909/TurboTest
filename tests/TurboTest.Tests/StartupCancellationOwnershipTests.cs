@@ -1,5 +1,6 @@
 using Docker.DotNet;
 using Docker.DotNet.Models;
+using Microsoft.EntityFrameworkCore;
 using TurboTest.EFCore;
 
 namespace TurboTest.Tests;
@@ -22,7 +23,12 @@ public class StartupCancellationOwnershipTests
     public Task Deadline_triggered_throwing_callback_is_reported_by_owned_cleanup()
         => RunAsync(callerCancellation: false, lateFailure: true);
 
-    private static async Task RunAsync(bool callerCancellation, bool lateFailure)
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public Task A_late_seed_database_failure_survives_interrupted_startup_and_physical_cleanup()
+        => RunAsync(callerCancellation: true, lateFailure: false, lateSeedFailure: true);
+
+    private static async Task RunAsync(bool callerCancellation, bool lateFailure, bool lateSeedFailure = false)
     {
         var prefix = $"tt-startup-ownership-{Guid.NewGuid():N}";
         var seedEntered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -36,7 +42,7 @@ public class StartupCancellationOwnershipTests
         var callbacks = 0;
         var deletions = 0;
         var definition = new TtBaselineDefinition<TestDbContext>("owned-cancellation-v1", TtSchemaInitialization.EnsureCreated,
-            async (_, token) =>
+            async (context, token) =>
             {
                 registration = token.Register(() =>
                 {
@@ -53,7 +59,12 @@ public class StartupCancellationOwnershipTests
                 seedEntered.TrySetResult();
                 // Deliberately ignores the token; this job must remain owned.
                 await releaseSeed.Task;
-                seedFinished.TrySetResult();
+                try
+                {
+                    if (lateSeedFailure)
+                        await context.Database.ExecuteSqlRawAsync("SELECT * FROM startup_seed_private_missing");
+                }
+                finally { seedFinished.TrySetResult(); }
             });
         using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
         var initializing = Tt.CreatePreparedFactoryAsync(new TtOptions
@@ -87,13 +98,17 @@ public class StartupCancellationOwnershipTests
             Assert.Equal(original, Assert.Single(await OwnedAsync()).ID);
             releaseCallback.Set();
             await callbackFinished.Task.WaitAsync(TimeSpan.FromSeconds(2));
-            if (lateFailure)
+            if (lateFailure || lateSeedFailure)
             {
-                var callbackFailure = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(15)));
-                Assert.Equal("StartupCancellation", callbackFailure.Stage);
-                Assert.DoesNotContain("startup-callback-private-detail", callbackFailure.ToString());
+                var late = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(15)));
+                Assert.Equal(lateSeedFailure ? "BaselineInitialize" : "StartupCancellation", late.Stage);
+                Assert.Equal(lateSeedFailure ? "42P01" : null, late.SqlState);
+                Assert.DoesNotContain("startup-callback-private-detail", late.ToString());
+                Assert.DoesNotContain("startup_seed_private_missing", late.ToString());
+                Assert.Null(late.InnerException);
+                Assert.Same(cleanup, late.Cleanup);
                 Assert.Empty(await OwnedAsync());
-                await cleanup.RetryCleanupAsync();
+                await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(15));
             }
             else await pending.WaitAsync(TimeSpan.FromSeconds(15));
             Assert.Equal((1, 1), (callbacks, deletions));

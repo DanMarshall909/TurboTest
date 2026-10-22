@@ -1,0 +1,968 @@
+{
+  "archive": {
+    "bytes": 2475683,
+    "path": "runs.tar.gz",
+    "sha256": "fa0d9e633d6149ed675169862b58205967f26e0f0a95827c88d94ec8135c00a0"
+  },
+  "baseCommit": "63737df38997d21eb2854d260bb0324147b8f23c",
+  "candidateSource": {
+    "src/TurboTest.EFCore/Tt.cs": "f197c2ea9e5f4fe242aa7b749344d4cdb3e33c7beb8c0655486b108dd5c3ded5",
+    "tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs": "dd82812778266a5efbb9650b957215c131136143e41375c790a1eac2a1f958c5",
+    "tests/TurboTest.Tests/StartupLateDrainTests.cs": "73e7d3a93b8c7a750de0151cf9177761e0d8703087dd16f57a7f2797802e2f41"
+  },
+  "files": [
+    {
+      "bytes": 10101,
+      "path": "startup-failure/base-source/Tt.cs",
+      "sha256": "d3fc7f0f8d3ad48cffd7303661dc246e2b09475f7fc93281121d2aaa13db8fe9"
+    },
+    {
+      "bytes": 15625,
+      "path": "startup-failure/build-packet.py",
+      "sha256": "ba4480ff209990380f83c7f54a00015828e5b66fc5f1a2a36517789efa3bf8bc"
+    },
+    {
+      "bytes": 4737,
+      "path": "startup-failure/calibrate-final.py",
+      "sha256": "121929ca4b2a3c0ae13d0df1400164266c609e986e9a6c3cafd2aa4738f32722"
+    },
+    {
+      "bytes": 4318,
+      "path": "startup-failure/calibrate-v2.py",
+      "sha256": "aced80064f44a0cdf8b4e84e89320f38e2c342ec3fbca0ae92faa5fd7751e896"
+    },
+    {
+      "bytes": 4290,
+      "path": "startup-failure/calibrate.py",
+      "sha256": "489625915dd35f79bf2bfd3ba34aa620b49e19d4c44fbe149d02eceb0c47b732"
+    },
+    {
+      "bytes": 515,
+      "path": "startup-failure/calibration-v2/Fault.targets",
+      "sha256": "94c8d15c42aa34b4c939364be983153eac137ce0d597fe80175f4c1d1030e790"
+    },
+    {
+      "bytes": 10586,
+      "path": "startup-failure/calibration-v2/Tt.cs",
+      "sha256": "1c70cc24ad05367973d793fde4ebccdd6d163ebce3834fbb505ed8416e0d6acd"
+    },
+    {
+      "bytes": 85424,
+      "path": "startup-failure/calibration-v2/binding.json",
+      "sha256": "bcea3739e8bf9901092900a0c6a7601c334aca6132e269817759a986041d81ef"
+    },
+    {
+      "bytes": 641,
+      "path": "startup-failure/calibration-v2/build.json",
+      "sha256": "12644470cda906b84388819db4067efa67d53667568f2591b55967fc9c3960e7"
+    },
+    {
+      "bytes": 668,
+      "path": "startup-failure/calibration-v2/build.log",
+      "sha256": "699ac6e65195384e852d2f002806c0b5ce087f07f1706a8e2b15f3a1990e68e0"
+    },
+    {
+      "bytes": 2838,
+      "path": "startup-failure/calibration-v2/compile.txt",
+      "sha256": "198ca877ee656f825378a102a9ac0ee437c6097807e3fff704ffc4516690b706"
+    },
+    {
+      "bytes": 413,
+      "path": "startup-failure/calibration-v2/restore.json",
+      "sha256": "26a4cb3bf0f27bfa5a9e87685bae57806cc16c39e8fa8ac231b1612ba0af4fb3"
+    },
+    {
+      "bytes": 80,
+      "path": "startup-failure/calibration-v2/restore.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "bytes": 322,
+      "path": "startup-failure/calibration-v2/restored/Original.targets",
+      "sha256": "eea10acfbcef174d4e10741d83c508ff5dec117c28f199d7b5627348aae7a9b2"
+    },
+    {
+      "bytes": 653,
+      "path": "startup-failure/calibration-v2/restored/build.json",
+      "sha256": "5a50e6fda8f06bdff88c7165726abc452a5ab169ea1f90b3c27a67ef576a1985"
+    },
+    {
+      "bytes": 668,
+      "path": "startup-failure/calibration-v2/restored/build.log",
+      "sha256": "ecfce89f1bf58dc4766bf9f5f2336348430a07c05c9d9bfdd17dbac1c46e3d67"
+    },
+    {
+      "bytes": 2811,
+      "path": "startup-failure/calibration-v2/restored/compile.txt",
+      "sha256": "6e0caedf70f96c9c2f5bcb8173cc1a07a60c6b9cfea5ed853ace8d23d535d8b1"
+    },
+    {
+      "bytes": 31654,
+      "path": "startup-failure/calibration-v2/restored/results/results.trx",
+      "sha256": "611799c34dd36635b22089f2ba8e26afc85e5c784bfb3918f85ae4a410f69a3c"
+    },
+    {
+      "bytes": 620,
+      "path": "startup-failure/calibration-v2/restored/test.json",
+      "sha256": "e4264d8dfbbee9a30e04eb87deba210004b01315e0b3acb64fb341a1e5dcc732"
+    },
+    {
+      "bytes": 361,
+      "path": "startup-failure/calibration-v2/restored/test.log",
+      "sha256": "da2bd6330d0295488248edf4625976ce1c9ac85907c709940733557b6d33a427"
+    },
+    {
+      "bytes": 2188,
+      "path": "startup-failure/calibration-v2/result.json",
+      "sha256": "c37d5490aa0672596aa9cef4daa416cabcaf896f8dd710991623f665dd80100f"
+    },
+    {
+      "bytes": 44105,
+      "path": "startup-failure/calibration-v2/results/results.trx",
+      "sha256": "4dfb043bf4a4db2c9bb757d910a33821d4ef5c136b2f96ce78cc38e6d0b88855"
+    },
+    {
+      "bytes": 611,
+      "path": "startup-failure/calibration-v2/test.json",
+      "sha256": "3f416fb589e24a6023e086062c93cfcaccdbe55f16767792cb3ef90f8dcceabe"
+    },
+    {
+      "bytes": 7184,
+      "path": "startup-failure/calibration-v2/test.log",
+      "sha256": "0ee14962ddb42d05bb6293440723fe4c3cddf0a66f1569539e5fce5d132a02c4"
+    },
+    {
+      "bytes": 509,
+      "path": "startup-failure/calibration/Fault.targets",
+      "sha256": "ba440bd15a08da861b321df71c072f9944cd4b13018b52614ec6a1340eaa31cd"
+    },
+    {
+      "bytes": 10561,
+      "path": "startup-failure/calibration/Tt.cs",
+      "sha256": "721c5ae8c76cb14fed4b5d8685dbd980ef10cdf38aa5a81ab8f7942b314fbefa"
+    },
+    {
+      "bytes": 639,
+      "path": "startup-failure/calibration/build.json",
+      "sha256": "d878585a8ac372e9c4da8b1225a5bc03b2884b631a6e776841c7f6e73581606e"
+    },
+    {
+      "bytes": 540,
+      "path": "startup-failure/calibration/build.log",
+      "sha256": "02c91096c2a964a344bfd24bda7113464fb0c77caa5bdc7d92f89365da9b4af3"
+    },
+    {
+      "bytes": 2835,
+      "path": "startup-failure/calibration/compile.txt",
+      "sha256": "1320c9d5e966094c023d5e6a1ec9a20383a3b83817244c61c2ce88ac406ed969"
+    },
+    {
+      "bytes": 413,
+      "path": "startup-failure/calibration/restore.json",
+      "sha256": "63dbd5b2cab6402b82ac9f7a6cc764d1bcfe71d39e158f5158dd67ec6f909f60"
+    },
+    {
+      "bytes": 80,
+      "path": "startup-failure/calibration/restore.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "bytes": 10790,
+      "path": "startup-failure/candidate-source/src/TurboTest.EFCore/Tt.cs",
+      "sha256": "f197c2ea9e5f4fe242aa7b749344d4cdb3e33c7beb8c0655486b108dd5c3ded5"
+    },
+    {
+      "bytes": 7204,
+      "path": "startup-failure/candidate-source/tests/TurboTest.Tests/StartupCancellationOwnershipTests.cs",
+      "sha256": "dd82812778266a5efbb9650b957215c131136143e41375c790a1eac2a1f958c5"
+    },
+    {
+      "bytes": 19599,
+      "path": "startup-failure/candidate-source/tests/TurboTest.Tests/StartupLateDrainTests.cs",
+      "sha256": "73e7d3a93b8c7a750de0151cf9177761e0d8703087dd16f57a7f2797802e2f41"
+    },
+    {
+      "bytes": 373,
+      "path": "startup-failure/canonical-all.json",
+      "sha256": "27538f6d0c223dfc4ca753dc3182ca5f4706c418d2cf3a0a44cd47ec108defd5"
+    },
+    {
+      "bytes": 790,
+      "path": "startup-failure/canonical-all.log",
+      "sha256": "91e23ec6bd8322c5e85a7f5cbd3cd1f67cda7c88aa312a6c3af13703e49cd547"
+    },
+    {
+      "bytes": 6265,
+      "path": "startup-failure/criterion-1-cycle.json",
+      "sha256": "6bb0c8daa3dce63b140b2e90215e95bee2be73fc94a563a8315a07be09fd271e"
+    },
+    {
+      "bytes": 2066,
+      "path": "startup-failure/criterion-1-plan.json",
+      "sha256": "f4e68f44e6cbbb80d894711b0db4ce00dfe5ef93e62a8fce60ac355944b62fb8"
+    },
+    {
+      "bytes": 378,
+      "path": "startup-failure/fast/build.json",
+      "sha256": "a2579cc8405b59a6a759059a10e4916e9ae465956e3380de38363770dc7895cc"
+    },
+    {
+      "bytes": 895,
+      "path": "startup-failure/fast/build.log",
+      "sha256": "942ec94252d39e9f61c30c0e98ceb42020cbf73a5cea0694f8c7d916c79ee488"
+    },
+    {
+      "bytes": 480,
+      "path": "startup-failure/fast/discover-all.json",
+      "sha256": "72b87856ec5d1ea3a78d7673de72430abe8910a12deb7a0af308f586a1952229"
+    },
+    {
+      "bytes": 69785,
+      "path": "startup-failure/fast/discover-all.log",
+      "sha256": "bf6ce6d0fcecd0a406d5c47e3dbc955d240ec449bfeda496110667392991e307"
+    },
+    {
+      "bytes": 415,
+      "path": "startup-failure/fast/discover-fast.json",
+      "sha256": "81e7137d781ca124f47b80b661c9c2017a9e753af6741b9f6dd0500d86421224"
+    },
+    {
+      "bytes": 46126,
+      "path": "startup-failure/fast/discover-fast.log",
+      "sha256": "1daae89c65915976014ca996b3593de952cb29bab93fa62372753dc7cf38394b"
+    },
+    {
+      "bytes": 414,
+      "path": "startup-failure/fast/discover-slow.json",
+      "sha256": "0dd5092ae840bcacb30e0605aa70da0f7c8aae46f0cd2d5e413e650c41beeba3"
+    },
+    {
+      "bytes": 23698,
+      "path": "startup-failure/fast/discover-slow.log",
+      "sha256": "bfb71642e0d8aa4c7c1bcc1be9526779d717f6aaebca2c73df66d22c5bdab68a"
+    },
+    {
+      "bytes": 1757850,
+      "path": "startup-failure/fast/discovery-diagnostic.host.26-10-22_14-35-54_27026_5.log",
+      "sha256": "4befc950dc6d8c57cf057c94e02202368ad85bff4130273812b8ac538b38c127"
+    },
+    {
+      "bytes": 1797043,
+      "path": "startup-failure/fast/discovery-diagnostic.log",
+      "sha256": "a6aa4ea59a4281376a22702fc802f5863fcbaab0a54462aede03655728fa9959"
+    },
+    {
+      "bytes": 404,
+      "path": "startup-failure/fast/example-build.json",
+      "sha256": "c796be1d09e421e129cef3c6582a5746e0382519eb2eb9b83c55b15ce0381604"
+    },
+    {
+      "bytes": 394,
+      "path": "startup-failure/fast/example-build.log",
+      "sha256": "ef7d07aa8e02f73d835dd27fb9439dbc941b3959d679327a07ce17865407137d"
+    },
+    {
+      "bytes": 85368,
+      "path": "startup-failure/fast/fast-results.json",
+      "sha256": "4eed6f49217782caf689b87f399f57de2fb46bd64830457625523c7a43b5967b"
+    },
+    {
+      "bytes": 476481,
+      "path": "startup-failure/fast/fast/results.trx",
+      "sha256": "726d9c5d6d2c79e1887ad108dabf53d79556faa502c9b3a64c0f6cf202985ebd"
+    },
+    {
+      "bytes": 281,
+      "path": "startup-failure/fast/restore.json",
+      "sha256": "6f4b2aaa253647c2c19364e87ae0c57260be52184e87929b2cf76fae95043a4d"
+    },
+    {
+      "bytes": 80,
+      "path": "startup-failure/fast/restore.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "bytes": 258,
+      "path": "startup-failure/fast/sdk.json",
+      "sha256": "842fca6387c6b192851f6532684c3737cb8a2d5cd9d0103329d14a6c16f4faa9"
+    },
+    {
+      "bytes": 1679,
+      "path": "startup-failure/fast/sdk.log",
+      "sha256": "3822077adf74f4b461cbe9ba957e9cb3192ce4c1df02f40e91bd0ecb162f1091"
+    },
+    {
+      "bytes": 51923,
+      "path": "startup-failure/fast/source-identity.json",
+      "sha256": "9799a3faf9cd743ff57fdfb4a2c01c5288f2964d8d3fe5389586a99219d4429b"
+    },
+    {
+      "bytes": 216892,
+      "path": "startup-failure/fast/test-catalog.json",
+      "sha256": "a67e8e4806d7391560e82d7ec21460876f1de9bf50fe31f1b11f512b62ad00fc"
+    },
+    {
+      "bytes": 677,
+      "path": "startup-failure/fast/test-fast.json",
+      "sha256": "9b2d15d5da40d9fe7a9318e0f370b7f942fcdf89255c16d707a66f6dbff0709b"
+    },
+    {
+      "bytes": 52590,
+      "path": "startup-failure/fast/test-fast.log",
+      "sha256": "5def68ae545e07e81e190dc53b774c89b7630db56aa6d64893361903f036641b"
+    },
+    {
+      "bytes": 550,
+      "path": "startup-failure/fast/verification.json",
+      "sha256": "b4f877ea30e19149898dc05e77d3ee161f517f11e1584c54f17d3715a3d0c82d"
+    },
+    {
+      "bytes": 377,
+      "path": "startup-failure/final-all/build.json",
+      "sha256": "6cb7ebd1247ac08582d762bbc4096a7510627016005289b096adf40d5a3d8f7e"
+    },
+    {
+      "bytes": 895,
+      "path": "startup-failure/final-all/build.log",
+      "sha256": "bad275cb7eee0ae668ee69b992717b8eef3c055e3723203dba14c16af86c8cf5"
+    },
+    {
+      "bytes": 485,
+      "path": "startup-failure/final-all/discover-all.json",
+      "sha256": "f0972ead37870f47082ea76b8296d26a59130f0b2fe71a5ad481164f02bd5938"
+    },
+    {
+      "bytes": 69923,
+      "path": "startup-failure/final-all/discover-all.log",
+      "sha256": "c5ad96ee8509cc1ee6a8d57655e9ba873ee54bd38bfe920c93bd025f83117ccb"
+    },
+    {
+      "bytes": 414,
+      "path": "startup-failure/final-all/discover-fast.json",
+      "sha256": "cf8163e9e96a9b96f13e3012d4c86b1e668b3f85f0e06de2fcb9673a1064b3af"
+    },
+    {
+      "bytes": 46126,
+      "path": "startup-failure/final-all/discover-fast.log",
+      "sha256": "1daae89c65915976014ca996b3593de952cb29bab93fa62372753dc7cf38394b"
+    },
+    {
+      "bytes": 414,
+      "path": "startup-failure/final-all/discover-slow.json",
+      "sha256": "4b8dd38a3c868a037c4ac6a6a9a543d528fc2c31c22f317e08ff91b393927bec"
+    },
+    {
+      "bytes": 23831,
+      "path": "startup-failure/final-all/discover-slow.log",
+      "sha256": "02626e51f6f4ebe3dcf1a64973fd87ae59f0a77d36edc8b946a1f4ec68ce4f0f"
+    },
+    {
+      "bytes": 1759784,
+      "path": "startup-failure/final-all/discovery-diagnostic.host.26-10-22_14-41-40_89449_5.log",
+      "sha256": "fecd9387e24643ed5f8c145537e0602b4cfbbd7c0a13c327d81cce5a3f2a9a68"
+    },
+    {
+      "bytes": 1798972,
+      "path": "startup-failure/final-all/discovery-diagnostic.log",
+      "sha256": "c12b96445e9f487cd8ab9eb273d9fe04cf79b1a3fbd9b268f78c4da91584c1bf"
+    },
+    {
+      "bytes": 349,
+      "path": "startup-failure/final-all/docker-info.json",
+      "sha256": "3d55f3586f79023f81d53aed2d85b2bc2d0130a7b6836c21c8d5e19c2aaa6adb"
+    },
+    {
+      "bytes": 892,
+      "path": "startup-failure/final-all/docker-info.log",
+      "sha256": "4ecc7cc07c4a86b3cac17d95b670a3492d14f8219bcde9657d7dc322b2655452"
+    },
+    {
+      "bytes": 404,
+      "path": "startup-failure/final-all/example-build.json",
+      "sha256": "673d52472eaa123e73584f9601243254c03024af3115b8e1f0b3e00b0e4ae15f"
+    },
+    {
+      "bytes": 394,
+      "path": "startup-failure/final-all/example-build.log",
+      "sha256": "b9036a0dd6374a8b2c36784846f1020965cbeddcc940179d12a866fdc0cf56eb"
+    },
+    {
+      "bytes": 85356,
+      "path": "startup-failure/final-all/fast-results.json",
+      "sha256": "8dad788cff6911ef59649571966488ae5d945373b5e2cc22404b9b92740a85e4"
+    },
+    {
+      "bytes": 476481,
+      "path": "startup-failure/final-all/fast/results.trx",
+      "sha256": "c8c79d370cf35b61bdb202d3f7a4f6e48f3963a97674f8f824b2930e317b6d7f"
+    },
+    {
+      "bytes": 379,
+      "path": "startup-failure/final-all/postgres-image.json",
+      "sha256": "1ac4c98df58a328faf143e45beea3a9942b6bb4ffd65acb1cbcc669c7491610b"
+    },
+    {
+      "bytes": 72,
+      "path": "startup-failure/final-all/postgres-image.log",
+      "sha256": "4326a7ef8ec8cb685a0057618849689413a07d64158cfce2525848301c824df9"
+    },
+    {
+      "bytes": 717,
+      "path": "startup-failure/final-all/resources-after-containers.json",
+      "sha256": "04729392ed71dc3c73e999f9882770b4d64bc570ba1b74c1def89044d64587c5"
+    },
+    {
+      "bytes": 420,
+      "path": "startup-failure/final-all/resources-after.json",
+      "sha256": "f72312baabb748f882f81215f7757c4813ca768a32d1b46196bc986b7fff8d69"
+    },
+    {
+      "bytes": 612,
+      "path": "startup-failure/final-all/resources-after.log",
+      "sha256": "e2cba4b2164358938d414301598a3f7b2f7dae56a1ef6762bc40bad2122ed0a1"
+    },
+    {
+      "bytes": 717,
+      "path": "startup-failure/final-all/resources-before-containers.json",
+      "sha256": "04729392ed71dc3c73e999f9882770b4d64bc570ba1b74c1def89044d64587c5"
+    },
+    {
+      "bytes": 420,
+      "path": "startup-failure/final-all/resources-before.json",
+      "sha256": "38d4b75427478ed8741528b54ad9493f1ac8b5bf892314ab1c5e01136d91fa6a"
+    },
+    {
+      "bytes": 612,
+      "path": "startup-failure/final-all/resources-before.log",
+      "sha256": "e2cba4b2164358938d414301598a3f7b2f7dae56a1ef6762bc40bad2122ed0a1"
+    },
+    {
+      "bytes": 281,
+      "path": "startup-failure/final-all/restore.json",
+      "sha256": "be0cdab3e556b0e184bc663431aee9c4fc7055fced1deb301f975fc747c65aaf"
+    },
+    {
+      "bytes": 80,
+      "path": "startup-failure/final-all/restore.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "bytes": 259,
+      "path": "startup-failure/final-all/sdk.json",
+      "sha256": "6cc22915802e38411ba74f84e8781d9c407ad00a3211306c82804a5e1e0b81b0"
+    },
+    {
+      "bytes": 1679,
+      "path": "startup-failure/final-all/sdk.log",
+      "sha256": "3822077adf74f4b461cbe9ba957e9cb3192ce4c1df02f40e91bd0ecb162f1091"
+    },
+    {
+      "bytes": 44553,
+      "path": "startup-failure/final-all/slow-results.json",
+      "sha256": "a09031fec1f4006356155fe3a7971645f072a094b220ba6af267cb67dcf229ca"
+    },
+    {
+      "bytes": 248364,
+      "path": "startup-failure/final-all/slow/results.trx",
+      "sha256": "fa5a4dfa0cd0617b82fdc04f52cd3303326574455efdb4b03b137f7b1ac1e910"
+    },
+    {
+      "bytes": 51923,
+      "path": "startup-failure/final-all/source-identity.json",
+      "sha256": "508c766e5bdca9b378dc66ee495058d8696a62d788fdf1d924360063dce9e0a2"
+    },
+    {
+      "bytes": 217312,
+      "path": "startup-failure/final-all/test-catalog.json",
+      "sha256": "1523e0f58d04917f81581156480a65242d01d8fb5b3ce99a63e42638477be3d0"
+    },
+    {
+      "bytes": 683,
+      "path": "startup-failure/final-all/test-fast.json",
+      "sha256": "c526ea0d7b33452d826485556d3902d81886a3d42fb1838b5075a583e3ede9c2"
+    },
+    {
+      "bytes": 52606,
+      "path": "startup-failure/final-all/test-fast.log",
+      "sha256": "6ad750d9677aea5078af4e97ad5d3f87cfae9f439b18bbcfb73875e6f8018388"
+    },
+    {
+      "bytes": 681,
+      "path": "startup-failure/final-all/test-slow.json",
+      "sha256": "8f5815a2e92aec81894486a3ce0b7faab7a0b78906a8ab6044c3b281f0ba2321"
+    },
+    {
+      "bytes": 26390,
+      "path": "startup-failure/final-all/test-slow.log",
+      "sha256": "8765bc08814797c36fe4ce57da596aca1d9d18b47ecbf6fa820576b1c8fe7977"
+    },
+    {
+      "bytes": 950,
+      "path": "startup-failure/final-all/verification.json",
+      "sha256": "c79313c08243a844a96a026a8e095a2b3b999612e2295e869421548f02c1fb3a"
+    },
+    {
+      "bytes": 521,
+      "path": "startup-failure/final-calibration/Fault.targets",
+      "sha256": "8e1bf50974d4aceb997577d0e4812de9f53f8283c6e3bc252f7f150def603eb5"
+    },
+    {
+      "bytes": 10586,
+      "path": "startup-failure/final-calibration/Tt.cs",
+      "sha256": "1c70cc24ad05367973d793fde4ebccdd6d163ebce3834fbb505ed8416e0d6acd"
+    },
+    {
+      "bytes": 85427,
+      "path": "startup-failure/final-calibration/binding.json",
+      "sha256": "aee4570b0bad585540721d826d1250960bb430f227da6d33a72e37a25157ed53"
+    },
+    {
+      "bytes": 644,
+      "path": "startup-failure/final-calibration/build.json",
+      "sha256": "7ec9be09bf1f21ad9872b40cb61f5c5832373d990f4dbbc1f2e85139409ff378"
+    },
+    {
+      "bytes": 668,
+      "path": "startup-failure/final-calibration/build.log",
+      "sha256": "7b4b995ede193fc1e15b264036da8d419d4796509dfd17fbe973051b73b28009"
+    },
+    {
+      "bytes": 2841,
+      "path": "startup-failure/final-calibration/compile.txt",
+      "sha256": "55792ab87979ab20058cf7654be9f7a963865e800d889185072412ddafe31772"
+    },
+    {
+      "bytes": 717,
+      "path": "startup-failure/final-calibration/resources-after-containers.json",
+      "sha256": "04729392ed71dc3c73e999f9882770b4d64bc570ba1b74c1def89044d64587c5"
+    },
+    {
+      "bytes": 420,
+      "path": "startup-failure/final-calibration/resources-after.json",
+      "sha256": "a1c13a85f6d1b710bb889879a43ffab48e2bde97cec96c169299c1473c4b0d02"
+    },
+    {
+      "bytes": 612,
+      "path": "startup-failure/final-calibration/resources-after.log",
+      "sha256": "e2cba4b2164358938d414301598a3f7b2f7dae56a1ef6762bc40bad2122ed0a1"
+    },
+    {
+      "bytes": 717,
+      "path": "startup-failure/final-calibration/resources-before-containers.json",
+      "sha256": "04729392ed71dc3c73e999f9882770b4d64bc570ba1b74c1def89044d64587c5"
+    },
+    {
+      "bytes": 421,
+      "path": "startup-failure/final-calibration/resources-before.json",
+      "sha256": "aa4018b3ae7acecb14d4226a1ef2347e55816e499981b47f707b1290d838dd9e"
+    },
+    {
+      "bytes": 612,
+      "path": "startup-failure/final-calibration/resources-before.log",
+      "sha256": "e2cba4b2164358938d414301598a3f7b2f7dae56a1ef6762bc40bad2122ed0a1"
+    },
+    {
+      "bytes": 412,
+      "path": "startup-failure/final-calibration/restore.json",
+      "sha256": "b596e0d3001c79ba1ee95988570ce5c921f9da06832b2af2ab6e9924afbbf25c"
+    },
+    {
+      "bytes": 80,
+      "path": "startup-failure/final-calibration/restore.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "bytes": 325,
+      "path": "startup-failure/final-calibration/restored/Original.targets",
+      "sha256": "7849e6619f5fb3e82780aba76dba8b662e75d60cf6182c80b65a3bf24b7efe43"
+    },
+    {
+      "bytes": 657,
+      "path": "startup-failure/final-calibration/restored/build.json",
+      "sha256": "4cb75e6f7d6ca12f652819a5a3153dcafe47df9d709d82e0e2593d5f9f147f40"
+    },
+    {
+      "bytes": 668,
+      "path": "startup-failure/final-calibration/restored/build.log",
+      "sha256": "5969626bca2e87ca913521b53d391b48b25bb03565e951f06e02fc6949785963"
+    },
+    {
+      "bytes": 2811,
+      "path": "startup-failure/final-calibration/restored/compile.txt",
+      "sha256": "6e0caedf70f96c9c2f5bcb8173cc1a07a60c6b9cfea5ed853ace8d23d535d8b1"
+    },
+    {
+      "bytes": 33154,
+      "path": "startup-failure/final-calibration/restored/results/results.trx",
+      "sha256": "c0c6bfa4e0db9e0e6bb9d8b0c35e190129171807f7db4219f4af64c485c41bb2"
+    },
+    {
+      "bytes": 670,
+      "path": "startup-failure/final-calibration/restored/test.json",
+      "sha256": "01d44ad2b715cd27c5e1a07a82f280293cc13e64859a7b6eadae1c1ebc395551"
+    },
+    {
+      "bytes": 361,
+      "path": "startup-failure/final-calibration/restored/test.log",
+      "sha256": "b05b6c2a5bfcf906f0c2ac640863336794dec006d286a00f3a4c46dd4624049e"
+    },
+    {
+      "bytes": 2498,
+      "path": "startup-failure/final-calibration/result.json",
+      "sha256": "f22fdfa25d3f35d9b3c99a54c9dc669396ec3bbf26da56cc750d7f84654b1184"
+    },
+    {
+      "bytes": 47499,
+      "path": "startup-failure/final-calibration/results/results.trx",
+      "sha256": "dd96b8892a1979e7c2961c9a9d545dc4250846763b6279cf3b0ba96f7287abb2"
+    },
+    {
+      "bytes": 661,
+      "path": "startup-failure/final-calibration/test.json",
+      "sha256": "e8439409186fe4c638bca680bd531420705720b9673871798ab425f4adc738de"
+    },
+    {
+      "bytes": 8154,
+      "path": "startup-failure/final-calibration/test.log",
+      "sha256": "4a2130a0926c4c821852fbcf906113b2236cc7889c3c60f2135d783c93262c3b"
+    },
+    {
+      "bytes": 10168,
+      "path": "startup-failure/final-owning-coverage-review.json",
+      "sha256": "651673df2ce11c145a53f06380c9861e3b806ec571e0a1bc000834a08a3023e1"
+    },
+    {
+      "bytes": 717,
+      "path": "startup-failure/final-owning-resources-after-containers.json",
+      "sha256": "04729392ed71dc3c73e999f9882770b4d64bc570ba1b74c1def89044d64587c5"
+    },
+    {
+      "bytes": 420,
+      "path": "startup-failure/final-owning-resources-after.json",
+      "sha256": "f8936f9dff896b19a42d340ccf313266284d70c6dddcf86fdc7bf7a0bceb7173"
+    },
+    {
+      "bytes": 612,
+      "path": "startup-failure/final-owning-resources-after.log",
+      "sha256": "e2cba4b2164358938d414301598a3f7b2f7dae56a1ef6762bc40bad2122ed0a1"
+    },
+    {
+      "bytes": 717,
+      "path": "startup-failure/final-owning-resources-before-containers.json",
+      "sha256": "04729392ed71dc3c73e999f9882770b4d64bc570ba1b74c1def89044d64587c5"
+    },
+    {
+      "bytes": 420,
+      "path": "startup-failure/final-owning-resources-before.json",
+      "sha256": "37e0730315e9144818af47966cc3499831d3a96fe3035b1419e699dc17de17d8"
+    },
+    {
+      "bytes": 612,
+      "path": "startup-failure/final-owning-resources-before.log",
+      "sha256": "e2cba4b2164358938d414301598a3f7b2f7dae56a1ef6762bc40bad2122ed0a1"
+    },
+    {
+      "bytes": 199,
+      "path": "startup-failure/final-owning-resources.json",
+      "sha256": "4cc419519469ea68a2abe2e5af1a08d5d9bad2c35555d9ca63c3be14fd817b05"
+    },
+    {
+      "bytes": 313,
+      "path": "startup-failure/final-owning-result.json",
+      "sha256": "b4077e7808289adab9630e885cdb23ebeacf22d78610c94d19b1ead2fb75c03d"
+    },
+    {
+      "bytes": 3008982,
+      "path": "startup-failure/final-owning-results/63552d32-0d17-49ba-a276-7ca75168ca16/dan_os-greg_2026-10-22.14_41_33.cobertura.xml",
+      "sha256": "56cc9eaa18743c5ec61dfc7482656cc8512d38a3069338bc9e0cc9f98daeca06"
+    },
+    {
+      "bytes": 3008982,
+      "path": "startup-failure/final-owning-results/_os-greg_2026-10-22_14_39_55/In/os-greg/dan_os-greg_2026-10-22.14_41_33.cobertura.xml",
+      "sha256": "56cc9eaa18743c5ec61dfc7482656cc8512d38a3069338bc9e0cc9f98daeca06"
+    },
+    {
+      "bytes": 494394,
+      "path": "startup-failure/final-owning-results/results.trx",
+      "sha256": "bc8193e916d34f26c1fb7bae5ecca8b17afe78584d7d26e4981606987806be49"
+    },
+    {
+      "bytes": 51923,
+      "path": "startup-failure/final-owning-source.json",
+      "sha256": "508c766e5bdca9b378dc66ee495058d8696a62d788fdf1d924360063dce9e0a2"
+    },
+    {
+      "bytes": 812,
+      "path": "startup-failure/final-owning.json",
+      "sha256": "7e5bb41a6c8afbb256cf3dce0aa347da50e48d1a2f0a445aab188ed770604a03"
+    },
+    {
+      "bytes": 589,
+      "path": "startup-failure/final-owning.log",
+      "sha256": "495e0071808308c324af00143dc5465120c8a19a89595c7c4263c617909d09f3"
+    },
+    {
+      "bytes": 3351,
+      "path": "startup-failure/finalize.py",
+      "sha256": "061f88b08eba67266a659dc83fabbf3fcd1c4611c79fc37d447f875a66ee5ec6"
+    },
+    {
+      "bytes": 408,
+      "path": "startup-failure/green-build.json",
+      "sha256": "d9f6777d7b184f3e6d5e5778d007e05082f6b70663e2bb94deb8ff8d65c8ef68"
+    },
+    {
+      "bytes": 550,
+      "path": "startup-failure/green-build.log",
+      "sha256": "ce167c6009179eb37675b9a99c73b655e862dd5a7617bb035498dfa796751533"
+    },
+    {
+      "bytes": 2995516,
+      "path": "startup-failure/green-results/_os-greg_2026-10-22_14_34_53/In/os-greg/dan_os-greg_2026-10-22.14_34_53.cobertura.xml",
+      "sha256": "33530233e74238a802d41e95abf1c83be377cd9c4106bd5724c68c5f7d41541a"
+    },
+    {
+      "bytes": 2995516,
+      "path": "startup-failure/green-results/c9836070-2a24-4c07-b422-b994a9030616/dan_os-greg_2026-10-22.14_34_53.cobertura.xml",
+      "sha256": "33530233e74238a802d41e95abf1c83be377cd9c4106bd5724c68c5f7d41541a"
+    },
+    {
+      "bytes": 30859,
+      "path": "startup-failure/green-results/results.trx",
+      "sha256": "0729cdff88dc6c779fb94f739e030e7dc4b4d7bcdd69f19545edf423f854aa1a"
+    },
+    {
+      "bytes": 51923,
+      "path": "startup-failure/green-source.json",
+      "sha256": "9799a3faf9cd743ff57fdfb4a2c01c5288f2964d8d3fe5389586a99219d4429b"
+    },
+    {
+      "bytes": 626,
+      "path": "startup-failure/green.json",
+      "sha256": "0d25d70b3d13ec8b1e4ed52ce0f8d8dcd2b31427254d07dc814c95ff42a3196a"
+    },
+    {
+      "bytes": 573,
+      "path": "startup-failure/green.log",
+      "sha256": "8ce758c8951c4ce4274a2d683127e6be29fe24641c756c68a05e80170ea24fdf"
+    },
+    {
+      "bytes": 408,
+      "path": "startup-failure/native-build.json",
+      "sha256": "8c264b97acc117f40963527931a5cc198375469256c2d08f2432b10e398d3912"
+    },
+    {
+      "bytes": 421,
+      "path": "startup-failure/native-build.log",
+      "sha256": "97fe904b6a8b8a395a96b0ea234f03a8b347235c09295b407a9e2a9a561dbe55"
+    },
+    {
+      "bytes": 717,
+      "path": "startup-failure/native-resources-after-containers.json",
+      "sha256": "04729392ed71dc3c73e999f9882770b4d64bc570ba1b74c1def89044d64587c5"
+    },
+    {
+      "bytes": 420,
+      "path": "startup-failure/native-resources-after.json",
+      "sha256": "230d0917d907215e737e2e08e77b9d3ddbd17c59fc662f1ad4f58e9671032dda"
+    },
+    {
+      "bytes": 612,
+      "path": "startup-failure/native-resources-after.log",
+      "sha256": "e2cba4b2164358938d414301598a3f7b2f7dae56a1ef6762bc40bad2122ed0a1"
+    },
+    {
+      "bytes": 717,
+      "path": "startup-failure/native-resources-before-containers.json",
+      "sha256": "04729392ed71dc3c73e999f9882770b4d64bc570ba1b74c1def89044d64587c5"
+    },
+    {
+      "bytes": 421,
+      "path": "startup-failure/native-resources-before.json",
+      "sha256": "55316a06f4779979d005b28636f9cc6c7fcf7538db68295d31ee40db042ed50b"
+    },
+    {
+      "bytes": 612,
+      "path": "startup-failure/native-resources-before.log",
+      "sha256": "e2cba4b2164358938d414301598a3f7b2f7dae56a1ef6762bc40bad2122ed0a1"
+    },
+    {
+      "bytes": 199,
+      "path": "startup-failure/native-resources.json",
+      "sha256": "4cc419519469ea68a2abe2e5af1a08d5d9bad2c35555d9ca63c3be14fd817b05"
+    },
+    {
+      "bytes": 2998888,
+      "path": "startup-failure/native-results/_os-greg_2026-10-22_14_37_13/In/os-greg/dan_os-greg_2026-10-22.14_38_23.cobertura.xml",
+      "sha256": "237da2e5e3d9c720c94d4dfcb3b08c1fab1c569a5682984a9d72e701893db784"
+    },
+    {
+      "bytes": 2998888,
+      "path": "startup-failure/native-results/df9c1574-3c01-4708-84ed-f6d7d586b52f/dan_os-greg_2026-10-22.14_38_23.cobertura.xml",
+      "sha256": "237da2e5e3d9c720c94d4dfcb3b08c1fab1c569a5682984a9d72e701893db784"
+    },
+    {
+      "bytes": 9352,
+      "path": "startup-failure/native-results/results.trx",
+      "sha256": "c80ddb646dbe6f002dce11aa6055e65e0be82573b9c03036dfec23df6686ce1f"
+    },
+    {
+      "bytes": 51923,
+      "path": "startup-failure/native-source.json",
+      "sha256": "508c766e5bdca9b378dc66ee495058d8696a62d788fdf1d924360063dce9e0a2"
+    },
+    {
+      "bytes": 640,
+      "path": "startup-failure/native.json",
+      "sha256": "6b58509a57a0ae96795de4c2f4247e63a24cde06c1b6252c648fd4c6becf7fc1"
+    },
+    {
+      "bytes": 577,
+      "path": "startup-failure/native.log",
+      "sha256": "d5cad600f9077d0639d57948e7cd0a8e7d2e82302ce836cb9f78e6d198941ebe"
+    },
+    {
+      "bytes": 1145,
+      "path": "startup-failure/next-slice-readiness.json",
+      "sha256": "ef9bda3d454882812d8dc1a3dfe34a5cf0cc86a1e546edcdffe1abd58de25402"
+    },
+    {
+      "bytes": 407,
+      "path": "startup-failure/red-build.json",
+      "sha256": "98b14155de16866ff25c01b7d376de01dc55ffa73297eb539c4255cdf35a04a5"
+    },
+    {
+      "bytes": 550,
+      "path": "startup-failure/red-build.log",
+      "sha256": "d78c352ded2b81299060bf4346ba844a6af1eae3b359cdc5d97d72664017f676"
+    },
+    {
+      "bytes": 29623,
+      "path": "startup-failure/red-results/results.trx",
+      "sha256": "1f9a3f526785a730075625ff1393dc7d0c71b360347aa0d9395b39549138c805"
+    },
+    {
+      "bytes": 51923,
+      "path": "startup-failure/red-source.json",
+      "sha256": "cfc351a6de2d9f216367a8a777c2802a7167318f1c25c719862c81dee498801f"
+    },
+    {
+      "bytes": 616,
+      "path": "startup-failure/red.json",
+      "sha256": "82860360cafbffc88fb23d35539d9c9b7b045d823ab15e383259f27acd5b9ad3"
+    },
+    {
+      "bytes": 7232,
+      "path": "startup-failure/red.log",
+      "sha256": "2040f49b131c54c98c737473d845ff2a94ffdf66a2dad1875021488ebbab0626"
+    },
+    {
+      "bytes": 64360,
+      "path": "startup-failure/resolved-dependencies/benchmarks/TurboTest.Benchmarks/obj/project.assets.json",
+      "sha256": "3c9197ccf18b4ef392936cbcb25f47ab702956c87eb1a1f63c55c454de733aff"
+    },
+    {
+      "bytes": 64360,
+      "path": "startup-failure/resolved-dependencies/examples/AutoAllocationExample/obj/project.assets.json",
+      "sha256": "0c21625718700aedbadfdda9ee538e40868bce17509082a706fcd2c29347641d"
+    },
+    {
+      "bytes": 233958,
+      "path": "startup-failure/resolved-dependencies/examples/ConfigurationExamples/obj/project.assets.json",
+      "sha256": "a299d9814c7a0e2725ac2a7e2a5483a4609aab411860dc9750ca0c7c644dc50c"
+    },
+    {
+      "bytes": 69415,
+      "path": "startup-failure/resolved-dependencies/examples/DynamicScalingExample/obj/project.assets.json",
+      "sha256": "11ccbe68a4331052b070dcac14b8a1c7c83ff2c847e568ee0e9e74030056712e"
+    },
+    {
+      "bytes": 69373,
+      "path": "startup-failure/resolved-dependencies/examples/LoggingExample/obj/project.assets.json",
+      "sha256": "e00e79f66054e9fcd502bb7b249fe48e8f73c6c9fabc5261af1639a375078632"
+    },
+    {
+      "bytes": 189576,
+      "path": "startup-failure/resolved-dependencies/examples/MinimalExample/obj/project.assets.json",
+      "sha256": "4c7ac60b690b890ab64ef4faa9265eca612db2d99977bf65bbce0d4e83f1f8ba"
+    },
+    {
+      "bytes": 64749,
+      "path": "startup-failure/resolved-dependencies/src/TurboTest.EFCore/obj/project.assets.json",
+      "sha256": "6bf65a201aa6748ca0fc592b619a68b8a0caab5f2742b379fc637b47409aa6ea"
+    },
+    {
+      "bytes": 247388,
+      "path": "startup-failure/resolved-dependencies/tests/TurboTest.Tests/obj/project.assets.json",
+      "sha256": "b0bfe0d041abd78060c84f487405b79934ffb325bb66b037855854f29c81c919"
+    },
+    {
+      "bytes": 940,
+      "path": "startup-failure/timing-review.json",
+      "sha256": "f96994587040f0c3ddf464c9783b7295f7422657bfe9f7417396072dc1648a92"
+    },
+    {
+      "bytes": 14899,
+      "path": "startup-failure/tracker-draft.json",
+      "sha256": "d8023c33745d06438d11329e2124a1a41e9fe74f3693d84e33511480d1ef121d"
+    },
+    {
+      "bytes": 2053,
+      "path": "startup-failure/verify-final.py",
+      "sha256": "7099d532f233b0e020bfa5a7cf4da95511d9915f7560762d2a7c7e2886f6f8ab"
+    }
+  ],
+  "limits": [
+    "Bounded TT023 repair only: interrupted observer returns before held actual initializer fails materially; retained cleanup reports that previously unobserved safe error once after cancellation and physical drain. No whole-ticket closure or original54-question resolution claim.",
+    "Six genuine RED rows and four success/owned-cancellation controls precede production change. Raw IOException, already-safe LateSeedWrite/53100, and late actual TimeoutException inputs cross caller cancellation and observation deadline.",
+    "Native held seed executes an actual missing-relation query after caller cancellation. Independent Docker identity, gated callback and physical deletion prove BaselineInitialize/42P01, safe diagnostics and exact-once cleanup. Native case was added as boundary calibration after component GREEN, then independently rejects the compiled fault.",
+    "Final exact compiled discard fault rejects six fast cases plus native seed;13controls pass, source/binary/dependency identity unchanged, owned command groups stopped, resources equal. First calibration build failed only for unused-variable warning and is retained as harness failure, not product RED.",
+    "Raw OperationCanceledException suppression and observed-error reference comparison retain existing behavior. This slice does not settle foreign-token cancellation, all AggregateException inner failures, immediate initializer-owned timeout taxonomy, caller/simultaneous shutdown precedence or every secondary failure/capability path.",
+    "Final ordinary498=327fast+171native and owning339=327fast+12native share identical source/runtime/dependency inputs. Local gate is not hostedCI. Whole-session mutation remains pending final coding-session snapshot; original mutation statuses unchanged.",
+    "No lane change from one timing observation. New fast deadline cases add approximately250ms of intentional observation waits, while the new native case stays in the PostgreSQL lane; retained ordinary timings support further review.",
+    "PostPASS envelope: exact completion write, local source commit and conditional issue13body-only append/readback. Issue remains open; all existing checkboxes unchanged. No source remote, push, Project field claim or cleanup deletion. Preserve stopped unknown baseline and reusable caches/evidence."
+  ],
+  "owningCoverageRows": 339,
+  "schemaVersion": 1,
+  "slice": "TT023 late initializer failure ownership",
+  "verification": {
+    "discovered": {
+      "all": 498,
+      "fast": 327,
+      "slow": 171
+    },
+    "dockerHost": "unix:///var/run/docker.sock",
+    "elapsedSeconds": 692.1725902869948,
+    "hostedWorkflow": "not performed by local driver",
+    "lane": "all",
+    "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35",
+    "resourceSettlement": {
+      "added": [],
+      "after": [
+        "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+      ],
+      "automaticDeletion": false,
+      "before": [
+        "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+      ],
+      "removed": []
+    },
+    "result": "PASS",
+    "runId": "e13957df-9cd5-4a85-bf13-826e46cce9ae",
+    "startedUtc": "2026-10-22T04:41:34Z",
+    "tests": {
+      "fast": {
+        "failed": 0,
+        "passed": 327,
+        "skipped": 0,
+        "testSeconds": 5.1651621
+      },
+      "slow": {
+        "failed": 0,
+        "passed": 171,
+        "skipped": 0,
+        "testSeconds": 1065.4466996999995
+      }
+    }
+  }
+}

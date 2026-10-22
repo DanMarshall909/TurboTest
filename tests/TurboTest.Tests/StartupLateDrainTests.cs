@@ -6,6 +6,84 @@ namespace TurboTest.Tests;
 [Collection("Static lifecycle")]
 public class StartupLateDrainTests
 {
+    [Theory]
+    [InlineData(true, "Success")]
+    [InlineData(false, "Success")]
+    [InlineData(true, "OwnedCancellation")]
+    [InlineData(false, "OwnedCancellation")]
+    [InlineData(true, "Material")]
+    [InlineData(false, "Material")]
+    [InlineData(true, "SafeMaterial")]
+    [InlineData(false, "SafeMaterial")]
+    [InlineData(true, "Timeout")]
+    [InlineData(false, "Timeout")]
+    public async Task Interrupted_startup_reports_the_actual_late_initializer_failure_once_after_physical_cleanup(
+        bool callerCancellation, string completion)
+    {
+        var pool = new StartupPool { FailedDeleteAttempts = 0 };
+        using var caller = new CancellationTokenSource();
+        Exception? material = completion switch
+        {
+            "Material" => new IOException("private-late-initializer"),
+            "SafeMaterial" => new TtLifecycleException("LateSeedWrite",
+                new Npgsql.PostgresException("private-late-seed", "ERROR", "ERROR", "53100")),
+            "Timeout" => new TimeoutException("private-owned-timeout"),
+            _ => null
+        };
+        var startup = Tt.InitializeOwnedPoolAsync(pool, new TtOptions
+        {
+            StartupTimeout = callerCancellation ? TimeSpan.FromSeconds(10) : TimeSpan.FromMilliseconds(50)
+        }, async token =>
+        {
+            await pool.InitializeAsync(token);
+            if (completion == "OwnedCancellation") token.ThrowIfCancellationRequested();
+            if (material is not null) throw material;
+        }, "BaselineInitialize", caller.Token);
+        TtCleanup? cleanup = null;
+        try
+        {
+            await pool.Initialized.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            if (callerCancellation) caller.Cancel();
+            var interrupted = await Assert.ThrowsAsync<TtLifecycleException>(() => startup.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal(callerCancellation ? "StartupCanceled" : "StartupTimeout", interrupted.Stage);
+            cleanup = Assert.IsType<TtCleanup>(interrupted.Cleanup);
+            Assert.Single(cleanup.OwnedResourceIds);
+            var recovery = cleanup.RetryCleanupAsync();
+            Assert.False(recovery.IsCompleted);
+            Assert.Equal(0, pool.DeleteAttempts);
+            pool.ReleaseInitialization.TrySetResult();
+
+            if (material is not null)
+            {
+                var late = await Assert.ThrowsAsync<TtLifecycleException>(() => recovery.WaitAsync(TimeSpan.FromSeconds(2)));
+                Assert.Equal((material as TtLifecycleException)?.Stage ?? "BaselineInitialize", late.Stage);
+                Assert.Equal((material as TtLifecycleException)?.SqlState, late.SqlState);
+                if (material is not TtLifecycleException) Assert.Contains(material.GetType().Name, late.Message);
+                Assert.DoesNotContain("private-", late.ToString());
+                Assert.Null(late.InnerException);
+                Assert.Same(cleanup, late.Cleanup);
+            }
+            else await recovery.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((1, 0), (pool.DeleteAttempts, pool.Snapshot.Reserved));
+            Assert.Empty(cleanup.OwnedResourceIds);
+            await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(1, pool.DeleteAttempts);
+        }
+        finally
+        {
+            pool.ReleaseInitialization.TrySetResult();
+            var failure = await Record.ExceptionAsync(() => startup.WaitAsync(TimeSpan.FromSeconds(2)));
+            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+            if (cleanup is not null)
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2)));
+                await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            }
+            await pool.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
     [Fact]
     public async Task Successful_initialization_releases_its_cancellation_handle_when_actual_work_finishes()
     {

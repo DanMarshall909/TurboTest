@@ -116,13 +116,19 @@ public static class Tt
         {
             var interrupted = cancellationToken.IsCancellationRequested ||
                 (error is TimeoutException && !ReferenceEquals(initialization.Exception?.InnerException, error));
+            TtLifecycleException? initializationFailure = null;
             Exception? cancellationFailure = null;
             cleanupOwnsCancellation = true;
             var cancellation = initializationCancellation.CancelAsync();
             async Task DrainAsync()
             {
                 try { await initialization; }
-                catch { /* Failure is reported separately; ownership still drains. */ }
+                catch (Exception initializationError)
+                {
+                    if (!ReferenceEquals(initializationError, error) && initializationError is not OperationCanceledException)
+                        initializationFailure = initializationError as TtLifecycleException ??
+                            new TtLifecycleException(stage, initializationError);
+                }
                 try { await cancellation; }
                 catch (Exception callbackError) { cancellationFailure = callbackError; }
                 try { await pool.DisposeAsync(); }
@@ -131,6 +137,7 @@ public static class Tt
             var drain = DrainAsync();
             TtCleanup RetainCleanup(bool drainFailureReported = false)
             {
+                var initializationFailureReported = false;
                 var cancellationFailureReported = false;
                 var cleanup = TtCleanupRegistry.Retain(pool.Snapshot.OwnerId, async () =>
                 {
@@ -148,6 +155,11 @@ public static class Tt
                         {
                             failures.Add(retryError);
                         }
+                    }
+                    if (initializationFailure is not null && !initializationFailureReported)
+                    {
+                        initializationFailureReported = true;
+                        failures.Add(initializationFailure);
                     }
                     if (cancellationFailure is not null && !cancellationFailureReported)
                     {

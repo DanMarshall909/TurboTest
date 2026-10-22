@@ -392,8 +392,15 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                 catch (Exception error)
                 {
                     var failure = error as TtLifecycleException ?? new TtLifecycleException("SlotPrepare", error);
-                    if (_capacityPolicy is not null && reservation.Recovering && error is not OperationCanceledException)
-                        lock (_gate) reservation.UnseenPreparationFailure = failure;
+                    // Preparation owns material failures until verified publication
+                    // or delivery, including abandoned initial acquisitions.
+                    if (error is not OperationCanceledException)
+                        lock (_gate)
+                        {
+                            if (reservation.UnseenPreparationFailure is { } previous)
+                                failure = new TtLifecycleException("SlotPrepare", new AggregateException(previous, failure));
+                            reservation.UnseenPreparationFailure = failure;
+                        }
                     await _resetLimit.WaitAsync();
                     try
                     {
@@ -412,10 +419,15 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
                     }
                     catch (Exception cleanupError)
                     {
+                        lock (_gate)
+                        {
+                            failure = (reservation.UnseenPreparationFailure ?? failure).WithCleanupFailure(cleanupError);
+                            reservation.UnseenPreparationFailure = failure;
+                        }
                         if (reservation.Recovering)
-                            ScheduleCleanupRecovery(reservation, failure.WithCleanupFailure(cleanupError), attempts - attempt);
+                            ScheduleCleanupRecovery(reservation, failure, attempts - attempt);
                         else
-                            Quarantine(reservation, failure.WithCleanupFailure(cleanupError), "SlotPrepare");
+                            Quarantine(reservation, failure, "SlotPrepare");
                         return;
                     }
                     finally { _resetLimit.Release(); }

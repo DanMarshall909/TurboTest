@@ -261,6 +261,7 @@ internal sealed class TtPool : ITtDatabasePool
             container.AttachDataSource(dataSource);
             await WaitForDatabaseReadyAsync(dataSource, cancellationToken: cancellationToken);
         }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
         catch (Exception error)
         {
             if (error is DockerApiException) slot.CreationRequestSettled = true;

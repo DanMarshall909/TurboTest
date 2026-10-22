@@ -353,9 +353,12 @@ public class SlotPoolTests
         var deleting = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var active = 0;
+        var preparations = 0;
         var deleted = new List<Guid>();
         await using var owner = new TtSlotPool<Resource>(2, 2, id => new Resource(id),
-            (_, _) => Task.FromException(new IOException("Preparation failed.")), async resource =>
+            (_, _) => Task.FromException(Interlocked.Increment(ref preparations) == 1
+                ? new TtLifecycleException("FirstCandidate", new IOException("private-first-preparation"))
+                : new TtLifecycleException("SecondCandidate", new UnauthorizedAccessException("private-second-preparation"))), async resource =>
             {
                 if (Interlocked.Increment(ref active) > 1)
                     throw new InvalidOperationException("Preparation compensation exceeded the cleanup limit.");
@@ -373,9 +376,18 @@ public class SlotPoolTests
             Assert.False(second.IsCompleted);
             Assert.Equal((2, 1), (owner.Snapshot.Reserved, active));
             release.TrySetResult();
-            await Assert.ThrowsAsync<TtLifecycleException>(() => first);
-            await Assert.ThrowsAsync<TtLifecycleException>(() => second);
-            await owner.DisposeAsync();
+            var delivered = await Assert.ThrowsAsync<TtLifecycleException>(() => first);
+            Assert.Equal("FirstCandidate", delivered.Stage);
+            Assert.Same(delivered, await Assert.ThrowsAsync<TtLifecycleException>(() => second));
+            var unseen = await Assert.ThrowsAsync<TtLifecycleException>(() => owner.DisposeAsync().AsTask());
+            Assert.Equal("SlotDispose", unseen.Stage);
+            Assert.Contains("SecondCandidate", unseen.Message);
+            Assert.Contains(nameof(UnauthorizedAccessException), unseen.Message);
+            Assert.DoesNotContain("FirstCandidate", unseen.Message);
+            Assert.DoesNotContain(nameof(IOException), unseen.Message);
+            Assert.DoesNotContain("private-", unseen.ToString());
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
             Assert.Equal(2, deleted.Count);
             Assert.Equal(2, deleted.Distinct().Count());
             Assert.Equal(0, owner.Snapshot.Reserved);
@@ -385,6 +397,8 @@ public class SlotPoolTests
             release.TrySetResult();
             await Record.ExceptionAsync(() => first);
             if (second is not null) await Record.ExceptionAsync(() => second);
+            await Record.ExceptionAsync(() => owner.DisposeAsync().AsTask());
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
         }
     }
 

@@ -135,6 +135,7 @@ public static class Tt
                 finally { initializationCancellation.Dispose(); }
             }
             var drain = DrainAsync();
+            var cleanupRetained = false;
             TtCleanup RetainCleanup(bool drainFailureReported = false)
             {
                 var initializationFailureReported = false;
@@ -169,12 +170,13 @@ public static class Tt
                     if (failures.Count == 1) throw failures[0];
                     if (failures.Count > 1) throw new AggregateException(failures);
                 }, () => pool.OwnedResourceIds);
+                cleanupRetained = true;
                 return cleanup;
             }
             if (interrupted)
             {
                 var interruptedStage = cancellationToken.IsCancellationRequested ? "StartupCanceled" : "StartupTimeout";
-                throw new TtLifecycleException(interruptedStage, error, cancellationFailure, RetainCleanup());
+                throw new TtLifecycleException(interruptedStage, error, cleanup: RetainCleanup());
             }
             var failure = error as TtLifecycleException ?? new TtLifecycleException(stage, error);
             try { await drain.WaitAsync(options.DrainTimeout); }
@@ -183,7 +185,9 @@ public static class Tt
                 failure = new TtLifecycleException(failure.Stage, failure, cleanupError,
                     RetainCleanup(ReferenceEquals(drain.Exception?.InnerException, cleanupError)));
             }
-            if (cancellationFailure is not null && failure.Cleanup is null)
+            // Causal cleanup can belong to a nested owner. Only this startup's
+            // retained drain takes responsibility for reporting its callback.
+            if (cancellationFailure is not null && !cleanupRetained)
                 failure = failure.WithCleanupFailure(cancellationFailure);
             throw failure;
         }

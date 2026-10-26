@@ -9,6 +9,83 @@ namespace TurboTest.Tests;
 
 public class FactoryTimingTests
 {
+    [Theory]
+    [InlineData("PoolClosed")]
+    [InlineData("OwnerClosed")]
+    [InlineData("CallerAndOwner")]
+    [InlineData("OwnerThenCaller")]
+    public async Task Admitted_checkout_distinguishes_closure_and_caller_cancellation_in_result_and_timing(string cause)
+    {
+        var clock = new ManualPoolClock();
+        var logger = new TimingLogger();
+        var poolFailure = new ObjectDisposedException("pool");
+        var pool = new TimedPool { CheckoutFailure = cause == "PoolClosed" ? poolFailure : null };
+        pool.AllowDrain.TrySetResult();
+        var factory = new TtFactory<TestDbContext>(pool,
+            new TtOptions { AutoMigrate = false, Logger = logger, LogLevel = LogLevel.Debug },
+            ownsPool: true, timeProvider: clock);
+        using var caller = new CancellationTokenSource();
+        Task<TtLease<TestDbContext>>? checkout = null;
+        Task? closing = null;
+        try
+        {
+            await Task.Run(() =>
+            {
+                var previous = SynchronizationContext.Current;
+                var pump = new QueuedSynchronizationContext();
+                SynchronizationContext.SetSynchronizationContext(pump);
+                try
+                {
+                    checkout = factory.CreateLeaseAsync(cancellationToken: caller.Token);
+                    Assert.True(pool.CheckoutEntered.Task.IsCompleted);
+                    clock.Advance(TimeSpan.FromSeconds(4));
+                    if (cause == "PoolClosed") pool.AllowCheckout.TrySetResult();
+                    else
+                    {
+                        if (cause == "CallerAndOwner")
+                            Task.Run(() => caller.Cancel()).WaitAsync(TimeSpan.FromSeconds(2)).GetAwaiter().GetResult();
+                        closing = factory.DisposeAsync().AsTask();
+                        if (cause == "OwnerThenCaller")
+                            Task.Run(() => caller.Cancel()).WaitAsync(TimeSpan.FromSeconds(2)).GetAwaiter().GetResult();
+                    }
+                    pump.RunUntil(checkout);
+                }
+                finally
+                {
+                    SynchronizationContext.SetSynchronizationContext(previous);
+                    pump.ReleaseToThreadPool();
+                }
+            });
+            var failure = await Record.ExceptionAsync(() => checkout!.WaitAsync(TimeSpan.FromSeconds(2)));
+            if (cause is "CallerAndOwner" or "OwnerThenCaller")
+            {
+                Assert.IsAssignableFrom<OperationCanceledException>(failure);
+                Assert.True(checkout!.IsCanceled);
+            }
+            else
+            {
+                Assert.IsType<ObjectDisposedException>(failure);
+                Assert.True(checkout!.IsFaulted);
+                if (cause == "PoolClosed") Assert.Same(poolFailure, failure);
+            }
+            var timing = Assert.Single(logger.Records, record => (string?)record["Operation"] == "Checkout");
+            Assert.Equal(cause is "CallerAndOwner" or "OwnerThenCaller" ? "Canceled" : "Closed", timing["Outcome"]);
+            Assert.Equal(4000d, timing["DurationMilliseconds"]);
+            Assert.DoesNotContain(logger.Records, record => (string?)record["Operation"] is "Return" or "Cycle");
+            await (closing ?? factory.DisposeAsync().AsTask()).WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((0, 1), (pool.Returns, pool.Drains));
+        }
+        finally
+        {
+            pool.AllowCheckout.TrySetResult();
+            pool.AllowReturn.TrySetResult();
+            pool.AllowDrain.TrySetResult();
+            if (checkout is not null)
+                await Record.ExceptionAsync(() => checkout.WaitAsync(TimeSpan.FromSeconds(2)));
+            await factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
     [Fact]
     public async Task Actual_shutdown_includes_context_cleanup_before_pool_teardown()
     {
@@ -93,6 +170,8 @@ public class FactoryTimingTests
             AssertDuration(logger, "Shutdown", 7000);
             await factory.DisposeAsync();
             Assert.Equal(4, logger.Records.Count);
+            Assert.Equal(4, logger.Events.Count);
+            Assert.All(logger.Events, entry => Assert.Equal((402, "PoolTiming"), (entry.Id, entry.Name)));
             Assert.All(logger.Records, record =>
             {
                 Assert.Equal("Succeeded", record["Outcome"]);
@@ -142,6 +221,7 @@ public class FactoryTimingTests
     internal sealed class TimingLogger : ILogger
     {
         internal ConcurrentQueue<Dictionary<string, object?>> Records { get; } = new();
+        internal ConcurrentQueue<EventId> Events { get; } = new();
         internal bool Throw { get; init; }
         internal Action<Dictionary<string, object?>>? OnRecord { get; init; }
         public bool IsEnabled(LogLevel logLevel) => true;
@@ -150,6 +230,7 @@ public class FactoryTimingTests
         {
             if (eventId.Id != 402) return;
             var record = ((IEnumerable<KeyValuePair<string, object?>>)state!).ToDictionary();
+            Events.Enqueue(eventId);
             Records.Enqueue(record);
             OnRecord?.Invoke(record);
             if (Throw) throw new UnauthorizedAccessException("private-observer-payload");
@@ -183,10 +264,12 @@ public class FactoryTimingTests
         internal TaskCompletionSource AllowDrain { get; } = NewSignal();
         internal int Returns { get; private set; }
         internal int Drains { get; private set; }
+        internal Exception? CheckoutFailure { get; init; }
         public async Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
         {
             CheckoutEntered.SetResult();
             await AllowCheckout.Task.WaitAsync(cancellationToken);
+            if (CheckoutFailure is not null) throw CheckoutFailure;
             return new TtDatabase(_source, async () =>
             {
                 if (++Returns > 1) throw new InvalidOperationException("Repeated database return.");

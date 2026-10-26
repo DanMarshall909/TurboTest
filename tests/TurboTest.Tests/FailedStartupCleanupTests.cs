@@ -1,5 +1,6 @@
 using Docker.DotNet;
 using Docker.DotNet.Models;
+using Microsoft.EntityFrameworkCore;
 using TurboTest.EFCore;
 using TurboTest.EFCore.Internal;
 
@@ -8,6 +9,96 @@ namespace TurboTest.Tests;
 [Collection("Static lifecycle")]
 public class FailedStartupCleanupTests
 {
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Nested_startup_failures_keep_both_real_child_hosts_recoverable_after_outer_cleanup()
+    {
+        var prefix = $"tt-nested-startup-{Guid.NewGuid():N}";
+        var holdChildren = true;
+        var childDeletions = 0;
+        var outerDeletions = 0;
+        var known = new List<TtCleanup>();
+        TtCleanup? returned = null;
+        CancellationTokenRegistration registration = default;
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        try
+        {
+            var seed = await FailChildAsync("seed", "SELECT 1 / 0", "22012");
+            var callback = await FailChildAsync("callback", "SELECT * FROM private_callback_missing", "42P01");
+            var childIds = known.SelectMany(cleanup => cleanup.OwnedResourceIds).Order().ToArray();
+            Assert.Equal(2, childIds.Distinct().Count());
+            var definition = new TtBaselineDefinition<TestDbContext>("nested-outer", TtSchemaInitialization.EnsureCreated,
+                (_, token) =>
+                {
+                    registration = token.Register(() => throw callback);
+                    throw seed;
+                });
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => Tt.CreatePreparedFactoryAsync(
+                new TtOptions { PoolSize = 1, ContainerPrefix = prefix + "-outer" }, definition, default,
+                deleteHost: async container =>
+                {
+                    if (Interlocked.Increment(ref outerDeletions) > 1)
+                        throw new InvalidOperationException("Outer deletion was repeated.");
+                    await container.DisposeAsync();
+                }).WaitAsync(TimeSpan.FromSeconds(45)));
+            returned = Assert.IsType<TtCleanup>(failure.Cleanup);
+            Assert.Equal(("BaselineInitialize", "22012"), (failure.Stage, failure.SqlState));
+            Assert.Contains("22012", failure.Message);
+            Assert.Contains("42P01", failure.Message);
+            Assert.DoesNotContain("private", failure.ToString());
+            Assert.Null(failure.InnerException);
+            Assert.Equal(childIds, returned.OwnedResourceIds.Order().ToArray());
+            Assert.Equal(childIds, (await OwnedAsync()).Select(container => container.ID).Order().ToArray());
+            Assert.Equal((1, 0), (outerDeletions, childDeletions));
+            holdChildren = false;
+            await returned.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(30));
+            await returned.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Empty(returned.OwnedResourceIds);
+            Assert.Empty(await OwnedAsync());
+            Assert.Equal((1, 2), (outerDeletions, childDeletions));
+        }
+        finally
+        {
+            holdChildren = false;
+            registration.Dispose();
+            foreach (var cleanup in known.Append(returned).OfType<TtCleanup>())
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(30)));
+                await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(30));
+            }
+            Assert.Empty(await OwnedAsync());
+        }
+
+        async Task<TtLifecycleException> FailChildAsync(string suffix, string sql, string expectedState)
+        {
+            var definition = new TtBaselineDefinition<TestDbContext>(suffix, TtSchemaInitialization.EnsureCreated,
+                (context, _) => context.Database.ExecuteSqlRawAsync(sql));
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => Tt.CreatePreparedFactoryAsync(
+                new TtOptions { PoolSize = 1, ContainerPrefix = prefix + "-" + suffix }, definition, default,
+                deleteHost: async container =>
+                {
+                    if (holdChildren) throw new IOException("private-held-child");
+                    if (Interlocked.Increment(ref childDeletions) > 2)
+                        throw new InvalidOperationException("Confirmed child deletion was repeated.");
+                    await container.DisposeAsync();
+                }).WaitAsync(TimeSpan.FromSeconds(45)));
+            var cleanup = Assert.IsType<TtCleanup>(failure.Cleanup);
+            known.Add(cleanup);
+            Assert.Equal(expectedState, failure.SqlState);
+            Assert.Single(cleanup.OwnedResourceIds);
+            return failure;
+        }
+
+        Task<IList<ContainerListResponse>> OwnedAsync() => docker.Containers.ListContainersAsync(new ContainersListParameters
+        {
+            All = true,
+            Filters = new Dictionary<string, IDictionary<string, bool>>
+            {
+                ["name"] = new Dictionary<string, bool> { [prefix] = true }
+            }
+        });
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]

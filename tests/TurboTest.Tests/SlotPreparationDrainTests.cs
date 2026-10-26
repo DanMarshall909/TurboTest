@@ -7,6 +7,60 @@ namespace TurboTest.Tests;
 public class SlotPreparationDrainTests
 {
     [Fact]
+    public async Task A_terminal_failure_observed_after_abandoned_preparation_is_not_replayed_at_drain()
+    {
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var expected = new TtLifecycleException("AbandonedSeed",
+            new Npgsql.PostgresException("private-abandoned-seed", "ERROR", "ERROR", "53100"));
+        var creates = 0;
+        var deletes = 0;
+        var owner = new TtSlotPool<Resource>(1, 1, id =>
+        {
+            if (++creates > 1) throw new InvalidOperationException("Terminal preparation created another resource.");
+            return new Resource(id);
+        }, async (_, _) =>
+        {
+            entered.TrySetResult();
+            await release.Task;
+            throw expected;
+        }, _ =>
+        {
+            if (++deletes > 1) throw new InvalidOperationException("Confirmed preparation deletion was repeated.");
+            return Task.CompletedTask;
+        });
+        using var caller = new CancellationTokenSource();
+        var abandoned = owner.AcquireAsync(caller.Token);
+        try
+        {
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            caller.Cancel();
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => abandoned.WaitAsync(TimeSpan.FromSeconds(2)));
+            release.TrySetResult();
+            using var settled = new CancellationTokenSource(TimeSpan.FromSeconds(2));
+            while (owner.Snapshot.Reserved != 0) await Task.Delay(1, settled.Token);
+            Assert.Equal((1, 1, 0), (creates, deletes, owner.Snapshot.QueuedAcquisitions));
+            var delivered = await Assert.ThrowsAsync<TtLifecycleException>(() => owner.AcquireAsync());
+            Assert.Same(expected, delivered);
+            Assert.Equal(("AbandonedSeed", "53100"), (delivered.Stage, delivered.SqlState));
+            Assert.DoesNotContain("private-", delivered.ToString());
+            Assert.Null(delivered.InnerException);
+            var drain = await Record.ExceptionAsync(() => owner.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Null(drain);
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((1, 1, 0), (creates, deletes, owner.Snapshot.Reserved));
+        }
+        finally
+        {
+            release.TrySetResult();
+            caller.Cancel();
+            await Record.ExceptionAsync(() => abandoned.WaitAsync(TimeSpan.FromSeconds(2)));
+            await Record.ExceptionAsync(() => owner.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)));
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
+    [Fact]
     public async Task A_retry_queued_before_shutdown_cannot_create_another_resource_after_closure()
     {
         var clock = new HeldRetryClock();

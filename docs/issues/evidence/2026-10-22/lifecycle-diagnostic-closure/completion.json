@@ -1,0 +1,35 @@
+{
+  "baseCommit": "e18d7e1418890a0a7f39a1bb9d2116580b4cefcb",
+  "currentFaults": 28,
+  "environmentFinalization": {
+    "afterSha256": "593b15a98046636c86a994d1dd3eac1239eed11c334e27d045c321b64f9f494d",
+    "artifact": ".aws",
+    "beforeSha256": "6671fe83b7a07c8932ee89164d1f2793b2318058eb8b98dc5c06ee0a5a3b0ec1",
+    "changesSourceIgnorePolicy": false,
+    "nativeIdentity": {
+      "bytes": 0,
+      "device": 66309,
+      "inode": 2402499,
+      "mode": "0444",
+      "mtimeNs": 1793006785779878736,
+      "namespace": "native elevated view; underlying ext4, no dedicated path mount",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "path": ".git/info/exclude",
+    "preservedArtifact": true,
+    "restrictedView": "Empty mode0600 regular placeholder on read-only tmpfs bindfile...//deleted mount",
+    "rule": "/.aws"
+  },
+  "historicalStatusesUnchanged": true,
+  "independentVerdict": "PASS",
+  "ordinaryTests": 520,
+  "originalQuestionDispositions": 54,
+  "owningCoverageRows": 383,
+  "publication": "local commit; fresh compared issue13body/checklist+closed/completed readback; native Project fields unverified/unmodified",
+  "reviewRound": 2,
+  "reviewedCandidateSha256": "7273c628a17e3f8f513a581821d271e4f7314a61ffa32b8b441b122520aa094e",
+  "reviewer": "/root/tt023_closure_review",
+  "ticket": "TT-023 lifecycle diagnostic closure",
+  "wholeIssueClosure": true,
+  "wholeSessionMutation": "pending final coding-session snapshot"
+}

@@ -27,7 +27,7 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
             _acquisitions.Add(settled);
             _maintenance.Add(work);
         }
-        _ = RunMaintenanceAsync(work, settled);
+        _ = RunMaintenanceAsync(work);
         try
         {
             using var linked = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _shutdown.Token);
@@ -60,7 +60,7 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
         internal bool Delivered { get; set; }
     }
 
-    private async Task RunMaintenanceAsync(MaintenanceWork work, TaskCompletionSource observer)
+    private async Task RunMaintenanceAsync(MaintenanceWork work)
     {
         Exception? failure = null;
         Task? operation = null;
@@ -78,7 +78,7 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
         lock (_disposeGate)
         {
             work.Completion.TrySetResult(failure);
-            if (!_acquisitions.Contains(observer) && (failure is null || work.Delivered)) _maintenance.Remove(work);
+            if (failure is null) _maintenance.Remove(work);
         }
     }
 

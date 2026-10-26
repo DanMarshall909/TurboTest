@@ -1,0 +1,2258 @@
+{
+  "criteria": [
+    {
+      "criterion": 1,
+      "evidence": "Existing accepted factory-ownership/factory-observer-race and final owning coverage/full ordinary run",
+      "outcome": "Cancel observer, actual failure completes, then drain preserves safe error once and confirms cleanup",
+      "tests": [
+        "FactoryMaintenanceTests.Canceled_observation_retains_an_already_completed_maintenance_failure_until_drain",
+        "FactoryMaintenanceTests.A_failure_recorded_before_canceled_observer_finally_remains_available_to_drain"
+      ]
+    },
+    {
+      "criterion": 2,
+      "evidence": "Criteria1/2/14 with current1775/1776/1896/1897/1899/1994/1713/1997 compiled faults; accepted cancellation decision established flags before observer resumes",
+      "outcome": "Owned timeout, observation deadline, caller interruption and owner/caller cancellation precedence are distinguished",
+      "tests": [
+        "StartupLateDrainTests.An_initializer_owned_timeout_preserves_its_stage_and_completes_physical_cleanup",
+        "StartupLateDrainTests.Interrupted_startup_reports_the_actual_late_initializer_failure_once_after_physical_cleanup",
+        "StartupLateDrainTests.Interrupted_initialization_keeps_cancellation_alive_for_owned_work_and_releases_it_after_drain",
+        "FactoryMaintenanceTests.Maintenance_cancellation_precedence_preserves_actual_failure_until_owner_drain",
+        "FactoryTimingTests.Admitted_checkout_distinguishes_closure_and_caller_cancellation_in_result_and_timing"
+      ]
+    },
+    {
+      "criterion": 3,
+      "evidence": "Criterion3 genuine pre-repair RED: callback disappears despite child cleanup; criterion4 complete collection characterization, current causal-guard/retry-collection faults; actual nested PostgreSQL/Docker boundary",
+      "outcome": "Independent held initializer/callback and concurrent safe seed/callback/drain/retry failures retain identities and all child owners",
+      "tests": [
+        "StartupLateDrainTests.Interrupted_initialization_keeps_cancellation_alive_for_owned_work_and_releases_it_after_drain",
+        "StartupLateDrainTests.Startup_recovery_preserves_four_distinct_safe_failures_and_every_remaining_child_owner",
+        "StartupLateDrainTests.Initializer_child_cleanup_does_not_hide_a_distinct_callback_failure_or_its_owner",
+        "FailedStartupCleanupTests.Nested_startup_failures_keep_both_real_child_hosts_recoverable_after_outer_cleanup"
+      ]
+    },
+    {
+      "criterion": 4,
+      "evidence": "Stage/type/SQLSTATE/redaction/capability assertions and current source producer audit; final per-lane coverage",
+      "outcome": "Existing safe stages and meaningful secondary errors survive wrapping without arbitrary prose/order contract",
+      "tests": [
+        "LifecycleDiagnosticRetentionTests.Wrapping_a_recovery_failure_retains_all_safe_diagnostics_without_private_payloads",
+        "SlotRetentionTests.Retirement_retry_preserves_capacity_and_replaces_only_for_renewed_demand",
+        "SlotRewarmDrainTests.A_rewarm_failure_delivered_by_exhausted_cleanup_is_not_reported_again_at_drain",
+        "SlotPoolTests.Two_failed_drain_deletions_retain_both_safe_errors_until_successful_physical_retry",
+        "CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership",
+        "FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry",
+        "PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model",
+        "PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure"
+      ]
+    },
+    {
+      "criterion": 5,
+      "evidence": "Accepted cleanup-lifetimes plus final exact201/210/211/212 faults",
+      "outcome": "Repeated monitor Stop/Join preserves held callbacks/reader, releases CTS after both settle and delivers throwing callback once",
+      "tests": [
+        "CapacityMonitorTests.Repeated_stop_and_join_keep_cancellation_alive_until_reader_and_callbacks_settle_then_release_it"
+      ]
+    },
+    {
+      "criterion": 6,
+      "evidence": "Already accepted cleanup-ownership slice (local7495ccf) and final full ordinary run; no new reclassification of prior evidence",
+      "outcome": "Multiple independently failing static and retained startup owners remain observable and recoverable",
+      "tests": [
+        "StaticFailedDrainTests.Independently_failed_static_owners_keep_both_diagnostics_and_both_recovery_capabilities",
+        "CleanupOwnershipTests.Global_cleanup_reports_each_failed_owner_and_returns_a_capability_that_retries_them_all"
+      ]
+    },
+    {
+      "criterion": 7,
+      "evidence": "Four distinct stage/state pairs, four child handles+actual remaining host; nested actual two-child-host proof; finite attempts, exact deletion and repeat-retry idempotence",
+      "outcome": "Every distinct failure and remaining capability in exercised startup/slot/factory paths reaches retry and confirmed physical cleanup",
+      "tests": [
+        "StartupLateDrainTests.Startup_recovery_preserves_four_distinct_safe_failures_and_every_remaining_child_owner",
+        "StartupLateDrainTests.Initializer_child_cleanup_does_not_hide_a_distinct_callback_failure_or_its_owner",
+        "FailedStartupCleanupTests.Nested_startup_failures_keep_both_real_child_hosts_recoverable_after_outer_cleanup",
+        "SlotPoolTests.Two_failed_drain_deletions_retain_both_safe_errors_until_successful_physical_retry",
+        "SlotRewarmDrainTests.A_failed_rewarm_transfers_its_unseen_failure_to_an_admitted_replacement_until_drain",
+        "CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership"
+      ]
+    },
+    {
+      "criterion": 8,
+      "evidence": "TT012 and TT024 archived investigations/verified local commits; criterion15 success-only worker refactor removes redundant ledger dependencies with source proof permitting reentrant Post",
+      "outcome": "TT012 bounded failed-test cleanup precedes this work; relevant TT024 owner/retention decisions settled",
+      "tests": [
+        "FactoryMaintenanceTests.Canceled_observation_retains_an_already_completed_maintenance_failure_until_drain",
+        "FactoryBackpressureTests.Repeated_failed_acquisitions_release_completed_contexts_and_work_while_the_factory_remains_usable",
+        "StartupLateDrainTests.Interrupted_initialization_keeps_cancellation_alive_for_owned_work_and_releases_it_after_drain",
+        "CapacityMonitorTests.Repeated_stop_and_join_keep_cancellation_alive_until_reader_and_callbacks_settle_then_release_it"
+      ]
+    }
+  ],
+  "currentRegressionFaults": [
+    "causal-guard",
+    "retry-collection",
+    "maintenance-success-only"
+  ],
+  "directCurrentOriginalFaultCount": 25,
+  "entries": [
+    {
+      "calibration": "final-calibration-v2/201/result.json",
+      "contract": "Repeated Stop preserves first actual cancellation task while reader and callback are held; repeated joins settle and release the CTS without losing a throwing callback.",
+      "currentSourceSha256": "19d4d70c788b5ec85e399225617ce8fc1a5261b8b5d2035c54a1d1893ab20643",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtCapacityMonitor.cs",
+        "group": "L07",
+        "id": "201",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:201",
+        "location": {
+          "end": {
+            "column": 35,
+            "line": 40
+          },
+          "start": {
+            "column": 28,
+            "line": 40
+          }
+        },
+        "mutator": "Statement mutation",
+        "originalFileSha256": "e0cec8b85687a4660066ce1a6e35e49b60fa309076d2121be9083d4d22d382c8",
+        "originalText": "return;",
+        "replacement": ";",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "CapacityMonitorTests.cs": "b0f5226249b6e7ff01d0f69810f608e94f3cdbe906acedf1ccce69a270c837fa"
+      },
+      "tests": [
+        "CapacityMonitorTests.Repeated_stop_and_join_keep_cancellation_alive_until_reader_and_callbacks_settle_then_release_it"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/210/result.json",
+      "contract": "First Join releases cancellation wait handle after actual reader and callback settle.",
+      "currentSourceSha256": "19d4d70c788b5ec85e399225617ce8fc1a5261b8b5d2035c54a1d1893ab20643",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtCapacityMonitor.cs",
+        "group": "L07",
+        "id": "210",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:210",
+        "location": {
+          "end": {
+            "column": 34,
+            "line": 55
+          },
+          "start": {
+            "column": 17,
+            "line": 55
+          }
+        },
+        "mutator": "Negate expression",
+        "originalFileSha256": "e0cec8b85687a4660066ce1a6e35e49b60fa309076d2121be9083d4d22d382c8",
+        "originalText": "_terminalObserved",
+        "replacement": "!(_terminalObserved)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "CapacityMonitorTests.cs": "b0f5226249b6e7ff01d0f69810f608e94f3cdbe906acedf1ccce69a270c837fa"
+      },
+      "tests": [
+        "CapacityMonitorTests.Repeated_stop_and_join_keep_cancellation_alive_until_reader_and_callbacks_settle_then_release_it"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/211/result.json",
+      "contract": "Concurrent/repeated Join retains the single callback error once; later TakeFailures is empty.",
+      "currentSourceSha256": "19d4d70c788b5ec85e399225617ce8fc1a5261b8b5d2035c54a1d1893ab20643",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtCapacityMonitor.cs",
+        "group": "L07",
+        "id": "211",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:211",
+        "location": {
+          "end": {
+            "column": 43,
+            "line": 55
+          },
+          "start": {
+            "column": 36,
+            "line": 55
+          }
+        },
+        "mutator": "Statement mutation",
+        "originalFileSha256": "e0cec8b85687a4660066ce1a6e35e49b60fa309076d2121be9083d4d22d382c8",
+        "originalText": "return;",
+        "replacement": ";",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "CapacityMonitorTests.cs": "b0f5226249b6e7ff01d0f69810f608e94f3cdbe906acedf1ccce69a270c837fa"
+      },
+      "tests": [
+        "CapacityMonitorTests.Repeated_stop_and_join_keep_cancellation_alive_until_reader_and_callbacks_settle_then_release_it"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/212/result.json",
+      "contract": "Concurrent/repeated Join retains the single callback error once; later TakeFailures is empty.",
+      "currentSourceSha256": "19d4d70c788b5ec85e399225617ce8fc1a5261b8b5d2035c54a1d1893ab20643",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtCapacityMonitor.cs",
+        "group": "L07",
+        "id": "212",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:212",
+        "location": {
+          "end": {
+            "column": 37,
+            "line": 56
+          },
+          "start": {
+            "column": 33,
+            "line": 56
+          }
+        },
+        "mutator": "Boolean mutation",
+        "originalFileSha256": "e0cec8b85687a4660066ce1a6e35e49b60fa309076d2121be9083d4d22d382c8",
+        "originalText": "true",
+        "replacement": "false",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "CapacityMonitorTests.cs": "b0f5226249b6e7ff01d0f69810f608e94f3cdbe906acedf1ccce69a270c837fa"
+      },
+      "tests": [
+        "CapacityMonitorTests.Repeated_stop_and_join_keep_cancellation_alive_until_reader_and_callbacks_settle_then_release_it"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1317/result.json",
+      "contract": "Safe idle-delete stage/state DistinctDelete/53100 survives; raw controls retain SlotIdleRetire. Successful actual retry confirms deletion and renewed capacity.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1317",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1317",
+        "location": {
+          "end": {
+            "column": 109,
+            "line": 214
+          },
+          "start": {
+            "column": 27,
+            "line": 214
+          }
+        },
+        "mutator": "Null coalescing mutation (remove left)",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "error as TtLifecycleException ?? new TtLifecycleException(\"SlotIdleRetire\", error)",
+        "replacement": "new TtLifecycleException(\"SlotIdleRetire\", error)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "SlotRetentionTests.cs": "677f6a8a217477e9da7c300718faf80d5306042c95900b91ef828eebef711269"
+      },
+      "tests": [
+        "SlotRetentionTests.Retirement_retry_preserves_capacity_and_replaces_only_for_renewed_demand"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1354/result.json",
+      "contract": "After abandoned observer and fully settled preparation, fresh acquisition observes the exact failure; later drain is clean, with one creation/deletion and no replay.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1354",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1354",
+        "location": {
+          "end": {
+            "column": 48,
+            "line": 268
+          },
+          "start": {
+            "column": 17,
+            "line": 268
+          }
+        },
+        "mutator": "Statement mutation",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "MarkFailureDelivered(_failure);",
+        "replacement": ";",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "SlotPreparationDrainTests.cs": "883b2f1b8ba15b78bce776ca06522879a570fe52b2eceb8e2e2b533083b0b89c"
+      },
+      "tests": [
+        "SlotPreparationDrainTests.A_terminal_failure_observed_after_abandoned_preparation_is_not_replayed_at_drain"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1396/result.json",
+      "contract": "Safe rewarm stage/state DistinctRewarm/53200 survives failed compensation and is not replayed at drain.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1396",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1396",
+        "location": {
+          "end": {
+            "column": 105,
+            "line": 324
+          },
+          "start": {
+            "column": 27,
+            "line": 324
+          }
+        },
+        "mutator": "Null coalescing mutation (remove left)",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "error as TtLifecycleException ?? new TtLifecycleException(\"SlotRewarm\", error)",
+        "replacement": "new TtLifecycleException(\"SlotRewarm\", error)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "SlotRewarmDrainTests.cs": "512a86a21ea99ec145af826aa3a30bfb080f8437df60782bd8c4a8de5876fee1"
+      },
+      "tests": [
+        "SlotRewarmDrainTests.A_rewarm_failure_delivered_by_exhausted_cleanup_is_not_reported_again_at_drain"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1397/result.json",
+      "contract": "Raw rewarm failure has SlotRewarm/null state; safe case independently preserves its own stage.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1397",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1397",
+        "location": {
+          "end": {
+            "column": 97,
+            "line": 324
+          },
+          "start": {
+            "column": 85,
+            "line": 324
+          }
+        },
+        "mutator": "String mutation",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "\"SlotRewarm\"",
+        "replacement": "\"\"",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "SlotRewarmDrainTests.cs": "512a86a21ea99ec145af826aa3a30bfb080f8437df60782bd8c4a8de5876fee1"
+      },
+      "tests": [
+        "SlotRewarmDrainTests.A_rewarm_failure_delivered_by_exhausted_cleanup_is_not_reported_again_at_drain"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Known safe preparation identity is preserved: same AbandonedSeed/53100 instance, and distinct FirstCandidate/SecondCandidate failure identities remain observable.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1457",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1457",
+        "location": {
+          "end": {
+            "column": 114,
+            "line": 395
+          },
+          "start": {
+            "column": 35,
+            "line": 395
+          }
+        },
+        "mutator": "Null coalescing mutation (remove left)",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "error as TtLifecycleException ?? new TtLifecycleException(\"SlotPrepare\", error)",
+        "replacement": "new TtLifecycleException(\"SlotPrepare\", error)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "SlotPoolTests.cs": "ecd2ca53d7b88b1dc4082a20f6ce15fc56d09423584e36b5474df24b03471381",
+        "SlotPreparationDrainTests.cs": "883b2f1b8ba15b78bce776ca06522879a570fe52b2eceb8e2e2b533083b0b89c"
+      },
+      "tests": [
+        "SlotPreparationDrainTests.A_terminal_failure_observed_after_abandoned_preparation_is_not_replayed_at_drain",
+        "SlotPoolTests.Failed_preparations_share_the_cleanup_limit_before_releasing_reservations"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Actual reset failure and subsequent acquisition preserve ResetRows/P0001 through failed real deletion; safe secondary kind and recoverable resource remain.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1586",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1586",
+        "location": {
+          "end": {
+            "column": 94,
+            "line": 583
+          },
+          "start": {
+            "column": 23,
+            "line": 583
+          }
+        },
+        "mutator": "Null coalescing mutation (remove left)",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "error as TtLifecycleException ?? new TtLifecycleException(stage, error)",
+        "replacement": "new TtLifecycleException(stage, error)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "CompensatingCleanupTests.cs": "c43e210ba21159e6837b9cd8051687492d19d826bf17b00eaea9ea82b2715d6b"
+      },
+      "tests": [
+        "CompensatingCleanupTests.Reset_then_failed_delete_preserves_diagnostic_and_retains_cleanup_ownership"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1598/result.json",
+      "contract": "After both failed preparations fully settle, fresh acquisition sees the first FirstCandidate same instance; SecondCandidate remains separately reported at drain.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1598",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1598",
+        "location": {
+          "end": {
+            "column": 29,
+            "line": 605
+          },
+          "start": {
+            "column": 9,
+            "line": 605
+          }
+        },
+        "mutator": "CoalesceAssignmentExpression to SimpleAssignmentExpression mutation",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "_failure ??= failure",
+        "replacement": "_failure = failure",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "SlotPoolTests.cs": "ecd2ca53d7b88b1dc4082a20f6ce15fc56d09423584e36b5474df24b03471381"
+      },
+      "tests": [
+        "SlotPoolTests.Failed_preparations_share_the_cleanup_limit_before_releasing_reservations"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1604/result.json",
+      "contract": "A held admitted replacement owns the unseen RewarmStage/53100 failure after original deletion; shutdown cancellation does not erase it, drain reports it once, both resources are confirmed deleted.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1604",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1604",
+        "location": {
+          "end": {
+            "column": 14,
+            "line": 620
+          },
+          "start": {
+            "column": 13,
+            "line": 617
+          }
+        },
+        "mutator": "Block removal mutation",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "{\n                replacement.UnseenPreparationFailure = reservation.UnseenPreparationFailure;\n                reservation.UnseenPreparationFailure = null;\n            }",
+        "replacement": "{}",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "SlotRewarmDrainTests.cs": "512a86a21ea99ec145af826aa3a30bfb080f8437df60782bd8c4a8de5876fee1"
+      },
+      "tests": [
+        "SlotRewarmDrainTests.A_failed_rewarm_transfers_its_unseen_failure_to_an_admitted_replacement_until_drain"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1645/result.json",
+      "contract": "After two independent quarantine failures, later acquisition still sees original FirstQuarantine/53100 same instance; physical retry clears both.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1645",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1645",
+        "location": {
+          "end": {
+            "column": 33,
+            "line": 691
+          },
+          "start": {
+            "column": 13,
+            "line": 691
+          }
+        },
+        "mutator": "CoalesceAssignmentExpression to SimpleAssignmentExpression mutation",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "_failure ??= failure",
+        "replacement": "_failure = failure",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "SlotPoolTests.cs": "ecd2ca53d7b88b1dc4082a20f6ce15fc56d09423584e36b5474df24b03471381"
+      },
+      "tests": [
+        "SlotPoolTests.A_second_quarantine_cannot_replace_the_first_terminal_error_seen_by_later_acquisition"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1703/result.json",
+      "contract": "Actual drain of two resources reports SlotDispose with FirstDrop/53100 and SecondDrop/53200; successful retry clears both once with finite four-attempt bound.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1703",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1703",
+        "location": {
+          "end": {
+            "column": 85,
+            "line": 814
+          },
+          "start": {
+            "column": 25,
+            "line": 814
+          }
+        },
+        "mutator": "Conditional (true) mutation",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "first is null ? error : new AggregateException(first, error)",
+        "replacement": "(true?error :new AggregateException(first, error))",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "SlotPoolTests.cs": "ecd2ca53d7b88b1dc4082a20f6ce15fc56d09423584e36b5474df24b03471381"
+      },
+      "tests": [
+        "SlotPoolTests.Two_failed_drain_deletions_retain_both_safe_errors_until_successful_physical_retry"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Drain primary Stage is SlotDispose for multiple safe slot failures and transferred unseen failure.",
+      "currentSourceSha256": "53e879f430e70df5f4a0f18f338cf00957652459fe5f68ccd1357aa1f31e4970",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtSlotPool.cs",
+        "group": "L13",
+        "id": "1709",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1709",
+        "location": {
+          "end": {
+            "column": 76,
+            "line": 818
+          },
+          "start": {
+            "column": 63,
+            "line": 818
+          }
+        },
+        "mutator": "String mutation",
+        "originalFileSha256": "4b3d77daa8f86887fd909f06aa6aebd1898dfb5efc8a3b9612fd396b3d3de1ce",
+        "originalText": "\"SlotDispose\"",
+        "replacement": "\"\"",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "SlotPoolTests.cs": "ecd2ca53d7b88b1dc4082a20f6ce15fc56d09423584e36b5474df24b03471381",
+        "SlotRewarmDrainTests.cs": "512a86a21ea99ec145af826aa3a30bfb080f8437df60782bd8c4a8de5876fee1"
+      },
+      "tests": [
+        "SlotPoolTests.Two_failed_drain_deletions_retain_both_safe_errors_until_successful_physical_retry",
+        "SlotRewarmDrainTests.A_failed_rewarm_transfers_its_unseen_failure_to_an_admitted_replacement_until_drain"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1713/result.json",
+      "contract": "PoolClosed returns the same material pool ODE and faulted checkout with Closed/4000ms timing; no Return/Cycle event.",
+      "currentSourceSha256": "e153798cba3ded6d57386281e9794d23c5e6e46c184d04acba101b965f26037a",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtTelemetry.cs",
+        "group": "A06",
+        "id": "1713",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1713",
+        "location": {
+          "end": {
+            "column": 44,
+            "line": 16
+          },
+          "start": {
+            "column": 36,
+            "line": 16
+          }
+        },
+        "mutator": "String mutation",
+        "originalFileSha256": "e153798cba3ded6d57386281e9794d23c5e6e46c184d04acba101b965f26037a",
+        "originalText": "\"Closed\"",
+        "replacement": "\"\"",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryTimingTests.cs": "09e374482dcf9d6824b3a202502ed4e722c61aa015e72c2764f6194fff6edf90"
+      },
+      "tests": [
+        "FactoryTimingTests.Admitted_checkout_distinguishes_closure_and_caller_cancellation_in_result_and_timing"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1718/result.json",
+      "contract": "All four emitted event identities are explicitly (402,PoolTiming); state records independently cover checkout, return, cycle and drain.",
+      "currentSourceSha256": "e153798cba3ded6d57386281e9794d23c5e6e46c184d04acba101b965f26037a",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Internal/TtTelemetry.cs",
+        "group": "A06",
+        "id": "1718",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1718",
+        "location": {
+          "end": {
+            "column": 59,
+            "line": 25
+          },
+          "start": {
+            "column": 47,
+            "line": 25
+          }
+        },
+        "mutator": "String mutation",
+        "originalFileSha256": "e153798cba3ded6d57386281e9794d23c5e6e46c184d04acba101b965f26037a",
+        "originalText": "\"PoolTiming\"",
+        "replacement": "\"\"",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryTimingTests.cs": "09e374482dcf9d6824b3a202502ed4e722c61aa015e72c2764f6194fff6edf90"
+      },
+      "tests": [
+        "FactoryTimingTests.Public_timings_cover_checkout_shared_return_cycle_and_actual_shutdown"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Actual raw prepared schema/seed initializer producer needs BaselineInitialize fallback. Native non-clone rows require that stage and retain/recover actual host.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A06",
+        "id": "1761",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1761",
+        "location": {
+          "end": {
+            "column": 97,
+            "line": 89
+          },
+          "start": {
+            "column": 77,
+            "line": 89
+          }
+        },
+        "mutator": "String mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "\"BaselineInitialize\"",
+        "replacement": "\"\"",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FailedStartupCleanupTests.cs": "9add7f8a03ee9e9ca36583b4092904ef517db4baa73a708c79838292379043a9"
+      },
+      "tests": [
+        "FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry",
+        "FailedStartupCleanupTests.Throwing_startup_cancellation_callbacks_cannot_replace_the_initializer_error_or_lose_cleanup"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1775/result.json",
+      "contract": "Initializer-owned TimeoutException preserves BaselineInitialize and completes deletion. Observer deadline instead reports StartupTimeout and retains held work; caller interruption is StartupCanceled.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1775",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1775",
+        "location": {
+          "end": {
+            "column": 112,
+            "line": 118
+          },
+          "start": {
+            "column": 18,
+            "line": 118
+          }
+        },
+        "mutator": "Logical mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "error is TimeoutException && !ReferenceEquals(initialization.Exception?.InnerException, error)",
+        "replacement": "error is TimeoutException || !ReferenceEquals(initialization.Exception?.InnerException, error)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.An_initializer_owned_timeout_preserves_its_stage_and_completes_physical_cleanup",
+        "StartupLateDrainTests.Interrupted_startup_reports_the_actual_late_initializer_failure_once_after_physical_cleanup",
+        "StartupLateDrainTests.Interrupted_initialization_keeps_cancellation_alive_for_owned_work_and_releases_it_after_drain"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1776/result.json",
+      "contract": "Initializer-owned TimeoutException preserves BaselineInitialize and completes deletion. Observer deadline instead reports StartupTimeout and retains held work; caller interruption is StartupCanceled.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1776",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1776",
+        "location": {
+          "end": {
+            "column": 112,
+            "line": 118
+          },
+          "start": {
+            "column": 47,
+            "line": 118
+          }
+        },
+        "mutator": "LogicalNotExpression to un-LogicalNotExpression mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "!ReferenceEquals(initialization.Exception?.InnerException, error)",
+        "replacement": "ReferenceEquals(initialization.Exception?.InnerException, error)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "NoCoverage"
+      },
+      "testSourceSha256": {
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.An_initializer_owned_timeout_preserves_its_stage_and_completes_physical_cleanup",
+        "StartupLateDrainTests.Interrupted_startup_reports_the_actual_late_initializer_failure_once_after_physical_cleanup",
+        "StartupLateDrainTests.Interrupted_initialization_keeps_cancellation_alive_for_owned_work_and_releases_it_after_drain"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Recovery remains incomplete and deletion has not begun until actual initializer settles independently of returned startup observation.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1780",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1780",
+        "location": {
+          "end": {
+            "column": 44,
+            "line": 124
+          },
+          "start": {
+            "column": 23,
+            "line": 124
+          }
+        },
+        "mutator": "Statement mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "await initialization;",
+        "replacement": ";",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Interrupted_startup_reports_the_actual_late_initializer_failure_once_after_physical_cleanup",
+        "StartupLateDrainTests.Startup_recovery_preserves_four_distinct_safe_failures_and_every_remaining_child_owner",
+        "StartupLateDrainTests.Interrupted_initialization_keeps_cancellation_alive_for_owned_work_and_releases_it_after_drain"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Initializer completion alone does not permit deletion while cancellation callback is independently held; CTS remains usable until both settle then releases its handle.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1782",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1782",
+        "location": {
+          "end": {
+            "column": 42,
+            "line": 126
+          },
+          "start": {
+            "column": 23,
+            "line": 126
+          }
+        },
+        "mutator": "Statement mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "await cancellation;",
+        "replacement": ";",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Interrupted_initialization_keeps_cancellation_alive_for_owned_work_and_releases_it_after_drain"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Initially unreported callback failure reaches recovery as CallbackStage/42501 plus its child owner, or native StartupCancellation, followed by clean retry.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1789",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1789",
+        "location": {
+          "end": {
+            "column": 56,
+            "line": 134
+          },
+          "start": {
+            "column": 51,
+            "line": 134
+          }
+        },
+        "mutator": "Boolean mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "false",
+        "replacement": "true",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "StartupCancellationOwnershipTests.cs": "dd82812778266a5efbb9650b957215c131136143e41375c790a1eac2a1f958c5",
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Startup_recovery_preserves_four_distinct_safe_failures_and_every_remaining_child_owner",
+        "StartupCancellationOwnershipTests.Deadline_triggered_throwing_callback_is_reported_by_owned_cleanup"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Current collection appends retry failure and continues collecting seed/callback errors; all four safe identities and five remaining resource labels are reachable and later cleared.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Obsolete historical early throw replaced by complete collection; current retry-collection fault calibrates the append obligation, not original replay",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1804",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1804",
+        "location": {
+          "end": {
+            "column": 87,
+            "line": 150
+          },
+          "start": {
+            "column": 29,
+            "line": 150
+          }
+        },
+        "mutator": "Statement mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "throw new AggregateException(failures.Append(retryError));",
+        "replacement": ";",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "NoCoverage"
+      },
+      "testSourceSha256": {
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Startup_recovery_preserves_four_distinct_safe_failures_and_every_remaining_child_owner"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Unseen callback is delivered by retained recovery once; subsequent successful retry neither replays callback/seed nor repeats successful child deletion.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1809",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1809",
+        "location": {
+          "end": {
+            "column": 88,
+            "line": 153
+          },
+          "start": {
+            "column": 60,
+            "line": 153
+          }
+        },
+        "mutator": "LogicalNotExpression to un-LogicalNotExpression mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "!cancellationFailureReported",
+        "replacement": "cancellationFailureReported",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "NoCoverage"
+      },
+      "testSourceSha256": {
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Startup_recovery_preserves_four_distinct_safe_failures_and_every_remaining_child_owner",
+        "StartupLateDrainTests.Initializer_child_cleanup_does_not_hide_a_distinct_callback_failure_or_its_owner"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Recovery must throw its multiple distinct failures while retaining remaining cleanup; all four stage/state pairs and successful later physical cleanup are asserted.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1821",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1821",
+        "location": {
+          "end": {
+            "column": 84,
+            "line": 159
+          },
+          "start": {
+            "column": 45,
+            "line": 159
+          }
+        },
+        "mutator": "Statement mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "throw new AggregateException(failures);",
+        "replacement": ";",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "NoCoverage"
+      },
+      "testSourceSha256": {
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Startup_recovery_preserves_four_distinct_safe_failures_and_every_remaining_child_owner"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Deadline and caller interruption have explicit StartupTimeout/StartupCanceled stages; actual initializer-owned timeout remains BaselineInitialize.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1824",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1824",
+        "location": {
+          "end": {
+            "column": 120,
+            "line": 165
+          },
+          "start": {
+            "column": 40,
+            "line": 165
+          }
+        },
+        "mutator": "Conditional (true) mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "cancellationToken.IsCancellationRequested ? \"StartupCanceled\" : \"StartupTimeout\"",
+        "replacement": "(true?\"StartupCanceled\" :\"StartupTimeout\")",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Interrupted_startup_reports_the_actual_late_initializer_failure_once_after_physical_cleanup",
+        "StartupLateDrainTests.Interrupted_initialization_keeps_cancellation_alive_for_owned_work_and_releases_it_after_drain",
+        "StartupLateDrainTests.An_initializer_owned_timeout_preserves_its_stage_and_completes_physical_cleanup"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Deadline and caller interruption have explicit StartupTimeout/StartupCanceled stages; actual initializer-owned timeout remains BaselineInitialize.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1827",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1827",
+        "location": {
+          "end": {
+            "column": 120,
+            "line": 165
+          },
+          "start": {
+            "column": 104,
+            "line": 165
+          }
+        },
+        "mutator": "String mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "\"StartupTimeout\"",
+        "replacement": "\"\"",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "NoCoverage"
+      },
+      "testSourceSha256": {
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Interrupted_startup_reports_the_actual_late_initializer_failure_once_after_physical_cleanup",
+        "StartupLateDrainTests.Interrupted_initialization_keeps_cancellation_alive_for_owned_work_and_releases_it_after_drain",
+        "StartupLateDrainTests.An_initializer_owned_timeout_preserves_its_stage_and_completes_physical_cleanup"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Existing BaselineClone or BaselineConfiguration lifecycle stage survives outer prepared BaselineInitialize boundary; raw fallback independently retained.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A06",
+        "id": "1829",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1829",
+        "location": {
+          "end": {
+            "column": 98,
+            "line": 168
+          },
+          "start": {
+            "column": 27,
+            "line": 168
+          }
+        },
+        "mutator": "Null coalescing mutation (remove left)",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "error as TtLifecycleException ?? new TtLifecycleException(stage, error)",
+        "replacement": "new TtLifecycleException(stage, error)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FailedStartupCleanupTests.cs": "9add7f8a03ee9e9ca36583b4092904ef517db4baa73a708c79838292379043a9",
+        "PreparedContextBindingTests.cs": "36e0763991152fb9ec2ff49e4aa5b8b5ca2753fcc1d320b2abcac97a0f1dc896"
+      },
+      "tests": [
+        "FailedStartupCleanupTests.Failed_startup_retains_exact_cleanup_ownership_and_supports_explicit_or_global_retry",
+        "PreparedContextBindingTests.EnsureCreated_cannot_publish_a_runtime_model_that_disagrees_with_its_schema_model"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Actual startup-retained drain ownership determines callback recovery responsibility. Initializer-owned child cleanup cannot hide distinct callback error/child; outer success still exposes both real child hosts and permits physical retry. No-callback and retained-outer-drain controls remain.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retire historical failure.Cleanup presence proxy; use catch-local cleanupRetained ownership; current causal-guard regression fault calibrates demonstrated repair",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1833",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1833",
+        "location": {
+          "end": {
+            "column": 75,
+            "line": 175
+          },
+          "start": {
+            "column": 17,
+            "line": 175
+          }
+        },
+        "mutator": "Logical mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "cancellationFailure is not null && failure.Cleanup is null",
+        "replacement": "cancellationFailure is not null || failure.Cleanup is null",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FailedStartupCleanupTests.cs": "9add7f8a03ee9e9ca36583b4092904ef517db4baa73a708c79838292379043a9",
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Initializer_child_cleanup_does_not_hide_a_distinct_callback_failure_or_its_owner",
+        "FailedStartupCleanupTests.Nested_startup_failures_keep_both_real_child_hosts_recoverable_after_outer_cleanup",
+        "StartupLateDrainTests.An_initializer_owned_timeout_preserves_its_stage_and_completes_physical_cleanup"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Actual startup-retained drain ownership determines callback recovery responsibility. Initializer-owned child cleanup cannot hide distinct callback error/child; outer success still exposes both real child hosts and permits physical retry. No-callback and retained-outer-drain controls remain.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retire historical failure.Cleanup presence proxy; use catch-local cleanupRetained ownership; current causal-guard regression fault calibrates demonstrated repair",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1834",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1834",
+        "location": {
+          "end": {
+            "column": 75,
+            "line": 175
+          },
+          "start": {
+            "column": 17,
+            "line": 175
+          }
+        },
+        "mutator": "Negate expression",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "cancellationFailure is not null && failure.Cleanup is null",
+        "replacement": "!(cancellationFailure is not null && failure.Cleanup is null)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FailedStartupCleanupTests.cs": "9add7f8a03ee9e9ca36583b4092904ef517db4baa73a708c79838292379043a9",
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Initializer_child_cleanup_does_not_hide_a_distinct_callback_failure_or_its_owner",
+        "FailedStartupCleanupTests.Nested_startup_failures_keep_both_real_child_hosts_recoverable_after_outer_cleanup",
+        "StartupLateDrainTests.An_initializer_owned_timeout_preserves_its_stage_and_completes_physical_cleanup"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Nonnull callback requirement preserves actual callback failures; no-callback successful drain remains valid. Repaired ownership predicate has explicit immediate/deferred controls.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1835",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1835",
+        "location": {
+          "end": {
+            "column": 48,
+            "line": 175
+          },
+          "start": {
+            "column": 17,
+            "line": 175
+          }
+        },
+        "mutator": "Equality mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "cancellationFailure is not null",
+        "replacement": "cancellationFailure is null",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FailedStartupCleanupTests.cs": "9add7f8a03ee9e9ca36583b4092904ef517db4baa73a708c79838292379043a9",
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Initializer_child_cleanup_does_not_hide_a_distinct_callback_failure_or_its_owner",
+        "FailedStartupCleanupTests.Throwing_startup_cancellation_callbacks_cannot_replace_the_initializer_error_or_lose_cleanup",
+        "StartupLateDrainTests.An_initializer_owned_timeout_preserves_its_stage_and_completes_physical_cleanup"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Actual startup-retained drain ownership determines callback recovery responsibility. Initializer-owned child cleanup cannot hide distinct callback error/child; outer success still exposes both real child hosts and permits physical retry. No-callback and retained-outer-drain controls remain.",
+      "currentSourceSha256": "2131a83bf699a3782e321e2330a486de543708f582f3be1d60682350ced68922",
+      "decision": "Retire historical failure.Cleanup presence proxy; use catch-local cleanupRetained ownership; current causal-guard regression fault calibrates demonstrated repair",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/Tt.cs",
+        "group": "A07",
+        "id": "1836",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1836",
+        "location": {
+          "end": {
+            "column": 75,
+            "line": 175
+          },
+          "start": {
+            "column": 52,
+            "line": 175
+          }
+        },
+        "mutator": "Equality mutation",
+        "originalFileSha256": "1d0c20a13fe4b6eb7fdf2239779d5e2759aa3353c3793947d3c3b704a5c98cd3",
+        "originalText": "failure.Cleanup is null",
+        "replacement": "failure.Cleanup is not null",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "NoCoverage"
+      },
+      "testSourceSha256": {
+        "FailedStartupCleanupTests.cs": "9add7f8a03ee9e9ca36583b4092904ef517db4baa73a708c79838292379043a9",
+        "StartupLateDrainTests.cs": "ba9b466d2713a32ea727377fe97a150eee2022a3c6bcae8d3bf1252168639031"
+      },
+      "tests": [
+        "StartupLateDrainTests.Initializer_child_cleanup_does_not_hide_a_distinct_callback_failure_or_its_owner",
+        "FailedStartupCleanupTests.Nested_startup_failures_keep_both_real_child_hosts_recoverable_after_outer_cleanup",
+        "StartupLateDrainTests.An_initializer_owned_timeout_preserves_its_stage_and_completes_physical_cleanup"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1896/result.json",
+      "contract": "Admitted maintenance owner-only cancellation becomes faulted ObjectDisposedException; caller participation in either request order remains canceled OperationCanceledException; actual failure stays owned until drain.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1896",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1896",
+        "location": {
+          "end": {
+            "column": 129,
+            "line": 41
+          },
+          "start": {
+            "column": 50,
+            "line": 41
+          }
+        },
+        "mutator": "Logical mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "_shutdown.IsCancellationRequested && !cancellationToken.IsCancellationRequested",
+        "replacement": "_shutdown.IsCancellationRequested || !cancellationToken.IsCancellationRequested",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryMaintenanceTests.cs": "805797d4aaf97a454099a0e1016127f7a0ef1d36b58c45677b04cebb90960718"
+      },
+      "tests": [
+        "FactoryMaintenanceTests.Maintenance_cancellation_precedence_preserves_actual_failure_until_owner_drain"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1897/result.json",
+      "contract": "Admitted maintenance owner-only cancellation becomes faulted ObjectDisposedException; caller participation in either request order remains canceled OperationCanceledException; actual failure stays owned until drain.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1897",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1897",
+        "location": {
+          "end": {
+            "column": 129,
+            "line": 41
+          },
+          "start": {
+            "column": 87,
+            "line": 41
+          }
+        },
+        "mutator": "LogicalNotExpression to un-LogicalNotExpression mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "!cancellationToken.IsCancellationRequested",
+        "replacement": "cancellationToken.IsCancellationRequested",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "NoCoverage"
+      },
+      "testSourceSha256": {
+        "FactoryMaintenanceTests.cs": "805797d4aaf97a454099a0e1016127f7a0ef1d36b58c45677b04cebb90960718"
+      },
+      "tests": [
+        "FactoryMaintenanceTests.Maintenance_cancellation_precedence_preserves_actual_failure_until_owner_drain"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1899/result.json",
+      "contract": "Admitted maintenance owner-only cancellation becomes faulted ObjectDisposedException; caller participation in either request order remains canceled OperationCanceledException; actual failure stays owned until drain.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1899",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1899",
+        "location": {
+          "end": {
+            "column": 76,
+            "line": 43
+          },
+          "start": {
+            "column": 13,
+            "line": 43
+          }
+        },
+        "mutator": "Statement mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "throw new ObjectDisposedException(nameof(TtFactory<TContext>));",
+        "replacement": ";",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "NoCoverage"
+      },
+      "testSourceSha256": {
+        "FactoryMaintenanceTests.cs": "805797d4aaf97a454099a0e1016127f7a0ef1d36b58c45677b04cebb90960718"
+      },
+      "tests": [
+        "FactoryMaintenanceTests.Maintenance_cancellation_precedence_preserves_actual_failure_until_owner_drain"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1919/result.json",
+      "contract": "Two-failure actual maintenance has primary IdleMaintenance plus both safe failure kinds; delivered failures are not replayed at drain.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A06",
+        "id": "1919",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1919",
+        "location": {
+          "end": {
+            "column": 61,
+            "line": 75
+          },
+          "start": {
+            "column": 44,
+            "line": 75
+          }
+        },
+        "mutator": "String mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "\"IdleMaintenance\"",
+        "replacement": "\"\"",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryMaintenanceTests.cs": "805797d4aaf97a454099a0e1016127f7a0ef1d36b58c45677b04cebb90960718"
+      },
+      "tests": [
+        "FactoryMaintenanceTests.Bulk_maintenance_reports_all_safe_failures_and_does_not_repeat_delivered_faults_on_drain"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Canceled observer -> actual failed work completed -> drain retains SlotIdleRetire and any distinct pool-drain error. Worker now releases success only; it cannot remove unseen failed work. Current maintenance-success-only fault independently loses both intended failures.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retire original compound worker predicate; retain explicit success-only worker cleanup and failure consumer ownership; not exact original replay",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1922",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1922",
+        "location": {
+          "end": {
+            "column": 89,
+            "line": 81
+          },
+          "start": {
+            "column": 17,
+            "line": 81
+          }
+        },
+        "mutator": "Logical mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "!_acquisitions.Contains(observer) && (failure is null || work.Delivered)",
+        "replacement": "!_acquisitions.Contains(observer) || (failure is null || work.Delivered)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryMaintenanceTests.cs": "805797d4aaf97a454099a0e1016127f7a0ef1d36b58c45677b04cebb90960718"
+      },
+      "tests": [
+        "FactoryMaintenanceTests.Canceled_observation_retains_an_already_completed_maintenance_failure_until_drain",
+        "FactoryMaintenanceTests.A_failure_recorded_before_canceled_observer_finally_remains_available_to_drain"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Canceled observer -> actual failed work completed -> drain retains SlotIdleRetire and any distinct pool-drain error. Worker now releases success only; it cannot remove unseen failed work. Current maintenance-success-only fault independently loses both intended failures.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retire original compound worker predicate; retain explicit success-only worker cleanup and failure consumer ownership; not exact original replay",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1923",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1923",
+        "location": {
+          "end": {
+            "column": 89,
+            "line": 81
+          },
+          "start": {
+            "column": 17,
+            "line": 81
+          }
+        },
+        "mutator": "Negate expression",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "!_acquisitions.Contains(observer) && (failure is null || work.Delivered)",
+        "replacement": "!(!_acquisitions.Contains(observer) && (failure is null || work.Delivered))",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryMaintenanceTests.cs": "805797d4aaf97a454099a0e1016127f7a0ef1d36b58c45677b04cebb90960718"
+      },
+      "tests": [
+        "FactoryMaintenanceTests.Canceled_observation_retains_an_already_completed_maintenance_failure_until_drain",
+        "FactoryMaintenanceTests.A_failure_recorded_before_canceled_observer_finally_remains_available_to_drain"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Worker removes completed actual success without observer-ledger dependency; observers remain independently joined in _acquisitions. Both consumers that set Delivered remove the work themselves without intervening await. This proof permits reentrant SynchronizationContext.Post. Prior1925 one-off canceledSuccess weak-node evidence establishes useful late-success removal, not a maintained public oracle.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Bounded source simplification; remove observer parameter and redundant Delivered/admission relationships. No exact1924 execution or historical-status change",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1924",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1924",
+        "location": {
+          "end": {
+            "column": 50,
+            "line": 81
+          },
+          "start": {
+            "column": 17,
+            "line": 81
+          }
+        },
+        "mutator": "LogicalNotExpression to un-LogicalNotExpression mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "!_acquisitions.Contains(observer)",
+        "replacement": "_acquisitions.Contains(observer)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryMaintenanceTests.cs": "805797d4aaf97a454099a0e1016127f7a0ef1d36b58c45677b04cebb90960718"
+      },
+      "tests": [
+        "FactoryMaintenanceTests.Canceled_observation_retains_an_already_completed_maintenance_failure_until_drain",
+        "FactoryMaintenanceTests.A_failure_recorded_before_canceled_observer_finally_remains_available_to_drain"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Canceled observer -> actual failed work completed -> drain retains SlotIdleRetire and any distinct pool-drain error. Worker now releases success only; it cannot remove unseen failed work. Current maintenance-success-only fault independently loses both intended failures.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retire original compound worker predicate; retain explicit success-only worker cleanup and failure consumer ownership; not exact original replay",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1926",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1926",
+        "location": {
+          "end": {
+            "column": 70,
+            "line": 81
+          },
+          "start": {
+            "column": 55,
+            "line": 81
+          }
+        },
+        "mutator": "Equality mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "failure is null",
+        "replacement": "failure is not null",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryMaintenanceTests.cs": "805797d4aaf97a454099a0e1016127f7a0ef1d36b58c45677b04cebb90960718"
+      },
+      "tests": [
+        "FactoryMaintenanceTests.Canceled_observation_retains_an_already_completed_maintenance_failure_until_drain",
+        "FactoryMaintenanceTests.A_failure_recorded_before_canceled_observer_finally_remains_available_to_drain"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1984/result.json",
+      "contract": "Sixteen failed acquisitions release weak Context and Acquisition while factory stays live;16 actual deletes/zero reservations, then another usable request. Successful-lease lifetime alone is not used as this proof.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1984",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1984",
+        "location": {
+          "end": {
+            "column": 67,
+            "line": 187
+          },
+          "start": {
+            "column": 25,
+            "line": 187
+          }
+        },
+        "mutator": "Block removal mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "{ _databases.TryRemove(database, out _); }",
+        "replacement": "{}",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryBackpressureTests.cs": "3a2ecd4e857bc85ecf77ea69a842f67071daab767966e769851d9a79d8bcd876"
+      },
+      "tests": [
+        "FactoryBackpressureTests.Repeated_failed_acquisitions_release_completed_contexts_and_work_while_the_factory_remains_usable"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Material construction/schema failure with clean discard requires safe ContextCreate/ContextInitialize; cancellation plus failed discard requires safe original OCE and secondary IOException/capability.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1985",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1985",
+        "location": {
+          "end": {
+            "column": 109,
+            "line": 188
+          },
+          "start": {
+            "column": 21,
+            "line": 188
+          }
+        },
+        "mutator": "Logical mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "error is OperationCanceledException or ObjectDisposedException && discardFailure is null",
+        "replacement": "error is OperationCanceledException or ObjectDisposedException || discardFailure is null",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "CompensatingCleanupTests.cs": "c43e210ba21159e6837b9cd8051687492d19d826bf17b00eaea9ea82b2715d6b",
+        "PublicLeaseTests.cs": "12b90f3dbbfdc8593f4bc37d327fff1b999e2e1e88b17827a8fe2f454f1a9ed8"
+      },
+      "tests": [
+        "PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease",
+        "PublicLeaseTests.Schema_initialization_failure_is_reported_before_a_lease_is_published",
+        "CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Clean cancellation remains OperationCanceledException, zero schema initialization and one dispose/delete; independent material constructor error requires safe wrapping.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1986",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1986",
+        "location": {
+          "end": {
+            "column": 109,
+            "line": 188
+          },
+          "start": {
+            "column": 21,
+            "line": 188
+          }
+        },
+        "mutator": "Negate expression",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "error is OperationCanceledException or ObjectDisposedException && discardFailure is null",
+        "replacement": "!(error is OperationCanceledException or ObjectDisposedException && discardFailure is null)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryBackpressureTests.cs": "3a2ecd4e857bc85ecf77ea69a842f67071daab767966e769851d9a79d8bcd876",
+        "PublicLeaseTests.cs": "12b90f3dbbfdc8593f4bc37d327fff1b999e2e1e88b17827a8fe2f454f1a9ed8"
+      },
+      "tests": [
+        "FactoryBackpressureTests.Cancellation_from_context_configuration_prevents_schema_initialization_and_discards_the_resource",
+        "PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Clean cancellation remains OperationCanceledException, zero schema initialization and one dispose/delete; independent material constructor error requires safe wrapping.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1987",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1987",
+        "location": {
+          "end": {
+            "column": 83,
+            "line": 188
+          },
+          "start": {
+            "column": 21,
+            "line": 188
+          }
+        },
+        "mutator": "Equality mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "error is OperationCanceledException or ObjectDisposedException",
+        "replacement": "error is not OperationCanceledException or ObjectDisposedException",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryBackpressureTests.cs": "3a2ecd4e857bc85ecf77ea69a842f67071daab767966e769851d9a79d8bcd876",
+        "PublicLeaseTests.cs": "12b90f3dbbfdc8593f4bc37d327fff1b999e2e1e88b17827a8fe2f454f1a9ed8"
+      },
+      "tests": [
+        "FactoryBackpressureTests.Cancellation_from_context_configuration_prevents_schema_initialization_and_discards_the_resource",
+        "PublicLeaseTests.Constructor_failure_does_not_leave_an_undisclosed_database_lease"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Clean cancellation with successful discard rethrows OCE; cancellation with failed discard composes original and IOException, retaining physical recovery ownership.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1989",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1989",
+        "location": {
+          "end": {
+            "column": 109,
+            "line": 188
+          },
+          "start": {
+            "column": 87,
+            "line": 188
+          }
+        },
+        "mutator": "Equality mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "discardFailure is null",
+        "replacement": "discardFailure is not null",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "NoCoverage"
+      },
+      "testSourceSha256": {
+        "CompensatingCleanupTests.cs": "c43e210ba21159e6837b9cd8051687492d19d826bf17b00eaea9ea82b2715d6b",
+        "FactoryBackpressureTests.cs": "3a2ecd4e857bc85ecf77ea69a842f67071daab767966e769851d9a79d8bcd876"
+      },
+      "tests": [
+        "FactoryBackpressureTests.Cancellation_from_context_configuration_prevents_schema_initialization_and_discards_the_resource",
+        "CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Clean configuration cancellation must throw OCE after verified one-time discard, never return lifecycle wrapping or publish schema/context.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1990",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1990",
+        "location": {
+          "end": {
+            "column": 117,
+            "line": 188
+          },
+          "start": {
+            "column": 111,
+            "line": 188
+          }
+        },
+        "mutator": "Statement mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "throw;",
+        "replacement": ";",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "NoCoverage"
+      },
+      "testSourceSha256": {
+        "FactoryBackpressureTests.cs": "3a2ecd4e857bc85ecf77ea69a842f67071daab767966e769851d9a79d8bcd876"
+      },
+      "tests": [
+        "FactoryBackpressureTests.Cancellation_from_context_configuration_prevents_schema_initialization_and_discards_the_resource"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Both material and cancellation initialization failure compose actual secondary Discard/IOException while retaining original kind, safe stage and cleanup until physical retry.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1992",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1992",
+        "location": {
+          "end": {
+            "column": 47,
+            "line": 190
+          },
+          "start": {
+            "column": 21,
+            "line": 190
+          }
+        },
+        "mutator": "Equality mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "discardFailure is not null",
+        "replacement": "discardFailure is null",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "CompensatingCleanupTests.cs": "c43e210ba21159e6837b9cd8051687492d19d826bf17b00eaea9ea82b2715d6b"
+      },
+      "tests": [
+        "CompensatingCleanupTests.Initialization_then_failed_discard_preserves_diagnostic_and_retains_cleanup_ownership"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1994/result.json",
+      "contract": "OwnerClosed gives faulted ODE/Closed; CallerAndOwner and OwnerThenCaller give canceled task/OCE/Canceled; same four-second clock interval and no Return/Cycle.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A09",
+        "id": "1994",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1994",
+        "location": {
+          "end": {
+            "column": 129,
+            "line": 194
+          },
+          "start": {
+            "column": 50,
+            "line": 194
+          }
+        },
+        "mutator": "Logical mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "_shutdown.IsCancellationRequested && !cancellationToken.IsCancellationRequested",
+        "replacement": "_shutdown.IsCancellationRequested || !cancellationToken.IsCancellationRequested",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryTimingTests.cs": "09e374482dcf9d6824b3a202502ed4e722c61aa015e72c2764f6194fff6edf90"
+      },
+      "tests": [
+        "FactoryTimingTests.Admitted_checkout_distinguishes_closure_and_caller_cancellation_in_result_and_timing"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/1997/result.json",
+      "contract": "Owner-only closure timing is Closed, preserving caller-participation Canceled controls.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A06",
+        "id": "1997",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:1997",
+        "location": {
+          "end": {
+            "column": 31,
+            "line": 196
+          },
+          "start": {
+            "column": 23,
+            "line": 196
+          }
+        },
+        "mutator": "String mutation",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "\"Closed\"",
+        "replacement": "\"\"",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryTimingTests.cs": "09e374482dcf9d6824b3a202502ed4e722c61aa015e72c2764f6194fff6edf90"
+      },
+      "tests": [
+        "FactoryTimingTests.Admitted_checkout_distinguishes_closure_and_caller_cancellation_in_result_and_timing"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "After public DrainTimeout, late actual failure retains PreparedPoolDispose stage and safe IOException; returned cleanup reaches physical deletion and succeeds on retry.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A06",
+        "id": "2033",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:2033",
+        "location": {
+          "end": {
+            "column": 125,
+            "line": 248
+          },
+          "start": {
+            "column": 31,
+            "line": 248
+          }
+        },
+        "mutator": "Null coalescing mutation (remove left)",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "cleanupError as TtLifecycleException ?? new TtLifecycleException(\"FactoryDrain\", cleanupError)",
+        "replacement": "new TtLifecycleException(\"FactoryDrain\", cleanupError)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "PreparedMaintenanceDrainTests.cs": "e811d3e679a590a695ec1850f11d9156f55883c85e16be64e423601d6add21c7"
+      },
+      "tests": [
+        "PreparedMaintenanceDrainTests.Closure_retains_held_rewarm_and_distinguishes_cancellation_from_late_material_failure"
+      ]
+    },
+    {
+      "calibration": null,
+      "contract": "Initial factory drain preserves existing SlotIdleRetire primary stage/safe message and cached exception with cleanup capability instead of replacing it with FactoryDrain.",
+      "currentSourceSha256": "e85811ac689c9f123e4f88aa63d98bd1dbb6fced068aa9b8199cfca1254645d8",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current executable contract and bounded producer/source audit; no exact original fault execution claim",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtFactory.cs",
+        "group": "A06",
+        "id": "2039",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:2039",
+        "location": {
+          "end": {
+            "column": 98,
+            "line": 253
+          },
+          "start": {
+            "column": 27,
+            "line": 253
+          }
+        },
+        "mutator": "Null coalescing mutation (remove left)",
+        "originalFileSha256": "60e9898f46a27c5ae254c0b0b0a897443b033732c5f1ffc3651f56c20e3dd8c6",
+        "originalText": "error as TtLifecycleException ?? new TtLifecycleException(stage, error)",
+        "replacement": "new TtLifecycleException(stage, error)",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "FactoryMaintenanceTests.cs": "805797d4aaf97a454099a0e1016127f7a0ef1d36b58c45677b04cebb90960718"
+      },
+      "tests": [
+        "FactoryMaintenanceTests.Canceled_observation_retains_an_already_completed_maintenance_failure_until_drain",
+        "FactoryMaintenanceTests.A_failure_recorded_before_canceled_observer_finally_remains_available_to_drain"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/2111/result.json",
+      "contract": "Nested safe DropOwned is retained with Rewarm and both safe cause types; no false Discard label may appear.",
+      "currentSourceSha256": "e02d99024cf734beeebc937d3449994ad490bd4b0708678a116b02881374129b",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtLifecycleException.cs",
+        "group": "A06",
+        "id": "2111",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:2111",
+        "location": {
+          "end": {
+            "column": 99,
+            "line": 19
+          },
+          "start": {
+            "column": 39,
+            "line": 19
+          }
+        },
+        "mutator": "Null coalescing mutation (remove left)",
+        "originalFileSha256": "ea78afcdfbc9db8f24b80815922c62a4bdcee8669fac7846b599ac4fe430f575",
+        "originalText": "(cleanupFailure as TtLifecycleException)?.Stage ?? \"Discard\"",
+        "replacement": "\"Discard\"",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "LifecycleDiagnosticRetentionTests.cs": "f47f7d90b53593c82c9049ec2195f16d28bcca885a63aee6925c87fc7b2aa4a1"
+      },
+      "tests": [
+        "LifecycleDiagnosticRetentionTests.Wrapping_a_recovery_failure_retains_all_safe_diagnostics_without_private_payloads"
+      ]
+    },
+    {
+      "calibration": "final-calibration-v2/2112/result.json",
+      "contract": "Nested raw secondary retains Discard fallback through outer PoolDrain wrapping; private payload and inner exception remain absent.",
+      "currentSourceSha256": "e02d99024cf734beeebc937d3449994ad490bd4b0708678a116b02881374129b",
+      "decision": "Retain useful current contract",
+      "evidenceKind": "current compiled exact-fault rejection plus executable contracts",
+      "original": {
+        "assembly": "TurboTest.EFCore",
+        "classification": "assertion-gap",
+        "file": "src/TurboTest.EFCore/TtLifecycleException.cs",
+        "group": "A06",
+        "id": "2112",
+        "issue": "docs/issues/open/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md",
+        "key": "TurboTest.EFCore:2112",
+        "location": {
+          "end": {
+            "column": 99,
+            "line": 19
+          },
+          "start": {
+            "column": 90,
+            "line": 19
+          }
+        },
+        "mutator": "String mutation",
+        "originalFileSha256": "ea78afcdfbc9db8f24b80815922c62a4bdcee8669fac7846b599ac4fe430f575",
+        "originalText": "\"Discard\"",
+        "replacement": "\"\"",
+        "reportSha256": "f0958b35ed10ff8638c7e94e168f56ff3d4bdbb3dffc783dd6542401416d48f3",
+        "status": "Survived"
+      },
+      "testSourceSha256": {
+        "LifecycleDiagnosticRetentionTests.cs": "f47f7d90b53593c82c9049ec2195f16d28bcca885a63aee6925c87fc7b2aa4a1"
+      },
+      "tests": [
+        "LifecycleDiagnosticRetentionTests.Wrapping_a_recovery_failure_retains_all_safe_diagnostics_without_private_payloads"
+      ]
+    }
+  ],
+  "finalCalibrationStatus": "terminal PASS",
+  "finalVerification": {
+    "ProjectFields": "unverified/unmodified; no native field tools or browser available",
+    "canonicalAll": {
+      "discovered": {
+        "all": 520,
+        "fast": 348,
+        "slow": 172
+      },
+      "dockerHost": "unix:///var/run/docker.sock",
+      "elapsedSeconds": 668.8103049620404,
+      "hostedWorkflow": "not performed by local driver",
+      "lane": "all",
+      "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35",
+      "resourceSettlement": {
+        "added": [],
+        "after": [
+          "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+        ],
+        "automaticDeletion": false,
+        "before": [
+          "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+        ],
+        "removed": []
+      },
+      "result": "PASS",
+      "runId": "77f2e627-034c-4305-ba8d-b37e8f4efbcb",
+      "startedUtc": "2026-10-22T06:21:49Z",
+      "tests": {
+        "fast": {
+          "failed": 0,
+          "passed": 348,
+          "skipped": 0,
+          "testSeconds": 5.7378325000000014
+        },
+        "slow": {
+          "failed": 0,
+          "passed": 172,
+          "skipped": 0,
+          "testSeconds": 1192.6515835999994
+        }
+      }
+    },
+    "fastCoverageRows": 348,
+    "identicalFinalSourceRuntimeDependencies": true,
+    "nativeCoverageRows": 35,
+    "result": "PASS",
+    "wholeSessionMutation": "pending final coding-session snapshot"
+  },
+  "historicalStatusesUnchanged": true,
+  "originalClassificationSha256": "9468dd5650a60588da69b362c346eff105c493e4290d5bdf85b1768fb651acde",
+  "originalCount": 54,
+  "originalSourceSnapshot": "29e974adc59e36ef8622f5f2c176ddb563f8c6d4",
+  "pending": [
+    "independent completion verdict",
+    "local publication and conditional issue closure"
+  ],
+  "qualification": "Candidate disposition matrix, not independent completion approval. Original mutation statuses preserved;25 original fault shapes and3 current regression faults are compiled on final source when complete. Remaining dispositions use executable maintained contract+bounded current producer/source proof, not a54fault replay. Original1924 useful success-release distinction is separately proved by prior one-off weak-node evidence and current source simplification. Broad claim that Delivered cannot precede worker check is superseded; proof permits reentrant synchronization-context Post.",
+  "schemaVersion": 1,
+  "ticket": "TT-023"
+}

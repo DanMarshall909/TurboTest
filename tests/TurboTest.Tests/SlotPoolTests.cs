@@ -6,6 +6,100 @@ namespace TurboTest.Tests;
 public class SlotPoolTests
 {
     [Fact]
+    public async Task Two_failed_drain_deletions_retain_both_safe_errors_until_successful_physical_retry()
+    {
+        var allowDeletion = false;
+        var attempts = 0;
+        var confirmed = new HashSet<Guid>();
+        var errors = new Dictionary<Guid, TtLifecycleException>();
+        var owner = new TtSlotPool<Resource>(2, 1, id => new Resource(id), (_, _) => Task.CompletedTask, resource =>
+        {
+            if (++attempts > 4) throw new InvalidOperationException("Drain exceeded its finite deletion oracle.");
+            if (!allowDeletion) throw errors[resource.Id];
+            Assert.True(confirmed.Add(resource.Id), "Confirmed drain deletion was repeated.");
+            return Task.CompletedTask;
+        });
+        try
+        {
+            var first = await owner.AcquireAsync();
+            var second = await owner.AcquireAsync();
+            errors[first.Value.Id] = new TtLifecycleException("FirstDrop",
+                new Npgsql.PostgresException("private-first-drop", "ERROR", "ERROR", "53100"));
+            errors[second.Value.Id] = new TtLifecycleException("SecondDrop",
+                new Npgsql.PostgresException("private-second-drop", "ERROR", "ERROR", "53200"));
+            await owner.ReturnAsync(first, (_, _) => Task.CompletedTask);
+            await owner.ReturnAsync(second, (_, _) => Task.CompletedTask);
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => owner.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("SlotDispose", failure.Stage);
+            Assert.Contains("FirstDrop", failure.Message);
+            Assert.Contains("53100", failure.Message);
+            Assert.Contains("SecondDrop", failure.Message);
+            Assert.Contains("53200", failure.Message);
+            Assert.DoesNotContain("private-", failure.ToString());
+            Assert.Null(failure.InnerException);
+            Assert.Equal((2, 2, 2, 0), (attempts, owner.Snapshot.Reserved, owner.Snapshot.Quarantined, confirmed.Count));
+            allowDeletion = true;
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(errors.Keys.Order().ToArray(), confirmed.Order().ToArray());
+            Assert.Equal((4, 0), (attempts, owner.Snapshot.Reserved));
+        }
+        finally
+        {
+            allowDeletion = true;
+            await Record.ExceptionAsync(() => owner.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)));
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
+    [Fact]
+    public async Task A_second_quarantine_cannot_replace_the_first_terminal_error_seen_by_later_acquisition()
+    {
+        var allowDeletion = false;
+        var confirmed = new HashSet<Guid>();
+        var errors = new Dictionary<Guid, TtLifecycleException>();
+        var creates = 0;
+        var owner = new TtSlotPool<Resource>(2, 1, id =>
+        {
+            if (++creates > 2) throw new InvalidOperationException("Quarantine created another resource.");
+            return new Resource(id);
+        }, (_, _) => Task.CompletedTask, resource =>
+        {
+            if (!allowDeletion) throw errors[resource.Id];
+            Assert.True(confirmed.Add(resource.Id), "Confirmed quarantine deletion was repeated.");
+            return Task.CompletedTask;
+        });
+        try
+        {
+            var first = await owner.AcquireAsync();
+            var second = await owner.AcquireAsync();
+            var firstError = errors[first.Value.Id] = new TtLifecycleException("FirstQuarantine",
+                new Npgsql.PostgresException("private-first-quarantine", "ERROR", "ERROR", "53100"));
+            var secondError = errors[second.Value.Id] = new TtLifecycleException("SecondQuarantine",
+                new Npgsql.PostgresException("private-second-quarantine", "ERROR", "ERROR", "53200"));
+            Assert.Same(firstError, await Assert.ThrowsAsync<TtLifecycleException>(() => owner.DiscardAsync(first)));
+            Assert.Same(secondError, await Assert.ThrowsAsync<TtLifecycleException>(() => owner.DiscardAsync(second)));
+            Assert.Equal((2, 2, 0), (owner.Snapshot.Reserved, owner.Snapshot.Quarantined, owner.Snapshot.QueuedAcquisitions));
+            var later = await Assert.ThrowsAsync<TtLifecycleException>(() => owner.AcquireAsync());
+            Assert.Equal("FirstQuarantine", later.Stage);
+            Assert.Same(firstError, later);
+            Assert.Equal("53100", later.SqlState);
+            Assert.DoesNotContain("private-", later.ToString());
+            allowDeletion = true;
+            await owner.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2));
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(errors.Keys.Order().ToArray(), confirmed.Order().ToArray());
+            Assert.Equal((2, 0), (creates, owner.Snapshot.Reserved));
+        }
+        finally
+        {
+            allowDeletion = true;
+            await Record.ExceptionAsync(() => owner.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)));
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
+    [Fact]
     public async Task Reentrant_deletion_observes_one_published_pending_drain_and_preserves_its_reservation()
     {
         var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -379,6 +473,11 @@ public class SlotPoolTests
             var delivered = await Assert.ThrowsAsync<TtLifecycleException>(() => first);
             Assert.Equal("FirstCandidate", delivered.Stage);
             Assert.Same(delivered, await Assert.ThrowsAsync<TtLifecycleException>(() => second));
+            using var settled = new CancellationTokenSource(TimeSpan.FromSeconds(2));
+            while (owner.Snapshot.Reserved != 0) await Task.Delay(1, settled.Token);
+            var later = await Assert.ThrowsAsync<TtLifecycleException>(() => owner.AcquireAsync());
+            Assert.Equal("FirstCandidate", later.Stage);
+            Assert.Same(delivered, later);
             var unseen = await Assert.ThrowsAsync<TtLifecycleException>(() => owner.DisposeAsync().AsTask());
             Assert.Equal("SlotDispose", unseen.Stage);
             Assert.Contains("SecondCandidate", unseen.Message);

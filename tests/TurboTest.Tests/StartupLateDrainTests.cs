@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using TurboTest.EFCore;
 using TurboTest.EFCore.Internal;
 
@@ -6,6 +7,197 @@ namespace TurboTest.Tests;
 [Collection("Static lifecycle")]
 public class StartupLateDrainTests
 {
+    [Fact]
+    public async Task Startup_recovery_preserves_four_distinct_safe_failures_and_every_remaining_child_owner()
+    {
+        var children = new ConcurrentDictionary<string, byte>();
+        var deletions = new ConcurrentDictionary<string, int>();
+        var names = new[] { "seed-child", "callback-child", "drain-child", "retry-child" };
+        var handles = names.ToDictionary(name => name, name => RetainChild(name, children, deletions));
+        TtLifecycleException Failure(string stage, string state, string child) => new(stage,
+            new Npgsql.PostgresException("private-" + stage, "ERROR", "ERROR", state), cleanup: handles[child]);
+        var seedFailure = Failure("SeedStage", "42P01", "seed-child");
+        var callbackFailure = Failure("CallbackStage", "42501", "callback-child");
+        var drainFailure = Failure("HostDrain", "53100", "drain-child");
+        var retryFailure = Failure("HostRetry", "53200", "retry-child");
+        var pool = new StartupPool
+        {
+            FailedDeleteAttempts = 2,
+            DeleteFailure = attempt => attempt == 1 ? drainFailure : retryFailure
+        };
+        using var caller = new CancellationTokenSource();
+        CancellationTokenRegistration registration = default;
+        var startup = Tt.InitializeOwnedPoolAsync(pool, new TtOptions(), async token =>
+        {
+            registration = token.Register(() => throw callbackFailure);
+            await pool.InitializeAsync(token);
+            throw seedFailure;
+        }, "BaselineInitialize", caller.Token);
+        TtCleanup? recovery = null;
+        try
+        {
+            await pool.Initialized.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            caller.Cancel();
+            var interrupted = await Assert.ThrowsAsync<TtLifecycleException>(() => startup.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("StartupCanceled", interrupted.Stage);
+            recovery = Assert.IsType<TtCleanup>(interrupted.Cleanup);
+            var pending = recovery.RetryCleanupAsync();
+            Assert.False(pending.IsCompleted);
+            Assert.Equal(0, pool.DeleteAttempts);
+            pool.ReleaseInitialization.TrySetResult();
+            await pool.Deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.False(pending.IsCompleted);
+            pool.ReleaseDeletion.TrySetResult();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(2)));
+            recovery = Assert.IsType<TtCleanup>(failure.Cleanup);
+            foreach (var expected in new[] { ("SeedStage", "42P01"), ("CallbackStage", "42501"), ("HostDrain", "53100"), ("HostRetry", "53200") })
+            {
+                Assert.Contains(expected.Item1, failure.Message);
+                Assert.Contains(expected.Item2, failure.Message);
+            }
+            Assert.DoesNotContain("private-", failure.ToString());
+            Assert.Null(failure.InnerException);
+            Assert.Equal(names.Append(pool.Snapshot.OwnerId.ToString("N")).Order().ToArray(), recovery.OwnedResourceIds.Order().ToArray());
+            Assert.Equal((1, 2), (pool.Snapshot.Reserved, pool.DeleteAttempts));
+            Assert.All(names, name => Assert.Equal(0, deletions.GetValueOrDefault(name)));
+            await recovery.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            await recovery.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Empty(recovery.OwnedResourceIds);
+            Assert.Empty(children);
+            Assert.All(names, name => Assert.Equal(1, deletions[name]));
+            Assert.Equal((0, 3), (pool.Snapshot.Reserved, pool.DeleteAttempts));
+        }
+        finally
+        {
+            pool.ReleaseInitialization.TrySetResult();
+            pool.ReleaseDeletion.TrySetResult();
+            var failure = await Record.ExceptionAsync(() => startup.WaitAsync(TimeSpan.FromSeconds(2)));
+            recovery ??= (failure as TtLifecycleException)?.Cleanup;
+            foreach (var cleanup in handles.Values.Append(recovery).OfType<TtCleanup>())
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2)));
+                await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            }
+            registration.Dispose();
+            await pool.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
+    [Theory]
+    [InlineData(false, false)]
+    [InlineData(true, false)]
+    [InlineData(true, true)]
+    public async Task Initializer_child_cleanup_does_not_hide_a_distinct_callback_failure_or_its_owner(
+        bool callbackFails, bool outerDrainFails)
+    {
+        var children = new ConcurrentDictionary<string, byte>();
+        var deletions = new ConcurrentDictionary<string, int>();
+        var seedChild = RetainChild("seed-child", children, deletions);
+        var callbackChild = callbackFails ? RetainChild("callback-child", children, deletions) : null;
+        var seedFailure = new TtLifecycleException("SeedStage",
+            new Npgsql.PostgresException("private-seed", "ERROR", "ERROR", "42P01"), cleanup: seedChild);
+        var callbackFailure = callbackFails ? new TtLifecycleException("CallbackStage",
+            new Npgsql.PostgresException("private-callback", "ERROR", "ERROR", "42501"), cleanup: callbackChild) : null;
+        var pool = new StartupPool { FailedDeleteAttempts = outerDrainFails ? 1 : 0 };
+        CancellationTokenRegistration registration = default;
+        var startup = Tt.InitializeOwnedPoolAsync(pool, new TtOptions(), async token =>
+        {
+            if (callbackFailure is not null) registration = token.Register(() => throw callbackFailure);
+            await pool.InitializeAsync(token);
+            throw seedFailure;
+        }, "BaselineInitialize", default);
+        TtCleanup? recovery = null;
+        try
+        {
+            await pool.Initialized.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            pool.ReleaseDeletion.TrySetResult();
+            pool.ReleaseInitialization.TrySetResult();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => startup.WaitAsync(TimeSpan.FromSeconds(2)));
+            recovery = Assert.IsType<TtCleanup>(failure.Cleanup);
+            Assert.Equal(("SeedStage", "42P01"), (failure.Stage, failure.SqlState));
+            Assert.Contains("seed-child", recovery.OwnedResourceIds);
+            if (callbackFails && !outerDrainFails)
+            {
+                Assert.Contains("CallbackStage", failure.Message);
+                Assert.Contains("42501", failure.Message);
+                Assert.Equal(new[] { "callback-child", "seed-child" }, recovery.OwnedResourceIds.Order().ToArray());
+            }
+            else Assert.DoesNotContain("CallbackStage", failure.Message);
+            Assert.DoesNotContain("private-", failure.ToString());
+            Assert.Null(failure.InnerException);
+            Assert.Equal((1, outerDrainFails ? 1 : 0), (pool.DeleteAttempts, pool.Snapshot.Reserved));
+            Assert.Equal(0, deletions.GetValueOrDefault("seed-child"));
+            Assert.Equal(0, deletions.GetValueOrDefault("callback-child"));
+            if (outerDrainFails)
+            {
+                var callback = await Assert.ThrowsAsync<TtLifecycleException>(() => recovery.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2)));
+                Assert.Contains("CallbackStage", callback.Message);
+                Assert.Contains("42501", callback.Message);
+                Assert.DoesNotContain("SeedStage", callback.Message);
+                recovery = Assert.IsType<TtCleanup>(callback.Cleanup);
+                Assert.Equal(new[] { "callback-child" }, recovery.OwnedResourceIds);
+            }
+            await recovery.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            await recovery.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Empty(recovery.OwnedResourceIds);
+            Assert.Empty(children);
+            Assert.Equal(1, deletions["seed-child"]);
+            Assert.Equal(callbackFails ? 1 : 0, deletions.GetValueOrDefault("callback-child"));
+            Assert.Equal((outerDrainFails ? 2 : 1, 0), (pool.DeleteAttempts, pool.Snapshot.Reserved));
+        }
+        finally
+        {
+            pool.ReleaseInitialization.TrySetResult();
+            pool.ReleaseDeletion.TrySetResult();
+            var failure = await Record.ExceptionAsync(() => startup.WaitAsync(TimeSpan.FromSeconds(2)));
+            recovery ??= (failure as TtLifecycleException)?.Cleanup;
+            foreach (var cleanup in new[] { recovery, seedChild, callbackChild }.OfType<TtCleanup>())
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2)));
+                await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            }
+            registration.Dispose();
+            await pool.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
+    [Fact]
+    public async Task An_initializer_owned_timeout_preserves_its_stage_and_completes_physical_cleanup()
+    {
+        var pool = new StartupPool { FailedDeleteAttempts = 0 };
+        var startup = Tt.InitializeOwnedPoolAsync(pool,
+            new TtOptions { StartupTimeout = TimeSpan.FromSeconds(10) }, async token =>
+            {
+                await pool.InitializeAsync(token);
+                throw new TimeoutException("private-initializer-timeout");
+            }, "BaselineInitialize", default);
+        try
+        {
+            await pool.Initialized.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.False(startup.IsCompleted);
+            pool.ReleaseInitialization.TrySetResult();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => startup.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("BaselineInitialize", failure.Stage);
+            Assert.Contains(nameof(TimeoutException), failure.Message);
+            Assert.Null(failure.SqlState);
+            Assert.Null(failure.InnerException);
+            Assert.Null(failure.Cleanup);
+            Assert.DoesNotContain("private-initializer-timeout", failure.ToString());
+            Assert.Equal((1, 0), (pool.DeleteAttempts, pool.Snapshot.Reserved));
+        }
+        finally
+        {
+            pool.ReleaseInitialization.TrySetResult();
+            var failure = await Record.ExceptionAsync(() => startup.WaitAsync(TimeSpan.FromSeconds(2)));
+            if (failure is TtLifecycleException { Cleanup: { } cleanup })
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2)));
+                await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            }
+            await pool.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
     [Theory]
     [InlineData(true, "Success")]
     [InlineData(false, "Success")]
@@ -346,6 +538,19 @@ public class StartupLateDrainTests
         }
     }
 
+    private static TtCleanup RetainChild(string name, ConcurrentDictionary<string, byte> children,
+        ConcurrentDictionary<string, int> deletions)
+    {
+        Assert.True(children.TryAdd(name, 0));
+        return TtCleanupRegistry.Retain(Guid.NewGuid(), () =>
+        {
+            if (deletions.AddOrUpdate(name, 1, (_, previous) => previous + 1) > 1)
+                throw new InvalidOperationException("Confirmed child cleanup was repeated.");
+            Assert.True(children.TryRemove(name, out _));
+            return Task.CompletedTask;
+        }, () => children.ContainsKey(name) ? [name] : []);
+    }
+
     private sealed class StartupPool : ITtDatabasePool
     {
         private readonly TtSlotPool<object> _slots;
@@ -358,6 +563,7 @@ public class StartupLateDrainTests
         internal int FailedDeleteAttempts { get; init; } = 1;
         internal bool ThrowCancellationCallback { get; init; }
         internal bool GateDeletion { get; init; }
+        internal Func<int, Exception>? DeleteFailure { get; init; }
         public TtPoolSnapshot Snapshot => _slots.Snapshot;
         public TtResourceBudget Budget => TtResourceBudget.Create(new TtOptions { PoolSize = 1 }, true);
         public IReadOnlyList<string> OwnedResourceIds => Snapshot.Reserved == 0 ? [] : [Snapshot.OwnerId.ToString("N")];
@@ -375,6 +581,7 @@ public class StartupLateDrainTests
                         await ReleaseDeletion.Task;
                     }
                     if (attempt > FailedDeleteAttempts) return;
+                    if (DeleteFailure is not null) throw DeleteFailure(attempt);
                     if (attempt > 1)
                         throw new TtLifecycleException("RetryHostDelete",
                             new Npgsql.PostgresException("private-retry-detail", "ERROR", "ERROR", "53100"));

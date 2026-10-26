@@ -6,6 +6,74 @@ namespace TurboTest.Tests;
 [Collection("Static lifecycle")]
 public class FactoryMaintenanceTests
 {
+    [Theory]
+    [InlineData(false, false)]
+    [InlineData(true, false)]
+    [InlineData(true, true)]
+    public async Task Maintenance_cancellation_precedence_preserves_actual_failure_until_owner_drain(bool callerCancellation, bool shutdownFirst)
+    {
+        await using var pool = new MaintenancePool();
+        await pool.WarmAsync();
+        var factory = new TtFactory<TestDbContext>(pool, new TtOptions(), ownsPool: true);
+        using var caller = new CancellationTokenSource();
+        Task? observation = null;
+        Task? closing = null;
+        try
+        {
+            await Task.Run(() =>
+            {
+                var previous = SynchronizationContext.Current;
+                var pump = new QueuedSynchronizationContext();
+                SynchronizationContext.SetSynchronizationContext(pump);
+                try
+                {
+                    observation = factory.MaintainIdleAsync(caller.Token);
+                    Assert.True(pool.Deleting.Task.IsCompleted);
+                    if (callerCancellation && !shutdownFirst)
+                        Task.Run(() => caller.Cancel()).WaitAsync(TimeSpan.FromSeconds(2)).GetAwaiter().GetResult();
+                    closing = factory.DisposeAsync().AsTask();
+                    if (callerCancellation && shutdownFirst)
+                        Task.Run(() => caller.Cancel()).WaitAsync(TimeSpan.FromSeconds(2)).GetAwaiter().GetResult();
+                    // Both requested flags are established before the observer
+                    // resumes; actual retirement remains independently held.
+                    pump.RunUntil(observation);
+                    Assert.Equal(callerCancellation, observation.IsCanceled);
+                    Assert.Equal(!callerCancellation, observation.IsFaulted);
+                    Assert.False(closing.IsCompleted);
+                }
+                finally
+                {
+                    SynchronizationContext.SetSynchronizationContext(previous);
+                    pump.ReleaseToThreadPool();
+                }
+            });
+            var result = await Record.ExceptionAsync(() => observation!.WaitAsync(TimeSpan.FromSeconds(2)));
+            if (callerCancellation) Assert.IsAssignableFrom<OperationCanceledException>(result);
+            else Assert.IsType<ObjectDisposedException>(result);
+            Assert.Equal((1, 1), (pool.Snapshot.Reserved, pool.DeleteAttempts));
+            pool.Release.TrySetResult();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => closing!.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("SlotIdleRetire", failure.Stage);
+            Assert.Contains(nameof(IOException), failure.Message);
+            Assert.DoesNotContain("private-retirement-payload", failure.ToString());
+            Assert.Null(failure.InnerException);
+            await Assert.IsType<TtCleanup>(failure.Cleanup).RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((0, 2, 1), (pool.Snapshot.Reserved, pool.DeleteAttempts, pool.DrainAttempts));
+        }
+        finally
+        {
+            pool.Release.TrySetResult();
+            if (observation is not null)
+                await Record.ExceptionAsync(() => observation.WaitAsync(TimeSpan.FromSeconds(2)));
+            var failure = await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)));
+            if (failure is TtLifecycleException { Cleanup: { } cleanup })
+            {
+                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2)));
+                await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            }
+        }
+    }
+
     [Fact]
     public async Task A_failure_recorded_before_canceled_observer_finally_remains_available_to_drain()
     {
@@ -206,6 +274,7 @@ public class FactoryMaintenanceTests
             Assert.Equal((2, 2), (pool.Snapshot.Retiring, pool.DeleteAttempts));
             pool.Release.TrySetResult();
             var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => maintenance);
+            Assert.Equal("IdleMaintenance", failure.Stage);
             Assert.Contains("IOException", failure.Message);
             Assert.Contains("UnauthorizedAccessException", failure.Message);
             Assert.DoesNotContain("private-retirement-payload", failure.ToString());

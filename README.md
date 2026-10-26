@@ -114,6 +114,7 @@ the cancellation result. Unconfirmed resources remain owned for final cleanup.
 Caller cancellation or expiry reports `StartupCanceled` or `StartupTimeout`
 with a cleanup capability. Cooperative Docker/readiness work receives the
 token; any pending noncooperative work remains owned until it actually settles.
+An initializer's own `TimeoutException` retains its initialization stage.
 An issued container create stays awaited until its response records the resource
 identity, because canceling an HTTP request cannot undo Docker's creation.
 Cleanup starts in the background and waits for initialization before deleting
@@ -139,6 +140,14 @@ retained cleanup attempt; a subsequent retry confirms remaining resources.
 Startup observes the caller token and deadline separately from the private token
 passed to initialization. Every interruption starts one owned asynchronous
 cancellation task; cleanup joins that task and initialization before deletion.
+After interrupted startup, callback failures are reported through retained
+cleanup. A nested initializer cleanup capability also remains available when a
+separate cancellation callback fails.
+
+Cancellation of an admitted checkout or maintenance wait reports
+`ObjectDisposedException` when only factory closure requested cancellation. If
+the caller has also canceled before observation resumes, the cancellation result
+is `OperationCanceledException`. Actual work and cleanup remain with their owner.
 
 Initial disposable cluster creation uses `initdb --no-sync` to avoid waiting for
 its initial disk flush. PostgreSQL server `fsync` remains enabled for test
@@ -427,6 +436,9 @@ and resource-ID snapshot. Await `error.Cleanup.RetryCleanupAsync()` to retry;
 concurrent retries share an attempt. `Tt.DisposeAsync()` also retries registered
 failed owners. Resources remain accounted until confirmed deletion, and a
 closed owner cannot publish another lease.
+The capability on the most recent lifecycle failure combines every remaining
+owner from its primary and secondary failures. Retry that capability to recover
+their resources together.
 
 ## Requirements
 

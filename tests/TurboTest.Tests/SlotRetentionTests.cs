@@ -8,9 +8,11 @@ public class SlotRetentionTests
     private sealed record Resource(Guid Id);
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
-    public async Task Retirement_retry_preserves_capacity_and_replaces_only_for_renewed_demand(bool renewed)
+    [InlineData(false, false)]
+    [InlineData(true, false)]
+    [InlineData(false, true)]
+    [InlineData(true, true)]
+    public async Task Retirement_retry_preserves_capacity_and_replaces_only_for_renewed_demand(bool renewed, bool safeFailure)
     {
         var retry = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var confirm = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -18,6 +20,9 @@ public class SlotRetentionTests
         var attempts = 0;
         var live = true;
         var inject = true;
+        Exception deletionFailure = safeFailure
+            ? new TtLifecycleException("DistinctDelete", new Npgsql.PostgresException("private-idle-drop", "ERROR", "ERROR", "53100"))
+            : new IOException("private-idle-drop");
         Resource? original = null;
         await using var owner = new TtSlotPool<Resource>(1, 1, id =>
         {
@@ -30,7 +35,7 @@ public class SlotRetentionTests
             if (!inject || !ReferenceEquals(resource, original)) return;
             var attempt = Interlocked.Increment(ref attempts);
             if (attempt > 2) throw new InvalidOperationException("Confirmed retirement was retried.");
-            if (attempt == 1) throw new IOException("The idle drop has not been confirmed.");
+            if (attempt == 1) throw deletionFailure;
             retry.TrySetResult();
             await confirm.Task;
             live = false;
@@ -43,7 +48,10 @@ public class SlotRetentionTests
         try
         {
             var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => owner.ParkIdleAsync(0, (_, _) => Task.CompletedTask, maxParked: 0));
-            Assert.Equal("SlotIdleRetire", failure.Stage);
+            Assert.Equal(safeFailure ? "DistinctDelete" : "SlotIdleRetire", failure.Stage);
+            Assert.Equal(safeFailure ? "53100" : null, failure.SqlState);
+            Assert.DoesNotContain("private-idle-drop", failure.ToString());
+            Assert.Null(failure.InnerException);
             await retry.Task.WaitAsync(TimeSpan.FromSeconds(2));
             Assert.Equal((1, 1, 1), (created, owner.Snapshot.Reserved, owner.Snapshot.Retiring));
             if (renewed)

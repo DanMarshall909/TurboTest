@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using TurboTest.EFCore;
 using TurboTest.EFCore.Internal;
 
@@ -6,10 +7,81 @@ namespace TurboTest.Tests;
 public class SlotRewarmDrainTests
 {
     [Fact]
-    public async Task A_rewarm_failure_delivered_by_exhausted_cleanup_is_not_reported_again_at_drain()
+    public async Task A_failed_rewarm_transfers_its_unseen_failure_to_an_admitted_replacement_until_drain()
+    {
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var created = new ConcurrentQueue<object>();
+        var deleted = new ConcurrentQueue<object>();
+        var preparations = 0;
+        var owner = new TtSlotPool<object>(1, 1, _ =>
+        {
+            if (created.Count >= 2) throw new InvalidOperationException("Recovery created another replacement.");
+            var resource = new object();
+            created.Enqueue(resource);
+            return resource;
+        }, async (_, token) =>
+        {
+            var attempt = Interlocked.Increment(ref preparations);
+            if (attempt == 1) return;
+            if (attempt > 2) throw new InvalidOperationException("Replacement preparation was repeated.");
+            entered.TrySetResult();
+            await release.Task;
+            token.ThrowIfCancellationRequested();
+        }, resource =>
+        {
+            Assert.DoesNotContain(resource, deleted);
+            deleted.Enqueue(resource);
+            return Task.CompletedTask;
+        }, rewarm: (_, _) => Task.FromException(new TtLifecycleException("RewarmStage",
+            new Npgsql.PostgresException("private-transferred-rewarm", "ERROR", "ERROR", "53100"))));
+        Task<TtSlotPool<object>.Reservation>? waiting = null;
+        Task? closing = null;
+        try
+        {
+            var initial = await owner.AcquireAsync();
+            await owner.ReturnAsync(initial, (_, _) => Task.CompletedTask);
+            await owner.ParkIdleAsync(0, (_, _) => Task.CompletedTask);
+            waiting = owner.AcquireAsync();
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((2, 1, 1, 1), (created.Count, deleted.Count, owner.Snapshot.Preparing, owner.Snapshot.Reserved));
+            Assert.False(waiting.IsCompleted);
+            closing = owner.DisposeAsync().AsTask();
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => waiting.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.False(closing.IsCompleted);
+            release.TrySetResult();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => closing.WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal("SlotDispose", failure.Stage);
+            Assert.Contains("RewarmStage", failure.Message);
+            Assert.Contains("53100", failure.Message);
+            Assert.DoesNotContain(nameof(OperationCanceledException), failure.Message);
+            Assert.DoesNotContain("private-", failure.ToString());
+            Assert.Null(failure.InnerException);
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(created.ToArray(), deleted.ToArray());
+            Assert.Equal((2, 2, 0), (created.Count, preparations, owner.Snapshot.Reserved));
+        }
+        finally
+        {
+            release.TrySetResult();
+            if (waiting is not null) await Record.ExceptionAsync(() => waiting.WaitAsync(TimeSpan.FromSeconds(2)));
+            closing ??= owner.DisposeAsync().AsTask();
+            await Record.ExceptionAsync(() => closing.WaitAsync(TimeSpan.FromSeconds(2)));
+            await owner.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        }
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task A_rewarm_failure_delivered_by_exhausted_cleanup_is_not_reported_again_at_drain(bool safeFailure)
     {
         var attempts = 0;
         var allowCleanup = false;
+        Exception rewarmFailure = safeFailure
+            ? new TtLifecycleException("DistinctRewarm", new Npgsql.PostgresException("private-rewarm-failure", "ERROR", "ERROR", "53200"))
+            : new IOException("private-rewarm-failure");
         var confirmed = 0;
         await using var owner = new TtSlotPool<object>(1, 1, _ => new object(), (_, _) => Task.CompletedTask,
             _ =>
@@ -18,14 +90,17 @@ public class SlotRewarmDrainTests
                 if (!allowCleanup) throw new UnauthorizedAccessException("private-cleanup-failure");
                 confirmed++;
                 return Task.CompletedTask;
-            }, rewarm: (_, _) => Task.FromException(new IOException("private-rewarm-failure")));
+            }, rewarm: (_, _) => Task.FromException(rewarmFailure));
         var initial = await owner.AcquireAsync();
         await owner.ReturnAsync(initial, (_, _) => Task.CompletedTask);
         await owner.ParkIdleAsync(0, (_, _) => Task.CompletedTask);
         try
         {
             var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => owner.AcquireAsync().WaitAsync(TimeSpan.FromSeconds(2)));
-            Assert.Contains("IOException", failure.Message);
+            Assert.Equal(safeFailure ? "DistinctRewarm" : "SlotRewarm", failure.Stage);
+            Assert.Equal(safeFailure ? "53200" : null, failure.SqlState);
+            Assert.Contains(safeFailure ? "53200" : nameof(IOException), failure.Message);
+            Assert.Null(failure.InnerException);
             Assert.Contains("UnauthorizedAccessException", failure.Message);
             Assert.DoesNotContain("private-", failure.ToString());
             Assert.Equal((3, 1, 0), (attempts, owner.Snapshot.Quarantined, confirmed));

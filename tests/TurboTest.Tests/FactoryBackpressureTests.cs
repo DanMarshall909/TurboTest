@@ -10,6 +10,55 @@ namespace TurboTest.Tests;
 [Collection("Static lifecycle")]
 public class FactoryBackpressureTests
 {
+    [Fact]
+    public async Task Repeated_failed_acquisitions_release_completed_contexts_and_work_while_the_factory_remains_usable()
+    {
+        await using var pool = new BoundedPool();
+        var factory = new TtFactory<CancelingConfigurationContext>(pool,
+            new TtOptions { AutoMigrate = false }, ownsPool: true);
+        try
+        {
+            var completed = await Task.Run(() => CompleteFailedContexts(factory, 16));
+            Assert.Equal(16, completed.Length);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+            GC.WaitForPendingFinalizers();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+            Assert.All(completed, entry =>
+            {
+                Assert.False(entry.Context.IsAlive);
+                Assert.False(entry.Acquisition.IsAlive);
+            });
+            Assert.Equal((16, 0), (pool.Deleted, factory.PoolState.Reserved));
+            var next = await Task.Run(() => CompleteFailedContexts(factory, 1));
+            Assert.Single(next);
+            Assert.Equal((17, 0), (pool.Deleted, factory.PoolState.Reserved));
+            GC.KeepAlive(factory);
+        }
+        finally { await factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)); }
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static (WeakReference Context, WeakReference Acquisition)[] CompleteFailedContexts(
+        TtFactory<CancelingConfigurationContext> factory, int count)
+    {
+        var completed = new List<(WeakReference, WeakReference)>();
+        for (var i = 0; i < count; i++)
+        {
+            using var caller = new CancellationTokenSource();
+            var probe = new ConfigurationCancellationProbe(caller);
+            NextConfigurationProbe = probe;
+            try
+            {
+                var acquiring = factory.CreateLeaseAsync(cancellationToken: caller.Token);
+                Assert.ThrowsAny<OperationCanceledException>(() => acquiring.WaitAsync(TimeSpan.FromSeconds(2)).GetAwaiter().GetResult());
+                Assert.Equal((1, 0, 1), (probe.Configurations, probe.SchemaInitializations, probe.Disposals));
+                completed.Add((Assert.IsType<WeakReference>(probe.Context), new WeakReference(acquiring)));
+            }
+            finally { NextConfigurationProbe = null; }
+        }
+        return completed.ToArray();
+    }
+
     private static CleanupLifetimeProbe? NextProbe;
     private static ConfigurationCancellationProbe? NextConfigurationProbe;
     private static Action? NextAlternateProviderDisposal;
@@ -99,6 +148,7 @@ public class FactoryBackpressureTests
         internal int Configurations;
         internal int SchemaInitializations;
         internal int Disposals;
+        internal WeakReference? Context;
     }
 
     public sealed class CancelingConfigurationContext : DbContext
@@ -110,6 +160,7 @@ public class FactoryBackpressureTests
         {
             _probe = NextConfigurationProbe ?? throw new InvalidOperationException("Missing configuration cancellation probe.");
             NextConfigurationProbe = null;
+            _probe.Context = new WeakReference(this);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)

@@ -62,6 +62,32 @@ public class HostMemoryTests
     }
 
     [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Cancellation_during_an_owned_host_stats_read_reaches_the_caller()
+    {
+        var entered = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);
+        await using var host = new TtPool(new TtOptions
+        {
+            PoolSize = 1,
+            ContainerPrefix = "tt_stats_cancel_" + Guid.NewGuid().ToString("N")
+        }, administratorHost: true, readStats: async (id, token) =>
+        {
+            entered.TrySetResult(id);
+            await Task.Delay(Timeout.InfiniteTimeSpan, token);
+            throw new InvalidOperationException("A canceled read cannot return statistics.");
+        });
+        await host.InitializeAsync();
+        var owned = Assert.Single(host.OwnedResourceIds);
+        using var cancellation = new CancellationTokenSource();
+        var read = host.ReadOwnedHostMemoryAsync(new ManualPoolClock(), cancellation.Token);
+        Assert.Equal(owned, await entered.Task.WaitAsync(TimeSpan.FromSeconds(5)));
+        Assert.False(read.IsCompleted);
+        cancellation.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => read.WaitAsync(TimeSpan.FromSeconds(5)));
+        Assert.Equal(owned, Assert.Single(host.OwnedResourceIds));
+    }
+
+    [Fact]
     public void Cgroup_v1_cache_takes_precedence_and_v2_uses_its_own_inactive_file_key()
     {
         var v1 = TtHostMemory.Read(new ContainerStatsResponse

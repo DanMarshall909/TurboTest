@@ -31,11 +31,11 @@ The table preserves implementation order and prerequisite identities.
 
 ## Verification and performance
 
-The current candidate passes all **520 tests**, including **348 fast checks**,
-without failures or skips. Solution and separate DynamicScalingExample builds
-pass without warnings/errors. Final receipts bind identical compiler/test inputs;
-independent completion review passed. Earlier ticket evidence retains
-its original source cut rather than being relabelled as current verification.
+The maintained correctness gate covers **525 tests**, including **352 fast
+checks**; failures and skips fail verification. It builds the solution and
+separate DynamicScalingExample and records source-bound results. Earlier ticket
+evidence retains its original source cut; use the hosted run for the exact
+commit when assessing current verification.
 
 The maintained Release experiments retain 16 fixed/parking cases and 2,544 cycles,
 plus six fixed/adaptive cases and 954 cycles with equivalent startup conditions.

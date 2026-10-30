@@ -56,7 +56,7 @@ internal sealed class TtPool : ITtDatabasePool
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
         catch (Exception) { return Unavailable("ProbeFailed"); }
-        if (response is null || response.ID != id || !_ownedContainers.ContainsKey(id))
+        if (response is null || !TtHostMemory.IsForRequestedHost(response, id) || !_ownedContainers.ContainsKey(id))
             return Unavailable("HostIdentity");
         return TtHostMemory.Read(response, observedAt) ?? Unavailable("StatisticsUnavailable");
     }

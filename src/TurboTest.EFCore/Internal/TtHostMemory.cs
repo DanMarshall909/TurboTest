@@ -4,6 +4,11 @@ namespace TurboTest.EFCore.Internal;
 
 internal static class TtHostMemory
 {
+    internal static bool IsForRequestedHost(ContainerStatsResponse stats, string requestedHostId)
+        // The full immutable ID already scopes the stats request. Docker 28's
+        // one-shot path omits ID; an explicitly different ID is still invalid.
+        => string.IsNullOrEmpty(stats.ID) || stats.ID == requestedHostId;
+
     internal static TtMemoryReading? Read(ContainerStatsResponse stats, long observedAt)
     {
         if (stats.MemoryStats is not { } memory || memory.Usage == 0 || memory.Limit == 0 ||

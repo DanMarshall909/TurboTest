@@ -7,6 +7,18 @@ namespace TurboTest.Tests;
 
 public class HostMemoryTests
 {
+    [Theory]
+    [InlineData(null, true)]
+    [InlineData("", true)]
+    [InlineData("owned-host", true)]
+    [InlineData("another-host", false)]
+    public void A_sample_from_the_owned_endpoint_may_omit_identity_but_cannot_claim_another_host(
+        string? returnedHostId, bool accepted)
+    {
+        var response = new ContainerStatsResponse { ID = returnedHostId };
+        Assert.Equal(accepted, TtHostMemory.IsForRequestedHost(response, "owned-host"));
+    }
+
     [Fact]
     [Trait("Category", "PostgreSQL")]
     public async Task Real_one_shot_host_statistics_calibrate_cache_conversion_and_the_owned_adapter()
@@ -20,7 +32,8 @@ public class HostMemoryTests
         await docker.Containers.GetContainerStatsAsync(id, new ContainerStatsParameters { Stream = false, OneShot = true }, capture);
         Assert.Equal(1, capture.Count);
         var stats = Assert.IsType<ContainerStatsResponse>(capture.Value);
-        Assert.Equal(id, stats.ID);
+        if (!string.IsNullOrEmpty(stats.ID)) Assert.Equal(id, stats.ID);
+        Assert.Equal(id, (await docker.Containers.InspectContainerAsync(id)).ID);
         var values = stats.MemoryStats.Stats;
         var cache = values.TryGetValue("total_inactive_file", out var v1) ? v1 : values["inactive_file"];
         Assert.True(stats.MemoryStats.Usage >= cache);

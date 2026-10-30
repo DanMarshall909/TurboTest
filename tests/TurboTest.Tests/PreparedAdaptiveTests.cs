@@ -138,15 +138,21 @@ public class PreparedAdaptiveTests
                 if (materialFailure) throw new IOException("private-late-growth-detail");
             }, deleteHost: async container =>
             {
-                Assert.True(finished);
-                Assert.Equal(1, Interlocked.Increment(ref hostDeletions));
-                await container.DisposeAsync();
+                try
+                {
+                    Assert.True(!verifying.Task.IsCompleted || finished);
+                    Assert.Equal(1, Interlocked.Increment(ref hostDeletions));
+                }
+                finally { await container.DisposeAsync(); }
             });
-        var lease = await fixture.CreateLeaseAsync();
-        var waiting = fixture.CreateLeaseAsync();
+        using var waitingCancellation = new CancellationTokenSource();
+        TtLease<TestDbContext>? lease = null;
+        Task<TtLease<TestDbContext>>? waiting = null;
         TtCleanup? cleanup = null;
         try
         {
+            lease = await fixture.CreateLeaseAsync();
+            waiting = fixture.CreateLeaseAsync(cancellationToken: waitingCancellation.Token);
             await verifying.Task.WaitAsync(TimeSpan.FromSeconds(10));
             var host = Assert.Single(fixture.OwnedResourceIds);
             var timeout = await Assert.ThrowsAsync<TtLifecycleException>(() => fixture.DisposeAsync().AsTask());
@@ -172,15 +178,82 @@ public class PreparedAdaptiveTests
         }
         finally
         {
-            release.TrySetResult();
-            await Record.ExceptionAsync(() => waiting);
-            await lease.DisposeAsync();
-            var failure = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
-            cleanup ??= (failure as TtLifecycleException)?.Cleanup;
-            if (cleanup is not null)
+            await FinishGrowthFixtureAsync(fixture, lease, waiting, waitingCancellation, release, cleanup);
+        }
+    }
+
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task A_failed_growth_observation_still_settles_queued_demand_and_deletes_its_host()
+    {
+        var fixture = await Tt.CreateFactoryAsync(
+            new TtBaselineDefinition<TestDbContext>("adaptive-no-growth-cleanup-v1", TtSchemaInitialization.EnsureCreated),
+            options =>
             {
-                await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync());
-                await cleanup.RetryCleanupAsync();
+                options.PoolSize = 2;
+                options.EnableDynamicScaling = true;
+                options.AdaptivePool = new() { GrowthStabilization = TimeSpan.FromDays(1), CheckInterval = TimeSpan.FromMilliseconds(10) };
+            });
+        using var cancellation = new CancellationTokenSource();
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        TtLease<TestDbContext>? lease = null;
+        Task<TtLease<TestDbContext>>? waiting = null;
+        Task? cleanup = null;
+        try
+        {
+            lease = await fixture.CreateLeaseAsync();
+            waiting = fixture.CreateLeaseAsync(cancellationToken: cancellation.Token);
+            await Assert.ThrowsAsync<TimeoutException>(() => waiting.WaitAsync(TimeSpan.FromMilliseconds(100)));
+            Assert.False(waiting.IsCompleted);
+            Assert.Single(fixture.OwnedResourceIds);
+            cleanup = FinishGrowthFixtureAsync(fixture, lease, waiting, cancellation, release, null);
+            await cleanup.WaitAsync(TimeSpan.FromSeconds(10));
+            Assert.True(waiting.IsCanceled);
+            Assert.Empty(fixture.OwnedResourceIds);
+            Assert.Equal(0, fixture.PoolState.Reserved);
+        }
+        finally
+        {
+            // The regression's own rescue runs even if the shared cleanup hangs.
+            cancellation.Cancel();
+            release.TrySetResult();
+            if (cleanup is not null)
+                await Record.ExceptionAsync(() => cleanup.WaitAsync(TimeSpan.FromSeconds(15)));
+            await FinishGrowthFixtureAsync(fixture, lease, waiting, cancellation, release, null)
+                .WaitAsync(TimeSpan.FromSeconds(15));
+        }
+    }
+
+    private static async Task FinishGrowthFixtureAsync(TtFactory<TestDbContext> fixture,
+        TtLease<TestDbContext>? lease, Task<TtLease<TestDbContext>>? waiting,
+        CancellationTokenSource cancellation, TaskCompletionSource release, TtCleanup? cleanup)
+    {
+        release.TrySetResult();
+        cancellation.Cancel();
+        try
+        {
+            if (waiting is not null)
+            {
+                var failure = await Record.ExceptionAsync(() => waiting.WaitAsync(TimeSpan.FromSeconds(2)));
+                Assert.IsNotType<TimeoutException>(failure);
+            }
+        }
+        finally
+        {
+            try
+            {
+                if (lease is not null) await lease.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(10));
+            }
+            finally
+            {
+                var failure = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(10)));
+                Assert.IsNotType<TimeoutException>(failure);
+                cleanup ??= (failure as TtLifecycleException)?.Cleanup;
+                if (cleanup is not null)
+                {
+                    await Record.ExceptionAsync(() => cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(10)));
+                    await cleanup.RetryCleanupAsync().WaitAsync(TimeSpan.FromSeconds(10));
+                }
             }
         }
     }

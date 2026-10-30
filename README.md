@@ -416,7 +416,10 @@ the cooldown. Parked databases consume reservations and are preferred on renewed
 demand; they must verify before publication. With a ten-second spare window,
 shrinking from eight to two requires at least six windows, plus checks and work.
 
-The monitor reads only its owned host. Working-set memory subtracts Docker's
+The monitor requests statistics using its owned host's full container ID. A
+one-shot response may omit its ID; a populated ID must match the requested host,
+and the host must still be owned when the request completes.
+Working-set memory subtracts Docker's
 inactive-file cache counter from cgroup usage; the default growth ceiling is
 80 percent of that host's limit. Missing, invalid, future or stale readings block
 growth while preserving the current target; they do not block eligible shrink.

@@ -1,10 +1,22 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "resources": {
     "memory": {
       "reserveMiBPerActiveWorktree": 4096,
       "basis": "estimated",
       "estimateReason": "Allows for a .NET build and test run with the default pool of three PostgreSQL containers at 256 MiB each; replace with a measured successful-run peak."
+    },
+    "disk": {
+      "workloads": {
+        "verification": {
+          "reserveMiB": 4096,
+          "outputGrowthMiB": 512,
+          "tempGrowthMiB": 512,
+          "retainedBudgetMiB": 2048,
+          "basis": "estimated",
+          "estimateReason": "Release builds and fast/native verification reuse existing NuGet and build caches; allow 1 GiB of new reports and temporary output while preserving 4 GiB of free space."
+        }
+      }
     }
   }
 }

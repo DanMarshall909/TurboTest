@@ -173,6 +173,7 @@ public class DiStartupDrainTests
         var provider = services.BuildServiceProvider();
         var service = provider.GetRequiredService<ITtServiceFactory>();
         var initializing = service.CreateFactoryAsync<TestDbContext>();
+        Task<TtFactory<OtherBlockingContext>>? queued = null;
         using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
         Task? closing = null;
         TtCleanup? cleanup = null;
@@ -180,7 +181,10 @@ public class DiStartupDrainTests
         {
             await entered.Task.WaitAsync(TimeSpan.FromSeconds(45));
             var original = Assert.Single(await OwnedAsync()).ID;
+            queued = service.CreateFactoryAsync<OtherBlockingContext>();
+            Assert.False(queued.IsCompleted);
             closing = provider.DisposeAsync().AsTask();
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => queued.WaitAsync(TimeSpan.FromSeconds(2)));
             var interrupted = await Assert.ThrowsAsync<TtLifecycleException>(() => initializing.WaitAsync(TimeSpan.FromSeconds(2)));
             Assert.Equal("StartupCanceled", interrupted.Stage);
             var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => closing.WaitAsync(TimeSpan.FromSeconds(2)));
@@ -203,6 +207,7 @@ public class DiStartupDrainTests
         finally
         {
             release.TrySetResult();
+            if (queued is not null) await Record.ExceptionAsync(() => queued);
             await Record.ExceptionAsync(() => initializing);
             if (closing is not null) await Record.ExceptionAsync(() => closing);
             var failure = await Record.ExceptionAsync(() => service.DisposeAsync().AsTask());

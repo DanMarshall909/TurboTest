@@ -8,6 +8,33 @@ namespace TurboTest.Tests;
 public class DiScopeLifetimeTests
 {
     [Fact]
+    public async Task Precanceled_scope_initialization_never_admits_lease_work()
+    {
+        var factory = new HeldFactory();
+        await using var provider = Provider(factory);
+        await using var scope = provider.CreateAsyncScope();
+        using var caller = new CancellationTokenSource();
+        caller.Cancel();
+
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+            scope.ServiceProvider.InitializeTurboTestAsync<TestDbContext>(caller.Token));
+        Assert.Equal(0, factory.Created);
+    }
+
+    [Fact]
+    public async Task Closed_scope_rejects_late_initialization_without_lease_work()
+    {
+        var factory = new HeldFactory();
+        await using var provider = Provider(factory);
+        var scope = provider.CreateAsyncScope();
+        await scope.DisposeAsync();
+
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            scope.ServiceProvider.InitializeTurboTestAsync<TestDbContext>());
+        Assert.Equal(0, factory.Created);
+    }
+
+    [Fact]
     public async Task Resolved_scope_ownership_disposes_its_context_exactly_once()
     {
         var factory = new CountingFactory();

@@ -1,0 +1,40 @@
+{
+  "discovered": {
+    "all": 541,
+    "fast": 365,
+    "slow": 176
+  },
+  "dockerHost": "unix:///var/run/docker.sock",
+  "elapsedSeconds": 850.7735962419974,
+  "hostedWorkflow": "not performed by local driver",
+  "lane": "all",
+  "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35",
+  "resourceSettlement": {
+    "added": [],
+    "after": [
+      "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+    ],
+    "automaticDeletion": false,
+    "before": [
+      "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+    ],
+    "removed": []
+  },
+  "result": "PASS",
+  "runId": "340f65dd-02f2-45ff-9918-a7ad2fc0bda3",
+  "startedUtc": "2026-10-30T07:14:47Z",
+  "tests": {
+    "fast": {
+      "failed": 0,
+      "passed": 365,
+      "skipped": 0,
+      "testSeconds": 6.074765900000002
+    },
+    "slow": {
+      "failed": 0,
+      "passed": 176,
+      "skipped": 0,
+      "testSeconds": 1577.0997113000003
+    }
+  }
+}

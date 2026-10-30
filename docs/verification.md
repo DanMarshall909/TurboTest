@@ -52,6 +52,8 @@ cleanup assertions; the inventory provides an additional leak diagnostic, not
 proof that every new resource on a shared daemon belongs to this run. On a killed
 job inspect its exact logs and container identities before cleanup.
 
-The source checkout currently has no configured code remote. GitHub hosts the
-tracker; hosted CI execution is pending until the source workflow is published.
-A local pass never establishes a hosted workflow pass.
+The source and maintained workflow are published in the
+[TurboTest repository](https://github.com/DanMarshall909/TurboTest).
+[Hosted CI](https://github.com/DanMarshall909/TurboTest/actions/workflows/ci.yml)
+uses the same driver above. Verify the hosted run for the exact source commit;
+a local pass never establishes a hosted workflow pass.

@@ -5,9 +5,10 @@ GitHub Issues is the authoritative tracker for remaining work in
 The [TurboTest robustness Kanban](https://github.com/users/DanMarshall909/projects/15/views/2) owns live priority,
 sequencing and workflow status. Repository documents retain historical
 investigations and evidence; completed tickets remain in their existing form.
-Source code and historical evidence remain in this local checkout; the GitHub
-repository currently hosts the issues and linked project. This checkout still
-uses local commits and has no configured code remote.
+Source code and historical evidence are published in the
+[GitHub repository](https://github.com/DanMarshall909/TurboTest), alongside the
+issues and linked project. This checkout tracks `origin/master`. Historical
+evidence retains the publication limits recorded for its original run.
 
 ## Current status — 2026-10-22
 

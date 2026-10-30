@@ -6,6 +6,40 @@ namespace TurboTest.Tests;
 public class SlotPoolTests
 {
     [Fact]
+    public async Task Reentrant_resource_factory_sees_reserved_startup_and_drain_owns_its_cleanup()
+    {
+        TtSlotPool<Resource>? owner = null;
+        Task? nestedDrain = null;
+        var observedPreparing = 0;
+        var created = new List<Guid>();
+        var deleted = new List<Guid>();
+        owner = new TtSlotPool<Resource>(1, 1, id =>
+        {
+            observedPreparing = owner!.Snapshot.Preparing;
+            nestedDrain = owner.DisposeAsync().AsTask();
+            created.Add(id);
+            return new Resource(id);
+        }, (_, _) => Task.CompletedTask, resource =>
+        {
+            deleted.Add(resource.Id);
+            return Task.CompletedTask;
+        });
+
+        try
+        {
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => owner.AcquireAsync().WaitAsync(TimeSpan.FromSeconds(2)));
+            Assert.Equal(1, observedPreparing);
+            Assert.NotNull(nestedDrain);
+            Assert.Same(nestedDrain, owner.DisposeAsync().AsTask());
+            await nestedDrain.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal(created, deleted);
+            Assert.Single(deleted);
+            Assert.Equal(0, owner.Snapshot.Reserved);
+        }
+        finally { await owner.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)); }
+    }
+
+    [Fact]
     public async Task Two_failed_drain_deletions_retain_both_safe_errors_until_successful_physical_retry()
     {
         var allowDeletion = false;

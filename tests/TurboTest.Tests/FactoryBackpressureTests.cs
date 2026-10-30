@@ -11,6 +11,35 @@ namespace TurboTest.Tests;
 public class FactoryBackpressureTests
 {
     [Fact]
+    public async Task Precanceled_factory_lease_request_never_enters_the_pool()
+    {
+        await using var pool = new PrecancelProbePool();
+        await using var factory = new TtFactory<TestDbContext>(pool, new TtOptions { AutoMigrate = false });
+        using var caller = new CancellationTokenSource();
+        caller.Cancel();
+
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => factory.CreateLeaseAsync(cancellationToken: caller.Token));
+        Assert.Equal(0, pool.Acquisitions);
+    }
+
+    private sealed class PrecancelProbePool : ITtDatabasePool
+    {
+        internal int Acquisitions;
+        public TtPoolSnapshot Snapshot => throw new NotSupportedException();
+        public TtResourceBudget Budget => throw new NotSupportedException();
+        public IReadOnlyList<string> OwnedResourceIds => [];
+        public Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
+        {
+            Acquisitions++;
+            throw new InvalidOperationException("A precanceled request entered the pool.");
+        }
+        public Task MaintainIdleAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public void StopAcceptingWork() { }
+        public Task RetryCleanupAsync() => Task.CompletedTask;
+        public ValueTask DisposeAsync() => ValueTask.CompletedTask;
+    }
+
+    [Fact]
     public async Task Repeated_failed_acquisitions_release_completed_contexts_and_work_while_the_factory_remains_usable()
     {
         await using var pool = new BoundedPool();
@@ -385,6 +414,107 @@ public class FactoryBackpressureTests
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             if (Redirect) builder.UseNpgsql("Host=localhost;Database=unused;Username=unused");
+        }
+    }
+
+    [Fact]
+    public async Task Reentrant_shutdown_callback_observes_the_published_factory_drain()
+    {
+        Task? nested = null;
+        TtFactory<TestDbContext>? factory = null;
+        await using var pool = new BoundedPool(onCancellation: () => nested = factory!.DisposeAsync().AsTask());
+        factory = new TtFactory<TestDbContext>(pool, new TtOptions { AutoMigrate = false }, ownsPool: true);
+        var lease = await factory.CreateLeaseAsync();
+        var waiting = factory.CreateLeaseAsync();
+        await pool.Waiting.Task.WaitAsync(TimeSpan.FromSeconds(2));
+
+        var closing = factory.DisposeAsync().AsTask();
+        try
+        {
+            await closing.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.NotNull(nested);
+            Assert.Same(closing, nested);
+            Assert.Same(closing, factory.DisposeAsync().AsTask());
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => waiting);
+            Assert.Throws<ObjectDisposedException>(() => _ = lease.Context);
+            Assert.Equal((1, 0), (pool.Deleted, pool.Snapshot.Reserved));
+        }
+        finally
+        {
+            pool.AbortWaiting();
+            await Record.ExceptionAsync(() => waiting);
+            await Record.ExceptionAsync(() => closing);
+        }
+    }
+
+    [Fact]
+    public async Task Context_callback_can_close_factory_before_lease_publication_without_losing_acquired_database()
+    {
+        using var release = new ManualResetEventSlim();
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        await using var pool = new BoundedPool();
+        await using var factory = new TtFactory<TestDbContext>(pool,
+            new TtOptions { AutoMigrate = false }, ownsPool: true);
+        Task? nestedDrain = null;
+        var acquisition = Task.Run(() => factory.CreateLeaseAsync(_ =>
+        {
+            nestedDrain = factory.DisposeAsync().AsTask();
+            entered.TrySetResult();
+            release.Wait();
+        }));
+        try
+        {
+            await entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            var drain = factory.DisposeAsync().AsTask();
+            Assert.Same(drain, nestedDrain);
+            Assert.False(drain.IsCompleted);
+            Assert.Equal((1, 0), (pool.Snapshot.Reserved, pool.Deleted));
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => factory.CreateLeaseAsync());
+            release.Set();
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => acquisition.WaitAsync(TimeSpan.FromSeconds(2)));
+            await drain.WaitAsync(TimeSpan.FromSeconds(2));
+            Assert.Equal((0, 1), (pool.Snapshot.Reserved, pool.Deleted));
+        }
+        finally
+        {
+            release.Set();
+            await Record.ExceptionAsync(() => acquisition.WaitAsync(TimeSpan.FromSeconds(2)));
+            await Record.ExceptionAsync(() => factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2)));
+        }
+    }
+
+    [Fact]
+    public async Task Factory_created_lease_shares_return_with_reentrant_context_disposal()
+    {
+        await using var pool = new BoundedPool();
+        await using var factory = new TtFactory<ReentrantContext>(pool,
+            new TtOptions { AutoMigrate = false }, ownsPool: true);
+        var lease = await factory.CreateLeaseAsync();
+        Task? nested = null;
+        var callbacks = 0;
+        lease.Context.OnDisposing = () =>
+        {
+            callbacks++;
+            nested = lease.DisposeAsync().AsTask();
+        };
+
+        var returnWork = lease.DisposeAsync().AsTask();
+        await returnWork.WaitAsync(TimeSpan.FromSeconds(2));
+        Assert.Equal(1, callbacks);
+        Assert.Same(returnWork, nested);
+        Assert.Equal((0, 1, 1), (pool.Deleted, pool.Snapshot.Ready, pool.Snapshot.Reserved));
+        await factory.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(2));
+        Assert.Equal((1, 0), (pool.Deleted, pool.Snapshot.Reserved));
+    }
+
+    public sealed class ReentrantContext(DbContextOptions<ReentrantContext> options) : DbContext(options)
+    {
+        internal Action? OnDisposing { get; set; }
+
+        public override ValueTask DisposeAsync()
+        {
+            OnDisposing?.Invoke();
+            return base.DisposeAsync();
         }
     }
 

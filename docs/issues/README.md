@@ -33,11 +33,12 @@ TT-021 is also resolved: [PR #22](https://github.com/DanMarshall909/TurboTest/pu
 
 ## Verification and performance
 
-The maintained correctness gate covers **533 tests**, including **357 fast
+The maintained correctness gate covers **541 tests**, including **365 fast
 checks**; failures and skips fail verification. It builds the solution and
 separate DynamicScalingExample and records source-bound results. Earlier ticket
-evidence retains its original source cut; use the hosted run for the exact
-commit when assessing current verification.
+evidence retains its original source cut. [TT-022's local combined run](evidence/2026-10-30/tt022-lifecycle/verification.json)
+passed both lanes with matching Docker resource inventories; use the hosted run
+for the exact published commit when assessing hosted verification.
 
 The maintained Release experiments retain 16 fixed/parking cases and 2,544 cycles,
 plus six fixed/adaptive cases and 954 cycles with equivalent startup conditions.
@@ -85,7 +86,7 @@ remaining item.
 | [TT-019](https://github.com/DanMarshall909/TurboTest/issues/9) | Assert allocation policy and platform memory inputs | [Evidence](open/database/TT-019-assert-allocation-policy-and-platform-memory-inputs.md) |
 | [TT-020](https://github.com/DanMarshall909/TurboTest/issues/10) | Assert default DI registration and observable options | [Evidence](open/api/TT-020-assert-default-di-registration-and-observable-options.md) |
 | [TT-021](https://github.com/DanMarshall909/TurboTest/issues/11) | Close Docker adapter cancellation and permit gaps | [Evidence](resolved/database/TT-021-close-docker-adapter-cancellation-and-permit-gaps.md) |
-| [TT-022](https://github.com/DanMarshall909/TurboTest/issues/12) | Assert lifecycle admission publication and drain races | [Evidence](open/api/TT-022-assert-lifecycle-admission-publication-and-drain-races.md) |
+| [TT-022](https://github.com/DanMarshall909/TurboTest/issues/12) | Assert lifecycle admission publication and drain races | [Evidence](resolved/api/TT-022-assert-lifecycle-admission-publication-and-drain-races.md) |
 | [TT-023](https://github.com/DanMarshall909/TurboTest/issues/13) | Assert late failure ordering and safe diagnostic identity | [Evidence](resolved/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md) |
 | [TT-024](https://github.com/DanMarshall909/TurboTest/issues/14) | Resolve retained-state cleanup and reentrancy invariants | [Evidence](resolved/api/TT-024-resolve-retained-state-cleanup-and-reentrancy-invariants.md) |
 | [TT-025](https://github.com/DanMarshall909/TurboTest/issues/15) | Establish uncovered boundary reachability and limits | [Evidence](open/database/TT-025-establish-uncovered-boundary-reachability-and-limits.md) |

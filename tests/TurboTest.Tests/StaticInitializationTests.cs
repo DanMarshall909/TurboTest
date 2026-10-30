@@ -9,6 +9,26 @@ namespace TurboTest.Tests;
 public class StaticInitializationTests
 {
     [Fact]
+    public async Task Precanceled_static_request_does_not_start_an_owner()
+    {
+        await Tt.DisposeAsync();
+        using var caller = new CancellationTokenSource();
+        caller.Cancel();
+        var starts = 0;
+        try
+        {
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => Tt.CreateLeaseAsync<TestDbContext>(
+                null, caller.Token, null, _ =>
+                {
+                    starts++;
+                    return Task.CompletedTask;
+                }));
+            Assert.Equal(0, starts);
+        }
+        finally { await Tt.DisposeAsync(); }
+    }
+
+    [Fact]
     [Trait("Category", "PostgreSQL")]
     public async Task Concurrent_static_initialization_and_disposal_drain_one_owner_before_reconfiguration_and_reuse()
     {

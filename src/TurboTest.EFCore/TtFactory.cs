@@ -115,6 +115,7 @@ public sealed class TtFactory<TContext> : IAsyncDisposable where TContext : DbCo
     public async Task<TtLease<TContext>> CreateLeaseAsync(
         Action<DbContextOptionsBuilder>? configure = null, CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
         var requested = _telemetry.Clock.GetTimestamp();
         var outcome = "Succeeded";
         if (_preparedOptions is not null && configure is not null)

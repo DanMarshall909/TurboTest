@@ -26,10 +26,12 @@ Related groups: A03 (4 reported entries; classifications distinguish gaps, bound
 
 [TT-021 on GitHub](https://github.com/DanMarshall909/TurboTest/issues/11) owns the current acceptance criteria, priority, assignment and workflow status. The [robustness project](https://github.com/users/DanMarshall909/projects/15/views/2) owns sequencing and Kanban status.
 
-This file retains the original investigation and evidence provenance. Its `open/` location means the investigation has not been archived; it does not mirror GitHub issue status. The original acceptance checklist is preserved in Git history at `0f0ca8f` and was migrated to GitHub with the subsequent robustness-review refinements.
+This file retains the original investigation and evidence provenance. Its `resolved/` location records the archive decision; GitHub owns the live issue status. The original acceptance checklist is preserved in Git history at `0f0ca8f` and was migrated to GitHub with the subsequent robustness-review refinements.
 
 ## Decision log
 
 - **2026-10-15 — Opened:** Classified post-session evidence; accepted follow-up is a focused repair or bounded investigation under the criteria above. No production change is made by this review.
 
 - **2026-10-15 — Migrated:** The user requested GitHub Issues and a Kanban project for all remaining work. GitHub now owns live planning and completion; this record retains durable investigation evidence. Completed repository tickets were left unchanged.
+
+- **2026-10-30 — Resolved and archived:** [PR #22](https://github.com/DanMarshall909/TurboTest/pull/22) merged the independently reviewed Docker adapter contract evidence into `master` as `8659ae516457a19b84c0f367d647a9c5617e6341`. The [hosted CI run](https://github.com/DanMarshall909/TurboTest/actions/runs/40996679200) passed 533 tests; the [evidence record](../../evidence/2026-10-30/tt021-docker-adapter/results.md) retains local fault calibration and resource settlement. All six GitHub acceptance criteria were checked, and the issue was closed as completed. This investigation is archived without treating earlier mutation classifications as production bug counts.

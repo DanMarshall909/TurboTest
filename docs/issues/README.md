@@ -10,11 +10,13 @@ Source code and historical evidence are published in the
 issues and linked project. This checkout tracks `origin/master`. Historical
 evidence retains the publication limits recorded for its original run.
 
-## Current status — 2026-10-22
+## Current status — 2026-10-30
 
 All ten implementation tickets, TT-001 through TT-010, are Resolved. Independent
 completion review passed for the final adaptive controller and performance work.
 The table preserves implementation order and prerequisite identities.
+
+TT-021 is also resolved: [PR #22](https://github.com/DanMarshall909/TurboTest/pull/22) merged its Docker adapter contract evidence, with 533 tests passing in [hosted CI](https://github.com/DanMarshall909/TurboTest/actions/runs/40996679200).
 
 | Ticket | Work | Status | Priority | Prerequisites | Evidence |
 | --- | --- | --- | --- | --- | --- |
@@ -31,7 +33,7 @@ The table preserves implementation order and prerequisite identities.
 
 ## Verification and performance
 
-The maintained correctness gate covers **525 tests**, including **352 fast
+The maintained correctness gate covers **533 tests**, including **357 fast
 checks**; failures and skips fail verification. It builds the solution and
 separate DynamicScalingExample and records source-bound results. Earlier ticket
 evidence retains its original source cut; use the hosted run for the exact
@@ -54,7 +56,7 @@ adequacy claim. The original [launch snapshot](evidence/2026-10-15/post-session-
 remains historical; the reviewed outcomes and new work below supersede its
 pending action. Full raw reports and bounded direct checks are retained.
 
-## Remaining work on GitHub
+## Robustness work on GitHub
 
 The original ten implementation tickets are Resolved. All remaining work is now
 organized as **20 GitHub issues**: TT-011 through TT-028 retain their identities,
@@ -82,7 +84,7 @@ remaining item.
 | [TT-018](https://github.com/DanMarshall909/TurboTest/issues/8) | Verify executable signal cancellation and final cleanup | [Evidence](open/benchmarks/TT-018-verify-executable-signal-cancellation-and-final-cleanup.md) |
 | [TT-019](https://github.com/DanMarshall909/TurboTest/issues/9) | Assert allocation policy and platform memory inputs | [Evidence](open/database/TT-019-assert-allocation-policy-and-platform-memory-inputs.md) |
 | [TT-020](https://github.com/DanMarshall909/TurboTest/issues/10) | Assert default DI registration and observable options | [Evidence](open/api/TT-020-assert-default-di-registration-and-observable-options.md) |
-| [TT-021](https://github.com/DanMarshall909/TurboTest/issues/11) | Close Docker adapter cancellation and permit gaps | [Evidence](open/database/TT-021-close-docker-adapter-cancellation-and-permit-gaps.md) |
+| [TT-021](https://github.com/DanMarshall909/TurboTest/issues/11) | Close Docker adapter cancellation and permit gaps | [Evidence](resolved/database/TT-021-close-docker-adapter-cancellation-and-permit-gaps.md) |
 | [TT-022](https://github.com/DanMarshall909/TurboTest/issues/12) | Assert lifecycle admission publication and drain races | [Evidence](open/api/TT-022-assert-lifecycle-admission-publication-and-drain-races.md) |
 | [TT-023](https://github.com/DanMarshall909/TurboTest/issues/13) | Assert late failure ordering and safe diagnostic identity | [Evidence](resolved/api/TT-023-assert-late-failure-ordering-and-safe-diagnostic-identity.md) |
 | [TT-024](https://github.com/DanMarshall909/TurboTest/issues/14) | Resolve retained-state cleanup and reentrancy invariants | [Evidence](resolved/api/TT-024-resolve-retained-state-cleanup-and-reentrancy-invariants.md) |

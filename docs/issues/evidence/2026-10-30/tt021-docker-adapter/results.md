@@ -1,6 +1,6 @@
 # TT-021 Docker adapter contract evidence
 
-Issue: [TT-021](https://github.com/DanMarshall909/TurboTest/issues/11). This is evidence for the branch candidate, not a claim that the GitHub issue or project field has been updated.
+Issue: [TT-021](https://github.com/DanMarshall909/TurboTest/issues/11), closed as completed after [PR #22](https://github.com/DanMarshall909/TurboTest/pull/22) merged into `master`.
 
 ## Contract and tests
 
@@ -15,7 +15,9 @@ The loopback HTTP endpoint sends controlled responses to the production Docker.D
 
 ## Verification
 
-From the repository root, `python3 scripts/verify.py all --output artifacts/verification/tt021-review-repair-001` passed on 2026-10-30 after the independent review repair: **357 fast + 176 PostgreSQL = 533 discovered and passed**, with zero failures, skips or lane overlap. The driver built the solution and DynamicScalingExample. Its source identity, exact discovered/executed IDs, TRX, logs, Docker and SDK identities, and resource inventories are retained in `runs.tar.gz` as `tt021-review-repair-001/`. The labelled-container inventory was the same single unrelated ID before and after; added and removed sets were empty, and the driver performed no automatic deletion. The earlier passing candidate run remains in the archive as `tt021-final-001/`; its source identity predates the reviewed test correction. This is local verification; a hosted run for the published commit remains to be checked.
+From the repository root, `python3 scripts/verify.py all --output artifacts/verification/tt021-review-repair-001` passed on 2026-10-30 after the independent review repair: **357 fast + 176 PostgreSQL = 533 discovered and passed**, with zero failures, skips or lane overlap. The driver built the solution and DynamicScalingExample. Its source identity, exact discovered/executed IDs, TRX, logs, Docker and SDK identities, and resource inventories are retained in `runs.tar.gz` as `tt021-review-repair-001/`. The labelled-container inventory was the same single unrelated ID before and after; added and removed sets were empty, and the driver performed no automatic deletion. The earlier passing candidate run remains in the archive as `tt021-final-001/`; its source identity predates the reviewed test correction. This is the retained local verification; hosted verification is recorded below.
+
+The [hosted CI run 40996679200](https://github.com/DanMarshall909/TurboTest/actions/runs/40996679200) succeeded for published head `f6cb6484e4cf8d57e46d345557f3bf8b12bff00c`: 357 fast and 176 slow tests passed with no failures or skips. Its correctness artifact (ID `12951927365`, ZIP SHA-256 `b8ffaa444567530e71f5814d1a2f1161f58f90b72f4b1f375bb0dce63c4b426e`) contains TRX, source identity matching the reviewed files, and an empty Docker inventory before and after. The merge commit `8659ae516457a19b84c0f367d647a9c5617e6341` has the reviewed tree `8b7e6b7d548179049fd5ba0d7336214c28f68a0b`.
 
 The temporary fault that converted cancellation into unavailable memory was confirmed in the source diff and rejected by the named held-read test: one failed, zero passed, with `Assert.ThrowsAny` reporting that no cancellation exception reached the caller. The fault was restored before the final combined run. The failed TRX is retained as `tt021-fault/` in the archive.
 
@@ -23,6 +25,6 @@ The first independent review found that a substring image assertion would accept
 
 Archive: `runs.tar.gz` (SHA-256 `290c900361d4e63f1f9784af307717d2eb16eb279371d4913b453823b778c01b`, 1.5 MiB). Local working artifacts remain under `artifacts/verification/`; they are not the published evidence path.
 
-## Limits and disposition pending review
+## Limits and disposition
 
-The tests characterize existing adapter behavior and close the named evidence gaps; they do not establish a reproduced defect in the unmodified Docker deletion or image-pull logic. The new production seam preserves the default stats request behavior. Independent candidate review, publication, the exact hosted check and final GitHub issue disposition remain pending at this checkpoint. Whole-project mutation belongs to the final robustness gate; no mutation result is claimed here.
+The tests characterize existing adapter behavior and close the named evidence gaps; they do not establish a reproduced defect in the unmodified Docker deletion or image-pull logic. The new production seam preserves the default stats request behavior. Independent Astra review passed for the final content tree, PR #22 merged, and TT-021 closed with all six criteria checked. Whole-project mutation belongs to the final robustness gate; no mutation result is claimed here.

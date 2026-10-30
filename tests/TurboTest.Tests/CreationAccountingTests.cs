@@ -7,6 +7,49 @@ namespace TurboTest.Tests;
 
 public class CreationAccountingTests
 {
+    [Fact]
+    [Trait("Category", "PostgreSQL")]
+    public async Task Failed_deletion_retains_the_exact_owned_container_until_a_successful_retry()
+    {
+        var prefix = $"tt-delete-retry-{Guid.NewGuid():N}";
+        using var docker = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+        var rejectDeletion = true;
+        var attempts = 0;
+        await using var pool = new TtPool(new TtOptions { PoolSize = 1, ContainerPrefix = prefix },
+            deleteResource: async container =>
+            {
+                Interlocked.Increment(ref attempts);
+                if (rejectDeletion) throw new IOException("The owned resource was not deleted.");
+                await container.DisposeAsync();
+            });
+        try
+        {
+            await pool.InitializeAsync();
+            var original = Assert.Single(pool.OwnedResourceIds);
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => pool.DisposeAsync().AsTask());
+            Assert.Equal("SlotDispose", failure.Stage);
+            Assert.Equal([original], pool.OwnedResourceIds);
+            Assert.Equal(1, pool.Snapshot.Reserved);
+            Assert.Equal(original, (await docker.Containers.InspectContainerAsync(original)).ID);
+            Assert.Equal(1, attempts);
+
+            rejectDeletion = false;
+            await pool.DisposeAsync();
+            Assert.Empty(pool.OwnedResourceIds);
+            Assert.Equal(0, pool.Snapshot.Reserved);
+            Assert.Empty(await OwnedAsync(docker, prefix));
+            Assert.Equal(2, attempts);
+        }
+        finally
+        {
+            rejectDeletion = false;
+            await Record.ExceptionAsync(() => pool.DisposeAsync().AsTask());
+            foreach (var container in await OwnedAsync(docker, prefix))
+                await docker.Containers.RemoveContainerAsync(container.ID,
+                    new ContainerRemoveParameters { Force = true, RemoveVolumes = true });
+        }
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]

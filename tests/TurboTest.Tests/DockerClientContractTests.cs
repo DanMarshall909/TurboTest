@@ -15,7 +15,7 @@ public class DockerClientContractTests
     [InlineData(500, false)]
     public async Task Container_deletion_accepts_confirmed_absence_but_reports_server_failure(int status, bool absent)
     {
-        await using var endpoint = new OneRequestDockerEndpoint(status);
+        await using var endpoint = new ScriptedDockerEndpoint(status);
         using var docker = new DockerClientConfiguration(endpoint.Uri).CreateClient();
         var resource = new TtContainer("owned-id", docker);
 
@@ -32,7 +32,7 @@ public class DockerClientContractTests
     [Fact]
     public async Task Docker_client_cancels_a_stats_request_while_the_response_is_held()
     {
-        await using var endpoint = new OneRequestDockerEndpoint(200, holdResponse: true);
+        await using var endpoint = new ScriptedDockerEndpoint(200, holdResponse: true);
         using var docker = new DockerClientConfiguration(endpoint.Uri).CreateClient();
         using var cancellation = new CancellationTokenSource();
         var read = docker.Containers.GetContainerStatsAsync("owned-id",
@@ -48,7 +48,7 @@ public class DockerClientContractTests
     [Fact]
     public async Task Cold_image_pull_requests_the_exact_configured_image()
     {
-        await using var endpoint = new OneRequestDockerEndpoint(200, 500);
+        await using var endpoint = new ScriptedDockerEndpoint(200, 500);
         await using var pool = new TtPool(new TtOptions
         {
             PoolSize = 1,
@@ -60,8 +60,12 @@ public class DockerClientContractTests
         Assert.Equal(HttpStatusCode.InternalServerError, failure.StatusCode);
         Assert.Contains("/images/json", await endpoint.Request);
         var pull = await endpoint.RequestAt(1).WaitAsync(TimeSpan.FromSeconds(5));
-        Assert.Contains("/images/create", pull);
-        Assert.Contains("fromImage=example.invalid/fixture-image:chosen", Uri.UnescapeDataString(pull));
+        var target = pull.Split(' ')[1];
+        var uri = new Uri(endpoint.Uri, target);
+        Assert.EndsWith("/images/create", uri.AbsolutePath);
+        var imageParameter = Assert.Single(uri.Query.TrimStart('?').Split('&')
+            .Select(field => field.Split('=', 2)), field => field[0] == "fromImage");
+        Assert.Equal("example.invalid/fixture-image:chosen", Uri.UnescapeDataString(imageParameter[1]));
         Assert.Empty(pool.OwnedResourceIds);
     }
 
@@ -70,7 +74,7 @@ public class DockerClientContractTests
         public void Report(ContainerStatsResponse value) => throw new InvalidOperationException("No stats response was sent.");
     }
 
-    private sealed class OneRequestDockerEndpoint : IAsyncDisposable
+    private sealed class ScriptedDockerEndpoint : IAsyncDisposable
     {
         private readonly TcpListener _listener = new(IPAddress.Loopback, 0);
         private readonly TaskCompletionSource _release = new(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -81,13 +85,13 @@ public class DockerClientContractTests
         internal Task<string> Request => _requests[0].Task;
         internal Task<string> RequestAt(int index) => _requests[index].Task;
 
-        internal OneRequestDockerEndpoint(int status, bool holdResponse = false)
+        internal ScriptedDockerEndpoint(int status, bool holdResponse = false)
             : this([status], holdResponse) { }
 
-        internal OneRequestDockerEndpoint(params int[] statuses)
+        internal ScriptedDockerEndpoint(params int[] statuses)
             : this(statuses, false) { }
 
-        private OneRequestDockerEndpoint(int[] statuses, bool holdResponse)
+        private ScriptedDockerEndpoint(int[] statuses, bool holdResponse)
         {
             _listener.Start();
             Uri = new Uri($"http://127.0.0.1:{((IPEndPoint)_listener.LocalEndpoint).Port}");
@@ -126,9 +130,8 @@ public class DockerClientContractTests
         {
             _release.TrySetResult();
             _listener.Stop();
-            if (Request.IsCompleted)
-                try { await _server.WaitAsync(TimeSpan.FromSeconds(5)); }
-                catch (SocketException) { /* Listener stopped before a later scripted request. */ }
+            try { await _server.WaitAsync(TimeSpan.FromSeconds(5)); }
+            catch (SocketException) { /* Listener stopped before a later scripted request. */ }
         }
     }
 }

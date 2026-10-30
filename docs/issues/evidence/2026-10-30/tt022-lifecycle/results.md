@@ -21,4 +21,4 @@ This record supports [TT-022](https://github.com/DanMarshall909/TurboTest/issues
 
 ## Limits and next gate
 
-The new tests prove named, deterministic schedules; they do not claim that all possible interleavings are covered or that historical mutation counts are defect counts. The provider case uses the real PostgreSQL/Docker boundary; the fast cases use the production factory and slot ledger with bounded callbacks. Candidate identity, independent completion verdict, publication and GitHub checklist closure remain to be recorded.
+The new tests prove named, deterministic schedules; they do not claim that all possible interleavings are covered or that historical mutation counts are defect counts. The provider case uses the real PostgreSQL/Docker boundary; the fast cases use the production factory and slot ledger with bounded callbacks. Independent GPT-6 Astra completion review returned PASS for candidate `25606f87b0d6963fa34414e485ec17900db8bed5` (tree `798406b5efb321a605c599e4e0adfed355fedf85`) after the fault-log digest correction, with no unresolved findings. Publication and GitHub checklist closure remain separate verification states.

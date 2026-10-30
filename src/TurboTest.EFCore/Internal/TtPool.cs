@@ -30,6 +30,7 @@ internal sealed class TtPool : ITtDatabasePool
     private readonly Func<string, CancellationToken, Task> _prepareImage;
     private readonly Func<TtContainer, Task>? _beforeStart;
     private readonly Func<CreateContainerParameters, Task<CreateContainerResponse>> _createResource;
+    private readonly Func<string, CancellationToken, Task<ContainerStatsResponse?>> _readStats;
     private readonly string _image;
     private readonly bool _administratorHost;
     private readonly SemaphoreSlim _initSemaphore = new(1, 1);
@@ -46,12 +47,10 @@ internal sealed class TtPool : ITtDatabasePool
         if (!_administratorHost || hosts.Length != 1) return Unavailable("HostUnavailable");
         var id = hosts[0];
         var observedAt = clock.GetTimestamp();
-        ContainerStatsResponse? response = null;
+        ContainerStatsResponse? response;
         try
         {
-            await _dockerClient.Containers.GetContainerStatsAsync(id,
-                new ContainerStatsParameters { Stream = false, OneShot = true },
-                new StatsProgress(value => response = value), cancellationToken);
+            response = await _readStats(id, cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
@@ -78,9 +77,19 @@ internal sealed class TtPool : ITtDatabasePool
         public void Report(ContainerStatsResponse value) => report(value);
     }
 
+    private async Task<ContainerStatsResponse?> ReadStatsAsync(string id, CancellationToken cancellationToken)
+    {
+        ContainerStatsResponse? response = null;
+        await _dockerClient.Containers.GetContainerStatsAsync(id,
+            new ContainerStatsParameters { Stream = false, OneShot = true },
+            new StatsProgress(value => response = value), cancellationToken);
+        return response;
+    }
+
     public TtPool(TtOptions? options = null, Func<TtContainer, Task>? deleteResource = null,
         Func<string, Task>? prepareImage = null, Func<TtContainer, Task>? beforeStart = null,
-        bool administratorHost = false, Func<CreateContainerParameters, Task<CreateContainerResponse>>? createResource = null)
+        bool administratorHost = false, Func<CreateContainerParameters, Task<CreateContainerResponse>>? createResource = null,
+        Func<string, CancellationToken, Task<ContainerStatsResponse?>>? readStats = null)
     {
         _options = (options ?? new TtOptions()).Snapshot();
         _administratorHost = administratorHost;
@@ -107,6 +116,7 @@ internal sealed class TtPool : ITtDatabasePool
         // Once issued, creation must settle so its response can establish cleanup
         // identity. Canceling HTTP observation cannot undo Docker's side effect.
         _createResource = createResource ?? (parameters => _dockerClient.Containers.CreateContainerAsync(parameters));
+        _readStats = readStats ?? ReadStatsAsync;
         _slots = new TtSlotPool<ContainerSlot>(_options.PoolSize, _options.PreparationConcurrency,
             id => new ContainerSlot(id, $"{_options.ContainerPrefix}_pool_{id:N}_{Guid.NewGuid():N}"),
             CreateContainerAsync, DeleteSlotAsync, _options.ResetConcurrency,

@@ -1,4 +1,5 @@
 using CompetitiveBaseline;
+Console.CancelKeyPress+=(_,e)=>{e.Cancel=true;Execution.Stop.Cancel();};
 if(Tuning.Workers is not (1 or 4) || Tuning.Capacity is not (1 or 4))throw new ArgumentException("Unsupported capacity or restoration concurrency");
 if(args.Length==4 && args[0]=="qualify")
 {

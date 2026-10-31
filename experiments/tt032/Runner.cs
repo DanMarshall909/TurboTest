@@ -27,7 +27,8 @@ static class Runner
         var report=new Dictionary<string,object?>{{"Contender",name},{"Count",count},{"Workers",workers},{"Capacity",Tuning.Capacity},{"ResetWorkers",Tuning.Workers},{"Mode",mode},{"Configuration",configuration},{"Binding",Binding()},{"StartedUtc",DateTime.UtcNow},{"Succeeded",false}};
         var failures=new List<object>();var samples=new ConcurrentBag<Sample>();var active=new ConcurrentDictionary<string,int>();
         var adapter=Adapter(name,output,lifetime);var overall=Clock.Now();ResourceMonitor? monitor=null;
-        using var deadline=new CancellationTokenSource(TimeSpan.FromMinutes(20));
+        using var deadline=CancellationTokenSource.CreateLinkedTokenSource(Execution.Stop.Token);deadline.CancelAfter(TimeSpan.FromMinutes(20));
+        var workerErrors=new ConcurrentQueue<string>();
         try
         {
             var start=Clock.Now();await adapter.Start();await adapter.Host.Configure(configuration);report["PreparationMs"]=Clock.Ms(start);
@@ -39,13 +40,20 @@ static class Runner
             report["ConstructionBefore"]=new{Workload.MigrationCalls,Workload.SeedCalls};
             var suite=Clock.Now();
             await Task.WhenAll(Enumerable.Range(0,workers).Select(async w=>{
-                for(var i=w;i<count;i+=workers)await Cycle(adapter,i,samples,active,deadline.Token);
+                try{for(var i=w;i<count;i+=workers)await Cycle(adapter,i,samples,active,deadline.Token);}
+                catch(Exception e){workerErrors.Enqueue(e.ToString());deadline.Cancel();throw;}
             }));
             report["TestsReturnedMs"]=Clock.Ms(suite);
             var settle=Clock.Now();await adapter.Settle(deadline.Token);report["SettlementMs"]=Clock.Ms(settle);
-            report["SuiteMs"]=Clock.Ms(suite);report["SettledState"]=adapter.State();
-            report["FinalResources"]=await adapter.Host.Snapshot();
+            report["SettledState"]=adapter.State();
+            if(adapter is IntegreAdapter)
+            {
+                var state=JsonSerializer.SerializeToElement(report["SettledState"]);
+                Workload.Require(state.GetProperty("ControllerErrors").GetArrayLength()==0,"ControllerBackgroundFailure");
+            }
             var verify=Clock.Now();report["RestoredDatabases"]=await VerifyReadyDatabases(adapter,deadline.Token);report["FinalAuditMs"]=Clock.Ms(verify);
+            report["SuiteMs"]=Clock.Ms(suite);
+            report["FinalResources"]=await adapter.Host.Snapshot();
             report["ConstructionAfter"]=new{Workload.MigrationCalls,Workload.SeedCalls};
             Workload.Require(samples.Count==count,"CompleteSamples");report["Succeeded"]=true;
         }
@@ -62,6 +70,7 @@ static class Runner
             catch(Exception e){report["Succeeded"]=false;report["CleanupCompleted"]=false;failures.Add(new{Phase="Drain",Type=e.GetType().FullName,e.Message,Detail=e.ToString()});}
             report["DrainMs"]=Clock.Ms(drain);report["ObserverInclusiveWallMs"]=Clock.Ms(overall);
             report["Cleanup"]=adapter.Host.Cleanup;report["Failures"]=failures;report["Samples"]=samples.OrderBy(s=>s.Ordinal).ToArray();report["EndedUtc"]=DateTime.UtcNow;
+            report["WorkerFailures"]=workerErrors.ToArray();
             if(report.TryGetValue("SuiteMs",out var suite)){
                 var prep=(double)report["PreparationMs"]!;var d=(double)report["DrainMs"]!;
                 report["FeedbackMs"]=(double)suite!+(mode=="fresh"?prep+d:0);

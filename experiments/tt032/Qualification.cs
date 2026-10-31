@@ -13,6 +13,7 @@ static class Qualification
         var failures=new List<string>();var binding=Runner.Binding();bool resetFaultInjected=false;
         async Task Probe(string id,Func<Task> action)
         {
+            Execution.Stop.Token.ThrowIfCancellationRequested();
             var start=Clock.Now();try{await action();probes.Add(new{Id=id,Passed=true,ElapsedMs=Clock.Ms(start)});Console.WriteLine($"{name}: {id} PASS");}
             catch(Exception e){probes.Add(new{Id=id,Passed=false,ElapsedMs=Clock.Ms(start),Error=e.ToString()});throw;}
         }
@@ -122,6 +123,7 @@ static class Qualification
                 Exception? observed=null;
                 try{await l.DisposeAsync();using var deadline=new CancellationTokenSource(TimeSpan.FromSeconds(3));await adapter.Settle(deadline.Token);}
                 catch(Exception e){observed=e;}
+                probes.Add(new{Id="reset-failure-observation",Error=observed?.ToString(),ObservationCancellation=observed is OperationCanceledException});
                 var state=JsonSerializer.Serialize(adapter.State());
                 if(observed is OperationCanceledException)
                 {
@@ -129,7 +131,6 @@ static class Qualification
                     probes.Add(new{Id="reset-failure-limitation",ApiFailureReceipt=false,ObservationTimeout=true,ControllerState=JsonSerializer.Deserialize<JsonElement>(state),Diagnostic="Server failure is logged; acquisition/restoration has no failed-return receipt. Caller needs a deadline and fixture replacement."});
                 }
                 else Workload.Require(observed is not null && BoundaryFailure(observed),"UnexpectedResetFailureEvidence");
-                probes.Add(new{Id="reset-failure-observation",Error=observed!.ToString(),ObservationCancellation=observed is OperationCanceledException});
                 // The owned server is deliberately unavailable. Force cleanup is a declared recovery path,
                 // not a successful reset. Subsequent test runs construct a new fixture.
                 await adapter.Host.DisposeAsync();
@@ -156,6 +157,12 @@ static class Qualification
     static bool BoundaryFailure(Exception e)=>e switch
     {
         NpgsqlException or HttpRequestException=>true,
+        TurboTest.EFCore.TtLifecycleException lifecycle=>
+            lifecycle.Stage is "BaselineRowReset" or "PreparedPoolDispose" &&
+            (lifecycle.SqlState is "57P01" or "57P02" or "08001" or "08006" ||
+             lifecycle.Message.Contains("NpgsqlException",StringComparison.Ordinal) &&
+             System.Text.RegularExpressions.Regex.Matches(lifecycle.Message,@"\b[A-Za-z]+Exception\b")
+                 .All(m=>m.Value is "NpgsqlException" or "AggregateException")),
         AggregateException aggregate=>aggregate.InnerExceptions.Count>0 && aggregate.InnerExceptions.All(BoundaryFailure),
         _=>e.InnerException is not null && BoundaryFailure(e.InnerException)
     };

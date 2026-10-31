@@ -15,6 +15,8 @@ static class Tuning
     public static int Capacity {get;}=int.Parse(Environment.GetEnvironmentVariable("TT032_CAPACITY")??"4");
 }
 
+static class Execution { public static CancellationTokenSource Stop {get;}=new(); }
+
 static class Clock
 {
     public static long Now()=>Stopwatch.GetTimestamp();
@@ -130,9 +132,7 @@ sealed class ControllerLogs : IAsyncDisposable
     readonly Process process;
     readonly Task pump;
     readonly StreamWriter writer;
-    public int Ready,Dirty,Recreating,Tasks,DatabaseCount;
-    public long ReadyGeneration;
-    public int Acquisitions,Recreations;
+    public System.Collections.Concurrent.ConcurrentDictionary<int,int> ReadyGenerations {get;}=new();
     public List<string> Errors {get;}=[];
     public ControllerLogs(string id,string path)
     {
@@ -150,17 +150,10 @@ sealed class ControllerLogs : IAsyncDisposable
             try
             {
                 using var doc=JsonDocument.Parse(line); var r=doc.RootElement;
-                if(r.TryGetProperty("message",out var eventMessage))
+                if(r.TryGetProperty("message",out var eventMessage)&&eventMessage.GetString()=="ready"&&r.TryGetProperty("poolHash",out _))
                 {
-                    if(eventMessage.GetString()=="got ready testdatabase!")Interlocked.Increment(ref Acquisitions);
-                    if(eventMessage.GetString()=="ready")Interlocked.Increment(ref Recreations);
-                }
-                if(r.TryGetProperty("message",out var m)&&m.GetString()=="pool stats")
-                {
-                    Dirty=r.GetProperty("dirty").GetInt32();Recreating=r.GetProperty("recreating").GetInt32();
-                    Tasks=r.GetProperty("tasksChan").GetInt32();DatabaseCount=r.GetProperty("dbs").GetInt32();
-                    Volatile.Write(ref Ready,r.GetProperty("ready").GetInt32());
-                    Interlocked.Increment(ref ReadyGeneration);
+                    var id=r.GetProperty("id").GetInt32();var generation=r.GetProperty("generation").GetInt32();
+                    ReadyGenerations.AddOrUpdate(id,generation,(_,old)=>Math.Max(old,generation));
                 }
                 if(r.TryGetProperty("level",out var level)&&level.GetString()=="error")lock(Errors)Errors.Add(line);
             }catch(JsonException){}

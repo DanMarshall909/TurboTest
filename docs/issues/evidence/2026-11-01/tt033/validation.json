@@ -1,0 +1,318 @@
+{
+  "maintained_verification": {
+    "discovered": {
+      "all": 541,
+      "fast": 365,
+      "slow": 176
+    },
+    "dockerHost": "unix:///var/run/docker.sock",
+    "elapsedSeconds": 614.9877509189828,
+    "hostedWorkflow": "not performed by local driver",
+    "lane": "all",
+    "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35",
+    "resourceSettlement": {
+      "added": [],
+      "after": [
+        "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+      ],
+      "automaticDeletion": false,
+      "before": [
+        "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+      ],
+      "removed": []
+    },
+    "result": "PASS",
+    "runId": "769bcccf-6713-4c3e-8b7a-f53be262fc1a",
+    "startedUtc": "2026-10-31T23:06:35Z",
+    "tests": {
+      "fast": {
+        "failed": 0,
+        "passed": 365,
+        "skipped": 0,
+        "testSeconds": 5.917842300000005
+      },
+      "slow": {
+        "failed": 0,
+        "passed": 176,
+        "skipped": 0,
+        "testSeconds": 1186.5398901999995
+      }
+    }
+  },
+  "commands": [
+    {
+      "command": "python3 -m unittest discover -s scripts -p test_verify.py",
+      "exit_code": 0,
+      "passed": 10
+    },
+    {
+      "command": "python3 scripts/verify.py all --output artifacts/tt033-verification",
+      "exit_code": 0
+    },
+    {
+      "command": "dotnet build experiments/tt032/CompetitiveBaseline.csproj -c Release --no-restore",
+      "exit_code": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 artifacts/tt033/calibrate.py",
+      "exit_code": 0,
+      "controls": 21
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "lane_wall_seconds": {
+    "fast": 4.609600223018788,
+    "slow": 595.149446542986
+  },
+  "lane_review": "No maintained tests or lanes changed. Fast feedback remains a few seconds; slow PostgreSQL contracts retain intentional lifecycle waits. No lane move is justified by this single run.",
+  "production_sources_and_tests_changed": false,
+  "mutation": "No changed maintained production/test scope; isolated experiment qualified with real PostgreSQL and deliberate faults. No mutation score claimed.",
+  "calibration": {
+    "passed": true,
+    "checks": [
+      "fixed_ten_case_plan",
+      "reject_duplicate",
+      "reject_order",
+      "reject_count",
+      "constant_half_ratio",
+      "paired_resampling_preserves_relation",
+      "complete_run_accepted",
+      "reject_wrong_count",
+      "reject_wrong_durability",
+      "reject_wrong_image",
+      "reject_recovered_failure",
+      "reject_missing_sample",
+      "reject_unsettled_capacity",
+      "failed_initial_image_allowed",
+      "reject_cleanup_0",
+      "reject_cleanup_1",
+      "reject_cleanup_2",
+      "python_syntax",
+      "reject_wrong_qualification_contender",
+      "reject_changed_qualification_evidence",
+      "reject_missing_qualification_evidence"
+    ],
+    "sha256": {
+      "experiments/tt032/tools/run_compiled.py": "44becba6a98b7142f1c17fd5658c7f3c414cf60de15822c27bc5ab148c4f8a53",
+      "experiments/tt032/tools/analyze_compiled.py": "55f15a21f9635a298c982a9a96097f33d5069ecf9b80768483c67e3cc632793c",
+      "experiments/tt032/tools/run_experiment.py": "f18d5baf9d3d761ee35584828fa065f48ce4b058c46e30106125ab9d3222e039",
+      "artifacts/tt033/calibrate.py": "b5732a9daf6f60b07b4ae80961d262fe4083dfe9a9f3eeda021e8f280a840e50"
+    }
+  },
+  "archive": "validation-results.tar.gz",
+  "archive_sha256": "dca2de09fbdc956008007531e3a396ce55b487ac13c1ad33ff75c56b7583af2e",
+  "archive_bytes": 743218,
+  "files": [
+    {
+      "path": "package_validation.py",
+      "bytes": 3099,
+      "sha256": "bf4b550f6f333b5d28fac88241e738c573ef6ad6127b5dcc778f40601bb33428"
+    },
+    {
+      "path": "verification-storage.json",
+      "bytes": 488,
+      "sha256": "e73f661d8dcdd651eef665bf5815ca36495c3e81e8e9fbdebec2b8a0db8674db"
+    },
+    {
+      "path": "verification-unit.log",
+      "bytes": 109,
+      "sha256": "a96c7bbed3f9afb15e286f9ac5956b7e73fa6aad76bbf8acbe804a5386defd7f"
+    },
+    {
+      "path": "verification.log",
+      "bytes": 798,
+      "sha256": "882b8b900b854e1275433f3a2ce8c8faec81f2d07224f64d8b4c509e5da838a4"
+    },
+    {
+      "path": "verification/build.json",
+      "bytes": 377,
+      "sha256": "f85d8105826fe0d6b32b8bf806d57bacacf21167f7a425a398a1dc34ba31b0bf"
+    },
+    {
+      "path": "verification/build.log",
+      "bytes": 1024,
+      "sha256": "8736735136109603cbeb37f919cbeb62feefb573e70564c3594a7269d3bc74a0"
+    },
+    {
+      "path": "verification/discover-all.json",
+      "bytes": 471,
+      "sha256": "bcba47caf84034abbe20887f43fb89dc97a2ac2846569272120c34a18efb9242"
+    },
+    {
+      "path": "verification/discover-all.log",
+      "bytes": 75806,
+      "sha256": "82735ac25f26b101ae0c32fc3ece763593e8f7b7dcdc1f90bf4062cd1119756d"
+    },
+    {
+      "path": "verification/discover-fast.json",
+      "bytes": 415,
+      "sha256": "a9e519a96bc8679b8dd7558858feb2ae33c1000f7a0e375dee1734b18569962f"
+    },
+    {
+      "path": "verification/discover-fast.log",
+      "bytes": 51417,
+      "sha256": "c222def0605353259ba7d8aa780146103b4581aeafccb249aa72ff98c92bbdd9"
+    },
+    {
+      "path": "verification/discover-slow.json",
+      "bytes": 414,
+      "sha256": "fb24270d38a7e5d0d2729a7ba33181d241b62824b1497fb9f24a5759b888addd"
+    },
+    {
+      "path": "verification/discover-slow.log",
+      "bytes": 24437,
+      "sha256": "1c49360ed5fe6a7b474e657fa59e8498fc549827b611f9486cdc52ee5c3b5058"
+    },
+    {
+      "path": "verification/discovery-diagnostic.host.26-11-01_09-06-50_21491_5.log",
+      "bytes": 1900371,
+      "sha256": "aa3978a7fcdec79f261d7bc3d1dc97b1a2753320300a3fe186572d9c035e3b1a"
+    },
+    {
+      "path": "verification/discovery-diagnostic.log",
+      "bytes": 1939570,
+      "sha256": "5552f60953fec94d935b54460b06609738519e37585a752e778bc2a094c531fe"
+    },
+    {
+      "path": "verification/docker-info.json",
+      "bytes": 349,
+      "sha256": "82118183276e052e499bd314a1d6d9fd48c721a110ed8ce7515778a1d7f02488"
+    },
+    {
+      "path": "verification/docker-info.log",
+      "bytes": 892,
+      "sha256": "4ecc7cc07c4a86b3cac17d95b670a3492d14f8219bcde9657d7dc322b2655452"
+    },
+    {
+      "path": "verification/example-build.json",
+      "bytes": 402,
+      "sha256": "25e3c63e299d9c3b4a429a48f9ac2318fe6a9292f829469ef0e2691641e1a3b4"
+    },
+    {
+      "path": "verification/example-build.log",
+      "bytes": 394,
+      "sha256": "97fa84ebedf7a99660123b91c055fc5ba78f36606e110cab642916ac757cf93a"
+    },
+    {
+      "path": "verification/fast-results.json",
+      "bytes": 95201,
+      "sha256": "8a81abaf177557fa81a5d90b3d834be5b6d4dcf10659184902400aa7070227b7"
+    },
+    {
+      "path": "verification/fast/results.trx",
+      "bytes": 531188,
+      "sha256": "53b7ce7ec015c158dbfe9a5cbacc3a9ba621e97542f30691002dbf508b475a1e"
+    },
+    {
+      "path": "verification/postgres-image.json",
+      "bytes": 380,
+      "sha256": "7846ecb56f5c343f77ec6e5f89ef93072131c1b44ae013583b651853f745e671"
+    },
+    {
+      "path": "verification/postgres-image.log",
+      "bytes": 72,
+      "sha256": "4326a7ef8ec8cb685a0057618849689413a07d64158cfce2525848301c824df9"
+    },
+    {
+      "path": "verification/resources-after-containers.json",
+      "bytes": 719,
+      "sha256": "fd0ec290b23f55afe32232156463b94ab0be8763dbe76f54130560575e8ec15f"
+    },
+    {
+      "path": "verification/resources-after.json",
+      "bytes": 420,
+      "sha256": "2120c1a8668da41a10d8579dbcf73d5a4180baa68fc5aba82d272eda17615af9"
+    },
+    {
+      "path": "verification/resources-after.log",
+      "bytes": 614,
+      "sha256": "8d2ce67786ecda08ba72e7bcdd801f6acd37b82d26e50c70996cb76a2569408d"
+    },
+    {
+      "path": "verification/resources-before-containers.json",
+      "bytes": 719,
+      "sha256": "fd0ec290b23f55afe32232156463b94ab0be8763dbe76f54130560575e8ec15f"
+    },
+    {
+      "path": "verification/resources-before.json",
+      "bytes": 420,
+      "sha256": "946637493ab39025fdd80f35b9795ed005c021ce3f23827eb18e709b497a38b6"
+    },
+    {
+      "path": "verification/resources-before.log",
+      "bytes": 614,
+      "sha256": "8d2ce67786ecda08ba72e7bcdd801f6acd37b82d26e50c70996cb76a2569408d"
+    },
+    {
+      "path": "verification/restore.json",
+      "bytes": 281,
+      "sha256": "e4bb874c192dc54d5cfcbd3475e08445b06549348e78a69a2b940fac91affcbc"
+    },
+    {
+      "path": "verification/restore.log",
+      "bytes": 80,
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "path": "verification/sdk.json",
+      "bytes": 259,
+      "sha256": "e15fbc6eba3f86c0906aa7a3577f5cae7bcb7b70372e34455a73c3d693095b67"
+    },
+    {
+      "path": "verification/sdk.log",
+      "bytes": 1679,
+      "sha256": "3822077adf74f4b461cbe9ba957e9cb3192ce4c1df02f40e91bd0ecb162f1091"
+    },
+    {
+      "path": "verification/slow-results.json",
+      "bytes": 45780,
+      "sha256": "49e9747b364bcc1babd94b8e37067a22464f3eb4d4dd40fb76b191b1e9a6bb87"
+    },
+    {
+      "path": "verification/slow/results.trx",
+      "bytes": 255377,
+      "sha256": "cb2b93b379186bf58857303b58f74cb27b97f1e24c0abba1eee3dd0a337f0a47"
+    },
+    {
+      "path": "verification/source-identity.json",
+      "bytes": 52049,
+      "sha256": "3f5893a6ef79ac721dd555e8df25c2f1f2a58a94da6e933fb12d4c87138949b1"
+    },
+    {
+      "path": "verification/test-catalog.json",
+      "bytes": 235756,
+      "sha256": "9a558560f2e7a861d71f7333d0216f1be6125eda2a6fa45e638e628886b0474c"
+    },
+    {
+      "path": "verification/test-fast.json",
+      "bytes": 668,
+      "sha256": "8ebec1098086d1f676042e4950fd9fa0d53716c43d52a64622897827ccd18df9"
+    },
+    {
+      "path": "verification/test-fast.log",
+      "bytes": 58369,
+      "sha256": "1ab247d6d89f2a04a99db1db0228c850ea5bd9c1e72850c3511a334e3c1cf516"
+    },
+    {
+      "path": "verification/test-slow.json",
+      "bytes": 666,
+      "sha256": "cf28966b485e345992a4e9e1f1deeb8e0e7c1abffb674c8b7b6462ed6f26df20"
+    },
+    {
+      "path": "verification/test-slow.log",
+      "bytes": 27044,
+      "sha256": "500fd57e4e624015bc9760510ee1fc57ed21c677b8264600bb37a6384560814a"
+    },
+    {
+      "path": "verification/verification.json",
+      "bytes": 958,
+      "sha256": "3ff7b2c1200b3220bff801be6da4a83578c883e45996e940d29fed200fe9b22c"
+    }
+  ],
+  "completion_review": "Independent GPT-6 Astra exact-candidate review and actual publication/CI are recorded on the PR linked from issue27. This receipt does not self-approve."
+}

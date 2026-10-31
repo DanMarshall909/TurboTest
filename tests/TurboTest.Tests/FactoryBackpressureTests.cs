@@ -668,6 +668,10 @@ public class FactoryBackpressureTests
         public async Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
         {
             using var linked = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _abort.Token);
+            var acquisition = _slots.AcquireAsync(linked.Token);
+            // Cancellation callbacks run in reverse registration order. Inject
+            // the callback after acquisition so its cancellation continuation
+            // cannot dispose this registration before the callback executes.
             using var callback = _throwOnCancellation || _onCancellation is not null
                 ? linked.Token.Register(() =>
                 {
@@ -675,7 +679,6 @@ public class FactoryBackpressureTests
                     if (_throwOnCancellation) throw new IOException("private-cancellation-callback");
                 })
                 : default;
-            var acquisition = _slots.AcquireAsync(linked.Token);
             if (!acquisition.IsCompleted) Waiting.TrySetResult();
             var reservation = await acquisition;
             return new TtDatabase(reservation.Value,

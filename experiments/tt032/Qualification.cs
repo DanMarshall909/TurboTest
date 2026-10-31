@@ -7,10 +7,11 @@ namespace CompetitiveBaseline;
 
 static class Qualification
 {
-    public static async Task<int> Run(string name,string output,int lifetime)
+    public static async Task<int> Run(string name,string output,int lifetime,string configuration="durable")
     {
         Directory.CreateDirectory(output);var adapter=Runner.Adapter(name,output,lifetime);var probes=new List<object>();
         var failures=new List<string>();var binding=Runner.Binding();bool resetFaultInjected=false;
+        object? initialResources=null;
         async Task Probe(string id,Func<Task> action)
         {
             Execution.Stop.Token.ThrowIfCancellationRequested();
@@ -21,6 +22,7 @@ static class Qualification
         try
         {
             await adapter.Start();
+            await adapter.Host.Configure(configuration);initialResources=await adapter.Host.Snapshot();
             await Probe("fresh-migration-and-seed",async()=>{Workload.Require(Workload.MigrationCalls==1&&Workload.SeedCalls==1,"ConstructionCount");await Restored();});
             await Probe("idempotent-migration",async()=>{
                 await using(var l=await adapter.Acquire()){var ctx=l.Context();await Workload.Migrate(ctx);await Workload.CheckBaseline(await Workload.Open(ctx));}
@@ -114,7 +116,49 @@ static class Qualification
                 await using var cmd=new NpgsqlCommand("SELECT count(*) FROM pg_database WHERE oid=@oid",admin);cmd.Parameters.AddWithValue("oid",NpgsqlTypes.NpgsqlDbType.Oid,oldOid);
                 Workload.Require((long)(await cmd.ExecuteScalarAsync())! == 0,"DatabaseNotReplaced");
                 Workload.Require(await Workload.Scalar<long>(admin,$"SELECT count(*) FROM pg_stat_activity WHERE pid={oldPid}")==0,"StaleBackendSurvivedReplacement");
-                probes.Add(new{Id="replacement-identity",Old=oldIdentity,OldPid=oldPid,OldConnectionClosed=true,OldBackendAbsent=true,CallerInvalidationRequired=name=="respawn"});
+                probes.Add(new{Id="replacement-identity",Old=oldIdentity,OldPid=oldPid,OldConnectionClosed=true,OldBackendAbsent=true,CallerInvalidationRequired=name is "respawn" or "compiled"});
+            });
+            if(name is "respawn" or "compiled")
+            await Probe("bounded-workload-connections-are-reused",async()=>{
+                async Task<HashSet<int>> Pids()
+                {
+                    var leases=new List<Lease>();var pids=new HashSet<int>();
+                    try
+                    {
+                        for(var i=0;i<Tuning.Capacity;i++)
+                        {
+                            var lease=await adapter.Acquire();leases.Add(lease);
+                            for(var j=0;j<3;j++)pids.Add(await Workload.Scalar<int>(await Workload.Open(lease.Context()),"SELECT pg_backend_pid()"));
+                        }
+                    }
+                    finally{foreach(var lease in leases)await lease.DisposeAsync();}
+                    await Restored();return pids;
+                }
+                var first=await Pids();var second=await Pids();
+                Workload.Require(first.Count==12 && first.SetEquals(second),"WorkloadConnectionsNotReused");
+                probes.Add(new{Id="reused-backend-identities",First=first.Order().ToArray(),Second=second.Order().ToArray()});
+            });
+            if(name=="compiled")
+            await Probe("post-sequence-failure-quarantines-and-replaces",async()=>{
+                var sql=(SqlAdapter)adapter;Workload.Require(sql.ResetFailures==0,"UnexpectedQualificationResetFailure");
+                var failuresBefore=sql.ResetFailures;var replacementsBefore=sql.Replacements;
+                var lease=await adapter.Acquire();var c=await Workload.Open(lease.Context());
+                var oldDatabase=c.Database;
+                var oldOid=await Workload.Scalar<uint>(c,"SELECT oid FROM pg_database WHERE datname=current_database()");
+                var oldPid=await Workload.Scalar<int>(c,"SELECT pg_backend_pid()");
+                await Workload.Execute(c,"UPDATE \"Parents\" SET \"Priority\"=-4 WHERE \"Id\"=1");
+                sql.InjectSequenceFailure();await lease.DisposeAsync();await Restored();
+                Workload.Require(sql.ResetFailures==failuresBefore+1 && sql.Replacements==replacementsBefore+1,"FailedResetNotReplaced");
+                Workload.Require(sql.ObservedPoisonedSequence==9001,"SequenceHazardNotObserved");
+                await using var admin=await adapter.Host.Admin!.OpenConnectionAsync();
+                await using var cmd=new NpgsqlCommand("SELECT count(*) FROM pg_database WHERE oid=@oid",admin);cmd.Parameters.AddWithValue("oid",NpgsqlTypes.NpgsqlDbType.Oid,oldOid);
+                Workload.Require((long)(await cmd.ExecuteScalarAsync())! == 0,"FailedResetDatabaseReused");
+                Workload.Require(await Workload.Scalar<long>(admin,$"SELECT count(*) FROM pg_stat_activity WHERE pid={oldPid}")==0,"FailedResetBackendSurvived");
+                var samples=new ConcurrentBag<Runner.Sample>();var active=new ConcurrentDictionary<string,int>();
+                await Task.WhenAll(Enumerable.Range(0,4).Select(i=>Runner.Cycle(adapter,i,samples,active,default)));await Restored();
+                Workload.Require(samples.Count==4 && sql.ResetFailures==failuresBefore+1,"RecoveryWorkFailed");
+                Workload.Require(samples.Any(s=>s.Database==oldDatabase && s.Oid!=oldOid),"ReplacementSlotNotExercised");
+                probes.Add(new{Id="sequence-hazard-recovery",OldOid=oldOid,OldPid=oldPid,sql.ObservedPoisonedSequence,State=sql.State()});
             });
             await Probe("reset-failure-characterized-and-owned-resources-settle",async()=>{
                 var l=await adapter.Acquire();var a=await Workload.Open(l.Context());await Workload.Execute(a,"UPDATE \"Parents\" SET \"Priority\"=-3 WHERE \"Id\"=1");
@@ -146,11 +190,11 @@ static class Qualification
         }
         if(failures.Count==0)
         {
-            var recovery=await Runner.Run(name,4,2,"fresh",Path.Combine(output,"fresh-recovery"),lifetime,"durable");
+            var recovery=await Runner.Run(name,4,2,"fresh",Path.Combine(output,"fresh-recovery"),lifetime,configuration);
             probes.Add(new{Id="fresh-fixture-recovers-after-server-failure",Passed=recovery==0});
             if(recovery!=0)failures.Add("Fresh fixture recovery failed; see fresh-recovery/report.json");
         }
-        var report=new{Contender=name,Binding=binding,Probes=probes,Failures=failures,Cleanup=adapter.Host.Cleanup,Succeeded=failures.Count==0,EndedUtc=DateTime.UtcNow};
+        var report=new{Contender=name,Configuration=configuration,Capacity=Tuning.Capacity,ResetWorkers=Tuning.Workers,Binding=binding,InitialResources=initialResources,Probes=probes,Failures=failures,Cleanup=adapter.Host.Cleanup,Succeeded=failures.Count==0,EndedUtc=DateTime.UtcNow};
         await File.WriteAllTextAsync(Path.Combine(output,"qualification.json"),JsonSerializer.Serialize(report,Runner.Json));
         Console.WriteLine($"{name}: qualification {(failures.Count==0?"PASS":"FAIL")}");return failures.Count==0?0:1;
     }

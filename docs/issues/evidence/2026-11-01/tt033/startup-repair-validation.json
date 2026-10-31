@@ -1,0 +1,222 @@
+{
+  "maintained_verification": {
+    "discovered": {
+      "all": 541,
+      "fast": 365,
+      "slow": 176
+    },
+    "dockerHost": "unix:///var/run/docker.sock",
+    "elapsedSeconds": 17.219139343011193,
+    "hostedWorkflow": "not performed by local driver",
+    "lane": "fast",
+    "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35",
+    "result": "PASS",
+    "runId": "c42be28b-500e-4d0e-8b65-10ae139820d2",
+    "startedUtc": "2026-10-31T23:44:32Z",
+    "tests": {
+      "fast": {
+        "failed": 0,
+        "passed": 365,
+        "skipped": 0,
+        "testSeconds": 6.078169200000003
+      }
+    }
+  },
+  "changed_inputs_since_first_repair": [
+    "tests/TurboTest.Tests/StartupLateDrainTests.cs"
+  ],
+  "production_changes": false,
+  "experiment_changes": false,
+  "dependency_changes": false,
+  "diagnostic": [
+    {
+      "waitForCallback": false,
+      "callbacks": 0,
+      "Stage": "StartupCanceled",
+      "cleanupStage": null,
+      "remaining": 0
+    },
+    {
+      "waitForCallback": true,
+      "callbacks": 1,
+      "Stage": "StartupCanceled",
+      "cleanupStage": "StartupCancellation",
+      "remaining": 0
+    }
+  ],
+  "failed_hosted_run": "https://github.com/DanMarshall909/TurboTest/actions/runs/41253502713",
+  "failed_hosted_candidate": "04ec654ae9b1f79922b954fbbd234284d70fc101",
+  "failed_hosted_fast": {
+    "passed": 364,
+    "failed": 1,
+    "slow_executed": false
+  },
+  "rerun_failed_attempt": false,
+  "validation_scope": "Current source: complete local fast365PASS. Previous all541PASS remains source-bound to the first repair and is not claimed as a full run on this second repair. Merge requires renewed exact-candidate review and complete hosted fast+slow verification. Native test, production, experiment, dependencies and lane inputs unchanged; only fast startup fixture precondition changed.",
+  "coverage_and_refactor": "All existing failure/ownership/retry assertions retained; entry signal establishes injected fault before releasing registration lifetime. Actual startup implementation diagnostic contrasts forced old/repaired schedules. No production refactor or numerical coverage/mutation claim.",
+  "archive": "startup-repair-evidence.tar.gz",
+  "archive_sha256": "ec9891449afbf7d7ca5deffad5c25b2690e1053e520cf41d9ad3a497a14f6e34",
+  "archive_bytes": 1335438,
+  "files": [
+    {
+      "path": "ci-attempt2/correctness-evidence.zip",
+      "bytes": 661906,
+      "sha256": "60fd81c274cf5436c9aac80cd64e77f8556c7af592c2e170e0c658c5fa29b9c4"
+    },
+    {
+      "path": "ci-attempt2/failed-job.log",
+      "bytes": 1763,
+      "sha256": "b37307e5e68ea4269d67280d43d78dbfcf85f496c517a925e38e1439d2ce314d"
+    },
+    {
+      "path": "ci-attempt2/run-metadata.json",
+      "bytes": 2940,
+      "sha256": "4f7bc48117801023149696c9b215ffb7b8e2e07d2c343ee9f9097a49868793a3"
+    },
+    {
+      "path": "package_startup_repair.py",
+      "bytes": 3905,
+      "sha256": "9a43ac409c82e7dd30f1c05398b9a8362f9127aa1f257dd8860b01cd93e70fad"
+    },
+    {
+      "path": "startup-race-diagnostic/Diagnostic.csproj",
+      "bytes": 261,
+      "sha256": "b8b5ec76725695b401bf302f818d86a9f584d4a2a83ab890c6ffde292c1d24a1"
+    },
+    {
+      "path": "startup-race-diagnostic/Program.cs",
+      "bytes": 3529,
+      "sha256": "29cc6a9c6612b488009373efd670c30b0e997a9f20e35fd16f9cd3e40a4619ac"
+    },
+    {
+      "path": "startup-race-diagnostic/fixture-repair.patch",
+      "bytes": 2394,
+      "sha256": "dc1f424e2df517e41ef5f9262ff70811d70089fa21c2fc5516601f806d4607f9"
+    },
+    {
+      "path": "startup-race-diagnostic/result.log",
+      "bytes": 216,
+      "sha256": "e7e6436f5c673af6542be437a7ddf89128376460bdd57b8c359b3d9bd5843ca0"
+    },
+    {
+      "path": "startup-repair-verification.log",
+      "bytes": 474,
+      "sha256": "aaed5e5476209921fdb9eab2863dc259a315809638bfbc08f7692a0b84b48707"
+    },
+    {
+      "path": "verification/build.json",
+      "bytes": 376,
+      "sha256": "b4bf222621c748633c6b99f1a5169930f4e3748eaac7f7499841d1c75a499a45"
+    },
+    {
+      "path": "verification/build.log",
+      "bytes": 895,
+      "sha256": "97ca797575a8050c6343defd67ded37cc8cde48d832c4bab5b91cf2c711bba18"
+    },
+    {
+      "path": "verification/discover-all.json",
+      "bytes": 486,
+      "sha256": "a9fbe44dc7b9360236dbcfc7346300b129ef505e1e256990b4e5e11f8a3e4c8e"
+    },
+    {
+      "path": "verification/discover-all.log",
+      "bytes": 75821,
+      "sha256": "586f20db8d711d42c2b531e78877688cf188c7536af8bd0dc5942b8abf61ae26"
+    },
+    {
+      "path": "verification/discover-fast.json",
+      "bytes": 415,
+      "sha256": "0c5c5cdc63bd5b1e34fb22aba4e733ebab4113f0e491029eab82d5223f40f0eb"
+    },
+    {
+      "path": "verification/discover-fast.log",
+      "bytes": 51417,
+      "sha256": "c222def0605353259ba7d8aa780146103b4581aeafccb249aa72ff98c92bbdd9"
+    },
+    {
+      "path": "verification/discover-slow.json",
+      "bytes": 413,
+      "sha256": "168cbe8a5da230a30556b3b42c5e4f497160f6a4db7bc5bf806fcf8688eda38e"
+    },
+    {
+      "path": "verification/discover-slow.log",
+      "bytes": 24437,
+      "sha256": "1c49360ed5fe6a7b474e657fa59e8498fc549827b611f9486cdc52ee5c3b5058"
+    },
+    {
+      "path": "verification/discovery-diagnostic.host.26-11-01_09-44-44_51941_5.log",
+      "bytes": 1900401,
+      "sha256": "f260ee47c70d6aef35c32bcddf9cd5a90b37a8a94e3b8676a6ac53c78ff4c338"
+    },
+    {
+      "path": "verification/discovery-diagnostic.log",
+      "bytes": 1939650,
+      "sha256": "829b5b4b99806e14db9460003deec2729a9293c6e3c073757556c56d8a0b3a2b"
+    },
+    {
+      "path": "verification/example-build.json",
+      "bytes": 404,
+      "sha256": "bc7dd5477baab3fbc00c4eb646ff9863dfb65e9727184a4446a15335366e7c83"
+    },
+    {
+      "path": "verification/example-build.log",
+      "bytes": 394,
+      "sha256": "9b15cab20bfda56f845038b3cf5e07bc20b8726e9310868f37dcf598a5ab9c5a"
+    },
+    {
+      "path": "verification/fast-results.json",
+      "bytes": 95233,
+      "sha256": "acdf60d6c44a9ba79544d0e665c4a7c74284dd7ff73f53198bc2ceee6bed00d0"
+    },
+    {
+      "path": "verification/fast/results.trx",
+      "bytes": 531188,
+      "sha256": "95be00aab73a3c4aadad8d7daa7c9fb34d675da4701f2a39dcc4e517cf7d718b"
+    },
+    {
+      "path": "verification/restore.json",
+      "bytes": 281,
+      "sha256": "21bdc648dfe6d356ec3ca8da81cffc3849ee5a4888357750e144d031c2a7a62c"
+    },
+    {
+      "path": "verification/restore.log",
+      "bytes": 80,
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "path": "verification/sdk.json",
+      "bytes": 259,
+      "sha256": "351d834a94d41e7a49b650763757d0dc51929a44395634731bf5611cda8edcbb"
+    },
+    {
+      "path": "verification/sdk.log",
+      "bytes": 1679,
+      "sha256": "3822077adf74f4b461cbe9ba957e9cb3192ce4c1df02f40e91bd0ecb162f1091"
+    },
+    {
+      "path": "verification/source-identity.json",
+      "bytes": 52049,
+      "sha256": "3a99d6e2b2a672c15be4d2f79add01e7c2c962fe48c1bc21e1c3a5f1c1925bf9"
+    },
+    {
+      "path": "verification/test-catalog.json",
+      "bytes": 235756,
+      "sha256": "9a558560f2e7a861d71f7333d0216f1be6125eda2a6fa45e638e628886b0474c"
+    },
+    {
+      "path": "verification/test-fast.json",
+      "bytes": 682,
+      "sha256": "f014718d5d15ff1a0bccd6aa6d7a05374af1d7afde5d405aa673e2d5540d6f78"
+    },
+    {
+      "path": "verification/test-fast.log",
+      "bytes": 58380,
+      "sha256": "cc7972e104760c87a9450f0e47593e8bcc362e8517323a51d553c44ba7a21eca"
+    },
+    {
+      "path": "verification/verification.json",
+      "bytes": 550,
+      "sha256": "5d3ec80d52612a0bf88971d370eb74b5b8cdd905059787e3f0b667beb6948fe4"
+    }
+  ]
+}

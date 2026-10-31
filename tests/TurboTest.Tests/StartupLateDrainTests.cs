@@ -417,6 +417,9 @@ public class StartupLateDrainTests
             Assert.Equal("StartupCanceled", interrupted.Stage);
             cleanup = Assert.IsType<TtCleanup>(interrupted.Cleanup);
             var retry = cleanup.RetryCleanupAsync();
+            // Startup can report cancellation before its async callbacks run.
+            // Keep the initializer's registration alive until the fault occurs.
+            await pool.CancellationCallbackEntered.Task.WaitAsync(TimeSpan.FromSeconds(2));
             pool.ReleaseInitialization.TrySetResult();
             await pool.Deleting.Task.WaitAsync(TimeSpan.FromSeconds(2));
             pool.ReleaseDeletion.TrySetResult();
@@ -556,6 +559,7 @@ public class StartupLateDrainTests
         private readonly TtSlotPool<object> _slots;
         internal TaskCompletionSource Initialized { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         internal TaskCompletionSource ReleaseInitialization { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal TaskCompletionSource CancellationCallbackEntered { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         internal TaskCompletionSource Deleting { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         internal TaskCompletionSource ReleaseDeletion { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         internal int DeleteAttempts { get; private set; }
@@ -592,7 +596,11 @@ public class StartupLateDrainTests
         internal async Task InitializeAsync(CancellationToken token)
         {
             using var registration = ThrowCancellationCallback
-                ? token.Register(() => throw new NotSupportedException("private-cancel-detail")) : default;
+                ? token.Register(() =>
+                {
+                    CancellationCallbackEntered.TrySetResult();
+                    throw new NotSupportedException("private-cancel-detail");
+                }) : default;
             await _slots.WarmAsync(1, default);
             Initialized.TrySetResult();
             await ReleaseInitialization.Task;

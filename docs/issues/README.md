@@ -33,6 +33,11 @@ TT-021 is also resolved: [PR #22](https://github.com/DanMarshall909/TurboTest/pu
 
 ## Verification and performance
 
+[TT-032’s competitive baseline](evidence/2026-10-31/tt032/report.md) compares actual
+Respawn, IntegreSQL, native PostgreSQL templates and the current TurboTest API.
+It records complete-workflow targets, failed attempts and a bounded next
+experiment; it does not establish the product’s 2× claim.
+
 The maintained correctness gate covers **541 tests**, including **365 fast
 checks**; failures and skips fail verification. It builds the solution and
 separate DynamicScalingExample and records source-bound results. Earlier ticket

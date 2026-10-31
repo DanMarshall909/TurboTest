@@ -1,0 +1,974 @@
+{
+  "audit_passed": true,
+  "attempted": 60,
+  "succeeded": 60,
+  "failed": 0,
+  "recorded_samples": 2420,
+  "scenarios": [
+    {
+      "configuration": "durable",
+      "count": 1,
+      "workers": 1,
+      "mode": "fresh",
+      "variants": {
+        "lifetime250": {
+          "contender": "integresql",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 4084.80537799187,
+            "mean": 5342.096127598779,
+            "p95": 10017.564426991157,
+            "maximum": 10017.564426991157,
+            "bootstrap_median_95": [
+              3733.3605849999003,
+              10017.564426991157
+            ],
+            "raw": [
+              3884.5074780110735,
+              3733.3605849999003,
+              10017.564426991157,
+              4990.242769999895,
+              4084.80537799187
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 3884.5074780110735,
+              "path": "artifacts/tt032/lifetime250/008-integresql-durable-fresh-1-r0-w1-lifetime250/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 3733.3605849999003,
+              "path": "artifacts/tt032/lifetime250/021-integresql-durable-fresh-1-r1-w1-lifetime250/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 10017.564426991157,
+              "path": "artifacts/tt032/lifetime250/028-integresql-durable-fresh-1-r2-w1-lifetime250/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 4990.242769999895,
+              "path": "artifacts/tt032/lifetime250/043-integresql-durable-fresh-1-r3-w1-lifetime250/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 4084.80537799187,
+              "path": "artifacts/tt032/lifetime250/056-integresql-durable-fresh-1-r4-w1-lifetime250/report.json"
+            }
+          ]
+        },
+        "reference": {
+          "contender": "respawn",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 3682.33803199837,
+            "mean": 3853.9047350059263,
+            "p95": 4889.552474021912,
+            "maximum": 4889.552474021912,
+            "bootstrap_median_95": [
+              2677.9639429878443,
+              4889.552474021912
+            ],
+            "raw": [
+              3633.4313140250742,
+              4386.237911996432,
+              4889.552474021912,
+              2677.9639429878443,
+              3682.33803199837
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 3633.4313140250742,
+              "path": "artifacts/tt032/lifetime250/009-respawn-durable-fresh-1-r0-w1-reference/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 4386.237911996432,
+              "path": "artifacts/tt032/lifetime250/020-respawn-durable-fresh-1-r1-w1-reference/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 4889.552474021912,
+              "path": "artifacts/tt032/lifetime250/029-respawn-durable-fresh-1-r2-w1-reference/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 2677.9639429878443,
+              "path": "artifacts/tt032/lifetime250/042-respawn-durable-fresh-1-r3-w1-reference/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 3682.33803199837,
+              "path": "artifacts/tt032/lifetime250/057-respawn-durable-fresh-1-r4-w1-reference/report.json"
+            }
+          ]
+        }
+      },
+      "complete_pairs": 5,
+      "ranking_eligible": true,
+      "paired_ratio_of_medians_95": [
+        0.8511532342532308,
+        2.048769182908715
+      ],
+      "ratio_of_medians": 1.1092966866420693,
+      "timing_condition": "All five pairs succeeded"
+    },
+    {
+      "configuration": "durable",
+      "count": 20,
+      "workers": 1,
+      "mode": "fresh",
+      "variants": {
+        "lifetime250": {
+          "contender": "integresql",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 12530.134222004563,
+            "mean": 14147.895983600756,
+            "p95": 21072.77402598993,
+            "maximum": 21072.77402598993,
+            "bootstrap_median_95": [
+              9864.743885002099,
+              21072.77402598993
+            ],
+            "raw": [
+              9864.743885002099,
+              17255.278341996018,
+              21072.77402598993,
+              10016.549443011172,
+              12530.134222004563
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 9864.743885002099,
+              "path": "artifacts/tt032/lifetime250/004-integresql-durable-fresh-20-r0-w1-lifetime250/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 17255.278341996018,
+              "path": "artifacts/tt032/lifetime250/013-integresql-durable-fresh-20-r1-w1-lifetime250/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 21072.77402598993,
+              "path": "artifacts/tt032/lifetime250/030-integresql-durable-fresh-20-r2-w1-lifetime250/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 10016.549443011172,
+              "path": "artifacts/tt032/lifetime250/037-integresql-durable-fresh-20-r3-w1-lifetime250/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 12530.134222004563,
+              "path": "artifacts/tt032/lifetime250/052-integresql-durable-fresh-20-r4-w1-lifetime250/report.json"
+            }
+          ]
+        },
+        "reference": {
+          "contender": "respawn",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 5491.674143995624,
+            "mean": 5904.678298998624,
+            "p95": 9916.834200994344,
+            "maximum": 9916.834200994344,
+            "bootstrap_median_95": [
+              3632.251692004502,
+              9916.834200994344
+            ],
+            "raw": [
+              3632.251692004502,
+              5491.674143995624,
+              9916.834200994344,
+              6849.936389015056,
+              3632.695068983594
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 3632.251692004502,
+              "path": "artifacts/tt032/lifetime250/005-respawn-durable-fresh-20-r0-w1-reference/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 5491.674143995624,
+              "path": "artifacts/tt032/lifetime250/012-respawn-durable-fresh-20-r1-w1-reference/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 9916.834200994344,
+              "path": "artifacts/tt032/lifetime250/031-respawn-durable-fresh-20-r2-w1-reference/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 6849.936389015056,
+              "path": "artifacts/tt032/lifetime250/036-respawn-durable-fresh-20-r3-w1-reference/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 3632.695068983594,
+              "path": "artifacts/tt032/lifetime250/053-respawn-durable-fresh-20-r4-w1-reference/report.json"
+            }
+          ]
+        }
+      },
+      "complete_pairs": 5,
+      "ranking_eligible": true,
+      "paired_ratio_of_medians_95": [
+        1.4622835708480848,
+        3.449266724583745
+      ],
+      "ratio_of_medians": 2.281660181113351,
+      "timing_condition": "All five pairs succeeded"
+    },
+    {
+      "configuration": "durable",
+      "count": 100,
+      "workers": 4,
+      "mode": "fresh",
+      "variants": {
+        "lifetime250": {
+          "contender": "integresql",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 35498.80410399055,
+            "mean": 33539.99358700239,
+            "p95": 47010.46253700042,
+            "maximum": 47010.46253700042,
+            "bootstrap_median_95": [
+              21827.105853008106,
+              47010.46253700042
+            ],
+            "raw": [
+              47010.46253700042,
+              38518.04911799263,
+              35498.80410399055,
+              24845.546323020244,
+              21827.105853008106
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 47010.46253700042,
+              "path": "artifacts/tt032/lifetime250/000-integresql-durable-fresh-100-r0-w4-lifetime250/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 38518.04911799263,
+              "path": "artifacts/tt032/lifetime250/017-integresql-durable-fresh-100-r1-w4-lifetime250/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 35498.80410399055,
+              "path": "artifacts/tt032/lifetime250/034-integresql-durable-fresh-100-r2-w4-lifetime250/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 24845.546323020244,
+              "path": "artifacts/tt032/lifetime250/039-integresql-durable-fresh-100-r3-w4-lifetime250/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 21827.105853008106,
+              "path": "artifacts/tt032/lifetime250/058-integresql-durable-fresh-100-r4-w4-lifetime250/report.json"
+            }
+          ]
+        },
+        "reference": {
+          "contender": "respawn",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 4889.997129997937,
+            "mean": 6017.66685579787,
+            "p95": 9262.294646003284,
+            "maximum": 9262.294646003284,
+            "bootstrap_median_95": [
+              4436.32047099527,
+              9262.294646003284
+            ],
+            "raw": [
+              4688.375069992617,
+              6811.346962000243,
+              9262.294646003284,
+              4889.997129997937,
+              4436.32047099527
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 4688.375069992617,
+              "path": "artifacts/tt032/lifetime250/001-respawn-durable-fresh-100-r0-w4-reference/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 6811.346962000243,
+              "path": "artifacts/tt032/lifetime250/016-respawn-durable-fresh-100-r1-w4-reference/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 9262.294646003284,
+              "path": "artifacts/tt032/lifetime250/035-respawn-durable-fresh-100-r2-w4-reference/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 4889.997129997937,
+              "path": "artifacts/tt032/lifetime250/038-respawn-durable-fresh-100-r3-w4-reference/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 4436.32047099527,
+              "path": "artifacts/tt032/lifetime250/059-respawn-durable-fresh-100-r4-w4-reference/report.json"
+            }
+          ]
+        }
+      },
+      "complete_pairs": 5,
+      "ranking_eligible": true,
+      "paired_ratio_of_medians_95": [
+        3.8326144287915116,
+        10.027026813167158
+      ],
+      "ratio_of_medians": 7.259473402595949,
+      "timing_condition": "All five pairs succeeded"
+    },
+    {
+      "configuration": "durable",
+      "count": 100,
+      "workers": 4,
+      "mode": "warm",
+      "variants": {
+        "lifetime250": {
+          "contender": "integresql",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 13729.0372,
+            "mean": 17297.09924,
+            "p95": 29045.9408,
+            "maximum": 29045.9408,
+            "bootstrap_median_95": [
+              12871.6353,
+              29045.9408
+            ],
+            "raw": [
+              17684.1987,
+              13729.0372,
+              13154.6842,
+              29045.9408,
+              12871.6353
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 17684.1987,
+              "path": "artifacts/tt032/lifetime250/002-integresql-durable-warm-100-r0-w4-lifetime250/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 13729.0372,
+              "path": "artifacts/tt032/lifetime250/015-integresql-durable-warm-100-r1-w4-lifetime250/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 13154.6842,
+              "path": "artifacts/tt032/lifetime250/026-integresql-durable-warm-100-r2-w4-lifetime250/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 29045.9408,
+              "path": "artifacts/tt032/lifetime250/045-integresql-durable-warm-100-r3-w4-lifetime250/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 12871.6353,
+              "path": "artifacts/tt032/lifetime250/054-integresql-durable-warm-100-r4-w4-lifetime250/report.json"
+            }
+          ]
+        },
+        "reference": {
+          "contender": "respawn",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 1924.6613,
+            "mean": 1933.5129399999998,
+            "p95": 2098.0512,
+            "maximum": 2098.0512,
+            "bootstrap_median_95": [
+              1823.5737,
+              2098.0512
+            ],
+            "raw": [
+              1823.5737,
+              2098.0512,
+              1983.8062,
+              1837.4723,
+              1924.6613
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 1823.5737,
+              "path": "artifacts/tt032/lifetime250/003-respawn-durable-warm-100-r0-w4-reference/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 2098.0512,
+              "path": "artifacts/tt032/lifetime250/014-respawn-durable-warm-100-r1-w4-reference/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 1983.8062,
+              "path": "artifacts/tt032/lifetime250/027-respawn-durable-warm-100-r2-w4-reference/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 1837.4723,
+              "path": "artifacts/tt032/lifetime250/044-respawn-durable-warm-100-r3-w4-reference/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 1924.6613,
+              "path": "artifacts/tt032/lifetime250/055-respawn-durable-warm-100-r4-w4-reference/report.json"
+            }
+          ]
+        }
+      },
+      "complete_pairs": 5,
+      "ranking_eligible": true,
+      "paired_ratio_of_medians_95": [
+        6.5437093241575806,
+        15.807553017261812
+      ],
+      "ratio_of_medians": 7.133222453218133,
+      "timing_condition": "All five pairs succeeded"
+    },
+    {
+      "configuration": "relaxed",
+      "count": 1,
+      "workers": 1,
+      "mode": "fresh",
+      "variants": {
+        "lifetime250": {
+          "contender": "integresql",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 4336.4326000155415,
+            "mean": 5803.752514405642,
+            "p95": 12277.082941000117,
+            "maximum": 12277.082941000117,
+            "bootstrap_median_95": [
+              3079.1654880158603,
+              12277.082941000117
+            ],
+            "raw": [
+              3129.9167730030604,
+              4336.4326000155415,
+              3079.1654880158603,
+              6196.164769993629,
+              12277.082941000117
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 3129.9167730030604,
+              "path": "artifacts/tt032/lifetime250/006-integresql-relaxed-fresh-1-r0-w1-lifetime250/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 4336.4326000155415,
+              "path": "artifacts/tt032/lifetime250/019-integresql-relaxed-fresh-1-r1-w1-lifetime250/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 3079.1654880158603,
+              "path": "artifacts/tt032/lifetime250/024-integresql-relaxed-fresh-1-r2-w1-lifetime250/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 6196.164769993629,
+              "path": "artifacts/tt032/lifetime250/047-integresql-relaxed-fresh-1-r3-w1-lifetime250/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 12277.082941000117,
+              "path": "artifacts/tt032/lifetime250/050-integresql-relaxed-fresh-1-r4-w1-lifetime250/report.json"
+            }
+          ]
+        },
+        "reference": {
+          "contender": "native-template",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 4789.353973988909,
+            "mean": 4607.695809594588,
+            "p95": 6246.300378988963,
+            "maximum": 6246.300378988963,
+            "bootstrap_median_95": [
+              2978.9922689960804,
+              6246.300378988963
+            ],
+            "raw": [
+              5039.818032993935,
+              2978.9922689960804,
+              3984.0143930050544,
+              4789.353973988909,
+              6246.300378988963
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "native-template",
+              "succeeded": true,
+              "primary_ms": 5039.818032993935,
+              "path": "artifacts/tt032/lifetime250/007-native-template-relaxed-fresh-1-r0-w1-reference/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "native-template",
+              "succeeded": true,
+              "primary_ms": 2978.9922689960804,
+              "path": "artifacts/tt032/lifetime250/018-native-template-relaxed-fresh-1-r1-w1-reference/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "native-template",
+              "succeeded": true,
+              "primary_ms": 3984.0143930050544,
+              "path": "artifacts/tt032/lifetime250/025-native-template-relaxed-fresh-1-r2-w1-reference/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "native-template",
+              "succeeded": true,
+              "primary_ms": 4789.353973988909,
+              "path": "artifacts/tt032/lifetime250/046-native-template-relaxed-fresh-1-r3-w1-reference/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "native-template",
+              "succeeded": true,
+              "primary_ms": 6246.300378988963,
+              "path": "artifacts/tt032/lifetime250/051-native-template-relaxed-fresh-1-r4-w1-reference/report.json"
+            }
+          ]
+        }
+      },
+      "complete_pairs": 5,
+      "ranking_eligible": true,
+      "paired_ratio_of_medians_95": [
+        0.6210376550328969,
+        1.965496725437227
+      ],
+      "ratio_of_medians": 0.905431635157227,
+      "timing_condition": "All five pairs succeeded"
+    },
+    {
+      "configuration": "relaxed",
+      "count": 20,
+      "workers": 1,
+      "mode": "fresh",
+      "variants": {
+        "lifetime250": {
+          "contender": "integresql",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 14741.430535010295,
+            "mean": 14429.235849407269,
+            "p95": 16146.423864003737,
+            "maximum": 16146.423864003737,
+            "bootstrap_median_95": [
+              11573.735448007938,
+              16146.423864003737
+            ],
+            "raw": [
+              11573.735448007938,
+              14741.430535010295,
+              15094.78684599162,
+              14589.802554022754,
+              16146.423864003737
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 11573.735448007938,
+              "path": "artifacts/tt032/lifetime250/010-integresql-relaxed-fresh-20-r0-w1-lifetime250/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 14741.430535010295,
+              "path": "artifacts/tt032/lifetime250/023-integresql-relaxed-fresh-20-r1-w1-lifetime250/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 15094.78684599162,
+              "path": "artifacts/tt032/lifetime250/032-integresql-relaxed-fresh-20-r2-w1-lifetime250/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 14589.802554022754,
+              "path": "artifacts/tt032/lifetime250/041-integresql-relaxed-fresh-20-r3-w1-lifetime250/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "integresql",
+              "succeeded": true,
+              "primary_ms": 16146.423864003737,
+              "path": "artifacts/tt032/lifetime250/048-integresql-relaxed-fresh-20-r4-w1-lifetime250/report.json"
+            }
+          ]
+        },
+        "reference": {
+          "contender": "respawn",
+          "attempted": 5,
+          "succeeded": 5,
+          "primary_ms": {
+            "n": 5,
+            "median": 3230.604309006594,
+            "mean": 3964.218743395759,
+            "p95": 5441.201955982251,
+            "maximum": 5441.201955982251,
+            "bootstrap_median_95": [
+              2978.8472200161777,
+              5441.201955982251
+            ],
+            "raw": [
+              3230.604309006594,
+              2978.8472200161777,
+              5090.621677984018,
+              3079.818553989753,
+              5441.201955982251
+            ]
+          },
+          "raw": [
+            {
+              "round": 0,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 3230.604309006594,
+              "path": "artifacts/tt032/lifetime250/011-respawn-relaxed-fresh-20-r0-w1-reference/report.json"
+            },
+            {
+              "round": 1,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 2978.8472200161777,
+              "path": "artifacts/tt032/lifetime250/022-respawn-relaxed-fresh-20-r1-w1-reference/report.json"
+            },
+            {
+              "round": 2,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 5090.621677984018,
+              "path": "artifacts/tt032/lifetime250/033-respawn-relaxed-fresh-20-r2-w1-reference/report.json"
+            },
+            {
+              "round": 3,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 3079.818553989753,
+              "path": "artifacts/tt032/lifetime250/040-respawn-relaxed-fresh-20-r3-w1-reference/report.json"
+            },
+            {
+              "round": 4,
+              "contender": "respawn",
+              "succeeded": true,
+              "primary_ms": 5441.201955982251,
+              "path": "artifacts/tt032/lifetime250/049-respawn-relaxed-fresh-20-r4-w1-reference/report.json"
+            }
+          ]
+        }
+      },
+      "complete_pairs": 5,
+      "ranking_eligible": true,
+      "paired_ratio_of_medians_95": [
+        2.965214820671852,
+        4.948703121112145
+      ],
+      "ratio_of_medians": 4.56305666834923,
+      "timing_condition": "All five pairs succeeded"
+    }
+  ],
+  "failures": [],
+  "selection": [
+    {
+      "scenario": {
+        "configuration": "durable",
+        "count": 1,
+        "workers": 1,
+        "mode": "fresh"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 5442.112223972799,
+      "floor_ms": 250,
+      "measure": true
+    },
+    {
+      "scenario": {
+        "configuration": "durable",
+        "count": 1,
+        "workers": 1,
+        "mode": "warm"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 126.2078,
+      "floor_ms": 250,
+      "measure": false
+    },
+    {
+      "scenario": {
+        "configuration": "durable",
+        "count": 20,
+        "workers": 1,
+        "mode": "fresh"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 7401.596448005876,
+      "floor_ms": 5000,
+      "measure": true
+    },
+    {
+      "scenario": {
+        "configuration": "durable",
+        "count": 20,
+        "workers": 1,
+        "mode": "warm"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 3646.512,
+      "floor_ms": 5000,
+      "measure": false
+    },
+    {
+      "scenario": {
+        "configuration": "durable",
+        "count": 100,
+        "workers": 4,
+        "mode": "fresh"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 20872.876062989235,
+      "floor_ms": 6250,
+      "measure": true
+    },
+    {
+      "scenario": {
+        "configuration": "durable",
+        "count": 100,
+        "workers": 4,
+        "mode": "warm"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 7010.533,
+      "floor_ms": 6250,
+      "measure": true
+    },
+    {
+      "scenario": {
+        "configuration": "relaxed",
+        "count": 1,
+        "workers": 1,
+        "mode": "fresh"
+      },
+      "reference": "native-template",
+      "reference_upper_ms": 6246.736967994366,
+      "floor_ms": 250,
+      "measure": true
+    },
+    {
+      "scenario": {
+        "configuration": "relaxed",
+        "count": 1,
+        "workers": 1,
+        "mode": "warm"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 80.1803,
+      "floor_ms": 250,
+      "measure": false
+    },
+    {
+      "scenario": {
+        "configuration": "relaxed",
+        "count": 20,
+        "workers": 1,
+        "mode": "fresh"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 5642.499706998933,
+      "floor_ms": 5000,
+      "measure": true
+    },
+    {
+      "scenario": {
+        "configuration": "relaxed",
+        "count": 20,
+        "workers": 1,
+        "mode": "warm"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 602.1615,
+      "floor_ms": 5000,
+      "measure": false
+    },
+    {
+      "scenario": {
+        "configuration": "relaxed",
+        "count": 1000,
+        "workers": 4,
+        "mode": "fresh"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 11321.317025984172,
+      "floor_ms": 62500,
+      "measure": false
+    },
+    {
+      "scenario": {
+        "configuration": "relaxed",
+        "count": 1000,
+        "workers": 4,
+        "mode": "warm"
+      },
+      "reference": "respawn",
+      "reference_upper_ms": 6802.6909,
+      "floor_ms": 62500,
+      "measure": false
+    }
+  ],
+  "method": "Ratio-of-medians uncertainty uses exact paired empirical bootstrap over the five round pairs. Separate phase; no pooling with25ms matrix. Small n, no population or familywise guarantee.",
+  "receipts_sha256": "d9e71745be5af073a567506b16ed9fbcb8a0e5f58876bcd202a4c3a849eac0a6"
+}

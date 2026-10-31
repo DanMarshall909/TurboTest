@@ -8,6 +8,14 @@
     },
     "disk": {
       "workloads": {
+        "competitive-baseline": {
+          "reserveMiB": 4096,
+          "outputGrowthMiB": 2048,
+          "tempGrowthMiB": 1024,
+          "retainedBudgetMiB": 1024,
+          "basis": "estimated",
+          "estimateReason": "TT-032 serial discovery runs reuse the cached PostgreSQL image and NuGet cache; allow 2 GiB for controller image, database volumes, builds and raw samples, plus 1 GiB temporary headroom. No unrelated cache cleanup is authorized."
+        },
         "verification": {
           "reserveMiB": 4096,
           "outputGrowthMiB": 512,

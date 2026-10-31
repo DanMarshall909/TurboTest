@@ -1,0 +1,421 @@
+{
+  "selection_rule": "Four workers only if both cases pass and median SuiteMs <=95% of one-worker median; sequential workflows use one.",
+  "details": [
+    {
+      "configuration": "durable",
+      "contender": "integresql",
+      "selected": 4,
+      "four_over_one": 0.8290110707231634,
+      "results": {
+        "1": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/002-integresql-durable-warm-20-r0-w1",
+            "artifacts/tt032/tuning-final-02/031-integresql-durable-warm-20-r1-w1"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 14697.79775,
+            "mean": 14697.79775,
+            "p95": 14935.7148,
+            "maximum": 14935.7148,
+            "bootstrap_median_95": [
+              14459.8807,
+              14935.7148
+            ],
+            "raw": [
+              14935.7148,
+              14459.8807
+            ]
+          }
+        },
+        "4": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/003-integresql-durable-warm-20-r0-w4",
+            "artifacts/tt032/tuning-final-02/030-integresql-durable-warm-20-r1-w4"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 12184.637050000001,
+            "mean": 12184.637050000001,
+            "p95": 18843.9874,
+            "maximum": 18843.9874,
+            "bootstrap_median_95": [
+              5525.2867,
+              18843.9874
+            ],
+            "raw": [
+              5525.2867,
+              18843.9874
+            ]
+          }
+        }
+      }
+    },
+    {
+      "configuration": "durable",
+      "contender": "native-template",
+      "selected": 4,
+      "four_over_one": 0.1223910529081539,
+      "results": {
+        "1": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/000-native-template-durable-warm-20-r0-w1",
+            "artifacts/tt032/tuning-final-02/025-native-template-durable-warm-20-r1-w1"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 14095.350999999999,
+            "mean": 14095.350999999999,
+            "p95": 14335.5826,
+            "maximum": 14335.5826,
+            "bootstrap_median_95": [
+              13855.1194,
+              14335.5826
+            ],
+            "raw": [
+              14335.5826,
+              13855.1194
+            ]
+          }
+        },
+        "4": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/001-native-template-durable-warm-20-r0-w4",
+            "artifacts/tt032/tuning-final-02/024-native-template-durable-warm-20-r1-w4"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 1725.14485,
+            "mean": 1725.14485,
+            "p95": 1795.1652,
+            "maximum": 1795.1652,
+            "bootstrap_median_95": [
+              1655.1245,
+              1795.1652
+            ],
+            "raw": [
+              1795.1652,
+              1655.1245
+            ]
+          }
+        }
+      }
+    },
+    {
+      "configuration": "durable",
+      "contender": "respawn",
+      "selected": 4,
+      "four_over_one": 0.5674870620444263,
+      "results": {
+        "1": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/004-respawn-durable-warm-20-r0-w1",
+            "artifacts/tt032/tuning-final-02/029-respawn-durable-warm-20-r1-w1"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 823.22705,
+            "mean": 823.22705,
+            "p95": 824.1902,
+            "maximum": 824.1902,
+            "bootstrap_median_95": [
+              822.2639,
+              824.1902
+            ],
+            "raw": [
+              824.1902,
+              822.2639
+            ]
+          }
+        },
+        "4": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/005-respawn-durable-warm-20-r0-w4",
+            "artifacts/tt032/tuning-final-02/028-respawn-durable-warm-20-r1-w4"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 467.1707,
+            "mean": 467.1707,
+            "p95": 494.2313,
+            "maximum": 494.2313,
+            "bootstrap_median_95": [
+              440.1101,
+              494.2313
+            ],
+            "raw": [
+              440.1101,
+              494.2313
+            ]
+          }
+        }
+      }
+    },
+    {
+      "configuration": "durable",
+      "contender": "turbotest",
+      "selected": 4,
+      "four_over_one": 0.44848216178393807,
+      "results": {
+        "1": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/006-turbotest-durable-warm-20-r0-w1",
+            "artifacts/tt032/tuning-final-02/027-turbotest-durable-warm-20-r1-w1"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 1524.90725,
+            "mean": 1524.90725,
+            "p95": 1549.6378,
+            "maximum": 1549.6378,
+            "bootstrap_median_95": [
+              1500.1767,
+              1549.6378
+            ],
+            "raw": [
+              1500.1767,
+              1549.6378
+            ]
+          }
+        },
+        "4": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/007-turbotest-durable-warm-20-r0-w4",
+            "artifacts/tt032/tuning-final-02/026-turbotest-durable-warm-20-r1-w4"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 683.8937000000001,
+            "mean": 683.8937000000001,
+            "p95": 694.278,
+            "maximum": 694.278,
+            "bootstrap_median_95": [
+              673.5094,
+              694.278
+            ],
+            "raw": [
+              694.278,
+              673.5094
+            ]
+          }
+        }
+      }
+    },
+    {
+      "configuration": "relaxed",
+      "contender": "integresql",
+      "selected": 4,
+      "four_over_one": 0.9482151849489707,
+      "results": {
+        "1": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/010-integresql-relaxed-warm-100-r0-w1",
+            "artifacts/tt032/tuning-final-02/023-integresql-relaxed-warm-100-r1-w1"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 7159.0639,
+            "mean": 7159.0639,
+            "p95": 7333.8994,
+            "maximum": 7333.8994,
+            "bootstrap_median_95": [
+              6984.2284,
+              7333.8994
+            ],
+            "raw": [
+              7333.8994,
+              6984.2284
+            ]
+          }
+        },
+        "4": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/011-integresql-relaxed-warm-100-r0-w4",
+            "artifacts/tt032/tuning-final-02/022-integresql-relaxed-warm-100-r1-w4"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 6788.3331,
+            "mean": 6788.3331,
+            "p95": 7362.455,
+            "maximum": 7362.455,
+            "bootstrap_median_95": [
+              6214.2112,
+              7362.455
+            ],
+            "raw": [
+              6214.2112,
+              7362.455
+            ]
+          }
+        }
+      }
+    },
+    {
+      "configuration": "relaxed",
+      "contender": "native-template",
+      "selected": 4,
+      "four_over_one": 0.6614206005583861,
+      "results": {
+        "1": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/008-native-template-relaxed-warm-100-r0-w1",
+            "artifacts/tt032/tuning-final-02/017-native-template-relaxed-warm-100-r1-w1"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 7068.35355,
+            "mean": 7068.35355,
+            "p95": 7266.9063,
+            "maximum": 7266.9063,
+            "bootstrap_median_95": [
+              6869.8008,
+              7266.9063
+            ],
+            "raw": [
+              6869.8008,
+              7266.9063
+            ]
+          }
+        },
+        "4": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/009-native-template-relaxed-warm-100-r0-w4",
+            "artifacts/tt032/tuning-final-02/016-native-template-relaxed-warm-100-r1-w4"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 4675.15465,
+            "mean": 4675.15465,
+            "p95": 4943.3761,
+            "maximum": 4943.3761,
+            "bootstrap_median_95": [
+              4406.9332,
+              4943.3761
+            ],
+            "raw": [
+              4943.3761,
+              4406.9332
+            ]
+          }
+        }
+      }
+    },
+    {
+      "configuration": "relaxed",
+      "contender": "respawn",
+      "selected": 4,
+      "four_over_one": 0.6250114792827292,
+      "results": {
+        "1": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/012-respawn-relaxed-warm-100-r0-w1",
+            "artifacts/tt032/tuning-final-02/021-respawn-relaxed-warm-100-r1-w1"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 1411.2379999999998,
+            "mean": 1411.2379999999998,
+            "p95": 1630.4493,
+            "maximum": 1630.4493,
+            "bootstrap_median_95": [
+              1192.0267,
+              1630.4493
+            ],
+            "raw": [
+              1192.0267,
+              1630.4493
+            ]
+          }
+        },
+        "4": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/013-respawn-relaxed-warm-100-r0-w4",
+            "artifacts/tt032/tuning-final-02/020-respawn-relaxed-warm-100-r1-w4"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 882.0399500000001,
+            "mean": 882.0399500000001,
+            "p95": 975.0674,
+            "maximum": 975.0674,
+            "bootstrap_median_95": [
+              789.0125,
+              975.0674
+            ],
+            "raw": [
+              789.0125,
+              975.0674
+            ]
+          }
+        }
+      }
+    },
+    {
+      "configuration": "relaxed",
+      "contender": "turbotest",
+      "selected": 4,
+      "four_over_one": 0.41048744234663476,
+      "results": {
+        "1": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/014-turbotest-relaxed-warm-100-r0-w1",
+            "artifacts/tt032/tuning-final-02/019-turbotest-relaxed-warm-100-r1-w1"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 6562.93,
+            "mean": 6562.93,
+            "p95": 6619.3257,
+            "maximum": 6619.3257,
+            "bootstrap_median_95": [
+              6506.5343,
+              6619.3257
+            ],
+            "raw": [
+              6619.3257,
+              6506.5343
+            ]
+          }
+        },
+        "4": {
+          "eligible": true,
+          "paths": [
+            "artifacts/tt032/tuning-final-02/015-turbotest-relaxed-warm-100-r0-w4",
+            "artifacts/tt032/tuning-final-02/018-turbotest-relaxed-warm-100-r1-w4"
+          ],
+          "suite_ms": {
+            "n": 2,
+            "median": 2694.00035,
+            "mean": 2694.00035,
+            "p95": 2696.3866,
+            "maximum": 2696.3866,
+            "bootstrap_median_95": [
+              2691.6141,
+              2696.3866
+            ],
+            "raw": [
+              2696.3866,
+              2691.6141
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

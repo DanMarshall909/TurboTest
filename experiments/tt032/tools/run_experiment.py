@@ -76,7 +76,7 @@ def main():
               'platform':command('uname','-a'),'cpu':json.loads(command('lscpu','--json')),'filesystem':json.loads(command('findmnt','-T',str(ROOT),'-J')),
               'images':[], 'started_utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()), 'selections':selections}
     for ref in ['postgres@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea','ghcr.io/allaboutapps/integresql@sha256:66b7433399f1907bad9e4b7cc7bd528ed4ebfccddecb8fd65da4af4d06a68c5a']:
-        i=json.loads(command('docker','image','inspect',ref))[0]
+        i=json.loads(command('docker','--host','unix:///var/run/docker.sock','image','inspect',ref))[0]
         manifest['images'].append({k:i.get(k) for k in ['Id','RepoDigests','Size','Architecture','Os']})
     save(out/'manifest.json',manifest);baseline_inventory=inventory();save(out/'initial-containers.json',baseline_inventory)
     receipts=[];common_binding=None

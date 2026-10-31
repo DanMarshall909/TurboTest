@@ -38,6 +38,11 @@ Respawn, IntegreSQL, native PostgreSQL templates and the current TurboTest API.
 It records complete-workflow targets, failed attempts and a bounded next
 experiment; it does not establish the product’s 2× claim.
 
+[TT-033’s compiled restoration experiment](evidence/2026-11-01/tt033/report.md)
+tests that bounded follow-up. The candidate passed qualification but took
+9.217 s against Respawn’s 6.768 s in the paired warm 1,000-test comparison, so
+the report records a stop decision and preserves the negative result.
+
 The maintained correctness gate covers **541 tests**, including **365 fast
 checks**; failures and skips fail verification. It builds the solution and
 separate DynamicScalingExample and records source-bound results. Earlier ticket

@@ -41,8 +41,9 @@ def make_plan(phase, rounds, selections):
         rng.shuffle(groups)
         for scenario,mode in groups:
             configuration,count,workers=scenario
-            order=NAMES[round_id%4:]+NAMES[:round_id%4]
-            if round_id%2: order=list(reversed(order))
+            base_order=list(NAMES);random.Random(20261031).shuffle(base_order)
+            order=base_order[round_id%4:]+base_order[:round_id%4]
+            if (round_id//4)%2: order=list(reversed(order))
             for name in order:
                 settings=[1,4] if phase=='tune' else [selections[configuration][name] if workers==4 else 1]
                 if round_id%2: settings.reverse()
@@ -61,6 +62,14 @@ def validate_plan(plan,phase,rounds):
         assert len(rows)==expected_per_round, 'RoundCount'
         assert {x['contender'] for x in rows}==set(NAMES), 'ContenderMembership'
         for name in NAMES: assert sum(x['contender']==name for x in rows)==expected_per_round//4, 'ContenderBalance'
+    if phase=='representative':
+        for scenario in {(x['configuration'],x['count'],x['workers'],x['mode']) for x in plan}:
+            positions={name:[0,0,0,0] for name in NAMES}
+            for r in range(rounds):
+                rows=[x for x in plan if x['round']==r and (x['configuration'],x['count'],x['workers'],x['mode'])==scenario]
+                assert len(rows)==4, 'ScenarioMembership'
+                for position,row in enumerate(rows):positions[row['contender']][position]+=1
+            for values in positions.values():assert max(values)-min(values)<=1, 'OrderPositionBalance'
 
 
 def main():
@@ -73,11 +82,11 @@ def main():
     bound=inputs()
     if bound['status']: raise ValueError('ExperimentRequiresCleanCheckpoint:'+bound['status'])
     manifest={'inputs':bound,'plan_sha256':digest(out/'plan.json'),'docker':json.loads(command('docker','--host','unix:///var/run/docker.sock','version','--format','{{json .Server}}')),
-              'platform':command('uname','-a'),'cpu':json.loads(command('lscpu','--json')),'filesystem':json.loads(command('findmnt','-T',str(ROOT),'-J')),
+              'platform':command('uname','-a'),'memory':{line.split(':')[0]:line.split(':',1)[1].strip() for line in pathlib.Path('/proc/meminfo').read_text().splitlines() if line.split(':')[0] in ['MemTotal','MemAvailable','SwapTotal','SwapFree']},'docker_filesystem':json.loads(command('findmnt','-T','/var/lib/docker','-J')),'storage':json.loads(command('lsblk','-d','-o','NAME,MODEL,SIZE,ROTA','--json')),'cpu':json.loads(command('lscpu','--json')),'filesystem':json.loads(command('findmnt','-T',str(ROOT),'-J')),
               'images':[], 'started_utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()), 'selections':selections}
     for ref in ['postgres@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea','ghcr.io/allaboutapps/integresql@sha256:66b7433399f1907bad9e4b7cc7bd528ed4ebfccddecb8fd65da4af4d06a68c5a']:
         i=json.loads(command('docker','--host','unix:///var/run/docker.sock','image','inspect',ref))[0]
-        manifest['images'].append({k:i.get(k) for k in ['Id','RepoDigests','Size','Architecture','Os']})
+        manifest['images'].append({**{k:i.get(k) for k in ['Id','RepoDigests','Size','Architecture','Os']},'labels':i.get('Config',{}).get('Labels')})
     save(out/'manifest.json',manifest);baseline_inventory=inventory();save(out/'initial-containers.json',baseline_inventory)
     receipts=[];common_binding=None
     for index,case in enumerate(plan):
@@ -107,7 +116,7 @@ def main():
             if common_binding is None:common_binding=binding
             receipt['binding_matches_experiment']=binding==common_binding and binding['AssemblySha'].lower()==bound['binaries'][str(DLL.relative_to(ROOT))] and binding['TurboSha'].lower()==bound['binaries'][str((DLL.parent/'TurboTest.EFCore.dll').relative_to(ROOT))]
             image_ids={i['Id'] for i in manifest['images']}
-            receipt['image_binding_matches']=all(c['Image'] in image_ids for boundary in ['InitialResources','FinalResources'] if boundary in report for c in report[boundary]['containers'])
+            receipt['image_binding_matches']=all(c['Image'] in image_ids for boundary in ['InitialResources','FinalResources'] for c in report[boundary]['containers']) if all(boundary in report for boundary in ['InitialResources','FinalResources']) else None
         else: receipt['report_succeeded']=False;receipt['missing_report']=True
         receipts.append(receipt);save(out/'receipts.json',receipts)
         print(json.dumps({'finished':index+1,'planned':len(plan),**case,'exit':code,'wall_ms':receipt['process_wall_ms'],'succeeded':receipt['report_succeeded']}),flush=True)

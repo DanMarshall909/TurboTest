@@ -155,3 +155,15 @@ Upstream contracts checked against [IntegreSQL v1.1.0](https://github.com/allabo
 [pgtestdb v0.1.1](https://github.com/peterldowns/pgtestdb/tree/v0.1.1), and
 [PostgreSQL 16 CREATE DATABASE](https://www.postgresql.org/docs/16/sql-createdatabase.html).
 The controller and PostgreSQL images are pinned by digest in the harness.
+
+The completed two-round tuning selects four restoration/preparation workers for
+all four contenders in both configurations; sequential scenarios still use one.
+[The retained selection calculation](../../docs/issues/evidence/2026-10-31/tt032/tuning-summary.json)
+records both runs, including IntegreSQL's large durable-run variation. This is a
+fixed pilot selection rule, not evidence that four is universally optimal.
+Tuning reverses each contender's 1/4 order between rounds. Representative rounds
+also balance contender positions: a seeded cyclic ordering covers every position
+in the first four rounds, and the fifth adds at most one occurrence per position.
+To reproduce an archived run's exact ordering, use the source commit in its
+manifest and its retained plan; later supervisor versions are not retroactive
+replacements for historical plans.

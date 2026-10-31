@@ -176,7 +176,7 @@ Respawn would also need a separate decision about TurboTest's broader guarantees
 
 Independent completion review and actual publication are recorded on the pull
 request linked from issue 27. This investigation adds no maintained production
-changes. Hosted CI exposed a pre-existing test-fixture registration race; the
+changes. Hosted CI exposed pre-existing test-fixture registration races; the
 [bounded repair and retained failure](ci-repair.md) supplement the original
 validation without changing the experiment or its measurements. No changed-core
 mutation score is claimed.

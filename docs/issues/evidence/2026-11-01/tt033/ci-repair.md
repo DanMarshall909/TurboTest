@@ -60,3 +60,43 @@ hosted CI and renewed independent GPT-6 Astra review are recorded on PR #28;
 this document does not substitute a local result for either publication gate.
 There is no changed production area and no new coverage or mutation score is
 claimed for this fixture-only repair.
+
+## Second hosted attempt: startup callback lifetime
+
+The new [hosted run](https://github.com/DanMarshall909/TurboTest/actions/runs/41253502713)
+for first-repair candidate `04ec654ae9b1f79922b954fbbd234284d70fc101` also failed:
+364 fast cases passed and one different, unchanged case failed. Both repaired
+blocking-callback cases passed. The failing case was
+`StartupLateDrainTests.Startup_recovery_reports_cancellation_drain_and_retry_failures_together_before_successful_recovery`:
+its assertion at line 427 did not find `StartupCancellation`. The slow lane did
+not execute. Its original ZIP matches GitHub's SHA-256
+`60fd81c274cf5436c9aac80cd64e77f8556c7af592c2e170e0c658c5fa29b9c4`.
+This failed run also remains intact; it was not rerun for a green result.
+
+Startup deliberately reports interruption before its asynchronous cancellation
+callbacks have necessarily run. This test released its initializer immediately
+after interruption, allowing the initializer's `using` registration to be
+disposed before the injected throwing callback executed. The test could thus
+remove its own failure precondition.
+
+A second isolated diagnostic uses actual `Tt.InitializeOwnedPoolAsync` and
+`TtSlotPool`, with a gated cancellation dispatcher. Releasing initialization
+before dispatch invokes zero injected callbacks and reports no callback failure;
+waiting for callback entry invokes one and preserves `StartupCancellation`.
+Both schedules reclaim all owned slots. This establishes the mechanism under a
+forced schedule without claiming the hosted runner used exactly that ordering.
+
+The second repair adds a callback-entry signal and waits for it before releasing
+initialization. Existing assertions and timeouts remain; the new precondition
+uses the existing two-second observation limit. No production, experiment,
+workflow, dependencies, native tests or lane membership changed.
+
+Current source passed the complete **365-case fast lane** locally, with zero
+failures or skips. The earlier 541-case local result belongs to the first repair
+and is not represented as a full run of this second repair. The final candidate
+must pass the complete hosted fast and slow lanes before merge, in addition to
+renewed independent review. [The second supplement](startup-repair-validation.json)
+retains that distinction, the failed hosted artifact and logs, diagnostic
+source/output, fixture patch, source bindings and local fast verification.
+The original benchmark protocol, measurements, analysis and stop decision remain
+unchanged. No new performance variant was attempted.

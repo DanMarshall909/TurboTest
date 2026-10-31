@@ -16,7 +16,7 @@ static class Qualification
             var start=Clock.Now();try{await action();probes.Add(new{Id=id,Passed=true,ElapsedMs=Clock.Ms(start)});Console.WriteLine($"{name}: {id} PASS");}
             catch(Exception e){probes.Add(new{Id=id,Passed=false,ElapsedMs=Clock.Ms(start),Error=e.ToString()});throw;}
         }
-        async Task Restored(){await adapter.Settle();await Runner.VerifyReadyDatabases(adapter.Host);}
+        async Task Restored(){await adapter.Settle();await Runner.VerifyReadyDatabases(adapter);}
         try
         {
             await adapter.Start();
@@ -57,7 +57,31 @@ static class Qualification
                 var held=new List<Lease>();
                 try
                 {
-                    for(var i=0;i<4;i++){var l=await adapter.Acquire();held.Add(l);await Workload.Open(l.Context());}
+                    var physical=new List<object>();var names=new HashSet<string>();
+                    for(var i=0;i<4;i++)
+                    {
+                        var l=await adapter.Acquire();held.Add(l);
+                        for(var j=0;j<3;j++)
+                        {
+                            var c=await Workload.Open(l.Context());names.Add(c.Database);
+                            physical.Add(new{Database=c.Database,Pid=await Workload.Scalar<int>(c,"SELECT pg_backend_pid()")});
+                        }
+                    }
+                    Workload.Require(names.Count==4,"HeldIsolation");
+                    await using(var admin=await adapter.Host.Admin!.OpenConnectionAsync())
+                    {
+                        var inventory=await Workload.Scalar<string>(admin,"SELECT json_agg(json_build_object('database',datname,'sessions',n))::text FROM (SELECT datname,count(*) n FROM pg_stat_activity WHERE backend_type='client backend' GROUP BY datname) s");
+                        var rows=JsonSerializer.Deserialize<JsonElement>(inventory);var total=0;var service=0;
+                        foreach(var row in rows.EnumerateArray())
+                        {
+                            var n=row.GetProperty("sessions").GetInt32();total+=n;
+                            if(names.Contains(row.GetProperty("database").GetString()!))Workload.Require(n<=4,"WorkloadConnectionCeiling");
+                            else service+=n;
+                        }
+                        Workload.Require(total<=21,"CombinedConnectionCeiling");
+                        Workload.Require(service<=5,"ServiceAndObserverConnectionCeiling");
+                        probes.Add(new{Id="held-resource-inventory",PhysicalConnections=physical,Inventory=rows,TotalSessions=total,ServiceAndObserverSessions=service,WorkloadSlots=names.Count});
+                    }
                     using var cts=new CancellationTokenSource(50);
                     try{await using var unexpected=await adapter.Acquire(cts.Token);throw new InvalidDataException("FifthLeaseAdmitted");}
                     catch(OperationCanceledException) when(cts.IsCancellationRequested){}
@@ -78,22 +102,33 @@ static class Qualification
             await Probe("schema-replacement-and-stale-context",async()=>{
                 var l=await adapter.Acquire();var context=l.Context();var c=await Workload.Open(context);
                 var oldIdentity=await Workload.Scalar<string>(c,"SELECT current_database()||':'||oid FROM pg_database WHERE datname=current_database()");
+                var oldPid=await Workload.Scalar<int>(c,"SELECT pg_backend_pid()");
                 await Workload.Execute(c,"ALTER TABLE \"Parents\" ADD COLUMN unexpected integer");l.InvalidateSchema();
                 await l.DisposeAsync();await Restored();
                 try{await context.Database.OpenConnectionAsync();throw new InvalidDataException("StaleContextUsable");}catch(ObjectDisposedException){}
+                Workload.Require(c.State==System.Data.ConnectionState.Closed,"StalePhysicalConnectionOpen");
+                try{await Workload.Scalar<int>(c,"SELECT 1");throw new InvalidDataException("StalePhysicalConnectionUsable");}
+                catch(InvalidOperationException){}
                 await using var admin=await adapter.Host.Admin!.OpenConnectionAsync();var oldOid=uint.Parse(oldIdentity.Split(':')[1]);
                 await using var cmd=new NpgsqlCommand("SELECT count(*) FROM pg_database WHERE oid=@oid",admin);cmd.Parameters.AddWithValue("oid",NpgsqlTypes.NpgsqlDbType.Oid,oldOid);
                 Workload.Require((long)(await cmd.ExecuteScalarAsync())! == 0,"DatabaseNotReplaced");
-                probes.Add(new{Id="replacement-identity",Old=oldIdentity,CallerInvalidationRequired=name=="respawn"});
+                Workload.Require(await Workload.Scalar<long>(admin,$"SELECT count(*) FROM pg_stat_activity WHERE pid={oldPid}")==0,"StaleBackendSurvivedReplacement");
+                probes.Add(new{Id="replacement-identity",Old=oldIdentity,OldPid=oldPid,OldConnectionClosed=true,OldBackendAbsent=true,CallerInvalidationRequired=name=="respawn"});
             });
-            await Probe("reset-failure-is-visible-and-owned-resources-settle",async()=>{
+            await Probe("reset-failure-characterized-and-owned-resources-settle",async()=>{
                 var l=await adapter.Acquire();var a=await Workload.Open(l.Context());await Workload.Execute(a,"UPDATE \"Parents\" SET \"Priority\"=-3 WHERE \"Id\"=1");
                 resetFaultInjected=true;
                 await Host.Docker.Containers.StopContainerAsync(adapter.Host.PgId,new(){WaitBeforeKillSeconds=1});
                 Exception? observed=null;
                 try{await l.DisposeAsync();using var deadline=new CancellationTokenSource(TimeSpan.FromSeconds(3));await adapter.Settle(deadline.Token);}
                 catch(Exception e){observed=e;}
-                Workload.Require(observed is not null,"ResetFailureHidden");
+                var state=JsonSerializer.Serialize(adapter.State());
+                if(observed is OperationCanceledException)
+                {
+                    Workload.Require(name=="integresql" && (state.Contains("shutting down",StringComparison.OrdinalIgnoreCase)||state.Contains("connection refused",StringComparison.OrdinalIgnoreCase)||state.Contains("connection reset",StringComparison.OrdinalIgnoreCase)),"TimeoutWithoutUnderlyingFailureEvidence");
+                    probes.Add(new{Id="reset-failure-limitation",ApiFailureReceipt=false,ObservationTimeout=true,ControllerState=JsonSerializer.Deserialize<JsonElement>(state),Diagnostic="Server failure is logged; acquisition/restoration has no failed-return receipt. Caller needs a deadline and fixture replacement."});
+                }
+                else Workload.Require(observed is not null && BoundaryFailure(observed),"UnexpectedResetFailureEvidence");
                 probes.Add(new{Id="reset-failure-observation",Error=observed!.ToString(),ObservationCancellation=observed is OperationCanceledException});
                 // The owned server is deliberately unavailable. Force cleanup is a declared recovery path,
                 // not a successful reset. Subsequent test runs construct a new fixture.
@@ -104,7 +139,9 @@ static class Qualification
         finally
         {
             try{await adapter.DisposeAsync();}
-            catch(Exception e){if(resetFaultInjected)probes.Add(new{Id="expected-drain-after-server-failure",Error=e.ToString()});else failures.Add(e.ToString());}
+            catch(Exception e){if(resetFaultInjected && BoundaryFailure(e))probes.Add(new{Id="expected-boundary-failure-during-drain",Error=e.ToString()});else failures.Add(e.ToString());}
+            try{await adapter.Host.VerifyAbsent();probes.Add(new{Id="independent-final-resource-absence",Passed=true,Containers=adapter.Host.Ids,Volumes=adapter.Host.Volumes});}
+            catch(Exception e){failures.Add(e.ToString());}
         }
         if(failures.Count==0)
         {
@@ -116,4 +153,10 @@ static class Qualification
         await File.WriteAllTextAsync(Path.Combine(output,"qualification.json"),JsonSerializer.Serialize(report,Runner.Json));
         Console.WriteLine($"{name}: qualification {(failures.Count==0?"PASS":"FAIL")}");return failures.Count==0?0:1;
     }
+    static bool BoundaryFailure(Exception e)=>e switch
+    {
+        NpgsqlException or HttpRequestException=>true,
+        AggregateException aggregate=>aggregate.InnerExceptions.Count>0 && aggregate.InnerExceptions.All(BoundaryFailure),
+        _=>e.InnerException is not null && BoundaryFailure(e.InnerException)
+    };
 }

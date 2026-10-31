@@ -9,6 +9,12 @@ using Npgsql;
 
 namespace CompetitiveBaseline;
 
+static class Tuning
+{
+    public static int Workers {get;}=int.Parse(Environment.GetEnvironmentVariable("TT032_RESET_WORKERS")??"1");
+    public static int Capacity {get;}=int.Parse(Environment.GetEnvironmentVariable("TT032_CAPACITY")??"4");
+}
+
 static class Clock
 {
     public static long Now()=>Stopwatch.GetTimestamp();
@@ -60,7 +66,7 @@ sealed class Host : IAsyncDisposable
             new HostConfig{ Memory=256L*1024*1024,PortBindings=new Dictionary<string,IList<PortBinding>>{{"5432/tcp",new[]{new PortBinding{HostIP="127.0.0.1",HostPort=""}}}} });
         var i=await Docker.Containers.InspectContainerAsync(PgId);
         var port=int.Parse(i.NetworkSettings.Ports["5432/tcp"][0].HostPort);
-        ConnectionString=new NpgsqlConnectionStringBuilder{Host="127.0.0.1",Port=port,Username="postgres",Password="tt032-disposable",Database="postgres",Pooling=true,MaxPoolSize=2,Timeout=5,CommandTimeout=15,Enlist=false}.ConnectionString;
+        ConnectionString=new NpgsqlConnectionStringBuilder{Host="127.0.0.1",Port=port,Username="postgres",Password="tt032-disposable",Database="postgres",Pooling=true,MaxPoolSize=4,Timeout=5,CommandTimeout=15,Enlist=false}.ConnectionString;
         Admin=NpgsqlDataSource.Create(ConnectionString);
         var until=DateTime.UtcNow.AddSeconds(60);
         while(true) { try {await using var c=await Admin.OpenConnectionAsync(); break;} catch(NpgsqlException) when(DateTime.UtcNow<until){await Task.Delay(50);} }
@@ -69,7 +75,8 @@ sealed class Host : IAsyncDisposable
     }
     public string ForDatabase(string name,bool admin=false)
     {
-        var b=new NpgsqlConnectionStringBuilder(ConnectionString){Database=name,Username=admin?"postgres":"tt032_app",MaxPoolSize=admin?2:4};
+        var b=new NpgsqlConnectionStringBuilder(ConnectionString){Database=name,MaxPoolSize=4};
+        if(!admin){b.Username="tt032_app";b.Password="tt032-disposable";}
         return b.ConnectionString;
     }
     public async Task<object> Snapshot()
@@ -106,6 +113,14 @@ sealed class Host : IAsyncDisposable
         }
         var all=await Docker.Volumes.ListAsync();
         foreach(var v in Volumes){var absent=all.Volumes.All(x=>x.Name!=v);Cleanup.Add(new{Volume=v,Absent=absent});Workload.Require(absent,"VolumeCleanup");}
+    }
+    public async Task VerifyAbsent()
+    {
+        var all=await Docker.Containers.ListContainersAsync(new(){All=true});
+        foreach(var id in Ids)Workload.Require(all.All(c=>c.ID!=id),"FinalContainerAbsence:"+id);
+        var volumes=await Docker.Volumes.ListAsync();
+        foreach(var v in Volumes)Workload.Require(volumes.Volumes.All(x=>x.Name!=v),"FinalVolumeAbsence:"+v);
+        Workload.Require(Ids.Count>0 && Cleanup.Count>=Ids.Count+Volumes.Count,"MissingCleanupReceipts");
     }
     public static int FreePort(){var l=new TcpListener(IPAddress.Loopback,0);l.Start();var p=((IPEndPoint)l.LocalEndpoint).Port;l.Stop();return p;}
 }

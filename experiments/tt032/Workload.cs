@@ -53,13 +53,14 @@ static class Workload
         SELECT string_agg("Id"::text,',' ORDER BY "Id") FROM "SchemaVersion";
         SELECT count(*) FROM information_schema.columns WHERE table_schema='public' AND column_name='unexpected';
         """;
-    public static async Task CheckBaseline(NpgsqlConnection c, CancellationToken token = default)
+    public static async Task CheckBaseline(NpgsqlConnection c, CancellationToken token = default,Action? firstResult=null)
     {
         await using var cmd = new NpgsqlCommand(ReadSeeds,c);
         await using var r = await cmd.ExecuteReaderAsync(token);
         for (var i=0;i<3;i++)
         {
-            Require(await r.ReadAsync(token) && !r.IsDBNull(0) && r.GetString(0)==ExpectedSeeds[i], "SeedState");
+            var read=await r.ReadAsync(token);if(i==0)firstResult?.Invoke();
+            Require(read && !r.IsDBNull(0) && r.GetString(0)==ExpectedSeeds[i], "SeedState");
             Require(await r.NextResultAsync(token), "BaselineResults");
         }
         for (var i=0;i<3;i++)

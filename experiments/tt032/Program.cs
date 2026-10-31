@@ -1,6 +1,8 @@
 using CompetitiveBaseline;
+if(Tuning.Workers is not (1 or 4) || Tuning.Capacity is not (1 or 4))throw new ArgumentException("Unsupported capacity or restoration concurrency");
 if(args.Length==4 && args[0]=="qualify")
 {
+    if(Tuning.Capacity!=4)throw new ArgumentException("Qualification requires four-slot pressure");
     if(Directory.Exists(args[2]))throw new ArgumentException("Output already exists");
     return await Qualification.Run(args[1],args[2],int.Parse(args[3]));
 }

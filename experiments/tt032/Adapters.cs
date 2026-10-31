@@ -30,6 +30,7 @@ interface IAdapter : IAsyncDisposable
     Task<Lease> Acquire(CancellationToken token=default);
     Task Settle(CancellationToken token=default);
     object State();
+    bool IsWorkloadDatabase(string name);
 }
 
 sealed class TurboAdapter : IAdapter
@@ -40,15 +41,16 @@ sealed class TurboAdapter : IAdapter
     public async Task Start()
     {
         fixture=await Tt.CreateFactoryAsync(Workload.Baseline,o=>{
-            o.PoolSize=4;o.StartupWarmDatabases=4;o.WarmFloor=0;o.EnableDynamicScaling=false;o.MaxContainers=1;
-            o.PreparationConcurrency=1;o.ResetConcurrency=1;o.MaxConnectionsPerDatabase=4;o.MaxAdministratorConnections=2;
+            o.PoolSize=Tuning.Capacity;o.StartupWarmDatabases=Tuning.Capacity;o.WarmFloor=0;o.EnableDynamicScaling=false;o.MaxContainers=1;
+            o.PreparationConcurrency=Tuning.Workers;o.ResetConcurrency=Tuning.Workers;o.MaxConnectionsPerDatabase=4;o.MaxAdministratorConnections=4;
             o.MemoryLimitMb=256;o.ContainerPrefix=Host.Prefix;o.DockerImage=Host.Image;o.DockerHost="unix:///var/run/docker.sock";
             o.Username="postgres";o.Password="tt032-disposable";o.StartupTimeout=TimeSpan.FromMinutes(2);o.DrainTimeout=TimeSpan.FromSeconds(30);
         });
         var owned=await Host.Docker.Containers.ListContainersAsync(new(){All=true,Filters=new Dictionary<string,IDictionary<string,bool>>{{"name",new Dictionary<string,bool>{{Host.Prefix,true}}}}});
         Workload.Require(owned.Count==1,"TurboHostIdentity");Host.PgId=owned[0].ID;await Host.Capture(owned[0].ID);
         var i=await Host.Docker.Containers.InspectContainerAsync(Host.PgId);
-        Host.ConnectionString=new NpgsqlConnectionStringBuilder{Host="127.0.0.1",Port=int.Parse(i.NetworkSettings.Ports["5432/tcp"][0].HostPort),Username="postgres",Password="tt032-disposable",Database="postgres",MaxPoolSize=2,CommandTimeout=15,Enlist=false}.ConnectionString;
+        var env=i.Config.Env.Select(e=>e.Split('=',2)).ToDictionary(e=>e[0],e=>e[1]);
+        Host.ConnectionString=new NpgsqlConnectionStringBuilder{Host="127.0.0.1",Port=int.Parse(i.NetworkSettings.Ports["5432/tcp"][0].HostPort),Username=env["POSTGRES_USER"],Password=env["POSTGRES_PASSWORD"],Database="postgres",MaxPoolSize=1,CommandTimeout=15,Enlist=false}.ConnectionString;
         Host.Admin=NpgsqlDataSource.Create(Host.ConnectionString);
     }
     public async Task<Lease> Acquire(CancellationToken token=default)
@@ -56,9 +58,10 @@ sealed class TurboAdapter : IAdapter
     public Task Settle(CancellationToken token=default)
     {
         token.ThrowIfCancellationRequested();var s=fixture!.PoolState;
-        Workload.Require(s.Ready==4 && s.Leased==0 && s.Preparing==0 && s.ExecutingResets==0,"TurboCapacity");return Task.CompletedTask;
+        Workload.Require(s.Ready==Tuning.Capacity && s.Leased==0 && s.Preparing==0 && s.ExecutingResets==0,"TurboCapacity");return Task.CompletedTask;
     }
     public object State()=>fixture!.PoolState;
+    public bool IsWorkloadDatabase(string name)=>name.StartsWith("testdb_slot_",StringComparison.Ordinal);
     public async ValueTask DisposeAsync(){try{if(fixture is not null)await fixture.DisposeAsync();}finally{await Host.DisposeAsync();}}
 }
 
@@ -68,10 +71,10 @@ sealed class SqlAdapter(bool respawn) : IAdapter
     public Host Host {get;}=new();
     public string Name=>respawn?"respawn":"native-template";
     const string Template="tt032_template";
-    readonly Channel<int> ready=Channel.CreateBounded<int>(4);
-    readonly NpgsqlDataSource?[] sources=new NpgsqlDataSource?[4];
-    readonly Respawner?[] resetters=new Respawner?[4];
-    readonly SemaphoreSlim reset=new(1);
+    readonly Channel<int> ready=Channel.CreateBounded<int>(Tuning.Capacity);
+    readonly NpgsqlDataSource?[] sources=new NpgsqlDataSource?[Tuning.Capacity];
+    readonly Respawner?[] resetters=new Respawner?[Tuning.Capacity];
+    readonly SemaphoreSlim reset=new(Tuning.Workers);
     readonly List<Task> jobs=[];
     readonly List<object> restoration=[];
     public int CompletedReturns;
@@ -82,7 +85,10 @@ sealed class SqlAdapter(bool respawn) : IAdapter
         await using(var source=NpgsqlDataSource.Create(Host.ForDatabase(Template)))
         await using(var c=Workload.New(source)){await Workload.Migrate(c);await Workload.Seed(c);}
         await using(var a=await Host.Admin!.OpenConnectionAsync())await Workload.Execute(a,$"ALTER DATABASE {Template} ALLOW_CONNECTIONS false");
-        for(var i=0;i<4;i++){await Clone(i);await ready.Writer.WriteAsync(i);}
+        using var preparation=new SemaphoreSlim(Tuning.Workers);
+        await Task.WhenAll(Enumerable.Range(0,Tuning.Capacity).Select(async i=>{
+            await preparation.WaitAsync();try{await Clone(i);await ready.Writer.WriteAsync(i);}finally{preparation.Release();}
+        }));
     }
     async Task Clone(int i)
     {
@@ -132,8 +138,9 @@ sealed class SqlAdapter(bool respawn) : IAdapter
         finally{reset.Release();}
     }
     public async Task Settle(CancellationToken token=default)
-    {Task[] tasks;lock(jobs)tasks=jobs.ToArray();await Task.WhenAll(tasks).WaitAsync(token);Workload.Require(ready.Reader.Count==4,"SqlCapacity");}
-    public object State()=>new{Ready=ready.Reader.Count,CompletedReturns,ResetConcurrency=1,Restoration=restoration.ToArray()};
+    {Task[] tasks;lock(jobs)tasks=jobs.ToArray();await Task.WhenAll(tasks).WaitAsync(token);Workload.Require(ready.Reader.Count==Tuning.Capacity,"SqlCapacity");}
+    public object State()=>new{Ready=ready.Reader.Count,CompletedReturns,ResetConcurrency=Tuning.Workers,Restoration=restoration.ToArray()};
+    public bool IsWorkloadDatabase(string name)=>name.StartsWith("tt032_slot_",StringComparison.Ordinal);
     public async ValueTask DisposeAsync()
     {
         try{Task[] tasks;lock(jobs)tasks=jobs.ToArray();await Task.WhenAll(tasks);}
@@ -148,7 +155,7 @@ sealed class IntegreAdapter(string output,int lifetime=25) : IAdapter
     readonly string hash="tt032"+Guid.NewGuid().ToString("N");
     HttpClient? http;
     ControllerLogs? logs;
-    readonly SemaphoreSlim admission=new(4);
+    readonly SemaphoreSlim admission=new(Tuning.Capacity);
     int issued;
     public async Task Start()
     {
@@ -156,7 +163,7 @@ sealed class IntegreAdapter(string output,int lifetime=25) : IAdapter
         Host.ControllerId=await Host.Create(Host.ControllerImage,"_controller",[
             "INTEGRESQL_ADDRESS=127.0.0.1",$"INTEGRESQL_PORT={apiPort}","INTEGRESQL_PGHOST=127.0.0.1",$"INTEGRESQL_PGPORT={pg.Port}",
             "INTEGRESQL_PGUSER=postgres","INTEGRESQL_PGPASSWORD=tt032-disposable","INTEGRESQL_TEST_PGUSER=tt032_app","INTEGRESQL_TEST_PGPASSWORD=tt032-disposable",
-            "INTEGRESQL_TEST_INITIAL_POOL_SIZE=4","INTEGRESQL_TEST_MAX_POOL_SIZE=4","INTEGRESQL_POOL_MAX_PARALLEL_TASKS=1",
+            $"INTEGRESQL_TEST_INITIAL_POOL_SIZE={Tuning.Capacity}",$"INTEGRESQL_TEST_MAX_POOL_SIZE={Tuning.Capacity}",$"INTEGRESQL_POOL_MAX_PARALLEL_TASKS={Tuning.Workers}",
             $"INTEGRESQL_TEST_DB_MINIMAL_LIFETIME_MS={lifetime}","INTEGRESQL_TEST_DB_RETRY_RECREATE_SLEEP_MIN_MS=5","INTEGRESQL_TEST_DB_RETRY_RECREATE_SLEEP_MAX_MS=25",
             "INTEGRESQL_LOGGER_LEVEL=trace","INTEGRESQL_LOGGER_REQUEST_LEVEL=info","INTEGRESQL_LOGGER_PRETTY_PRINT_CONSOLE=false"],new(){NetworkMode="host",Memory=64L*1024*1024});
         logs=new(Host.ControllerId,Path.Combine(output,"integresql.jsonl"));
@@ -189,7 +196,7 @@ sealed class IntegreAdapter(string output,int lifetime=25) : IAdapter
     public async Task Settle(CancellationToken token=default)
     {
         var until=DateTime.UtcNow.AddSeconds(60);
-        while(logs is null || Volatile.Read(ref logs.Ready)!=4 || logs.Dirty!=0 || logs.Acquisitions<issued || logs.Recreations<4+issued)
+        while(logs is null || Volatile.Read(ref logs.Ready)!=Tuning.Capacity || logs.Dirty!=0 || logs.Acquisitions<issued || logs.Recreations<Tuning.Capacity+issued)
         {token.ThrowIfCancellationRequested();if(DateTime.UtcNow>until)throw new TimeoutException("IntegreCapacity");await Task.Delay(2,token);}
         // 'ready' is emitted after CREATE finishes and queue publication, before the worker's final bookkeeping.
         // Confirm no database-changing SQL remains; this SQL observation follows publication.
@@ -197,7 +204,8 @@ sealed class IntegreAdapter(string output,int lifetime=25) : IAdapter
         while(await Workload.Scalar<long>(a,"SELECT count(*) FROM pg_stat_activity WHERE pid<>pg_backend_pid() AND state='active' AND backend_type='client backend'",token)!=0)
         {if(DateTime.UtcNow>until)throw new TimeoutException("IntegreBackgroundSettlement");await Task.Delay(2,token);}
     }
-    public object State()=>new{Ready=logs?.Ready,Dirty=logs?.Dirty,RecreatingAtLastLog=logs?.Recreating,DatabaseCount=logs?.DatabaseCount,LifetimeMs=lifetime,ControllerErrors=logs?.Errors.ToArray()};
+    public object State()=>new{Ready=logs?.Ready,Dirty=logs?.Dirty,RecreatingAtLastLog=logs?.Recreating,DatabaseCount=logs?.DatabaseCount,ObservedAcquisitions=logs?.Acquisitions,CompletedRecreations=logs?.Recreations,Issued=issued,LifetimeMs=lifetime,ControllerErrors=logs?.Errors.ToArray()};
+    public bool IsWorkloadDatabase(string name)=>name.StartsWith("integresql_test_"+hash+"_",StringComparison.Ordinal);
     public async ValueTask DisposeAsync()
     {
         try{if(http is not null){using var r=await http.DeleteAsync($"templates/{hash}");r.EnsureSuccessStatusCode();}}

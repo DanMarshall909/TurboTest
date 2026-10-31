@@ -167,3 +167,35 @@ in the first four rounds, and the fifth adds at most one occurrence per position
 To reproduce an archived run's exact ordering, use the source commit in its
 manifest and its retained plan; later supervisor versions are not retroactive
 replacements for historical plans.
+
+## Recorded outcome and reporting repairs
+
+[The TT-032 report](../../docs/issues/evidence/2026-10-31/tt032/report.md)
+contains the phase-specific leaders, half-time targets, restoration limits,
+failures and the next bounded experiment. The original 240-case matrix measured
+`f077440782fd742144c89b86577c2d798e18e4ad`; production source is unchanged from
+`221493ba28fa0f2d152563766dcafd3652796994`. Raw inputs, reports and receipt hashes
+are retained in the linked evidence archive.
+
+The original supervisor stopped after case 021 because a failed run lacked its
+final resource snapshot. A hash-bound, separately archived continuation driver
+verified all 22 existing receipts and continued only unattempted cases. No case
+was retried. The final reporting correction accepts a failed run's matching
+initial image evidence and checks every available observation; successful runs
+still require both boundaries. Failed or missing container/volume cleanup proof
+now stops the supervisor explicitly. These corrections do not change timed C#
+workload or adapter behavior.
+
+A separate predeclared sensitivity phase uses IntegreSQL's documented 250 ms
+minimum lifetime, retaining the other tuned settings. It qualifies that setting
+and pairs it with the original reference only where an automatic-recreation
+latency bound cannot exclude a win against the retained reference evidence.
+It does not replace the 25 ms failures, combine phases, or establish a unique
+combined winner for short fresh workflows. The archive includes its exact
+protocol, selection, drivers and results. Diagnostic TurboTest profiles are
+separate from every ranking.
+
+Reproduction requires the recorded SDK/runtime and both digest-pinned images
+already available before timing. The commands above create new output roots;
+never overwrite an archived attempt. Historical continuation scripts are
+recovery evidence for their exact receipt prefix, not a general resume API.

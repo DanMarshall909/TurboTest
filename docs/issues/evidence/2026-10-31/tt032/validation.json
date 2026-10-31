@@ -1,0 +1,301 @@
+{
+  "maintained_verification": {
+    "discovered": {
+      "all": 541,
+      "fast": 365,
+      "slow": 176
+    },
+    "dockerHost": "unix:///var/run/docker.sock",
+    "elapsedSeconds": 795.9817934110179,
+    "hostedWorkflow": "not performed by local driver",
+    "lane": "all",
+    "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35",
+    "resourceSettlement": {
+      "added": [],
+      "after": [
+        "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+      ],
+      "automaticDeletion": false,
+      "before": [
+        "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+      ],
+      "removed": []
+    },
+    "result": "PASS",
+    "runId": "56264834-e872-4edf-8f1f-2b2ceeef9858",
+    "startedUtc": "2026-10-31T16:00:57Z",
+    "tests": {
+      "fast": {
+        "failed": 0,
+        "passed": 365,
+        "skipped": 0,
+        "testSeconds": 5.898299799999998
+      },
+      "slow": {
+        "failed": 0,
+        "passed": 176,
+        "skipped": 0,
+        "testSeconds": 1217.6631444999998
+      }
+    }
+  },
+  "commands": [
+    {
+      "command": "python3 -m unittest discover -s scripts -p test_verify.py",
+      "exit_code": 0,
+      "passed": 10
+    },
+    {
+      "command": "python3 scripts/verify.py all --output artifacts/tt032-verification",
+      "exit_code": 0
+    },
+    {
+      "command": "dotnet build experiments/tt032/CompetitiveBaseline.csproj -c Release --no-restore",
+      "exit_code": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "command": "python3 artifacts/tt032/calibrate_reporting.py",
+      "exit_code": 0,
+      "controls": 15
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "lane_wall_seconds": {
+    "fast": 4.606933892995585,
+    "slow": 777.7998444420227
+  },
+  "lane_review": "No tests or lanes changed. Fast feedback remains a few seconds; slow native contracts include intentional startup/cancellation/drain waits. A single run does not warrant reassignment.",
+  "production_sources_and_tests_changed": false,
+  "mutation": "Not applicable to unchanged maintained production/tests; this change is an isolated discovery harness, analysis and report. No mutation score is claimed.",
+  "reporting_calibration": {
+    "passed": true,
+    "checks": [
+      "failed_initial_only_image_proof",
+      "successful_final_image_required",
+      "initial_image_mismatch_rejected",
+      "available_final_image_mismatch_rejected",
+      "cleanup_flag_named_rejection",
+      "volume_absence_named_rejection",
+      "missing_cleanup_named_rejection",
+      "inventory_drift_named_rejection",
+      "constant_ratio_interval",
+      "median_interval",
+      "nearest_rank_p95",
+      "median",
+      "final_analyzer_preserves_bound_selection_numbers",
+      "conditional_interval_scope_is_explicit",
+      "failed_cell_not_eligible"
+    ],
+    "source_sha256": {
+      "experiments/tt032/tools/run_experiment.py": "f18d5baf9d3d761ee35584828fa065f48ce4b058c46e30106125ab9d3222e039",
+      "experiments/tt032/tools/analyze.py": "7eee66b2983420b27276a41fd41a025b3d8654e28ebcfadee5a867652483c268",
+      "artifacts/tt032/calibrate_reporting.py": "b92330ccd38619fb8f5695e948c6f6f7c37eb4460d234d5bb833be5ada34e25c"
+    }
+  },
+  "archive": "validation-results.tar.gz",
+  "archive_sha256": "f4ad30a4b3ec63bba023e5034b6da93d3ea0154e7b4ccb0d6e6abdc89a5f700b",
+  "archive_bytes": 741230,
+  "files": [
+    {
+      "path": "verification/build.json",
+      "bytes": 377,
+      "sha256": "d6ab4fe7c0deb3e356ee5bb27e1ed3e5c07945e3be008892e404f24929be3885"
+    },
+    {
+      "path": "verification/build.log",
+      "bytes": 895,
+      "sha256": "9915d22f0534f90b9f1e9c10fcefde86fb43ab02f9d672052dcca2d527b9001c"
+    },
+    {
+      "path": "verification/discover-all.json",
+      "bytes": 471,
+      "sha256": "417e2bfdc4f8a984ec3a6ff01e00ec40f496cd4c9550fd93be480e0941752d1d"
+    },
+    {
+      "path": "verification/discover-all.log",
+      "bytes": 75806,
+      "sha256": "b3a537544814d6bc6ca78726fccce10c3d4e0846f0c4b072df8895f7bd98aedb"
+    },
+    {
+      "path": "verification/discover-fast.json",
+      "bytes": 415,
+      "sha256": "c543f16e7f0fadeb31dee0513967b494dca919288bc5a1a09db994b8cb513b1b"
+    },
+    {
+      "path": "verification/discover-fast.log",
+      "bytes": 51417,
+      "sha256": "c222def0605353259ba7d8aa780146103b4581aeafccb249aa72ff98c92bbdd9"
+    },
+    {
+      "path": "verification/discover-slow.json",
+      "bytes": 414,
+      "sha256": "3f1ee65e48bc19e80f004f8ca8aaa5f1c5ac123a1f54e8aa6b216159a19fa8e2"
+    },
+    {
+      "path": "verification/discover-slow.log",
+      "bytes": 24437,
+      "sha256": "1c49360ed5fe6a7b474e657fa59e8498fc549827b611f9486cdc52ee5c3b5058"
+    },
+    {
+      "path": "verification/discovery-diagnostic.host.26-11-01_02-01-10_16770_5.log",
+      "bytes": 1900368,
+      "sha256": "65092b75a38eddeb99ce4173b24b4d9a4fdc92579a6adb52104e39bfa9118e86"
+    },
+    {
+      "path": "verification/discovery-diagnostic.log",
+      "bytes": 1939636,
+      "sha256": "d618abaca0f6d0a158d88b27544dd21bd4616b661b4f33bc183297ba579b3d5a"
+    },
+    {
+      "path": "verification/docker-info.json",
+      "bytes": 349,
+      "sha256": "473110cd2b90d72303dd60aacc552c0b69ba0a6ae273d8774a861dae065c5579"
+    },
+    {
+      "path": "verification/docker-info.log",
+      "bytes": 892,
+      "sha256": "4ecc7cc07c4a86b3cac17d95b670a3492d14f8219bcde9657d7dc322b2655452"
+    },
+    {
+      "path": "verification/example-build.json",
+      "bytes": 403,
+      "sha256": "f811983d96da3594c4d3baab568a871ecb3a83d59831e8f4588dd2a0c04128b9"
+    },
+    {
+      "path": "verification/example-build.log",
+      "bytes": 394,
+      "sha256": "37cc425667d541af9c8fc3f44d7a4b8c5b8763abc67e294b08bd607de250fbbd"
+    },
+    {
+      "path": "verification/fast/results.trx",
+      "bytes": 531188,
+      "sha256": "34ff6a2caac63b9c5131af72e0b8ac73248917a31859fbaf08595afa5ee9737f"
+    },
+    {
+      "path": "verification/fast-results.json",
+      "bytes": 95211,
+      "sha256": "b334f16c0b9a4ed9bf7dde57c486b125cfa1f513c602f53dc9ee5b4f091299c0"
+    },
+    {
+      "path": "verification/postgres-image.json",
+      "bytes": 380,
+      "sha256": "a9ab5a456bdd21d7021684860504dd4578c665787e6132db4b09c47b0e9d8c17"
+    },
+    {
+      "path": "verification/postgres-image.log",
+      "bytes": 72,
+      "sha256": "4326a7ef8ec8cb685a0057618849689413a07d64158cfce2525848301c824df9"
+    },
+    {
+      "path": "verification/resources-after-containers.json",
+      "bytes": 719,
+      "sha256": "fd0ec290b23f55afe32232156463b94ab0be8763dbe76f54130560575e8ec15f"
+    },
+    {
+      "path": "verification/resources-after.json",
+      "bytes": 420,
+      "sha256": "154e41ef60025f597aa5b6f36de81b381418be6fecbc2d672a09a2ae54a9bafb"
+    },
+    {
+      "path": "verification/resources-after.log",
+      "bytes": 614,
+      "sha256": "8d2ce67786ecda08ba72e7bcdd801f6acd37b82d26e50c70996cb76a2569408d"
+    },
+    {
+      "path": "verification/resources-before-containers.json",
+      "bytes": 719,
+      "sha256": "fd0ec290b23f55afe32232156463b94ab0be8763dbe76f54130560575e8ec15f"
+    },
+    {
+      "path": "verification/resources-before.json",
+      "bytes": 420,
+      "sha256": "04d87e6bb9bf0f056fc8b589a12d3067b2e6da2f455979c0b75da43c9b55ba2b"
+    },
+    {
+      "path": "verification/resources-before.log",
+      "bytes": 614,
+      "sha256": "8d2ce67786ecda08ba72e7bcdd801f6acd37b82d26e50c70996cb76a2569408d"
+    },
+    {
+      "path": "verification/restore.json",
+      "bytes": 280,
+      "sha256": "56a2111ffa89c5e7fca60544262d7109fd56265262a9838777a37900ee94e0e8"
+    },
+    {
+      "path": "verification/restore.log",
+      "bytes": 80,
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "path": "verification/sdk.json",
+      "bytes": 259,
+      "sha256": "377416e8a998049a9d29ad7a06b9a9b6bf5ae267e35a3cd79fc6fcba4a2edee7"
+    },
+    {
+      "path": "verification/sdk.log",
+      "bytes": 1679,
+      "sha256": "3822077adf74f4b461cbe9ba957e9cb3192ce4c1df02f40e91bd0ecb162f1091"
+    },
+    {
+      "path": "verification/slow/results.trx",
+      "bytes": 255377,
+      "sha256": "ccd11221c8611479a368e342fa2694088bdb64db6aa5ba4266e9ac059db475d8"
+    },
+    {
+      "path": "verification/slow-results.json",
+      "bytes": 45777,
+      "sha256": "ba4606c298437c49af5e224de374cab9f192783246dd6a442f3d8fa982add834"
+    },
+    {
+      "path": "verification/source-identity.json",
+      "bytes": 52049,
+      "sha256": "c52f5428663be0a276d0ba4b315cda62654f531619ad38d2e0ee17495fd49d24"
+    },
+    {
+      "path": "verification/test-catalog.json",
+      "bytes": 235756,
+      "sha256": "9a558560f2e7a861d71f7333d0216f1be6125eda2a6fa45e638e628886b0474c"
+    },
+    {
+      "path": "verification/test-fast.json",
+      "bytes": 668,
+      "sha256": "571460d9f8d7e12256f2c55ab419d42de31e1b4d9e4e3b56da5d6047da5209e3"
+    },
+    {
+      "path": "verification/test-fast.log",
+      "bytes": 58361,
+      "sha256": "0139c3e0e8db221d954c4bd0285ee230ef3c88e14f94b16c9bdbdb31b8f3a29f"
+    },
+    {
+      "path": "verification/test-slow.json",
+      "bytes": 667,
+      "sha256": "74c284f627bc57160291fdb3a652b6c174470889fb61bf3796a7bddd44aa9967"
+    },
+    {
+      "path": "verification/test-slow.log",
+      "bytes": 27046,
+      "sha256": "8bea90ef2b17565d6d23819ea3b92ec333ab4e574b40e062779d700042402920"
+    },
+    {
+      "path": "verification/verification.json",
+      "bytes": 958,
+      "sha256": "463ff55c56f399249bf01403a4d8926786454ea319e6e1e3db69c9748d48e1ce"
+    },
+    {
+      "path": "verification-unit.stdout.txt",
+      "bytes": 109,
+      "sha256": "b36685a94b3275271bd3b45babda4946f372d444bce301e396d7a0f1a5baa492"
+    },
+    {
+      "path": "experiment-final-build.stdout.txt",
+      "bytes": 297,
+      "sha256": "a0b50acca488c62c71fb6911d6a992d47b0e8ce7ace7c341219d53c0cc8c46fc"
+    }
+  ],
+  "completion_review": "A separate GPT-6 Astra PASS for the exact candidate is required before publication. Its verdict and candidate identity are recorded in the pull request linked from issue25; this file does not self-approve."
+}

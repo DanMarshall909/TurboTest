@@ -72,6 +72,18 @@ def validate_plan(plan,phase,rounds):
             for values in positions.values():assert max(values)-min(values)<=1, 'OrderPositionBalance'
 
 
+def image_binding(report, image_ids):
+    # Failed runs can stop before the final audit; their initial image proof remains valid.
+    if 'InitialResources' not in report:return False
+    if report['Succeeded'] and 'FinalResources' not in report:return False
+    observations=[report[k]['containers'] for k in ['InitialResources','FinalResources'] if k in report]
+    return all(cs and all(c['Image'] in image_ids for c in cs) for cs in observations)
+
+def require_cleanup(report, observed, baseline):
+    if (observed!=baseline or not report.get('CleanupCompleted',False) or
+        not report.get('Cleanup') or not all(c.get('Absent',False) for c in report['Cleanup'])):
+        raise RuntimeError('UnsettledResourceInventory')
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('phase',choices=['tune','representative']);p.add_argument('--rounds',type=int,required=True)
     p.add_argument('--output',type=pathlib.Path,required=True);p.add_argument('--selections',type=pathlib.Path)
@@ -116,12 +128,12 @@ def main():
             if common_binding is None:common_binding=binding
             receipt['binding_matches_experiment']=binding==common_binding and binding['AssemblySha'].lower()==bound['binaries'][str(DLL.relative_to(ROOT))] and binding['TurboSha'].lower()==bound['binaries'][str((DLL.parent/'TurboTest.EFCore.dll').relative_to(ROOT))]
             image_ids={i['Id'] for i in manifest['images']}
-            receipt['image_binding_matches']=all(c['Image'] in image_ids for boundary in ['InitialResources','FinalResources'] for c in report[boundary]['containers']) if all(boundary in report for boundary in ['InitialResources','FinalResources']) else None
+            receipt['image_binding_matches']=image_binding(report,image_ids)
         else: receipt['report_succeeded']=False;receipt['missing_report']=True
         receipts.append(receipt);save(out/'receipts.json',receipts)
         print(json.dumps({'finished':index+1,'planned':len(plan),**case,'exit':code,'wall_ms':receipt['process_wall_ms'],'succeeded':receipt['report_succeeded']}),flush=True)
         if not receipt['inputs_unchanged'] or not receipt.get('binding_matches_experiment',False) or not receipt.get('image_binding_matches',False):raise RuntimeError('ExperimentIdentityRejected')
-        if receipt['post_containers']!=baseline_inventory:raise RuntimeError('UnsettledResourceInventory')
+        require_cleanup(report,receipt['post_containers'],baseline_inventory)
         if 'interruption' in receipt:raise RuntimeError('ExperimentInterrupted; no cases retried')
     save(out/'completion.json',{'completed':len(receipts),'planned':len(plan),'all_passed':all(r['exit_code']==0 and r['report_succeeded'] for r in receipts),'ended_utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())})
     return 0 if all(r['exit_code']==0 and r['report_succeeded'] for r in receipts) else 1

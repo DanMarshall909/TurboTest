@@ -1,0 +1,66 @@
+{
+  "durable": {
+    "cycles": 100,
+    "excluded_warmups": 4,
+    "suite_ms": 2889.6225,
+    "reset": {
+      "ResetPermitWaitMilliseconds": {
+        "sum_ms": 1.5259000000000005,
+        "median_ms": 0.0141
+      },
+      "ResetExecutionMilliseconds": {
+        "sum_ms": 7134.604,
+        "median_ms": 70.95045
+      },
+      "ValidationMilliseconds": {
+        "sum_ms": 4797.596400000003,
+        "median_ms": 48.03
+      },
+      "RecreationValidationMilliseconds": {
+        "sum_ms": 0,
+        "median_ms": 0.0
+      }
+    },
+    "validation_fraction_of_aggregate_reset_execution": 0.6724404606058028,
+    "operation_sums_ms": {
+      "AcquireMs": 41.674300000000024,
+      "IdentitySqlMs": 197.77839999999995,
+      "ApplicationMs": 3709.1979999999994,
+      "ReturnMs": 7147.9018000000015,
+      "CycleMs": 11097.218399999998
+    },
+    "ranking_eligible": false
+  },
+  "relaxed": {
+    "cycles": 100,
+    "excluded_warmups": 4,
+    "suite_ms": 2723.6962,
+    "reset": {
+      "ResetPermitWaitMilliseconds": {
+        "sum_ms": 1.6242000000000008,
+        "median_ms": 0.01515
+      },
+      "ResetExecutionMilliseconds": {
+        "sum_ms": 6923.6315,
+        "median_ms": 68.6939
+      },
+      "ValidationMilliseconds": {
+        "sum_ms": 4850.4335,
+        "median_ms": 47.9696
+      },
+      "RecreationValidationMilliseconds": {
+        "sum_ms": 0,
+        "median_ms": 0.0
+      }
+    },
+    "validation_fraction_of_aggregate_reset_execution": 0.7005620533097406,
+    "operation_sums_ms": {
+      "AcquireMs": 47.4542,
+      "IdentitySqlMs": 197.17129999999992,
+      "ApplicationMs": 3182.3158,
+      "ReturnMs": 6939.349499999999,
+      "CycleMs": 10367.704600000001
+    },
+    "ranking_eligible": false
+  }
+}

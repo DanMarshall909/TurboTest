@@ -1,0 +1,316 @@
+{
+  "maintained_verification": {
+    "discovered": {
+      "all": 541,
+      "fast": 365,
+      "slow": 176
+    },
+    "dockerHost": "unix:///var/run/docker.sock",
+    "elapsedSeconds": 771.4093609419942,
+    "hostedWorkflow": "not performed by local driver",
+    "lane": "all",
+    "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35",
+    "resourceSettlement": {
+      "added": [],
+      "after": [
+        "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+      ],
+      "automaticDeletion": false,
+      "before": [
+        "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0"
+      ],
+      "removed": []
+    },
+    "result": "PASS",
+    "runId": "279e71fe-be23-42ef-9ce6-a56d42e7b2c5",
+    "startedUtc": "2026-10-31T23:25:54Z",
+    "tests": {
+      "fast": {
+        "failed": 0,
+        "passed": 365,
+        "skipped": 0,
+        "testSeconds": 5.869002399999994
+      },
+      "slow": {
+        "failed": 0,
+        "passed": 176,
+        "skipped": 0,
+        "testSeconds": 1342.8686777
+      }
+    }
+  },
+  "changed_maintained_inputs": [
+    "tests/TurboTest.Tests/FactoryBackpressureTests.cs"
+  ],
+  "resolved_dependencies_changed": false,
+  "diagnostic": [
+    {
+      "registerAfterAcquisition": false,
+      "injectedCallbacks": 0,
+      "canceled": true,
+      "immediatePosts": 2
+    },
+    {
+      "registerAfterAcquisition": true,
+      "injectedCallbacks": 1,
+      "canceled": true,
+      "immediatePosts": 2
+    }
+  ],
+  "original_hosted_failure": {
+    "url": "https://github.com/DanMarshall909/TurboTest/actions/runs/41252036297",
+    "candidate": "44bb7ff3a4022b6fd02b790de1056e92a081a082",
+    "fast_passed": 364,
+    "fast_failed": 1,
+    "slow_executed": false,
+    "rerun": false
+  },
+  "lane_wall_seconds": {
+    "fast": 4.518705221998971,
+    "slow": 752.7274274759984
+  },
+  "lane_review": "Membership and deadlines unchanged. Both blocking-callback theory cases pass around the intentional 100 ms drain deadline. The fast lane remains a few seconds; native contracts remain slow. No evidence justifies a lane change.",
+  "production_changes": false,
+  "experiment_changes": false,
+  "coverage_and_mutation": "Existing behavioral assertions retained. Forced-order diagnostic reproduces fixture precondition defect; no new numerical coverage/mutation claim and no changed production scope.",
+  "archive": "ci-repair-evidence.tar.gz",
+  "archive_sha256": "488690a72d918ffa06156724812b59ecd1252855e5351e1f385a791239e5685c",
+  "archive_bytes": 1398422,
+  "files": [
+    {
+      "path": "ci-attempt1/correctness-evidence.zip",
+      "bytes": 661792,
+      "sha256": "a5fb0bc84e53917aca7a67e0f6cd3ab25f2e2f50db29eed0ebe4348c57ad9436"
+    },
+    {
+      "path": "ci-attempt1/failed-job.log",
+      "bytes": 1763,
+      "sha256": "61c35952942fee27e18a5202df7fe0d469560881d37cbae49eebb35295270ecd"
+    },
+    {
+      "path": "ci-attempt1/run-metadata.json",
+      "bytes": 2940,
+      "sha256": "52f0e9a30b2a06d5aa22bfe211428830ecbf919e76ac2d8be36908093204ffeb"
+    },
+    {
+      "path": "ci-race-diagnostic/Diagnostic.csproj",
+      "bytes": 261,
+      "sha256": "b8b5ec76725695b401bf302f818d86a9f584d4a2a83ab890c6ffde292c1d24a1"
+    },
+    {
+      "path": "ci-race-diagnostic/Program.cs",
+      "bytes": 1897,
+      "sha256": "cd56640c07221222163ed553291c9f45c457771ea31ae035e017ba10a01dd3e2"
+    },
+    {
+      "path": "ci-race-diagnostic/fixture-repair.patch",
+      "bytes": 1448,
+      "sha256": "0bf8016cd0cb1c8aba261ec254890869be2f0f8bffc5c7118d63d3981ae29bbc"
+    },
+    {
+      "path": "ci-race-diagnostic/restore-network-failure.log",
+      "bytes": 305,
+      "sha256": "af27d787db9c3f004881e36f8aa16d3a947c86ea2c3068160d01a46c86959ceb"
+    },
+    {
+      "path": "ci-race-diagnostic/result.log",
+      "bytes": 183,
+      "sha256": "2f0b8e19254838e9002f3e63d99055acea7ca7dad5721c1138d2c5b087a49299"
+    },
+    {
+      "path": "ci-repair-verification.log",
+      "bytes": 792,
+      "sha256": "0a6940efd92c6a1d724855be77921d0df266c1db03f4964df7d9fad76041b919"
+    },
+    {
+      "path": "package_ci_repair.py",
+      "bytes": 3818,
+      "sha256": "12082db17358542ae89facefd70f5eb7a086c8f2106ecb6c6b2427baa84e9caf"
+    },
+    {
+      "path": "verification/build.json",
+      "bytes": 378,
+      "sha256": "205c74eb969fb59a079974d403debbf7d8edb4a1f3b56029955b80e9f5d4f965"
+    },
+    {
+      "path": "verification/build.log",
+      "bytes": 895,
+      "sha256": "e40be7c67f10cb3fb1e22869a637584231a6032ef01597f119acfe35043d984f"
+    },
+    {
+      "path": "verification/discover-all.json",
+      "bytes": 480,
+      "sha256": "bdd4b550ac5fab38397ed55281f1bd5bbaa570dfb9a9bb180061da63014e8f0a"
+    },
+    {
+      "path": "verification/discover-all.log",
+      "bytes": 75816,
+      "sha256": "d05d45fc4266b62779b97a2f5ffebae1b31b3762f6c9c47073de69be66d3bda1"
+    },
+    {
+      "path": "verification/discover-fast.json",
+      "bytes": 415,
+      "sha256": "23efb48ffcbeca83298a245e1c8736f0c1fb53614f8f61f2c0b0810e7abfbc2c"
+    },
+    {
+      "path": "verification/discover-fast.log",
+      "bytes": 51417,
+      "sha256": "c222def0605353259ba7d8aa780146103b4581aeafccb249aa72ff98c92bbdd9"
+    },
+    {
+      "path": "verification/discover-slow.json",
+      "bytes": 414,
+      "sha256": "d10583f121ddab9741d6eca730a9e6eb80a99eb5fe1a7a536ff52f25a2ef36ca"
+    },
+    {
+      "path": "verification/discover-slow.log",
+      "bytes": 24437,
+      "sha256": "1c49360ed5fe6a7b474e657fa59e8498fc549827b611f9486cdc52ee5c3b5058"
+    },
+    {
+      "path": "verification/discovery-diagnostic.host.26-11-01_09-26-07_41988_5.log",
+      "bytes": 1900391,
+      "sha256": "68010fd0aeae7832531cbc9a4a3fccfd6bf275c483d9343903fae81387682490"
+    },
+    {
+      "path": "verification/discovery-diagnostic.log",
+      "bytes": 1939640,
+      "sha256": "935d36efc172424c3ca509fcecf4c7d611d595a12856df19c3e336ba68321c9a"
+    },
+    {
+      "path": "verification/docker-info.json",
+      "bytes": 350,
+      "sha256": "fe6a1bb05a21ebd75abe052505e0f69eae4e71b65c3f2eec95f290301c8e42d7"
+    },
+    {
+      "path": "verification/docker-info.log",
+      "bytes": 892,
+      "sha256": "4ecc7cc07c4a86b3cac17d95b670a3492d14f8219bcde9657d7dc322b2655452"
+    },
+    {
+      "path": "verification/example-build.json",
+      "bytes": 403,
+      "sha256": "38e32282ba6968c7a265df81e8c9f19764dc184688a063c3aa15c6e81401d738"
+    },
+    {
+      "path": "verification/example-build.log",
+      "bytes": 394,
+      "sha256": "1c142622272de919f4a9a0127298baefd8c009ba00324f11524bac09f7611a9f"
+    },
+    {
+      "path": "verification/fast-results.json",
+      "bytes": 95222,
+      "sha256": "b5eddf52b432a52135df3527148067ed883040aa7cfacd1b2d4b26231a66dda7"
+    },
+    {
+      "path": "verification/fast/results.trx",
+      "bytes": 531188,
+      "sha256": "5479d6a15f6111fcaa7bb73894b414c2ae98d5e781069dd8db8ece5f05e64899"
+    },
+    {
+      "path": "verification/postgres-image.json",
+      "bytes": 379,
+      "sha256": "536bc4980c2d05a16044fcee81eec00b1324b3dc27f2bc398b6e474da3ca7036"
+    },
+    {
+      "path": "verification/postgres-image.log",
+      "bytes": 72,
+      "sha256": "4326a7ef8ec8cb685a0057618849689413a07d64158cfce2525848301c824df9"
+    },
+    {
+      "path": "verification/resources-after-containers.json",
+      "bytes": 719,
+      "sha256": "fd0ec290b23f55afe32232156463b94ab0be8763dbe76f54130560575e8ec15f"
+    },
+    {
+      "path": "verification/resources-after.json",
+      "bytes": 420,
+      "sha256": "ea7f27cb58417f70c63e77ad45cde4924b3e7fb0ca21ce72f9b0d05e22a1707c"
+    },
+    {
+      "path": "verification/resources-after.log",
+      "bytes": 614,
+      "sha256": "8d2ce67786ecda08ba72e7bcdd801f6acd37b82d26e50c70996cb76a2569408d"
+    },
+    {
+      "path": "verification/resources-before-containers.json",
+      "bytes": 719,
+      "sha256": "fd0ec290b23f55afe32232156463b94ab0be8763dbe76f54130560575e8ec15f"
+    },
+    {
+      "path": "verification/resources-before.json",
+      "bytes": 420,
+      "sha256": "7aa074fe0ad94d3d91287f3eecc61f66dbe0d90b33880f909747cd430b0f247d"
+    },
+    {
+      "path": "verification/resources-before.log",
+      "bytes": 614,
+      "sha256": "8d2ce67786ecda08ba72e7bcdd801f6acd37b82d26e50c70996cb76a2569408d"
+    },
+    {
+      "path": "verification/restore.json",
+      "bytes": 281,
+      "sha256": "9edfe0997db45cd38b8fd7e007f68647a72e3b5ca133ee61d43131982d82f250"
+    },
+    {
+      "path": "verification/restore.log",
+      "bytes": 80,
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "path": "verification/sdk.json",
+      "bytes": 257,
+      "sha256": "8b45eb60081a25c3bfd9998cb1841fd16d9852d6147c92010cb92fbb99c3e16d"
+    },
+    {
+      "path": "verification/sdk.log",
+      "bytes": 1679,
+      "sha256": "3822077adf74f4b461cbe9ba957e9cb3192ce4c1df02f40e91bd0ecb162f1091"
+    },
+    {
+      "path": "verification/slow-results.json",
+      "bytes": 45777,
+      "sha256": "4ee31c0c1429ef3ac997b92736411c19feaed4e526b54f1ef5c32ded23f97d4b"
+    },
+    {
+      "path": "verification/slow/results.trx",
+      "bytes": 255377,
+      "sha256": "966e0c8e9bd5f3da61cf4e74185fdc992e5ff0c288a28a1d11223bb422a66a01"
+    },
+    {
+      "path": "verification/source-identity.json",
+      "bytes": 52049,
+      "sha256": "ba8c1e3602a0afa6fe9059c2aa0a74b515d357b9e4fbd1425f66b5662e881052"
+    },
+    {
+      "path": "verification/test-catalog.json",
+      "bytes": 235756,
+      "sha256": "9a558560f2e7a861d71f7333d0216f1be6125eda2a6fa45e638e628886b0474c"
+    },
+    {
+      "path": "verification/test-fast.json",
+      "bytes": 678,
+      "sha256": "826425d5fac1127e2e037200057f880cb1c89d8e32055ddc43b907207a449e7f"
+    },
+    {
+      "path": "verification/test-fast.log",
+      "bytes": 58379,
+      "sha256": "22339a69d02f07745242410bde2d08f787aa7c113e56106cf16fa57e00458dc1"
+    },
+    {
+      "path": "verification/test-slow.json",
+      "bytes": 677,
+      "sha256": "97046ef3889caa78b791067de952de21d289c5bbc6ac68af0149f65cd2b9dcbc"
+    },
+    {
+      "path": "verification/test-slow.log",
+      "bytes": 27070,
+      "sha256": "29e3dc5a1456ecbc995c9fec96497b974f1a6c8aadee2974be3b7bf0958d687c"
+    },
+    {
+      "path": "verification/verification.json",
+      "bytes": 952,
+      "sha256": "32ac29ce488e11a68634e102cc4684953336abb594f0f1b2413d6c047761f262"
+    }
+  ]
+}

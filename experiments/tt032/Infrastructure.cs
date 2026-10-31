@@ -18,8 +18,8 @@ static class Clock
 sealed class Host : IAsyncDisposable
 {
     public static readonly DockerClient Docker=new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
-    public const string Image="postgres:16-alpine";
-    public const string ControllerImage="ghcr.io/allaboutapps/integresql:v1.1.0";
+    public const string Image="postgres@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea";
+    public const string ControllerImage="ghcr.io/allaboutapps/integresql@sha256:66b7433399f1907bad9e4b7cc7bd528ed4ebfccddecb8fd65da4af4d06a68c5a";
     public string Prefix { get; }="tt032_"+Guid.NewGuid().ToString("N");
     public List<string> Ids {get;}=[];
     public List<string> Volumes {get;}=[];
@@ -28,6 +28,17 @@ sealed class Host : IAsyncDisposable
     public string? ControllerId {get;set;}
     public NpgsqlDataSource? Admin {get;set;}
     public string ConnectionString {get;set;}="";
+    public async Task Configure(string configuration)
+    {
+        if(configuration=="durable")return;
+        Workload.Require(configuration=="relaxed","DurabilityConfiguration");
+        await using var c=await Admin!.OpenConnectionAsync();
+        foreach(var setting in new[]{"fsync","synchronous_commit","full_page_writes"})await Workload.Execute(c,$"ALTER SYSTEM SET {setting}='off'");
+        await Workload.Execute(c,"SELECT pg_reload_conf()");
+        var until=DateTime.UtcNow.AddSeconds(5);
+        while(await Workload.Scalar<string>(c,"SHOW fsync")!="off")
+        {if(DateTime.UtcNow>until)throw new TimeoutException("SettingsReload");await Task.Delay(5);}
+    }
     public async Task<string> Create(string image,string suffix,string[] env,HostConfig config)
     {
         var r=await Docker.Containers.CreateContainerAsync(new CreateContainerParameters {
@@ -75,7 +86,12 @@ sealed class Host : IAsyncDisposable
         var data=await Workload.Scalar<string>(c,"""
             SELECT json_build_object('version',version(),'fsync',current_setting('fsync'),'synchronous_commit',current_setting('synchronous_commit'),'shared_buffers',current_setting('shared_buffers'),'max_connections',current_setting('max_connections'),'databases',(SELECT json_agg(json_build_object('name',datname,'oid',oid,'bytes',pg_database_size(oid))) FROM pg_database WHERE NOT datistemplate),'sessions',(SELECT count(*) FROM pg_stat_activity WHERE backend_type='client backend'))::text
             """);
-        return new{containers,Postgres=JsonSerializer.Deserialize<JsonElement>(data),ClientWorkingSet=Process.GetCurrentProcess().WorkingSet64};
+        var psi=new ProcessStartInfo("docker"){RedirectStandardOutput=true,RedirectStandardError=true,UseShellExecute=false};
+        foreach(var arg in new[]{"--host","unix:///var/run/docker.sock","exec",PgId!,"du","-sk","/var/lib/postgresql/data"})psi.ArgumentList.Add(arg);
+        using var du=Process.Start(psi)!;var stdout=du.StandardOutput.ReadToEndAsync();var stderr=du.StandardError.ReadToEndAsync();await du.WaitForExitAsync();
+        Workload.Require(du.ExitCode==0,"DiskObservation:"+await stderr);
+        var diskKiB=long.Parse((await stdout).Split((char[]?)null,StringSplitOptions.RemoveEmptyEntries)[0]);
+        return new{containers,Postgres=JsonSerializer.Deserialize<JsonElement>(data),PostgresAllocatedKiB=diskKiB,ClientWorkingSet=Process.GetCurrentProcess().WorkingSet64};
     }
     public async ValueTask DisposeAsync()
     {
@@ -101,6 +117,7 @@ sealed class ControllerLogs : IAsyncDisposable
     readonly StreamWriter writer;
     public int Ready,Dirty,Recreating,Tasks,DatabaseCount;
     public long ReadyGeneration;
+    public int Acquisitions,Recreations;
     public List<string> Errors {get;}=[];
     public ControllerLogs(string id,string path)
     {
@@ -118,6 +135,11 @@ sealed class ControllerLogs : IAsyncDisposable
             try
             {
                 using var doc=JsonDocument.Parse(line); var r=doc.RootElement;
+                if(r.TryGetProperty("message",out var eventMessage))
+                {
+                    if(eventMessage.GetString()=="got ready testdatabase!")Interlocked.Increment(ref Acquisitions);
+                    if(eventMessage.GetString()=="ready")Interlocked.Increment(ref Recreations);
+                }
                 if(r.TryGetProperty("message",out var m)&&m.GetString()=="pool stats")
                 {
                     Dirty=r.GetProperty("dirty").GetInt32();Recreating=r.GetProperty("recreating").GetInt32();
@@ -134,4 +156,35 @@ sealed class ControllerLogs : IAsyncDisposable
         if(!process.HasExited)process.Kill(entireProcessTree:true);
         await process.WaitForExitAsync();await pump;writer.Dispose();process.Dispose();
     }
+}
+
+sealed class ResourceMonitor : IAsyncDisposable
+{
+    readonly Host host;
+    readonly CancellationTokenSource stop=new();
+    readonly Task run;
+    readonly long started=Clock.Now();
+    public System.Collections.Concurrent.ConcurrentQueue<object> Samples {get;}=new();
+    public List<string> Errors {get;}=[];
+    sealed class Capture : IProgress<ContainerStatsResponse>
+    {public ContainerStatsResponse? Value;public void Report(ContainerStatsResponse value)=>Value=value;}
+    public ResourceMonitor(Host host){this.host=host;run=Observe();}
+    async Task Observe()
+    {
+        try
+        {
+            while(!stop.IsCancellationRequested)
+            {
+                foreach(var id in host.Ids.ToArray())
+                {
+                    var c=new Capture();await Host.Docker.Containers.GetContainerStatsAsync(id,new(){Stream=false,OneShot=true},c,stop.Token);
+                    if(c.Value is not {} stats)throw new InvalidDataException("MissingMemorySample");
+                    Samples.Enqueue(new{ElapsedMs=Clock.Ms(started),Container=id,MemoryBytes=stats.MemoryStats.Usage,LimitBytes=stats.MemoryStats.Limit,ClientWorkingSet=Process.GetCurrentProcess().WorkingSet64});
+                }
+                await Task.Delay(500,stop.Token);
+            }
+        }catch(OperationCanceledException) when(stop.IsCancellationRequested){}
+        catch(Exception e){Errors.Add(e.ToString());}
+    }
+    public async ValueTask DisposeAsync(){stop.Cancel();await run;stop.Dispose();}
 }

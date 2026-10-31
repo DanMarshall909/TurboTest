@@ -9,11 +9,12 @@ using TurboTest.EFCore;
 
 namespace CompetitiveBaseline;
 
-sealed class Lease(Func<Context> create,Func<Task> release) : IAsyncDisposable
+sealed class Lease(Func<Context> create,Func<Task> release,Action? invalidate=null) : IAsyncDisposable
 {
     readonly List<Context> contexts=[];
     bool returned;
     public Context Context(){ObjectDisposedException.ThrowIf(returned,this);var c=create();contexts.Add(c);return c;}
+    public void InvalidateSchema()=>invalidate?.Invoke();
     public async ValueTask DisposeAsync()
     {
         if(returned)return;returned=true;
@@ -72,6 +73,7 @@ sealed class SqlAdapter(bool respawn) : IAdapter
     readonly Respawner?[] resetters=new Respawner?[4];
     readonly SemaphoreSlim reset=new(1);
     readonly List<Task> jobs=[];
+    readonly List<object> restoration=[];
     public int CompletedReturns;
     public async Task Start()
     {
@@ -91,28 +93,39 @@ sealed class SqlAdapter(bool respawn) : IAdapter
     public async Task<Lease> Acquire(CancellationToken token=default)
     {
         var i=await ready.Reader.ReadAsync(token);
+        var replace=false;
         return new(()=>Workload.New(sources[i]!),()=>{
-            lock(jobs)jobs.Add(Restore(i));return Task.CompletedTask;
-        });
+            lock(jobs)jobs.Add(Restore(i,replace));return Task.CompletedTask;
+        },()=>replace=true);
     }
-    async Task Restore(int i)
+    async Task Restore(int i,bool replace)
     {
+        var requested=Clock.Now();
         await reset.WaitAsync();
+        var executing=Clock.Now();
+        double disconnect=0,drop=0,clone=0;
         try
         {
-            if(respawn)
+            if(respawn && !replace)
             {
                 await using var c=await sources[i]!.OpenConnectionAsync();
                 await resetters[i]!.ResetAsync(c);await Workload.Execute(c,Workload.SeedSql);
-                // DISCARD ALL resets session settings; all adapter-created contexts have closed.
-                await Workload.Execute(c,"DISCARD ALL");
             }
             else
             {
-                await sources[i]!.DisposeAsync();sources[i]=null;
-                await using(var a=await Host.Admin!.OpenConnectionAsync())await Workload.Execute(a,$"DROP DATABASE tt032_slot_{i} WITH (FORCE)");
-                await Clone(i);
+                var phase=Clock.Now();await sources[i]!.DisposeAsync();sources[i]=null;
+                await using(var a=await Host.Admin!.OpenConnectionAsync())
+                {
+                    // Npgsql disposal sends close, but the server can still be processing it.
+                    // Avoid FORCE's backend termination wait on the ordinary already-closed path.
+                    var until=DateTime.UtcNow.AddSeconds(2);
+                    while(await Workload.Scalar<long>(a,$"SELECT count(*) FROM pg_stat_activity WHERE datname='tt032_slot_{i}'")!=0 && DateTime.UtcNow<until)await Task.Delay(1);
+                    disconnect=Clock.Ms(phase);phase=Clock.Now();
+                    await Workload.Execute(a,$"DROP DATABASE tt032_slot_{i} WITH (FORCE)");drop=Clock.Ms(phase);
+                }
+                phase=Clock.Now();await Clone(i);clone=Clock.Ms(phase);
             }
+            lock(restoration)restoration.Add(new{Slot=i,QueueMs=Clock.Ms(requested)-Clock.Ms(executing),ExecutionMs=Clock.Ms(executing),DisconnectMs=disconnect,DropMs=drop,CloneMs=clone});
             Interlocked.Increment(ref CompletedReturns);await ready.Writer.WriteAsync(i);
         }
         catch(Exception e){ready.Writer.TryComplete(e);throw;}
@@ -120,7 +133,7 @@ sealed class SqlAdapter(bool respawn) : IAdapter
     }
     public async Task Settle(CancellationToken token=default)
     {Task[] tasks;lock(jobs)tasks=jobs.ToArray();await Task.WhenAll(tasks).WaitAsync(token);Workload.Require(ready.Reader.Count==4,"SqlCapacity");}
-    public object State()=>new{Ready=ready.Reader.Count,CompletedReturns,ResetConcurrency=1};
+    public object State()=>new{Ready=ready.Reader.Count,CompletedReturns,ResetConcurrency=1,Restoration=restoration.ToArray()};
     public async ValueTask DisposeAsync()
     {
         try{Task[] tasks;lock(jobs)tasks=jobs.ToArray();await Task.WhenAll(tasks);}
@@ -136,6 +149,7 @@ sealed class IntegreAdapter(string output,int lifetime=25) : IAdapter
     HttpClient? http;
     ControllerLogs? logs;
     readonly SemaphoreSlim admission=new(4);
+    int issued;
     public async Task Start()
     {
         await Host.StartPostgres();var apiPort=Host.FreePort();var pg=new NpgsqlConnectionStringBuilder(Host.ConnectionString);
@@ -144,13 +158,14 @@ sealed class IntegreAdapter(string output,int lifetime=25) : IAdapter
             "INTEGRESQL_PGUSER=postgres","INTEGRESQL_PGPASSWORD=tt032-disposable","INTEGRESQL_TEST_PGUSER=tt032_app","INTEGRESQL_TEST_PGPASSWORD=tt032-disposable",
             "INTEGRESQL_TEST_INITIAL_POOL_SIZE=4","INTEGRESQL_TEST_MAX_POOL_SIZE=4","INTEGRESQL_POOL_MAX_PARALLEL_TASKS=1",
             $"INTEGRESQL_TEST_DB_MINIMAL_LIFETIME_MS={lifetime}","INTEGRESQL_TEST_DB_RETRY_RECREATE_SLEEP_MIN_MS=5","INTEGRESQL_TEST_DB_RETRY_RECREATE_SLEEP_MAX_MS=25",
-            "INTEGRESQL_LOGGER_LEVEL=trace","INTEGRESQL_LOGGER_REQUEST_LEVEL=error","INTEGRESQL_LOGGER_PRETTY_PRINT_CONSOLE=false"],new(){NetworkMode="host",Memory=64L*1024*1024});
+            "INTEGRESQL_LOGGER_LEVEL=trace","INTEGRESQL_LOGGER_REQUEST_LEVEL=info","INTEGRESQL_LOGGER_PRETTY_PRINT_CONSOLE=false"],new(){NetworkMode="host",Memory=64L*1024*1024});
         logs=new(Host.ControllerId,Path.Combine(output,"integresql.jsonl"));
         http=new(){BaseAddress=new Uri($"http://127.0.0.1:{apiPort}/api/v1/"),Timeout=TimeSpan.FromSeconds(60)};
         var until=DateTime.UtcNow.AddSeconds(30);
         while(true){try{using var r=await http.GetAsync("health");break;}catch(HttpRequestException) when(DateTime.UtcNow<until){await Task.Delay(50);}}
         using var init=await http.PostAsJsonAsync("templates",new{hash});init.EnsureSuccessStatusCode();
         var body=await init.Content.ReadFromJsonAsync<JsonElement>();var db=body.GetProperty("database").GetProperty("config").GetProperty("database").GetString()!;
+        await using(var a=await Host.Admin!.OpenConnectionAsync())await Workload.Execute(a,$"ALTER DATABASE {db} OWNER TO tt032_app");
         await using(var source=NpgsqlDataSource.Create(Host.ForDatabase(db)))
         await using(var c=Workload.New(source)){await Workload.Migrate(c);await Workload.Seed(c);}
         using var done=await http.PutAsync($"templates/{hash}",null);done.EnsureSuccessStatusCode();
@@ -162,6 +177,7 @@ sealed class IntegreAdapter(string output,int lifetime=25) : IAdapter
         try
         {
             using var r=await http!.GetAsync($"templates/{hash}/tests",token);r.EnsureSuccessStatusCode();
+            Interlocked.Increment(ref issued);
             var body=await r.Content.ReadFromJsonAsync<JsonElement>(token);var db=body.GetProperty("database").GetProperty("config").GetProperty("database").GetString()!;
             var source=NpgsqlDataSource.Create(Host.ForDatabase(db));
             // Keep one real session alive from admission through release: auto-clean infers ownership from sessions.
@@ -173,7 +189,7 @@ sealed class IntegreAdapter(string output,int lifetime=25) : IAdapter
     public async Task Settle(CancellationToken token=default)
     {
         var until=DateTime.UtcNow.AddSeconds(60);
-        while(logs is null || Volatile.Read(ref logs.Ready)!=4 || logs.Dirty!=0)
+        while(logs is null || Volatile.Read(ref logs.Ready)!=4 || logs.Dirty!=0 || logs.Acquisitions<issued || logs.Recreations<4+issued)
         {token.ThrowIfCancellationRequested();if(DateTime.UtcNow>until)throw new TimeoutException("IntegreCapacity");await Task.Delay(2,token);}
         // 'ready' is emitted after CREATE finishes and queue publication, before the worker's final bookkeeping.
         // Confirm no database-changing SQL remains; this SQL observation follows publication.

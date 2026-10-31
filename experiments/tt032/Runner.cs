@@ -21,17 +21,18 @@ static class Runner
         TurboSha=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(typeof(TurboTest.EFCore.Tt).Assembly.Location))),
         Inputs=Directory.EnumerateFiles("experiments/tt032","*",SearchOption.TopDirectoryOnly).Order().ToDictionary(p=>p,p=>Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(p))))
     };
-    public static async Task<int> Run(string name,int count,int workers,string mode,string output,int lifetime)
+    public static async Task<int> Run(string name,int count,int workers,string mode,string output,int lifetime,string configuration)
     {
         Directory.CreateDirectory(output);
-        var report=new Dictionary<string,object?>{{"Contender",name},{"Count",count},{"Workers",workers},{"Mode",mode},{"Binding",Binding()},{"StartedUtc",DateTime.UtcNow},{"Succeeded",false}};
+        var report=new Dictionary<string,object?>{{"Contender",name},{"Count",count},{"Workers",workers},{"Mode",mode},{"Configuration",configuration},{"Binding",Binding()},{"StartedUtc",DateTime.UtcNow},{"Succeeded",false}};
         var failures=new List<object>();var samples=new ConcurrentBag<Sample>();var active=new ConcurrentDictionary<string,int>();
-        var adapter=Adapter(name,output,lifetime);var overall=Clock.Now();
+        var adapter=Adapter(name,output,lifetime);var overall=Clock.Now();ResourceMonitor? monitor=null;
         using var deadline=new CancellationTokenSource(TimeSpan.FromMinutes(20));
         try
         {
-            var start=Clock.Now();await adapter.Start();report["PreparationMs"]=Clock.Ms(start);
+            var start=Clock.Now();await adapter.Start();await adapter.Host.Configure(configuration);report["PreparationMs"]=Clock.Ms(start);
             report["InitialResources"]=await adapter.Host.Snapshot();report["InitialState"]=adapter.State();
+            monitor=new(adapter.Host);
             var pre=Clock.Now();
             if(mode=="warm") {for(var i=0;i<4;i++)await Cycle(adapter,-i-1,new(),active,deadline.Token);await adapter.Settle(deadline.Token);}
             report["WarmupMs"]=mode=="warm"?Clock.Ms(pre):0;
@@ -51,6 +52,11 @@ static class Runner
         catch(Exception e){failures.Add(new{Phase="Run",Type=e.GetType().FullName,e.Message,Detail=e.ToString()});}
         finally
         {
+            if(monitor is not null)
+            {
+                await monitor.DisposeAsync();report["ResourceSamples"]=monitor.Samples.ToArray();report["ResourceObservationErrors"]=monitor.Errors;
+                if(monitor.Errors.Count>0 || monitor.Samples.IsEmpty){report["Succeeded"]=false;failures.Add(new{Phase="Resources",Diagnostic="MissingOrFailedResourceObservation"});}
+            }
             var drain=Clock.Now();
             try{await adapter.DisposeAsync();report["CleanupCompleted"]=true;}
             catch(Exception e){report["Succeeded"]=false;report["CleanupCompleted"]=false;failures.Add(new{Phase="Drain",Type=e.GetType().FullName,e.Message,Detail=e.ToString()});}
@@ -58,7 +64,7 @@ static class Runner
             report["Cleanup"]=adapter.Host.Cleanup;report["Failures"]=failures;report["Samples"]=samples.OrderBy(s=>s.Ordinal).ToArray();report["EndedUtc"]=DateTime.UtcNow;
             if(report.TryGetValue("SuiteMs",out var suite)){
                 var prep=(double)report["PreparationMs"]!;var d=(double)report["DrainMs"]!;
-                report["FeedbackMs"]=(double)suite!+(mode=="fresh"?prep:0);
+                report["FeedbackMs"]=(double)suite!+(mode=="fresh"?prep+d:0);
                 report["CompleteMs"]=(double)suite!+prep+(double)report["WarmupMs"]!+d;
                 report["UsefulThroughputPerSecond"]=count*1000/(double)suite!;
             }

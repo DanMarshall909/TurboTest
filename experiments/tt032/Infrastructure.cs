@@ -93,7 +93,7 @@ sealed class Host : IAsyncDisposable
         if(Admin is null) return new{containers,ClientWorkingSet=Process.GetCurrentProcess().WorkingSet64};
         await using var c=await Admin.OpenConnectionAsync();
         var data=await Workload.Scalar<string>(c,"""
-            SELECT json_build_object('version',version(),'fsync',current_setting('fsync'),'synchronous_commit',current_setting('synchronous_commit'),'shared_buffers',current_setting('shared_buffers'),'max_connections',current_setting('max_connections'),'databases',(SELECT json_agg(json_build_object('name',datname,'oid',oid,'bytes',pg_database_size(oid))) FROM pg_database WHERE NOT datistemplate),'sessions',(SELECT count(*) FROM pg_stat_activity WHERE backend_type='client backend'))::text
+            SELECT json_build_object('version',version(),'fsync',current_setting('fsync'),'synchronous_commit',current_setting('synchronous_commit'),'full_page_writes',current_setting('full_page_writes'),'shared_buffers',current_setting('shared_buffers'),'max_connections',current_setting('max_connections'),'databases',(SELECT json_agg(json_build_object('name',datname,'oid',oid,'bytes',pg_database_size(oid))) FROM pg_database WHERE NOT datistemplate),'sessions',(SELECT count(*) FROM pg_stat_activity WHERE backend_type='client backend'))::text
             """);
         var psi=new ProcessStartInfo("docker"){RedirectStandardOutput=true,RedirectStandardError=true,UseShellExecute=false};
         foreach(var arg in new[]{"--host","unix:///var/run/docker.sock","exec",PgId!,"du","-sk","/var/lib/postgresql/data"})psi.ArgumentList.Add(arg);

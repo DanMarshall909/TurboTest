@@ -12,7 +12,7 @@ static class Runner
 {
     public static readonly JsonSerializerOptions Json=new(){WriteIndented=true};
     public static IAdapter Adapter(string name,string output,int lifetime)=>name switch{
-        "turbotest"=>new TurboAdapter(),"respawn"=>new SqlAdapter(true),"native-template"=>new SqlAdapter(false),"integresql"=>new IntegreAdapter(output,lifetime),_=>throw new ArgumentException("Unknown contender")};
+        "turbotest"=>new TurboAdapter(),"respawn"=>new SqlAdapter(true),"compiled"=>new SqlAdapter(true,true),"native-template"=>new SqlAdapter(false),"integresql"=>new IntegreAdapter(output,lifetime),_=>throw new ArgumentException("Unknown contender")};
     public static object Binding()=>new{
         Runtime=System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription,
         OS=System.Runtime.InteropServices.RuntimeInformation.OSDescription,
@@ -46,6 +46,7 @@ static class Runner
             report["TestsReturnedMs"]=Clock.Ms(suite);
             var settle=Clock.Now();await adapter.Settle(deadline.Token);report["SettlementMs"]=Clock.Ms(settle);
             report["SettledState"]=adapter.State();
+            if(adapter is SqlAdapter sql)Workload.Require(sql.ResetFailures==0,"UnexpectedResetFailure");
             if(adapter is IntegreAdapter)
             {
                 var state=JsonSerializer.SerializeToElement(report["SettledState"]);

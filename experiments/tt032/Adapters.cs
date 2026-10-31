@@ -80,10 +80,10 @@ sealed class TimingLog : Microsoft.Extensions.Logging.ILogger
 }
 
 // Bounded channels and one reset worker let restoration overlap another test without hiding its cost.
-sealed class SqlAdapter(bool respawn) : IAdapter
+sealed class SqlAdapter(bool respawn, bool compiled=false) : IAdapter
 {
     public Host Host {get;}=new();
-    public string Name=>respawn?"respawn":"native-template";
+    public string Name=>compiled?"compiled":respawn?"respawn":"native-template";
     const string Template="tt032_template";
     readonly Channel<int> ready=Channel.CreateBounded<int>(Tuning.Capacity);
     readonly NpgsqlDataSource?[] sources=new NpgsqlDataSource?[Tuning.Capacity];
@@ -91,9 +91,29 @@ sealed class SqlAdapter(bool respawn) : IAdapter
     readonly SemaphoreSlim reset=new(Tuning.Workers);
     readonly List<Task> jobs=[];
     readonly List<object> restoration=[];
+    readonly List<object> resetFailures=[];
+    string? compiledSql;
+    string? injectedSql;
+    double compilationMs;
+    int injectSequenceFailure;
     public int CompletedReturns;
+    public int ResetFailures;
+    public int Replacements;
+    public long? ObservedPoisonedSequence;
+    public void InjectSequenceFailure()
+    {Workload.Require(compiled,"CompiledFaultOnly");Interlocked.Exchange(ref injectSequenceFailure,1);}
     public async Task Start()
     {
+        if(compiled)
+        {
+            var compilation=Clock.Now();
+            // This bounded prototype compiles the declared fixed workload's dependency order
+            // and deterministic seed input. It is not a generic catalog/seed serializer.
+            var prefix="BEGIN; DELETE FROM \"Notes\"; DELETE FROM \"Children\"; DELETE FROM \"Parents\"; "+Workload.SeedSql;
+            compiledSql=prefix+"COMMIT;";
+            injectedSql=prefix+"SELECT setval('\"Parents_Id_seq\"',9001,true); DO $tt033$ BEGIN RAISE EXCEPTION 'TT033_InjectedAfterSequence' USING ERRCODE='P0001'; END $tt033$; COMMIT;";
+            compilationMs=Clock.Ms(compilation);
+        }
         await Host.StartPostgres();
         await using(var a=await Host.Admin!.OpenConnectionAsync())await Workload.Execute(a,$"CREATE DATABASE {Template} OWNER tt032_app TEMPLATE template0");
         await using(var source=NpgsqlDataSource.Create(Host.ForDatabase(Template)))
@@ -108,7 +128,7 @@ sealed class SqlAdapter(bool respawn) : IAdapter
     {
         await using(var a=await Host.Admin!.OpenConnectionAsync())await Workload.Execute(a,$"CREATE DATABASE tt032_slot_{i} OWNER tt032_app TEMPLATE {Template} STRATEGY WAL_LOG");
         sources[i]=NpgsqlDataSource.Create(Host.ForDatabase($"tt032_slot_{i}"));
-        if(respawn){await using var c=await sources[i]!.OpenConnectionAsync();resetters[i]=await Respawner.CreateAsync(c,new(){DbAdapter=DbAdapter.Postgres,SchemasToInclude=["public"],TablesToIgnore=[new Table("SchemaVersion")],CommandTimeout=15});}
+        if(respawn && !compiled){await using var c=await sources[i]!.OpenConnectionAsync();resetters[i]=await Respawner.CreateAsync(c,new(){DbAdapter=DbAdapter.Postgres,SchemasToInclude=["public"],TablesToIgnore=[new Table("SchemaVersion")],CommandTimeout=15});}
     }
     public async Task<Lease> Acquire(CancellationToken token=default)
     {
@@ -124,14 +144,28 @@ sealed class SqlAdapter(bool respawn) : IAdapter
         await reset.WaitAsync();
         var executing=Clock.Now();
         double disconnect=0,drop=0,clone=0;
+        Exception? resetError=null;
         try
         {
-            if(respawn && !replace)
+            if(compiled && !replace)
+            {
+                try{await RestoreCompiled(i);}
+                catch(Exception e)
+                {
+                    resetError=e;
+                    Interlocked.Increment(ref ResetFailures);
+                    lock(resetFailures)resetFailures.Add(new{Slot=i,Error=e.ToString(),SqlState=(e as PostgresException)?.SqlState,PoisonedSequence=ObservedPoisonedSequence});
+                    // The slot remains outside the ready channel until replacement succeeds.
+                    // Transaction rollback alone cannot undo sequence side effects.
+                    replace=true;
+                }
+            }
+            if(respawn && !compiled && !replace)
             {
                 await using var c=await sources[i]!.OpenConnectionAsync();
                 await resetters[i]!.ResetAsync(c);await Workload.Execute(c,Workload.SeedSql);
             }
-            else
+            else if(!respawn || replace)
             {
                 var phase=Clock.Now();await sources[i]!.DisposeAsync();sources[i]=null;
                 await using(var a=await Host.Admin!.OpenConnectionAsync())
@@ -143,17 +177,33 @@ sealed class SqlAdapter(bool respawn) : IAdapter
                     disconnect=Clock.Ms(phase);phase=Clock.Now();
                     await Workload.Execute(a,$"DROP DATABASE tt032_slot_{i} WITH (FORCE)");drop=Clock.Ms(phase);
                 }
-                phase=Clock.Now();await Clone(i);clone=Clock.Ms(phase);
+                phase=Clock.Now();await Clone(i);clone=Clock.Ms(phase);Interlocked.Increment(ref Replacements);
             }
             lock(restoration)restoration.Add(new{Slot=i,QueueMs=Clock.Ms(requested)-Clock.Ms(executing),ExecutionMs=Clock.Ms(executing),DisconnectMs=disconnect,DropMs=drop,CloneMs=clone});
             Interlocked.Increment(ref CompletedReturns);await ready.Writer.WriteAsync(i);
         }
-        catch(Exception e){ready.Writer.TryComplete(e);throw;}
+        catch(Exception e)
+        {
+            if(resetError is not null){var failure=new AggregateException("CompiledResetRecoveryFailed",resetError,e);ready.Writer.TryComplete(failure);throw failure;}
+            ready.Writer.TryComplete(e);throw;
+        }
         finally{reset.Release();}
+    }
+    async Task RestoreCompiled(int i)
+    {
+        var inject=Interlocked.Exchange(ref injectSequenceFailure,0)==1;
+        await using var c=await sources[i]!.OpenConnectionAsync();
+        try{await Workload.Execute(c,(inject?injectedSql:compiledSql)!);}
+        catch(PostgresException e) when(inject && e.SqlState=="P0001" && e.MessageText=="TT033_InjectedAfterSequence")
+        {
+            await Workload.Execute(c,"ROLLBACK;");
+            ObservedPoisonedSequence=await Workload.Scalar<long>(c,"SELECT last_value FROM \"Parents_Id_seq\"");
+            throw;
+        }
     }
     public async Task Settle(CancellationToken token=default)
     {Task[] tasks;lock(jobs)tasks=jobs.ToArray();await Task.WhenAll(tasks).WaitAsync(token);Workload.Require(ready.Reader.Count==Tuning.Capacity,"SqlCapacity");}
-    public object State()=>new{Ready=ready.Reader.Count,CompletedReturns,ResetConcurrency=Tuning.Workers,Restoration=restoration.ToArray()};
+    public object State()=>new{Ready=ready.Reader.Count,CompletedReturns,ResetConcurrency=Tuning.Workers,Restoration=restoration.ToArray(),ResetFailures,Replacements,ResetFailureDetails=resetFailures.ToArray(),CompilationMs=compilationMs,PlanBytes=compiledSql is null?0:System.Text.Encoding.UTF8.GetByteCount(compiledSql),FaultPlanBytes=injectedSql is null?0:System.Text.Encoding.UTF8.GetByteCount(injectedSql),ObservedPoisonedSequence};
     public bool IsWorkloadDatabase(string name)=>name.StartsWith("tt032_slot_",StringComparison.Ordinal);
     public async ValueTask DisposeAsync()
     {

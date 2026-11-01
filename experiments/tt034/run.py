@@ -18,6 +18,10 @@ def docker(*args, **kw):
 def hashes(paths):
     return {str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest() for f in paths}
 
+def host_observation():
+    st=os.statvfs('/var/lib/docker')
+    return {'loadavg':pathlib.Path('/proc/loadavg').read_text().strip(),'docker_volume_free_bytes':st.f_bavail*st.f_frsize}
+
 def main():
     p = argparse.ArgumentParser(); p.add_argument('--output', required=True); p.add_argument('--smoke', action='store_true'); args=p.parse_args()
     out = ROOT / args.output; out.mkdir(parents=True, exist_ok=False)
@@ -33,7 +37,7 @@ def main():
     executables=sorted(binary.parent.glob('*.dll'))+sorted(binary.parent.glob('*.json'))
     manifest={'head':run(['git','rev-parse','HEAD'],cwd=ROOT).decode().strip(), 'image':IMAGE,'zip_sha256':ZIP_SHA,
               'sources':hashes(inputs), 'executables':hashes(executables), 'profiles':PROFILES,'smoke':args.smoke,
-              'dotnet_info':run(['dotnet','--info'],cwd=ROOT).decode()}
+              'dotnet_info':run(['dotnet','--info'],cwd=ROOT).decode(), 'uname':run(['uname','-a']).decode(), 'logical_cpus':os.cpu_count()}
     (out/'inputs.json').write_text(json.dumps(manifest,indent=2))
     failures=[]
     for pair in range(1 if args.smoke else 5):
@@ -47,6 +51,8 @@ def main():
                 started=time.monotonic()
                 try:
                     assert manifest['sources']==hashes(inputs) and manifest['executables']==hashes(executables),'Input drift before run'
+                    receipt['host_before']=host_observation()
+                    assert receipt['host_before']['docker_volume_free_bytes']>=7*1024**3,'Disk headroom below admitted growth plus reserve'
                     flags=[]
                     for k,v in (BASE | PROFILES[profile]).items(): flags+=['-c',k+'='+v]
                     cid=docker('create','--name',name,'--label','tt034.owner='+name,'--memory','256m','-p','127.0.0.1::5432',
@@ -118,6 +124,7 @@ def main():
                         receipt['cleanup']=True
                     finally:
                         receipt['total_seconds']=time.monotonic()-started
+                        receipt['host_after']=host_observation()
                         (folder/'receipt.json').write_text(json.dumps(receipt,indent=2))
                     assert receipt['cleanup'], 'Cleanup must be proven before another run'
                 if failures: raise RuntimeError('Retained failed attempt; repair before further runs: '+str(failures))

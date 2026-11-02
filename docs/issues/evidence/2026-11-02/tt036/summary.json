@@ -1,0 +1,841 @@
+{
+  "source_head": "a42246dc2927562eb34dba43f6b2b278d5e948d1",
+  "validated_cases": 45,
+  "validated_tests": 45000,
+  "all_resets_drained": true,
+  "all_slot_timelines_valid": true,
+  "delays": {
+    "0": {
+      "direct": {
+        "suite_ms": [
+          5360.2523,
+          5867.558,
+          4819.8577,
+          6459.2793,
+          6409.0598
+        ],
+        "median_suite_ms": 5867.558,
+        "tests_per_second_at_median": 170.42865191958904,
+        "final_drain_ms": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "preparation_ms": [
+          1155.7152,
+          1329.5531,
+          2686.7418,
+          952.8392,
+          917.9164
+        ],
+        "sample_medians_ms": {
+          "LeaseWaitMs": 9.999999974752427e-05,
+          "ApplicationMs": 4.704450000000179,
+          "ResetQueueMs": 0.0,
+          "ResetMs": 9.809350000000222
+        },
+        "queue_high_water": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "stage_occupancy": [
+          {
+            "wall_ms_with_test_and_reset_active": 3713.8611000000033,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.1786960289164015,
+            "average_reset_stage_occupancy": 2.811708993623299
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3255.340500000001,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.0270570823501028,
+            "average_reset_stage_occupancy": 2.951629843284038
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3242.0012999999985,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.226129684285078,
+            "average_reset_stage_occupancy": 2.762523881151097
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 4271.6927,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.0443665286311437,
+            "average_reset_stage_occupancy": 2.94178491399188
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 4038.872399999997,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.0570885139814108,
+            "average_reset_stage_occupancy": 2.933338631042263
+          }
+        ],
+        "max_container_lifetime_memory_mib": 278.02734375
+      },
+      "awaited": {
+        "suite_ms": [
+          5556.9165,
+          4864.4284,
+          4983.2007,
+          5426.4603,
+          5035.3424
+        ],
+        "median_suite_ms": 5035.3424,
+        "tests_per_second_at_median": 198.59622654459406,
+        "final_drain_ms": [
+          0.24490000000059808,
+          0.1368000000002212,
+          0.12260000000060245,
+          0.22589999999945576,
+          0.16110000000026048
+        ],
+        "preparation_ms": [
+          1974.7768,
+          3412.9919,
+          3220.0221,
+          1633.0448,
+          3143.701
+        ],
+        "sample_medians_ms": {
+          "LeaseWaitMs": 0.0005999999998493877,
+          "ApplicationMs": 4.721599999999853,
+          "ResetQueueMs": 0.004599999999982174,
+          "ResetMs": 9.676799999999957
+        },
+        "queue_high_water": [
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "stage_occupancy": [
+          {
+            "wall_ms_with_test_and_reset_active": 3892.7845999999977,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.2248169825837742,
+            "average_reset_stage_occupancy": 2.766097978978091
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3165.7561999999984,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.2889433833582573,
+            "average_reset_stage_occupancy": 2.6985071874015056
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3110.0919000000017,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.1412226282597846,
+            "average_reset_stage_occupancy": 2.848987278397199
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3503.9604999999997,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.081534163255557,
+            "average_reset_stage_occupancy": 2.847486657186091
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3486.876899999996,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.1672299981030099,
+            "average_reset_stage_occupancy": 2.796296275701135
+          }
+        ],
+        "max_container_lifetime_memory_mib": 390.03515625
+      },
+      "background": {
+        "suite_ms": [
+          4542.3386,
+          4053.5743,
+          3448.0374,
+          4151.7435,
+          4042.4916
+        ],
+        "median_suite_ms": 4053.5743,
+        "tests_per_second_at_median": 246.69586049033316,
+        "final_drain_ms": [
+          21.09360000000015,
+          9.651300000000447,
+          212.72389999999996,
+          10.659299999999348,
+          12.19549999999981
+        ],
+        "preparation_ms": [
+          3628.8857,
+          3272.402,
+          1600.0027,
+          3452.8182,
+          3332.1859
+        ],
+        "sample_medians_ms": {
+          "LeaseWaitMs": 5.236950000000036,
+          "ApplicationMs": 5.08880000000002,
+          "ResetQueueMs": 5.247850000000142,
+          "ResetMs": 10.467300000000137
+        },
+        "queue_high_water": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "stage_occupancy": [
+          {
+            "wall_ms_with_test_and_reset_active": 3701.8344999999977,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.158698098816323,
+            "average_reset_stage_occupancy": 3.9867633381624152
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 2935.7196999999996,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.5751981158948998,
+            "average_reset_stage_occupancy": 3.99340352537759
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 2669.2856999999985,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.640189633673929,
+            "average_reset_stage_occupancy": 3.9623910691919986
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3168.860300000005,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.6623432781914405,
+            "average_reset_stage_occupancy": 3.992677799098138
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 2882.035199999999,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.551982371466153,
+            "average_reset_stage_occupancy": 3.992082185155316
+          }
+        ],
+        "max_container_lifetime_memory_mib": 390.125
+      },
+      "background_vs_awaited_primary": {
+        "ratio_of_medians": 0.8050245599981443,
+        "paired_95": [
+          0.6919322755754148,
+          0.8333094798969598
+        ],
+        "paired_ratios": [
+          0.8174207044500309,
+          0.8333094798969598,
+          0.6919322755754148,
+          0.7650923936548472,
+          0.8028235775982184
+        ],
+        "interpretation": "gain supported in this screen"
+      },
+      "background_vs_direct_secondary": {
+        "ratio_of_medians": 0.6908452034048919,
+        "paired_95": [
+          0.6307464317933186,
+          0.8474113429324959
+        ],
+        "paired_ratios": [
+          0.8474113429324959,
+          0.6908452034048919,
+          0.7153815765141781,
+          0.6427564604614635,
+          0.6307464317933186
+        ],
+        "interpretation": "gain supported in this screen"
+      },
+      "awaited_vs_direct_secondary": {
+        "ratio_of_medians": 0.8581666171855481,
+        "paired_95": [
+          0.7856600745089007,
+          1.0366893550887522
+        ],
+        "paired_ratios": [
+          1.0366893550887522,
+          0.8290379745713634,
+          1.0338895897279292,
+          0.8401030591756575,
+          0.7856600745089007
+        ],
+        "interpretation": "no demonstrated gain; not parity"
+      }
+    },
+    "5": {
+      "direct": {
+        "suite_ms": [
+          6683.0214,
+          6546.5391,
+          6384.4115,
+          6444.8206,
+          6228.655
+        ],
+        "median_suite_ms": 6444.8206,
+        "tests_per_second_at_median": 155.1633570684652,
+        "final_drain_ms": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "preparation_ms": [
+          995.1357,
+          974.4597,
+          2703.6093,
+          2620.7182,
+          1922.5603
+        ],
+        "sample_medians_ms": {
+          "LeaseWaitMs": 9.999999997489795e-05,
+          "ApplicationMs": 9.823599999999942,
+          "ResetQueueMs": 0.0,
+          "ResetMs": 9.709599999999966
+        },
+        "queue_high_water": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "stage_occupancy": [
+          {
+            "wall_ms_with_test_and_reset_active": 5173.337999999991,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.7752841401944337,
+            "average_reset_stage_occupancy": 2.2025121302170305
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 5459.097799999996,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.6819376057801299,
+            "average_reset_stage_occupancy": 2.287616963900818
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 4425.114400000005,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.6973529510120082,
+            "average_reset_stage_occupancy": 2.2654719702826163
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 5248.475300000004,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.7122080791511853,
+            "average_reset_stage_occupancy": 2.2429733730679797
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 5059.4208999999955,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.679589975684956,
+            "average_reset_stage_occupancy": 2.312913911590862
+          }
+        ],
+        "max_container_lifetime_memory_mib": 278.64453125
+      },
+      "awaited": {
+        "suite_ms": [
+          7563.4073,
+          9727.3666,
+          6870.392,
+          6841.7951,
+          6922.3401
+        ],
+        "median_suite_ms": 6922.3401,
+        "tests_per_second_at_median": 144.45981930301286,
+        "final_drain_ms": [
+          0.13559999999961292,
+          0.2749999999996362,
+          0.14989999999943393,
+          0.13799999999991996,
+          0.1191000000007989
+        ],
+        "preparation_ms": [
+          3359.1559,
+          1573.1663,
+          1647.3394,
+          3622.4346,
+          2746.5858
+        ],
+        "sample_medians_ms": {
+          "LeaseWaitMs": 0.0005999999998493877,
+          "ApplicationMs": 10.04505000000006,
+          "ResetQueueMs": 0.004100000000107684,
+          "ResetMs": 10.105750000000057
+        },
+        "queue_high_water": [
+          4,
+          4,
+          3,
+          4,
+          3
+        ],
+        "stage_occupancy": [
+          {
+            "wall_ms_with_test_and_reset_active": 4834.870500000001,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.5507388316903117,
+            "average_reset_stage_occupancy": 2.4373581203275942
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 7412.659500000002,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.4810622023847637,
+            "average_reset_stage_occupancy": 2.411187309420411
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 4878.831400000005,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.6912472679870425,
+            "average_reset_stage_occupancy": 2.286367269873389
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 5377.531100000004,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.6289180890553128,
+            "average_reset_stage_occupancy": 2.3210617780704927
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 5035.176499999996,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 1.6145614399962802,
+            "average_reset_stage_occupancy": 2.362525051318987
+          }
+        ],
+        "max_container_lifetime_memory_mib": 390.078125
+      },
+      "background": {
+        "suite_ms": [
+          6133.2983,
+          4153.8366,
+          4266.1249,
+          4251.2617,
+          4124.961
+        ],
+        "median_suite_ms": 4251.2617,
+        "tests_per_second_at_median": 235.22428647476582,
+        "final_drain_ms": [
+          18.71730000000025,
+          8.45509999999922,
+          175.6196,
+          9.179299999999785,
+          8.250700000000506
+        ],
+        "preparation_ms": [
+          2815.668,
+          3256.3551,
+          2183.7704,
+          3481.9055,
+          3338.8656
+        ],
+        "sample_medians_ms": {
+          "LeaseWaitMs": 0.27600000000000335,
+          "ApplicationMs": 10.463550000000055,
+          "ResetQueueMs": 0.31090000000003215,
+          "ResetMs": 10.880300000000034
+        },
+        "queue_high_water": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "stage_occupancy": [
+          {
+            "wall_ms_with_test_and_reset_active": 5717.9852,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 3.106371574981122,
+            "average_reset_stage_occupancy": 3.7764878972216365
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3375.979600000001,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.7819334540025005,
+            "average_reset_stage_occupancy": 3.9073703091739325
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3565.085599999998,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.614014113839001,
+            "average_reset_stage_occupancy": 3.877993000158059
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3540.2279,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.7853933574590353,
+            "average_reset_stage_occupancy": 3.9017279975965673
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 3452.1528999999973,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.7787004774105752,
+            "average_reset_stage_occupancy": 3.887834406191962
+          }
+        ],
+        "max_container_lifetime_memory_mib": 390.04296875
+      },
+      "background_vs_awaited_primary": {
+        "ratio_of_medians": 0.6141364969918193,
+        "paired_95": [
+          0.42702580984251176,
+          0.8109173626019057
+        ],
+        "paired_ratios": [
+          0.8109173626019057,
+          0.42702580984251176,
+          0.6209434483505454,
+          0.621366415957122,
+          0.5958911206919753
+        ],
+        "interpretation": "gain supported in this screen"
+      },
+      "background_vs_direct_secondary": {
+        "ratio_of_medians": 0.6596400371485903,
+        "paired_95": [
+          0.6345087895373602,
+          0.9177433278905857
+        ],
+        "paired_ratios": [
+          0.9177433278905857,
+          0.6345087895373602,
+          0.6682095757768746,
+          0.6596400371485903,
+          0.6622554949664093
+        ],
+        "interpretation": "gain supported in this screen"
+      },
+      "awaited_vs_direct_secondary": {
+        "ratio_of_medians": 1.074093528685655,
+        "paired_95": [
+          1.0615958960905754,
+          1.4858792487774188
+        ],
+        "paired_ratios": [
+          1.1317347120869612,
+          1.4858792487774188,
+          1.0761198585022285,
+          1.0615958960905754,
+          1.1113699667103092
+        ],
+        "interpretation": "no demonstrated gain; not parity"
+      }
+    },
+    "20": {
+      "direct": {
+        "suite_ms": [
+          11827.8204,
+          10400.8029,
+          11132.8836,
+          11269.5755,
+          12128.6555
+        ],
+        "median_suite_ms": 11269.5755,
+        "tests_per_second_at_median": 88.73448693786203,
+        "final_drain_ms": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "preparation_ms": [
+          2671.5181,
+          864.7211,
+          1048.5999,
+          2708.3078,
+          922.3671
+        ],
+        "sample_medians_ms": {
+          "LeaseWaitMs": 9.999999929277692e-05,
+          "ApplicationMs": 24.911300000000097,
+          "ResetQueueMs": 0.0,
+          "ResetMs": 9.868099999999686
+        },
+        "queue_high_water": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "stage_occupancy": [
+          {
+            "wall_ms_with_test_and_reset_active": 7520.319499999998,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.295054395651794,
+            "average_reset_stage_occupancy": 1.693744394360264
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 6622.480399999995,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.4789029989213605,
+            "average_reset_stage_occupancy": 1.5052914039934366
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 7994.044399999996,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.372042846114012,
+            "average_reset_stage_occupancy": 1.623920374052958
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 8969.489800000005,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.361386708842759,
+            "average_reset_stage_occupancy": 1.6095476533255393
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 8795.338800000014,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.2691905957754357,
+            "average_reset_stage_occupancy": 1.7090777621641573
+          }
+        ],
+        "max_container_lifetime_memory_mib": 278.0390625
+      },
+      "awaited": {
+        "suite_ms": [
+          13027.5155,
+          10963.9329,
+          11776.5574,
+          10796.5416,
+          10940.7669
+        ],
+        "median_suite_ms": 10963.9329,
+        "tests_per_second_at_median": 91.20814666788047,
+        "final_drain_ms": [
+          0.17549999999937427,
+          0.18059999999968568,
+          0.15569999999934225,
+          0.12659999999959837,
+          0.17600000000129512
+        ],
+        "preparation_ms": [
+          2272.8353,
+          2887.3802,
+          2032.6578,
+          3341.0788,
+          1631.9084
+        ],
+        "sample_medians_ms": {
+          "LeaseWaitMs": 0.0005999999993946403,
+          "ApplicationMs": 24.985299999999796,
+          "ResetQueueMs": 0.003899999999703141,
+          "ResetMs": 9.800499999999886
+        },
+        "queue_high_water": [
+          4,
+          3,
+          3,
+          3,
+          4
+        ],
+        "stage_occupancy": [
+          {
+            "wall_ms_with_test_and_reset_active": 9247.132000000021,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.215095748686694,
+            "average_reset_stage_occupancy": 1.750184499876435
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 7200.922099999999,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.365337314313556,
+            "average_reset_stage_occupancy": 1.5272139890604426
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 7020.197999999993,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.2845345278918248,
+            "average_reset_stage_occupancy": 1.6867180386689233
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 7417.411500000006,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.412970770195524,
+            "average_reset_stage_occupancy": 1.562839826412564
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 7463.6246000000065,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 2.382927187672742,
+            "average_reset_stage_occupancy": 1.59726207127217
+          }
+        ],
+        "max_container_lifetime_memory_mib": 389.96875
+      },
+      "background": {
+        "suite_ms": [
+          7611.105,
+          7532.7028,
+          7552.0843,
+          7868.4419,
+          8202.0651
+        ],
+        "median_suite_ms": 7611.105,
+        "tests_per_second_at_median": 131.38696680705365,
+        "final_drain_ms": [
+          196.1953999999996,
+          133.8717999999999,
+          147.75750000000062,
+          9.315499999999702,
+          121.35769999999957
+        ],
+        "preparation_ms": [
+          1624.1212,
+          3259.5591,
+          1623.4565,
+          3351.418,
+          1716.7303
+        ],
+        "sample_medians_ms": {
+          "LeaseWaitMs": 0.0008000000000265572,
+          "ApplicationMs": 25.149949999999997,
+          "ResetQueueMs": 0.014300000000730506,
+          "ResetMs": 9.976699999999937
+        },
+        "queue_high_water": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "stage_occupancy": [
+          {
+            "wall_ms_with_test_and_reset_active": 5516.388700000004,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 3.544898815612189,
+            "average_reset_stage_occupancy": 2.6335899320795093
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 6364.2364,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 3.6273000575570338,
+            "average_reset_stage_occupancy": 2.7895978718289487
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 6116.211099999999,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 3.567666015062892,
+            "average_reset_stage_occupancy": 2.6176723424551818
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 6559.587899999997,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 3.4776837330399526,
+            "average_reset_stage_occupancy": 2.787361523251507
+          },
+          {
+            "wall_ms_with_test_and_reset_active": 5954.108900000004,
+            "application_concurrency_peak": 4,
+            "reset_concurrency_peak": 4,
+            "average_application_stage_occupancy": 3.2388625396304134,
+            "average_reset_stage_occupancy": 2.742907722105254
+          }
+        ],
+        "max_container_lifetime_memory_mib": 389.27734375
+      },
+      "background_vs_awaited_primary": {
+        "ratio_of_medians": 0.6941947811446383,
+        "paired_95": [
+          0.5842330412118872,
+          0.7496791746838148
+        ],
+        "paired_ratios": [
+          0.5842330412118872,
+          0.6870438617879538,
+          0.6412811523340429,
+          0.7287928108386115,
+          0.7496791746838148
+        ],
+        "interpretation": "gain supported in this screen"
+      },
+      "background_vs_direct_secondary": {
+        "ratio_of_medians": 0.6753674972051963,
+        "paired_95": [
+          0.6434917628610592,
+          0.7242424332452256
+        ],
+        "paired_ratios": [
+          0.6434917628610592,
+          0.7242424332452256,
+          0.678358327576514,
+          0.6982021549968762,
+          0.6762550968654357
+        ],
+        "interpretation": "gain supported in this screen"
+      },
+      "awaited_vs_direct_secondary": {
+        "ratio_of_medians": 0.9728789607026457,
+        "paired_95": [
+          0.9020593337818854,
+          1.1014299388583884
+        ],
+        "paired_ratios": [
+          1.1014299388583884,
+          1.0541429354458778,
+          1.0578173475199184,
+          0.958025579579284,
+          0.9020593337818854
+        ],
+        "interpretation": "no demonstrated gain; not parity"
+      }
+    }
+  },
+  "bootstrap": {
+    "unit": "paired round",
+    "resamples": 3125,
+    "statistic": "ratio of medians",
+    "quantiles": "nearest rank",
+    "intervals": "pointwise; no multiplicity adjustment"
+  }
+}

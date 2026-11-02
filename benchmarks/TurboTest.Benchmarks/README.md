@@ -95,3 +95,32 @@ correctness gates are retained in the
 Its 16 cases and 2,544 measured cycles pass; later validation guards have separate
 source-bound regressions. The raw historical experiment is not relabelled as
 new source after those repairs.
+
+## Scheduler refinement
+
+Use simulation-first refinement for scheduling performance policies. The accepted
+next calibration slice is [TT-039](https://github.com/DanMarshall909/TurboTest/issues/38);
+its acceptance criteria and live status belong to GitHub. The
+[TT-038 production-pool comparison](../../docs/issues/evidence/2026-11-02/tt038/report.md)
+provides the initial trace data, source identities and measured reference behavior.
+
+1. Calibrate a discrete-event model against pinned traces. Start with the existing
+   test/reset pipeline and policies; aim to share scheduling decisions between
+   virtual and real executors.
+2. Freeze calibration/validation splits by whole runs and prediction metrics/error
+   limits before fitting. Validate on held-out runs before using the model to rank
+   new policies. Retain failed predictions and the model's qualified scope.
+3. Explore capacity, admission, ordering and feedback policies in simulation using
+   matched workloads and random seeds. Include variability and sensitivity to
+   uncertain costs. Contention can change service times as concurrency changes;
+   current traces do not establish CPU/I/O demand or behavior at every capacity.
+4. Select a small finalist set and physical-run budget before real confirmation.
+   Use targeted measurements to resolve material model gaps rather than repeating
+   a broad native matrix for every candidate policy.
+
+Suite-provided safety constraints remain binding; duration and resource estimates
+can be refined from observations. Account explicitly for preparation, queueing,
+physical reset completion and final drain. Keep simulated predictions distinct
+from verified physical performance, and retain required native correctness,
+failure and cleanup checks. A credible simulator is the first outcome; adopting
+this procedure does not mean a simulator or adaptive scheduler already exists.

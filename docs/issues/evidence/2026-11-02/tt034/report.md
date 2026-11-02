@@ -130,16 +130,22 @@ This experiment does **not** isolate Docker overhead. A follow-up read-only chec
 found native Linux Docker Engine on Pop!_OS, overlay2 for the image filesystem,
 and PostgreSQL data on Docker volumes backed by ext4/NVMe. The data volume bypasses
 the writable overlay layer. The 256 MiB cgroup limit and bridged host-port network
-path are still possible influences; their interaction with contenders is unmeasured.
+path were not isolated by the original screen.
 Post-process Docker stats are point observations, not memory-pressure or peak traces.
 Shared-host load/free-space observations are retained, not used to discard cases.
 
 The smallest next control would reuse the script and change one factor at a time:
 256 MiB versus 1 GiB with pressure/swap observations, then bridge versus host
 networking at the same memory setting. A same-version native PostgreSQL comparison
-would isolate remaining container effects. These are recommendations, not experiments
-performed or new goals started by this report. No result here proves Docker is the
+would isolate remaining container effects. Dan subsequently accepted the bounded
+memory/network controls; their [supplement](docker-report.md) retains 30 additional
+successful measurements and limitations. No native comparison was performed.
+No result here proves Docker is the
 cause, or proves its overhead is zero.
+
+Dan then requested a [Respawn source study](respawn-study.md). It identifies the
+cached native TRUNCATE path and additional repeated work in the alternatives,
+without assigning unmeasured causal shares or implementing a new fast mode.
 
 The conversation goal API refused replacement of the unfinished paused SQL Server
 goal. TT-034 was executed under Dan's explicit authorization and recorded on GitHub;

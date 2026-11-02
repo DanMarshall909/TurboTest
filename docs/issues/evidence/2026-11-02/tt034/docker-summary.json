@@ -1,0 +1,724 @@
+{
+  "source_head": "2dcf0663559b94e9b00e9617bacf47b19477bc57",
+  "original_source_head": "a822c75a29d2dfd1f864defab3cae0aecddc669d",
+  "same_executables": true,
+  "runs": 30,
+  "measured_cycles": 3000,
+  "profiles": {
+    "bridge256": {
+      "contenders": {
+        "respawn": {
+          "suite_ms": [
+            2167.9958,
+            1178.7687,
+            3064.7217,
+            1265.5869,
+            2885.8614
+          ],
+          "median_suite_ms": 2167.9958,
+          "median_reset_ms": 8.7711,
+          "event_deltas": [
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            }
+          ],
+          "pressure_us_deltas": [
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 640,
+              "full": 640
+            },
+            {
+              "some": 0,
+              "full": 0
+            }
+          ],
+          "container_lifetime_memory_peaks_bytes": [
+            114786304,
+            111624192,
+            119312384,
+            110452736,
+            112361472
+          ],
+          "container_lifetime_swap_peaks_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_swap_current_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "emaj": {
+          "suite_ms": [
+            6981.6991,
+            6034.4999,
+            6491.4607,
+            6710.4465,
+            6218.4382
+          ],
+          "median_suite_ms": 6491.4607,
+          "median_reset_ms": 52.1845,
+          "event_deltas": [
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            }
+          ],
+          "pressure_us_deltas": [
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 146,
+              "full": 146
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            }
+          ],
+          "container_lifetime_memory_peaks_bytes": [
+            152756224,
+            151080960,
+            140267520,
+            157372416,
+            144388096
+          ],
+          "container_lifetime_swap_peaks_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_swap_current_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "candidate_over_reference": 2.9942219906514573,
+      "ratio_of_medians_paired_95": [
+        2.118124037167877,
+        5.302240802271262
+      ]
+    },
+    "bridge1024": {
+      "contenders": {
+        "respawn": {
+          "suite_ms": [
+            2604.917,
+            1240.6117,
+            1273.8626,
+            1259.4096,
+            1154.2003
+          ],
+          "median_suite_ms": 1259.4096,
+          "median_reset_ms": 8.246300000000002,
+          "event_deltas": [
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            }
+          ],
+          "pressure_us_deltas": [
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            }
+          ],
+          "container_lifetime_memory_peaks_bytes": [
+            111759360,
+            112709632,
+            119869440,
+            112230400,
+            110858240
+          ],
+          "container_lifetime_swap_peaks_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_swap_current_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "emaj": {
+          "suite_ms": [
+            6347.4555,
+            4769.5215,
+            8000.5954,
+            6232.2211,
+            6200.2593
+          ],
+          "median_suite_ms": 6232.2211,
+          "median_reset_ms": 49.0999,
+          "event_deltas": [
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            }
+          ],
+          "pressure_us_deltas": [
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            }
+          ],
+          "container_lifetime_memory_peaks_bytes": [
+            145199104,
+            149348352,
+            138121216,
+            149221376,
+            147472384
+          ],
+          "container_lifetime_swap_peaks_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_swap_current_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "candidate_over_reference": 4.948525960100669,
+      "ratio_of_medians_paired_95": [
+        2.436720824502278,
+        6.280579553870253
+      ]
+    },
+    "host1024": {
+      "contenders": {
+        "respawn": {
+          "suite_ms": [
+            1338.2278,
+            2680.2009,
+            1267.7892,
+            1216.4384,
+            1232.0075
+          ],
+          "median_suite_ms": 1267.7892,
+          "median_reset_ms": 8.33465,
+          "event_deltas": [
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            }
+          ],
+          "pressure_us_deltas": [
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            }
+          ],
+          "container_lifetime_memory_peaks_bytes": [
+            119898112,
+            114069504,
+            112644096,
+            116510720,
+            114716672
+          ],
+          "container_lifetime_swap_peaks_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_swap_current_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "emaj": {
+          "suite_ms": [
+            6150.1663,
+            6000.156,
+            6334.5924,
+            8210.1925,
+            5140.4517
+          ],
+          "median_suite_ms": 6150.1663,
+          "median_reset_ms": 50.5737,
+          "event_deltas": [
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            },
+            {
+              "low": 0,
+              "high": 0,
+              "max": 0,
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0,
+              "sock_throttled": 0
+            }
+          ],
+          "pressure_us_deltas": [
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            },
+            {
+              "some": 0,
+              "full": 0
+            }
+          ],
+          "container_lifetime_memory_peaks_bytes": [
+            150978560,
+            146276352,
+            146235392,
+            141807616,
+            146849792
+          ],
+          "container_lifetime_swap_peaks_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_swap_current_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "candidate_over_reference": 4.851095355600127,
+      "ratio_of_medians_paired_95": [
+        2.238696360410893,
+        6.749369717365054
+      ]
+    }
+  },
+  "effects": {
+    "memory_budget": {
+      "respawn": {
+        "alternative": "bridge1024",
+        "reference": "bridge256",
+        "ratio_of_medians": 0.5809096124632713,
+        "paired_95": [
+          0.3999500114593168,
+          1.2015323092415584
+        ],
+        "median_difference_ms": -908.5862000000002,
+        "clear_improvement": false
+      },
+      "emaj": {
+        "alternative": "bridge1024",
+        "reference": "bridge256",
+        "ratio_of_medians": 0.9600645198391172,
+        "paired_95": [
+          0.7903756034530716,
+          1.2324799871314018
+        ],
+        "median_difference_ms": -259.2395999999999,
+        "clear_improvement": false
+      }
+    },
+    "network": {
+      "respawn": {
+        "alternative": "host1024",
+        "reference": "bridge1024",
+        "ratio_of_medians": 1.006653593874463,
+        "paired_95": [
+          0.5137314547833961,
+          2.1603866060589305
+        ],
+        "median_difference_ms": 8.379599999999982,
+        "clear_improvement": false
+      },
+      "emaj": {
+        "alternative": "host1024",
+        "reference": "bridge1024",
+        "ratio_of_medians": 0.9868337790519017,
+        "paired_95": [
+          0.7917651228807296,
+          1.3173782457750094
+        ],
+        "median_difference_ms": -82.05479999999989,
+        "clear_improvement": false
+      }
+    }
+  },
+  "uncertainty": "Five same-round pairs; exact paired bootstrap ratio of medians, 3125 resamples.",
+  "memory_boundary": "RAM plus Docker default swap allowance changes together; actual swap limits not captured. Observed current/peak swap, events and pressure retained. Peaks are container-lifetime high-water marks; pressure/event deltas span application preparation, warmup and measured suite, including observation overhead."
+}

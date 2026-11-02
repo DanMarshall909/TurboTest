@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/TurboTest.EFCore/TurboTest.EFCore.csproj" />
+    <PackageReference Include="Respawn" Version="7.0.0" />
+    <Compile Include="../../tt032/Workload.cs" Link="Workload.cs" />
+  </ItemGroup>
+</Project>

@@ -64,6 +64,10 @@ Together with the first phase, **77 owned containers and 77 volumes** were remov
 Final inventory retained the two unrelated pre-existing containers. There were no
 failed performance cases or retries in this follow-up.
 
+[resource-inventory.json](resource-inventory.json) retains a later direct absence
+check of all 77 container and volume IDs. It distinguishes that fresh observation
+from the initial inventory, which was observed only in session tool output.
+
 [docker-evidence.tar.gz](docker-evidence.tar.gz) has 164 verified members, SHA256
 `713b593919fd5ea2426ea65bd658b4a800f93ca471cb272c8a4f554605024261`.
 No production code, maintained tests or workflows changed. The Docker analyzer

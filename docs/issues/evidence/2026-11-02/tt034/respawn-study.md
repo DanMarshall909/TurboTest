@@ -41,9 +41,10 @@ constraints remain enabled. [PostgreSQL semantics](https://www.postgresql.org/do
 ## Comparison with the other mechanisms
 
 E-Maj logs every mutation, then plans and executes undo. Version 5.0.1's _rlbk_tbl
-creates/drops an internal unlogged key-work table for each changed table, rebuilds
-affected rows with deletes/inserts, and deletes logs. Broader rollback manages
-sequences, triggers and history. The internal work table is distinct from the
+creates/drops an internal unlogged key-work table for each changed table and
+rebuilds affected rows with deletes/inserts. Broader rollback separately deletes
+logs through _delete_log_tbl and manages sequences, triggers and history.
+The internal work table is distinct from the
 unsupported UNLOGGED application-table case.
 [Pinned source, sql/emaj--5.0.1.sql lines 4920–4995](https://api.pgxn.org/dist/e-maj/5.0.1/e-maj-5.0.1.zip),
 [rollback mechanics](https://emaj.readthedocs.io/en/latest/rollbackDetails.html).

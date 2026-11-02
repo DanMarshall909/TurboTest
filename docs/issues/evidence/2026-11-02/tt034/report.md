@@ -119,6 +119,10 @@ absence. Final inventory preserved the two unrelated pre-existing stopped/create
 containers. Source, raw evidence, release download and small build outputs are
 retained; no shared cache deletion or host filesystem changes occurred.
 
+The initial inventory was observed in session tool output, not retained as a raw
+file. A later [final inventory](resource-inventory.json) explicitly records that
+provenance and rechecks absence of all 77 resources from both phases.
+
 [raw-evidence.tar.gz](raw-evidence.tar.gz) contains 236 verified members, including
 all reports, receipts, PostgreSQL logs, input manifests and build/method records.
 Archive SHA256: `f849c38fc2e78522e482d3375e37c561b291c700cce6045dbe523fed559b51dd`.

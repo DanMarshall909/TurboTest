@@ -1,0 +1,36 @@
+{
+  "captured_utc": "2026-11-02T00:23:29.907961+00:00",
+  "initial_observation": {
+    "source": "Earlier session tool output; not retained as a raw inventory file",
+    "containers": [
+      {
+        "id_prefix": "b553e3c83a30",
+        "name": "tt_pool_d0be30edfb464ebab2d9dd5bcdc533cb_3f704a8881324958850a8d77675db574",
+        "state": "exited"
+      },
+      {
+        "id_prefix": "0a95e88a68d8",
+        "name": "prismml-llamacpp-server-1",
+        "state": "created"
+      }
+    ]
+  },
+  "final_containers": [
+    {
+      "id": "b553e3c83a3042a9f11cafae27b546b6e5a8c82a9f77e71e09ca47ed297189f0",
+      "name": "tt_pool_d0be30edfb464ebab2d9dd5bcdc533cb_3f704a8881324958850a8d77675db574",
+      "state": "exited"
+    },
+    {
+      "id": "0a95e88a68d8e717082b1f73494889ecb9e741423915b1796baf6c7ae4d48326",
+      "name": "prismml-llamacpp-server-1",
+      "state": "created"
+    }
+  ],
+  "owned_container_count": 77,
+  "owned_volume_count": 77,
+  "owned_containers_still_present": [],
+  "owned_volumes_still_present": [],
+  "all_receipts_cleanup_passed": true,
+  "limitation": "Initial inventory provenance is session observation; this file is a fresh final read-only inventory, not a reconstruction of an initial raw artifact."
+}

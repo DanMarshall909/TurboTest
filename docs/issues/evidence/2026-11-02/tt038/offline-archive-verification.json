@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "archiveSha256": "a6562f3cbf8174a8653da6e9d98ae747f5b0715d35f53db8eeb00dc89a20a0b5",
+  "safeDataFilterExtraction": true,
+  "offlineAnalysisExitCode": 0,
+  "recomputedSummaryExactlyEqual": true,
+  "scope": "Extract frozen archive into fresh temp directory; rehash all source/runtime files, validate cases and recompute paired summary; no database/native runs.",
+  "ownedDisposableExtractionRemoved": true
+}

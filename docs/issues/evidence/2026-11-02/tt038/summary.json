@@ -1,0 +1,1447 @@
+{
+  "result": "PASS",
+  "cases": 40,
+  "measuredCycles": 10240,
+  "warmupCycles": 1280,
+  "allSuccessfulRowsResetsIncludingAudits": 12160,
+  "uniqueOwnedContainers": 40,
+  "uniqueOwnedVolumes": 40,
+  "allCaseResourceInventoriesUnchanged": true,
+  "equalResourceLimits": [
+    {
+      "WorkloadSlotLimit": 8,
+      "ContainerLimit": 1,
+      "MaxConnectionsPerDatabase": 4,
+      "AdministratorConnectionAllowance": 4,
+      "PreparationConcurrency": 1,
+      "ResetConcurrency": 4,
+      "FixedInfrastructureDatabases": 2,
+      "MaximumOwnedDatabases": 10,
+      "MaximumManagedConnections": 36
+    },
+    {
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuShares": 0,
+      "Memory": 1073741824,
+      "MemorySwap": 2147483648,
+      "NanoCpus": 0,
+      "NetworkMode": "bridge"
+    }
+  ],
+  "comparisons": [
+    {
+      "additionalWaitMilliseconds": 0,
+      "pairs": [
+        {
+          "pair": 0,
+          "awaited": 11039.034000000001,
+          "background": 5312.8634999999995,
+          "backgroundOverAwaited": 0.48127974784750177
+        },
+        {
+          "pair": 1,
+          "background": 4217.228899999999,
+          "awaited": 5784.3438,
+          "backgroundOverAwaited": 0.7290764598051727
+        },
+        {
+          "pair": 2,
+          "awaited": 5736.119999999999,
+          "background": 4419.0286000000015,
+          "backgroundOverAwaited": 0.7703863587233186
+        },
+        {
+          "pair": 3,
+          "background": 4055.887700000001,
+          "awaited": 6189.223400000001,
+          "backgroundOverAwaited": 0.6553144777420703
+        },
+        {
+          "pair": 4,
+          "awaited": 6503.023699999999,
+          "background": 4328.796,
+          "backgroundOverAwaited": 0.6656589610768296
+        }
+      ],
+      "awaitedMedianSuiteMilliseconds": 6189.223400000001,
+      "backgroundMedianSuiteMilliseconds": 4328.796,
+      "ratioOfMedians": 0.6994085881598651,
+      "lowerSuiteTimePercent": 30.059141184013495,
+      "backgroundWins": 5,
+      "pairedRatioRange": [
+        0.48127974784750177,
+        0.7703863587233186
+      ],
+      "exactPairedBootstrapPointwise95Interval": [
+        0.48127974784750177,
+        0.7703863587233186
+      ],
+      "bootstrapOrderedResamples": 3125,
+      "modeSummaries": {
+        "awaited": {
+          "checkoutMilliseconds": {
+            "count": 1280,
+            "p50": 0.2389500000008411,
+            "p95": 0.54359999999906,
+            "max": 3.252599999999802
+          },
+          "returnMilliseconds": {
+            "count": 1280,
+            "p50": 59.51690000000053,
+            "p95": 123.82500000000073,
+            "max": 204.07790000000023
+          },
+          "bodyMilliseconds": {
+            "count": 1280,
+            "p50": 32.090799999999945,
+            "p95": 72.36869999999908,
+            "max": 106.7332000000024
+          },
+          "resetMilliseconds": {
+            "count": 1280,
+            "p50": 59.4495,
+            "p95": 123.7104,
+            "max": 203.9265
+          },
+          "resetPermitWaitMilliseconds": {
+            "count": 1280,
+            "p50": 0.0044,
+            "p95": 0.0081,
+            "max": 0.0232
+          },
+          "resetValidationMilliseconds": {
+            "count": 1280,
+            "p50": 45.09855,
+            "p95": 80.4914,
+            "max": 122.8371
+          },
+          "processWallMilliseconds": {
+            "count": 5,
+            "p50": 21042.798680020496,
+            "p95": 27558.70115698781,
+            "max": 27558.70115698781
+          },
+          "startupMilliseconds": {
+            "count": 5,
+            "p50": 5884.3283,
+            "p95": 7549.3374,
+            "max": 7549.3374
+          },
+          "preflightMilliseconds": {
+            "count": 5,
+            "p50": 2158.6190000000006,
+            "p95": 3732.8651999999993,
+            "max": 3732.8651999999993
+          },
+          "finalResetWaitMilliseconds": {
+            "count": 5,
+            "p50": 0.194100000000617,
+            "p95": 0.20020000000113214,
+            "max": 0.20020000000113214
+          },
+          "finalAuditMilliseconds": {
+            "count": 5,
+            "p50": 152.2567999999992,
+            "p95": 296.34149999999863,
+            "max": 296.34149999999863
+          },
+          "disposalMilliseconds": {
+            "count": 5,
+            "p50": 5490.3485,
+            "p95": 7167.749599999999,
+            "max": 7167.749599999999
+          },
+          "throughputPerSecond": {
+            "count": 5,
+            "p50": 41.36221678474232,
+            "p95": 44.62947079210338,
+            "max": 44.62947079210338
+          }
+        },
+        "background": {
+          "checkoutMilliseconds": {
+            "count": 1280,
+            "p50": 27.272550000000138,
+            "p95": 40.68790000000081,
+            "max": 56.96979999999894
+          },
+          "returnMilliseconds": {
+            "count": 1280,
+            "p50": 0.06525000000056025,
+            "p95": 0.18850000000020373,
+            "max": 0.5861999999997352
+          },
+          "bodyMilliseconds": {
+            "count": 1280,
+            "p50": 34.93925000000081,
+            "p95": 83.9927000000007,
+            "max": 115.65209999999934
+          },
+          "resetMilliseconds": {
+            "count": 1280,
+            "p50": 64.12275,
+            "p95": 86.6647,
+            "max": 105.3504
+          },
+          "resetPermitWaitMilliseconds": {
+            "count": 1280,
+            "p50": 27.08915,
+            "p95": 40.1716,
+            "max": 56.3527
+          },
+          "resetValidationMilliseconds": {
+            "count": 1280,
+            "p50": 47.28805,
+            "p95": 61.7646,
+            "max": 76.4928
+          },
+          "processWallMilliseconds": {
+            "count": 5,
+            "p50": 17074.409977998585,
+            "p95": 19083.22999201482,
+            "max": 19083.22999201482
+          },
+          "startupMilliseconds": {
+            "count": 5,
+            "p50": 5547.9518,
+            "p95": 7774.0505,
+            "max": 7774.0505
+          },
+          "preflightMilliseconds": {
+            "count": 5,
+            "p50": 1253.3346000000001,
+            "p95": 1946.9526999999998,
+            "max": 1946.9526999999998
+          },
+          "finalResetWaitMilliseconds": {
+            "count": 5,
+            "p50": 82.72700000000077,
+            "p95": 105.3159999999989,
+            "max": 105.3159999999989
+          },
+          "finalAuditMilliseconds": {
+            "count": 5,
+            "p50": 148.71839999999975,
+            "p95": 191.3672999999999,
+            "max": 191.3672999999999
+          },
+          "disposalMilliseconds": {
+            "count": 5,
+            "p50": 5479.3735,
+            "p95": 5563.796699999999,
+            "max": 5563.796699999999
+          },
+          "throughputPerSecond": {
+            "count": 5,
+            "p50": 59.138845997824795,
+            "p95": 63.1181183838004,
+            "max": 63.1181183838004
+          }
+        }
+      }
+    },
+    {
+      "additionalWaitMilliseconds": 25,
+      "pairs": [
+        {
+          "pair": 0,
+          "background": 4384.9449,
+          "awaited": 7453.0128,
+          "backgroundOverAwaited": 0.5883452796431532
+        },
+        {
+          "pair": 1,
+          "awaited": 7768.1666000000005,
+          "background": 4811.9244,
+          "backgroundOverAwaited": 0.6194414522469175
+        },
+        {
+          "pair": 2,
+          "background": 4754.2575,
+          "awaited": 7812.556200000001,
+          "backgroundOverAwaited": 0.6085405824024663
+        },
+        {
+          "pair": 3,
+          "awaited": 7829.8548,
+          "background": 4641.6657000000005,
+          "backgroundOverAwaited": 0.592816318892657
+        },
+        {
+          "pair": 4,
+          "background": 4869.316,
+          "awaited": 7494.358,
+          "backgroundOverAwaited": 0.6497309042348924
+        }
+      ],
+      "awaitedMedianSuiteMilliseconds": 7768.1666000000005,
+      "backgroundMedianSuiteMilliseconds": 4754.2575,
+      "ratioOfMedians": 0.6120179631574842,
+      "lowerSuiteTimePercent": 38.798203684251575,
+      "backgroundWins": 5,
+      "pairedRatioRange": [
+        0.5883452796431532,
+        0.6497309042348924
+      ],
+      "exactPairedBootstrapPointwise95Interval": [
+        0.5883452796431532,
+        0.6497309042348924
+      ],
+      "bootstrapOrderedResamples": 3125,
+      "modeSummaries": {
+        "awaited": {
+          "checkoutMilliseconds": {
+            "count": 1280,
+            "p50": 0.22704999999950815,
+            "p95": 0.5496999999995751,
+            "max": 2.512399999999616
+          },
+          "returnMilliseconds": {
+            "count": 1280,
+            "p50": 58.08460000000014,
+            "p95": 67.7510999999995,
+            "max": 86.14270000000033
+          },
+          "bodyMilliseconds": {
+            "count": 1280,
+            "p50": 54.39670000000024,
+            "p95": 95.55389999999898,
+            "max": 137.39140000000043
+          },
+          "resetMilliseconds": {
+            "count": 1280,
+            "p50": 58.0128,
+            "p95": 67.6762,
+            "max": 86.0449
+          },
+          "resetPermitWaitMilliseconds": {
+            "count": 1280,
+            "p50": 0.00445,
+            "p95": 0.0097,
+            "max": 0.0297
+          },
+          "resetValidationMilliseconds": {
+            "count": 1280,
+            "p50": 44.3695,
+            "p95": 50.7519,
+            "max": 65.1119
+          },
+          "processWallMilliseconds": {
+            "count": 5,
+            "p50": 22604.438158043195,
+            "p95": 24504.569560987875,
+            "max": 24504.569560987875
+          },
+          "startupMilliseconds": {
+            "count": 5,
+            "p50": 7686.9277,
+            "p95": 8597.0446,
+            "max": 8597.0446
+          },
+          "preflightMilliseconds": {
+            "count": 5,
+            "p50": 1855.6273999999994,
+            "p95": 2136.7227999999996,
+            "max": 2136.7227999999996
+          },
+          "finalResetWaitMilliseconds": {
+            "count": 5,
+            "p50": 0.20030000000042492,
+            "p95": 0.21089999999821885,
+            "max": 0.21089999999821885
+          },
+          "finalAuditMilliseconds": {
+            "count": 5,
+            "p50": 156.66150000000198,
+            "p95": 173.571899999999,
+            "max": 173.571899999999
+          },
+          "disposalMilliseconds": {
+            "count": 5,
+            "p50": 5471.5743,
+            "p95": 5613.6702000000005,
+            "max": 5613.6702000000005
+          },
+          "throughputPerSecond": {
+            "count": 5,
+            "p50": 32.955008972129924,
+            "p95": 34.34852547147108,
+            "max": 34.34852547147108
+          }
+        },
+        "background": {
+          "checkoutMilliseconds": {
+            "count": 1280,
+            "p50": 1.5508999999992739,
+            "p95": 10.580700000000434,
+            "max": 20.63630000000012
+          },
+          "returnMilliseconds": {
+            "count": 1280,
+            "p50": 0.08220000000073924,
+            "p95": 0.2379000000000815,
+            "max": 0.3886000000002241
+          },
+          "bodyMilliseconds": {
+            "count": 1280,
+            "p50": 58.20060000000012,
+            "p95": 109.44329999999991,
+            "max": 148.7030999999988
+          },
+          "resetMilliseconds": {
+            "count": 1280,
+            "p50": 61.61645,
+            "p95": 72.6546,
+            "max": 89.7106
+          },
+          "resetPermitWaitMilliseconds": {
+            "count": 1280,
+            "p50": 1.3689,
+            "p95": 10.1022,
+            "max": 20.2956
+          },
+          "resetValidationMilliseconds": {
+            "count": 1280,
+            "p50": 45.967349999999996,
+            "p95": 53.1085,
+            "max": 60.6199
+          },
+          "processWallMilliseconds": {
+            "count": 5,
+            "p50": 17070.93986700056,
+            "p95": 19282.181389979087,
+            "max": 19282.181389979087
+          },
+          "startupMilliseconds": {
+            "count": 5,
+            "p50": 5184.4604,
+            "p95": 7488.9116,
+            "max": 7488.9116
+          },
+          "preflightMilliseconds": {
+            "count": 5,
+            "p50": 1226.3475000000008,
+            "p95": 1680.2163999999993,
+            "max": 1680.2163999999993
+          },
+          "finalResetWaitMilliseconds": {
+            "count": 5,
+            "p50": 55.71810000000005,
+            "p95": 61.65680000000066,
+            "max": 61.65680000000066
+          },
+          "finalAuditMilliseconds": {
+            "count": 5,
+            "p50": 158.6340999999993,
+            "p95": 161.28440000000046,
+            "max": 161.28440000000046
+          },
+          "disposalMilliseconds": {
+            "count": 5,
+            "p50": 5505.033800000001,
+            "p95": 5745.919100000001,
+            "max": 5745.919100000001
+          },
+          "throughputPerSecond": {
+            "count": 5,
+            "p50": 53.84647339779135,
+            "p95": 58.38157738310463,
+            "max": 58.38157738310463
+          }
+        }
+      }
+    },
+    {
+      "additionalWaitMilliseconds": 100,
+      "pairs": [
+        {
+          "pair": 0,
+          "awaited": 12282.496700000002,
+          "background": 11222.877400000001,
+          "backgroundOverAwaited": 0.9137293234526169
+        },
+        {
+          "pair": 1,
+          "background": 8670.1012,
+          "awaited": 13011.413999999999,
+          "backgroundOverAwaited": 0.6663458099173541
+        },
+        {
+          "pair": 2,
+          "awaited": 11949.995899999998,
+          "background": 8663.4182,
+          "backgroundOverAwaited": 0.7249724830449524
+        },
+        {
+          "pair": 3,
+          "background": 8694.2053,
+          "awaited": 13159.547900000001,
+          "backgroundOverAwaited": 0.6606765951283173
+        },
+        {
+          "pair": 4,
+          "awaited": 12184.019699999997,
+          "background": 8779.437,
+          "backgroundOverAwaited": 0.720569829676162
+        }
+      ],
+      "awaitedMedianSuiteMilliseconds": 12282.496700000002,
+      "backgroundMedianSuiteMilliseconds": 8694.2053,
+      "ratioOfMedians": 0.7078532575547118,
+      "lowerSuiteTimePercent": 29.214674244528815,
+      "backgroundWins": 5,
+      "pairedRatioRange": [
+        0.6606765951283173,
+        0.9137293234526169
+      ],
+      "exactPairedBootstrapPointwise95Interval": [
+        0.6606765951283173,
+        0.9137293234526169
+      ],
+      "bootstrapOrderedResamples": 3125,
+      "modeSummaries": {
+        "awaited": {
+          "checkoutMilliseconds": {
+            "count": 1280,
+            "p50": 0.22264999999879365,
+            "p95": 0.5534000000006927,
+            "max": 2.0851000000002387
+          },
+          "returnMilliseconds": {
+            "count": 1280,
+            "p50": 58.68909999999869,
+            "p95": 71.64930000000095,
+            "max": 170.40190000000075
+          },
+          "bodyMilliseconds": {
+            "count": 1280,
+            "p50": 129.5577000000012,
+            "p95": 163.02599999999984,
+            "max": 204.73989999999958
+          },
+          "resetMilliseconds": {
+            "count": 1280,
+            "p50": 58.62325,
+            "p95": 71.5838,
+            "max": 170.3159
+          },
+          "resetPermitWaitMilliseconds": {
+            "count": 1280,
+            "p50": 0.005,
+            "p95": 0.0111,
+            "max": 0.0508
+          },
+          "resetValidationMilliseconds": {
+            "count": 1280,
+            "p50": 44.44565,
+            "p95": 53.2642,
+            "max": 116.1185
+          },
+          "processWallMilliseconds": {
+            "count": 5,
+            "p50": 27846.071666979697,
+            "p95": 30201.49745803792,
+            "max": 30201.49745803792
+          },
+          "startupMilliseconds": {
+            "count": 5,
+            "p50": 5702.0192,
+            "p95": 7518.4718,
+            "max": 7518.4718
+          },
+          "preflightMilliseconds": {
+            "count": 5,
+            "p50": 2089.6427999999996,
+            "p95": 3174.387199999999,
+            "max": 3174.387199999999
+          },
+          "finalResetWaitMilliseconds": {
+            "count": 5,
+            "p50": 0.21209999999700813,
+            "p95": 0.3088999999999942,
+            "max": 0.3088999999999942
+          },
+          "finalAuditMilliseconds": {
+            "count": 5,
+            "p50": 154.0741999999991,
+            "p95": 406.1947,
+            "max": 406.1947
+          },
+          "disposalMilliseconds": {
+            "count": 5,
+            "p50": 5668.093400000002,
+            "p95": 7879.841499999999,
+            "max": 7879.841499999999
+          },
+          "throughputPerSecond": {
+            "count": 5,
+            "p50": 20.842667924347985,
+            "p95": 21.42260149227332,
+            "max": 21.42260149227332
+          }
+        },
+        "background": {
+          "checkoutMilliseconds": {
+            "count": 1280,
+            "p50": 0.25599999999940337,
+            "p95": 0.5565000000005966,
+            "max": 8.863499999999476
+          },
+          "returnMilliseconds": {
+            "count": 1280,
+            "p50": 0.16134999999940192,
+            "p95": 0.26530000000002474,
+            "max": 3.945400000000518
+          },
+          "bodyMilliseconds": {
+            "count": 1280,
+            "p50": 129.5362500000001,
+            "p95": 184.9994999999999,
+            "max": 215.5725999999995
+          },
+          "resetMilliseconds": {
+            "count": 1280,
+            "p50": 60.97605,
+            "p95": 143.9695,
+            "max": 206.9479
+          },
+          "resetPermitWaitMilliseconds": {
+            "count": 1280,
+            "p50": 0.0048,
+            "p95": 0.0101,
+            "max": 8.3022
+          },
+          "resetValidationMilliseconds": {
+            "count": 1280,
+            "p50": 46.094800000000006,
+            "p95": 92.9608,
+            "max": 135.4033
+          },
+          "processWallMilliseconds": {
+            "count": 5,
+            "p50": 23811.71167298453,
+            "p95": 27864.56591100432,
+            "max": 27864.56591100432
+          },
+          "startupMilliseconds": {
+            "count": 5,
+            "p50": 7671.0008,
+            "p95": 8138.5719,
+            "max": 8138.5719
+          },
+          "preflightMilliseconds": {
+            "count": 5,
+            "p50": 1559.2783999999992,
+            "p95": 2560.4144000000006,
+            "max": 2560.4144000000006
+          },
+          "finalResetWaitMilliseconds": {
+            "count": 5,
+            "p50": 60.354199999999764,
+            "p95": 92.85100000000239,
+            "max": 92.85100000000239
+          },
+          "finalAuditMilliseconds": {
+            "count": 5,
+            "p50": 158.57640000000174,
+            "p95": 262.1849999999977,
+            "max": 262.1849999999977
+          },
+          "disposalMilliseconds": {
+            "count": 5,
+            "p50": 5645.120600000002,
+            "p95": 5953.565600000002,
+            "max": 5953.565600000002
+          },
+          "throughputPerSecond": {
+            "count": 5,
+            "p50": 29.444899351525553,
+            "p95": 29.549537386986582,
+            "max": 29.549537386986582
+          }
+        }
+      }
+    },
+    {
+      "additionalWaitMilliseconds": 500,
+      "pairs": [
+        {
+          "pair": 0,
+          "background": 34499.0721,
+          "awaited": 37614.74679999999,
+          "backgroundOverAwaited": 0.9171687977439743
+        },
+        {
+          "pair": 1,
+          "awaited": 39023.6511,
+          "background": 34067.4617,
+          "backgroundOverAwaited": 0.8729952410834259
+        },
+        {
+          "pair": 2,
+          "background": 33844.7102,
+          "awaited": 38883.5413,
+          "backgroundOverAwaited": 0.8704122378894539
+        },
+        {
+          "pair": 3,
+          "awaited": 37677.340899999996,
+          "background": 33927.9036,
+          "backgroundOverAwaited": 0.9004856178690679
+        },
+        {
+          "pair": 4,
+          "background": 35956.966400000005,
+          "awaited": 37839.3767,
+          "backgroundOverAwaited": 0.9502526081514446
+        }
+      ],
+      "awaitedMedianSuiteMilliseconds": 37839.3767,
+      "backgroundMedianSuiteMilliseconds": 34067.4617,
+      "ratioOfMedians": 0.9003177290708385,
+      "lowerSuiteTimePercent": 9.968227092916148,
+      "backgroundWins": 5,
+      "pairedRatioRange": [
+        0.8704122378894539,
+        0.9502526081514446
+      ],
+      "exactPairedBootstrapPointwise95Interval": [
+        0.8704122378894539,
+        0.9502526081514446
+      ],
+      "bootstrapOrderedResamples": 3125,
+      "modeSummaries": {
+        "awaited": {
+          "checkoutMilliseconds": {
+            "count": 1280,
+            "p50": 0.21459999999933643,
+            "p95": 0.40319999999974243,
+            "max": 2.3352000000013504
+          },
+          "returnMilliseconds": {
+            "count": 1280,
+            "p50": 57.58179999999629,
+            "p95": 104.36959999999817,
+            "max": 176.90380000000005
+          },
+          "bodyMilliseconds": {
+            "count": 1280,
+            "p50": 529.7944499999994,
+            "p95": 557.6610999999994,
+            "max": 654.4092
+          },
+          "resetMilliseconds": {
+            "count": 1280,
+            "p50": 57.50085,
+            "p95": 104.2345,
+            "max": 176.7807
+          },
+          "resetPermitWaitMilliseconds": {
+            "count": 1280,
+            "p50": 0.0056500000000000005,
+            "p95": 0.0124,
+            "max": 0.0542
+          },
+          "resetValidationMilliseconds": {
+            "count": 1280,
+            "p50": 43.93355,
+            "p95": 73.6399,
+            "max": 131.2344
+          },
+          "processWallMilliseconds": {
+            "count": 5,
+            "p50": 51410.343438968994,
+            "p95": 56206.462164002005,
+            "max": 56206.462164002005
+          },
+          "startupMilliseconds": {
+            "count": 5,
+            "p50": 5227.3972,
+            "p95": 7685.8856,
+            "max": 7685.8856
+          },
+          "preflightMilliseconds": {
+            "count": 5,
+            "p50": 1946.7676000000001,
+            "p95": 2465.2432,
+            "max": 2465.2432
+          },
+          "finalResetWaitMilliseconds": {
+            "count": 5,
+            "p50": 0.1970999999975902,
+            "p95": 0.22009999999863794,
+            "max": 0.22009999999863794
+          },
+          "finalAuditMilliseconds": {
+            "count": 5,
+            "p50": 150.19980000000214,
+            "p95": 160.96089999999822,
+            "max": 160.96089999999822
+          },
+          "disposalMilliseconds": {
+            "count": 5,
+            "p50": 5598.4202000000005,
+            "p95": 7890.777200000004,
+            "max": 7890.777200000004
+          },
+          "throughputPerSecond": {
+            "count": 5,
+            "p50": 6.7654391357878785,
+            "p95": 6.805841372830936,
+            "max": 6.805841372830936
+          }
+        },
+        "background": {
+          "checkoutMilliseconds": {
+            "count": 1280,
+            "p50": 0.23290000000088185,
+            "p95": 0.48359999999956926,
+            "max": 3.0366999999969266
+          },
+          "returnMilliseconds": {
+            "count": 1280,
+            "p50": 0.16560000000026776,
+            "p95": 0.2942000000002736,
+            "max": 4.203099999998813
+          },
+          "bodyMilliseconds": {
+            "count": 1280,
+            "p50": 528.2069499999998,
+            "p95": 574.1931000000004,
+            "max": 701.0504000000001
+          },
+          "resetMilliseconds": {
+            "count": 1280,
+            "p50": 58.17465,
+            "p95": 127.9575,
+            "max": 210.0134
+          },
+          "resetPermitWaitMilliseconds": {
+            "count": 1280,
+            "p50": 0.0052,
+            "p95": 0.0113,
+            "max": 0.0571
+          },
+          "resetValidationMilliseconds": {
+            "count": 1280,
+            "p50": 44.698800000000006,
+            "p95": 83.7894,
+            "max": 138.5938
+          },
+          "processWallMilliseconds": {
+            "count": 5,
+            "p50": 47554.71718497574,
+            "p95": 49710.65277501475,
+            "max": 49710.65277501475
+          },
+          "startupMilliseconds": {
+            "count": 5,
+            "p50": 5487.8761,
+            "p95": 7716.2207,
+            "max": 7716.2207
+          },
+          "preflightMilliseconds": {
+            "count": 5,
+            "p50": 1463.4249,
+            "p95": 1748.0959000000003,
+            "max": 1748.0959000000003
+          },
+          "finalResetWaitMilliseconds": {
+            "count": 5,
+            "p50": 56.87940000000526,
+            "p95": 78.09079999999813,
+            "max": 78.09079999999813
+          },
+          "finalAuditMilliseconds": {
+            "count": 5,
+            "p50": 151.18300000000454,
+            "p95": 275.6368000000002,
+            "max": 275.6368000000002
+          },
+          "disposalMilliseconds": {
+            "count": 5,
+            "p50": 5523.383900000001,
+            "p95": 6370.768100000001,
+            "max": 6370.768100000001
+          },
+          "throughputPerSecond": {
+            "count": 5,
+            "p50": 7.514501733482539,
+            "p95": 7.563958990554453,
+            "max": 7.563958990554453
+          }
+        }
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "name": "r0-w0-awaited",
+      "pair": 0,
+      "mode": "awaited",
+      "waitMilliseconds": 0,
+      "suiteMilliseconds": 11039.034000000001,
+      "processWallMilliseconds": 27558.70115698781,
+      "startupMilliseconds": 6575.9005,
+      "preflightMilliseconds": 3732.8651999999993,
+      "finalResetWaitMilliseconds": 0.194100000000617,
+      "finalAuditMilliseconds": 296.34149999999863,
+      "disposalMilliseconds": 5750.0249,
+      "throughputPerSecond": 23.19043496016046
+    },
+    {
+      "name": "r0-w0-background",
+      "pair": 0,
+      "mode": "background",
+      "waitMilliseconds": 0,
+      "suiteMilliseconds": 5312.8634999999995,
+      "processWallMilliseconds": 18584.866195975337,
+      "startupMilliseconds": 5391.8867,
+      "preflightMilliseconds": 1946.9526999999998,
+      "finalResetWaitMilliseconds": 105.3159999999989,
+      "finalAuditMilliseconds": 191.3672999999999,
+      "disposalMilliseconds": 5563.796699999999,
+      "throughputPerSecond": 48.184938310573955
+    },
+    {
+      "name": "r0-w25-background",
+      "pair": 0,
+      "mode": "background",
+      "waitMilliseconds": 25,
+      "suiteMilliseconds": 4384.9449,
+      "processWallMilliseconds": 17070.93986700056,
+      "startupMilliseconds": 5184.4604,
+      "preflightMilliseconds": 1680.2163999999993,
+      "finalResetWaitMilliseconds": 61.65680000000066,
+      "finalAuditMilliseconds": 159.52850000000035,
+      "disposalMilliseconds": 5505.033800000001,
+      "throughputPerSecond": 58.38157738310463
+    },
+    {
+      "name": "r0-w25-awaited",
+      "pair": 0,
+      "mode": "awaited",
+      "waitMilliseconds": 25,
+      "suiteMilliseconds": 7453.0128,
+      "processWallMilliseconds": 22604.438158043195,
+      "startupMilliseconds": 7686.9277,
+      "preflightMilliseconds": 1670.8972000000003,
+      "finalResetWaitMilliseconds": 0.19310000000041327,
+      "finalAuditMilliseconds": 156.66150000000198,
+      "disposalMilliseconds": 5465.340799999998,
+      "throughputPerSecond": 34.34852547147108
+    },
+    {
+      "name": "r0-w100-awaited",
+      "pair": 0,
+      "mode": "awaited",
+      "waitMilliseconds": 100,
+      "suiteMilliseconds": 12282.496700000002,
+      "processWallMilliseconds": 27846.071666979697,
+      "startupMilliseconds": 7518.4718,
+      "preflightMilliseconds": 1605.0658999999996,
+      "finalResetWaitMilliseconds": 0.3088999999999942,
+      "finalAuditMilliseconds": 165.02509999999893,
+      "disposalMilliseconds": 6059.663199999999,
+      "throughputPerSecond": 20.842667924347985
+    },
+    {
+      "name": "r0-w100-background",
+      "pair": 0,
+      "mode": "background",
+      "waitMilliseconds": 100,
+      "suiteMilliseconds": 11222.877400000001,
+      "processWallMilliseconds": 27864.56591100432,
+      "startupMilliseconds": 7671.0008,
+      "preflightMilliseconds": 2560.4144000000006,
+      "finalResetWaitMilliseconds": 92.85100000000239,
+      "finalAuditMilliseconds": 262.1849999999977,
+      "disposalMilliseconds": 5953.565600000002,
+      "throughputPerSecond": 22.810549458555073
+    },
+    {
+      "name": "r0-w500-background",
+      "pair": 0,
+      "mode": "background",
+      "waitMilliseconds": 500,
+      "suiteMilliseconds": 34499.0721,
+      "processWallMilliseconds": 47554.71718497574,
+      "startupMilliseconds": 5487.8761,
+      "preflightMilliseconds": 1748.0959000000003,
+      "finalResetWaitMilliseconds": 58.90969999999652,
+      "finalAuditMilliseconds": 148.9568999999974,
+      "disposalMilliseconds": 5499.477500000001,
+      "throughputPerSecond": 7.4204894339752405
+    },
+    {
+      "name": "r0-w500-awaited",
+      "pair": 0,
+      "mode": "awaited",
+      "waitMilliseconds": 500,
+      "suiteMilliseconds": 37614.74679999999,
+      "processWallMilliseconds": 50349.482250981964,
+      "startupMilliseconds": 5022.982,
+      "preflightMilliseconds": 1798.2663000000002,
+      "finalResetWaitMilliseconds": 0.20899999999528518,
+      "finalAuditMilliseconds": 151.87419999999838,
+      "disposalMilliseconds": 5598.4202000000005,
+      "throughputPerSecond": 6.805841372830936
+    },
+    {
+      "name": "r1-w25-awaited",
+      "pair": 1,
+      "mode": "awaited",
+      "waitMilliseconds": 25,
+      "suiteMilliseconds": 7768.1666000000005,
+      "processWallMilliseconds": 22858.072477043606,
+      "startupMilliseconds": 7750.7614,
+      "preflightMilliseconds": 1547.0845000000008,
+      "finalResetWaitMilliseconds": 0.21089999999821885,
+      "finalAuditMilliseconds": 173.571899999999,
+      "disposalMilliseconds": 5475.482899999999,
+      "throughputPerSecond": 32.955008972129924
+    },
+    {
+      "name": "r1-w25-background",
+      "pair": 1,
+      "mode": "background",
+      "waitMilliseconds": 25,
+      "suiteMilliseconds": 4811.9244,
+      "processWallMilliseconds": 19282.181389979087,
+      "startupMilliseconds": 7488.9116,
+      "preflightMilliseconds": 1226.3475000000008,
+      "finalResetWaitMilliseconds": 54.25120000000061,
+      "finalAuditMilliseconds": 158.6340999999993,
+      "disposalMilliseconds": 5468.895300000002,
+      "throughputPerSecond": 53.20116833090728
+    },
+    {
+      "name": "r1-w100-background",
+      "pair": 1,
+      "mode": "background",
+      "waitMilliseconds": 100,
+      "suiteMilliseconds": 8670.1012,
+      "processWallMilliseconds": 23811.71167298453,
+      "startupMilliseconds": 7926.4341,
+      "preflightMilliseconds": 1458.0722000000005,
+      "finalResetWaitMilliseconds": 62.70290000000023,
+      "finalAuditMilliseconds": 158.57640000000174,
+      "disposalMilliseconds": 5425.5092,
+      "throughputPerSecond": 29.526760310479425
+    },
+    {
+      "name": "r1-w100-awaited",
+      "pair": 1,
+      "mode": "awaited",
+      "waitMilliseconds": 100,
+      "suiteMilliseconds": 13011.413999999999,
+      "processWallMilliseconds": 28096.729978977237,
+      "startupMilliseconds": 5702.0192,
+      "preflightMilliseconds": 3174.387199999999,
+      "finalResetWaitMilliseconds": 0.21209999999700813,
+      "finalAuditMilliseconds": 406.1947,
+      "disposalMilliseconds": 5656.775400000002,
+      "throughputPerSecond": 19.675033013321997
+    },
+    {
+      "name": "r1-w500-awaited",
+      "pair": 1,
+      "mode": "awaited",
+      "waitMilliseconds": 500,
+      "suiteMilliseconds": 39023.6511,
+      "processWallMilliseconds": 54932.12803499773,
+      "startupMilliseconds": 7598.5113,
+      "preflightMilliseconds": 2013.374499999999,
+      "finalResetWaitMilliseconds": 0.13790000000153668,
+      "finalAuditMilliseconds": 160.96089999999822,
+      "disposalMilliseconds": 5969.658100000001,
+      "throughputPerSecond": 6.560124252443411
+    },
+    {
+      "name": "r1-w500-background",
+      "pair": 1,
+      "mode": "background",
+      "waitMilliseconds": 500,
+      "suiteMilliseconds": 34067.4617,
+      "processWallMilliseconds": 49710.65277501475,
+      "startupMilliseconds": 7716.2207,
+      "preflightMilliseconds": 1207.1308000000008,
+      "finalResetWaitMilliseconds": 56.87940000000526,
+      "finalAuditMilliseconds": 175.49029999999766,
+      "disposalMilliseconds": 6370.768100000001,
+      "throughputPerSecond": 7.514501733482539
+    },
+    {
+      "name": "r1-w0-background",
+      "pair": 1,
+      "mode": "background",
+      "waitMilliseconds": 0,
+      "suiteMilliseconds": 4217.228899999999,
+      "processWallMilliseconds": 17074.409977998585,
+      "startupMilliseconds": 5547.9518,
+      "preflightMilliseconds": 1571.0148,
+      "finalResetWaitMilliseconds": 80.36009999999987,
+      "finalAuditMilliseconds": 146.40950000000157,
+      "disposalMilliseconds": 5413.546,
+      "throughputPerSecond": 60.703368508168964
+    },
+    {
+      "name": "r1-w0-awaited",
+      "pair": 1,
+      "mode": "awaited",
+      "waitMilliseconds": 0,
+      "suiteMilliseconds": 5784.3438,
+      "processWallMilliseconds": 18631.94597896654,
+      "startupMilliseconds": 5043.9082,
+      "preflightMilliseconds": 2001.0677999999998,
+      "finalResetWaitMilliseconds": 0.1937999999991007,
+      "finalAuditMilliseconds": 152.2567999999992,
+      "disposalMilliseconds": 5477.921199999999,
+      "throughputPerSecond": 44.25739701018463
+    },
+    {
+      "name": "r2-w100-awaited",
+      "pair": 2,
+      "mode": "awaited",
+      "waitMilliseconds": 100,
+      "suiteMilliseconds": 11949.995899999998,
+      "processWallMilliseconds": 25109.2129079625,
+      "startupMilliseconds": 5074.518599999999,
+      "preflightMilliseconds": 2089.6427999999996,
+      "finalResetWaitMilliseconds": 0.22009999999863794,
+      "finalAuditMilliseconds": 149.67959999999948,
+      "disposalMilliseconds": 5668.093400000002,
+      "throughputPerSecond": 21.42260149227332
+    },
+    {
+      "name": "r2-w100-background",
+      "pair": 2,
+      "mode": "background",
+      "waitMilliseconds": 100,
+      "suiteMilliseconds": 8663.4182,
+      "processWallMilliseconds": 25169.374922988936,
+      "startupMilliseconds": 8138.5719,
+      "preflightMilliseconds": 2428.1085000000003,
+      "finalResetWaitMilliseconds": 53.28199999999924,
+      "finalAuditMilliseconds": 158.56549999999697,
+      "disposalMilliseconds": 5645.120600000002,
+      "throughputPerSecond": 29.549537386986582
+    },
+    {
+      "name": "r2-w500-background",
+      "pair": 2,
+      "mode": "background",
+      "waitMilliseconds": 500,
+      "suiteMilliseconds": 33844.7102,
+      "processWallMilliseconds": 46677.2768899682,
+      "startupMilliseconds": 5565.7468,
+      "preflightMilliseconds": 1463.4249,
+      "finalResetWaitMilliseconds": 52.80309999999736,
+      "finalAuditMilliseconds": 149.35269999999582,
+      "disposalMilliseconds": 5473.761200000001,
+      "throughputPerSecond": 7.563958990554453
+    },
+    {
+      "name": "r2-w500-awaited",
+      "pair": 2,
+      "mode": "awaited",
+      "waitMilliseconds": 500,
+      "suiteMilliseconds": 38883.5413,
+      "processWallMilliseconds": 56206.462164002005,
+      "startupMilliseconds": 7685.8856,
+      "preflightMilliseconds": 1460.2521000000006,
+      "finalResetWaitMilliseconds": 0.1941999999980908,
+      "finalAuditMilliseconds": 150.19980000000214,
+      "disposalMilliseconds": 7890.777200000004,
+      "throughputPerSecond": 6.583762472272555
+    },
+    {
+      "name": "r2-w0-awaited",
+      "pair": 2,
+      "mode": "awaited",
+      "waitMilliseconds": 0,
+      "suiteMilliseconds": 5736.119999999999,
+      "processWallMilliseconds": 19534.448338032234,
+      "startupMilliseconds": 5884.3283,
+      "preflightMilliseconds": 2158.6190000000006,
+      "finalResetWaitMilliseconds": 0.1966999999986001,
+      "finalAuditMilliseconds": 141.56670000000122,
+      "disposalMilliseconds": 5490.3485,
+      "throughputPerSecond": 44.62947079210338
+    },
+    {
+      "name": "r2-w0-background",
+      "pair": 2,
+      "mode": "background",
+      "waitMilliseconds": 0,
+      "suiteMilliseconds": 4419.0286000000015,
+      "processWallMilliseconds": 19083.22999201482,
+      "startupMilliseconds": 7774.0505,
+      "preflightMilliseconds": 1173.8494,
+      "finalResetWaitMilliseconds": 81.60100000000057,
+      "finalAuditMilliseconds": 148.71839999999975,
+      "disposalMilliseconds": 5440.0152,
+      "throughputPerSecond": 57.931283812012424
+    },
+    {
+      "name": "r2-w25-background",
+      "pair": 2,
+      "mode": "background",
+      "waitMilliseconds": 25,
+      "suiteMilliseconds": 4754.2575,
+      "processWallMilliseconds": 17405.9618889587,
+      "startupMilliseconds": 5359.3267000000005,
+      "preflightMilliseconds": 1194.8532999999998,
+      "finalResetWaitMilliseconds": 55.71810000000005,
+      "finalAuditMilliseconds": 151.4338000000007,
+      "disposalMilliseconds": 5745.919100000001,
+      "throughputPerSecond": 53.84647339779135
+    },
+    {
+      "name": "r2-w25-awaited",
+      "pair": 2,
+      "mode": "awaited",
+      "waitMilliseconds": 25,
+      "suiteMilliseconds": 7812.556200000001,
+      "processWallMilliseconds": 24504.569560987875,
+      "startupMilliseconds": 8597.0446,
+      "preflightMilliseconds": 2136.7227999999996,
+      "finalResetWaitMilliseconds": 0.20249999999941792,
+      "finalAuditMilliseconds": 150.1970999999976,
+      "disposalMilliseconds": 5613.6702000000005,
+      "throughputPerSecond": 32.767764281810855
+    },
+    {
+      "name": "r3-w500-awaited",
+      "pair": 3,
+      "mode": "awaited",
+      "waitMilliseconds": 500,
+      "suiteMilliseconds": 37677.340899999996,
+      "processWallMilliseconds": 50552.08069697255,
+      "startupMilliseconds": 5073.1461,
+      "preflightMilliseconds": 1946.7676000000001,
+      "finalResetWaitMilliseconds": 0.22009999999863794,
+      "finalAuditMilliseconds": 147.8309999999983,
+      "disposalMilliseconds": 5540.965600000003,
+      "throughputPerSecond": 6.794534696051229
+    },
+    {
+      "name": "r3-w500-background",
+      "pair": 3,
+      "mode": "background",
+      "waitMilliseconds": 500,
+      "suiteMilliseconds": 33927.9036,
+      "processWallMilliseconds": 46071.185369975865,
+      "startupMilliseconds": 5081.9794,
+      "preflightMilliseconds": 1211.2759999999998,
+      "finalResetWaitMilliseconds": 52.8946999999971,
+      "finalAuditMilliseconds": 151.18300000000454,
+      "disposalMilliseconds": 5523.383900000001,
+      "throughputPerSecond": 7.545411677012664
+    },
+    {
+      "name": "r3-w0-background",
+      "pair": 3,
+      "mode": "background",
+      "waitMilliseconds": 0,
+      "suiteMilliseconds": 4055.887700000001,
+      "processWallMilliseconds": 16970.37736501079,
+      "startupMilliseconds": 5877.0698,
+      "preflightMilliseconds": 1253.3346000000001,
+      "finalResetWaitMilliseconds": 86.97200000000157,
+      "finalAuditMilliseconds": 164.01699999999983,
+      "disposalMilliseconds": 5489.773000000001,
+      "throughputPerSecond": 63.1181183838004
+    },
+    {
+      "name": "r3-w0-awaited",
+      "pair": 3,
+      "mode": "awaited",
+      "waitMilliseconds": 0,
+      "suiteMilliseconds": 6189.223400000001,
+      "processWallMilliseconds": 21042.798680020496,
+      "startupMilliseconds": 7549.3374,
+      "preflightMilliseconds": 1537.2232000000004,
+      "finalResetWaitMilliseconds": 0.20020000000113214,
+      "finalAuditMilliseconds": 154.3646000000008,
+      "disposalMilliseconds": 5438.987799999999,
+      "throughputPerSecond": 41.36221678474232
+    },
+    {
+      "name": "r3-w25-awaited",
+      "pair": 3,
+      "mode": "awaited",
+      "waitMilliseconds": 25,
+      "suiteMilliseconds": 7829.8548,
+      "processWallMilliseconds": 20589.973422989715,
+      "startupMilliseconds": 5125.7446,
+      "preflightMilliseconds": 1855.6273999999994,
+      "finalResetWaitMilliseconds": 0.19859999999971478,
+      "finalAuditMilliseconds": 158.71389999999883,
+      "disposalMilliseconds": 5463.464499999998,
+      "throughputPerSecond": 32.69537003419271
+    },
+    {
+      "name": "r3-w25-background",
+      "pair": 3,
+      "mode": "background",
+      "waitMilliseconds": 25,
+      "suiteMilliseconds": 4641.6657000000005,
+      "processWallMilliseconds": 16619.873308984097,
+      "startupMilliseconds": 4961.4515,
+      "preflightMilliseconds": 1270.3630999999996,
+      "finalResetWaitMilliseconds": 55,
+      "finalAuditMilliseconds": 161.28440000000046,
+      "disposalMilliseconds": 5443.928100000001,
+      "throughputPerSecond": 55.15261471760019
+    },
+    {
+      "name": "r3-w100-background",
+      "pair": 3,
+      "mode": "background",
+      "waitMilliseconds": 100,
+      "suiteMilliseconds": 8694.2053,
+      "processWallMilliseconds": 21194.957454979885,
+      "startupMilliseconds": 5214.4621,
+      "preflightMilliseconds": 1559.2783999999992,
+      "finalResetWaitMilliseconds": 53.162099999999555,
+      "finalAuditMilliseconds": 148.27199999999903,
+      "disposalMilliseconds": 5429.3524,
+      "throughputPerSecond": 29.444899351525553
+    },
+    {
+      "name": "r3-w100-awaited",
+      "pair": 3,
+      "mode": "awaited",
+      "waitMilliseconds": 100,
+      "suiteMilliseconds": 13159.547900000001,
+      "processWallMilliseconds": 30201.49745803792,
+      "startupMilliseconds": 6285.313999999999,
+      "preflightMilliseconds": 2585.602899999999,
+      "finalResetWaitMilliseconds": 0.19640000000072177,
+      "finalAuditMilliseconds": 154.0741999999991,
+      "disposalMilliseconds": 7879.841499999999,
+      "throughputPerSecond": 19.4535558474619
+    },
+    {
+      "name": "r4-w0-awaited",
+      "pair": 4,
+      "mode": "awaited",
+      "waitMilliseconds": 0,
+      "suiteMilliseconds": 6503.023699999999,
+      "processWallMilliseconds": 21745.603877003305,
+      "startupMilliseconds": 5495.3488,
+      "preflightMilliseconds": 2269.6894999999995,
+      "finalResetWaitMilliseconds": 0.1926999999996042,
+      "finalAuditMilliseconds": 147.3119000000006,
+      "disposalMilliseconds": 7167.749599999999,
+      "throughputPerSecond": 39.36630278619468
+    },
+    {
+      "name": "r4-w0-background",
+      "pair": 4,
+      "mode": "background",
+      "waitMilliseconds": 0,
+      "suiteMilliseconds": 4328.796,
+      "processWallMilliseconds": 16619.64111198904,
+      "startupMilliseconds": 5273.8493,
+      "preflightMilliseconds": 1243.7275,
+      "finalResetWaitMilliseconds": 82.72700000000077,
+      "finalAuditMilliseconds": 147.41979999999967,
+      "disposalMilliseconds": 5479.3735,
+      "throughputPerSecond": 59.138845997824795
+    },
+    {
+      "name": "r4-w25-background",
+      "pair": 4,
+      "mode": "background",
+      "waitMilliseconds": 25,
+      "suiteMilliseconds": 4869.316,
+      "processWallMilliseconds": 16823.97966599092,
+      "startupMilliseconds": 4910.3423999999995,
+      "preflightMilliseconds": 1185.1758,
+      "finalResetWaitMilliseconds": 59.565599999999904,
+      "finalAuditMilliseconds": 148.96460000000116,
+      "disposalMilliseconds": 5564.624399999999,
+      "throughputPerSecond": 52.57411923974538
+    },
+    {
+      "name": "r4-w25-awaited",
+      "pair": 4,
+      "mode": "awaited",
+      "waitMilliseconds": 25,
+      "suiteMilliseconds": 7494.358,
+      "processWallMilliseconds": 20186.39556202106,
+      "startupMilliseconds": 5043.0917,
+      "preflightMilliseconds": 1881.5139,
+      "finalResetWaitMilliseconds": 0.20030000000042492,
+      "finalAuditMilliseconds": 141.6924999999992,
+      "disposalMilliseconds": 5471.5743,
+      "throughputPerSecond": 34.15903003299282
+    },
+    {
+      "name": "r4-w100-awaited",
+      "pair": 4,
+      "mode": "awaited",
+      "waitMilliseconds": 100,
+      "suiteMilliseconds": 12184.019699999997,
+      "processWallMilliseconds": 24560.718243999872,
+      "startupMilliseconds": 4991.9121,
+      "preflightMilliseconds": 1674.9642999999996,
+      "finalResetWaitMilliseconds": 0.21149999999761349,
+      "finalAuditMilliseconds": 153.78380000000107,
+      "disposalMilliseconds": 5406.756799999999,
+      "throughputPerSecond": 21.011128207548783
+    },
+    {
+      "name": "r4-w100-background",
+      "pair": 4,
+      "mode": "background",
+      "waitMilliseconds": 100,
+      "suiteMilliseconds": 8779.437,
+      "processWallMilliseconds": 21044.741566991434,
+      "startupMilliseconds": 5039.695299999999,
+      "preflightMilliseconds": 1178.8823000000002,
+      "finalResetWaitMilliseconds": 60.354199999999764,
+      "finalAuditMilliseconds": 174.34499999999935,
+      "disposalMilliseconds": 5706.106399999999,
+      "throughputPerSecond": 29.15904516428559
+    },
+    {
+      "name": "r4-w500-background",
+      "pair": 4,
+      "mode": "background",
+      "waitMilliseconds": 500,
+      "suiteMilliseconds": 35956.966400000005,
+      "processWallMilliseconds": 48974.73929700209,
+      "startupMilliseconds": 5183.2991,
+      "preflightMilliseconds": 1559.7224999999999,
+      "finalResetWaitMilliseconds": 78.09079999999813,
+      "finalAuditMilliseconds": 275.6368000000002,
+      "disposalMilliseconds": 5849.028599999998,
+      "throughputPerSecond": 7.1196217487357325
+    },
+    {
+      "name": "r4-w500-awaited",
+      "pair": 4,
+      "mode": "awaited",
+      "waitMilliseconds": 500,
+      "suiteMilliseconds": 37839.3767,
+      "processWallMilliseconds": 51410.343438968994,
+      "startupMilliseconds": 5227.3972,
+      "preflightMilliseconds": 2465.2432,
+      "finalResetWaitMilliseconds": 0.1970999999975902,
+      "finalAuditMilliseconds": 147.9438999999984,
+      "disposalMilliseconds": 5559.070800000001,
+      "throughputPerSecond": 6.7654391357878785
+    }
+  ],
+  "qualifications": [
+    "Added waits are synthetic asynchronous waits beyond real DB work, not measured application/CPU work.",
+    "Five pairs on one uncontrolled shared host; intervals are pointwise with no multiplicity adjustment.",
+    "Physical-reset suite endpoint and complete process/host-disposal endpoint are separate.",
+    "Resource observations show equal configured quotas, not measured CPU or peak memory consumption.",
+    "All v3 order-confounded cases and earlier OID qualification failure are retained separately."
+  ]
+}

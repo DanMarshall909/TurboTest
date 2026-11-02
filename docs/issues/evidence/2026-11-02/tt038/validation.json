@@ -1,0 +1,462 @@
+{
+  "result": "PASS",
+  "classification": "one-off experiment, no production or maintained test changes",
+  "primaryCases": 40,
+  "primaryMeasuredCycles": 10240,
+  "primaryWarmupCycles": 1280,
+  "primarySuccessfulRowsResetsIncludingAudits": 12160,
+  "controllerReceipt": {
+    "command": [
+      "python3",
+      "artifacts/tt038/run.py",
+      "measure"
+    ],
+    "cwd": "/home/dan/code/TurboTest",
+    "deadlineExceeded": false,
+    "deadlineSeconds": 3600,
+    "elapsedSeconds": 1157.031434678007,
+    "exitCode": 0,
+    "processGroupId": 1159276,
+    "processGroupStopped": true
+  },
+  "allAttempts": [
+    {
+      "path": "v4/r0-w25-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r0-w0-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r3-w25-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r1-w100-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r4-w100-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r2-w100-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r4-w25-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r1-w500-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r1-w0-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r1-w25-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r3-w500-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r4-w0-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r2-w25-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r0-w500-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r4-w100-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r3-w100-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r3-w500-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r0-w0-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r2-w100-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r4-w500-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r2-w500-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r4-w500-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r3-w100-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r2-w0-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r0-w100-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r1-w500-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r0-w100-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r1-w100-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r2-w500-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r1-w25-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r3-w0-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r3-w25-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r0-w25-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r0-w500-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r3-w0-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r4-w0-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r4-w25-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r2-w0-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r2-w25-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v4/r1-w0-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "smoke-awaited/report.json",
+      "succeeded": false,
+      "measuredSampleCount": 0,
+      "failures": [
+        "InvalidCastException: Reading as 'System.Int64' is not supported for fields having DataTypeName 'oid'"
+      ]
+    },
+    {
+      "path": "v3/r0-w25-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v3/r0-w0-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v3/smoke-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 16,
+      "failures": []
+    },
+    {
+      "path": "v3/r0-w500-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v3/fault-awaited/report.json",
+      "succeeded": false,
+      "measuredSampleCount": 6,
+      "failures": [
+        "InvalidDataException: WorkloadDistribution: expected 100/20/10, observed 100/20/0."
+      ]
+    },
+    {
+      "path": "v3/r0-w0-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v3/r0-w100-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v3/r0-w100-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v3/fault-background/report.json",
+      "succeeded": false,
+      "measuredSampleCount": 6,
+      "failures": [
+        "InvalidDataException: WorkloadDistribution: expected 100/20/10, observed 100/20/0."
+      ]
+    },
+    {
+      "path": "v3/r0-w25-awaited/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v3/r0-w500-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 256,
+      "failures": []
+    },
+    {
+      "path": "v3/smoke-background/report.json",
+      "succeeded": true,
+      "measuredSampleCount": 16,
+      "failures": []
+    }
+  ],
+  "ownedContainers": [
+    "113aafbb80e9f48c9fe4ae10e649dba8158f2cf529254b58149b3f9a2e8ee36b",
+    "139f61b5e411bd82b16e5b784e7f8e57680bdc5eab4c48f84563784f533a8641",
+    "1841b1a0c8160bffeaa7bfbdd8389211f86451b58d6d3f4d945f238b5cd0722d",
+    "1a2c2e262f3bf42fc05d081a1bea9d9aac897d9f0603e7b44fe772c890b1dddf",
+    "272515d94fdce9801ffe017e6a79de5510bb94986669084b07cc4e5b4f64ed50",
+    "27fb0a2842feb5df374ab42b493755badad861a7acced9c256adf3be5ca6314a",
+    "32fd27d2dda6788491a11147973cc55fddede83b5e4d38cdbf7c78a35280fee3",
+    "33ef199b16664962cf3a6088e4f23bfc6742ef4ca0bf74f03f87a861fe6494c8",
+    "35b43b49543b54cdc2aa55cd225118dfb2ab2467a82faf7fd7e6e303ffeef643",
+    "4475667e38ae4107781bf97ee396abe648694858310615d469626ce1959b381c",
+    "4f948402f5ec2dc06af868180adcade7ccaf0f2773cae843319a49d0caf33694",
+    "5046d5ebb10ed0649683f3ea4be8ee5c37ea824bac1949ad9c327e3584ed07b1",
+    "521b6a7799eef024299714f3bf39015d9de7f5c580e4b70fe6119112828d334f",
+    "53ecce45be30812004460488606866817c832b20c3d3e937e5cfa60b7f146689",
+    "5988a57969f6b4d96be44e6b00b19d5644b5d264624d85c1194b4021655874cd",
+    "5bbe90f7b532edc6af15e62f6db80c040af9710be1787006f19ffdf48093d7dd",
+    "5c18b1c653ea07b5a287f03504cdaea109bd5d580476d787af545878dea077a5",
+    "5e46aefc453a8de4e197a392674c5b6eb25b89b393cfd11fc59ab4032927769a",
+    "602f616a6543ede482b504c695280673c09b3f8b29e71c059bbfff612c28929a",
+    "6086bbfcd32e03621049168b15f02d7c8ad607516380fff7c41675c880bb3770",
+    "653db4f427b0f32daedb766eb5ceec70af3beba73e372760160b9ff5ec2820c7",
+    "65522ff6fc5b9ffe13f076914782ff406c9fcb5be6112be9bf37f6b14ee0710d",
+    "65918f7b9b0907622f78996fdb789375a98d2871eb7e3cbbc6c2892dca3cacf8",
+    "65e6faff36e499e623ff4f251c1ece7d75c02ac00479de4163fa7ce2646cfa08",
+    "65fb3ae679548e258af4acc41d22c105be56ba817b9c702288ec34a73d7fd668",
+    "704f84f41efd7df9439c89c07281ec61da31e8e2b66474863b66f4b8ae044ba3",
+    "7128c174c40f82e445331d11c835814a889045cdfa7d06af7275cb862014fb20",
+    "77b94a14e11895260ee98abd0f4498b57760d232a6c69cf8afc7072998837759",
+    "79fc52cc2ae8ff9134b0baa6e4f01110c6293799f34cf19b83b42e6bd6ae8694",
+    "7eba04e1f4152cd10d8e474b95378d4a5a309b3b48f1f70a87d4c9ffe8571210",
+    "87944aaae6c00144d4b589fbf10e4e49268b3edebabf9e68135155ab7136ebd3",
+    "8ff75a201520870dbabbcaec54fd40c9b636695213d6caa474c8c74687f1f86b",
+    "94ae8e411697369bf358d370af17395b5baa48251ff0a70fa4526486c08e1a4c",
+    "993faa022ce8b02ef63d1b2de7c46f75927adc92f3b63d05a9ba2d6ceb6ebf68",
+    "9c07edc7224e19e3f2d64e58442743947b876bafc3dd430f0a4c723e885f1a14",
+    "9f498bbdfe3f1f36939d223d4add5448d9546336256336d731fe6c8a3a99cad2",
+    "a6036517a070c4c2023d2285c273c5665f7bdef1f4f6e8cb43489079529c010c",
+    "b4565f18ebc5c873700ee0b76d9982526565abd605a51fdba69462b40bc5df65",
+    "bcf07e54ffd581e2f5b1b1143cfa7197b1156d0bcc3f90bf37aa7a9fd3f308f1",
+    "be1b426f07da681a4d9753fc50e599867d6b30fab39a780ad9dca06d54b3dce2",
+    "bf0c3520f6acac3312d8a395cd7542d8a301066bf8c458943666c920c0b9be7f",
+    "cbed4c8c1f0edcca0dafd0b092c666fe3938ea1d9bf4818be07d96abe5650f89",
+    "ccb89905e38fb5100520bef0424aa7184a39d8f5cfccef8e645cbdb59a9a7c94",
+    "e1b36020b9c25849e2b9522c392d8790af5028e18da748d8bb4261c39ade7b3e",
+    "e58639519a786edb4b70b9390f63dccc00b6bd102f09a2a0d9541ca91e06ada2",
+    "ee173ba36d4e658fa3b5cb6fd3f9cae67939f033bdb58f76d30052b7d8932e7a",
+    "ef8db30bc1192fa72b81434081232033c11829e651c5a30beb8a3370a339711c",
+    "f21be1d6c8fe6e54b576d03771f5d15791d94ea0b11c05081e0f14489c48005e",
+    "f26cce313ef5a7f77d055b81f5dca64dd5aac21be05bf533edfecadded30ea70",
+    "f5aeedee48cadcc7e46befd9c2fa5255ea8a4214450d256236b4a2b9b49bcefa",
+    "f67589f06ff38071c60f9f47e7551aa53dfc65859b0b1ff11722cfe0bdf37e89",
+    "f70b7ed7593b30a0e2007853a8fb8fe13fb3052e683aa1e61c824f326f62680d",
+    "f88f9acc92b3c52e519a912571543e9603c75ce36626926f6f17779a3b5ca566"
+  ],
+  "ownedVolumes": [
+    "003427b2e77b39c792f7d1edcc572884d5f1430b5ef96970d6a28367e43b69c9",
+    "02eb6a7e38596a2e077b11ea764d716a8cf75e5a7f4eb71b1b9e4a98e1e317db",
+    "0f65f0f14000a1a672e6ded8bfa19497e8f62249adbb089e5e6f05e91f37c045",
+    "0feab678bb0f364f3d7ccde183237aa74883e5a4bba47e008ecde0283045bc4a",
+    "10aff8d832a379adde957eb52cd1eff040b5a630aadbf82a17574dc17613604c",
+    "1126961c25707e12646676a65ee563611f4f6940e135e888d520fd8b032bf9fb",
+    "17df34a79fded31a0d18f1356526fb6f5957134d8160e5d7f0567872483a629d",
+    "2cd5030cc5acf80ac70e46b6fb6bc66eb3a45eb0d80c43736d3443b85e2aef9e",
+    "2ec4d4a389c10093d3e3bc9b2e9dd92045496fdffcd3dc236b947b512aa33734",
+    "39b55078300e5091f5f8c304af67b471ef72e8911b0599937c115f962ad28836",
+    "455b4d64560157b2a57cf259341051be79a30a1840a05b56b87e8aa0a0698efd",
+    "4859ccf010ae512fcd9d26489129d647955c240cfa90977e425c9b58c9954e66",
+    "57065680a7b46f6d824ce04f9a18ccce7977a3c229263e623d7b146566e80e49",
+    "57c5d7f5f2d06b915c08f7e68d4722f027fbc0eef98a6daa57a62274f5a9915f",
+    "5a9c727040f6bd58253e4a65662dfef8a67d246cc2cbcfdff485430083e04be7",
+    "5f5ffaac1c9b7ae78bf2abf832987440b8e700b6b8dc32ed0ff31a300d17ac1c",
+    "62df9b5a3584d0d7de24068a1e1a5e2f6feabcb6824fc96cb8e91186e1a81c5a",
+    "7652a068c17a7d28b41d772b9df130efd124b9cce982ad852b39691443ab3fc7",
+    "7eec825f2006f8cb2913148628b8bca1b3d5fc8a91a8210f8dc6d85afa748c7c",
+    "7fd0d124b675b891ec7ad9d1b2fc8417b91c927abc96356da19781a48689ee77",
+    "8255213c12ae3e73747d41d791cdc3c6a51f0dceabda509692191df75efbd9e0",
+    "863cc8a3f97927fb27fdce726de486b211a58451f6d0becb22f9ada541f76d64",
+    "88537d8f25ab52fbf48c0307d9ba57a2b3edd2c036830a576c3e2b7bba6a5f46",
+    "89b0ff209922d2995734b304d81864a6c42dd0497b5cb72510036463cfe95722",
+    "8aaadc63bbd0da6cdde32d18236cbe2a15cea16f6d8bedf1548c7695d153cc09",
+    "8fa38d440c172bd82626e27c3338ffbc028a6cb5dd03660d176a60c1f1a66578",
+    "97e507c6e70c2cb49a0770f73b8db39d18860b9a806eed74a16d02f04dbc8d3d",
+    "9a4b8c980afb4cac4f09b2605c6383ed62f958a170ae97aab1a1c46d80c79ed3",
+    "9b0f211b60a6345e4fc0199c366882acf5e75d063e32e44320f542c935fbd7b6",
+    "9db6317ebd5e3d4e505f7e9815fa96dedefabbeb0f3613e94bc7bb253cef1610",
+    "9eceb6c24c14c997d6235982955cd1b42027dbf7085feb357c943ea6befaef6c",
+    "a38fec292d89f8d9afedcce89863facdff65878ac8030983ce45ef797d80234a",
+    "a4ce993a847d74eea95077cec119b0cc6b3d0256d3c256b6f60495ba75ce7c80",
+    "a6dd341f091d41c85431a182b0a98e93070dfb3f18115b80698e429dff9d1886",
+    "a9c99a6f2c8506e237f36f72895bc26aeeb7e37173aa6361fdb4e3a067fa60af",
+    "ac03ceeae9c41445d0858542fd9645c59e56495db801eafb462e6b022e251c4e",
+    "add2ad5298386fc0e1bc5c1b8babf70a4692b9e55e6e0c2d9ef6f5f50d8939c8",
+    "ba000ac9171bfff7c420ea1715a107f92524d636137e685c53804fbe42b17f04",
+    "ccdd4d6ba078b33950c64f1be6ef76a7af6a9cc9206979317ea2df8e6f736e9c",
+    "cffbd65f3683849c1eab5e79fdb182355f18f3c7ccacd073f2279cf629d1bfd5",
+    "d7b672ecae3dd18eacb15cee6b11cf6272a12637353f6f19677fd975d42d2a56",
+    "d84e7b36e5d5216275495aaf3bee87b9649d73c3bb08379cfc7a81b64bd1fa12",
+    "da2d3de65dcf0c71af311becfb8bd6b144480ca9d7bf758605dade85614d3489",
+    "dc6bfcdcaaa38455e7178e3c1a19dfa4d61190a6f965f017ea81d137bde4df6d",
+    "dd70a6cda1a9a4495081be6a3e544883bb77b912743bb0137bc5b8c8981eaf8b",
+    "e5d36d076b71efa5ebb9cd6687612225a1ce440edbe29c4b17f54f5ce651f9a1",
+    "eb5ada496f786d56126663820552f54fb9462ddbd80f7f1f78a32329c17aeb48",
+    "eba071c71245659b0a2c8e2713168eed86c30f5b488b0ae4fd369d4503ae60e5",
+    "f1af33b6cd59e77c7e43ddd522e575d9886774dd44bcf83767e3be07886b251d",
+    "f85ffcbeaba82a38444494208b1e3df46c0789fe22a58b939bed9b7c902d0074",
+    "f9035788d24a9fd2f76d534eadb9fa938b83953a4d41b6a5ce68263b3aa1ad0b",
+    "fb80c73512e6e42f6914d35b1a40a55d5b6176380005bcaecabb480b27e06761",
+    "fd78b4b607c543fe99b8ab4d671bcb40d8d52d8f0778cbfd8d08e9b37a566842"
+  ],
+  "ownedResourcesAbsentAtEnd": true,
+  "qualification": "Two16-cycle smokes plus two intentional WorkloadDistribution controls; exact v3/v4 native runtime hashes match.",
+  "retainedNonPrimary": "One OID-mapping harness setup failure; eight v3 order-confounded cases (2048 cycles) stopped cleanly at the next source admission.",
+  "coverageMutation": "No new production behavior or maintained code. Existing 554-test source-identical correctness/pack gates passed; this experiment claims native qualification and offline analysis, not new maintained-suite coverage or mutation."
+}

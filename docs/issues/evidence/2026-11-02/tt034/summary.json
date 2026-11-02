@@ -1,0 +1,550 @@
+{
+  "source_head": "a822c75a29d2dfd1f864defab3cae0aecddc669d",
+  "measured_cycles": 4000,
+  "runs": 40,
+  "profiles": {
+    "relaxed": {
+      "contenders": {
+        "respawn": {
+          "suite_ms": [
+            1641.2481,
+            2636.9869,
+            2382.7442,
+            1217.6195,
+            1192.3417
+          ],
+          "median_suite_ms": 1641.2481,
+          "median_application_ms": 4.0286,
+          "median_reset_ms": 7.9505,
+          "preparation_ms": [
+            502.2784,
+            341.4158,
+            345.2245,
+            356.3756,
+            342.446
+          ],
+          "container_preparation_seconds": [
+            35.48022268799832,
+            3.1149530329857953,
+            5.32630502502434,
+            7.87397494999459,
+            3.2512758760130964
+          ],
+          "observed_checkpoint_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_wal_bytes_delta": [
+            6650843.0,
+            6650843.0,
+            6650843.0,
+            6650843.0,
+            6650843.0
+          ],
+          "observed_autovacuum_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "jit_available": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        "emaj": {
+          "suite_ms": [
+            6342.7221,
+            6600.6385,
+            6852.9615,
+            6612.2151,
+            7875.3478
+          ],
+          "median_suite_ms": 6612.2151,
+          "median_application_ms": 7.65665,
+          "median_reset_ms": 56.455349999999996,
+          "preparation_ms": [
+            908.833,
+            776.7091,
+            737.1563,
+            1819.3749,
+            1778.2416
+          ],
+          "container_preparation_seconds": [
+            3.1251816949807107,
+            3.1602253149612807,
+            5.562219895015005,
+            4.445862497028429,
+            5.268568878993392
+          ],
+          "observed_checkpoint_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_wal_bytes_delta": [
+            10308109.0,
+            10308109.0,
+            10308112.0,
+            10308117.0,
+            10308117.0
+          ],
+          "observed_autovacuum_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "jit_available": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      "candidate_over_reference": 4.02877243239459,
+      "median_paired_ratio": 3.864572394630647,
+      "ratio_of_medians_paired_95": [
+        2.5030987070887614,
+        6.604942022911721
+      ],
+      "median_pair_ratios_paired_95": [
+        2.5030987070887614,
+        6.604942022911721
+      ],
+      "expand": false
+    },
+    "minimal-wal": {
+      "contenders": {
+        "respawn": {
+          "suite_ms": [
+            2802.8808,
+            2184.7293,
+            2506.8807,
+            1515.2791,
+            1836.8383
+          ],
+          "median_suite_ms": 2184.7293,
+          "median_application_ms": 4.196899999999999,
+          "median_reset_ms": 8.433599999999998,
+          "preparation_ms": [
+            376.4004,
+            536.1303,
+            339.4362,
+            371.1174,
+            369.8913
+          ],
+          "container_preparation_seconds": [
+            3.1110763889737427,
+            3.113286427978892,
+            3.306544318969827,
+            5.1631922480301,
+            5.004226313030813
+          ],
+          "observed_checkpoint_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_wal_bytes_delta": [
+            11384543.0,
+            11384543.0,
+            11384543.0,
+            11384543.0,
+            11384543.0
+          ],
+          "observed_autovacuum_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "jit_available": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        "emaj": {
+          "suite_ms": [
+            6101.5977,
+            7325.5255,
+            5845.1115,
+            6677.0153,
+            6273.3304
+          ],
+          "median_suite_ms": 6273.3304,
+          "median_application_ms": 7.158849999999999,
+          "median_reset_ms": 51.710049999999995,
+          "preparation_ms": [
+            834.2787,
+            1290.0236,
+            1786.0098,
+            809.2871,
+            880.134
+          ],
+          "container_preparation_seconds": [
+            3.3841430390020832,
+            5.065821540018078,
+            3.1296326110023074,
+            5.2254240740439855,
+            3.2136128839920275
+          ],
+          "observed_checkpoint_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_wal_bytes_delta": [
+            12467916.0,
+            12467917.0,
+            12467911.0,
+            12467917.0,
+            12467905.0
+          ],
+          "observed_autovacuum_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "jit_available": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      "candidate_over_reference": 2.8714451717199014,
+      "median_paired_ratio": 3.353058660402458,
+      "ratio_of_medians_paired_95": [
+        2.1769023142189994,
+        4.406459047709428
+      ],
+      "median_pair_ratios_paired_95": [
+        2.1769023142189994,
+        4.406459047709428
+      ],
+      "expand": false,
+      "configuration_vs_relaxed": {
+        "respawn": {
+          "ratio_of_medians": 1.3311389667412257,
+          "round_paired_95": [
+            0.8284945594534429,
+            1.7077739800582252
+          ]
+        },
+        "emaj": {
+          "ratio_of_medians": 0.9487486878640714,
+          "round_paired_95": [
+            0.7965782031874199,
+            1.1098207393118105
+          ]
+        }
+      }
+    },
+    "no-jit": {
+      "contenders": {
+        "respawn": {
+          "suite_ms": [
+            2741.9411,
+            2807.1591,
+            1816.868,
+            2523.7398,
+            2790.0526
+          ],
+          "median_suite_ms": 2741.9411,
+          "median_application_ms": 4.35145,
+          "median_reset_ms": 8.793199999999999,
+          "preparation_ms": [
+            346.7663,
+            525.6801,
+            485.2515,
+            362.9969,
+            371.2427
+          ],
+          "container_preparation_seconds": [
+            3.1366098760045134,
+            3.392221227986738,
+            5.243512924993411,
+            3.1203108170302585,
+            3.512478218995966
+          ],
+          "observed_checkpoint_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_wal_bytes_delta": [
+            6650843.0,
+            6650843.0,
+            6650843.0,
+            6650843.0,
+            6650843.0
+          ],
+          "observed_autovacuum_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "jit_available": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "emaj": {
+          "suite_ms": [
+            8223.8827,
+            6640.1564,
+            6661.4294,
+            6794.0145,
+            6328.989
+          ],
+          "median_suite_ms": 6661.4294,
+          "median_application_ms": 8.18365,
+          "median_reset_ms": 60.988,
+          "preparation_ms": [
+            1753.3415,
+            843.0147,
+            868.7467,
+            735.4347,
+            865.2685
+          ],
+          "container_preparation_seconds": [
+            5.348751044017263,
+            3.1482835480128415,
+            3.0935758870327845,
+            5.122629210993182,
+            3.2199511080398224
+          ],
+          "observed_checkpoint_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_wal_bytes_delta": [
+            10308123.0,
+            10308113.0,
+            10308113.0,
+            10308110.0,
+            10308111.0
+          ],
+          "observed_autovacuum_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "jit_available": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      "candidate_over_reference": 2.429457510958204,
+      "median_paired_ratio": 2.6920423809142293,
+      "ratio_of_medians_paired_95": [
+        2.268412072231183,
+        3.6664355363185437
+      ],
+      "median_pair_ratios_paired_95": [
+        2.268412072231183,
+        3.6664355363185437
+      ],
+      "expand": false,
+      "configuration_vs_relaxed": {
+        "respawn": {
+          "ratio_of_medians": 1.6706438837613886,
+          "round_paired_95": [
+            0.7625107218810983,
+            2.3399773739356764
+          ]
+        },
+        "emaj": {
+          "ratio_of_medians": 1.0074429369365192,
+          "round_paired_95": [
+            0.8036456497832388,
+            1.2965856883434954
+          ]
+        }
+      }
+    },
+    "no-autovacuum": {
+      "contenders": {
+        "respawn": {
+          "suite_ms": [
+            2780.5731,
+            2798.1957,
+            1165.3819,
+            2318.8756,
+            2700.0761
+          ],
+          "median_suite_ms": 2700.0761,
+          "median_application_ms": 4.3536,
+          "median_reset_ms": 8.6131,
+          "preparation_ms": [
+            355.5558,
+            397.1128,
+            355.9954,
+            477.723,
+            346.7418
+          ],
+          "container_preparation_seconds": [
+            3.0776369940140285,
+            3.827781011990737,
+            5.564264598011505,
+            3.147452384000644,
+            3.40559876995394
+          ],
+          "observed_checkpoint_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_wal_bytes_delta": [
+            6650843.0,
+            6650843.0,
+            6650843.0,
+            6650843.0,
+            6650843.0
+          ],
+          "observed_autovacuum_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "jit_available": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        "emaj": {
+          "suite_ms": [
+            6499.1332,
+            6751.1373,
+            6473.9177,
+            8206.5112,
+            6403.4911
+          ],
+          "median_suite_ms": 6499.1332,
+          "median_application_ms": 8.4993,
+          "median_reset_ms": 56.77845,
+          "preparation_ms": [
+            795.6154,
+            751.6938,
+            781.1513,
+            832.6455,
+            858.0961
+          ],
+          "container_preparation_seconds": [
+            3.160271956003271,
+            5.484086806012783,
+            5.360868060961366,
+            3.240356238966342,
+            3.3475201360415667
+          ],
+          "observed_checkpoint_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "observed_wal_bytes_delta": [
+            10308107.0,
+            10308115.0,
+            10308102.0,
+            10308122.0,
+            10308108.0
+          ],
+          "observed_autovacuum_deltas": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "jit_available": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      "candidate_over_reference": 2.4070185281074115,
+      "median_paired_ratio": 2.4126751749350484,
+      "ratio_of_medians_paired_95": [
+        2.337335853533216,
+        5.555189848066115
+      ],
+      "median_pair_ratios_paired_95": [
+        2.337335853533216,
+        5.555189848066115
+      ],
+      "expand": false,
+      "configuration_vs_relaxed": {
+        "respawn": {
+          "ratio_of_medians": 1.6451358572783725,
+          "round_paired_95": [
+            0.48909232472373665,
+            2.2645153650165892
+          ]
+        },
+        "emaj": {
+          "ratio_of_medians": 0.9828980306463412,
+          "round_paired_95": [
+            0.8131058161012268,
+            1.2411137683648557
+          ]
+        }
+      }
+    }
+  },
+  "uncertainty": "Exact paired bootstrap ratio of medians (3125 resamples); five independent pairs per profile on one shared host.",
+  "comparison_boundary": "100 sequential complete cycles, one database/worker; excludes preparation, warmup, diagnostics/final audit and container disposal.",
+  "decision": "Stop E-Maj candidate for this workload: no profile met the expansion threshold; defer production adoption"
+}

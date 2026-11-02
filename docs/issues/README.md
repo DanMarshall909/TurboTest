@@ -43,6 +43,13 @@ tests that bounded follow-up. The candidate passed qualification but took
 9.217 s against Respawn’s 6.768 s in the paired warm 1,000-test comparison, so
 the report records a stop decision and preserves the negative result.
 
+[TT-034's E-Maj and disposable-settings screen](evidence/2026-11-02/tt034/report.md)
+passed all 4,000 measured cycles, but E-Maj took 2.4–4.0 times Respawn's complete
+100-cycle time across the four configurations. Additional minimal-WAL, JIT-off and
+autovacuum-off settings did not establish a clear gain over already-relaxed
+durability. The report stops this candidate within the measured scope and leaves
+Docker overhead as an untested question.
+
 The maintained correctness gate covers **541 tests**, including **365 fast
 checks**; failures and skips fail verification. It builds the solution and
 separate DynamicScalingExample and records source-bound results. Earlier ticket

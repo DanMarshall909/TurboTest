@@ -103,8 +103,10 @@ def main():
                             assert inspection['Config']['Labels'].get('tt035.owner')==name,'Cleanup ownership'
                             volumes=[m['Name'] for m in inspection['Mounts'] if m['Type']=='volume']
                             receipt['id']=cid;receipt['volumes']=volumes
-                            logs=subprocess.run(DOCKER+['logs',cid],capture_output=True,timeout=30)
-                            (folder/'postgres.log').write_bytes(logs.stdout+logs.stderr)
+                            try:
+                                logs=subprocess.run(DOCKER+['logs',cid],capture_output=True,timeout=30)
+                                (folder/'postgres.log').write_bytes(logs.stdout+logs.stderr)
+                            except Exception as exc:receipt['log_error']=repr(exc)
                             docker('rm','-fv',cid)
                             assert not docker('ps','-aq','--filter','id='+cid).strip()
                             assert not set(volumes).intersection(docker('volume','ls','-q').decode().split())

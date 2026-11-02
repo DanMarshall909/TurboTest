@@ -32,9 +32,9 @@ rng=random.Random(35035); ratios=[]
 for _ in range(20000):
     picked=[rng.choice(rows) for _ in rows]
     ratios.append(statistics.median(r['cached'] for r in picked)/statistics.median(r['respawn'] for r in picked))
-ratios.sort();interval=[ratios[int(.025*len(ratios))],ratios[int(.975*len(ratios))-1]]
+ratios.sort();interval=[ratios[math.ceil(p*len(ratios))-1] for p in [.025,.975]]
 result={'source_head':manifest['head'],'pairs':rows,'suite_medians_ms':medians,'candidate_reference_ratio':medians['cached']/medians['respawn'],
-        'paired_bootstrap_95':interval,'bootstrap':{'seed':35035,'resamples':20000,'unit':'paired round','statistic':'ratio of medians'},
+        'paired_bootstrap_95':interval,'bootstrap':{'seed':35035,'resamples':20000,'unit':'paired round','statistic':'ratio of medians','quantiles':'nearest rank'},
         'cycle_medians_ms':{c:{k:statistics.median(s[k] for s in v) for k in ['OpenMs','ApplicationMs','ResetMs','CycleMs']} for c,v in samples.items()},
         'decision':'2x supported' if interval[1]<.5 else 'gain supported; 2x not supported' if interval[1]<1 else 'no demonstrated gain; not equivalence',
         'validated':{'runs':10,'measured_cycles':10000,'identical_configurations':True,'identical_cached_sql':True,'all_successful_and_cleaned':True}}

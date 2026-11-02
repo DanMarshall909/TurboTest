@@ -1,0 +1,73 @@
+{
+  "source_head": "f444f3b5de2515bbfe710d72c8d50597ffe25cb5",
+  "pairs": [
+    {
+      "pair": 0,
+      "respawn": 5237.4577,
+      "cached": 6105.0051,
+      "ratio": 1.165642846146519
+    },
+    {
+      "pair": 1,
+      "respawn": 9612.876,
+      "cached": 4965.9873,
+      "ratio": 0.5165974574102484
+    },
+    {
+      "pair": 2,
+      "respawn": 3513.553,
+      "cached": 4915.3483,
+      "ratio": 1.398968024674738
+    },
+    {
+      "pair": 3,
+      "respawn": 6453.7216,
+      "cached": 3355.2003,
+      "ratio": 0.519886122760548
+    },
+    {
+      "pair": 4,
+      "respawn": 5067.0424,
+      "cached": 3709.5628,
+      "ratio": 0.7320962619140506
+    }
+  ],
+  "suite_medians_ms": {
+    "respawn": 5237.4577,
+    "cached": 4915.3483
+  },
+  "candidate_reference_ratio": 0.9384989018622527,
+  "paired_bootstrap_95": [
+    0.5165974574102484,
+    1.398968024674738
+  ],
+  "bootstrap": {
+    "seed": 35035,
+    "resamples": 20000,
+    "unit": "paired round",
+    "statistic": "ratio of medians",
+    "quantiles": "nearest rank"
+  },
+  "cycle_medians_ms": {
+    "respawn": {
+      "OpenMs": 0.0059,
+      "ApplicationMs": 5.4186499999999995,
+      "ResetMs": 10.6294,
+      "CycleMs": 16.07365
+    },
+    "cached": {
+      "OpenMs": 0.0029,
+      "ApplicationMs": 4.7246500000000005,
+      "ResetMs": 8.813099999999999,
+      "CycleMs": 13.584399999999999
+    }
+  },
+  "decision": "no demonstrated gain; not equivalence",
+  "validated": {
+    "runs": 10,
+    "measured_cycles": 10000,
+    "identical_configurations": true,
+    "identical_cached_sql": true,
+    "all_successful_and_cleaned": true
+  }
+}

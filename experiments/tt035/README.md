@@ -21,3 +21,5 @@ python3 experiments/tt035/analyze.py artifacts/tt035/measure
 ```
 
 Runner aborts on failure, drift or unproven cleanup, retaining the attempt. No broad Docker cleanup. Retain compiled dependencies and evidence; only exact owned containers and volumes are automatically removed. The source checkpoint and executable hashes bind measurements to code. Reproduction creates new output folders and must preserve previous attempts.
+
+Measured checkpoint: `f444f3b5de2515bbfe710d72c8d50597ffe25cb5`. Later changes preserve disposal failures in the report, attempt all worker disposals, and ensure a failed log capture cannot skip owned container removal. These run after the timed suite. A final two-arm smoke qualifies the revised harness; the original ten measurements stay bound to their original checkpoint/binary. Analysis now uses nearest-rank percentiles consistently; the endpoint correction did not change this dataset's interval. No additional performance rounds were selected.

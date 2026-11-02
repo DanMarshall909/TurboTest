@@ -47,7 +47,13 @@ try
 catch (Exception e) { report["Failure"] = e.ToString(); }
 finally
 {
-    foreach (var w in workers) await w.DisposeAsync();
+    var failures = new List<string>();
+    foreach (var w in workers)
+    {
+        try { await w.DisposeAsync(); }
+        catch (Exception e) { failures.Add($"worker{w.Index}: {e}"); }
+    }
+    if (failures.Count > 0) { report["Succeeded"] = false; report["DisposalFailures"] = failures; }
 }
 report["Workers"] = workers.Select(w => new { w.Index, w.DeleteSql, w.CachedSql, w.Qualification, w.Samples }).ToArray();
 report["ProcessMs"] = timer.Elapsed.TotalMilliseconds;
@@ -124,5 +130,9 @@ sealed class Worker(int index, string contender, string cs) : IAsyncDisposable
             if (record) Samples.Add(sample);
         }
     }
-    public async ValueTask DisposeAsync() { await app.DisposeAsync(); await admin.DisposeAsync(); }
+    public async ValueTask DisposeAsync()
+    {
+        try { await app.DisposeAsync(); }
+        finally { await admin.DisposeAsync(); }
+    }
 }

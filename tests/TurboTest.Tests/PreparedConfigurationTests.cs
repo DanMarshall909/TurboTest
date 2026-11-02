@@ -67,6 +67,7 @@ public class PreparedConfigurationTests
     [InlineData("MemoryLimitMb", 0)]
     [InlineData("MemoryLimitMb", -1)]
     [InlineData("Provider", 987)]
+    [InlineData("ResetFailurePolicy", 987)]
     [InlineData("AutoAllocateResources", 1)]
     [InlineData("StartupWarmDatabases", 0)]
     [InlineData("StartupWarmDatabases", 2)]
@@ -92,6 +93,7 @@ public class PreparedConfigurationTests
             case "IdleDatabaseLifetime": options.IdleDatabaseLifetime = TimeSpan.FromMilliseconds(value); break;
             case "MemoryLimitMb": options.MemoryLimitMb = value; break;
             case "Provider": options.Provider = (TtDatabaseProvider)value; break;
+            case "ResetFailurePolicy": options.ResetFailurePolicy = (TtResetFailurePolicy)value; break;
             case "AutoAllocateResources": options.AutoAllocateResources = true; break;
             case "StartupWarmDatabases": options.StartupWarmDatabases = value; break;
             case "ConnectionStringTemplate": options.ConnectionStringTemplate = "custom-template"; break;

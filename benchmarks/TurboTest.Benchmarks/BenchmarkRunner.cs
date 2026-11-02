@@ -154,6 +154,7 @@ public static class BenchmarkRunner
                     }
                 }
                 finally { await Task.WhenAll(leases.Select(lease => lease.DisposeAsync().AsTask())); }
+                await SettleReturnsAsync();
                 foreach (var rows in new[] { 130, 1300, 13000 })
                 {
                     await using var lease = await fixture.CreateLeaseAsync(cancellationToken: cancellationToken);
@@ -161,6 +162,8 @@ public static class BenchmarkRunner
                     var marker = "preflight-" + Guid.NewGuid().ToString("N");
                     await BenchmarkWorkload.LoadAsync(lease.Context, WorkloadMix.ForTotal(rows), marker, cancellationToken);
                     await BenchmarkWorkload.ValidateMutatedAsync(lease.Context, WorkloadMix.ForTotal(rows), marker, cancellationToken);
+                    await lease.DisposeAsync();
+                    await SettleReturnsAsync();
                 }
             }
             finally { report.PreflightMilliseconds = Stopwatch.GetElapsedTime(preflight).TotalMilliseconds; }
@@ -216,6 +219,7 @@ public static class BenchmarkRunner
                             }
                         }
                     }));
+                    await SettleReturnsAsync();
                 }
                 var completed = samples.OrderBy(sample => sample.Ordinal).ToArray();
                 var elapsed = Stopwatch.GetElapsedTime(phaseStarted).TotalMilliseconds;
@@ -231,6 +235,19 @@ public static class BenchmarkRunner
             stage = logger.Phase = "FinalValidation";
             await using (var final = await fixture.CreateLeaseAsync(cancellationToken: cancellationToken))
                 await BenchmarkWorkload.VerifyBaselineAsync(final.Context, cancellationToken);
+            await SettleReturnsAsync();
+
+            async Task SettleReturnsAsync()
+            {
+                // Return is now a handoff. Preserve preflight capacity and include
+                // physical resets/recreation in each measured phase boundary.
+                while (true)
+                {
+                    var state = fixture.PoolState;
+                    if (state.WaitingResets == 0 && state.ExecutingCleanup == 0) return;
+                    await Task.Delay(1, cancellationToken);
+                }
+            }
         }
         catch (Exception error)
         {

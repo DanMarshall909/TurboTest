@@ -97,9 +97,11 @@ found when making this decision.
 Each lease owns one test database. Use `lease.CreateContext()` for another
 context in the same test. You can dispose an individual context synchronously or
 asynchronously; the lease still owns the database. Always asynchronously dispose
-the lease to close all remaining contexts, readers and transactions and await
-reset. Concurrent/repeated lease disposal waits for the same result, including
-failures. A disposed lease rejects context access and additional contexts.
+the lease to close all remaining contexts, readers and transactions. For prepared
+fixtures, disposal then hands reset ownership to the fixture and finishes; ordinary
+factories await their reset. Concurrent/repeated lease disposal shares the same
+handoff result, including context-cleanup failures. A disposed lease rejects
+context access and additional contexts.
 
 Factory disposal closes outstanding leases and deletes its owned resources.
 Construction or initialization failure closes acquired resources and discards
@@ -223,9 +225,9 @@ context cleanup settles. See the pinned
 ## Prepared fixture baselines
 
 The baseline overload prepares schema and seed data once before returning a
-factory. Each lease receives a validated copy. Ordinary returns now restore
-cached seed rows and sequence state in place; schema changes, foreign-key cycles
-and oversized seed caches use the sealed template. Baselines and row restoration
+factory. Each lease receives a validated copy. Prepared returns restore
+cached seed rows and sequence state in place in the background; schema changes,
+foreign-key cycles and oversized seed caches use the sealed template. Baselines and row restoration
 have passed independent completion review under TT-003 and TT-004.
 
 ```csharp
@@ -277,10 +279,38 @@ the prepared path. Ordinary startup allocation respects `MaxContainers`.
 Adaptive warm databases are available for prepared baseline factories as described
 below. Ordinary factories reject `EnableDynamicScaling`.
 
-Failed reset or validation quarantines the slot. Confirmed deletion starts a
-replacement even without queued demand; schema, seed, sequences and identity
-must verify before it becomes Ready. Recovery permits at most three preparation
-attempts with 100 ms spacing. Unconfirmed deletion keeps the reservation and
+Prepared lease disposal closes its contexts before handing reset to the pool.
+The dirty slot remains unavailable until reset and verification finish. A spare
+Ready slot can serve the next test immediately; if all slots are busy, acquisition
+waits. `ResetConcurrency` still bounds reset work, and fixture disposal joins all
+accepted work before deleting the host. A drain timeout retains that work through
+its cleanup capability. With one slot, the next acquisition still waits for reset.
+
+`ResetFailurePolicy` is captured when a prepared fixture is created:
+
+- `TtResetFailurePolicy.StopFixture` (default) rejects queued and later acquisitions
+  after a background reset fails. Physical cleanup continues.
+- `TtResetFailurePolicy.RecoverAndReport` attempts bounded recovery and permits
+  later acquisitions to use verified replacements.
+
+Both policies retain reset failures for fixture shutdown, including a failure
+already reported by acquisition. Always await fixture disposal and handle any
+reported cleanup capability. Context-cleanup errors still fail lease disposal
+immediately. Neither policy makes a dirty database available for reuse.
+
+```csharp
+await using var fixture = await Tt.CreateFactoryAsync(baseline, options =>
+{
+    options.PoolSize = 4;
+    options.ResetConcurrency = 2;
+    options.ResetFailurePolicy = TtResetFailurePolicy.RecoverAndReport;
+});
+```
+
+Failed reset or validation retires the slot. With `RecoverAndReport`, confirmed
+deletion starts a replacement even without queued demand; schema, seed, sequences
+and identity must verify before it becomes Ready. Recovery permits at most three
+preparation attempts with 100 ms spacing. Unconfirmed deletion keeps the reservation and
 permits at most three deletion attempts; cleanup retries cannot restart the
 preparation budget. Initial startup preparation fails once and drains rather
 than starting recovery. Terminal exhaustion settles waiters with a lifecycle
@@ -320,9 +350,10 @@ the row-restoration callback and its validation, while `Recreation` and
 and row validation separately from `RecreationValidationMilliseconds`.
 
 `Return` starts at the first lease disposal request and ends at the shared
-receipt, including context cleanup and the return outcome. It can end in
-retirement during shutdown. `Cycle` starts at checkout and ends at that receipt,
-including the test body. `Shutdown` measures actual factory closure through
+receipt, including context cleanup and the return outcome. For prepared fixtures
+that receipt ends at background-reset handoff; reset execution is recorded
+separately. It can end in retirement during shutdown. `Cycle` starts at checkout
+and ends at that receipt, including the test body. `Shutdown` measures actual factory closure through
 cleanup of leases, jobs and the owned pool; a caller deadline can expire while
 that measurement remains pending. These overlapping durations must not be added
 together. Events contain no credentials or test payloads, and a throwing logger

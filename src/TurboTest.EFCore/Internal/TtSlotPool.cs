@@ -487,8 +487,9 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
         => ReturnAsync(reservation, async (resource, token) => { await reset(resource, token); return true; });
 
     internal Task ReturnAsync(Reservation reservation, Func<T, CancellationToken, Task<bool>> reset,
-        Action<TimeSpan>? observeWait = null, Func<T, CancellationToken, Task>? prepareReplacement = null)
-        => ResetAsync(reservation, reset, BeginReturn(reservation), observeWait, prepareReplacement);
+        Action<TimeSpan>? observeWait = null, Func<T, CancellationToken, Task>? prepareReplacement = null,
+        bool backgroundReturn = false, bool stopOnFailure = false)
+        => ResetAsync(reservation, reset, BeginReturn(reservation), observeWait, prepareReplacement, backgroundReturn, stopOnFailure);
 
     internal async Task WarmAsync(int count, CancellationToken cancellationToken)
     {
@@ -532,7 +533,8 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
     }
 
     private async Task ResetAsync(Reservation reservation, Func<T, CancellationToken, Task<bool>> reset,
-        TaskCompletionSource settled, Action<TimeSpan>? observeWait, Func<T, CancellationToken, Task>? prepareReplacement)
+        TaskCompletionSource settled, Action<TimeSpan>? observeWait, Func<T, CancellationToken, Task>? prepareReplacement,
+        bool backgroundReturn, bool stopOnFailure)
     {
         var permitHeld = false;
         try
@@ -556,8 +558,24 @@ internal sealed class TtSlotPool<T> : IAsyncDisposable where T : class
             }
             PublishReady(reservation);
         }
+        catch (OperationCanceledException error) when (backgroundReturn && _closing.IsCancellationRequested &&
+                                                      error.CancellationToken == _closing.Token)
+        {
+            // Shutdown owns deletion. Only its own cancellation is a normal drain;
+            // material reset/cleanup failures still reach the background ledger.
+            lock (_gate) _owned[reservation] = State.Retiring;
+        }
         catch (Exception error)
         {
+            if (stopOnFailure)
+            {
+                lock (_gate)
+                {
+                    // Reject demand before compensation can reserve/publish a replacement.
+                    _failure ??= error as TtLifecycleException ?? new TtLifecycleException("SlotReset", error);
+                    FailWaiters(_failure);
+                }
+            }
             if (!permitHeld)
             {
                 await _resetLimit.WaitAsync();

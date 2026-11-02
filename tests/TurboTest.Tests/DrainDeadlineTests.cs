@@ -10,9 +10,11 @@ namespace TurboTest.Tests;
 [Collection("Static lifecycle")]
 public class DrainDeadlineTests
 {
-    [Fact]
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
     [Trait("Category", "PostgreSQL")]
-    public async Task A_timed_out_prepared_drain_retains_the_actual_reset_session_until_return_settles()
+    public async Task A_timed_out_prepared_drain_retains_the_actual_reset_session_until_reset_settles(bool materialFailure)
     {
         var prefix = $"tt-reset-drain-{Guid.NewGuid():N}";
         var password = Guid.NewGuid().ToString("N");
@@ -37,6 +39,7 @@ public class DrainDeadlineTests
             resetSession = (int)(await query.ExecuteScalarAsync())!;
             entered.TrySetResult();
             await release.Task;
+            if (materialFailure) throw new IOException("private-late-reset");
         });
         var lease = await fixture.CreateLeaseAsync();
         var observerOptions = new NpgsqlConnectionStringBuilder(lease.Context.Database.GetDbConnection().ConnectionString)
@@ -56,7 +59,7 @@ public class DrainDeadlineTests
             cleanup = Assert.IsType<TtCleanup>(failure.Cleanup);
             Assert.Equal(new[] { original }, cleanup.OwnedResourceIds);
             Assert.Equal((1, 1, 0), (fixture.PoolState.Reserved, fixture.PoolState.ExecutingResets, fixture.PoolState.Ready));
-            Assert.False(returning.IsCompleted);
+            Assert.True(returning.IsCompletedSuccessfully);
             await Assert.ThrowsAsync<ObjectDisposedException>(() => fixture.CreateLeaseAsync());
             Assert.Equal(original, Assert.Single(await OwnedAsync()).ID);
             await using (var observer = new NpgsqlConnection(observerOptions.ConnectionString))
@@ -70,7 +73,14 @@ public class DrainDeadlineTests
             Assert.False(pending.IsCompleted);
             release.TrySetResult();
             await returning.WaitAsync(TimeSpan.FromSeconds(10));
-            await pending.WaitAsync(TimeSpan.FromSeconds(10));
+            if (materialFailure)
+            {
+                var late = await Assert.ThrowsAsync<TtLifecycleException>(() => pending.WaitAsync(TimeSpan.FromSeconds(10)));
+                Assert.Contains("IOException", late.Message);
+                Assert.DoesNotContain("private-late-reset", late.ToString());
+                await cleanup.RetryCleanupAsync();
+            }
+            else await pending.WaitAsync(TimeSpan.FromSeconds(10));
             Assert.Equal((1, 0, 0), (resetCalls, fixture.PoolState.Reserved, fixture.PoolState.Ready));
             Assert.Empty(cleanup.OwnedResourceIds);
             Assert.Empty(await OwnedAsync());

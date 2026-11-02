@@ -21,7 +21,7 @@ public class PreparedRecoveryTests
                 context.Users.Add(new User { Email = "recovery-seed@example.test" });
                 await context.SaveChangesAsync(token);
             });
-        await using var fixture = await Tt.CreatePreparedFactoryAsync(new TtOptions { PoolSize = 1 }, definition, default,
+        var fixture = await Tt.CreatePreparedFactoryAsync(new TtOptions { PoolSize = 1, ResetFailurePolicy = TtResetFailurePolicy.RecoverAndReport }, definition, default,
             beforeVerification: async source =>
             {
                 var candidate = Interlocked.Increment(ref clones);
@@ -47,8 +47,7 @@ public class PreparedRecoveryTests
         Task<TtLease<TestDbContext>>? waiting = null;
         try
         {
-            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => dirty.DisposeAsync().AsTask());
-            Assert.Equal("BaselineRowReset", failure.Stage);
+            await dirty.DisposeAsync();
             waiting = fixture.CreateLeaseAsync(cancellationToken: deadline.Token);
             await validCandidate.Task.WaitAsync(TimeSpan.FromSeconds(10));
             Assert.False(waiting.IsCompleted);
@@ -68,6 +67,10 @@ public class PreparedRecoveryTests
             command.Parameters.Add(new NpgsqlParameter { Value = new[] { originalDatabase, corruptDatabase! } });
             Assert.Equal(0L, await command.ExecuteScalarAsync());
             Assert.Equal(3, clones);
+            await clean.DisposeAsync();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => fixture.DisposeAsync().AsTask());
+            Assert.Contains("BaselineRowReset", failure.Message);
+            Assert.Empty(fixture.OwnedResourceIds);
         }
         finally
         {
@@ -78,6 +81,8 @@ public class PreparedRecoveryTests
                 await Record.ExceptionAsync(async () => { await using var lease = await waiting; });
             }
             await Record.ExceptionAsync(() => dirty.DisposeAsync().AsTask());
+            var failure = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
+            if (failure is TtLifecycleException { Cleanup: { } cleanup }) await cleanup.RetryCleanupAsync();
         }
     }
 }

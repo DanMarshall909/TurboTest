@@ -6,6 +6,8 @@ internal static class TtPreparedConfiguration
 {
     internal static void Validate(TtOptions options)
     {
+        if (!Enum.IsDefined(options.ResetFailurePolicy))
+            throw new ArgumentOutOfRangeException(nameof(TtOptions.ResetFailurePolicy));
         if (options.Provider != TtDatabaseProvider.PostgreSql)
             throw new ArgumentOutOfRangeException(nameof(TtOptions.Provider), "Prepared fixtures require PostgreSQL.");
         if (options.PoolSize <= 0)

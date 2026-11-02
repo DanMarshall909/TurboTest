@@ -21,7 +21,7 @@ public class BaselineRestoreTests
                 context.Users.Add(new User { Email = "failure-seed@example.com" });
                 await context.SaveChangesAsync(cancellation);
             });
-        await using var fixture = await Tt.CreatePreparedFactoryAsync(new TtOptions { PoolSize = 1 }, baseline, default,
+        var fixture = await Tt.CreatePreparedFactoryAsync(new TtOptions { PoolSize = 1, ResetFailurePolicy = TtResetFailurePolicy.RecoverAndReport }, baseline, default,
             afterSequenceRestore: async (connection, transaction) =>
             {
                 if (!inject || boundary != "sequence") return;
@@ -36,32 +36,42 @@ public class BaselineRestoreTests
                 await using var command = new NpgsqlCommand("DELETE FROM \"Users\"", connection);
                 await command.ExecuteNonQueryAsync();
             });
-        var lease = await fixture.CreateLeaseAsync();
-        var original = await DatabaseOidAsync(lease.Context);
-        var originalName = lease.Context.Database.GetDbConnection().Database;
-        await lease.Context.Users.ExecuteUpdateAsync(update => update.SetProperty(user => user.Email, "changed-payload"));
-        lease.Context.Users.Add(new User { Email = "added-payload" });
-        await lease.Context.SaveChangesAsync();
-        var error = await Record.ExceptionAsync(() => lease.DisposeAsync().AsTask());
-        inject = false;
-        var failure = Assert.IsType<TtLifecycleException>(error);
-        Assert.Equal("BaselineRowReset", failure.Stage);
-        Assert.DoesNotContain("secret-payload", failure.ToString());
-        Assert.DoesNotContain("changed-payload", failure.ToString());
-        if (boundary == "sequence") Assert.Equal(1L, valueAfterRollback);
-        Assert.Same(failure, await Record.ExceptionAsync(() => lease.DisposeAsync().AsTask()));
-        await using var recovered = await fixture.CreateLeaseAsync();
-        Assert.NotEqual(original, await DatabaseOidAsync(recovered.Context));
-        var seed = await recovered.Context.Users.SingleAsync();
-        Assert.Equal((1, "failure-seed@example.com"), (seed.Id, seed.Email));
-        var connection = (NpgsqlConnection)recovered.Context.Database.GetDbConnection();
-        await using var database = new NpgsqlCommand("SELECT count(*) FROM pg_database WHERE datname = $1", connection);
-        database.Parameters.Add(new NpgsqlParameter { Value = originalName });
-        Assert.Equal(0L, await database.ExecuteScalarAsync());
-        var added = new User { Email = "after-failure@example.com" };
-        recovered.Context.Users.Add(added);
-        await recovered.Context.SaveChangesAsync();
-        Assert.Equal(2, added.Id);
+        try
+        {
+            var lease = await fixture.CreateLeaseAsync();
+            var original = await DatabaseOidAsync(lease.Context);
+            var originalName = lease.Context.Database.GetDbConnection().Database;
+            await lease.Context.Users.ExecuteUpdateAsync(update => update.SetProperty(user => user.Email, "changed-payload"));
+            lease.Context.Users.Add(new User { Email = "added-payload" });
+            await lease.Context.SaveChangesAsync();
+            await lease.DisposeAsync();
+            await lease.DisposeAsync();
+            await using var recovered = await fixture.CreateLeaseAsync();
+            inject = false;
+            if (boundary == "sequence") Assert.Equal(1L, valueAfterRollback);
+            Assert.NotEqual(original, await DatabaseOidAsync(recovered.Context));
+            var seed = await recovered.Context.Users.SingleAsync();
+            Assert.Equal((1, "failure-seed@example.com"), (seed.Id, seed.Email));
+            var connection = (NpgsqlConnection)recovered.Context.Database.GetDbConnection();
+            await using var database = new NpgsqlCommand("SELECT count(*) FROM pg_database WHERE datname = $1", connection);
+            database.Parameters.Add(new NpgsqlParameter { Value = originalName });
+            Assert.Equal(0L, await database.ExecuteScalarAsync());
+            var added = new User { Email = "after-failure@example.com" };
+            recovered.Context.Users.Add(added);
+            await recovered.Context.SaveChangesAsync();
+            Assert.Equal(2, added.Id);
+            await recovered.DisposeAsync();
+            var failure = await Assert.ThrowsAsync<TtLifecycleException>(() => fixture.DisposeAsync().AsTask());
+            Assert.Contains("BaselineRowReset", failure.Message);
+            Assert.DoesNotContain("secret-payload", failure.ToString());
+            Assert.DoesNotContain("changed-payload", failure.ToString());
+            Assert.Empty(fixture.OwnedResourceIds);
+        }
+        finally
+        {
+            var failure = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
+            if (failure is TtLifecycleException { Cleanup: { } cleanup }) await cleanup.RetryCleanupAsync();
+        }
     }
 
     [Fact]

@@ -53,6 +53,7 @@ public class PreparedRewarmRecoveryTests
         var original = await fixture.CreateLeaseAsync();
         var identity = await PooledResetTests.ReadIdentityAsync(original.Context);
         await original.DisposeAsync();
+        await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 1);
         await fixture.MaintainIdleAsync();
         using var cancel = new CancellationTokenSource(TimeSpan.FromSeconds(30));
         var waiting = fixture.CreateLeaseAsync(cancellationToken: cancel.Token);

@@ -51,6 +51,7 @@ public class PreparedMaintenanceDrainTests
             });
         var initial = await fixture.CreateLeaseAsync();
         await initial.DisposeAsync();
+        await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 1);
         await fixture.MaintainIdleAsync();
         var waiting = fixture.CreateLeaseAsync();
         TtCleanup? cleanup = null;
@@ -135,6 +136,7 @@ public class PreparedMaintenanceDrainTests
         var heldIdentity = await PooledResetTests.ReadIdentityAsync(context);
         var idle = await fixture.CreateLeaseAsync();
         await idle.DisposeAsync();
+        await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 1);
         await fixture.MaintainIdleAsync();
         var waiting = fixture.CreateLeaseAsync();
         await verifying.Task.WaitAsync(TimeSpan.FromSeconds(5));
@@ -220,6 +222,7 @@ public class PreparedMaintenanceDrainTests
         {
             var lease = await fixture.CreateLeaseAsync();
             await lease.DisposeAsync();
+            await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 1);
             await fixture.MaintainIdleAsync();
             waiting = fixture.CreateLeaseAsync();
             await verifying.Task.WaitAsync(TimeSpan.FromSeconds(5));
@@ -308,6 +311,7 @@ public class PreparedMaintenanceDrainTests
             var lease = await fixture.CreateLeaseAsync();
             await lease.Context.Database.OpenConnectionAsync();
             await lease.DisposeAsync();
+            await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 1);
             var host = Assert.Single(await OwnedAsync()).ID;
             maintenance = fixture.MaintainIdleAsync(cancel.Token);
             await deleting.Task.WaitAsync(TimeSpan.FromSeconds(5));

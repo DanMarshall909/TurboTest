@@ -23,6 +23,9 @@ public class BenchmarkRunnerTests
             Assert.NotNull(report.PreflightState);
             Assert.Equal(startup, report.StartupState!.Reserved);
             Assert.Equal(startup, report.PreflightState!.Reserved);
+            Assert.Equal((0, 0), (report.PreflightState.WaitingResets, report.PreflightState.ExecutingResets));
+            Assert.All(report.Phases, phase =>
+                Assert.Equal((0, 0), (phase.EndState!.WaitingResets, phase.EndState.ExecutingResets)));
             Assert.Equal(8, report.Samples.Count);
             Assert.All(report.Samples, sample => Assert.Contains(sample.Database, report.KnownDatabases));
             Assert.InRange(report.KnownDatabases.Length, startup, 8);

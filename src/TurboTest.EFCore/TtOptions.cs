@@ -7,6 +7,13 @@ namespace TurboTest.EFCore;
 /// </summary>
 public class TtOptions
 {
+    /// <summary>
+    /// Failure handling for prepared fixtures' background resets. Captured at fixture creation.
+    /// Both policies report retained reset failures when the fixture is disposed.
+    /// Ordinary factories keep their awaited return behavior.
+    /// </summary>
+    public TtResetFailurePolicy ResetFailurePolicy { get; set; } = TtResetFailurePolicy.StopFixture;
+
     internal TtOptions Snapshot() => (TtOptions)MemberwiseClone();
     /// <summary>
     /// Configuration section name for IConfiguration binding

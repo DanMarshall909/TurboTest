@@ -86,7 +86,7 @@ public static class BenchmarkCommand
                 ExpectedCases = cases.Length, CompletedCycles = completed, TotalMilliseconds = elapsed,
                 FullSuiteCyclesPerSecond = elapsed > 0 ? completed * 1000 / elapsed : 0,
                 Percentiles = "p50 conventional median; p95 nearest rank ceil(.95*n); max/count; milliseconds. Failed/incomplete runs remain rejected.",
-                Timing = "Checkout: public request to lease. Return: dispose request through receipt. Cycle includes baseline checks, load, validation and return. Startup/preflight/idle/monitor stop/drain are retained separately and included in total. Operation validation is a subset, not an additional cost.",
+                Timing = "Checkout: public request to lease. Return: dispose request through background-reset handoff. Cycle includes baseline checks, load, validation and handoff. Phase wall time also includes settling physical resets. Startup/preflight/idle/monitor stop/drain are retained separately and included in total. Operation validation is a subset, not an additional cost.",
                 Scope = smoke ? "Smoke boundary verification; no representative performance conclusion."
                     : adaptive ? "Local repeated fixed/adaptive comparison: equal startup2 pair and already-warm fixed8 control. Phase-specific first/renewed/repeated/heavy/idle results and actual targets remain in each case; no universal50ms guarantee."
                     : "Local repeated fixed/explicit-parking comparison; no universal50ms guarantee. Source/image/runtime/resource details and raw events reside in each case report.",

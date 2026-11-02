@@ -18,8 +18,8 @@ public class ResetTimingTests
         var resets = 0; var deletions = 0;
         var baseline = new TtBaselineDefinition<TestDbContext>("native-timing-boundary-v1", TtSchemaInitialization.EnsureCreated,
             async (context, token) => { context.Users.Add(new User { Email = "native-seed@example.test" }); await context.SaveChangesAsync(token); });
-        await using var fixture = await Tt.CreatePreparedFactoryAsync(
-            new TtOptions { PoolSize = 1, Logger = logger, LogLevel = LogLevel.Debug }, baseline, default,
+        var fixture = await Tt.CreatePreparedFactoryAsync(
+            new TtOptions { PoolSize = 1, Logger = logger, LogLevel = LogLevel.Debug, ResetFailurePolicy = TtResetFailurePolicy.RecoverAndReport }, baseline, default,
             afterRowCommit: _ =>
             {
                 if (Interlocked.Increment(ref resets) == 1)
@@ -42,8 +42,8 @@ public class ResetTimingTests
             await deleting.Task.WaitAsync(TimeSpan.FromSeconds(10));
             clock.Advance(TimeSpan.FromSeconds(5));
             release.SetResult();
-            var error = await Assert.ThrowsAsync<TtLifecycleException>(() => returning);
-            Assert.Contains("IOException", error.Message);
+            await returning;
+            await PreparedTestWait.UntilAsync(() => logger.Records.Count == 1);
             var record = Assert.Single(logger.Records);
             Assert.Equal(2000d, record["ResetExecutionMilliseconds"]);
             Assert.Equal(0d, record["ResetPermitWaitMilliseconds"]);
@@ -51,8 +51,17 @@ public class ResetTimingTests
             Assert.Equal(5000d, recovery["DurationMilliseconds"]);
             await using var next = await fixture.CreateLeaseAsync();
             Assert.Equal("native-seed@example.test", (await next.Context.Users.SingleAsync()).Email);
+            await next.DisposeAsync();
+            var error = await Assert.ThrowsAsync<TtLifecycleException>(() => fixture.DisposeAsync().AsTask());
+            Assert.Contains("IOException", error.Message);
         }
-        finally { release.TrySetResult(); await Record.ExceptionAsync(() => returning); }
+        finally
+        {
+            release.TrySetResult();
+            await Record.ExceptionAsync(() => returning);
+            var error = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
+            if (error is TtLifecycleException { Cleanup: { } cleanup }) await cleanup.RetryCleanupAsync();
+        }
     }
 
     [Theory]
@@ -69,31 +78,42 @@ public class ResetTimingTests
                 await context.SaveChangesAsync(token);
             });
         var callbacks = 0;
-        await using var fixture = await Tt.CreatePreparedFactoryAsync(
-            new TtOptions { PoolSize = 1, Logger = logger, LogLevel = LogLevel.Debug }, definition, default,
+        var fixture = await Tt.CreatePreparedFactoryAsync(
+            new TtOptions { PoolSize = 1, Logger = logger, LogLevel = LogLevel.Debug, ResetFailurePolicy = TtResetFailurePolicy.RecoverAndReport }, definition, default,
             afterRowCommit: _ =>
             {
                 if (Interlocked.Increment(ref callbacks) == 1 && failReset)
                     throw new IOException("private-reset-payload");
                 return Task.CompletedTask;
             });
-        var lease = await fixture.CreateLeaseAsync();
-        lease.Context.Users.Add(new User { Email = "private-load@example.test" });
-        await lease.Context.SaveChangesAsync();
-        var result = await Record.ExceptionAsync(() => lease.DisposeAsync().AsTask());
-        if (failReset)
+        try
         {
-            var error = Assert.IsType<TtLifecycleException>(result);
-            Assert.Contains("IOException", error.Message);
-            Assert.DoesNotContain("UnauthorizedAccessException", error.Message);
-            Assert.DoesNotContain("private-reset", error.Message);
+            var lease = await fixture.CreateLeaseAsync();
+            lease.Context.Users.Add(new User { Email = "private-load@example.test" });
+            await lease.Context.SaveChangesAsync();
+            await lease.DisposeAsync();
+            await PreparedTestWait.UntilAsync(() => logger.Records.Count == 1);
+            var record = Assert.Single(logger.Records);
+            Assert.Equal(!failReset, record["Succeeded"]);
+            Assert.DoesNotContain("private-", string.Join(" ", record.Values));
+            await using var next = await fixture.CreateLeaseAsync();
+            Assert.Equal("private-seed@example.test", (await next.Context.Users.SingleAsync()).Email);
+            await next.DisposeAsync();
+            var result = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
+            if (failReset)
+            {
+                var error = Assert.IsType<TtLifecycleException>(result);
+                Assert.Contains("IOException", error.Message);
+                Assert.DoesNotContain("UnauthorizedAccessException", error.Message);
+                Assert.DoesNotContain("private-reset", error.Message);
+            }
+            else Assert.Null(result);
         }
-        else Assert.Null(result);
-        var record = Assert.Single(logger.Records);
-        Assert.Equal(!failReset, record["Succeeded"]);
-        Assert.DoesNotContain("private-", string.Join(" ", record.Values));
-        await using var next = await fixture.CreateLeaseAsync();
-        Assert.Equal("private-seed@example.test", (await next.Context.Users.SingleAsync()).Email);
+        finally
+        {
+            var error = await Record.ExceptionAsync(() => fixture.DisposeAsync().AsTask());
+            if (error is TtLifecycleException { Cleanup: { } cleanup }) await cleanup.RetryCleanupAsync();
+        }
     }
 
     [Fact]
@@ -126,7 +146,8 @@ public class ResetTimingTests
             firstReturn = first.DisposeAsync().AsTask();
             await entered.Task.WaitAsync(TimeSpan.FromSeconds(30));
             secondReturn = second.DisposeAsync().AsTask();
-            Assert.False(secondReturn.IsCompleted);
+            await Task.WhenAll(firstReturn, secondReturn);
+            Assert.True(secondReturn.IsCompletedSuccessfully);
             using var queued = new CancellationTokenSource(TimeSpan.FromSeconds(5));
             while (fixture.PoolState.WaitingResets == 0) await Task.Delay(1, queued.Token);
             Assert.Equal((2, 1, 1, 0), (fixture.PoolState.Reserved, fixture.PoolState.WaitingResets,
@@ -134,6 +155,7 @@ public class ResetTimingTests
             await Task.Delay(25);
             release.SetResult();
             await Task.WhenAll(firstReturn, secondReturn);
+            await PreparedTestWait.UntilAsync(() => logger.Records.Count == 2);
             var records = logger.Records.ToArray();
             Assert.Equal(2, records.Length);
             var validationRecords = logger.Timings.Where(record => Equals(record["Operation"], "ResetValidation")).ToArray();

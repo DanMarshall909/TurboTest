@@ -53,8 +53,9 @@ public class PreparationBudgetTests
             while (pool.Snapshot.WaitingResets == 0) await Task.Delay(1, queued.Token);
             Assert.Equal((4, 2, 1, 1), (pool.Snapshot.Reserved, pool.Snapshot.ExecutingResets,
                 pool.Snapshot.WaitingResets, pool.Snapshot.Ready));
-            releaseResets.TrySetResult();
             await Task.WhenAll(returns);
+            releaseResets.TrySetResult();
+            await PreparedTestWait.UntilAsync(() => pool.Snapshot.Ready == 4);
             Assert.Equal((4, 4, 0, 0), (pool.Snapshot.Reserved, pool.Snapshot.Ready,
                 pool.Snapshot.WaitingResets, pool.Snapshot.ExecutingResets));
         }

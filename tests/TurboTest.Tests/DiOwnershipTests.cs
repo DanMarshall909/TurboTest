@@ -67,8 +67,8 @@ public class DiOwnershipTests
         Assert.Equal("postgres:16-alpine", configuredHost.Config.Image);
         Assert.Equal(192L * 1024 * 1024, configuredHost.HostConfig.Memory);
         await a.DisposeAsync();
-        Assert.Contains(400, logger.Events);
         await first.DisposeAsync();
+        Assert.Contains(400, logger.Events);
         Assert.Empty(await OwnedAsync(firstPrefix));
         Assert.Single(await OwnedAsync(otherPrefix));
         Assert.Equal("other-di@example.test", (await otherContext.Users.SingleAsync()).Email);

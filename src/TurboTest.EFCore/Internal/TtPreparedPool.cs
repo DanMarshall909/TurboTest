@@ -71,6 +71,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     private readonly TtCapacityMonitor? _monitor;
     private readonly TtAdministratorConnections _administrators;
     private readonly object _lifecycleGate = new();
+    private readonly TtBackgroundReturns _returns = new();
     private NpgsqlDataSource? _administrator;
     private BaselineIdentity? _identity;
     private TtBaselineSnapshot? _snapshot;
@@ -238,7 +239,11 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
     public async Task<TtDatabase> GetDatabaseAsync(CancellationToken cancellationToken = default)
     {
         var reservation = await _slots.AcquireAsync(cancellationToken);
-        return new TtDatabase(reservation.Value.Source, () => ReturnAsync(reservation), () => _slots.DiscardAsync(reservation));
+        return new TtDatabase(reservation.Value.Source, () =>
+        {
+            _returns.Start(() => ReturnAsync(reservation));
+            return Task.CompletedTask;
+        }, () => _slots.DiscardAsync(reservation));
     }
 
     public Task MaintainIdleAsync(CancellationToken cancellationToken = default)
@@ -411,7 +416,8 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
                     _telemetry.Record("ResetValidation", validation, validationOutcome);
                 }
             }, duration => wait = duration,
-                (slot, token) => PrepareSlotAsync(slot, token, duration => recreationValidation += duration));
+                (slot, token) => PrepareSlotAsync(slot, token, duration => recreationValidation += duration),
+                backgroundReturn: true, stopOnFailure: _options.ResetFailurePolicy == TtResetFailurePolicy.StopFixture);
             succeeded = true;
         }
         finally
@@ -520,9 +526,13 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
         await _gate.WaitAsync();
         try
         {
+            // Factory drain has joined all lease handoffs. Seal the return ledger,
+            // then cancel slot work so resets queued behind maintenance can settle.
+            var returns = _returns.DrainAsync();
             Exception? first = null;
             try { await _slots.RetryCleanupAsync(); }
             catch (Exception error) { first ??= error; }
+            await returns;
             // Slot drain cancels admitted lifecycle work before the monitor joins it.
             if (_monitor is not null) await _monitor.JoinAsync();
             if (first is null)
@@ -533,6 +543,7 @@ internal sealed class TtPreparedPool<TContext> : ITtDatabasePool where TContext 
             if (first is null)
                 _rowReset = null;
             var failures = _monitor?.TakeFailures().ToList() ?? [];
+            failures.AddRange(_returns.TakeFailures());
             if (first is not null) failures.Insert(0, first);
             if (failures.Count > 0)
                 throw new TtLifecycleException("PreparedPoolDispose", failures.Count == 1 ? failures[0] : new AggregateException(failures));

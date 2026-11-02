@@ -77,8 +77,10 @@ explicit. A canceled caller does not waive lease, monitor or fixture cleanup.
 
 Checkout measures the public request through lease publication. Return measures
 the disposal request through its shared receipt, including context cleanup and
-restoration. Cycle includes baseline verification, loading, independent workload
-checks and return. Detailed queue/permit/execution/validation/recreation/rewarm
+background-reset handoff. Cycle includes baseline verification, loading,
+independent workload checks and handoff. Preflight waits for its returns before
+requesting another lease; each measured phase includes settling its physical
+resets before recording wall time. Detailed queue/permit/execution/validation/recreation/rewarm
 events overlap these boundaries; do not sum them or substitute slot rewarm for
 request checkout. The warm 50 ms aspiration concerns verified row restoration of
 the named small 130-row workload, including validation; queue, test body, startup,

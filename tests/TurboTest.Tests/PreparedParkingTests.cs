@@ -38,6 +38,7 @@ public class PreparedParkingTests
         var original = await fixture.CreateLeaseAsync();
         var identity = await PooledResetTests.ReadIdentityAsync(original.Context);
         await original.DisposeAsync();
+        await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 1);
         await fixture.MaintainIdleAsync();
         using var cancel = new CancellationTokenSource(TimeSpan.FromSeconds(15));
         var waiting = fixture.CreateLeaseAsync(cancellationToken: cancel.Token);
@@ -110,6 +111,7 @@ public class PreparedParkingTests
         await observer.OpenAsync();
         var oid = await ReadAsync<uint>("SELECT oid FROM pg_database WHERE datname = $1", identity.Database);
         await lease.DisposeAsync();
+        await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 1);
         Assert.True(await ReadAsync<long>("SELECT count(*) FROM pg_stat_activity WHERE datname = $1 AND usename = current_user", identity.Database) > 0);
         await fixture.MaintainIdleAsync();
         Assert.Equal(0L, await ReadAsync<long>("SELECT count(*) FROM pg_stat_activity WHERE datname = $1 AND usename = current_user", identity.Database));

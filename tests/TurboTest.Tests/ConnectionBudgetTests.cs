@@ -86,10 +86,11 @@ public class ConnectionBudgetTests
                 await Task.Delay(5, deadline.Token);
             Assert.Equal((2, 1, 1), (fixture.PoolState.ExecutingResets,
                 fixture.PoolState.ExecutingAdministratorConnections, fixture.PoolState.WaitingAdministratorConnections));
-            Assert.False(secondReturn.IsCompleted);
+            await Task.WhenAll(firstReturn, secondReturn);
+            Assert.True(secondReturn.IsCompletedSuccessfully);
             Assert.Equal(1, await AdministratorCountAsync(observer.Context));
             release.TrySetResult();
-            await Task.WhenAll(firstReturn, secondReturn);
+            await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 2);
             Assert.Equal((0, 0), (fixture.PoolState.ExecutingAdministratorConnections,
                 fixture.PoolState.WaitingAdministratorConnections));
             Assert.Equal(0, await AdministratorCountAsync(observer.Context));
@@ -125,6 +126,7 @@ public class ConnectionBudgetTests
         using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
             await lease.DisposeAsync();
+            await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 1);
             Assert.Equal(1, fixture.PoolState.Ready);
             Assert.Equal(0, fixture.PoolState.ExecutingAdministratorConnections);
             Assert.Equal(0, await AdministratorCountAsync(observer.Context));

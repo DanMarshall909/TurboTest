@@ -35,6 +35,7 @@ public class PreparedRetentionTests
         var original = await fixture.CreateLeaseAsync();
         var identity = await PooledResetTests.ReadIdentityAsync(original.Context);
         await original.DisposeAsync();
+        await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 1);
         clock.Advance(lifetime - TimeSpan.FromTicks(1));
         await fixture.MaintainIdleAsync();
         Assert.Equal((1, 1, 0), (fixture.PoolState.Reserved, fixture.PoolState.Parked, drops));
@@ -102,6 +103,7 @@ public class PreparedRetentionTests
         var original = new[] { await PooledResetTests.ReadIdentityAsync(first.Context), await PooledResetTests.ReadIdentityAsync(second.Context) };
         await first.DisposeAsync();
         await second.DisposeAsync();
+        await PreparedTestWait.UntilAsync(() => fixture.PoolState.Ready == 2);
         // Caller mutation cannot change the captured maintenance policy.
         options.MaxParkedDatabases = 2;
         options.WarmFloor = 2;

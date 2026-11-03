@@ -1,0 +1,315 @@
+{
+  "version": 2,
+  "classification": "prospective TT-039 instrumented-current-pool reference; no counterfactual policy ranking",
+  "productionCommit": "2ba887f9d4b63dcba1c07c77dde14e0578fe5fd7",
+  "sourceRelation": "One executable compiles copied current production sources; timestamp-only probes plus an awaited branch joining the same return operation. Not the archived TT-038 baseline DLL.",
+  "cycles": 256,
+  "warmups": 32,
+  "slots": 8,
+  "workers": 4,
+  "resetConcurrency": 4,
+  "preparationConcurrency": 1,
+  "administratorConnections": 4,
+  "connectionsPerDatabase": 4,
+  "memoryMiB": 1024,
+  "additionalAsyncWaitMilliseconds": [
+    0,
+    25,
+    100,
+    500
+  ],
+  "calibrationRounds": [
+    0,
+    1,
+    2
+  ],
+  "validationRounds": [
+    3,
+    4
+  ],
+  "protocolSha256": "646bbb845b886bd0296d79bf7adedc2e4a8ac58b85ad6f8fb0f50398b491c73c",
+  "predictionFreeze": "Before validation collection: immutable fit/forecast/source/calibration file hashes and a local Git freeze checkpoint.",
+  "primaryEndpoint": "First measured request through final physical reset and background wrapper completion; observed settlement polling remains explicit.",
+  "cases": [
+    {
+      "name": "r0-w0-awaited",
+      "pair": 0,
+      "mode": "awaited",
+      "waitMilliseconds": 0,
+      "split": "calibration"
+    },
+    {
+      "name": "r0-w0-background",
+      "pair": 0,
+      "mode": "background",
+      "waitMilliseconds": 0,
+      "split": "calibration"
+    },
+    {
+      "name": "r0-w25-background",
+      "pair": 0,
+      "mode": "background",
+      "waitMilliseconds": 25,
+      "split": "calibration"
+    },
+    {
+      "name": "r0-w25-awaited",
+      "pair": 0,
+      "mode": "awaited",
+      "waitMilliseconds": 25,
+      "split": "calibration"
+    },
+    {
+      "name": "r0-w100-awaited",
+      "pair": 0,
+      "mode": "awaited",
+      "waitMilliseconds": 100,
+      "split": "calibration"
+    },
+    {
+      "name": "r0-w100-background",
+      "pair": 0,
+      "mode": "background",
+      "waitMilliseconds": 100,
+      "split": "calibration"
+    },
+    {
+      "name": "r0-w500-background",
+      "pair": 0,
+      "mode": "background",
+      "waitMilliseconds": 500,
+      "split": "calibration"
+    },
+    {
+      "name": "r0-w500-awaited",
+      "pair": 0,
+      "mode": "awaited",
+      "waitMilliseconds": 500,
+      "split": "calibration"
+    },
+    {
+      "name": "r1-w25-background",
+      "pair": 1,
+      "mode": "background",
+      "waitMilliseconds": 25,
+      "split": "calibration"
+    },
+    {
+      "name": "r1-w25-awaited",
+      "pair": 1,
+      "mode": "awaited",
+      "waitMilliseconds": 25,
+      "split": "calibration"
+    },
+    {
+      "name": "r1-w100-awaited",
+      "pair": 1,
+      "mode": "awaited",
+      "waitMilliseconds": 100,
+      "split": "calibration"
+    },
+    {
+      "name": "r1-w100-background",
+      "pair": 1,
+      "mode": "background",
+      "waitMilliseconds": 100,
+      "split": "calibration"
+    },
+    {
+      "name": "r1-w500-background",
+      "pair": 1,
+      "mode": "background",
+      "waitMilliseconds": 500,
+      "split": "calibration"
+    },
+    {
+      "name": "r1-w500-awaited",
+      "pair": 1,
+      "mode": "awaited",
+      "waitMilliseconds": 500,
+      "split": "calibration"
+    },
+    {
+      "name": "r1-w0-awaited",
+      "pair": 1,
+      "mode": "awaited",
+      "waitMilliseconds": 0,
+      "split": "calibration"
+    },
+    {
+      "name": "r1-w0-background",
+      "pair": 1,
+      "mode": "background",
+      "waitMilliseconds": 0,
+      "split": "calibration"
+    },
+    {
+      "name": "r2-w100-awaited",
+      "pair": 2,
+      "mode": "awaited",
+      "waitMilliseconds": 100,
+      "split": "calibration"
+    },
+    {
+      "name": "r2-w100-background",
+      "pair": 2,
+      "mode": "background",
+      "waitMilliseconds": 100,
+      "split": "calibration"
+    },
+    {
+      "name": "r2-w500-background",
+      "pair": 2,
+      "mode": "background",
+      "waitMilliseconds": 500,
+      "split": "calibration"
+    },
+    {
+      "name": "r2-w500-awaited",
+      "pair": 2,
+      "mode": "awaited",
+      "waitMilliseconds": 500,
+      "split": "calibration"
+    },
+    {
+      "name": "r2-w0-awaited",
+      "pair": 2,
+      "mode": "awaited",
+      "waitMilliseconds": 0,
+      "split": "calibration"
+    },
+    {
+      "name": "r2-w0-background",
+      "pair": 2,
+      "mode": "background",
+      "waitMilliseconds": 0,
+      "split": "calibration"
+    },
+    {
+      "name": "r2-w25-background",
+      "pair": 2,
+      "mode": "background",
+      "waitMilliseconds": 25,
+      "split": "calibration"
+    },
+    {
+      "name": "r2-w25-awaited",
+      "pair": 2,
+      "mode": "awaited",
+      "waitMilliseconds": 25,
+      "split": "calibration"
+    },
+    {
+      "name": "r3-w500-background",
+      "pair": 3,
+      "mode": "background",
+      "waitMilliseconds": 500,
+      "split": "validation"
+    },
+    {
+      "name": "r3-w500-awaited",
+      "pair": 3,
+      "mode": "awaited",
+      "waitMilliseconds": 500,
+      "split": "validation"
+    },
+    {
+      "name": "r3-w0-awaited",
+      "pair": 3,
+      "mode": "awaited",
+      "waitMilliseconds": 0,
+      "split": "validation"
+    },
+    {
+      "name": "r3-w0-background",
+      "pair": 3,
+      "mode": "background",
+      "waitMilliseconds": 0,
+      "split": "validation"
+    },
+    {
+      "name": "r3-w25-background",
+      "pair": 3,
+      "mode": "background",
+      "waitMilliseconds": 25,
+      "split": "validation"
+    },
+    {
+      "name": "r3-w25-awaited",
+      "pair": 3,
+      "mode": "awaited",
+      "waitMilliseconds": 25,
+      "split": "validation"
+    },
+    {
+      "name": "r3-w100-awaited",
+      "pair": 3,
+      "mode": "awaited",
+      "waitMilliseconds": 100,
+      "split": "validation"
+    },
+    {
+      "name": "r3-w100-background",
+      "pair": 3,
+      "mode": "background",
+      "waitMilliseconds": 100,
+      "split": "validation"
+    },
+    {
+      "name": "r4-w0-awaited",
+      "pair": 4,
+      "mode": "awaited",
+      "waitMilliseconds": 0,
+      "split": "validation"
+    },
+    {
+      "name": "r4-w0-background",
+      "pair": 4,
+      "mode": "background",
+      "waitMilliseconds": 0,
+      "split": "validation"
+    },
+    {
+      "name": "r4-w25-background",
+      "pair": 4,
+      "mode": "background",
+      "waitMilliseconds": 25,
+      "split": "validation"
+    },
+    {
+      "name": "r4-w25-awaited",
+      "pair": 4,
+      "mode": "awaited",
+      "waitMilliseconds": 25,
+      "split": "validation"
+    },
+    {
+      "name": "r4-w100-awaited",
+      "pair": 4,
+      "mode": "awaited",
+      "waitMilliseconds": 100,
+      "split": "validation"
+    },
+    {
+      "name": "r4-w100-background",
+      "pair": 4,
+      "mode": "background",
+      "waitMilliseconds": 100,
+      "split": "validation"
+    },
+    {
+      "name": "r4-w500-background",
+      "pair": 4,
+      "mode": "background",
+      "waitMilliseconds": 500,
+      "split": "validation"
+    },
+    {
+      "name": "r4-w500-awaited",
+      "pair": 4,
+      "mode": "awaited",
+      "waitMilliseconds": 500,
+      "split": "validation"
+    }
+  ]
+}

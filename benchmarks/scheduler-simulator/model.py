@@ -12,20 +12,28 @@ class Work:
     reset_us: int
     checkout_us: int = 0
     handoff_us: int = 0
+    receipt_us: int | None = None
+    publication_us: int = 0
+    release_us: int = 0
+    completion_us: int = 0
+    dispatch_us: int = 0
 
 
 def simulate(jobs, *, mode, slots, workers, reset_workers, release_tail_us=0):
     """Run a closed-loop workload to full settlement, independently of wall time.
 
     A slot becomes clean at publication; its reset permit can remain held longer.
-    The caller supplies independent reset service draws, never trace/test matches.
+    The adapter supplies service samples and owns their trace/test matching.
     """
     jobs = tuple(jobs)
     if (mode not in ("awaited", "background") or not jobs
             or any(type(n) is not int or n <= 0 for n in (slots, workers, reset_workers))
             or type(release_tail_us) is not int or release_tail_us < 0
             or any(type(n) is not int or n < 0 for job in jobs
-                   for n in (job.body_us, job.reset_us, job.checkout_us, job.handoff_us))):
+                   for n in (job.body_us, job.reset_us, job.checkout_us, job.handoff_us,
+                             job.publication_us, job.release_us, job.completion_us, job.dispatch_us))
+            or any(job.receipt_us is not None and (type(job.receipt_us) is not int or job.receipt_us < 0
+                   or mode == "background" and job.receipt_us < job.handoff_us) for job in jobs)):
         raise ValueError("ModelInput: require a mode, jobs, positive capacities and nonnegative integer timings")
 
     now = 0
@@ -42,7 +50,8 @@ def simulate(jobs, *, mode, slots, workers, reset_workers, release_tail_us=0):
 
     def request(ordinal):
         if ordinal < len(jobs):
-            tests[ordinal] = dict(ordinal=ordinal, worker=ordinal % workers, requested=now)
+            tests[ordinal] = dict(ordinal=ordinal, worker=ordinal % workers, requested=now,
+                                  queued_clean=not bool(clean))
             checkouts.append(ordinal)
             admit_tests()
 
@@ -62,17 +71,21 @@ def simulate(jobs, *, mode, slots, workers, reset_workers, release_tail_us=0):
     def body_done(ordinal):
         tests[ordinal]["returning"] = now
         schedule(jobs[ordinal].handoff_us, handoff_done, ordinal)
+        if mode == "background" and jobs[ordinal].receipt_us is not None:
+            schedule(jobs[ordinal].receipt_us, returned, ordinal)
 
     def returned(ordinal):
         tests[ordinal]["returned"] = now
-        request(ordinal + workers)
+        following = ordinal + workers
+        if following < len(jobs):
+            schedule(jobs[following].dispatch_us, request, following)
 
     def handoff_done(ordinal):
         slot = tests[ordinal]["slot"]
         state[slot] = "queued"
         pending_resets.append(dict(ordinal=ordinal, slot=slot, queued=now))
         admit_resets()
-        if mode == "background":
+        if mode == "background" and jobs[ordinal].receipt_us is None:
             returned(ordinal)
 
     def admit_resets():
@@ -84,25 +97,33 @@ def simulate(jobs, *, mode, slots, workers, reset_workers, release_tail_us=0):
             active_resets += 1
             peak_resets = max(peak_resets, active_resets)
             resets.append(reset)
-            schedule(jobs[reset["ordinal"]].reset_us, publish, reset)
+            schedule(jobs[reset["ordinal"]].reset_us, executed, reset)
+
+    def executed(reset):
+        reset["executed"] = now
+        schedule(jobs[reset["ordinal"]].publication_us, publish, reset)
 
     def publish(reset):
         reset["published"] = now
         state[reset["slot"]] = "clean"
         clean.append(reset["slot"])
         admit_tests()
-        schedule(release_tail_us, release, reset)
+        schedule(release_tail_us + jobs[reset["ordinal"]].release_us, release, reset)
 
     def release(reset):
         nonlocal active_resets
         reset["released"] = now
         active_resets -= 1
         admit_resets()
+        schedule(jobs[reset["ordinal"]].completion_us, completed, reset)
+
+    def completed(reset):
+        reset["completed"] = now
         if mode == "awaited":
-            returned(reset["ordinal"])
+            schedule(jobs[reset["ordinal"]].receipt_us or 0, returned, reset["ordinal"])
 
     for worker in range(min(workers, len(jobs))):
-        request(worker)
+        schedule(jobs[worker].dispatch_us, request, worker)
     while events:
         at, _, callback, args = heapq.heappop(events)
         if at < now:

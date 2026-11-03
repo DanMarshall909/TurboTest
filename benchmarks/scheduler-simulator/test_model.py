@@ -4,6 +4,22 @@ from model import Work, simulate
 
 
 class PipelineContract(unittest.TestCase):
+    def test_receipt_overlap_publication_release_and_wrapper_completion_are_distinct(self):
+        jobs = [Work(1, 10, handoff_us=2, receipt_us=5, publication_us=3,
+                     release_us=4, completion_us=2, dispatch_us=offset) for offset in (0, 1)]
+        background = simulate(jobs, mode="background", slots=1, workers=1, reset_workers=1)
+        self.assertEqual((39, 22, 17), (background["suite_us"], background["last_return_us"], background["drain_us"]))
+        self.assertEqual([0, 7], [t["requested"] for t in background["tests"]])
+        self.assertEqual([0, 16], [t["acquired"] for t in background["tests"]])
+        self.assertEqual([3, 20], [r["started"] for r in background["resets"]])
+        self.assertEqual([13, 30], [r["executed"] for r in background["resets"]])
+        self.assertEqual([16, 33], [r["published"] for r in background["resets"]])
+        self.assertEqual([20, 37], [r["released"] for r in background["resets"]])
+        self.assertEqual([22, 39], [r["completed"] for r in background["resets"]])
+        awaited = simulate(jobs, mode="awaited", slots=1, workers=1, reset_workers=1)
+        self.assertEqual((55, 55, 0), (awaited["suite_us"], awaited["last_return_us"], awaited["drain_us"]))
+        self.assertEqual([0, 28], [t["requested"] for t in awaited["tests"]])
+
     def test_awaited_return_joins_reset_and_background_drain_joins_it_later(self):
         for mode, returned, drain in [("awaited", 40, 0), ("background", 15, 25)]:
             with self.subTest(mode=mode):

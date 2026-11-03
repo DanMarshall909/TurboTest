@@ -47,3 +47,32 @@ reference evaluator fixes capacity to the recorded contract and exposes no
 policy sweep. Empirical costs are mode-conditioned, CPU/I/O demand is unknown,
 and reset-to-test correlation is unobserved. The protocol specifies all modelling
 approximations and the evidence needed before any new ranking claim.
+
+## Prospective revision 2
+
+[The revised protocol](protocol-r2.md) preserves joint test/reset records within
+one calibration run, adds explicit native request/slot/reset identities and
+separates receipt, publication, permit release and wrapper completion. Its
+experimental awaited mode joins the current pool's return operation; it is a
+different comparison from the historical TT-038 awaited library. Qualification
+is pending fresh prospective validation. The first failed result remains intact.
+
+The [native experiment](../../experiments/tt039/README.md) documents preparation,
+controls and the 24-calibration/16-validation collection contract. Freeze the
+model, native sources and collection contract before calibration; freeze the
+fit/forecast before collecting validation. Offline commands are:
+
+```sh
+python3 benchmarks/scheduler-simulator/revised.py fit --trace-root artifacts/tt039-r2 --output artifacts/tt039-r2/fit.json
+python3 benchmarks/scheduler-simulator/revised.py forecast --trace-root artifacts/tt039-r2 --fit artifacts/tt039-r2/fit.json --output artifacts/tt039-r2/forecast.json
+python3 benchmarks/scheduler-simulator/revised.py validate --trace-root artifacts/tt039-r2 --fit artifacts/tt039-r2/fit.json --forecast artifacts/tt039-r2/forecast.json --output artifacts/tt039-r2/evaluation.json
+```
+
+The unchanged fast command also discovers revision-2 tests. The slow lane adds
+`python3 -m unittest discover -s benchmarks/scheduler-simulator -p revision_contract.py`
+to the original archive contract; **all** means all three selections. CI runs
+each selection. Revision 2 exits 0 for successful fit/forecast or qualified
+validation, 2 for a completed failed prediction gate, and 1 for input/output
+errors. Argparse usage errors exit 2 without an evaluation. Existing outputs
+are preserved. Model correctness, prospective prediction and policy ranking
+remain separate claims.

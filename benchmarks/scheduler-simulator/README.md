@@ -33,11 +33,12 @@ The canonical test runner is the repository's existing Python `unittest` runner:
 | Lane | Command | Purpose |
 | --- | --- | --- |
 | fast | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p 'test_*.py'` | Deterministic pipeline, fitting, partition, metrics and failure controls |
-| slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p archive_contract.py` | Actual archive/CLI reproduction without Docker |
-| all | Run both commands above | Exact union of 15 fast tests and one slow test |
+| slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p archive_contract.py` | Original negative-result archive/CLI reproduction without Docker |
+| slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p revision_contract.py` | Revised CLI boundary and full native-input archive replay |
+| all | Run all three commands above | Exact union of 22 fast tests and three slow tests |
 
-Both lanes run in CI. The fast lane takes about 0.2 s locally; the archive lane
-about 10 s. The expensive work belongs to the archive contract; fast tests retain
+Both lanes run in CI. The fast lane takes about 0.6 s locally. The expensive
+replays belong to the slow lane; fast tests retain
 the queueing, gate and sampling rules with real model code and small workloads.
 Standard-library `trace --count --missing` can inspect execution coverage; it is
 not assertion coverage or branch coverage.
@@ -54,8 +55,11 @@ approximations and the evidence needed before any new ranking claim.
 one calibration run, adds explicit native request/slot/reset identities and
 separates receipt, publication, permit release and wrapper completion. Its
 experimental awaited mode joins the current pool's return operation; it is a
-different comparison from the historical TT-038 awaited library. Qualification
-is pending fresh prospective validation. The first failed result remains intact.
+different comparison from the historical TT-038 awaited library. Its fresh
+prospective gate also **fails**: two suite strata and one actual clean-starvation
+check miss their frozen limits. The [retained result](../../docs/issues/evidence/2026-11-03/tt039-r2/report.md)
+includes every error and a full offline replay. The first failed result remains
+intact; policy search remains gated.
 
 The [native experiment](../../experiments/tt039/README.md) documents preparation,
 controls and the 24-calibration/16-validation collection contract. Freeze the

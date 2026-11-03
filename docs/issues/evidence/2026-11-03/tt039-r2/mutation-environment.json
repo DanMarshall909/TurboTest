@@ -1,0 +1,9 @@
+{
+  "copyOnWriteSupported": false,
+  "diagnostic": "cp: failed to clone 'artifacts/tt039-r2/tt039-r2-cow-ux298nkb/write-layer' from 'artifacts/tt039-r2/tt039-r2-cow-ux298nkb/base': Operation not supported",
+  "mutationScore": null,
+  "mutationStarted": false,
+  "probeDirectoryRemoved": true,
+  "probeExitCode": 1,
+  "reason": "CoW unsupported"
+}

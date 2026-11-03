@@ -1,0 +1,105 @@
+{
+  "result": "PASS",
+  "sourceSha256": {
+    "benchmarks/scheduler-simulator/archive_contract.py": "e2df78d9a13f58bf7ad7d14ea19bf25f0e95c4470e81dea6cdd3e7ede349c3d7",
+    "benchmarks/scheduler-simulator/model.py": "2867f7c14aecfb0160df688ca55dd967b893185502c826f46d3ce240f1aa1796",
+    "benchmarks/scheduler-simulator/reference.py": "6394d8674753b8becd73bae0eeaa8e19bf50862f3836c7fa5e2bc9c65a22701a",
+    "benchmarks/scheduler-simulator/revised.py": "3715c64b0e7371a03ad3779b419e29cdf4a1349ab2e11955bbb6b41543d51ac9",
+    "benchmarks/scheduler-simulator/revision_contract.py": "1d1b93ba24417486f81896cebcd69e9baec5165a2fc1a0493051cd6dcd3d0fb3",
+    "benchmarks/scheduler-simulator/test_model.py": "09d22edb662f62ea22976da0c8672250fa319ad16f70bb585e7c408e70b48148",
+    "benchmarks/scheduler-simulator/test_reference.py": "ff98f7dced3630722d1962d1e7c76ff743f8b7ea4656ea9c2df36eee55976ddf",
+    "benchmarks/scheduler-simulator/test_revised.py": "71bae251a58c038fd02c3e971cc96a6e7a0b4c778cc211fa84573be78a2155c8"
+  },
+  "tests": 22,
+  "timings": [
+    {
+      "id": "test_model.PipelineContract.test_awaited_return_joins_reset_and_background_drain_joins_it_later",
+      "seconds": 0.00016678799875080585
+    },
+    {
+      "id": "test_model.PipelineContract.test_dirty_slots_wait_for_fifo_resets_before_admitting_oldest_checkout",
+      "seconds": 9.938998846337199e-05
+    },
+    {
+      "id": "test_model.PipelineContract.test_invalid_capacity_mode_or_nonfinite_timing_is_rejected",
+      "seconds": 0.0002218190347775817
+    },
+    {
+      "id": "test_model.PipelineContract.test_publication_can_serve_next_test_while_prior_reset_still_holds_permit",
+      "seconds": 8.098897524178028e-05
+    },
+    {
+      "id": "test_model.PipelineContract.test_receipt_overlap_publication_release_and_wrapper_completion_are_distinct",
+      "seconds": 0.00011831900337710977
+    },
+    {
+      "id": "test_model.PipelineContract.test_service_variability_worker_order_and_exclusive_ownership_are_repeatable",
+      "seconds": 0.0068579469807446
+    },
+    {
+      "id": "test_model.PipelineContract.test_zero_duration_jobs_still_conserve_slots_and_finish_every_reset",
+      "seconds": 0.0001189290196634829
+    },
+    {
+      "id": "test_reference.PredictionContract.test_gate_cannot_qualify_empty_or_nonfinite_predictions",
+      "seconds": 0.00011338898912072182
+    },
+    {
+      "id": "test_reference.PredictionContract.test_qualification_requires_all_strata_metrics_and_per_run_suite_limits",
+      "seconds": 0.0005493349744938314
+    },
+    {
+      "id": "test_reference.PredictionContract.test_seeded_prediction_preserves_queue_and_drain_endpoints",
+      "seconds": 0.0407716219779104
+    },
+    {
+      "id": "test_reference.TraceContract.test_evaluation_reports_all_runs_but_qualifies_only_the_held_out_partition",
+      "seconds": 0.12386360298842192
+    },
+    {
+      "id": "test_reference.TraceContract.test_fit_retains_service_variability_and_ignores_validation_timings",
+      "seconds": 0.005162088957149535
+    },
+    {
+      "id": "test_reference.TraceContract.test_invalid_trace_timing_ordinals_resets_and_binding_are_rejected",
+      "seconds": 0.006107572000473738
+    },
+    {
+      "id": "test_reference.TraceContract.test_pin_verification_rejects_changed_missing_or_unpinned_inputs",
+      "seconds": 0.003916040004696697
+    },
+    {
+      "id": "test_reference.TraceContract.test_saved_fit_must_match_pinned_training_inputs_and_protocol",
+      "seconds": 0.006540049042087048
+    },
+    {
+      "id": "test_reference.TraceContract.test_whole_run_partition_cannot_be_changed_duplicated_or_truncated",
+      "seconds": 0.005241309001576155
+    },
+    {
+      "id": "test_revised.JointPredictionContract.test_one_run_supplies_every_joint_service_without_impossible_hybrids",
+      "seconds": 0.03594422998139635
+    },
+    {
+      "id": "test_revised.JointPredictionContract.test_qualification_also_requires_actual_clean_queue_and_starvation_metrics",
+      "seconds": 0.00027392798801884055
+    },
+    {
+      "id": "test_revised.JointTraceContract.test_explicit_identity_joins_separate_services_from_generated_queues",
+      "seconds": 0.0003820869605988264
+    },
+    {
+      "id": "test_revised.JointTraceContract.test_missing_duplicate_mismatched_or_unsafe_events_cannot_supply_services",
+      "seconds": 0.0008868339937180281
+    },
+    {
+      "id": "test_revised.ProspectiveFitContract.test_fitting_needs_only_calibration_and_binds_the_frozen_split_and_sources",
+      "seconds": 0.007552401046268642
+    },
+    {
+      "id": "test_revised.ProspectiveFitContract.test_frozen_forecasts_precede_validation_and_reject_edited_fit_or_predictions",
+      "seconds": 0.29975589003879577
+    }
+  ],
+  "wallSeconds": 0.5557186320074834
+}

@@ -1,12 +1,15 @@
-"""Slow CLI boundary lane; independent small trace oracle lives in test_revised."""
+"""Slow CLI/archive boundaries; independent small trace oracles live in test_revised."""
+import hashlib
 import json
 from pathlib import Path
 import subprocess
 import sys
+import tarfile
 import tempfile
 import unittest
 
 from test_revised import training_fixture, trace_fixture
+from revised import fit, validate
 
 
 class ProspectiveCliContract(unittest.TestCase):
@@ -43,3 +46,31 @@ class ProspectiveCliContract(unittest.TestCase):
             self.assertEqual(0 if evaluation["gate"]["qualified"] else 2, result.returncode)
             self.assertEqual((10, 4, 2), (len(evaluation["runs"]), len(evaluation["gate"]["perRunSuite"]),
                                         len(evaluation["gate"]["strata"])))
+
+
+class RecordedNativeArchiveContract(unittest.TestCase):
+    def test_published_native_inputs_reconstruct_fit_forecast_and_every_evaluation_field(self):
+        repo = Path(__file__).resolve().parents[2]
+        evidence = repo / "docs/issues/evidence/2026-11-03/tt039-r2"
+        pins = json.loads((evidence/"evidence-manifest.json").read_text())
+        archive = evidence/"raw-evidence.tar.gz"
+        self.assertEqual(pins["archiveSha256"], hashlib.sha256(archive.read_bytes()).hexdigest())
+        with tempfile.TemporaryDirectory(prefix="tt039-r2-archive-") as temp:
+            root = Path(temp)
+            # Read only the pinned JSON inputs; never extract archive paths or binaries.
+            with tarfile.open(archive) as source:
+                for name in pins["modelInputs"]:
+                    payload = source.extractfile(name).read()
+                    self.assertEqual(pins["files"][name], hashlib.sha256(payload).hexdigest(), name)
+                    target = root/name
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(payload)
+            contract = json.loads((root/"contract.json").read_text())
+            fitted = json.loads((root/"fit.json").read_text())
+            frozen = json.loads((root/"forecast.json").read_text())
+            saved = json.loads((root/"evaluation.json").read_text())
+            self.assertEqual({k:v for k,v in fitted.items() if k != "runtimeSeconds"}, fit(root, contract))
+            replay = validate(root, contract, fitted, frozen)
+            self.assertEqual({k:v for k,v in saved.items() if k != "runtimeSeconds"}, replay)
+            self.assertEqual((40, 16, 8), (len(replay["runs"]), len(replay["gate"]["perRunSuite"]), len(replay["gate"]["strata"])))
+            self.assertEqual((24, 6), (len(fitted["calibrationRuns"]), len(frozen["sensitivities"])))

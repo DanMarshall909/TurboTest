@@ -6,7 +6,7 @@ import sys
 import tempfile
 import unittest
 
-from test_replicated import cohort
+from test_replicated import cohort,complete_phase
 from test_revised import trace_fixture
 
 
@@ -35,6 +35,7 @@ class ReplicatedCliContract(unittest.TestCase):
                 if row['split']!='validation':continue
                 write(row['name']+'/report.json',trace_fixture(row['mode']))
                 write(row['name']+'/process.json',dict(exitCode=0,processGroupStopped=True,deadlineExceeded=False,elapsedSeconds=1))
+            complete_phase(contract,write,'validation')
             result=run('validate','evaluation.json',*args)
             self.assertEqual(0,result.returncode,result.stderr)
             evaluation=json.loads((root/'evaluation.json').read_text())

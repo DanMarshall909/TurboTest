@@ -53,6 +53,29 @@ class PerformanceEntrypointContract(unittest.TestCase):
               patch.object(baseline,'TASK',Path(temp)),patch.object(baseline,'session_driver',return_value=session)):
             with self.assertRaisesRegex(ValueError,'FreezeSource.*analyzer'):baseline.main()
 
+    def test_tt038_analysis_requires_complete_progress_and_successful_outer_measurement(self):
+        baseline=load('tt038_analysis_settlement','baseline_rerun.py');launched=[]
+        native=types.SimpleNamespace(verify=types.SimpleNamespace(run_phase=lambda *args:launched.append(args)))
+        session=types.SimpleNamespace(check_protocol_freeze=lambda *args:None,
+                                     shared=types.SimpleNamespace(native_driver=lambda *args:native))
+        with (tempfile.TemporaryDirectory() as temp,patch('sys.argv',['baseline_rerun.py','analyze']),
+              patch.object(baseline,'TASK',Path(temp)),patch.object(baseline,'ROOT',Path(temp)/'v4'),
+              patch.object(baseline,'session_driver',return_value=session)):
+            root=Path(temp)/'v4';root.mkdir()
+            write=lambda name,data:(root/name).write_text(json.dumps(data))
+            write('contract.json',dict(cases=[dict(name='first'),dict(name='last')]))
+            correct=dict(phase='baseline',complete=True,expected=2,completed=['first','last'],failure=None)
+            receipt=dict(command=['python3','experiments/tt039/baseline_rerun.py','measure'],
+                         exitCode=0,processGroupStopped=True,deadlineExceeded=False)
+            write('baseline-progress.json',correct|dict(complete=False,completed=['first'],failure='ResourceSettlement'))
+            write('baseline-process.json',receipt)
+            with self.assertRaisesRegex(ValueError,'BaselineSettlement'):baseline.main()
+            write('baseline-progress.json',correct);write('baseline-process.json',receipt|dict(exitCode=1))
+            with self.assertRaisesRegex(ValueError,'BaselineSettlement'):baseline.main()
+            self.assertEqual([],launched)
+            write('baseline-process.json',receipt);baseline.main()
+            self.assertEqual(1,len(launched))
+
     def test_tt038_refuses_before_loading_the_historical_driver_without_confirmation(self):
         baseline=load('tt038_entrypoint','baseline_rerun.py')
         def deny(*args,**kwargs):raise PermissionError('PerformanceConfirmation')

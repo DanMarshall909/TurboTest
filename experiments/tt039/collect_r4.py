@@ -56,7 +56,7 @@ def collect_cases(root,cases,driver,*,clock,authorize,budget_seconds=7200,phase=
         failure=type(error).__name__+': '+str(error)
         raise
     finally:
-        state=dict(expected=len(cases),completed=completed,complete=len(completed)==len(cases),
+        state=dict(phase=phase,expected=len(cases),completed=completed,complete=len(completed)==len(cases),
                    budgetSeconds=budget_seconds,elapsedSeconds=clock()-started,failure=failure)
         (root/(phase+'-progress.json')).write_text(json.dumps(state,indent=2,sort_keys=True)+'\n')
 

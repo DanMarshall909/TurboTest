@@ -68,6 +68,16 @@ def main():
     if action=='analyze':
         session.check_protocol_freeze(SESSION)
         if (TASK/'summary.json').exists():raise FileExistsError('BaselineExisting: preserve summary')
+        contract=json.loads((ROOT/'contract.json').read_text())
+        names=[row['name'] for row in contract['cases']]
+        progress=json.loads((ROOT/'baseline-progress.json').read_text())
+        receipt=json.loads((ROOT/'baseline-process.json').read_text());command=receipt['command']
+        if (progress['phase']!='baseline' or progress['complete'] is not True
+                or progress['expected']!=len(names) or progress['completed']!=names or progress['failure'] is not None
+                or receipt['exitCode']!=0 or receipt['processGroupStopped'] is not True or receipt['deadlineExceeded'] is not False
+                or len(command)!=3 or command[2]!='measure'
+                or Path(command[1]).parts[-3:]!=('experiments','tt039','baseline_rerun.py')):
+            raise ValueError('BaselineSettlement: exact complete cohort and successful outer collector required')
         session.shared.native_driver(SESSION).verify.run_phase('analysis-process',
             [sys.executable,str(REPO/'artifacts/tt038/analyze.py'),str(TASK)],TASK,120)
         return

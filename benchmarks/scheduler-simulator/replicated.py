@@ -90,6 +90,22 @@ def calibration_cases(strata):
     return result
 
 
+def check_collection(root,contract,phase):
+    names=[r['name'] for r in contract['cases'] if r['split']==phase]
+    progress=read(root/(phase+'-progress.json'))
+    receipt=read(root/(phase+'-process.json'))
+    action='calibrate' if phase=='calibration' else 'validate'
+    command=receipt['command']
+    require(progress['phase']==phase and progress['complete'] is True
+            and type(progress['expected']) is int and progress['expected']==len(names)
+            and progress['completed']==names and progress['failure'] is None,
+            'CollectionSettlement: '+phase+' did not complete its exact ordered cohort')
+    require(receipt['exitCode']==0 and receipt['processGroupStopped'] is True
+            and receipt['deadlineExceeded'] is False and len(command)==3 and command[2]==action
+            and Path(command[1]).parts[-3:]==('experiments','tt039','collect_r4.py'),
+            'CollectionSettlement: '+phase+' outer collector did not complete and settle')
+
+
 def fit(root,contract):
     root=Path(root)
     require(read(root/'contract.json')==contract,'ContractIdentity: collected contract differs')
@@ -104,9 +120,10 @@ def fit(root,contract):
     require(all(type(n) is int and n>0 for n in settings.values()) and settings['cycles']>=settings['workers'],
             'ContractSplit: positive workload and capacities required')
     bound=['contract.json','source-identity.json','runtime-identity.json','image.json','measurement-window.json',
-           'protocol-freeze.json','collection-freeze.json']
+           'protocol-freeze.json','collection-freeze.json','calibration-progress.json','calibration-process.json']
     bound+=[r['name']+'/'+name for r in training for name in ('report.json','process.json')]
     identities=file_identity(root,bound)
+    check_collection(root,contract,'calibration')
     groups=defaultdict(list)
     for row in training:
         receipt=read(root/row['name']/'process.json');report=read(root/row['name']/'report.json')
@@ -134,7 +151,10 @@ def validate(root,contract,fitted,frozen):
     expected=forecast(fitted)
     require(frozen.keys()<=expected.keys()|{'runtimeSeconds'} and all(frozen.get(k)==v for k,v in expected.items()),
             'ForecastIdentity: exact frozen ensemble differs')
-    rows,validation_files=[],{}
+    rows=[]
+    phase_names=['validation-progress.json','validation-process.json']
+    validation_files=file_identity(root,phase_names)
+    check_collection(root,contract,'validation')
     for row in contract['cases']:
         names=[row['name']+'/'+name for name in ('report.json','process.json')]
         before=file_identity(root,names)
@@ -153,6 +173,8 @@ def validate(root,contract,fitted,frozen):
             signedErrors={k:predicted[k]-trace['observed'][k] for k in predicted}))
         require(file_identity(root,names)==before,'TraceIdentity: observation changed during evaluation')
         if row['split']=='validation':validation_files.update(before)
+    require(file_identity(root,phase_names)=={n:validation_files[n] for n in phase_names},
+            'CollectionSettlement: validation phase evidence changed during evaluation')
     return dict(gate=assess_cohorts([r for r in rows if r['split']=='validation']),runs=rows,
                 validationFiles=validation_files,forecastSha256=digest(frozen),sourceSha256=source_identity())
 

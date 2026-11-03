@@ -1,12 +1,22 @@
 import copy
 import json
+import importlib.util
 from pathlib import Path
+import shutil
 import tempfile
 import unittest
 
-from replicated import forecast,assess_cohorts,fit,calibration_cases,future_cases,validate
+from replicated import forecast,assess_cohorts,fit,calibration_cases,future_cases,validate,check_collection
 from reference import latency_metrics
 from test_revised import trace_fixture
+
+
+def complete_phase(contract,write,phase):
+    names=[r['name'] for r in contract['cases'] if r['split']==phase]
+    write(phase+'-progress.json',dict(phase=phase,expected=len(names),completed=names,complete=True,failure=None))
+    action='calibrate' if phase=='calibration' else 'validate'
+    write(phase+'-process.json',dict(command=['python3','experiments/tt039/collect_r4.py',action],
+          exitCode=0,processGroupStopped=True,deadlineExceeded=False))
 
 
 def cohort(root):
@@ -24,6 +34,7 @@ def cohort(root):
             write(row['name']+'/report.json',trace_fixture(row['mode']))
             write(row['name']+'/process.json',dict(exitCode=0,processGroupStopped=True,deadlineExceeded=False,elapsedSeconds=1))
     write('contract.json',contract)
+    complete_phase(contract,write,'calibration')
     return contract,write
 
 
@@ -70,6 +81,53 @@ class OriginalChallengeContract(unittest.TestCase):
 
 
 class ReplicatedTrainingContract(unittest.TestCase):
+    def test_phase_proof_requires_exact_order_count_identity_and_stopped_success(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);contract,write=cohort(root)
+            for phase in ('calibration','validation'):
+                complete_phase(contract,write,phase)
+                progress=json.loads((root/(phase+'-progress.json')).read_text())
+                receipt=json.loads((root/(phase+'-process.json')).read_text())
+                check_collection(root,contract,phase)
+                for changed in (dict(completed=progress['completed'][::-1]),dict(expected=999),
+                                dict(phase='wrong'),dict(failure='ResourceSettlement'),dict(complete=False)):
+                    write(phase+'-progress.json',progress|changed)
+                    with self.assertRaisesRegex(ValueError,'CollectionSettlement.*'+phase):check_collection(root,contract,phase)
+                write(phase+'-progress.json',progress)
+                for changed in (dict(exitCode=1),dict(processGroupStopped=False),dict(deadlineExceeded=True)):
+                    write(phase+'-process.json',receipt|changed)
+                    with self.assertRaisesRegex(ValueError,'CollectionSettlement.*'+phase):check_collection(root,contract,phase)
+
+    def test_last_case_cleanup_failure_and_outer_freeze_failure_cannot_fit_or_qualify(self):
+        spec=importlib.util.spec_from_file_location('collection_settlement',Path('experiments/tt039/collect_r4.py'))
+        collector=importlib.util.module_from_spec(spec);spec.loader.exec_module(collector)
+        for phase in ('calibration','validation'):
+            with self.subTest(phase=phase),tempfile.TemporaryDirectory() as temp:
+                root=Path(temp);contract,write=cohort(root)
+                fitted=fit(root,contract);frozen=forecast(fitted)
+                selected=[r for r in contract['cases'] if r['split']==phase]
+                if phase=='calibration':
+                    for row in selected:shutil.rmtree(root/row['name'])
+                def case(name,mode,*args):
+                    write(name+'/report.json',trace_fixture(mode))
+                    write(name+'/process.json',dict(exitCode=0,processGroupStopped=True,deadlineExceeded=False,elapsedSeconds=1))
+                    if name==selected[-1]['name']:raise ValueError('ResourceSettlement')
+                class Driver:run_case=staticmethod(case)
+                complete_phase(contract,write,phase)
+                with self.assertRaisesRegex(ValueError,'ResourceSettlement'):
+                    collector.collect_cases(root,selected,Driver(),clock=lambda:0,authorize=lambda:None,phase=phase)
+                # All successful child reports exist, but the last case never settled.
+                evaluate=lambda:fit(root,contract) if phase=='calibration' else validate(root,contract,fitted,frozen)
+                with self.assertRaisesRegex(ValueError,'CollectionSettlement.*'+phase):evaluate()
+                complete_phase(contract,write,phase)
+                receipt=json.loads((root/(phase+'-process.json')).read_text())
+                write(phase+'-process.json',receipt|dict(exitCode=1))
+                # Complete progress cannot hide the final post-collection freeze failure.
+                with self.assertRaisesRegex(ValueError,'CollectionSettlement.*'+phase):evaluate()
+                complete_phase(contract,write,phase)
+                write(phase+'-process.json',receipt|dict(command=['python3','experiments/tt039/collect_r4.py','qualify']))
+                with self.assertRaisesRegex(ValueError,'CollectionSettlement.*'+phase):evaluate()
+
     def test_calibration_cannot_silently_drop_a_mode_or_fit_an_empty_cohort(self):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp);contract,write=cohort(root)
@@ -84,6 +142,7 @@ class ReplicatedTrainingContract(unittest.TestCase):
             write('historical/contract.json',{'mustNotBeRead':True})
             original=(root/'historical/contract.json').read_bytes()
             fitted=fit(root,contract)
+            self.assertTrue({'calibration-progress.json','calibration-process.json'}<=fitted['trainingFiles'].keys())
             self.assertEqual(14,len(fitted['calibrationRuns']))
             self.assertEqual({'awaited/0':7,'background/0':7},{k:len(v) for k,v in fitted['groups'].items()})
             self.assertEqual(14,sum(r['split']=='validation' for r in contract['cases']))
@@ -127,7 +186,9 @@ class ReplicatedTrainingContract(unittest.TestCase):
                 for key in ('SuiteMilliseconds','FinalResetsFinishedMilliseconds','LastTestFinishedMilliseconds'):report[key]*=10
                 write(row['name']+'/report.json',report)
                 write(row['name']+'/process.json',dict(exitCode=0,processGroupStopped=True,deadlineExceeded=False,elapsedSeconds=1))
+            complete_phase(contract,write,'validation')
             result=validate(root,contract,fitted,frozen)
+            self.assertTrue({'validation-progress.json','validation-process.json'}<=result['validationFiles'].keys())
             self.assertFalse(result['gate']['qualified'])
             self.assertEqual((4,14),(len(result['gate']['initialTwo']['perRunSuite']),len(result['gate']['fullCohort']['perRunSuite'])))
             self.assertEqual(28,len(result['runs']))

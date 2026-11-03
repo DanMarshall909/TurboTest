@@ -28,6 +28,14 @@ Fit only these new calibration reports. The model is an empirical mixture of
 whole service paths with original worker order and initial offsets. No outliers,
 independent components or hybrid worker paths enter the baseline forecast.
 
+Fitting also requires the exact completed calibration progress and successful,
+stopped outer collector receipt, including its final source-freeze check.
+Qualification requires the equivalent validation pair. Ordered case identities,
+phase, count and absence of failure must match; successful child reports alone
+cannot qualify a collection whose final cleanup or source check failed. Bind
+calibration phase evidence into the fit and validation phase evidence into the
+evaluation, alongside all individual report/process identities.
+
 Point rule: enumerate each of seven complete replay paths exactly once
 per scenario, and report their equal-weight arithmetic mean for each metric.
 This is an expected-metric point forecast. It is not claimed to equal the

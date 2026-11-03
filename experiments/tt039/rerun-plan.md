@@ -50,6 +50,21 @@ deadline. Controls have their own finite supervision. Suggested whole-window
 planning allowance is up to three hours; actual permission and expiry come from
 Dan's confirmation. Historical runtimes are planning estimates only.
 
+Name the primary TT-039 outer supervisor phases `calibration-process` and
+`validation-process`, using commands `[sys.executable,
+str(REPO/'experiments/tt039/collect_r4.py'), 'calibrate']` and the same command
+with `'validate'`. Use a 7,800-second outer deadline for each two-hour collection
+budget. Their receipts are written after the collector's final freeze check.
+The model requires both the exact completed `calibration-progress.json` and
+successful `calibration-process.json` before fitting, and their `validation-`
+equivalents before qualification. A final cleanup/source-check failure cannot
+be hidden by otherwise successful child reports.
+Supervise the baseline measurement as `baseline-process`, with its receipt in
+`artifacts/tt039-r4/tt038-baseline/v4` and command `[sys.executable,
+str(REPO/'experiments/tt039/baseline_rerun.py'), 'measure']`, also with a
+7,800-second outer deadline. Baseline analysis requires its exact completed
+`baseline-progress.json` and successful stopped `baseline-process.json`.
+
 ## Confirmation record and stopping
 
 The local measurement record contains `approvedBy: Dan`, an actual

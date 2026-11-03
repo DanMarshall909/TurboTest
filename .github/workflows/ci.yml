@@ -30,6 +30,12 @@ jobs:
     - name: Verify correctness driver contracts
       run: python3 -m unittest discover -s scripts -p test_verify.py
 
+    - name: Verify scheduler simulator fast lane
+      run: python3 -m unittest discover -s benchmarks/scheduler-simulator -p 'test_*.py'
+
+    - name: Verify scheduler simulator archive lane
+      run: python3 -m unittest discover -s benchmarks/scheduler-simulator -p archive_contract.py
+
     - name: Prepare PostgreSQL image on the native contract daemon
       run: docker --host "$DOCKER_HOST" pull postgres:16-alpine
 

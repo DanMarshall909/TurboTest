@@ -1,0 +1,20 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "benchmarks/scheduler-simulator",
+    "-p",
+    "archive_contract.py",
+    "-v"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "deadlineExceeded": false,
+  "deadlineSeconds": 60,
+  "elapsedSeconds": 9.918606819002889,
+  "exitCode": 0,
+  "processGroupId": 4,
+  "processGroupStopped": true
+}

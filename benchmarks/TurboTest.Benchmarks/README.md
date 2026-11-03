@@ -122,5 +122,6 @@ Suite-provided safety constraints remain binding; duration and resource estimate
 can be refined from observations. Account explicitly for preparation, queueing,
 physical reset completion and final drain. Keep simulated predictions distinct
 from verified physical performance, and retain required native correctness,
-failure and cleanup checks. A credible simulator is the first outcome; adopting
-this procedure does not mean a simulator or adaptive scheduler already exists.
+failure and cleanup checks. The [first offline reference model](../scheduler-simulator/README.md)
+reproduces this pipeline but fails its frozen held-out prediction gate. It is not
+qualified for policy searches; a credible simulator remains the first outcome.

@@ -1,0 +1,13 @@
+........
+======================================================================
+FAIL: test_saved_fit_must_match_pinned_training_inputs_and_protocol (test_reference.TraceContract) (change='samples')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 141, in test_saved_fit_must_match_pinned_training_inputs_and_protocol
+    with self.subTest(change=change), self.assertRaisesRegex(ValueError, "FitIdentity"):
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.278s
+
+FAILED (failures=1)

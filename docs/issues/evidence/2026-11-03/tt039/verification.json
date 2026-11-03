@@ -1,0 +1,36 @@
+{
+  "cleanup": "No Docker resources created. Archive contract and CoW probe TemporaryDirectories removed. Historical evidence and reusable caches preserved.",
+  "fast": {
+    "coverage": {
+      "modelLinePercent": 95,
+      "referenceLinePercent": 86,
+      "subprocessAttribution": false,
+      "tool": "stdlib trace --count --missing"
+    },
+    "result": "PASS",
+    "selection": "test_*.py",
+    "tests": 15
+  },
+  "laneReview": "Fast wall 0.168 s. The in-process evaluation contract dominates at about 0.15 s, but verifies actual seeded sampling and all sensitivities against small independent fixtures. Retain in fast lane; total remains under a few seconds. Archive replay about 10 s remains slow.",
+  "mutation": {
+    "reason": "CoW unavailable: cp --reflink=always returned Operation not supported; isolated temporary probe removed",
+    "score": null,
+    "state": "pending"
+  },
+  "python": "3.10.12",
+  "slow": {
+    "result": "PASS",
+    "selection": "archive_contract.py",
+    "tests": 1
+  },
+  "sourceSha256": {
+    ".github/workflows/ci.yml": "127f15d46030b7f779e9f2352e924ad130fa1d15f496426be9d35b8038ba51ff",
+    "benchmarks/scheduler-simulator/archive_contract.py": "e2df78d9a13f58bf7ad7d14ea19bf25f0e95c4470e81dea6cdd3e7ede349c3d7",
+    "benchmarks/scheduler-simulator/inputs.json": "df686ad52dc3cf0a9692aa027718abb7f4dbfbf20cb0767711f0ea2dba49b5a2",
+    "benchmarks/scheduler-simulator/model.py": "532451593e5a0ffaf57e497b5599871379f181bcdaca1c77f60b17da760b8e97",
+    "benchmarks/scheduler-simulator/protocol.md": "28797a6e4aba87b2c0878be2c8e52b9a502ec89923dcb21313b8923c6d56b829",
+    "benchmarks/scheduler-simulator/reference.py": "6394d8674753b8becd73bae0eeaa8e19bf50862f3836c7fa5e2bc9c65a22701a",
+    "benchmarks/scheduler-simulator/test_model.py": "d222d3cd57252d987eedec018447172adf265ff17bc6c0cdeb74562f3cca318a",
+    "benchmarks/scheduler-simulator/test_reference.py": "ff98f7dced3630722d1962d1e7c76ff743f8b7ea4656ea9c2df36eee55976ddf"
+  }
+}

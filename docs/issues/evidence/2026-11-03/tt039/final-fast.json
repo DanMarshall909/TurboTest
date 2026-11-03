@@ -1,0 +1,70 @@
+{
+  "python": "3.10.12",
+  "result": "PASS",
+  "tests": 15,
+  "wallSeconds": 0.16803741705371067,
+  "timings": [
+    {
+      "id": "test_model.PipelineContract.test_awaited_return_joins_reset_and_background_drain_joins_it_later",
+      "seconds": 0.00019416800932958722
+    },
+    {
+      "id": "test_model.PipelineContract.test_dirty_slots_wait_for_fifo_resets_before_admitting_oldest_checkout",
+      "seconds": 9.008002234622836e-05
+    },
+    {
+      "id": "test_model.PipelineContract.test_invalid_capacity_mode_or_nonfinite_timing_is_rejected",
+      "seconds": 0.00022883800556883216
+    },
+    {
+      "id": "test_model.PipelineContract.test_publication_can_serve_next_test_while_prior_reset_still_holds_permit",
+      "seconds": 6.243004463613033e-05
+    },
+    {
+      "id": "test_model.PipelineContract.test_service_variability_worker_order_and_exclusive_ownership_are_repeatable",
+      "seconds": 0.004591339034959674
+    },
+    {
+      "id": "test_model.PipelineContract.test_zero_duration_jobs_still_conserve_slots_and_finish_every_reset",
+      "seconds": 8.566898759454489e-05
+    },
+    {
+      "id": "test_reference.PredictionContract.test_gate_cannot_qualify_empty_or_nonfinite_predictions",
+      "seconds": 0.00011225900379940867
+    },
+    {
+      "id": "test_reference.PredictionContract.test_qualification_requires_all_strata_metrics_and_per_run_suite_limits",
+      "seconds": 0.0004970760201103985
+    },
+    {
+      "id": "test_reference.PredictionContract.test_seeded_prediction_preserves_queue_and_drain_endpoints",
+      "seconds": 0.03231872501783073
+    },
+    {
+      "id": "test_reference.TraceContract.test_evaluation_reports_all_runs_but_qualifies_only_the_held_out_partition",
+      "seconds": 0.10438226902624592
+    },
+    {
+      "id": "test_reference.TraceContract.test_fit_retains_service_variability_and_ignores_validation_timings",
+      "seconds": 0.004831666999962181
+    },
+    {
+      "id": "test_reference.TraceContract.test_invalid_trace_timing_ordinals_resets_and_binding_are_rejected",
+      "seconds": 0.0056561900419183075
+    },
+    {
+      "id": "test_reference.TraceContract.test_pin_verification_rejects_changed_missing_or_unpinned_inputs",
+      "seconds": 0.003658367961179465
+    },
+    {
+      "id": "test_reference.TraceContract.test_saved_fit_must_match_pinned_training_inputs_and_protocol",
+      "seconds": 0.006102946004830301
+    },
+    {
+      "id": "test_reference.TraceContract.test_whole_run_partition_cannot_be_changed_duplicated_or_truncated",
+      "seconds": 0.004894836980383843
+    }
+  ],
+  "slowSelection": "archive_contract.py",
+  "fastSelection": "test_*.py"
+}

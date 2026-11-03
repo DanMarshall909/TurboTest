@@ -1,0 +1,65 @@
+EE
+======================================================================
+ERROR: test_fit_retains_service_variability_and_ignores_validation_timings (test_reference.TraceContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 78, in test_fit_retains_service_variability_and_ignores_validation_timings
+    first = fit(self.root, self.pins)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py", line 8, in fit
+    raise NotImplementedError("Calibration-only fitting not implemented")
+NotImplementedError: Calibration-only fitting not implemented
+
+======================================================================
+ERROR: test_pin_verification_rejects_changed_missing_or_unpinned_inputs (test_reference.TraceContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 49, in test_pin_verification_rejects_changed_missing_or_unpinned_inputs
+    self.assertEqual(4, verify_inputs(self.root, self.pins)["cycles"])
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py", line 4, in verify_inputs
+    raise NotImplementedError("Pinned trace verification not implemented")
+NotImplementedError: Pinned trace verification not implemented
+
+======================================================================
+ERROR: test_whole_run_partition_cannot_be_changed_duplicated_or_truncated (test_reference.TraceContract) (change='duplicate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 75, in test_whole_run_partition_cannot_be_changed_duplicated_or_truncated
+    verify_inputs(self.root, pins)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py", line 4, in verify_inputs
+    raise NotImplementedError("Pinned trace verification not implemented")
+NotImplementedError: Pinned trace verification not implemented
+
+======================================================================
+ERROR: test_whole_run_partition_cannot_be_changed_duplicated_or_truncated (test_reference.TraceContract) (change='omit')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 75, in test_whole_run_partition_cannot_be_changed_duplicated_or_truncated
+    verify_inputs(self.root, pins)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py", line 4, in verify_inputs
+    raise NotImplementedError("Pinned trace verification not implemented")
+NotImplementedError: Pinned trace verification not implemented
+
+======================================================================
+ERROR: test_whole_run_partition_cannot_be_changed_duplicated_or_truncated (test_reference.TraceContract) (change='leak')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 75, in test_whole_run_partition_cannot_be_changed_duplicated_or_truncated
+    verify_inputs(self.root, pins)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py", line 4, in verify_inputs
+    raise NotImplementedError("Pinned trace verification not implemented")
+NotImplementedError: Pinned trace verification not implemented
+
+======================================================================
+ERROR: test_whole_run_partition_cannot_be_changed_duplicated_or_truncated (test_reference.TraceContract) (change='mode')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 75, in test_whole_run_partition_cannot_be_changed_duplicated_or_truncated
+    verify_inputs(self.root, pins)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py", line 4, in verify_inputs
+    raise NotImplementedError("Pinned trace verification not implemented")
+NotImplementedError: Pinned trace verification not implemented
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.011s
+
+FAILED (errors=6)

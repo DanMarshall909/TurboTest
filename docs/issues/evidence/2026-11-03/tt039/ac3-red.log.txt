@@ -1,0 +1,45 @@
+EE...
+======================================================================
+ERROR: test_gate_cannot_qualify_empty_or_nonfinite_predictions (test_reference.PredictionContract) (rows=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 146, in test_gate_cannot_qualify_empty_or_nonfinite_predictions
+    assess(rows)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py", line 88, in assess
+    raise NotImplementedError("Held-out qualification gate not implemented")
+NotImplementedError: Held-out qualification gate not implemented
+
+======================================================================
+ERROR: test_gate_cannot_qualify_empty_or_nonfinite_predictions (test_reference.PredictionContract) (rows=[{'name': 'bad', 'mode': 'background', 'waitMilliseconds': 0, 'observed': {'suite_ms': nan}, 'predicted': {'suite_ms': 1}}])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 146, in test_gate_cannot_qualify_empty_or_nonfinite_predictions
+    assess(rows)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py", line 88, in assess
+    raise NotImplementedError("Held-out qualification gate not implemented")
+NotImplementedError: Held-out qualification gate not implemented
+
+======================================================================
+ERROR: test_qualification_requires_all_strata_metrics_and_per_run_suite_limits (test_reference.PredictionContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 121, in test_qualification_requires_all_strata_metrics_and_per_run_suite_limits
+    self.assertTrue(assess(rows)["qualified"])
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py", line 88, in assess
+    raise NotImplementedError("Held-out qualification gate not implemented")
+NotImplementedError: Held-out qualification gate not implemented
+
+======================================================================
+ERROR: test_seeded_prediction_preserves_queue_and_drain_endpoints (test_reference.PredictionContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py", line 103, in test_seeded_prediction_preserves_queue_and_drain_endpoints
+    result = predict(fitted, "background", 0)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py", line 84, in predict
+    raise NotImplementedError("Seeded service prediction not implemented")
+NotImplementedError: Seeded service prediction not implemented
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.018s
+
+FAILED (errors=4)

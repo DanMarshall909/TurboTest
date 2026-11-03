@@ -1,0 +1,215 @@
+EEEE
+======================================================================
+ERROR: test_awaited_return_joins_reset_and_background_drain_joins_it_later (test_model.PipelineContract) (mode='awaited')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 10, in test_awaited_return_joins_reset_and_background_drain_joins_it_later
+    result = simulate([Work(10, 20, 2, 3)], mode=mode, slots=1,
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_awaited_return_joins_reset_and_background_drain_joins_it_later (test_model.PipelineContract) (mode='background')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 10, in test_awaited_return_joins_reset_and_background_drain_joins_it_later
+    result = simulate([Work(10, 20, 2, 3)], mode=mode, slots=1,
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_dirty_slots_wait_for_fifo_resets_before_admitting_oldest_checkout (test_model.PipelineContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 19, in test_dirty_slots_wait_for_fifo_resets_before_admitting_oldest_checkout
+    result = simulate([Work(1, 10)] * 4, mode="background", slots=2,
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract) (patch={'slots': 0})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 72, in test_invalid_capacity_mode_or_nonfinite_timing_is_rejected
+    simulate([Work(1, 1)], **(valid | patch))
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract) (patch={'workers': -1})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 72, in test_invalid_capacity_mode_or_nonfinite_timing_is_rejected
+    simulate([Work(1, 1)], **(valid | patch))
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract) (patch={'reset_workers': 0})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 72, in test_invalid_capacity_mode_or_nonfinite_timing_is_rejected
+    simulate([Work(1, 1)], **(valid | patch))
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract) (patch={'mode': 'other'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 72, in test_invalid_capacity_mode_or_nonfinite_timing_is_rejected
+    simulate([Work(1, 1)], **(valid | patch))
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract) (patch={'release_tail_us': -1})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 72, in test_invalid_capacity_mode_or_nonfinite_timing_is_rejected
+    simulate([Work(1, 1)], **(valid | patch))
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract) (patch={'slots': 1.5})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 72, in test_invalid_capacity_mode_or_nonfinite_timing_is_rejected
+    simulate([Work(1, 1)], **(valid | patch))
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract) (job=Work(body_us=-1, reset_us=1, checkout_us=0, handoff_us=0))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 75, in test_invalid_capacity_mode_or_nonfinite_timing_is_rejected
+    simulate([job], **valid)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract) (job=Work(body_us=1, reset_us=inf, checkout_us=0, handoff_us=0))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 75, in test_invalid_capacity_mode_or_nonfinite_timing_is_rejected
+    simulate([job], **valid)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract) (job=Work(body_us=1, reset_us=1, checkout_us=nan, handoff_us=0))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 75, in test_invalid_capacity_mode_or_nonfinite_timing_is_rejected
+    simulate([job], **valid)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 77, in test_invalid_capacity_mode_or_nonfinite_timing_is_rejected
+    simulate([], **valid)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_publication_can_serve_next_test_while_prior_reset_still_holds_permit (test_model.PipelineContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 29, in test_publication_can_serve_next_test_while_prior_reset_still_holds_permit
+    result = simulate([Work(1, 10)] * 2, mode="background", slots=1,
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_service_variability_worker_order_and_exclusive_ownership_are_repeatable (test_model.PipelineContract) (mode='awaited', slots=1, resets=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 43, in test_service_variability_worker_order_and_exclusive_ownership_are_repeatable
+    result = simulate(jobs, **kwargs)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_service_variability_worker_order_and_exclusive_ownership_are_repeatable (test_model.PipelineContract) (mode='awaited', slots=4, resets=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 43, in test_service_variability_worker_order_and_exclusive_ownership_are_repeatable
+    result = simulate(jobs, **kwargs)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_service_variability_worker_order_and_exclusive_ownership_are_repeatable (test_model.PipelineContract) (mode='awaited', slots=4, resets=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 43, in test_service_variability_worker_order_and_exclusive_ownership_are_repeatable
+    result = simulate(jobs, **kwargs)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_service_variability_worker_order_and_exclusive_ownership_are_repeatable (test_model.PipelineContract) (mode='background', slots=1, resets=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 43, in test_service_variability_worker_order_and_exclusive_ownership_are_repeatable
+    result = simulate(jobs, **kwargs)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_service_variability_worker_order_and_exclusive_ownership_are_repeatable (test_model.PipelineContract) (mode='background', slots=4, resets=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 43, in test_service_variability_worker_order_and_exclusive_ownership_are_repeatable
+    result = simulate(jobs, **kwargs)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_service_variability_worker_order_and_exclusive_ownership_are_repeatable (test_model.PipelineContract) (mode='background', slots=4, resets=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 43, in test_service_variability_worker_order_and_exclusive_ownership_are_repeatable
+    result = simulate(jobs, **kwargs)
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+======================================================================
+ERROR: test_zero_duration_jobs_still_conserve_slots_and_finish_every_reset (test_model.PipelineContract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py", line 62, in test_zero_duration_jobs_still_conserve_slots_and_finish_every_reset
+    result = simulate([Work(0, 0)] * 7, mode="background", slots=2,
+  File "/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py", line 15, in simulate
+    raise NotImplementedError("Virtual pipeline not implemented")
+NotImplementedError: Virtual pipeline not implemented
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (errors=21)

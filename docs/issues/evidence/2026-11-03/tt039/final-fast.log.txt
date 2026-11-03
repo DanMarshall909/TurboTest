@@ -1,0 +1,20 @@
+test_awaited_return_joins_reset_and_background_drain_joins_it_later (test_model.PipelineContract) ... ok
+test_dirty_slots_wait_for_fifo_resets_before_admitting_oldest_checkout (test_model.PipelineContract) ... ok
+test_invalid_capacity_mode_or_nonfinite_timing_is_rejected (test_model.PipelineContract) ... ok
+test_publication_can_serve_next_test_while_prior_reset_still_holds_permit (test_model.PipelineContract) ... ok
+test_service_variability_worker_order_and_exclusive_ownership_are_repeatable (test_model.PipelineContract) ... ok
+test_zero_duration_jobs_still_conserve_slots_and_finish_every_reset (test_model.PipelineContract) ... ok
+test_gate_cannot_qualify_empty_or_nonfinite_predictions (test_reference.PredictionContract) ... ok
+test_qualification_requires_all_strata_metrics_and_per_run_suite_limits (test_reference.PredictionContract) ... ok
+test_seeded_prediction_preserves_queue_and_drain_endpoints (test_reference.PredictionContract) ... ok
+test_evaluation_reports_all_runs_but_qualifies_only_the_held_out_partition (test_reference.TraceContract) ... ok
+test_fit_retains_service_variability_and_ignores_validation_timings (test_reference.TraceContract) ... ok
+test_invalid_trace_timing_ordinals_resets_and_binding_are_rejected (test_reference.TraceContract) ... ok
+test_pin_verification_rejects_changed_missing_or_unpinned_inputs (test_reference.TraceContract) ... ok
+test_saved_fit_must_match_pinned_training_inputs_and_protocol (test_reference.TraceContract) ... ok
+test_whole_run_partition_cannot_be_changed_duplicated_or_truncated (test_reference.TraceContract) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.168s
+
+OK

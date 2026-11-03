@@ -35,7 +35,8 @@ The canonical test runner is the repository's existing Python `unittest` runner:
 | fast | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p 'test_*.py'` | Deterministic pipeline, fitting, partition, metrics and failure controls |
 | slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p archive_contract.py` | Original negative-result archive/CLI reproduction without Docker |
 | slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p revision_contract.py` | Revised CLI boundary and full native-input archive replay |
-| all | Run all three commands above | Exact union of 22 fast tests and three slow tests |
+| slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p trajectory_contract.py` | Whole-path CLI, real training archive and Git freeze boundaries |
+| all | Run all four commands above | Exact union of 26 fast tests and six slow tests |
 
 Both lanes run in CI. The fast lane takes about 0.6 s locally. The expensive
 replays belong to the slow lane; fast tests retain
@@ -80,3 +81,18 @@ validation, 2 for a completed failed prediction gate, and 1 for input/output
 errors. Argparse usage errors exit 2 without an evaluation. Existing outputs
 are preserved. Model correctness, prospective prediction and policy ranking
 remain separate claims.
+
+## Whole-path revision 3
+
+[Protocol-r3](protocol-r3.md) retains each selected run's complete worker paths,
+original order and initial offsets. All 40 now-observed R2 runs supply five
+training paths per mode/wait; their original roles remain untouched in the R2
+archive. Only 16 new cases assess R3. Forecasts freeze before those cases.
+Sixty-four seed selections do not create 64 independent training paths.
+
+`trajectory.py` provides the same `fit`, `forecast` and `validate` actions as
+`revised.py`, using `--trace-root artifacts/tt039-r3`. Its sixth sensitivity is
+explicitly independent-worker single-record sampling, outside the primary
+whole-path forecast. The unchanged kernel, R2 adapter and historical results
+remain reproducible. Prediction qualification is pending; no policy search is
+authorized by this implementation.

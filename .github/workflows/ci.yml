@@ -39,6 +39,9 @@ jobs:
     - name: Verify revised scheduler simulator CLI lane
       run: python3 -m unittest discover -s benchmarks/scheduler-simulator -p revision_contract.py
 
+    - name: Verify whole-path scheduler simulator boundaries
+      run: python3 -m unittest discover -s benchmarks/scheduler-simulator -p trajectory_contract.py
+
     - name: Prepare PostgreSQL image on the native contract daemon
       run: docker --host "$DOCKER_HOST" pull postgres:16-alpine
 

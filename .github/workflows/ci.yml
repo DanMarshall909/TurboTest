@@ -42,6 +42,12 @@ jobs:
     - name: Verify whole-path scheduler simulator boundaries
       run: python3 -m unittest discover -s benchmarks/scheduler-simulator -p trajectory_contract.py
 
+    - name: Verify fresh replicated scheduler CLI boundaries
+      run: python3 -m unittest discover -s benchmarks/scheduler-simulator -p replicated_contract.py
+
+    - name: Verify replicated collection freeze boundaries
+      run: python3 -m unittest discover -s benchmarks/scheduler-simulator -p replicated_collection_contract.py
+
     - name: Prepare PostgreSQL image on the native contract daemon
       run: docker --host "$DOCKER_HOST" pull postgres:16-alpine
 

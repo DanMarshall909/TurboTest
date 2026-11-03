@@ -36,9 +36,11 @@ The canonical test runner is the repository's existing Python `unittest` runner:
 | slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p archive_contract.py` | Original negative-result archive/CLI reproduction without Docker |
 | slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p revision_contract.py` | Revised CLI boundary and full native-input archive replay |
 | slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p trajectory_contract.py` | Whole-path CLI, real training archive, Git freeze boundaries and full R3 replay |
-| all | Run all four commands above | Exact union of 26 fast tests and seven slow tests |
+| slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p replicated_contract.py` | Fresh-only R4 fit/forecast/evaluation CLI, using synthetic traces |
+| slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p replicated_collection_contract.py` | Real Git protocol, collection and forecast freezes, using synthetic inputs |
+| all | Run all six commands above | Complete functional and historical archive regression suite |
 
-Both lanes run in CI. The fast lane takes about 0.6 s locally. The expensive
+Both lanes run locally and are also configured in CI. The expensive
 replays belong to the slow lane; fast tests retain
 the queueing, gate and sampling rules with real model code and small workloads.
 Standard-library `trace --count --missing` can inspect execution coverage; it is
@@ -96,3 +98,24 @@ remain reproducible. The fresh prediction gate **fails**: awaited/100 ms suite
 time misses the 10% stratum limit and one run misses the 20% individual limit.
 The [retained result](../../docs/issues/evidence/2026-11-03/tt039-r3/report.md)
 reproduces the full failed evaluation. Policy search remains gated.
+
+## Fresh replicated revision 4
+
+[Protocol-r4](protocol-r4.md) fits seven **new** complete paths per stratum
+from 56 calibration cases. The point forecast is the equal-weight mean of
+whole-path metrics. All 84 fresh validation cases must satisfy both the original
+first-two-visit challenge and the full-cohort gate, including every individual
+suite check. Historical measurements do not train this attempt.
+
+`replicated.py` provides the same three actions with
+`--trace-root artifacts/tt039-r4`. All forecasts and inputs freeze before any
+validation. CLI exit codes and output preservation match the earlier revisions.
+The new functional contracts use synthetic traces and never launch native
+experiments. They establish executable behavior, not predictive qualification.
+
+The [complete rerun plan](../../experiments/tt039/rerun-plan.md) includes the
+TT-038 baseline, all TT-039 timing controls, fresh calibration and fresh
+validation. Finish offline verification and independent readiness review before
+asking Dan to confirm a measurement window. No performance run is authorized by
+this documentation. The collectors reject absent, expired or withdrawn approval.
+Policy search remains gated until a fresh, fully retained evaluation qualifies.

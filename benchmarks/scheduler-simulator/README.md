@@ -35,8 +35,8 @@ The canonical test runner is the repository's existing Python `unittest` runner:
 | fast | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p 'test_*.py'` | Deterministic pipeline, fitting, partition, metrics and failure controls |
 | slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p archive_contract.py` | Original negative-result archive/CLI reproduction without Docker |
 | slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p revision_contract.py` | Revised CLI boundary and full native-input archive replay |
-| slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p trajectory_contract.py` | Whole-path CLI, real training archive and Git freeze boundaries |
-| all | Run all four commands above | Exact union of 26 fast tests and six slow tests |
+| slow | `python3 -m unittest discover -s benchmarks/scheduler-simulator -p trajectory_contract.py` | Whole-path CLI, real training archive, Git freeze boundaries and full R3 replay |
+| all | Run all four commands above | Exact union of 26 fast tests and seven slow tests |
 
 Both lanes run in CI. The fast lane takes about 0.6 s locally. The expensive
 replays belong to the slow lane; fast tests retain
@@ -46,9 +46,9 @@ not assertion coverage or branch coverage.
 
 The kernel accepts synthetic capacities for deterministic safety controls. The
 reference evaluator fixes capacity to the recorded contract and exposes no
-policy sweep. Empirical costs are mode-conditioned, CPU/I/O demand is unknown,
-and reset-to-test correlation is unobserved. The protocol specifies all modelling
-approximations and the evidence needed before any new ranking claim.
+policy sweep. For the original TT-038 input, costs are mode-conditioned, CPU/I/O
+demand is unknown, and reset-to-test correlation is unobserved. Its protocol
+specifies modelling approximations and evidence needed before a new ranking claim.
 
 ## Prospective revision 2
 
@@ -73,11 +73,9 @@ python3 benchmarks/scheduler-simulator/revised.py forecast --trace-root artifact
 python3 benchmarks/scheduler-simulator/revised.py validate --trace-root artifacts/tt039-r2 --fit artifacts/tt039-r2/fit.json --forecast artifacts/tt039-r2/forecast.json --output artifacts/tt039-r2/evaluation.json
 ```
 
-The unchanged fast command also discovers revision-2 tests. The slow lane adds
-`python3 -m unittest discover -s benchmarks/scheduler-simulator -p revision_contract.py`
-to the original archive contract; **all** means all three selections. CI runs
-each selection. Revision 2 exits 0 for successful fit/forecast or qualified
-validation, 2 for a completed failed prediction gate, and 1 for input/output
+The fast command also discovers revision-2 tests, and `revision_contract.py`
+replays this attempt. CI runs each named selection. Revision 2 exits 0 for
+successful fit/forecast or qualified validation, 2 for a completed failed prediction gate, and 1 for input/output
 errors. Argparse usage errors exit 2 without an evaluation. Existing outputs
 are preserved. Model correctness, prospective prediction and policy ranking
 remain separate claims.
@@ -94,5 +92,7 @@ Sixty-four seed selections do not create 64 independent training paths.
 `revised.py`, using `--trace-root artifacts/tt039-r3`. Its sixth sensitivity is
 explicitly independent-worker single-record sampling, outside the primary
 whole-path forecast. The unchanged kernel, R2 adapter and historical results
-remain reproducible. Prediction qualification is pending; no policy search is
-authorized by this implementation.
+remain reproducible. The fresh prediction gate **fails**: awaited/100 ms suite
+time misses the 10% stratum limit and one run misses the 20% individual limit.
+The [retained result](../../docs/issues/evidence/2026-11-03/tt039-r3/report.md)
+reproduces the full failed evaluation. Policy search remains gated.

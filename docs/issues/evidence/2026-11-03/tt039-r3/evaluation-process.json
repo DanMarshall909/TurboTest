@@ -1,0 +1,22 @@
+{
+  "command": [
+    "python3",
+    "benchmarks/scheduler-simulator/trajectory.py",
+    "validate",
+    "--trace-root",
+    "/home/dan/code/TurboTest/artifacts/tt039-r3",
+    "--fit",
+    "/home/dan/code/TurboTest/artifacts/tt039-r3/fit.json",
+    "--forecast",
+    "/home/dan/code/TurboTest/artifacts/tt039-r3/forecast.json",
+    "--output",
+    "/home/dan/code/TurboTest/artifacts/tt039-r3/evaluation.json"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "deadlineExceeded": false,
+  "deadlineSeconds": 180,
+  "elapsedSeconds": 4.789779320999514,
+  "exitCode": 2,
+  "processGroupId": 8,
+  "processGroupStopped": true
+}

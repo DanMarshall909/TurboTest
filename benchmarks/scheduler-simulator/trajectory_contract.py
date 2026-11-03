@@ -1,14 +1,17 @@
 """Slow command boundary for the whole-path reference."""
+import hashlib
 import json
 from pathlib import Path
 import subprocess
 import sys
+import tarfile
 import tempfile
 import unittest
 
 from test_trajectory import cohort
 from test_revised import trace_fixture
 from test_trajectory_collector import collector
+from trajectory import fit, validate
 
 
 class WholePathCliContract(unittest.TestCase):
@@ -77,3 +80,29 @@ class TrainingArchiveContract(unittest.TestCase):
             altered=manifest|dict(archiveSha256="wrong")
             with self.assertRaisesRegex(ValueError,"TrainingArchive"):
                 collector.extract_training(root/"bad",evidence/"raw-evidence.tar.gz",altered)
+
+
+class RecordedWholePathContract(unittest.TestCase):
+    def test_published_training_and_fresh_holdout_reproduce_the_complete_result(self):
+        repo=Path(__file__).resolve().parents[2]
+        evidence=repo/"docs/issues/evidence/2026-11-03/tt039-r3"
+        pins=json.loads((evidence/"evidence-manifest.json").read_text())
+        archive=evidence/"raw-evidence.tar.gz"
+        self.assertEqual(pins["archiveSha256"],hashlib.sha256(archive.read_bytes()).hexdigest())
+        with tempfile.TemporaryDirectory(prefix="tt039-r3-replay-") as temp:
+            root=Path(temp)
+            with tarfile.open(archive) as source:
+                for name in pins["modelInputs"]:
+                    payload=source.extractfile(name).read()
+                    self.assertEqual(pins["files"][name],hashlib.sha256(payload).hexdigest(),name)
+                    target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(payload)
+            contract=json.loads((root/"contract.json").read_text())
+            fitted=json.loads((root/"fit.json").read_text())
+            frozen=json.loads((root/"forecast.json").read_text())
+            saved=json.loads((root/"evaluation.json").read_text())
+            self.assertEqual({k:v for k,v in fitted.items() if k!="runtimeSeconds"},fit(root,contract))
+            replay=validate(root,contract,fitted,frozen)
+            self.assertEqual({k:v for k,v in saved.items() if k!="runtimeSeconds"},replay)
+            self.assertEqual((56,16,8),(len(replay["runs"]),len(replay["gate"]["perRunSuite"]),len(replay["gate"]["strata"])))
+            self.assertEqual(40,len(fitted["calibrationRuns"]))
+            self.assertEqual({5},set(frozen["trainingPathCounts"].values()))

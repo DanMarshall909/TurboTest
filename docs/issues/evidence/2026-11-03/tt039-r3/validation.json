@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python3",
+    "experiments/tt039/collect_r3.py",
+    "validate"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "deadlineExceeded": false,
+  "deadlineSeconds": 3600,
+  "elapsedSeconds": 445.7105673229671,
+  "exitCode": 0,
+  "processGroupId": 2085988,
+  "processGroupStopped": true
+}

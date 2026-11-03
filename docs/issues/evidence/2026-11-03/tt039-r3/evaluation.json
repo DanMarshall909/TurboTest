@@ -1,0 +1,3991 @@
+{
+  "forecastSha256": "fa92c6f996157c0c334f74fbbce94188d5372b52b3701d58c59db3c7d821be42",
+  "gate": {
+    "perRunSuite": [
+      {
+        "allowance": 936.9661544000003,
+        "name": "r5-w25-background",
+        "observed": 4684.830772000001,
+        "passed": true,
+        "predicted": 4506.263,
+        "relativeError": -0.0381161627154718,
+        "signedError": -178.56777200000124
+      },
+      {
+        "allowance": 1449.4805403999999,
+        "name": "r5-w25-awaited",
+        "observed": 7247.402701999999,
+        "passed": true,
+        "predicted": 7569.226,
+        "relativeError": 0.044405328533929866,
+        "signedError": 321.82329800000025
+      },
+      {
+        "allowance": 2471.7699468000005,
+        "name": "r5-w100-awaited",
+        "observed": 12358.849734000001,
+        "passed": true,
+        "predicted": 12264.908,
+        "relativeError": -0.007601171308164845,
+        "signedError": -93.94173400000182
+      },
+      {
+        "allowance": 1830.8290006,
+        "name": "r5-w100-background",
+        "observed": 9154.145003,
+        "passed": true,
+        "predicted": 8697.061,
+        "relativeError": -0.04993191639964234,
+        "signedError": -457.08400299999994
+      },
+      {
+        "allowance": 6772.0546156,
+        "name": "r5-w500-background",
+        "observed": 33860.273078,
+        "passed": true,
+        "predicted": 34050.614,
+        "relativeError": 0.005621364055792943,
+        "signedError": 190.34092200000305
+      },
+      {
+        "allowance": 7510.0116960000005,
+        "name": "r5-w500-awaited",
+        "observed": 37550.05848,
+        "passed": true,
+        "predicted": 37577.411,
+        "relativeError": 0.0007284281598274323,
+        "signedError": 27.352520000000368
+      },
+      {
+        "allowance": 1219.9888938000001,
+        "name": "r5-w0-awaited",
+        "observed": 6099.944469,
+        "passed": true,
+        "predicted": 6259.57,
+        "relativeError": 0.026168358058211716,
+        "signedError": 159.62553099999968
+      },
+      {
+        "allowance": 832.6211599999999,
+        "name": "r5-w0-background",
+        "observed": 4163.105799999999,
+        "passed": true,
+        "predicted": 4217.25,
+        "relativeError": 0.013005722794746433,
+        "signedError": 54.14420000000064
+      },
+      {
+        "allowance": 3094.000306,
+        "name": "r6-w100-awaited",
+        "observed": 15470.001529999998,
+        "passed": false,
+        "predicted": 12264.908,
+        "relativeError": -0.2071812031682455,
+        "signedError": -3205.0935299999983
+      },
+      {
+        "allowance": 1848.6830074,
+        "name": "r6-w100-background",
+        "observed": 9243.415036999999,
+        "passed": true,
+        "predicted": 8697.061,
+        "relativeError": -0.05910737912481767,
+        "signedError": -546.3540369999992
+      },
+      {
+        "allowance": 6801.678667199999,
+        "name": "r6-w500-background",
+        "observed": 34008.393335999994,
+        "passed": true,
+        "predicted": 34050.614,
+        "relativeError": 0.001241477760588916,
+        "signedError": 42.22066400000767
+      },
+      {
+        "allowance": 7500.1791978,
+        "name": "r6-w500-awaited",
+        "observed": 37500.895989,
+        "passed": true,
+        "predicted": 37577.411,
+        "relativeError": 0.0020403515431324237,
+        "signedError": 76.51501100000314
+      },
+      {
+        "allowance": 1244.1436856,
+        "name": "r6-w0-awaited",
+        "observed": 6220.718428,
+        "passed": true,
+        "predicted": 6259.57,
+        "relativeError": 0.006245512065796932,
+        "signedError": 38.85157199999958
+      },
+      {
+        "allowance": 832.7666952000002,
+        "name": "r6-w0-background",
+        "observed": 4163.833476000001,
+        "passed": true,
+        "predicted": 4217.25,
+        "relativeError": 0.012828688829149337,
+        "signedError": 53.4165239999993
+      },
+      {
+        "allowance": 927.3107322000001,
+        "name": "r6-w25-background",
+        "observed": 4636.553661,
+        "passed": true,
+        "predicted": 4506.263,
+        "relativeError": -0.028100755545207967,
+        "signedError": -130.290661
+      },
+      {
+        "allowance": 1492.0205778000002,
+        "name": "r6-w25-awaited",
+        "observed": 7460.102889000001,
+        "passed": true,
+        "predicted": 7569.226,
+        "relativeError": 0.014627561123976118,
+        "signedError": 109.12311099999897
+      }
+    ],
+    "qualified": false,
+    "strata": [
+      {
+        "metrics": {
+          "checkout_mean_ms": {
+            "allowance": 3,
+            "observed": 0.34281298632814305,
+            "passed": true,
+            "predicted": 0.301537109375,
+            "relativeError": -0.12040348119611044,
+            "signedError": -0.041275876953143054
+          },
+          "checkout_p95_ms": {
+            "allowance": 10,
+            "observed": 0.5900450000008277,
+            "passed": true,
+            "predicted": 0.5549999999999999,
+            "relativeError": -0.059393775052374975,
+            "signedError": -0.035045000000827775
+          },
+          "clean_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "clean_starvation": {
+            "allowance": 0.1,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "reset_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.0073124999999999996,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.0073124999999999996
+          },
+          "reset_queue_p95_ms": {
+            "allowance": 10,
+            "observed": 0.013499999999999998,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.013499999999999998
+          },
+          "starvation_proxy": {
+            "allowance": 0.1,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "suite_ms": {
+            "allowance": 616.0331448500001,
+            "observed": 6160.3314485,
+            "passed": true,
+            "predicted": 6259.57,
+            "relativeError": 0.01610928767869524,
+            "signedError": 99.23855149999963
+          }
+        },
+        "mode": "awaited",
+        "waitMilliseconds": 0
+      },
+      {
+        "metrics": {
+          "checkout_mean_ms": {
+            "allowance": 3,
+            "observed": 0.31653974609372426,
+            "passed": true,
+            "predicted": 0.31225390625,
+            "relativeError": -0.013539657804790384,
+            "signedError": -0.004285839843724271
+          },
+          "checkout_p95_ms": {
+            "allowance": 10,
+            "observed": 0.5699699999995573,
+            "passed": true,
+            "predicted": 0.603,
+            "relativeError": 0.05795041844389748,
+            "signedError": 0.03303000000044265
+          },
+          "clean_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "clean_starvation": {
+            "allowance": 0.1,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "reset_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.005783203125,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.005783203125
+          },
+          "reset_queue_p95_ms": {
+            "allowance": 10,
+            "observed": 0.01,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.01
+          },
+          "starvation_proxy": {
+            "allowance": 0.1,
+            "observed": 0.0078125,
+            "passed": true,
+            "predicted": 0.0078125,
+            "relativeError": 0.0,
+            "signedError": 0.0
+          },
+          "suite_ms": {
+            "allowance": 735.3752795500001,
+            "observed": 7353.7527955000005,
+            "passed": true,
+            "predicted": 7569.226,
+            "relativeError": 0.029301121548694686,
+            "signedError": 215.47320449999916
+          }
+        },
+        "mode": "awaited",
+        "waitMilliseconds": 25
+      },
+      {
+        "metrics": {
+          "checkout_mean_ms": {
+            "allowance": 3,
+            "observed": 0.2589621582031132,
+            "passed": true,
+            "predicted": 0.25293359375,
+            "relativeError": -0.023279711966196825,
+            "signedError": -0.006028564453113172
+          },
+          "checkout_p95_ms": {
+            "allowance": 10,
+            "observed": 0.4955659999995987,
+            "passed": true,
+            "predicted": 0.543,
+            "relativeError": 0.09571681673165577,
+            "signedError": 0.04743400000040132
+          },
+          "clean_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "clean_starvation": {
+            "allowance": 0.1,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "reset_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.00474609375,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.00474609375
+          },
+          "reset_queue_p95_ms": {
+            "allowance": 10,
+            "observed": 0.0095,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.0095
+          },
+          "starvation_proxy": {
+            "allowance": 0.1,
+            "observed": 0.009765625,
+            "passed": true,
+            "predicted": 0.00390625,
+            "relativeError": -0.6,
+            "signedError": -0.005859375
+          },
+          "suite_ms": {
+            "allowance": 1391.4425632,
+            "observed": 13914.425631999999,
+            "passed": false,
+            "predicted": 12264.908,
+            "relativeError": -0.11854730303825733,
+            "signedError": -1649.5176319999991
+          }
+        },
+        "mode": "awaited",
+        "waitMilliseconds": 100
+      },
+      {
+        "metrics": {
+          "checkout_mean_ms": {
+            "allowance": 3,
+            "observed": 0.20683817382810332,
+            "passed": true,
+            "predicted": 0.2168203125,
+            "relativeError": 0.04826062078943183,
+            "signedError": 0.009982138671896679
+          },
+          "checkout_p95_ms": {
+            "allowance": 10,
+            "observed": 0.35142699999960314,
+            "passed": true,
+            "predicted": 0.352,
+            "relativeError": 0.0016304950968408782,
+            "signedError": 0.0005730000003968394
+          },
+          "clean_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "clean_starvation": {
+            "allowance": 0.1,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "reset_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.00513671875,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.00513671875
+          },
+          "reset_queue_p95_ms": {
+            "allowance": 10,
+            "observed": 0.009999999999999998,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.009999999999999998
+          },
+          "starvation_proxy": {
+            "allowance": 0.1,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.00390625,
+            "relativeError": null,
+            "signedError": 0.00390625
+          },
+          "suite_ms": {
+            "allowance": 3752.5477234499995,
+            "observed": 37525.477234499995,
+            "passed": true,
+            "predicted": 37577.411,
+            "relativeError": 0.0013839601605987184,
+            "signedError": 51.93376550000539
+          }
+        },
+        "mode": "awaited",
+        "waitMilliseconds": 500
+      },
+      {
+        "metrics": {
+          "checkout_mean_ms": {
+            "allowance": 4.248093243164068,
+            "observed": 16.992372972656273,
+            "passed": true,
+            "predicted": 19.01916796875,
+            "relativeError": 0.11927674841855218,
+            "signedError": 2.0267949960937273
+          },
+          "checkout_p95_ms": {
+            "allowance": 10,
+            "observed": 33.06336999999985,
+            "passed": true,
+            "predicted": 33.582499999999996,
+            "relativeError": 0.01570106132557414,
+            "signedError": 0.5191300000001462
+          },
+          "clean_queue_mean_ms": {
+            "allowance": 4.126163085937501,
+            "observed": 16.504652343750003,
+            "passed": true,
+            "predicted": 18.54048828125,
+            "relativeError": 0.12334921663896359,
+            "signedError": 2.0358359374999964
+          },
+          "clean_starvation": {
+            "allowance": 0.1,
+            "observed": 0.75,
+            "passed": true,
+            "predicted": 0.75390625,
+            "relativeError": 0.005208333333333259,
+            "signedError": 0.00390625
+          },
+          "reset_queue_mean_ms": {
+            "allowance": 4.2466196289062506,
+            "observed": 16.986478515625002,
+            "passed": true,
+            "predicted": 18.99498046875,
+            "relativeError": 0.11824122058480091,
+            "signedError": 2.0085019531249984
+          },
+          "reset_queue_p95_ms": {
+            "allowance": 10,
+            "observed": 32.765,
+            "passed": true,
+            "predicted": 33.215500000000006,
+            "relativeError": 0.013749427743018572,
+            "signedError": 0.45050000000000523
+          },
+          "starvation_proxy": {
+            "allowance": 0.1,
+            "observed": 0.744140625,
+            "passed": true,
+            "predicted": 0.73828125,
+            "relativeError": -0.007874015748031482,
+            "signedError": -0.005859375
+          },
+          "suite_ms": {
+            "allowance": 416.3469638000001,
+            "observed": 4163.4696380000005,
+            "passed": true,
+            "predicted": 4217.25,
+            "relativeError": 0.012917198076610514,
+            "signedError": 53.78036199999951
+          }
+        },
+        "mode": "background",
+        "waitMilliseconds": 0
+      },
+      {
+        "metrics": {
+          "checkout_mean_ms": {
+            "allowance": 3,
+            "observed": 2.659277332031234,
+            "passed": true,
+            "predicted": 2.09262109375,
+            "relativeError": -0.21308655229592222,
+            "signedError": -0.5666562382812339
+          },
+          "checkout_p95_ms": {
+            "allowance": 10,
+            "observed": 9.659200500000225,
+            "passed": true,
+            "predicted": 6.651,
+            "relativeError": -0.31143369474524885,
+            "signedError": -3.0082005000002248
+          },
+          "clean_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 2.247798828125,
+            "passed": true,
+            "predicted": 1.62014453125,
+            "relativeError": -0.2792306362213728,
+            "signedError": -0.6276542968750001
+          },
+          "clean_starvation": {
+            "allowance": 0.1,
+            "observed": 0.509765625,
+            "passed": true,
+            "predicted": 0.51953125,
+            "relativeError": 0.019157088122605304,
+            "signedError": 0.009765625
+          },
+          "reset_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 2.34153125,
+            "passed": true,
+            "predicted": 1.68823046875,
+            "relativeError": -0.27900579214990195,
+            "signedError": -0.65330078125
+          },
+          "reset_queue_p95_ms": {
+            "allowance": 10,
+            "observed": 9.161,
+            "passed": true,
+            "predicted": 6.416,
+            "relativeError": -0.29963977731688674,
+            "signedError": -2.744999999999999
+          },
+          "starvation_proxy": {
+            "allowance": 0.1,
+            "observed": 0.4609375,
+            "passed": true,
+            "predicted": 0.4921875,
+            "relativeError": 0.06779661016949157,
+            "signedError": 0.03125
+          },
+          "suite_ms": {
+            "allowance": 466.0692216500001,
+            "observed": 4660.6922165000005,
+            "passed": true,
+            "predicted": 4506.263,
+            "relativeError": -0.03313439491955361,
+            "signedError": -154.42921650000062
+          }
+        },
+        "mode": "background",
+        "waitMilliseconds": 25
+      },
+      {
+        "metrics": {
+          "checkout_mean_ms": {
+            "allowance": 3,
+            "observed": 0.3243199824218639,
+            "passed": true,
+            "predicted": 0.3030390625,
+            "relativeError": -0.06561704820945136,
+            "signedError": -0.021280919921863872
+          },
+          "checkout_p95_ms": {
+            "allowance": 10,
+            "observed": 0.6205900000004476,
+            "passed": true,
+            "predicted": 0.5934999999999999,
+            "relativeError": -0.043652008573177414,
+            "signedError": -0.0270900000004477
+          },
+          "clean_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "clean_starvation": {
+            "allowance": 0.1,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "reset_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.00710546875,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.00710546875
+          },
+          "reset_queue_p95_ms": {
+            "allowance": 10,
+            "observed": 0.019,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.019
+          },
+          "starvation_proxy": {
+            "allowance": 0.1,
+            "observed": 0.009765625,
+            "passed": true,
+            "predicted": 0.0078125,
+            "relativeError": -0.19999999999999996,
+            "signedError": -0.001953125
+          },
+          "suite_ms": {
+            "allowance": 919.8780019999999,
+            "observed": 9198.780019999998,
+            "passed": true,
+            "predicted": 8697.061,
+            "relativeError": -0.05454190869975806,
+            "signedError": -501.71901999999864
+          }
+        },
+        "mode": "background",
+        "waitMilliseconds": 100
+      },
+      {
+        "metrics": {
+          "checkout_mean_ms": {
+            "allowance": 3,
+            "observed": 0.2409537128906507,
+            "passed": true,
+            "predicted": 0.2554609375,
+            "relativeError": 0.060207516353702806,
+            "signedError": 0.014507224609349278
+          },
+          "checkout_p95_ms": {
+            "allowance": 10,
+            "observed": 0.3675869999997303,
+            "passed": true,
+            "predicted": 0.541,
+            "relativeError": 0.4717604267843991,
+            "signedError": 0.1734130000002697
+          },
+          "clean_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "clean_starvation": {
+            "allowance": 0.1,
+            "observed": 0.0,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": null,
+            "signedError": 0.0
+          },
+          "reset_queue_mean_ms": {
+            "allowance": 3,
+            "observed": 0.00544921875,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.00544921875
+          },
+          "reset_queue_p95_ms": {
+            "allowance": 10,
+            "observed": 0.0095,
+            "passed": true,
+            "predicted": 0.0,
+            "relativeError": -1.0,
+            "signedError": -0.0095
+          },
+          "starvation_proxy": {
+            "allowance": 0.1,
+            "observed": 0.001953125,
+            "passed": true,
+            "predicted": 0.0078125,
+            "relativeError": 3.0,
+            "signedError": 0.005859375
+          },
+          "suite_ms": {
+            "allowance": 3393.4333207,
+            "observed": 33934.333206999996,
+            "passed": true,
+            "predicted": 34050.614,
+            "relativeError": 0.0034266414575081505,
+            "signedError": 116.28079300000536
+          }
+        },
+        "mode": "background",
+        "waitMilliseconds": 500
+      }
+    ]
+  },
+  "runs": [
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "awaited",
+      "name": "training/r0-w0-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.3097254531251181,
+        "checkout_p95_ms": 0.5782659999986208,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.19061800000054063,
+        "reset_queue_mean_ms": 0.0136875,
+        "reset_queue_p95_ms": 0.012,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": 6892.565765999998
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 223,
+        "wrapperDrain_us": 0
+      },
+      "pair": 0,
+      "predicted": {
+        "checkout_mean_ms": 0.301537109375,
+        "checkout_p95_ms": 0.5549999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0,
+        "suite_ms": 6259.57
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.008188343750118121,
+        "checkout_p95_ms": -0.02326599999862089,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.19061800000054063,
+        "reset_queue_mean_ms": -0.0136875,
+        "reset_queue_p95_ms": -0.012,
+        "starvation_proxy": -0.01171875,
+        "suite_ms": -632.9957659999982
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5460.494351999998,
+        "FinalAuditMilliseconds": 154.529975999998,
+        "PreflightMilliseconds": 3167.8478460000006,
+        "StartupMilliseconds": 8023.374533,
+        "TotalMilliseconds": 23736.704079,
+        "processWallMilliseconds": 23870.255079993512
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 9,
+      "mode": "background",
+      "name": "training/r0-w0-background",
+      "observed": {
+        "checkout_mean_ms": 23.01356898437501,
+        "checkout_p95_ms": 33.62222099999963,
+        "clean_queue_mean_ms": 22.501359375,
+        "clean_starvation": 0.90625,
+        "drain_ms": 76.51232399999935,
+        "reset_queue_mean_ms": 22.9785859375,
+        "reset_queue_p95_ms": 33.109,
+        "starvation_proxy": 0.890625,
+        "suite_ms": 4077.9797449999987
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          76127,
+          76127
+        ],
+        "settlementTail_us": 404,
+        "wrapperDrain_us": 76133
+      },
+      "pair": 0,
+      "predicted": {
+        "checkout_mean_ms": 19.01916796875,
+        "checkout_p95_ms": 33.582499999999996,
+        "clean_queue_mean_ms": 18.54048828125,
+        "clean_starvation": 0.75390625,
+        "drain_ms": 80.318,
+        "reset_queue_mean_ms": 18.99498046875,
+        "reset_queue_p95_ms": 33.215500000000006,
+        "starvation_proxy": 0.73828125,
+        "suite_ms": 4217.25
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -3.9944010156250087,
+        "checkout_p95_ms": -0.039720999999630635,
+        "clean_queue_mean_ms": -3.9608710937500007,
+        "clean_starvation": -0.15234375,
+        "drain_ms": 3.805676000000645,
+        "reset_queue_mean_ms": -3.9836054687499995,
+        "reset_queue_p95_ms": 0.10650000000000404,
+        "starvation_proxy": -0.15234375,
+        "suite_ms": 139.27025500000127
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5456.698503999998,
+        "FinalAuditMilliseconds": 155.51467799999955,
+        "PreflightMilliseconds": 1626.998955,
+        "StartupMilliseconds": 5171.83645,
+        "TotalMilliseconds": 16521.406534,
+        "processWallMilliseconds": 16676.808802993037
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "background",
+      "name": "training/r0-w25-background",
+      "observed": {
+        "checkout_mean_ms": 5.360368968749942,
+        "checkout_p95_ms": 13.710046000000148,
+        "clean_queue_mean_ms": 4.7859296875,
+        "clean_starvation": 0.65234375,
+        "drain_ms": 70.51281399999971,
+        "reset_queue_mean_ms": 4.9520703125,
+        "reset_queue_p95_ms": 13.005,
+        "starvation_proxy": 0.64453125,
+        "suite_ms": 4829.172326
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          69884,
+          69884
+        ],
+        "settlementTail_us": 669,
+        "wrapperDrain_us": 69893
+      },
+      "pair": 0,
+      "predicted": {
+        "checkout_mean_ms": 2.09262109375,
+        "checkout_p95_ms": 6.651,
+        "clean_queue_mean_ms": 1.62014453125,
+        "clean_starvation": 0.51953125,
+        "drain_ms": 61.179,
+        "reset_queue_mean_ms": 1.68823046875,
+        "reset_queue_p95_ms": 6.416,
+        "starvation_proxy": 0.4921875,
+        "suite_ms": 4506.263
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -3.267747874999942,
+        "checkout_p95_ms": -7.059046000000148,
+        "clean_queue_mean_ms": -3.16578515625,
+        "clean_starvation": -0.1328125,
+        "drain_ms": -9.333813999999705,
+        "reset_queue_mean_ms": -3.26383984375,
+        "reset_queue_p95_ms": -6.589,
+        "starvation_proxy": -0.15234375,
+        "suite_ms": -322.90932599999996
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5454.635501000001,
+        "FinalAuditMilliseconds": 174.76729799999885,
+        "PreflightMilliseconds": 1400.609375,
+        "StartupMilliseconds": 6066.734036,
+        "TotalMilliseconds": 17964.888403,
+        "processWallMilliseconds": 18077.86101498641
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "training/r0-w25-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.28945283593748883,
+        "checkout_p95_ms": 0.6590150000010908,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.1984790000005887,
+        "reset_queue_mean_ms": 0.0056640625,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": 7586.491993000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 230,
+        "wrapperDrain_us": 0
+      },
+      "pair": 0,
+      "predicted": {
+        "checkout_mean_ms": 0.31225390625,
+        "checkout_p95_ms": 0.603,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 7569.226
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.022801070312511162,
+        "checkout_p95_ms": -0.05601500000109083,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.1984790000005887,
+        "reset_queue_mean_ms": -0.0056640625,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": -0.00390625,
+        "suite_ms": -17.26599300000089
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5456.886991999998,
+        "FinalAuditMilliseconds": 155.955645,
+        "PreflightMilliseconds": 2060.738733,
+        "StartupMilliseconds": 5033.562497999999,
+        "TotalMilliseconds": 20329.329563,
+        "processWallMilliseconds": 20442.04695598455
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "awaited",
+      "name": "training/r0-w100-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.24105932812490494,
+        "checkout_p95_ms": 0.5534060000009049,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.20129799999995157,
+        "reset_queue_mean_ms": 0.00584765625,
+        "reset_queue_p95_ms": 0.011,
+        "starvation_proxy": 0,
+        "suite_ms": 12008.336922000002
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 239,
+        "wrapperDrain_us": 0
+      },
+      "pair": 0,
+      "predicted": {
+        "checkout_mean_ms": 0.25293359375,
+        "checkout_p95_ms": 0.543,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 12264.908
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.011874265625095082,
+        "checkout_p95_ms": -0.010406000000904858,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.20129799999995157,
+        "reset_queue_mean_ms": -0.00584765625,
+        "reset_queue_p95_ms": -0.011,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 256.5710779999972
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5469.500612,
+        "FinalAuditMilliseconds": 144.4291200000007,
+        "PreflightMilliseconds": 2027.3615199999995,
+        "StartupMilliseconds": 5214.676333,
+        "TotalMilliseconds": 24902.901758,
+        "processWallMilliseconds": 25016.075510007795
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "background",
+      "name": "training/r0-w100-background",
+      "observed": {
+        "checkout_mean_ms": 0.3080740585937036,
+        "checkout_p95_ms": 0.5866349999996601,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 55.81914400000096,
+        "reset_queue_mean_ms": 0.00526171875,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8578.441109000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          55322,
+          55323
+        ],
+        "settlementTail_us": 522,
+        "wrapperDrain_us": 55330
+      },
+      "pair": 0,
+      "predicted": {
+        "checkout_mean_ms": 0.3030390625,
+        "checkout_p95_ms": 0.5934999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.955,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8697.061
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.005034996093703614,
+        "checkout_p95_ms": 0.006865000000339849,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.13585599999903764,
+        "reset_queue_mean_ms": -0.00526171875,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": 0.0,
+        "suite_ms": 118.61989099999846
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5443.100922000001,
+        "FinalAuditMilliseconds": 147.79356200000257,
+        "PreflightMilliseconds": 1246.0505709999998,
+        "StartupMilliseconds": 7775.203691,
+        "TotalMilliseconds": 23226.71111,
+        "processWallMilliseconds": 23360.945072956383
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 8,
+      "mode": "background",
+      "name": "training/r0-w500-background",
+      "observed": {
+        "checkout_mean_ms": 0.24900903906253902,
+        "checkout_p95_ms": 0.42570700000032957,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 53.669181000004755,
+        "reset_queue_mean_ms": 0.0062890625,
+        "reset_queue_p95_ms": 0.011,
+        "starvation_proxy": 0,
+        "suite_ms": 34110.839632
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          53364,
+          53364
+        ],
+        "settlementTail_us": 327,
+        "wrapperDrain_us": 53376
+      },
+      "pair": 0,
+      "predicted": {
+        "checkout_mean_ms": 0.2554609375,
+        "checkout_p95_ms": 0.541,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.167,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 34050.614
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.006451898437460968,
+        "checkout_p95_ms": 0.11529299999967046,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 1.4978189999952463,
+        "reset_queue_mean_ms": -0.0062890625,
+        "reset_queue_p95_ms": -0.011,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": -60.2256320000015
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5911.216627999995,
+        "FinalAuditMilliseconds": 155.85761700000148,
+        "PreflightMilliseconds": 1496.3526549999997,
+        "StartupMilliseconds": 5305.838834,
+        "TotalMilliseconds": 47020.817315,
+        "processWallMilliseconds": 47155.85702197859
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 11,
+      "mode": "awaited",
+      "name": "training/r0-w500-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.24473593749987543,
+        "checkout_p95_ms": 0.37672700000075565,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.22744799999782117,
+        "reset_queue_mean_ms": 0.0062578125,
+        "reset_queue_p95_ms": 0.011,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": 38333.445866
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 263,
+        "wrapperDrain_us": 0
+      },
+      "pair": 0,
+      "predicted": {
+        "checkout_mean_ms": 0.2168203125,
+        "checkout_p95_ms": 0.352,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37577.411
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.027915624999875432,
+        "checkout_p95_ms": -0.024727000000755672,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.22744799999782117,
+        "reset_queue_mean_ms": -0.0062578125,
+        "reset_queue_p95_ms": -0.011,
+        "starvation_proxy": -0.0078125,
+        "suite_ms": -756.0348660000018
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5526.9410780000035,
+        "FinalAuditMilliseconds": 149.07454300000245,
+        "PreflightMilliseconds": 1993.604684,
+        "StartupMilliseconds": 5181.981186,
+        "TotalMilliseconds": 51223.6523,
+        "processWallMilliseconds": 51377.5344430469
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "background",
+      "name": "training/r1-w25-background",
+      "observed": {
+        "checkout_mean_ms": 2.07928306640628,
+        "checkout_p95_ms": 6.6002559999997175,
+        "clean_queue_mean_ms": 1.60678125,
+        "clean_starvation": 0.53125,
+        "drain_ms": 60.23989799999981,
+        "reset_queue_mean_ms": 1.69166796875,
+        "reset_queue_p95_ms": 5.969,
+        "starvation_proxy": 0.48828125,
+        "suite_ms": 4425.467417000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          59318,
+          59318
+        ],
+        "settlementTail_us": 949,
+        "wrapperDrain_us": 59325
+      },
+      "pair": 1,
+      "predicted": {
+        "checkout_mean_ms": 2.09262109375,
+        "checkout_p95_ms": 6.651,
+        "clean_queue_mean_ms": 1.62014453125,
+        "clean_starvation": 0.51953125,
+        "drain_ms": 61.179,
+        "reset_queue_mean_ms": 1.68823046875,
+        "reset_queue_p95_ms": 6.416,
+        "starvation_proxy": 0.4921875,
+        "suite_ms": 4506.263
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.013338027343720249,
+        "checkout_p95_ms": 0.05074400000028234,
+        "clean_queue_mean_ms": 0.01336328124999997,
+        "clean_starvation": -0.01171875,
+        "drain_ms": 0.9391020000001902,
+        "reset_queue_mean_ms": -0.0034374999999999822,
+        "reset_queue_p95_ms": 0.44700000000000006,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 80.79558299999917
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5621.573305,
+        "FinalAuditMilliseconds": 150.55599000000075,
+        "PreflightMilliseconds": 1473.442822,
+        "StartupMilliseconds": 5310.393807,
+        "TotalMilliseconds": 17019.958976,
+        "processWallMilliseconds": 17178.673728951253
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "training/r1-w25-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.35849146484375183,
+        "checkout_p95_ms": 0.6030649999993329,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.1465779999998631,
+        "reset_queue_mean_ms": 0.00876171875,
+        "reset_queue_p95_ms": 0.019,
+        "starvation_proxy": 0,
+        "suite_ms": 7569.9981370000005
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 184,
+        "wrapperDrain_us": 0
+      },
+      "pair": 1,
+      "predicted": {
+        "checkout_mean_ms": 0.31225390625,
+        "checkout_p95_ms": 0.603,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 7569.226
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.04623755859375184,
+        "checkout_p95_ms": -6.499999933295975e-05,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.1465779999998631,
+        "reset_queue_mean_ms": -0.00876171875,
+        "reset_queue_p95_ms": -0.019,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": -0.7721370000008392
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 6669.529784,
+        "FinalAuditMilliseconds": 153.56814499999928,
+        "PreflightMilliseconds": 1520.814966,
+        "StartupMilliseconds": 6073.401954,
+        "TotalMilliseconds": 22024.349733,
+        "processWallMilliseconds": 22154.958255996462
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 5,
+      "mode": "awaited",
+      "name": "training/r1-w100-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.29384280859387957,
+        "checkout_p95_ms": 0.5853650000008201,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.205829000002268,
+        "reset_queue_mean_ms": 0.00758203125,
+        "reset_queue_p95_ms": 0.019,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 12306.142586000002
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 280,
+        "wrapperDrain_us": 0
+      },
+      "pair": 1,
+      "predicted": {
+        "checkout_mean_ms": 0.25293359375,
+        "checkout_p95_ms": 0.543,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 12264.908
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.04090921484387955,
+        "checkout_p95_ms": -0.04236500000082011,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.205829000002268,
+        "reset_queue_mean_ms": -0.00758203125,
+        "reset_queue_p95_ms": -0.019,
+        "starvation_proxy": 0.0,
+        "suite_ms": -41.23458600000231
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5548.761989999999,
+        "FinalAuditMilliseconds": 155.06963299999916,
+        "PreflightMilliseconds": 1925.6225989999994,
+        "StartupMilliseconds": 6543.065357,
+        "TotalMilliseconds": 26515.178465,
+        "processWallMilliseconds": 26633.675246033818
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 4,
+      "mode": "background",
+      "name": "training/r1-w100-background",
+      "observed": {
+        "checkout_mean_ms": 0.3921854882813278,
+        "checkout_p95_ms": 0.654313999999431,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 57.59910899999886,
+        "reset_queue_mean_ms": 0.00909375,
+        "reset_queue_p95_ms": 0.024,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8673.954128
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          56716,
+          56717
+        ],
+        "settlementTail_us": 913,
+        "wrapperDrain_us": 56723
+      },
+      "pair": 1,
+      "predicted": {
+        "checkout_mean_ms": 0.3030390625,
+        "checkout_p95_ms": 0.5934999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.955,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8697.061
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.08914642578132781,
+        "checkout_p95_ms": -0.060813999999431045,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -1.6441089999988634,
+        "reset_queue_mean_ms": -0.00909375,
+        "reset_queue_p95_ms": -0.024,
+        "starvation_proxy": 0.0,
+        "suite_ms": 23.106872000000294
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5572.335997000002,
+        "FinalAuditMilliseconds": 162.0741369999996,
+        "PreflightMilliseconds": 1294.7161129999995,
+        "StartupMilliseconds": 6547.791618,
+        "TotalMilliseconds": 22287.329144,
+        "processWallMilliseconds": 22404.624365037307
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "background",
+      "name": "training/r1-w500-background",
+      "observed": {
+        "checkout_mean_ms": 0.28394532812514583,
+        "checkout_p95_ms": 0.6562649999996211,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 57.21469200000138,
+        "reset_queue_mean_ms": 0.00716796875,
+        "reset_queue_p95_ms": 0.016,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 34816.21299
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          56954,
+          56955
+        ],
+        "settlementTail_us": 285,
+        "wrapperDrain_us": 56964
+      },
+      "pair": 1,
+      "predicted": {
+        "checkout_mean_ms": 0.2554609375,
+        "checkout_p95_ms": 0.541,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.167,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 34050.614
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.02848439062514585,
+        "checkout_p95_ms": -0.11526499999962103,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -2.0476920000013763,
+        "reset_queue_mean_ms": -0.00716796875,
+        "reset_queue_p95_ms": -0.016,
+        "starvation_proxy": 0.0,
+        "suite_ms": -765.5989899999986
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5491.083909000001,
+        "FinalAuditMilliseconds": 160.45767999999953,
+        "PreflightMilliseconds": 1361.5461170000008,
+        "StartupMilliseconds": 6516.491513999999,
+        "TotalMilliseconds": 48384.718441,
+        "processWallMilliseconds": 48509.87798400456
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "awaited",
+      "name": "training/r1-w500-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.22910777734363919,
+        "checkout_p95_ms": 0.32910700000047655,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.25527799999690615,
+        "reset_queue_mean_ms": 0.0059765625,
+        "reset_queue_p95_ms": 0.012,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37564.508716
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 294,
+        "wrapperDrain_us": 0
+      },
+      "pair": 1,
+      "predicted": {
+        "checkout_mean_ms": 0.2168203125,
+        "checkout_p95_ms": 0.352,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37577.411
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.012287464843639184,
+        "checkout_p95_ms": 0.022892999999523433,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.25527799999690615,
+        "reset_queue_mean_ms": -0.0059765625,
+        "reset_queue_p95_ms": -0.012,
+        "starvation_proxy": 0.0,
+        "suite_ms": 12.90228400000342
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5483.489566999997,
+        "FinalAuditMilliseconds": 143.83841299999767,
+        "PreflightMilliseconds": 1624.687253,
+        "StartupMilliseconds": 5181.381966999999,
+        "TotalMilliseconds": 50035.301543,
+        "processWallMilliseconds": 50161.36283002561
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "training/r1-w0-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.29336350781256115,
+        "checkout_p95_ms": 0.5324449999998251,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.2504079999998794,
+        "reset_queue_mean_ms": 0.00542578125,
+        "reset_queue_p95_ms": 0.009,
+        "starvation_proxy": 0,
+        "suite_ms": 6282.3912470000005
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 283,
+        "wrapperDrain_us": 0
+      },
+      "pair": 1,
+      "predicted": {
+        "checkout_mean_ms": 0.301537109375,
+        "checkout_p95_ms": 0.5549999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0,
+        "suite_ms": 6259.57
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.008173601562438848,
+        "checkout_p95_ms": 0.022555000000174852,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.2504079999998794,
+        "reset_queue_mean_ms": -0.00542578125,
+        "reset_queue_p95_ms": -0.009,
+        "starvation_proxy": 0.0,
+        "suite_ms": -22.821247000000767
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5469.456741000002,
+        "FinalAuditMilliseconds": 143.37606700000106,
+        "PreflightMilliseconds": 1547.4806090000002,
+        "StartupMilliseconds": 5268.160962,
+        "TotalMilliseconds": 18747.806907,
+        "processWallMilliseconds": 18884.928065002896
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "background",
+      "name": "training/r1-w0-background",
+      "observed": {
+        "checkout_mean_ms": 19.037131828124966,
+        "checkout_p95_ms": 33.82996599999933,
+        "clean_queue_mean_ms": 18.55846484375,
+        "clean_starvation": 0.796875,
+        "drain_ms": 89.5634140000002,
+        "reset_queue_mean_ms": 19.04127734375,
+        "reset_queue_p95_ms": 33.372,
+        "starvation_proxy": 0.78515625,
+        "suite_ms": 4281.763263000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          89033,
+          89033
+        ],
+        "settlementTail_us": 544,
+        "wrapperDrain_us": 89041
+      },
+      "pair": 1,
+      "predicted": {
+        "checkout_mean_ms": 19.01916796875,
+        "checkout_p95_ms": 33.582499999999996,
+        "clean_queue_mean_ms": 18.54048828125,
+        "clean_starvation": 0.75390625,
+        "drain_ms": 80.318,
+        "reset_queue_mean_ms": 18.99498046875,
+        "reset_queue_p95_ms": 33.215500000000006,
+        "starvation_proxy": 0.73828125,
+        "suite_ms": 4217.25
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.017963859374965807,
+        "checkout_p95_ms": -0.24746599999933494,
+        "clean_queue_mean_ms": -0.01797656249999946,
+        "clean_starvation": -0.04296875,
+        "drain_ms": -9.245414000000196,
+        "reset_queue_mean_ms": -0.04629687499999946,
+        "reset_queue_p95_ms": -0.1564999999999941,
+        "starvation_proxy": -0.046875,
+        "suite_ms": -64.51326300000073
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5437.206421999999,
+        "FinalAuditMilliseconds": 160.5981869999996,
+        "PreflightMilliseconds": 1372.1437919999998,
+        "StartupMilliseconds": 5041.935958,
+        "TotalMilliseconds": 16330.84933,
+        "processWallMilliseconds": 16472.356052021496
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "awaited",
+      "name": "training/r2-w100-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.2529168046875121,
+        "checkout_p95_ms": 0.5432650000002468,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.22288800000023912,
+        "reset_queue_mean_ms": 0.00543359375,
+        "reset_queue_p95_ms": 0.011,
+        "starvation_proxy": 0,
+        "suite_ms": 12225.002110000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 259,
+        "wrapperDrain_us": 0
+      },
+      "pair": 2,
+      "predicted": {
+        "checkout_mean_ms": 0.25293359375,
+        "checkout_p95_ms": 0.543,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 12264.908
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 1.678906248792078e-05,
+        "checkout_p95_ms": -0.0002650000002467623,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.22288800000023912,
+        "reset_queue_mean_ms": -0.00543359375,
+        "reset_queue_p95_ms": -0.011,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 39.90588999999818
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5455.177415999999,
+        "FinalAuditMilliseconds": 160.15896099999736,
+        "PreflightMilliseconds": 1930.6492609999996,
+        "StartupMilliseconds": 5475.933318,
+        "TotalMilliseconds": 25284.545302,
+        "processWallMilliseconds": 25419.121571001597
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "background",
+      "name": "training/r2-w100-background",
+      "observed": {
+        "checkout_mean_ms": 0.30007145312507433,
+        "checkout_p95_ms": 0.5812349999996513,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 55.140073000000484,
+        "reset_queue_mean_ms": 0.0058515625,
+        "reset_queue_p95_ms": 0.015,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8799.095884999999
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          55000,
+          55000
+        ],
+        "settlementTail_us": 162,
+        "wrapperDrain_us": 55014
+      },
+      "pair": 2,
+      "predicted": {
+        "checkout_mean_ms": 0.3030390625,
+        "checkout_p95_ms": 0.5934999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.955,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8697.061
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.0029676093749256838,
+        "checkout_p95_ms": 0.01226500000034858,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.8149269999995141,
+        "reset_queue_mean_ms": -0.0058515625,
+        "reset_queue_p95_ms": -0.015,
+        "starvation_proxy": 0.0,
+        "suite_ms": -102.03488499999912
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5443.803909000002,
+        "FinalAuditMilliseconds": 145.42427099999986,
+        "PreflightMilliseconds": 1566.101028,
+        "StartupMilliseconds": 5023.438818,
+        "TotalMilliseconds": 21015.086459,
+        "processWallMilliseconds": 21148.905502981506
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "background",
+      "name": "training/r2-w500-background",
+      "observed": {
+        "checkout_mean_ms": 0.2320449687500883,
+        "checkout_p95_ms": 0.3467369999998482,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 53.105569999999716,
+        "reset_queue_mean_ms": 0.0054140625000000005,
+        "reset_queue_p95_ms": 0.011,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 33896.338106999996
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          52696,
+          52696
+        ],
+        "settlementTail_us": 437,
+        "wrapperDrain_us": 52705
+      },
+      "pair": 2,
+      "predicted": {
+        "checkout_mean_ms": 0.2554609375,
+        "checkout_p95_ms": 0.541,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.167,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 34050.614
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.023415968749911698,
+        "checkout_p95_ms": 0.19426300000015184,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 2.0614300000002856,
+        "reset_queue_mean_ms": -0.0054140625000000005,
+        "reset_queue_p95_ms": -0.011,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 154.27589300000545
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5474.901766000003,
+        "FinalAuditMilliseconds": 146.46273199999996,
+        "PreflightMilliseconds": 1229.4079189999993,
+        "StartupMilliseconds": 7692.482171,
+        "TotalMilliseconds": 48477.516307,
+        "processWallMilliseconds": 48603.19088801043
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "awaited",
+      "name": "training/r2-w500-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.21681607421885118,
+        "checkout_p95_ms": 0.34724699999969744,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.19643799999903422,
+        "reset_queue_mean_ms": 0.0055390625,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37482.796678
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 227,
+        "wrapperDrain_us": 0
+      },
+      "pair": 2,
+      "predicted": {
+        "checkout_mean_ms": 0.2168203125,
+        "checkout_p95_ms": 0.352,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37577.411
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 4.238281148816192e-06,
+        "checkout_p95_ms": 0.004753000000302543,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.19643799999903422,
+        "reset_queue_mean_ms": -0.0055390625,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": 0.0,
+        "suite_ms": 94.61432200000127
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5495.794777000003,
+        "FinalAuditMilliseconds": 144.00444199999765,
+        "PreflightMilliseconds": 1967.9382990000004,
+        "StartupMilliseconds": 5471.625532,
+        "TotalMilliseconds": 50598.460535,
+        "processWallMilliseconds": 50710.40520694805
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "training/r2-w0-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.3980574921874833,
+        "checkout_p95_ms": 0.600414999998975,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.26992799999970885,
+        "reset_queue_mean_ms": 0.00669921875,
+        "reset_queue_p95_ms": 0.014,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": 5881.738726
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 302,
+        "wrapperDrain_us": 0
+      },
+      "pair": 2,
+      "predicted": {
+        "checkout_mean_ms": 0.301537109375,
+        "checkout_p95_ms": 0.5549999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0,
+        "suite_ms": 6259.57
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.09652038281248332,
+        "checkout_p95_ms": -0.045414999998975025,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.26992799999970885,
+        "reset_queue_mean_ms": -0.00669921875,
+        "reset_queue_p95_ms": -0.014,
+        "starvation_proxy": -0.01171875,
+        "suite_ms": 377.8312740000001
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5420.400517999999,
+        "FinalAuditMilliseconds": 153.7403030000005,
+        "PreflightMilliseconds": 1963.5837039999997,
+        "StartupMilliseconds": 5081.218908999999,
+        "TotalMilliseconds": 18532.159897,
+        "processWallMilliseconds": 18684.394580952358
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 9,
+      "mode": "background",
+      "name": "training/r2-w0-background",
+      "observed": {
+        "checkout_mean_ms": 15.641377960937508,
+        "checkout_p95_ms": 30.254494999999224,
+        "clean_queue_mean_ms": 15.18079296875,
+        "clean_starvation": 0.70703125,
+        "drain_ms": 81.93757800000094,
+        "reset_queue_mean_ms": 15.62820703125,
+        "reset_queue_p95_ms": 29.838,
+        "starvation_proxy": 0.69140625,
+        "suite_ms": 4285.067283
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          81483,
+          81483
+        ],
+        "settlementTail_us": 465,
+        "wrapperDrain_us": 81494
+      },
+      "pair": 2,
+      "predicted": {
+        "checkout_mean_ms": 19.01916796875,
+        "checkout_p95_ms": 33.582499999999996,
+        "clean_queue_mean_ms": 18.54048828125,
+        "clean_starvation": 0.75390625,
+        "drain_ms": 80.318,
+        "reset_queue_mean_ms": 18.99498046875,
+        "reset_queue_p95_ms": 33.215500000000006,
+        "starvation_proxy": 0.73828125,
+        "suite_ms": 4217.25
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 3.377790007812493,
+        "checkout_p95_ms": 3.328005000000772,
+        "clean_queue_mean_ms": 3.3596953124999995,
+        "clean_starvation": 0.046875,
+        "drain_ms": -1.619578000000942,
+        "reset_queue_mean_ms": 3.366773437500001,
+        "reset_queue_p95_ms": 3.377500000000005,
+        "starvation_proxy": 0.046875,
+        "suite_ms": -67.81728300000032
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5424.917963,
+        "FinalAuditMilliseconds": 154.00418600000012,
+        "PreflightMilliseconds": 1224.5084589999997,
+        "StartupMilliseconds": 6369.538404,
+        "TotalMilliseconds": 17493.541168,
+        "processWallMilliseconds": 17633.28075199388
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "background",
+      "name": "training/r2-w25-background",
+      "observed": {
+        "checkout_mean_ms": 1.2691733906249993,
+        "checkout_p95_ms": 4.990635000000111,
+        "clean_queue_mean_ms": 0.89846875,
+        "clean_starvation": 0.35546875,
+        "drain_ms": 61.5770420000008,
+        "reset_queue_mean_ms": 0.97863671875,
+        "reset_queue_p95_ms": 4.912,
+        "starvation_proxy": 0.3046875,
+        "suite_ms": 4697.7347
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          61172,
+          61173
+        ],
+        "settlementTail_us": 436,
+        "wrapperDrain_us": 61181
+      },
+      "pair": 2,
+      "predicted": {
+        "checkout_mean_ms": 2.09262109375,
+        "checkout_p95_ms": 6.651,
+        "clean_queue_mean_ms": 1.62014453125,
+        "clean_starvation": 0.51953125,
+        "drain_ms": 61.179,
+        "reset_queue_mean_ms": 1.68823046875,
+        "reset_queue_p95_ms": 6.416,
+        "starvation_proxy": 0.4921875,
+        "suite_ms": 4506.263
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.8234477031250007,
+        "checkout_p95_ms": 1.6603649999998886,
+        "clean_queue_mean_ms": 0.72167578125,
+        "clean_starvation": 0.1640625,
+        "drain_ms": -0.3980420000007996,
+        "reset_queue_mean_ms": 0.70959375,
+        "reset_queue_p95_ms": 1.5040000000000004,
+        "starvation_proxy": 0.1875,
+        "suite_ms": -191.47170000000006
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5448.126329000002,
+        "FinalAuditMilliseconds": 165.72363300000143,
+        "PreflightMilliseconds": 1143.5017640000005,
+        "StartupMilliseconds": 5123.392175999999,
+        "TotalMilliseconds": 16611.510436,
+        "processWallMilliseconds": 16722.904214984737
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "historicalSplit": "calibration",
+      "maxReleaseBracketMicroseconds": 5,
+      "mode": "awaited",
+      "name": "training/r2-w25-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.3159990742188086,
+        "checkout_p95_ms": 0.5733460000010382,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.20025900000109687,
+        "reset_queue_mean_ms": 0.00665625,
+        "reset_queue_p95_ms": 0.014,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 7564.261252
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 235,
+        "wrapperDrain_us": 0
+      },
+      "pair": 2,
+      "predicted": {
+        "checkout_mean_ms": 0.31225390625,
+        "checkout_p95_ms": 0.603,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 7569.226
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.0037451679688085826,
+        "checkout_p95_ms": 0.02965399999896179,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.20025900000109687,
+        "reset_queue_mean_ms": -0.00665625,
+        "reset_queue_p95_ms": -0.014,
+        "starvation_proxy": 0.0,
+        "suite_ms": 4.9647479999994175
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5480.28616,
+        "FinalAuditMilliseconds": 148.99408100000073,
+        "PreflightMilliseconds": 1852.4167269999998,
+        "StartupMilliseconds": 5258.515736,
+        "TotalMilliseconds": 20337.478502,
+        "processWallMilliseconds": 20448.120766028296
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "background",
+      "name": "training/r3-w500-background",
+      "observed": {
+        "checkout_mean_ms": 0.26192507421874467,
+        "checkout_p95_ms": 0.664215000000695,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 59.10215899999457,
+        "reset_queue_mean_ms": 0.0059179687500000005,
+        "reset_queue_p95_ms": 0.013,
+        "starvation_proxy": 0.0234375,
+        "suite_ms": 34043.960005
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          58887,
+          58887
+        ],
+        "settlementTail_us": 257,
+        "wrapperDrain_us": 58897
+      },
+      "pair": 3,
+      "predicted": {
+        "checkout_mean_ms": 0.2554609375,
+        "checkout_p95_ms": 0.541,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.167,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 34050.614
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.006464136718744684,
+        "checkout_p95_ms": -0.12321500000069496,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -3.93515899999457,
+        "reset_queue_mean_ms": -0.0059179687500000005,
+        "reset_queue_p95_ms": -0.013,
+        "starvation_proxy": -0.015625,
+        "suite_ms": 6.653995000000577
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5460.700534000003,
+        "FinalAuditMilliseconds": 156.57714000000124,
+        "PreflightMilliseconds": 1575.4520009999997,
+        "StartupMilliseconds": 5511.051106999999,
+        "TotalMilliseconds": 46786.005307,
+        "processWallMilliseconds": 46944.64749097824
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "awaited",
+      "name": "training/r3-w500-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.21538400781267342,
+        "checkout_p95_ms": 0.3618870000000243,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.21847900000284426,
+        "reset_queue_mean_ms": 0.00648828125,
+        "reset_queue_p95_ms": 0.013,
+        "starvation_proxy": 0,
+        "suite_ms": 37637.283405
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 252,
+        "wrapperDrain_us": 0
+      },
+      "pair": 3,
+      "predicted": {
+        "checkout_mean_ms": 0.2168203125,
+        "checkout_p95_ms": 0.352,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37577.411
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.001436304687326584,
+        "checkout_p95_ms": -0.009887000000024293,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.21847900000284426,
+        "reset_queue_mean_ms": -0.00648828125,
+        "reset_queue_p95_ms": -0.013,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": -59.87240500000189
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5526.302704999995,
+        "FinalAuditMilliseconds": 170.47413800000504,
+        "PreflightMilliseconds": 1889.7182620000003,
+        "StartupMilliseconds": 5622.920092,
+        "TotalMilliseconds": 50883.269095,
+        "processWallMilliseconds": 51014.19006998185
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "training/r3-w0-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.27762336718742375,
+        "checkout_p95_ms": 0.5277759999989939,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.22151800000028743,
+        "reset_queue_mean_ms": 0.0050546875,
+        "reset_queue_p95_ms": 0.009,
+        "starvation_proxy": 0,
+        "suite_ms": 6260.150689
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 250,
+        "wrapperDrain_us": 0
+      },
+      "pair": 3,
+      "predicted": {
+        "checkout_mean_ms": 0.301537109375,
+        "checkout_p95_ms": 0.5549999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0,
+        "suite_ms": 6259.57
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.023913742187576248,
+        "checkout_p95_ms": 0.027224000001006,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.22151800000028743,
+        "reset_queue_mean_ms": -0.0050546875,
+        "reset_queue_p95_ms": -0.009,
+        "starvation_proxy": 0.0,
+        "suite_ms": -0.5806890000003477
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5420.736274999999,
+        "FinalAuditMilliseconds": 165.8944109999993,
+        "PreflightMilliseconds": 1498.3046139999997,
+        "StartupMilliseconds": 7858.200485,
+        "TotalMilliseconds": 21240.563991,
+        "processWallMilliseconds": 21353.36426901631
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "background",
+      "name": "training/r3-w0-background",
+      "observed": {
+        "checkout_mean_ms": 19.665573835937472,
+        "checkout_p95_ms": 35.85536900000079,
+        "clean_queue_mean_ms": 19.169328125,
+        "clean_starvation": 0.72265625,
+        "drain_ms": 80.9728899999991,
+        "reset_queue_mean_ms": 19.63475390625,
+        "reset_queue_p95_ms": 35.338,
+        "starvation_proxy": 0.7265625,
+        "suite_ms": 4218.9070409999995
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          80353,
+          80354
+        ],
+        "settlementTail_us": 636,
+        "wrapperDrain_us": 80363
+      },
+      "pair": 3,
+      "predicted": {
+        "checkout_mean_ms": 19.01916796875,
+        "checkout_p95_ms": 33.582499999999996,
+        "clean_queue_mean_ms": 18.54048828125,
+        "clean_starvation": 0.75390625,
+        "drain_ms": 80.318,
+        "reset_queue_mean_ms": 18.99498046875,
+        "reset_queue_p95_ms": 33.215500000000006,
+        "starvation_proxy": 0.73828125,
+        "suite_ms": 4217.25
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.6464058671874717,
+        "checkout_p95_ms": -2.272869000000796,
+        "clean_queue_mean_ms": -0.6288398437500007,
+        "clean_starvation": 0.03125,
+        "drain_ms": -0.6548899999990994,
+        "reset_queue_mean_ms": -0.6397734375000006,
+        "reset_queue_p95_ms": -2.122499999999995,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": -1.6570409999994808
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5425.801068000001,
+        "FinalAuditMilliseconds": 167.7676279999996,
+        "PreflightMilliseconds": 1403.0564869999998,
+        "StartupMilliseconds": 5588.441223,
+        "TotalMilliseconds": 16838.098448,
+        "processWallMilliseconds": 16975.348828011192
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "background",
+      "name": "training/r3-w25-background",
+      "observed": {
+        "checkout_mean_ms": 3.5396127851562937,
+        "checkout_p95_ms": 11.345796999999948,
+        "clean_queue_mean_ms": 3.0663984375,
+        "clean_starvation": 0.6484375,
+        "drain_ms": 64.67370899999878,
+        "reset_queue_mean_ms": 3.24030078125,
+        "reset_queue_p95_ms": 10.93,
+        "starvation_proxy": 0.609375,
+        "suite_ms": 4285.651464999999
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          64279,
+          64279
+        ],
+        "settlementTail_us": 409,
+        "wrapperDrain_us": 64295
+      },
+      "pair": 3,
+      "predicted": {
+        "checkout_mean_ms": 2.09262109375,
+        "checkout_p95_ms": 6.651,
+        "clean_queue_mean_ms": 1.62014453125,
+        "clean_starvation": 0.51953125,
+        "drain_ms": 61.179,
+        "reset_queue_mean_ms": 1.68823046875,
+        "reset_queue_p95_ms": 6.416,
+        "starvation_proxy": 0.4921875,
+        "suite_ms": 4506.263
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -1.4469916914062937,
+        "checkout_p95_ms": -4.694796999999948,
+        "clean_queue_mean_ms": -1.4462539062500002,
+        "clean_starvation": -0.12890625,
+        "drain_ms": -3.494708999998778,
+        "reset_queue_mean_ms": -1.5520703125000002,
+        "reset_queue_p95_ms": -4.513999999999999,
+        "starvation_proxy": -0.1171875,
+        "suite_ms": 220.6115350000009
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5520.772156000001,
+        "FinalAuditMilliseconds": 161.5534829999997,
+        "PreflightMilliseconds": 1618.8487450000002,
+        "StartupMilliseconds": 5412.822542,
+        "TotalMilliseconds": 17037.043098,
+        "processWallMilliseconds": 17181.151448981836
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 2,
+      "mode": "awaited",
+      "name": "training/r3-w25-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.31221438671875035,
+        "checkout_p95_ms": 0.6583450000016455,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.21746800000255462,
+        "reset_queue_mean_ms": 0.0068515625,
+        "reset_queue_p95_ms": 0.012,
+        "starvation_proxy": 0.01953125,
+        "suite_ms": 7694.018961000002
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 252,
+        "wrapperDrain_us": 0
+      },
+      "pair": 3,
+      "predicted": {
+        "checkout_mean_ms": 0.31225390625,
+        "checkout_p95_ms": 0.603,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 7569.226
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 3.951953124964325e-05,
+        "checkout_p95_ms": -0.05534500000164555,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.21746800000255462,
+        "reset_queue_mean_ms": -0.0068515625,
+        "reset_queue_p95_ms": -0.012,
+        "starvation_proxy": -0.01171875,
+        "suite_ms": -124.79296100000192
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5421.4734290000015,
+        "FinalAuditMilliseconds": 155.24621900000056,
+        "PreflightMilliseconds": 2900.229138999999,
+        "StartupMilliseconds": 8287.479707,
+        "TotalMilliseconds": 24493.357831,
+        "processWallMilliseconds": 24620.92808203306
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "training/r3-w100-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.24358693750008342,
+        "checkout_p95_ms": 0.49616600000081235,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.19707800000105635,
+        "reset_queue_mean_ms": 0.00471484375,
+        "reset_queue_p95_ms": 0.009,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 12388.287468
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 227,
+        "wrapperDrain_us": 0
+      },
+      "pair": 3,
+      "predicted": {
+        "checkout_mean_ms": 0.25293359375,
+        "checkout_p95_ms": 0.543,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 12264.908
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.009346656249916596,
+        "checkout_p95_ms": 0.04683399999918769,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.19707800000105635,
+        "reset_queue_mean_ms": -0.00471484375,
+        "reset_queue_p95_ms": -0.009,
+        "starvation_proxy": -0.00390625,
+        "suite_ms": -123.379468000001
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5394.7152129999995,
+        "FinalAuditMilliseconds": 157.5820019999992,
+        "PreflightMilliseconds": 1591.2557960000004,
+        "StartupMilliseconds": 7917.333973999999,
+        "TotalMilliseconds": 27486.212705,
+        "processWallMilliseconds": 27630.060156981926
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 4,
+      "mode": "background",
+      "name": "training/r3-w100-background",
+      "observed": {
+        "checkout_mean_ms": 0.262236437500043,
+        "checkout_p95_ms": 0.5995860000002722,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 57.14081400000032,
+        "reset_queue_mean_ms": 0.0046328125,
+        "reset_queue_p95_ms": 0.009,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 9099.444392000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          56575,
+          56575
+        ],
+        "settlementTail_us": 590,
+        "wrapperDrain_us": 56583
+      },
+      "pair": 3,
+      "predicted": {
+        "checkout_mean_ms": 0.3030390625,
+        "checkout_p95_ms": 0.5934999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.955,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8697.061
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.040802624999957016,
+        "checkout_p95_ms": -0.0060860000002722625,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -1.1858140000003203,
+        "reset_queue_mean_ms": -0.0046328125,
+        "reset_queue_p95_ms": -0.009,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": -402.38339200000155
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5424.632901000001,
+        "FinalAuditMilliseconds": 155.12069899999915,
+        "PreflightMilliseconds": 1534.1199320000005,
+        "StartupMilliseconds": 5280.682624,
+        "TotalMilliseconds": 21531.011859,
+        "processWallMilliseconds": 21650.800800009165
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "training/r4-w0-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.35247441796877155,
+        "checkout_p95_ms": 0.5969050000003335,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.2037980000004609,
+        "reset_queue_mean_ms": 0.00595703125,
+        "reset_queue_p95_ms": 0.012,
+        "starvation_proxy": 0,
+        "suite_ms": 5928.023532
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 238,
+        "wrapperDrain_us": 0
+      },
+      "pair": 4,
+      "predicted": {
+        "checkout_mean_ms": 0.301537109375,
+        "checkout_p95_ms": 0.5549999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0,
+        "suite_ms": 6259.57
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.050937308593771546,
+        "checkout_p95_ms": -0.04190500000033359,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.2037980000004609,
+        "reset_queue_mean_ms": -0.00595703125,
+        "reset_queue_p95_ms": -0.012,
+        "starvation_proxy": 0.0,
+        "suite_ms": 331.54646799999955
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5474.523802999998,
+        "FinalAuditMilliseconds": 155.41757599999983,
+        "PreflightMilliseconds": 2058.8753080000006,
+        "StartupMilliseconds": 5167.977637,
+        "TotalMilliseconds": 18822.371721,
+        "processWallMilliseconds": 18938.42548597604
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 212,
+      "mode": "background",
+      "name": "training/r4-w0-background",
+      "observed": {
+        "checkout_mean_ms": 16.25306951562508,
+        "checkout_p95_ms": 32.92235100000107,
+        "clean_queue_mean_ms": 15.82798828125,
+        "clean_starvation": 0.7578125,
+        "drain_ms": 89.09256800000003,
+        "reset_queue_mean_ms": 16.305390625,
+        "reset_queue_p95_ms": 32.683,
+        "starvation_proxy": 0.7421875,
+        "suite_ms": 4199.774309999999
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          88999,
+          88999
+        ],
+        "settlementTail_us": 115,
+        "wrapperDrain_us": 89006
+      },
+      "pair": 4,
+      "predicted": {
+        "checkout_mean_ms": 19.01916796875,
+        "checkout_p95_ms": 33.582499999999996,
+        "clean_queue_mean_ms": 18.54048828125,
+        "clean_starvation": 0.75390625,
+        "drain_ms": 80.318,
+        "reset_queue_mean_ms": 18.99498046875,
+        "reset_queue_p95_ms": 33.215500000000006,
+        "starvation_proxy": 0.73828125,
+        "suite_ms": 4217.25
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 2.766098453124922,
+        "checkout_p95_ms": 0.6601489999989241,
+        "clean_queue_mean_ms": 2.7124999999999986,
+        "clean_starvation": -0.00390625,
+        "drain_ms": -8.77456800000003,
+        "reset_queue_mean_ms": 2.6895898437499994,
+        "reset_queue_p95_ms": 0.532500000000006,
+        "starvation_proxy": -0.00390625,
+        "suite_ms": 17.475690000001123
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5455.735411,
+        "FinalAuditMilliseconds": 157.3022119999987,
+        "PreflightMilliseconds": 1254.7981189999991,
+        "StartupMilliseconds": 7848.342310999999,
+        "TotalMilliseconds": 18952.387647,
+        "processWallMilliseconds": 19088.047097960953
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 11,
+      "mode": "background",
+      "name": "training/r4-w25-background",
+      "observed": {
+        "checkout_mean_ms": 1.6394129804687516,
+        "checkout_p95_ms": 5.822204000000056,
+        "clean_queue_mean_ms": 1.217015625,
+        "clean_starvation": 0.36328125,
+        "drain_ms": 59.460861999999906,
+        "reset_queue_mean_ms": 1.31737890625,
+        "reset_queue_p95_ms": 6.246,
+        "starvation_proxy": 0.3359375,
+        "suite_ms": 4573.683366000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          58659,
+          58660
+        ],
+        "settlementTail_us": 817,
+        "wrapperDrain_us": 58673
+      },
+      "pair": 4,
+      "predicted": {
+        "checkout_mean_ms": 2.09262109375,
+        "checkout_p95_ms": 6.651,
+        "clean_queue_mean_ms": 1.62014453125,
+        "clean_starvation": 0.51953125,
+        "drain_ms": 61.179,
+        "reset_queue_mean_ms": 1.68823046875,
+        "reset_queue_p95_ms": 6.416,
+        "starvation_proxy": 0.4921875,
+        "suite_ms": 4506.263
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.45320811328124844,
+        "checkout_p95_ms": 0.8287959999999437,
+        "clean_queue_mean_ms": 0.4031289062500001,
+        "clean_starvation": 0.15625,
+        "drain_ms": 1.7181380000000956,
+        "reset_queue_mean_ms": 0.37085156249999995,
+        "reset_queue_p95_ms": 0.16999999999999993,
+        "starvation_proxy": 0.15625,
+        "suite_ms": -67.4203660000012
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5472.680037,
+        "FinalAuditMilliseconds": 151.9825030000011,
+        "PreflightMilliseconds": 1216.4669510000003,
+        "StartupMilliseconds": 5352.352355,
+        "TotalMilliseconds": 16802.785173,
+        "processWallMilliseconds": 16923.022386967205
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 4,
+      "mode": "awaited",
+      "name": "training/r4-w25-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.30200603515625346,
+        "checkout_p95_ms": 0.5294659999999567,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.21275900000000547,
+        "reset_queue_mean_ms": 0.005515625,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 7457.086032
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 248,
+        "wrapperDrain_us": 0
+      },
+      "pair": 4,
+      "predicted": {
+        "checkout_mean_ms": 0.31225390625,
+        "checkout_p95_ms": 0.603,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 7569.226
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.01024787109374653,
+        "checkout_p95_ms": 0.07353400000004329,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.21275900000000547,
+        "reset_queue_mean_ms": -0.005515625,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 112.1399679999995
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5479.535382999999,
+        "FinalAuditMilliseconds": 152.666878,
+        "PreflightMilliseconds": 1962.5291469999993,
+        "StartupMilliseconds": 5189.248618,
+        "TotalMilliseconds": 20271.996194,
+        "processWallMilliseconds": 20390.739749011118
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "awaited",
+      "name": "training/r4-w100-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.25941210546874416,
+        "checkout_p95_ms": 0.5074359999998705,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.19721900000149617,
+        "reset_queue_mean_ms": 0.006,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 12159.871102000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 227,
+        "wrapperDrain_us": 0
+      },
+      "pair": 4,
+      "predicted": {
+        "checkout_mean_ms": 0.25293359375,
+        "checkout_p95_ms": 0.543,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 12264.908
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.00647851171874414,
+        "checkout_p95_ms": 0.03556400000012949,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.19721900000149617,
+        "reset_queue_mean_ms": -0.006,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": 0.0,
+        "suite_ms": 105.03689799999847
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5437.114426999997,
+        "FinalAuditMilliseconds": 146.28244800000175,
+        "PreflightMilliseconds": 1523.692102,
+        "StartupMilliseconds": 5404.923391,
+        "TotalMilliseconds": 24704.450764,
+        "processWallMilliseconds": 24817.59571301518
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "background",
+      "name": "training/r4-w100-background",
+      "observed": {
+        "checkout_mean_ms": 0.30301267968754786,
+        "checkout_p95_ms": 0.5842350000002625,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 53.27256000000125,
+        "reset_queue_mean_ms": 0.0055703125,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8698.09775
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          52259,
+          52259
+        ],
+        "settlementTail_us": 1035,
+        "wrapperDrain_us": 52271
+      },
+      "pair": 4,
+      "predicted": {
+        "checkout_mean_ms": 0.3030390625,
+        "checkout_p95_ms": 0.5934999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.955,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8697.061
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 2.638281245215257e-05,
+        "checkout_p95_ms": 0.0092649999997374,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 2.682439999998749,
+        "reset_queue_mean_ms": -0.0055703125,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": 0.0,
+        "suite_ms": -1.0367500000011205
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5395.6087640000005,
+        "FinalAuditMilliseconds": 150.92995099999825,
+        "PreflightMilliseconds": 1204.2729680000011,
+        "StartupMilliseconds": 7799.934732,
+        "TotalMilliseconds": 23285.11073,
+        "processWallMilliseconds": 23408.151142008137
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 2,
+      "mode": "background",
+      "name": "training/r4-w500-background",
+      "observed": {
+        "checkout_mean_ms": 0.24393973046868567,
+        "checkout_p95_ms": 0.37034700000003795,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 51.828002000002016,
+        "reset_queue_mean_ms": 0.00538671875,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": 34051.294076
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          51177,
+          51177
+        ],
+        "settlementTail_us": 680,
+        "wrapperDrain_us": 51186
+      },
+      "pair": 4,
+      "predicted": {
+        "checkout_mean_ms": 0.2554609375,
+        "checkout_p95_ms": 0.541,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.167,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 34050.614
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.011521207031314318,
+        "checkout_p95_ms": 0.17065299999996209,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 3.3389979999979857,
+        "reset_queue_mean_ms": -0.00538671875,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": -0.00390625,
+        "suite_ms": -0.6800759999969159
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5479.580412999996,
+        "FinalAuditMilliseconds": 144.41737300000386,
+        "PreflightMilliseconds": 1129.2708380000004,
+        "StartupMilliseconds": 5364.535819000001,
+        "TotalMilliseconds": 46202.159068,
+        "processWallMilliseconds": 46338.08447903721
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "historicalSplit": "validation",
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "awaited",
+      "name": "training/r4-w500-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.21373494140635785,
+        "checkout_p95_ms": 0.35219799999867973,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.21288800000183983,
+        "reset_queue_mean_ms": 0.0051875,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37577.951147
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 251,
+        "wrapperDrain_us": 0
+      },
+      "pair": 4,
+      "predicted": {
+        "checkout_mean_ms": 0.2168203125,
+        "checkout_p95_ms": 0.352,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37577.411
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.003085371093642153,
+        "checkout_p95_ms": -0.00019799999867975426,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.21288800000183983,
+        "reset_queue_mean_ms": -0.0051875,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": 0.0,
+        "suite_ms": -0.5401469999997062
+      },
+      "split": "calibration",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5482.164773000004,
+        "FinalAuditMilliseconds": 154.02778699999908,
+        "PreflightMilliseconds": 1809.6144610000001,
+        "StartupMilliseconds": 5101.1741329999995,
+        "TotalMilliseconds": 50159.957655,
+        "processWallMilliseconds": 50303.1468380359
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "maxReleaseBracketMicroseconds": 5,
+      "mode": "background",
+      "name": "r5-w25-background",
+      "observed": {
+        "checkout_mean_ms": 3.0015577773436846,
+        "checkout_p95_ms": 9.987715999999637,
+        "clean_queue_mean_ms": 2.58904296875,
+        "clean_starvation": 0.546875,
+        "drain_ms": 58.910805000001346,
+        "reset_queue_mean_ms": 2.70655078125,
+        "reset_queue_p95_ms": 9.485,
+        "starvation_proxy": 0.49609375,
+        "suite_ms": 4684.830772000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          57827,
+          57828
+        ],
+        "settlementTail_us": 1104,
+        "wrapperDrain_us": 57838
+      },
+      "pair": 5,
+      "predicted": {
+        "checkout_mean_ms": 2.09262109375,
+        "checkout_p95_ms": 6.651,
+        "clean_queue_mean_ms": 1.62014453125,
+        "clean_starvation": 0.51953125,
+        "drain_ms": 61.179,
+        "reset_queue_mean_ms": 1.68823046875,
+        "reset_queue_p95_ms": 6.416,
+        "starvation_proxy": 0.4921875,
+        "suite_ms": 4506.263
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.9089366835936845,
+        "checkout_p95_ms": -3.3367159999996368,
+        "clean_queue_mean_ms": -0.9688984374999998,
+        "clean_starvation": -0.02734375,
+        "drain_ms": 2.2681949999986557,
+        "reset_queue_mean_ms": -1.0183203124999998,
+        "reset_queue_p95_ms": -3.068999999999999,
+        "starvation_proxy": -0.00390625,
+        "suite_ms": -178.56777200000124
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5410.154385999998,
+        "FinalAuditMilliseconds": 171.7663590000011,
+        "PreflightMilliseconds": 1268.4885060000006,
+        "StartupMilliseconds": 7727.639892,
+        "TotalMilliseconds": 19297.723834,
+        "processWallMilliseconds": 19437.457470980007
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "r5-w25-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.2999279179686951,
+        "checkout_p95_ms": 0.5137450000001991,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.1986589999996795,
+        "reset_queue_mean_ms": 0.0056640625,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 7247.402701999999
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 230,
+        "wrapperDrain_us": 0
+      },
+      "pair": 5,
+      "predicted": {
+        "checkout_mean_ms": 0.31225390625,
+        "checkout_p95_ms": 0.603,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 7569.226
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.012325988281304878,
+        "checkout_p95_ms": 0.08925499999980091,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.1986589999996795,
+        "reset_queue_mean_ms": -0.0056640625,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 321.82329800000025
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5473.829763,
+        "FinalAuditMilliseconds": 154.7399519999999,
+        "PreflightMilliseconds": 1818.3678529999997,
+        "StartupMilliseconds": 5269.532426000001,
+        "TotalMilliseconds": 19996.848189,
+        "processWallMilliseconds": 20143.999255029485
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "maxReleaseBracketMicroseconds": 8,
+      "mode": "awaited",
+      "name": "r5-w100-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.2419683632812415,
+        "checkout_p95_ms": 0.492895999999746,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.20767800000248826,
+        "reset_queue_mean_ms": 0.00478515625,
+        "reset_queue_p95_ms": 0.009,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 12358.849734000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 244,
+        "wrapperDrain_us": 0
+      },
+      "pair": 5,
+      "predicted": {
+        "checkout_mean_ms": 0.25293359375,
+        "checkout_p95_ms": 0.543,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 12264.908
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.010965230468758524,
+        "checkout_p95_ms": 0.050104000000254056,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.20767800000248826,
+        "reset_queue_mean_ms": -0.00478515625,
+        "reset_queue_p95_ms": -0.009,
+        "starvation_proxy": -0.00390625,
+        "suite_ms": -93.94173400000182
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5452.312933000001,
+        "FinalAuditMilliseconds": 160.49689299999955,
+        "PreflightMilliseconds": 1612.1793930000003,
+        "StartupMilliseconds": 5199.219696,
+        "TotalMilliseconds": 24819.295655,
+        "processWallMilliseconds": 24970.188759965822
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "background",
+      "name": "r5-w100-background",
+      "observed": {
+        "checkout_mean_ms": 0.32262988281245697,
+        "checkout_p95_ms": 0.6052250000011554,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 58.54558899999938,
+        "reset_queue_mean_ms": 0.0066171875,
+        "reset_queue_p95_ms": 0.018,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 9154.145003
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          57700,
+          57700
+        ],
+        "settlementTail_us": 865,
+        "wrapperDrain_us": 57704
+      },
+      "pair": 5,
+      "predicted": {
+        "checkout_mean_ms": 0.3030390625,
+        "checkout_p95_ms": 0.5934999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.955,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8697.061
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.019590820312456958,
+        "checkout_p95_ms": -0.011725000001155506,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -2.590588999999383,
+        "reset_queue_mean_ms": -0.0066171875,
+        "reset_queue_p95_ms": -0.018,
+        "starvation_proxy": 0.0,
+        "suite_ms": -457.08400299999994
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5390.516930999998,
+        "FinalAuditMilliseconds": 155.43385599999965,
+        "PreflightMilliseconds": 1450.8762859999997,
+        "StartupMilliseconds": 5328.310503,
+        "TotalMilliseconds": 21515.955252,
+        "processWallMilliseconds": 21651.533373980783
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "maxReleaseBracketMicroseconds": 2,
+      "mode": "background",
+      "name": "r5-w500-background",
+      "observed": {
+        "checkout_mean_ms": 0.2490018632811548,
+        "checkout_p95_ms": 0.3544270000002143,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 51.794504999998026,
+        "reset_queue_mean_ms": 0.00568359375,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 33860.273078
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          51412,
+          51412
+        ],
+        "settlementTail_us": 404,
+        "wrapperDrain_us": 51424
+      },
+      "pair": 5,
+      "predicted": {
+        "checkout_mean_ms": 0.2554609375,
+        "checkout_p95_ms": 0.541,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.167,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 34050.614
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.006459074218845173,
+        "checkout_p95_ms": 0.18657299999978572,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 3.372495000001976,
+        "reset_queue_mean_ms": -0.00568359375,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 190.34092200000305
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5503.878080000002,
+        "FinalAuditMilliseconds": 165.04524599999422,
+        "PreflightMilliseconds": 1564.0837970000002,
+        "StartupMilliseconds": 5190.034154,
+        "TotalMilliseconds": 46316.763643,
+        "processWallMilliseconds": 46435.2910980233
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "maxReleaseBracketMicroseconds": 13,
+      "mode": "awaited",
+      "name": "r5-w500-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.21487095703125902,
+        "checkout_p95_ms": 0.361337000000276,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.2224690000002738,
+        "reset_queue_mean_ms": 0.00487109375,
+        "reset_queue_p95_ms": 0.009,
+        "starvation_proxy": 0,
+        "suite_ms": 37550.05848
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 257,
+        "wrapperDrain_us": 0
+      },
+      "pair": 5,
+      "predicted": {
+        "checkout_mean_ms": 0.2168203125,
+        "checkout_p95_ms": 0.352,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37577.411
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.0019493554687409764,
+        "checkout_p95_ms": -0.009337000000276041,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.2224690000002738,
+        "reset_queue_mean_ms": -0.00487109375,
+        "reset_queue_p95_ms": -0.009,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 27.352520000000368
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5527.486081999996,
+        "FinalAuditMilliseconds": 160.38252400000056,
+        "PreflightMilliseconds": 1901.184918,
+        "StartupMilliseconds": 6066.52373,
+        "TotalMilliseconds": 51239.737508,
+        "processWallMilliseconds": 51358.90269698575
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "r5-w0-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.28832401953129505,
+        "checkout_p95_ms": 0.5907750000005763,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.18425900000147521,
+        "reset_queue_mean_ms": 0.00558203125,
+        "reset_queue_p95_ms": 0.009,
+        "starvation_proxy": 0,
+        "suite_ms": 6099.944469
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 215,
+        "wrapperDrain_us": 0
+      },
+      "pair": 5,
+      "predicted": {
+        "checkout_mean_ms": 0.301537109375,
+        "checkout_p95_ms": 0.5549999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0,
+        "suite_ms": 6259.57
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.01321308984370495,
+        "checkout_p95_ms": -0.03577500000057632,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.18425900000147521,
+        "reset_queue_mean_ms": -0.00558203125,
+        "reset_queue_p95_ms": -0.009,
+        "starvation_proxy": 0.0,
+        "suite_ms": 159.62553099999968
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5437.574536,
+        "FinalAuditMilliseconds": 150.96892300000036,
+        "PreflightMilliseconds": 1679.3227899999993,
+        "StartupMilliseconds": 7806.098733,
+        "TotalMilliseconds": 21210.744993,
+        "processWallMilliseconds": 21346.30847600056
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "maxReleaseBracketMicroseconds": 8,
+      "mode": "background",
+      "name": "r5-w0-background",
+      "observed": {
+        "checkout_mean_ms": 17.26388501953131,
+        "checkout_p95_ms": 32.03225100000054,
+        "clean_queue_mean_ms": 16.7384453125,
+        "clean_starvation": 0.7578125,
+        "drain_ms": 84.07813499999975,
+        "reset_queue_mean_ms": 17.1834375,
+        "reset_queue_p95_ms": 31.523,
+        "starvation_proxy": 0.7578125,
+        "suite_ms": 4163.105799999999
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          83543,
+          83544
+        ],
+        "settlementTail_us": 565,
+        "wrapperDrain_us": 83556
+      },
+      "pair": 5,
+      "predicted": {
+        "checkout_mean_ms": 19.01916796875,
+        "checkout_p95_ms": 33.582499999999996,
+        "clean_queue_mean_ms": 18.54048828125,
+        "clean_starvation": 0.75390625,
+        "drain_ms": 80.318,
+        "reset_queue_mean_ms": 18.99498046875,
+        "reset_queue_p95_ms": 33.215500000000006,
+        "starvation_proxy": 0.73828125,
+        "suite_ms": 4217.25
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 1.7552829492186923,
+        "checkout_p95_ms": 1.5502489999994538,
+        "clean_queue_mean_ms": 1.8020429687499977,
+        "clean_starvation": -0.00390625,
+        "drain_ms": -3.7601349999997495,
+        "reset_queue_mean_ms": 1.8115429687500004,
+        "reset_queue_p95_ms": 1.692500000000006,
+        "starvation_proxy": -0.01953125,
+        "suite_ms": 54.14420000000064
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5564.921597999999,
+        "FinalAuditMilliseconds": 167.6995930000012,
+        "PreflightMilliseconds": 1335.5265250000002,
+        "StartupMilliseconds": 5024.501061999999,
+        "TotalMilliseconds": 16289.316136,
+        "processWallMilliseconds": 16431.17815500591
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "maxReleaseBracketMicroseconds": 6,
+      "mode": "awaited",
+      "name": "r6-w100-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.2759559531249849,
+        "checkout_p95_ms": 0.49823599999945145,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.23902799999996205,
+        "reset_queue_mean_ms": 0.00470703125,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": 15470.001529999998
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 281,
+        "wrapperDrain_us": 0
+      },
+      "pair": 6,
+      "predicted": {
+        "checkout_mean_ms": 0.25293359375,
+        "checkout_p95_ms": 0.543,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 12264.908
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.02302235937498487,
+        "checkout_p95_ms": 0.04476400000054859,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.23902799999996205,
+        "reset_queue_mean_ms": -0.00470703125,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": -0.0078125,
+        "suite_ms": -3205.0935299999983
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5506.547677999999,
+        "FinalAuditMilliseconds": 200.14867999999842,
+        "PreflightMilliseconds": 2505.2732000000005,
+        "StartupMilliseconds": 5600.143673,
+        "TotalMilliseconds": 29316.613221,
+        "processWallMilliseconds": 29448.801241989713
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "background",
+      "name": "r6-w100-background",
+      "observed": {
+        "checkout_mean_ms": 0.3260100820312708,
+        "checkout_p95_ms": 0.6359549999997398,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 57.816595000000234,
+        "reset_queue_mean_ms": 0.00759375,
+        "reset_queue_p95_ms": 0.02,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": 9243.415036999999
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          57154,
+          57155
+        ],
+        "settlementTail_us": 690,
+        "wrapperDrain_us": 57164
+      },
+      "pair": 6,
+      "predicted": {
+        "checkout_mean_ms": 0.3030390625,
+        "checkout_p95_ms": 0.5934999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.955,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8697.061
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.022971019531270787,
+        "checkout_p95_ms": -0.042454999999739895,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -1.8615950000002357,
+        "reset_queue_mean_ms": -0.00759375,
+        "reset_queue_p95_ms": -0.02,
+        "starvation_proxy": -0.00390625,
+        "suite_ms": -546.3540369999992
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5431.803185000001,
+        "FinalAuditMilliseconds": 146.26303299999927,
+        "PreflightMilliseconds": 1273.3533560000005,
+        "StartupMilliseconds": 6021.2301290000005,
+        "TotalMilliseconds": 22153.672254,
+        "processWallMilliseconds": 22306.176834972575
+      },
+      "waitMilliseconds": 100
+    },
+    {
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "background",
+      "name": "r6-w500-background",
+      "observed": {
+        "checkout_mean_ms": 0.2329055625001466,
+        "checkout_p95_ms": 0.3807469999992463,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 57.85389500000019,
+        "reset_queue_mean_ms": 0.00521484375,
+        "reset_queue_p95_ms": 0.009,
+        "starvation_proxy": 0,
+        "suite_ms": 34008.393335999994
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          56783,
+          56783
+        ],
+        "settlementTail_us": 1101,
+        "wrapperDrain_us": 56794
+      },
+      "pair": 6,
+      "predicted": {
+        "checkout_mean_ms": 0.2554609375,
+        "checkout_p95_ms": 0.541,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 55.167,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 34050.614
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.022555374999853384,
+        "checkout_p95_ms": 0.1602530000007537,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -2.6868950000001917,
+        "reset_queue_mean_ms": -0.00521484375,
+        "reset_queue_p95_ms": -0.009,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 42.22066400000767
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5565.6193520000015,
+        "FinalAuditMilliseconds": 156.31921900000452,
+        "PreflightMilliseconds": 1570.2584350000006,
+        "StartupMilliseconds": 5231.813133,
+        "TotalMilliseconds": 46568.230123,
+        "processWallMilliseconds": 46685.25066098664
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "maxReleaseBracketMicroseconds": 5,
+      "mode": "awaited",
+      "name": "r6-w500-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.19880539062494762,
+        "checkout_p95_ms": 0.34151699999893026,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.2132080000010319,
+        "reset_queue_mean_ms": 0.00540234375,
+        "reset_queue_p95_ms": 0.011,
+        "starvation_proxy": 0,
+        "suite_ms": 37500.895989
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 257,
+        "wrapperDrain_us": 0
+      },
+      "pair": 6,
+      "predicted": {
+        "checkout_mean_ms": 0.2168203125,
+        "checkout_p95_ms": 0.352,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37577.411
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 0.01801492187505238,
+        "checkout_p95_ms": 0.01048300000106972,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.2132080000010319,
+        "reset_queue_mean_ms": -0.00540234375,
+        "reset_queue_p95_ms": -0.011,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 76.51501100000314
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5466.549192999999,
+        "FinalAuditMilliseconds": 153.5024670000057,
+        "PreflightMilliseconds": 1911.17641,
+        "StartupMilliseconds": 5329.340654,
+        "TotalMilliseconds": 50398.831769,
+        "processWallMilliseconds": 50560.32835401129
+      },
+      "waitMilliseconds": 500
+    },
+    {
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "r6-w0-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.39730195312499106,
+        "checkout_p95_ms": 0.5893150000010792,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.1767390000004525,
+        "reset_queue_mean_ms": 0.00904296875,
+        "reset_queue_p95_ms": 0.018,
+        "starvation_proxy": 0,
+        "suite_ms": 6220.718428
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 203,
+        "wrapperDrain_us": 0
+      },
+      "pair": 6,
+      "predicted": {
+        "checkout_mean_ms": 0.301537109375,
+        "checkout_p95_ms": 0.5549999999999999,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0,
+        "suite_ms": 6259.57
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.09576484374999106,
+        "checkout_p95_ms": -0.03431500000107923,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.1767390000004525,
+        "reset_queue_mean_ms": -0.00904296875,
+        "reset_queue_p95_ms": -0.018,
+        "starvation_proxy": 0.0,
+        "suite_ms": 38.85157199999958
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5425.603658,
+        "FinalAuditMilliseconds": 146.24256500000047,
+        "PreflightMilliseconds": 1560.9063419999993,
+        "StartupMilliseconds": 5906.530959000001,
+        "TotalMilliseconds": 19295.720227,
+        "processWallMilliseconds": 19436.246307974216
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "maxReleaseBracketMicroseconds": 9,
+      "mode": "background",
+      "name": "r6-w0-background",
+      "observed": {
+        "checkout_mean_ms": 16.72086092578124,
+        "checkout_p95_ms": 34.09448899999916,
+        "clean_queue_mean_ms": 16.270859375,
+        "clean_starvation": 0.7421875,
+        "drain_ms": 90.62999800000034,
+        "reset_queue_mean_ms": 16.78951953125,
+        "reset_queue_p95_ms": 34.007,
+        "starvation_proxy": 0.73046875,
+        "suite_ms": 4163.833476000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          89592,
+          89593
+        ],
+        "settlementTail_us": 1054,
+        "wrapperDrain_us": 89604
+      },
+      "pair": 6,
+      "predicted": {
+        "checkout_mean_ms": 19.01916796875,
+        "checkout_p95_ms": 33.582499999999996,
+        "clean_queue_mean_ms": 18.54048828125,
+        "clean_starvation": 0.75390625,
+        "drain_ms": 80.318,
+        "reset_queue_mean_ms": 18.99498046875,
+        "reset_queue_p95_ms": 33.215500000000006,
+        "starvation_proxy": 0.73828125,
+        "suite_ms": 4217.25
+      },
+      "signedErrors": {
+        "checkout_mean_ms": 2.298307042968762,
+        "checkout_p95_ms": -0.5119889999991614,
+        "clean_queue_mean_ms": 2.2696289062499986,
+        "clean_starvation": 0.01171875,
+        "drain_ms": -10.311998000000344,
+        "reset_queue_mean_ms": 2.2054609375,
+        "reset_queue_p95_ms": -0.7914999999999921,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 53.4165239999993
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5428.513405,
+        "FinalAuditMilliseconds": 156.63003299999946,
+        "PreflightMilliseconds": 1279.2524640000001,
+        "StartupMilliseconds": 5187.252286000001,
+        "TotalMilliseconds": 16252.528499,
+        "processWallMilliseconds": 16370.234561967663
+      },
+      "waitMilliseconds": 0
+    },
+    {
+      "maxReleaseBracketMicroseconds": 7,
+      "mode": "background",
+      "name": "r6-w25-background",
+      "observed": {
+        "checkout_mean_ms": 2.3169968867187833,
+        "checkout_p95_ms": 9.330685000000813,
+        "clean_queue_mean_ms": 1.9065546875,
+        "clean_starvation": 0.47265625,
+        "drain_ms": 57.246603999999934,
+        "reset_queue_mean_ms": 1.97651171875,
+        "reset_queue_p95_ms": 8.837,
+        "starvation_proxy": 0.42578125,
+        "suite_ms": 4636.553661
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          56532,
+          56532
+        ],
+        "settlementTail_us": 734,
+        "wrapperDrain_us": 56547
+      },
+      "pair": 6,
+      "predicted": {
+        "checkout_mean_ms": 2.09262109375,
+        "checkout_p95_ms": 6.651,
+        "clean_queue_mean_ms": 1.62014453125,
+        "clean_starvation": 0.51953125,
+        "drain_ms": 61.179,
+        "reset_queue_mean_ms": 1.68823046875,
+        "reset_queue_p95_ms": 6.416,
+        "starvation_proxy": 0.4921875,
+        "suite_ms": 4506.263
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.2243757929687833,
+        "checkout_p95_ms": -2.6796850000008128,
+        "clean_queue_mean_ms": -0.2864101562499999,
+        "clean_starvation": 0.046875,
+        "drain_ms": 3.932396000000068,
+        "reset_queue_mean_ms": -0.28828125000000004,
+        "reset_queue_p95_ms": -2.4209999999999994,
+        "starvation_proxy": 0.06640625,
+        "suite_ms": -130.290661
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5417.656491999998,
+        "FinalAuditMilliseconds": 149.80271800000082,
+        "PreflightMilliseconds": 1233.9119850000006,
+        "StartupMilliseconds": 5115.735156000001,
+        "TotalMilliseconds": 16590.25092,
+        "processWallMilliseconds": 16725.04026599927
+      },
+      "waitMilliseconds": 25
+    },
+    {
+      "maxReleaseBracketMicroseconds": 3,
+      "mode": "awaited",
+      "name": "r6-w25-awaited",
+      "observed": {
+        "checkout_mean_ms": 0.3331515742187534,
+        "checkout_p95_ms": 0.6261949999989156,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.20771899999999732,
+        "reset_queue_mean_ms": 0.00590234375,
+        "reset_queue_p95_ms": 0.01,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": 7460.102889000001
+      },
+      "observedDrain": {
+        "physicalDrainBracket_us": [
+          0,
+          0
+        ],
+        "settlementTail_us": 240,
+        "wrapperDrain_us": 0
+      },
+      "pair": 6,
+      "predicted": {
+        "checkout_mean_ms": 0.31225390625,
+        "checkout_p95_ms": 0.603,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 7569.226
+      },
+      "signedErrors": {
+        "checkout_mean_ms": -0.02089766796875342,
+        "checkout_p95_ms": -0.02319499999891561,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0.0,
+        "drain_ms": -0.20771899999999732,
+        "reset_queue_mean_ms": -0.00590234375,
+        "reset_queue_p95_ms": -0.01,
+        "starvation_proxy": -0.00390625,
+        "suite_ms": 109.12311099999897
+      },
+      "split": "validation",
+      "unmodelledObservedCosts": {
+        "DisposalMilliseconds": 5437.371415000001,
+        "FinalAuditMilliseconds": 144.2952409999998,
+        "PreflightMilliseconds": 2008.07244,
+        "StartupMilliseconds": 5460.476601,
+        "TotalMilliseconds": 20547.680209,
+        "processWallMilliseconds": 20693.09265096672
+      },
+      "waitMilliseconds": 25
+    }
+  ],
+  "runtimeSeconds": 4.728363381000236,
+  "sourceSha256": {
+    "model.py": "2867f7c14aecfb0160df688ca55dd967b893185502c826f46d3ce240f1aa1796",
+    "protocol-r2.md": "646bbb845b886bd0296d79bf7adedc2e4a8ac58b85ad6f8fb0f50398b491c73c",
+    "protocol-r3.md": "a21b0e97cf7a5cbc1145a266b797e9eccc38aba4f23364c1ed95ad274fc1974b",
+    "reference.py": "6394d8674753b8becd73bae0eeaa8e19bf50862f3836c7fa5e2bc9c65a22701a",
+    "revised.py": "3715c64b0e7371a03ad3779b419e29cdf4a1349ab2e11955bbb6b41543d51ac9",
+    "trajectory.py": "71929678c554390d440194c2eed69d8332128cabfb2b520a42a9a6d9d4412244"
+  },
+  "validationFiles": {
+    "r5-w0-awaited/process.json": "11618bc4bcb57e9c2c53ce23e1223de0a77c3befa5e157e67be114668b95d8c2",
+    "r5-w0-awaited/report.json": "ecf52a9c1738e2b8da7d257b7009da39c31682ed45ba6f6bd781cb919d90a44a",
+    "r5-w0-background/process.json": "8a261d2de0de2c05a69261220672cdad77b6a1fcf7366aff7a0bea1f5a9a31be",
+    "r5-w0-background/report.json": "ebd8039245ed43dfa81852abc7c4149ab1b7561063baa65cf5e1a750503ed22e",
+    "r5-w100-awaited/process.json": "374c1b49533cdc1d69a511f4c169545af38ae535e343265ce58152bc0b20427e",
+    "r5-w100-awaited/report.json": "dee0bd99d68b8afb9311ae449378f8c18865b445fbeed3ccbe7c743223489547",
+    "r5-w100-background/process.json": "373fc5a166c64d0f8cec1ff1cc8b0fdd1c38cb6cef57f0061d43e6179262a9ec",
+    "r5-w100-background/report.json": "053a2c4943f6a123211efad2dbec71cf22b52dabf47fa392e1fecb90ad1cc281",
+    "r5-w25-awaited/process.json": "2c0ffe6b11c72e00afd775f6d18b184235f9d98c23e915071aefef21642336a7",
+    "r5-w25-awaited/report.json": "cd7ebdbdfe4f6ecb40ee5b68f1b52b38e2f92379fb67d0af478b59a2eb4c369b",
+    "r5-w25-background/process.json": "80ad401de934bb83f07a53b44f9faa15255622306a2cfa51098556c5126b4103",
+    "r5-w25-background/report.json": "4908768dd3b3b0b6a338c15e6b3aa736a2fc4827b1859edcdf82d1b3c63c5690",
+    "r5-w500-awaited/process.json": "4ffe0693a32903cce72b95cd59111a59f92f36781f9e97272405840240499ba7",
+    "r5-w500-awaited/report.json": "83ff0a64a7e377d242e6ce2426b745d0666565dfe7aa9dc8d7021bf9785bf19d",
+    "r5-w500-background/process.json": "a2a057f7080a7b3fde8e45a5acd4e26dc0364c71df96727787a1b67d233561d7",
+    "r5-w500-background/report.json": "399e7351b880ef20a6da9b22ff7a0d82d269b3a762d70cb2145f5f06dec8f1b1",
+    "r6-w0-awaited/process.json": "50abbfd13fe8c8e7af0964e0c8ab57f2317323842300194c737b0a0de0a86d59",
+    "r6-w0-awaited/report.json": "2bcc57fa6bfa88adca14ebf5d16785ec0a24756a3278c564c2bc180b844d0e49",
+    "r6-w0-background/process.json": "19c795ea886aadeee80c82a975891998d9e348ebe861e691f1008e455cb59a65",
+    "r6-w0-background/report.json": "b7da029fad222d79a87e395e9e086fd1d48d0b925766d5cf9cd1017f7dc2e342",
+    "r6-w100-awaited/process.json": "709bec80490b6aaa6753a380ca09fdcda2780ffcd7512800e7600529563ac7d6",
+    "r6-w100-awaited/report.json": "2772cf18f0bcf488331fca0a82b555b47ec8a7c7da683da188714407156256dd",
+    "r6-w100-background/process.json": "139b3a1ddc9b4bd18e2d215a2e15d764fa12b2e696eb7af000f3d6b2da2c66bb",
+    "r6-w100-background/report.json": "44a0d12376d5761ad59112f17c3c382fca6f882d53a669b8bc75a653193197e2",
+    "r6-w25-awaited/process.json": "3cbc3564b0133e072e37339e27ea38b42fcd1ea74d2d3664da90a7d7e1c3d6ce",
+    "r6-w25-awaited/report.json": "b99ed1a980231d45a4960c74ba151dbb47681f2d31af734f64868a37033a16d1",
+    "r6-w25-background/process.json": "577e3f5af68fff70d031ab5997790ef1a0d96a1d8fc1f892539d9ffd92b55d71",
+    "r6-w25-background/report.json": "402f472bcd70379b0373426e38a619404d591e4831b0c66247357fca738a775f",
+    "r6-w500-awaited/process.json": "1504680d8955422a9a4b8c6ef9167395e8266026f2563ace4a3e6e419aea42ff",
+    "r6-w500-awaited/report.json": "1646af538dfb09ec1b977d14f53b76442b3705861eb6bcc5c5d6db1813a40939",
+    "r6-w500-background/process.json": "c1bcb6db1f2f5c6f9590f08b4cdcc0c3b00f9a8d8f569690197b96d1333278d9",
+    "r6-w500-background/report.json": "a589519ff8d68f25c34bc61cc6baae1e4fd6f6d42c24d155cc3c350abc723acf"
+  }
+}

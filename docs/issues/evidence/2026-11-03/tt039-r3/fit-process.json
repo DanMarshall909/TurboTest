@@ -1,0 +1,18 @@
+{
+  "command": [
+    "python3",
+    "benchmarks/scheduler-simulator/trajectory.py",
+    "fit",
+    "--trace-root",
+    "/home/dan/code/TurboTest/artifacts/tt039-r3",
+    "--output",
+    "/home/dan/code/TurboTest/artifacts/tt039-r3/fit.json"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "deadlineExceeded": false,
+  "deadlineSeconds": 120,
+  "elapsedSeconds": 0.819871261017397,
+  "exitCode": 0,
+  "processGroupId": 4,
+  "processGroupStopped": true
+}

@@ -1,0 +1,17 @@
+..........................
+----------------------------------------------------------------------
+Ran 26 tests in 6.352s
+
+OK
+Skipping counts file 'artifacts/tt039-r3/final-fast-counts': [Errno 2] No such file or directory: 'artifacts/tt039-r3/final-fast-counts'
+lines   cov%   module   (path)
+  122    26%   experiments.tt039.collect_r3   (/home/dan/code/TurboTest/experiments/tt039/collect_r3.py)
+  118    96%   model   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py)
+  217    86%   reference   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py)
+  292    87%   revised   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/revised.py)
+   86    98%   test_model   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_model.py)
+  175    99%   test_reference   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_reference.py)
+  198   100%   test_revised   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_revised.py)
+  101   100%   test_trajectory   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_trajectory.py)
+   34   100%   test_trajectory_collector   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_trajectory_collector.py)
+  174    82%   trajectory   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/trajectory.py)

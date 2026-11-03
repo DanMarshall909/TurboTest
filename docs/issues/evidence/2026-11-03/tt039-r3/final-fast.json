@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "trace",
+    "--count",
+    "--missing",
+    "--summary",
+    "--coverdir",
+    "artifacts/tt039-r3/final-fast-coverage",
+    "--file",
+    "artifacts/tt039-r3/final-fast-counts",
+    "--ignore-dir",
+    "/usr",
+    "--module",
+    "unittest",
+    "discover",
+    "-s",
+    "benchmarks/scheduler-simulator",
+    "-p",
+    "test_*.py"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "deadlineExceeded": false,
+  "deadlineSeconds": 60,
+  "elapsedSeconds": 6.501575111004058,
+  "exitCode": 0,
+  "processGroupId": 4,
+  "processGroupStopped": true
+}

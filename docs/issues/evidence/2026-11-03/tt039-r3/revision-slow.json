@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "trace",
+    "--count",
+    "--missing",
+    "--summary",
+    "--coverdir",
+    "artifacts/tt039-r3/revision-slow-coverage",
+    "--file",
+    "artifacts/tt039-r3/revision-slow-counts",
+    "--ignore-dir",
+    "/usr",
+    "--module",
+    "unittest",
+    "discover",
+    "-s",
+    "benchmarks/scheduler-simulator",
+    "-p",
+    "revision_contract.py"
+  ],
+  "cwd": "/home/dan/code/TurboTest",
+  "deadlineExceeded": false,
+  "deadlineSeconds": 240,
+  "elapsedSeconds": 199.9037867040024,
+  "exitCode": 0,
+  "processGroupId": 10,
+  "processGroupStopped": true
+}

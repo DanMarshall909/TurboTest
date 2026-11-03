@@ -1,0 +1,12 @@
+..
+----------------------------------------------------------------------
+Ran 2 tests in 199.791s
+
+OK
+Skipping counts file 'artifacts/tt039-r3/revision-slow-counts': [Errno 2] No such file or directory: 'artifacts/tt039-r3/revision-slow-counts'
+lines   cov%   module   (path)
+  118    94%   model   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py)
+  217    26%   reference   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py)
+  292    87%   revised   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/revised.py)
+   70   100%   revision_contract   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/revision_contract.py)
+  198    36%   test_revised   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_revised.py)

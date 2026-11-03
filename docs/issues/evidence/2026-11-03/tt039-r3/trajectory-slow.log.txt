@@ -1,0 +1,16 @@
+....
+----------------------------------------------------------------------
+Ran 4 tests in 60.920s
+
+OK
+Skipping counts file 'artifacts/tt039-r3/trajectory-slow-counts': [Errno 2] No such file or directory: 'artifacts/tt039-r3/trajectory-slow-counts'
+lines   cov%   module   (path)
+  122    41%   experiments.tt039.collect_r3   (/home/dan/code/TurboTest/experiments/tt039/collect_r3.py)
+  118    94%   model   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/model.py)
+  217    23%   reference   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/reference.py)
+  292    53%   revised   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/revised.py)
+  198    36%   test_revised   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_revised.py)
+  101    36%   test_trajectory   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_trajectory.py)
+   34    32%   test_trajectory_collector   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/test_trajectory_collector.py)
+  174    82%   trajectory   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/trajectory.py)
+  100   100%   trajectory_contract   (/home/dan/code/TurboTest/benchmarks/scheduler-simulator/trajectory_contract.py)

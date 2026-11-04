@@ -98,8 +98,10 @@ class R4ArchiveContract(unittest.TestCase):
                 for name, expected in identities.items():
                     member = task / "v4" / f"runtime-{mode}" / name
                     self.assertEqual(expected, digest(member.read_bytes()), str(member))
+            analyzer = task / "v4/sources/artifacts/tt038/analyze.py"
+            self.assertTrue(analyzer.is_file(), str(analyzer))
             result = subprocess.run(
-                [sys.executable, str(REPO / "artifacts/tt038/analyze.py"), str(task)],
+                [sys.executable, str(analyzer), str(task)],
                 capture_output=True,
                 text=True,
                 timeout=120,

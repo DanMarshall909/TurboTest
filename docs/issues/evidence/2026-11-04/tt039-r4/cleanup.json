@@ -1,0 +1,54 @@
+{
+  "allCaseSettlementsUnchanged": true,
+  "allControlSettlementsUnchanged": true,
+  "allRequiredSupervisorsStopped": true,
+  "controlSettlementsChecked": 3,
+  "liveTaskMeasurementProcesses": [],
+  "recordedAtUtc": "2026-11-04T07:27:14+00:00",
+  "scope": "Task-owned TT-038/TT-039 processes and per-case resources only; unrelated sessions are excluded",
+  "settlementsChecked": 194,
+  "supervisorReceipts": [
+    {
+      "deadlineExceeded": false,
+      "exitCode": 0,
+      "path": "qualification.json",
+      "processGroupStopped": true
+    },
+    {
+      "deadlineExceeded": false,
+      "exitCode": 0,
+      "path": "calibration-process.json",
+      "processGroupStopped": true
+    },
+    {
+      "deadlineExceeded": false,
+      "exitCode": 0,
+      "path": "validation-process.json",
+      "processGroupStopped": true
+    },
+    {
+      "deadlineExceeded": false,
+      "exitCode": 0,
+      "path": "tt038-baseline/v4/qualification.json",
+      "processGroupStopped": true
+    },
+    {
+      "deadlineExceeded": false,
+      "exitCode": 0,
+      "path": "tt038-baseline/v4/baseline-process.json",
+      "processGroupStopped": true
+    },
+    {
+      "deadlineExceeded": false,
+      "exitCode": 0,
+      "path": "tt038-baseline/baseline-analysis-process.json",
+      "processGroupStopped": true
+    },
+    {
+      "deadlineExceeded": false,
+      "exitCode": 0,
+      "path": "tt038-baseline/analysis-process.json",
+      "processGroupStopped": true
+    }
+  ]
+}

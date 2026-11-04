@@ -1,0 +1,1658 @@
+{
+  "fittedSha256": "a071edcb77c0348bf8e3b1441ef3ff26d69a63bef4c26c6a201412d3c26fa757",
+  "independentProbeDrawsPerPath": 64,
+  "pathMetrics": {
+    "awaited/0": [
+      {
+        "calibrationRun": "r0-w0-awaited",
+        "checkout_mean_ms": 0.35373046875,
+        "checkout_p95_ms": 0.554,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 5659.77
+      },
+      {
+        "calibrationRun": "r1-w0-awaited",
+        "checkout_mean_ms": 0.3615234375,
+        "checkout_p95_ms": 0.541,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 5727.946
+      },
+      {
+        "calibrationRun": "r2-w0-awaited",
+        "checkout_mean_ms": 0.42825390625,
+        "checkout_p95_ms": 0.613,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 6571.32
+      },
+      {
+        "calibrationRun": "r3-w0-awaited",
+        "checkout_mean_ms": 0.377609375,
+        "checkout_p95_ms": 0.611,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 6006.272
+      },
+      {
+        "calibrationRun": "r4-w0-awaited",
+        "checkout_mean_ms": 0.34397265625,
+        "checkout_p95_ms": 0.603,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 5779.528
+      },
+      {
+        "calibrationRun": "r5-w0-awaited",
+        "checkout_mean_ms": 0.37337890625,
+        "checkout_p95_ms": 0.558,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 6054.897
+      },
+      {
+        "calibrationRun": "r6-w0-awaited",
+        "checkout_mean_ms": 0.35850390625,
+        "checkout_p95_ms": 0.586,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 5725.454
+      }
+    ],
+    "awaited/100": [
+      {
+        "calibrationRun": "r0-w100-awaited",
+        "checkout_mean_ms": 0.24533203125,
+        "checkout_p95_ms": 0.517,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 11813.011
+      },
+      {
+        "calibrationRun": "r1-w100-awaited",
+        "checkout_mean_ms": 0.26854296875,
+        "checkout_p95_ms": 0.569,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 12236.919
+      },
+      {
+        "calibrationRun": "r2-w100-awaited",
+        "checkout_mean_ms": 0.284,
+        "checkout_p95_ms": 0.582,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": 12067.578
+      },
+      {
+        "calibrationRun": "r3-w100-awaited",
+        "checkout_mean_ms": 0.24702734375,
+        "checkout_p95_ms": 0.508,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 12098.911
+      },
+      {
+        "calibrationRun": "r4-w100-awaited",
+        "checkout_mean_ms": 0.31594921875,
+        "checkout_p95_ms": 0.579,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.01171875,
+        "suite_ms": 11864.346
+      },
+      {
+        "calibrationRun": "r5-w100-awaited",
+        "checkout_mean_ms": 0.268671875,
+        "checkout_p95_ms": 0.537,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 11762.093
+      },
+      {
+        "calibrationRun": "r6-w100-awaited",
+        "checkout_mean_ms": 0.25103515625,
+        "checkout_p95_ms": 0.522,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 11701.383
+      }
+    ],
+    "awaited/25": [
+      {
+        "calibrationRun": "r0-w25-awaited",
+        "checkout_mean_ms": 0.28717578125,
+        "checkout_p95_ms": 0.516,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 7122.241
+      },
+      {
+        "calibrationRun": "r1-w25-awaited",
+        "checkout_mean_ms": 0.31921484375,
+        "checkout_p95_ms": 0.601,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 7424.038
+      },
+      {
+        "calibrationRun": "r2-w25-awaited",
+        "checkout_mean_ms": 0.29819921875,
+        "checkout_p95_ms": 0.587,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 7017.354
+      },
+      {
+        "calibrationRun": "r3-w25-awaited",
+        "checkout_mean_ms": 0.319953125,
+        "checkout_p95_ms": 0.583,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 7243.904
+      },
+      {
+        "calibrationRun": "r4-w25-awaited",
+        "checkout_mean_ms": 0.3075859375,
+        "checkout_p95_ms": 0.567,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 7169.641
+      },
+      {
+        "calibrationRun": "r5-w25-awaited",
+        "checkout_mean_ms": 0.31522656250000003,
+        "checkout_p95_ms": 0.578,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 7180.47
+      },
+      {
+        "calibrationRun": "r6-w25-awaited",
+        "checkout_mean_ms": 0.32727734375,
+        "checkout_p95_ms": 0.533,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 7153.806
+      }
+    ],
+    "awaited/500": [
+      {
+        "calibrationRun": "r0-w500-awaited",
+        "checkout_mean_ms": 0.22429296875,
+        "checkout_p95_ms": 0.389,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 37463.949
+      },
+      {
+        "calibrationRun": "r1-w500-awaited",
+        "checkout_mean_ms": 0.22344140625,
+        "checkout_p95_ms": 0.388,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 37544.712
+      },
+      {
+        "calibrationRun": "r2-w500-awaited",
+        "checkout_mean_ms": 0.212296875,
+        "checkout_p95_ms": 0.353,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 37449.449
+      },
+      {
+        "calibrationRun": "r3-w500-awaited",
+        "checkout_mean_ms": 0.2282890625,
+        "checkout_p95_ms": 0.375,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37450.557
+      },
+      {
+        "calibrationRun": "r4-w500-awaited",
+        "checkout_mean_ms": 0.2186171875,
+        "checkout_p95_ms": 0.338,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 37333.659
+      },
+      {
+        "calibrationRun": "r5-w500-awaited",
+        "checkout_mean_ms": 0.1863046875,
+        "checkout_p95_ms": 0.323,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 37452.777
+      },
+      {
+        "calibrationRun": "r6-w500-awaited",
+        "checkout_mean_ms": 0.2143203125,
+        "checkout_p95_ms": 0.316,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 39380.983
+      }
+    ],
+    "background/0": [
+      {
+        "calibrationRun": "r0-w0-background",
+        "checkout_mean_ms": 22.2576015625,
+        "checkout_p95_ms": 28.449,
+        "clean_queue_mean_ms": 21.783484375,
+        "clean_starvation": 0.96875,
+        "drain_ms": 80.442,
+        "reset_queue_mean_ms": 22.2110625,
+        "reset_queue_p95_ms": 28.098,
+        "starvation_proxy": 0.96875,
+        "suite_ms": 3699.283
+      },
+      {
+        "calibrationRun": "r1-w0-background",
+        "checkout_mean_ms": 24.4638046875,
+        "checkout_p95_ms": 31.58,
+        "clean_queue_mean_ms": 23.99458984375,
+        "clean_starvation": 0.96875,
+        "drain_ms": 87.509,
+        "reset_queue_mean_ms": 24.424890625,
+        "reset_queue_p95_ms": 30.971,
+        "starvation_proxy": 0.96875,
+        "suite_ms": 3930.339
+      },
+      {
+        "calibrationRun": "r2-w0-background",
+        "checkout_mean_ms": 24.256015625,
+        "checkout_p95_ms": 29.995,
+        "clean_queue_mean_ms": 23.75323046875,
+        "clean_starvation": 0.96875,
+        "drain_ms": 88.144,
+        "reset_queue_mean_ms": 24.1601484375,
+        "reset_queue_p95_ms": 29.41,
+        "starvation_proxy": 0.96875,
+        "suite_ms": 3854.727
+      },
+      {
+        "calibrationRun": "r3-w0-background",
+        "checkout_mean_ms": 24.5181640625,
+        "checkout_p95_ms": 32.448,
+        "clean_queue_mean_ms": 24.02770703125,
+        "clean_starvation": 0.96484375,
+        "drain_ms": 82.454,
+        "reset_queue_mean_ms": 24.43233984375,
+        "reset_queue_p95_ms": 32.248,
+        "starvation_proxy": 0.96484375,
+        "suite_ms": 3899.032
+      },
+      {
+        "calibrationRun": "r4-w0-background",
+        "checkout_mean_ms": 25.6884765625,
+        "checkout_p95_ms": 34.391,
+        "clean_queue_mean_ms": 25.22602734375,
+        "clean_starvation": 0.96875,
+        "drain_ms": 86.384,
+        "reset_queue_mean_ms": 25.7238359375,
+        "reset_queue_p95_ms": 33.807,
+        "starvation_proxy": 0.96875,
+        "suite_ms": 3908.15
+      },
+      {
+        "calibrationRun": "r5-w0-background",
+        "checkout_mean_ms": 15.5957890625,
+        "checkout_p95_ms": 29.521,
+        "clean_queue_mean_ms": 15.133890625,
+        "clean_starvation": 0.65625,
+        "drain_ms": 84.019,
+        "reset_queue_mean_ms": 15.53931640625,
+        "reset_queue_p95_ms": 29.056,
+        "starvation_proxy": 0.6484375,
+        "suite_ms": 4383.422
+      },
+      {
+        "calibrationRun": "r6-w0-background",
+        "checkout_mean_ms": 15.96370703125,
+        "checkout_p95_ms": 31.49,
+        "clean_queue_mean_ms": 15.49371484375,
+        "clean_starvation": 0.66015625,
+        "drain_ms": 79.793,
+        "reset_queue_mean_ms": 15.90267578125,
+        "reset_queue_p95_ms": 31.078,
+        "starvation_proxy": 0.6484375,
+        "suite_ms": 4333.745
+      }
+    ],
+    "background/100": [
+      {
+        "calibrationRun": "r0-w100-background",
+        "checkout_mean_ms": 0.32980078125,
+        "checkout_p95_ms": 0.56,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 52.555,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 8311.417
+      },
+      {
+        "calibrationRun": "r1-w100-background",
+        "checkout_mean_ms": 0.3895703125,
+        "checkout_p95_ms": 0.726,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 51.295,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 8446.88
+      },
+      {
+        "calibrationRun": "r2-w100-background",
+        "checkout_mean_ms": 0.31566796875,
+        "checkout_p95_ms": 0.597,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 55.834,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0078125,
+        "suite_ms": 8386.73
+      },
+      {
+        "calibrationRun": "r3-w100-background",
+        "checkout_mean_ms": 0.3710859375,
+        "checkout_p95_ms": 0.584,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 53.795,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 8724.479
+      },
+      {
+        "calibrationRun": "r4-w100-background",
+        "checkout_mean_ms": 0.34180859375,
+        "checkout_p95_ms": 0.701,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 53.928,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 8771.799
+      },
+      {
+        "calibrationRun": "r5-w100-background",
+        "checkout_mean_ms": 0.3574609375,
+        "checkout_p95_ms": 0.623,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 53.149,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 8405.765
+      },
+      {
+        "calibrationRun": "r6-w100-background",
+        "checkout_mean_ms": 0.31390625,
+        "checkout_p95_ms": 0.631,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 51.87,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.01953125,
+        "suite_ms": 8448.99
+      }
+    ],
+    "background/25": [
+      {
+        "calibrationRun": "r0-w25-background",
+        "checkout_mean_ms": 1.54716796875,
+        "checkout_p95_ms": 6.532,
+        "clean_queue_mean_ms": 1.08103125,
+        "clean_starvation": 0.375,
+        "drain_ms": 54.653,
+        "reset_queue_mean_ms": 1.1179531249999999,
+        "reset_queue_p95_ms": 6.157,
+        "starvation_proxy": 0.32421875,
+        "suite_ms": 4281.042
+      },
+      {
+        "calibrationRun": "r1-w25-background",
+        "checkout_mean_ms": 3.888046875,
+        "checkout_p95_ms": 8.807,
+        "clean_queue_mean_ms": 3.35370703125,
+        "clean_starvation": 0.78125,
+        "drain_ms": 75.85,
+        "reset_queue_mean_ms": 3.4838671875,
+        "reset_queue_p95_ms": 8.269,
+        "starvation_proxy": 0.75390625,
+        "suite_ms": 4233.629
+      },
+      {
+        "calibrationRun": "r2-w25-background",
+        "checkout_mean_ms": 1.9619296875,
+        "checkout_p95_ms": 6.869,
+        "clean_queue_mean_ms": 1.46297265625,
+        "clean_starvation": 0.4453125,
+        "drain_ms": 55.776,
+        "reset_queue_mean_ms": 1.510796875,
+        "reset_queue_p95_ms": 6.286,
+        "starvation_proxy": 0.390625,
+        "suite_ms": 4828.3
+      },
+      {
+        "calibrationRun": "r3-w25-background",
+        "checkout_mean_ms": 3.00483203125,
+        "checkout_p95_ms": 8.564,
+        "clean_queue_mean_ms": 2.473703125,
+        "clean_starvation": 0.7578125,
+        "drain_ms": 63.963,
+        "reset_queue_mean_ms": 2.54353125,
+        "reset_queue_p95_ms": 7.942,
+        "starvation_proxy": 0.69140625,
+        "suite_ms": 4321.055
+      },
+      {
+        "calibrationRun": "r4-w25-background",
+        "checkout_mean_ms": 2.7612421875,
+        "checkout_p95_ms": 7.361,
+        "clean_queue_mean_ms": 2.2857109375,
+        "clean_starvation": 0.49609375,
+        "drain_ms": 54.055,
+        "reset_queue_mean_ms": 2.3168828125,
+        "reset_queue_p95_ms": 6.832,
+        "starvation_proxy": 0.46484375,
+        "suite_ms": 4828.318
+      },
+      {
+        "calibrationRun": "r5-w25-background",
+        "checkout_mean_ms": 2.4080859375,
+        "checkout_p95_ms": 7.672,
+        "clean_queue_mean_ms": 1.90285546875,
+        "clean_starvation": 0.51953125,
+        "drain_ms": 69.132,
+        "reset_queue_mean_ms": 1.9943125,
+        "reset_queue_p95_ms": 7.517,
+        "starvation_proxy": 0.48828125,
+        "suite_ms": 4503.485
+      },
+      {
+        "calibrationRun": "r6-w25-background",
+        "checkout_mean_ms": 1.94692578125,
+        "checkout_p95_ms": 7.041,
+        "clean_queue_mean_ms": 1.48048828125,
+        "clean_starvation": 0.4609375,
+        "drain_ms": 54.556,
+        "reset_queue_mean_ms": 1.59460546875,
+        "reset_queue_p95_ms": 7.047,
+        "starvation_proxy": 0.41796875,
+        "suite_ms": 4779.294
+      }
+    ],
+    "background/500": [
+      {
+        "calibrationRun": "r0-w500-background",
+        "checkout_mean_ms": 0.24351953125,
+        "checkout_p95_ms": 0.486,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 58.415,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 34132.095
+      },
+      {
+        "calibrationRun": "r1-w500-background",
+        "checkout_mean_ms": 0.24496875,
+        "checkout_p95_ms": 0.435,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 51.844,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 34070.386
+      },
+      {
+        "calibrationRun": "r2-w500-background",
+        "checkout_mean_ms": 0.2193046875,
+        "checkout_p95_ms": 0.459,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 56.069,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0,
+        "suite_ms": 34178.484
+      },
+      {
+        "calibrationRun": "r3-w500-background",
+        "checkout_mean_ms": 0.2779453125,
+        "checkout_p95_ms": 0.515,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 54.5,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.01953125,
+        "suite_ms": 34204.9
+      },
+      {
+        "calibrationRun": "r4-w500-background",
+        "checkout_mean_ms": 0.24799609375,
+        "checkout_p95_ms": 0.447,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 52.084,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 34093.969
+      },
+      {
+        "calibrationRun": "r5-w500-background",
+        "checkout_mean_ms": 0.24065234375,
+        "checkout_p95_ms": 0.401,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 50.504,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 34050.848
+      },
+      {
+        "calibrationRun": "r6-w500-background",
+        "checkout_mean_ms": 0.24301953125,
+        "checkout_p95_ms": 0.39,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 52.68,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.00390625,
+        "suite_ms": 34057.242
+      }
+    ]
+  },
+  "pointRule": "Exact equal-weight expectation of complete replay-path metrics; not a population-median identity or a pooled p95",
+  "predictionBounds": {
+    "awaited/0": {
+      "checkout_mean_ms": [
+        0.34397265625,
+        0.42825390625
+      ],
+      "checkout_p95_ms": [
+        0.541,
+        0.613
+      ],
+      "clean_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "clean_starvation": [
+        0,
+        0
+      ],
+      "drain_ms": [
+        0.0,
+        0.0
+      ],
+      "reset_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "reset_queue_p95_ms": [
+        0.0,
+        0.0
+      ],
+      "starvation_proxy": [
+        0,
+        0.00390625
+      ],
+      "suite_ms": [
+        5659.77,
+        6571.32
+      ]
+    },
+    "awaited/100": {
+      "checkout_mean_ms": [
+        0.24533203125,
+        0.31594921875
+      ],
+      "checkout_p95_ms": [
+        0.508,
+        0.582
+      ],
+      "clean_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "clean_starvation": [
+        0,
+        0
+      ],
+      "drain_ms": [
+        0.0,
+        0.0
+      ],
+      "reset_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "reset_queue_p95_ms": [
+        0.0,
+        0.0
+      ],
+      "starvation_proxy": [
+        0,
+        0.01171875
+      ],
+      "suite_ms": [
+        11701.383,
+        12236.919
+      ]
+    },
+    "awaited/25": {
+      "checkout_mean_ms": [
+        0.28717578125,
+        0.32727734375
+      ],
+      "checkout_p95_ms": [
+        0.516,
+        0.601
+      ],
+      "clean_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "clean_starvation": [
+        0,
+        0
+      ],
+      "drain_ms": [
+        0.0,
+        0.0
+      ],
+      "reset_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "reset_queue_p95_ms": [
+        0.0,
+        0.0
+      ],
+      "starvation_proxy": [
+        0,
+        0.0078125
+      ],
+      "suite_ms": [
+        7017.354,
+        7424.038
+      ]
+    },
+    "awaited/500": {
+      "checkout_mean_ms": [
+        0.1863046875,
+        0.2282890625
+      ],
+      "checkout_p95_ms": [
+        0.316,
+        0.389
+      ],
+      "clean_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "clean_starvation": [
+        0,
+        0
+      ],
+      "drain_ms": [
+        0.0,
+        0.0
+      ],
+      "reset_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "reset_queue_p95_ms": [
+        0.0,
+        0.0
+      ],
+      "starvation_proxy": [
+        0,
+        0.0078125
+      ],
+      "suite_ms": [
+        37333.659,
+        39380.983
+      ]
+    },
+    "background/0": {
+      "checkout_mean_ms": [
+        15.5957890625,
+        25.6884765625
+      ],
+      "checkout_p95_ms": [
+        28.449,
+        34.391
+      ],
+      "clean_queue_mean_ms": [
+        15.133890625,
+        25.22602734375
+      ],
+      "clean_starvation": [
+        0.65625,
+        0.96875
+      ],
+      "drain_ms": [
+        79.793,
+        88.144
+      ],
+      "reset_queue_mean_ms": [
+        15.53931640625,
+        25.7238359375
+      ],
+      "reset_queue_p95_ms": [
+        28.098,
+        33.807
+      ],
+      "starvation_proxy": [
+        0.6484375,
+        0.96875
+      ],
+      "suite_ms": [
+        3699.283,
+        4383.422
+      ]
+    },
+    "background/100": {
+      "checkout_mean_ms": [
+        0.31390625,
+        0.3895703125
+      ],
+      "checkout_p95_ms": [
+        0.56,
+        0.726
+      ],
+      "clean_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "clean_starvation": [
+        0,
+        0
+      ],
+      "drain_ms": [
+        51.295,
+        55.834
+      ],
+      "reset_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "reset_queue_p95_ms": [
+        0.0,
+        0.0
+      ],
+      "starvation_proxy": [
+        0,
+        0.01953125
+      ],
+      "suite_ms": [
+        8311.417,
+        8771.799
+      ]
+    },
+    "background/25": {
+      "checkout_mean_ms": [
+        1.54716796875,
+        3.888046875
+      ],
+      "checkout_p95_ms": [
+        6.532,
+        8.807
+      ],
+      "clean_queue_mean_ms": [
+        1.08103125,
+        3.35370703125
+      ],
+      "clean_starvation": [
+        0.375,
+        0.78125
+      ],
+      "drain_ms": [
+        54.055,
+        75.85
+      ],
+      "reset_queue_mean_ms": [
+        1.1179531249999999,
+        3.4838671875
+      ],
+      "reset_queue_p95_ms": [
+        6.157,
+        8.269
+      ],
+      "starvation_proxy": [
+        0.32421875,
+        0.75390625
+      ],
+      "suite_ms": [
+        4233.629,
+        4828.318
+      ]
+    },
+    "background/500": {
+      "checkout_mean_ms": [
+        0.2193046875,
+        0.2779453125
+      ],
+      "checkout_p95_ms": [
+        0.39,
+        0.515
+      ],
+      "clean_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "clean_starvation": [
+        0,
+        0
+      ],
+      "drain_ms": [
+        50.504,
+        58.415
+      ],
+      "reset_queue_mean_ms": [
+        0.0,
+        0.0
+      ],
+      "reset_queue_p95_ms": [
+        0.0,
+        0.0
+      ],
+      "starvation_proxy": [
+        0,
+        0.01953125
+      ],
+      "suite_ms": [
+        34050.848,
+        34204.9
+      ]
+    }
+  },
+  "predictions": {
+    "awaited/0": {
+      "checkout_mean_ms": 0.37099609375,
+      "checkout_p95_ms": 0.5808571428571428,
+      "clean_queue_mean_ms": 0.0,
+      "clean_starvation": 0,
+      "drain_ms": 0.0,
+      "reset_queue_mean_ms": 0.0,
+      "reset_queue_p95_ms": 0.0,
+      "starvation_proxy": 0.002232142857142857,
+      "suite_ms": 5932.1695714285715
+    },
+    "awaited/100": {
+      "checkout_mean_ms": 0.2686512276785714,
+      "checkout_p95_ms": 0.5448571428571428,
+      "clean_queue_mean_ms": 0.0,
+      "clean_starvation": 0,
+      "drain_ms": 0.0,
+      "reset_queue_mean_ms": 0.0,
+      "reset_queue_p95_ms": 0.0,
+      "starvation_proxy": 0.0033482142857142855,
+      "suite_ms": 11934.891571428572
+    },
+    "awaited/25": {
+      "checkout_mean_ms": 0.31066183035714284,
+      "checkout_p95_ms": 0.5664285714285714,
+      "clean_queue_mean_ms": 0.0,
+      "clean_starvation": 0,
+      "drain_ms": 0.0,
+      "reset_queue_mean_ms": 0.0,
+      "reset_queue_p95_ms": 0.0,
+      "starvation_proxy": 0.002232142857142857,
+      "suite_ms": 7187.350571428571
+    },
+    "awaited/500": {
+      "checkout_mean_ms": 0.21536607142857142,
+      "checkout_p95_ms": 0.3545714285714286,
+      "clean_queue_mean_ms": 0.0,
+      "clean_starvation": 0,
+      "drain_ms": 0.0,
+      "reset_queue_mean_ms": 0.0,
+      "reset_queue_p95_ms": 0.0,
+      "starvation_proxy": 0.0027901785714285715,
+      "suite_ms": 37725.15514285714
+    },
+    "background/0": {
+      "checkout_mean_ms": 21.820508370535713,
+      "checkout_p95_ms": 31.12485714285714,
+      "clean_queue_mean_ms": 21.344663504464286,
+      "clean_starvation": 0.8794642857142857,
+      "drain_ms": 84.10642857142857,
+      "reset_queue_mean_ms": 21.770609933035715,
+      "reset_queue_p95_ms": 30.666857142857143,
+      "starvation_proxy": 0.8766741071428571,
+      "suite_ms": 4001.2425714285714
+    },
+    "background/100": {
+      "checkout_mean_ms": 0.34561439732142857,
+      "checkout_p95_ms": 0.6317142857142857,
+      "clean_queue_mean_ms": 0.0,
+      "clean_starvation": 0,
+      "drain_ms": 53.203714285714284,
+      "reset_queue_mean_ms": 0.0,
+      "reset_queue_p95_ms": 0.0,
+      "starvation_proxy": 0.006138392857142857,
+      "suite_ms": 8499.437142857143
+    },
+    "background/25": {
+      "checkout_mean_ms": 2.5026043526785715,
+      "checkout_p95_ms": 7.549428571428572,
+      "clean_queue_mean_ms": 2.00578125,
+      "clean_starvation": 0.5479910714285714,
+      "drain_ms": 61.14071428571429,
+      "reset_queue_mean_ms": 2.0802784598214283,
+      "reset_queue_p95_ms": 7.15,
+      "starvation_proxy": 0.5044642857142857,
+      "suite_ms": 4539.303285714286
+    },
+    "background/500": {
+      "checkout_mean_ms": 0.24534375,
+      "checkout_p95_ms": 0.44757142857142856,
+      "clean_queue_mean_ms": 0.0,
+      "clean_starvation": 0,
+      "drain_ms": 53.728,
+      "reset_queue_mean_ms": 0.0,
+      "reset_queue_p95_ms": 0.0,
+      "starvation_proxy": 0.005580357142857143,
+      "suite_ms": 34112.56057142857
+    }
+  },
+  "probeSeeds": [
+    39000,
+    39063
+  ],
+  "runtimeSeconds": 14.694052886999998,
+  "sensitivities": {
+    "body-0.8": {
+      "awaited/0": {
+        "checkout_mean_ms": 0.37099609375,
+        "checkout_p95_ms": 0.5808571428571428,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002232142857142857,
+        "suite_ms": 5507.425
+      },
+      "awaited/100": {
+        "checkout_mean_ms": 0.2686512276785714,
+        "checkout_p95_ms": 0.5448571428571428,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0033482142857142855,
+        "suite_ms": 10279.109
+      },
+      "awaited/25": {
+        "checkout_mean_ms": 0.31066183035714284,
+        "checkout_p95_ms": 0.5664285714285714,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002232142857142857,
+        "suite_ms": 6491.957714285714
+      },
+      "awaited/500": {
+        "checkout_mean_ms": 0.21536607142857142,
+        "checkout_p95_ms": 0.3545714285714286,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0027901785714285715,
+        "suite_ms": 30904.49885714286
+      },
+      "background/0": {
+        "checkout_mean_ms": 28.487931361607142,
+        "checkout_p95_ms": 37.371428571428574,
+        "clean_queue_mean_ms": 28.012086495535716,
+        "clean_starvation": 0.9441964285714286,
+        "drain_ms": 89.82528571428571,
+        "reset_queue_mean_ms": 28.566015625,
+        "reset_queue_p95_ms": 36.90428571428571,
+        "starvation_proxy": 0.9425223214285714,
+        "suite_ms": 3933.6234285714286
+      },
+      "background/100": {
+        "checkout_mean_ms": 0.34561439732142857,
+        "checkout_p95_ms": 0.6317142857142857,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 53.203714285714284,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.006138392857142857,
+        "suite_ms": 6816.959285714286
+      },
+      "background/25": {
+        "checkout_mean_ms": 10.909564732142858,
+        "checkout_p95_ms": 18.845142857142857,
+        "clean_queue_mean_ms": 10.412741629464286,
+        "clean_starvation": 0.7734375,
+        "drain_ms": 74.17257142857143,
+        "reset_queue_mean_ms": 10.713906808035714,
+        "reset_queue_p95_ms": 18.401714285714284,
+        "starvation_proxy": 0.7728794642857143,
+        "suite_ms": 4232.498857142857
+      },
+      "background/500": {
+        "checkout_mean_ms": 0.24534375,
+        "checkout_p95_ms": 0.44757142857142856,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 53.728,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.005580357142857143,
+        "suite_ms": 27306.12385714286
+      }
+    },
+    "body-1.2": {
+      "awaited/0": {
+        "checkout_mean_ms": 0.37099609375,
+        "checkout_p95_ms": 0.5808571428571428,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002232142857142857,
+        "suite_ms": 6357.377142857143
+      },
+      "awaited/100": {
+        "checkout_mean_ms": 0.2686512276785714,
+        "checkout_p95_ms": 0.5448571428571428,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0033482142857142855,
+        "suite_ms": 13590.674142857142
+      },
+      "awaited/25": {
+        "checkout_mean_ms": 0.31066183035714284,
+        "checkout_p95_ms": 0.5664285714285714,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002232142857142857,
+        "suite_ms": 7882.743428571429
+      },
+      "awaited/500": {
+        "checkout_mean_ms": 0.21536607142857142,
+        "checkout_p95_ms": 0.3545714285714286,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0027901785714285715,
+        "suite_ms": 44546.39
+      },
+      "background/0": {
+        "checkout_mean_ms": 15.85129408482143,
+        "checkout_p95_ms": 24.940714285714286,
+        "clean_queue_mean_ms": 15.37544921875,
+        "clean_starvation": 0.8532366071428571,
+        "drain_ms": 72.10828571428571,
+        "reset_queue_mean_ms": 15.710009486607142,
+        "reset_queue_p95_ms": 24.44142857142857,
+        "starvation_proxy": 0.8537946428571429,
+        "suite_ms": 4115.068
+      },
+      "background/100": {
+        "checkout_mean_ms": 0.34561439732142857,
+        "checkout_p95_ms": 0.6317142857142857,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 53.203714285714284,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.006138392857142857,
+        "suite_ms": 10181.915
+      },
+      "background/25": {
+        "checkout_mean_ms": 0.5698225446428572,
+        "checkout_p95_ms": 0.7161428571428572,
+        "clean_queue_mean_ms": 0.07299944196428572,
+        "clean_starvation": 0.010044642857142858,
+        "drain_ms": 57.98142857142857,
+        "reset_queue_mean_ms": 0.07341573660714286,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.013392857142857142,
+        "suite_ms": 5303.347
+      },
+      "background/500": {
+        "checkout_mean_ms": 0.24534375,
+        "checkout_p95_ms": 0.44757142857142856,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 53.74314285714286,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.005580357142857143,
+        "suite_ms": 40919.01242857143
+      }
+    },
+    "independent-worker-records": {
+      "awaited/0": {
+        "checkout_mean_ms": 0.3705579136439732,
+        "checkout_p95_ms": 0.5810446428571429,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002197265625,
+        "suite_ms": 5986.619970982143
+      },
+      "awaited/100": {
+        "checkout_mean_ms": 0.26854452078683033,
+        "checkout_p95_ms": 0.5433571428571429,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0035313197544642855,
+        "suite_ms": 11960.874232142856
+      },
+      "awaited/25": {
+        "checkout_mean_ms": 0.30989071219308034,
+        "checkout_p95_ms": 0.5660736607142857,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0023716517857142855,
+        "suite_ms": 7209.593881696429
+      },
+      "awaited/500": {
+        "checkout_mean_ms": 0.2153153337751116,
+        "checkout_p95_ms": 0.35749330357142856,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0029384068080357145,
+        "suite_ms": 37763.67403125
+      },
+      "background/0": {
+        "checkout_mean_ms": 21.281240208217074,
+        "checkout_p95_ms": 32.498183035714284,
+        "clean_queue_mean_ms": 20.80656812395368,
+        "clean_starvation": 0.8959263392857143,
+        "drain_ms": 76.69960267857142,
+        "reset_queue_mean_ms": 21.246622497558594,
+        "reset_queue_p95_ms": 32.124466517857144,
+        "starvation_proxy": 0.8936331612723214,
+        "suite_ms": 4010.9624620535715
+      },
+      "background/100": {
+        "checkout_mean_ms": 0.3453110089983259,
+        "checkout_p95_ms": 0.6351830357142857,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 58.461247767857145,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.006181989397321429,
+        "suite_ms": 8531.76397767857
+      },
+      "background/25": {
+        "checkout_mean_ms": 2.663444649832589,
+        "checkout_p95_ms": 10.272946428571428,
+        "clean_queue_mean_ms": 2.1660027901785712,
+        "clean_starvation": 0.43655831473214285,
+        "drain_ms": 62.44497544642857,
+        "reset_queue_mean_ms": 2.238872323172433,
+        "reset_queue_p95_ms": 9.899037946428571,
+        "starvation_proxy": 0.41306849888392855,
+        "suite_ms": 4657.400200892857
+      },
+      "background/500": {
+        "checkout_mean_ms": 0.2448940952845982,
+        "checkout_p95_ms": 0.44136383928571427,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 58.002703125,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.005528041294642857,
+        "suite_ms": 34126.78884151786
+      }
+    },
+    "release-tail-2ms": {
+      "awaited/0": {
+        "checkout_mean_ms": 0.37099609375,
+        "checkout_p95_ms": 0.5808571428571428,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002232142857142857,
+        "suite_ms": 6060.1695714285715
+      },
+      "awaited/100": {
+        "checkout_mean_ms": 0.2686512276785714,
+        "checkout_p95_ms": 0.5448571428571428,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0033482142857142855,
+        "suite_ms": 12062.891571428572
+      },
+      "awaited/25": {
+        "checkout_mean_ms": 0.31066183035714284,
+        "checkout_p95_ms": 0.5664285714285714,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002232142857142857,
+        "suite_ms": 7315.350571428571
+      },
+      "awaited/500": {
+        "checkout_mean_ms": 0.21536607142857142,
+        "checkout_p95_ms": 0.3545714285714286,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0027901785714285715,
+        "suite_ms": 37853.15514285714
+      },
+      "background/0": {
+        "checkout_mean_ms": 23.498336495535714,
+        "checkout_p95_ms": 33.26571428571428,
+        "clean_queue_mean_ms": 23.022491629464287,
+        "clean_starvation": 0.8828125,
+        "drain_ms": 89.65371428571429,
+        "reset_queue_mean_ms": 25.289925223214286,
+        "reset_queue_p95_ms": 34.75457142857143,
+        "starvation_proxy": 0.8794642857142857,
+        "suite_ms": 4117.191428571428
+      },
+      "background/100": {
+        "checkout_mean_ms": 0.34561439732142857,
+        "checkout_p95_ms": 0.6317142857142857,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 55.203714285714284,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.006138392857142857,
+        "suite_ms": 8501.437142857143
+      },
+      "background/25": {
+        "checkout_mean_ms": 3.5838755580357144,
+        "checkout_p95_ms": 9.459,
+        "clean_queue_mean_ms": 3.087052455357143,
+        "clean_starvation": 0.6400669642857143,
+        "drain_ms": 66.0052857142857,
+        "reset_queue_mean_ms": 4.62877734375,
+        "reset_queue_p95_ms": 11.080571428571428,
+        "starvation_proxy": 0.6227678571428571,
+        "suite_ms": 4614.651428571428
+      },
+      "background/500": {
+        "checkout_mean_ms": 0.24534375,
+        "checkout_p95_ms": 0.44757142857142856,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 55.728,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.005580357142857143,
+        "suite_ms": 34114.56057142857
+      }
+    },
+    "reset-0.8": {
+      "awaited/0": {
+        "checkout_mean_ms": 0.37099609375,
+        "checkout_p95_ms": 0.5808571428571428,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002232142857142857,
+        "suite_ms": 5176.447428571429
+      },
+      "awaited/100": {
+        "checkout_mean_ms": 0.2686512276785714,
+        "checkout_p95_ms": 0.5448571428571428,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0033482142857142855,
+        "suite_ms": 11207.986428571428
+      },
+      "awaited/25": {
+        "checkout_mean_ms": 0.31066183035714284,
+        "checkout_p95_ms": 0.5664285714285714,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002232142857142857,
+        "suite_ms": 6449.960571428572
+      },
+      "awaited/500": {
+        "checkout_mean_ms": 0.21536607142857142,
+        "checkout_p95_ms": 0.3545714285714286,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0027901785714285715,
+        "suite_ms": 37004.637714285716
+      },
+      "background/0": {
+        "checkout_mean_ms": 11.531014508928571,
+        "checkout_p95_ms": 18.484285714285715,
+        "clean_queue_mean_ms": 11.055169642857143,
+        "clean_starvation": 0.8487723214285714,
+        "drain_ms": 57.26614285714285,
+        "reset_queue_mean_ms": 11.29837890625,
+        "reset_queue_p95_ms": 18.047857142857143,
+        "starvation_proxy": 0.8493303571428571,
+        "suite_ms": 3315.5437142857145
+      },
+      "background/100": {
+        "checkout_mean_ms": 0.34561439732142857,
+        "checkout_p95_ms": 0.6317142857142857,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 42.54,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.006138392857142857,
+        "suite_ms": 8488.773428571429
+      },
+      "background/25": {
+        "checkout_mean_ms": 0.5431088169642857,
+        "checkout_p95_ms": 0.7051428571428572,
+        "clean_queue_mean_ms": 0.046285714285714284,
+        "clean_starvation": 0.0033482142857142855,
+        "drain_ms": 46.720285714285716,
+        "reset_queue_mean_ms": 0.04643080357142857,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.008928571428571428,
+        "suite_ms": 4424.485285714286
+      },
+      "background/500": {
+        "checkout_mean_ms": 0.24534375,
+        "checkout_p95_ms": 0.44757142857142856,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 42.96,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.005580357142857143,
+        "suite_ms": 34101.792571428574
+      }
+    },
+    "reset-1.2": {
+      "awaited/0": {
+        "checkout_mean_ms": 0.37099609375,
+        "checkout_p95_ms": 0.5808571428571428,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002232142857142857,
+        "suite_ms": 6688.125
+      },
+      "awaited/100": {
+        "checkout_mean_ms": 0.2686512276785714,
+        "checkout_p95_ms": 0.5448571428571428,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0033482142857142855,
+        "suite_ms": 12661.796714285714
+      },
+      "awaited/25": {
+        "checkout_mean_ms": 0.31066183035714284,
+        "checkout_p95_ms": 0.5664285714285714,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.002232142857142857,
+        "suite_ms": 7924.7405714285715
+      },
+      "awaited/500": {
+        "checkout_mean_ms": 0.21536607142857142,
+        "checkout_p95_ms": 0.3545714285714286,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 0.0,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.0027901785714285715,
+        "suite_ms": 38446.140857142855
+      },
+      "background/0": {
+        "checkout_mean_ms": 32.743335379464284,
+        "checkout_p95_ms": 43.601,
+        "clean_queue_mean_ms": 32.26749051339286,
+        "clean_starvation": 0.9375,
+        "drain_ms": 105.98514285714286,
+        "reset_queue_mean_ms": 32.9219140625,
+        "reset_queue_p95_ms": 43.16285714285714,
+        "starvation_proxy": 0.9358258928571429,
+        "suite_ms": 4728.944571428571
+      },
+      "background/100": {
+        "checkout_mean_ms": 0.34561439732142857,
+        "checkout_p95_ms": 0.6317142857142857,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 63.86742857142857,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.006138392857142857,
+        "suite_ms": 8510.100857142857
+      },
+      "background/25": {
+        "checkout_mean_ms": 11.302739955357143,
+        "checkout_p95_ms": 20.459,
+        "clean_queue_mean_ms": 10.805916852678571,
+        "clean_starvation": 0.7622767857142857,
+        "drain_ms": 86.01671428571429,
+        "reset_queue_mean_ms": 11.113653459821428,
+        "reset_queue_p95_ms": 19.979,
+        "starvation_proxy": 0.7628348214285714,
+        "suite_ms": 5132.742
+      },
+      "background/500": {
+        "checkout_mean_ms": 0.24534375,
+        "checkout_p95_ms": 0.44757142857142856,
+        "clean_queue_mean_ms": 0.0,
+        "clean_starvation": 0,
+        "drain_ms": 64.52614285714286,
+        "reset_queue_mean_ms": 0.0,
+        "reset_queue_p95_ms": 0.0,
+        "starvation_proxy": 0.005580357142857143,
+        "suite_ms": 34123.358714285714
+      }
+    }
+  },
+  "sourceSha256": {
+    "model.py": "2867f7c14aecfb0160df688ca55dd967b893185502c826f46d3ce240f1aa1796",
+    "protocol-r2.md": "646bbb845b886bd0296d79bf7adedc2e4a8ac58b85ad6f8fb0f50398b491c73c",
+    "protocol-r3.md": "a21b0e97cf7a5cbc1145a266b797e9eccc38aba4f23364c1ed95ad274fc1974b",
+    "protocol-r4.md": "e0b9ee285ed30d94a91b76344b55e1728a8787949de94e874380ccb0e312d132",
+    "reference.py": "6394d8674753b8becd73bae0eeaa8e19bf50862f3836c7fa5e2bc9c65a22701a",
+    "replicated.py": "4a229c14a04d17643b698250480962d0d0f97003af2d2fccad231b19cfa5ada7",
+    "revised.py": "3715c64b0e7371a03ad3779b419e29cdf4a1349ab2e11955bbb6b41543d51ac9",
+    "trajectory.py": "71929678c554390d440194c2eed69d8332128cabfb2b520a42a9a6d9d4412244"
+  },
+  "trainingPathCounts": {
+    "awaited/0": 7,
+    "awaited/100": 7,
+    "awaited/25": 7,
+    "awaited/500": 7,
+    "background/0": 7,
+    "background/100": 7,
+    "background/25": 7,
+    "background/500": 7
+  }
+}

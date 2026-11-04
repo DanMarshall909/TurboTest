@@ -1,0 +1,47 @@
+{
+  "archiveReplay": {
+    "command": [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "benchmarks/scheduler-simulator/replicated_r4_archive_contract.py",
+      "-v"
+    ],
+    "result": "PASS",
+    "scope": "Rebuilt the R4 fit/evaluation and TT-038 summary from clean temporary roots; verified all embedded runtime bytes."
+  },
+  "fast": {
+    "command": [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "benchmarks/scheduler-simulator",
+      "-p",
+      "test_*.py"
+    ],
+    "exitCode": 0,
+    "tests": 48
+  },
+  "slow": {
+    "command": [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "benchmarks/scheduler-simulator",
+      "-p",
+      "*_contract.py"
+    ],
+    "exitCode": 0,
+    "tests": 12
+  },
+  "qualification": {
+    "tt038": "PASS",
+    "tt039": "FAIL",
+    "policySearchAuthorized": false
+  },
+  "schemaVersion": 1
+}

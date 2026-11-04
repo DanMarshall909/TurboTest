@@ -1,0 +1,45 @@
+{
+  "complete": false,
+  "diagnostics": [
+    "worktree-inventory-unavailable"
+  ],
+  "limitations": [
+    "Category names are hints; tracked non-output files are source. Unknown files are preserved.",
+    "Logical sizes deduplicate file identities, not shared extents. Allocation and reclaimable bytes remain unknown.",
+    "A scan is a bounded observation, not a snapshot or deletion authority."
+  ],
+  "method": "logical-v1",
+  "retention": {
+    "budget_bytes": 1073741824,
+    "cleanup_authorized": false,
+    "known_output_logical_bytes": 239608,
+    "review_required": true,
+    "unknown_logical_bytes": 183001128
+  },
+  "roots": [
+    {
+      "allocated_bytes": null,
+      "categories": {
+        "build": 0,
+        "dependencies": 0,
+        "evidence": 239608,
+        "git": 0,
+        "source": 0,
+        "unknown": 183001128
+      },
+      "cleanup_authorized": false,
+      "complete": false,
+      "diagnostics": [
+        "linked-entry"
+      ],
+      "files": 2682,
+      "logical_bytes": 183240736,
+      "reclaimable_bytes": null,
+      "root": "/home/dan/code/TurboTest/artifacts/tt039-r4",
+      "shared_entries": 0
+    }
+  ],
+  "schema_version": 1,
+  "commandExitCode": 3,
+  "interpretation": "Bounded lower-bound inventory; linked read-only runtime inputs make the scan incomplete and are preserved."
+}
